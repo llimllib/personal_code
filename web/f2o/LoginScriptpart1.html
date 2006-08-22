@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+<style>
+abbr {cursor : help;border-bottom-color: Purple; border-bottom-width : medium;}
+/*a:link {color: #336699; text-decoration: underline;}
+a:visited {color: #003366; text-decoration: underline;}
+a:hover {color: #336699; text-decoration: underline;}
+a.nav:link {color: black; text-decoration: none;}
+a.nav:visited {color: black; text-decoration: none;}
+a.nav:hover { color: black;	text-decoration: none;}*/
+body { background: #e6e6e6;	scrollbar-arrow-color: #000000;	scrollbar-base-color: #e6e6e6;scrollbar-dark-shadow-color: #999900;scrollbar-track-color: #e6e6e6;	scrollbar-face-color: #cccccc;	scrollbar-shadow-color: #336699;scrollbar-highlight-color: #CCCCCC;scrollbar-3d-light-color: #336699;}
+td {font-family: Arial,Helvetica,Verdana,Geneva,sans-serif;font-size: 14px;}
+/*td.nav {font-weight: bold;font-size: 12px;}*/
+.headline {font-weight: bold;font-size: 16px;}
+caption {font-weight: bold;font-size: 13px;}
+.author {font-weight: bold;font-size: 10px;color: #333333;}
+.copyright {font-weight: bold;font-size: 10px;}
+.content_footer {font-weight: bold;font-size: 12px;}
+.content_header{background: #eeeeee;color: black; font-weight: bold;text-align: left;}
+.main_content{background: #ffffff;color: black;text-align: left; width: 100%}
+acronym .help {border-bottom: 1px dashed #00cc00;cursor: help;}	
+.phpcode {border : thin dotted black;background : #FFFFF0;padding : 4px 4px 4px 4px;color: darkred;font-weight: bold;}
+.sqlcode {border : thin dotted black;background : #FFFFF0;padding : 4px 4px 4px 4px;color: brown;font-weight: bold;}
+.output {border : thin dotted black;background : #FFFFFF;padding : 4px 4px 4px 4px;color: black;font-weight: normal;}
+.phpcode_inline {color: red;font-weight: bold;}
+.sqlcode_inline {color: brown;font-weight: bold;}
+.function_def {color: black;border : thin dotted black;padding : 4px 4px 4px 4px;background: #eeeeff;}
+.function_def_name {font-weight: bold;}
+.function_def_def {font-weight: normal;text-align: justify;}
+.important {color: black;border : thin dotted black;padding : 4px 4px 4px 4px;background: #eeeeff;}
+.note {color: black;border : thin dotted black;padding : 4px 4px 4px 4px;background: #eeeeff;}
+.bar {color: #FFFFFF; font-size: 8pt; font-family: Veranda,arial, helvetica;}
+img {border: none;}
+</style><title>Login Script Tutorial</title></head>
+
+
+<body>
+
+<p><strong>Update:</strong> you can download the files I talk about in this article 
+<a href="files/login_tut.tar.gz">here</a>. Also, I fixed a couple of errors
+that I should have fixed a while ago. -BM 1.30.03</p>
+
+<p>If you've been surfing the web for any amount of time, you probably have a 
+few sites that you visit every day. More than likely, many of these sites all 
+have one feature in common - a place for users to log in and customize the 
+website for themselves. If you've decided to start a webpage offering content to 
+users, chances are you've wanted to add a login script to your own site. With 
+this tutorial, we'll cover the basics of PHP authentication.</p>
+
+<p>Once you've decided to let your users log in, you'll need a few things. 
+You'll need a web server (preferably <a href="http://www.apache.org/"
+class="link">Apache</a>) 
+with a working installation of <acronym title="recursive acronymn PHP: Hypertext Preprocessor">PHP</acronym>
+. Also, you'll need a <a href="http://www.mysql.org/" class="link">MySQL</a> 
+database and the 
+permissions on it to create and drop databases. All of these products, might I 
+add, are open source, and all of them are available for a grand total of $0 
+(unless you want to run MySQL on Windows for more than 30 days - read their 
+website for details).</p>
+
+<p>To understand this tutorial, the only thing you'll need is a very basic 
+understanding of <acronym title="Hypertext Markup Language">HTML</acronym>, 
+databases, and PHP. There are good tutorials on these all 
+over the web, so I'll let you cover them by yourself.</p>
+
+<p>The first thing you'll need to get started is a place to store the users that 
+you'll create. If you fire up the command interpereter for MySQL, you can start 
+with a couple statements:</p>
+
+<pre class="sqlcode">mysql&gt; CREATE DATABASE dictators;
+mysql&gt; use dictators;
+mysql&gt; CREATE TABLE users (
+    -&gt; user_name varchar(15) NOT NULL,
+    -&gt; password varchar(32) NOT NULL,
+    -&gt; PRIMARY KEY (user_name));</pre>
+
+<p>What you did first was create a database "dictators" which will hold the user 
+information for our fictional company - Dictators Inc. Secondly, you told MySQL 
+that you wanted it to use that database, then you created a table in it with 2 
+fields, one for the user_name and one for the password. The username field can 
+be any amount of characters up to 15, and the password field up to 32. Although 
+we will only keep this information in the "dictators" database, it could contain 
+any number of tables and just about any amount of data. 
+Speaking of data, let's add some to the users table so that we can test what we've created:</p>
+
+<pre class="sqlcode">mysql&gt; INSERT INTO users VALUES('pol_pot', 'evilevil');</pre>
+
+<p>With this statement, you added the user 'pol_pot', with the password 'evilevil'. 
+The MySQL syntax for this statement is somewhat forgiving - the capitals are a 
+usual way of denoting <acronym title="Structured Query Language">SQL</acronym> 
+language statements, and you can use single or double 
+quotes. Either way, you now have a user in the database that you can try to log 
+in. To get them to log in, we'll need a simple HTML form to capture his username 
+and password:</p>
+
+<pre class="phpcode">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;login.html&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form name="login" method="post" action="validate.php"&gt;
+username:&lt;input type="text" name="user_name"&gt;&lt;br&gt;
+password:&lt;input type="password" name="password"&gt;&lt;br&gt;
+&lt;input type="submit" value="submit"&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>It's better to use method="post" here, because you don't want the user to be 
+able to bookmark the page where he's logged in. If you choose to use 
+method="get" to pass these variables to the validate.php, the variables will be 
+put into the actual address of the page (i.e. 
+"http://example.com/validate.php?username=pol_pot&amp;password=evilevil"). This 
+would allow the user to go back to the validate page without actually logging in 
+again, which is a rather large security hole. Therefore, we use "post" to send 
+the variables through the browser. Now that we've sent the user_name and 
+password, how do we recover them? Here comes the beauty of PHP for the web:</p>
+
+<pre class="phpcode">&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;validate.php&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;?php
+	$user_name = $_POST['user_name'];
+	$password = $_POST['password'];
+?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>Form variables sent through "post" end up in the <span class="phpcode_inline">$_POST</span> array (in newer versions 
+of PHP, anyway). To pull them out, we simply reference this array using the 
+"name" attribute of the form as a key in the array.</p>
+
+<p>Now that we've got the variables into PHP, we're ready for some first real 
+validation; we'll compare the variables that we sent to validate.php against 
+those we stored in the database. To do that, all we have to do is connect to the 
+MySQL database through PHP, then try to retrieve any database entries with the 
+same user_name and password that the user entered. If there is one and only one 
+entry, then we can say that the user is verified. We'll add code to the already 
+existing validate.php to accomplish this:</p>
+
+<pre class="phpcode">&lt;?php
+	session_start();
+	$db_user = 'mysql_username';
+	$db_pass = 'mysql_password';
+	$user_name = $_POST['user_name'];
+	$password = $_POST['password'];
+
+	//connect to the DB and select the "dictator" database
+	$connection = mysql_connect('localhost', $db_user, $db_pass) or die(mysql_error());
+	mysql_select_db('dictators', $connection) or die(mysql_error());
+
+	//set up the query
+	$query = "SELECT * FROM users 
+			WHERE user_name='$user_name' AND password='$password'";
+			
+	//run the query and get the number of affected rows
+	$result = mysql_query($query, $connection) or die('error making query');
+	$affected_rows = mysql_num_rows($result);
+
+	//if there's exactly one result, the user is validated. Otherwise, he's invalid
+	if($affected_rows == 1) {
+		print 'validated';
+	}
+	else {
+		print 'not valid';
+	}
+?&gt;</pre>
+
+<p>At this point, you can redirect the user to a receipt page, but you still have a 
+problem - if the user wants to go anywhere else on your site, they will need to 
+login again. To fix this, we'll add some session variables to tell us that the 
+user has already logged in. If you don't understand session variables, you can 
+read <a href="http://www.phpcomplete.com/content.php?id=14" class="link">
+Jason's sessions 
+tutorial</a> first. Otherwise, read on:</p>
+
+<pre class="phpcode">&lt;?php
+	//...snip...
+	if($affected_rows == 1) {
+		print 'validated';
+		//add the user to our session variables
+		$_SESSION['user_name'] = $user_name;
+	}
+	else {
+		print 'not valid';
+	}
+?&gt;</pre>
+
+<p>And, finally, to check if they've logged in from any other page, include this:</p>
+
+<pre class="phpcode">&lt;?php
+	session_start();
+	if(empty($_SESSION['user_name'])) {
+		die('An error has ocurred. It may be that you have not logged in, or that your session has expired.
+			Please try &lt;a href="login.php"&gt;logging in&lt;/a&gt; again or contact the 
+			&lt;a href="mailto:admin@example.com"&gt;system administrator&lt;/a&gt;');
+	}
+?&gt;</pre>
+
+<p>And now, we've just developed a very simple authentication script. This is just 
+a base for further experimentation - please never install this on a production 
+server. However, you are free to take my code and play with it. If you do, or if 
+you have any other comments, drop me an email at <a href="mail:llimllib@f2o.org"
+class="link">llimllib@f2o.org</a>. In my next 
+article, I'll tackle adding some security to this login, retrieving lost 
+passwords, and probably some other topics too. Until then, don't be afraid to 
+experiment, and most of all, have fun!</p>
+
+</body></html>

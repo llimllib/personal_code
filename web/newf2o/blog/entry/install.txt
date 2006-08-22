@@ -1,0 +1,73 @@
+How I Installed Pyblosxom
+Recently, I installed pyblosxom. Despite my concerns about its 
+unpronounceability, I'm very happy with it, and I hope to put some interesting
+hacks on it soon. For now, though, I'll just list how I installed it. I'll
+try to keep it brief, so if you have any questions,
+<a href="mailto:wimill@ursinus.edu">drop me a line</a>.<p>
+My server is graciously hosted by <a href="http://f2o.org">f2o</a>, and I only
+have FTP access to it. It already was well set up for Python CGI, so I was able
+to skip that part of the process.<p>
+The first thing I did, naturally, was pick up the most recent pyblosxom at
+<a href="http://sourceforge.net/project/showfiles.php?group_id=67445">sourceforge</a>, 
+version 1.0 in my case. I then extracted the tar file into its own
+directory, using my own
+<a href="http://llimllib.f2o.org/files/extract.py">extract</a>
+script.<p>
+Once I had the program downloaded and extracted, my next task was to upload
+the necessary directories to my web server. I made a blog/ directory and
+copied the Pyblosxom/ and web/ directories to it. I edited the web/config.py
+file on my local machine, simply answering the questions that it asked me,
+and updated the copy on my FTP server. I then loaded up the pyblosxom.cgi
+script in my browser, and saw that it appeared to be working correctly.<p>
+Next, I wanted to put the pyblosxom.cgi script in a more convenient place and
+rename it to something better than pyblosxom.cgi. I moved the file down into
+the blog/ directory, and called it "serve". Remember that when you move this
+file, you'll have to move config.py into the same directory. 
+To make sure that Apache parsed
+serve as a cgi file, I created a .htaccess file, and added a few other
+options to it.
+<h2>.htaccess</h2>
+<textarea cols="50" rows="10">
+#load the "serve" page by default
+DirectoryIndex serve
+
+#don't let anyone read my "config.py"
+&lt;Files config.py>
+    deny from all
+&lt;/Files>
+
+#force "serve" to be a python file
+&lt;Files serve>
+ForceType application/cgi-script
+SetHandler cgi-script
+&lt;/Files>
+</textarea><p>
+To test the installation, I created a file called "test.txt" with a few lines
+of text in it, and put it in the blog directory. Since the blog directory was
+also my data directory (as I specified in config.py), pyblosxom should display
+the text of the file as a blog entry, and it did.<p>
+<h2>Creating my flavour</h2><p>
+The next task was to match the blog design to my existing website's design.
+This was the part I was dreading, as most software packages require you to
+learn their arcane templating language. Pyblosxom, instead, does things exactly
+the way I do for my own site.<p>
+I copied the *.html files from the contrib/flavour_examples/ directory to the
+main blog directory. Inside the head.html file, I put the HTML I already had 
+for my header. Inside the foot.html file, I did the same thing. Finally, I
+altered the story.html file so that it used the same CSS styles as the rest
+of the site, and added some cosmetic changes.<p>
+And that was it! This method is remarkably similar to how I already generate
+the static HTML for my web pages. I wrote a very simple pre-processing system
+in python which includes a generic header and footer into each page, and each
+page simply defines its body. Thus, it was a piece of cake to integrate
+Pyblosxom into my own site.<p>
+Finally, I added comments to my site. This time, however, I was able to use
+exactly the instructions provided in the README, so I'll spare you the grungy
+details of the process.<p>
+And that was it! I had a fully functional pyblosxom which was integrated into
+my own site. As I said before, I was pretty excited about the ease with which
+I was able to get it installed, and by how easy it is to understand. I plan
+to add <a href="http://del.icio.us">del.icio.us</a>-style labels to my blog,
+so I'll add updates on pyblosxom's hackability later.
+<!--time: 11-05-04 20:21 -->
+<!--keywords: pyblosxom, install, blog-->

@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<rss version="2.0" xmlns:admin="http://webns.net/mvcb/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:html="http://www.w3.org/1999/html" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:slash="http://purl.org/rss/1.0/modules/slash/"><channel><title>Blog.a.licious</title><link>http://llimllib.f2o.org/blog/serve</link><description>Bill Mill on Python, programming and life</description><language>en</language><ttl>60</ttl><dc:creator>Bill Mill bill.mill@gmail.com</dc:creator><admin:generatorAgent rdf:resource="http://roughingit.subtlehints.net/pyblosxom"/><admin:errorReportsTo rdf:resource="mailto:bill.mill@gmail.com"/><item><title>Python vs. Illinois</title><guid isPermaLink="false">entry/illinois</guid><link>http://llimllib.f2o.org/blog/serve/entry/illinois</link><description>No, I'm not dead yet , I've just been hibernating. And by &quot;hibernating&quot;, I mean &quot;watching college basketball&quot;. As the ...</description><content:encoded><![CDATA[No, I'm <a href="http://llimllib.f2o.org/images/notdeadyet.jpg">not dead
+yet</a>, I've just been hibernating. And by "hibernating", I mean "watching
+college basketball". As the geekier of you probably don't know, the Illinois
+men's basketball team just ended a dream season tonight with a loss to North
+Carolina in the NCAA tournament finals. Prior to tonight's loss, they only had
+<a href="http://www.msnbc.msn.com/id/7108724/">one loss</a>, on a buzzerbeater,
+to Ohio State.<p>
+"What in the world", I can hear you asking, "does that have to do with Python?"
+Well, on a <a href="http://www.yocohoops.com">college basketball board</a> I
+frequent, a user named madurzak 
+<a href="http://www.yocohoops.com/story/2005/4/2/10954/76021">proved 
+conclusively</a> that the worst team, <a
+href="http://en.wikipedia.org/wiki/Ratings_Percentage_Index">RPI-wise</a>, in
+college basketball is better than Illinois:<p>
+<blockquote>Maryland Eastern Shore beat<br>
+MD Baltimore Country which beat<br>
+Maine who beat<br>
+Northeastern who had a nice win against<br>
+UMass who somehow beat<br>
+UConn who beat<br>
+Indiana who beat<br>
+Ohio St. who shocked<br>
+Illinois</blockquote><p>
+This got me to wondering what some other teams' Illinois Number (as I christened
+it, after the famous <a href="http://en.wikipedia.org/wiki/Erdos_number">Erdos
+Number</a>) would be. Armed with <a href="http://kenpom.com">Ken Pomeroy's</a>
+(<a href="#illinois_txt_foot1">[1]</a>)
+<a href="http://kenpom.com/cbbga.txt">game data</a>, Python, and a spare hour,
+I set out to find out. Would every team have an Illinois Number? What would the
+highest Illinois Number be?<p>
+To figure out, I simply built a tree with Illinois at the top, Ohio State below,
+the teams that beat Ohio State below that, and so on until all the games that
+fit into the tree had been properly placed. I've posted the basic code to
+construct the tree <a 
+href="http://llimllib.f2o.org/files/gen_illinois_tree.py">here</a>; it
+requires the <a href="http://kenpom.com/cbbga.txt">data</a> I mentioned
+earlier. After some massaging of the results, I threw up a quick CGI app to
+explore them <a
+href="http://llimllib.f2o.org/illinois_number/illinois.html">here</a>.<p>
+<h2>Conclusion</h2><p>
+There's no deep conclusion; I just thought it was a neat little script, so I
+wanted to post it. There are a few interesting thoughts I had on the data,
+though:
+<ul><li>The highest Illinois Number is 7, and it belongs to the 
+little Division III squad of <a
+href="http://www.hsc.edu/athletics/basketball/">Hampden Sydney</a>, an 
+all-men's school in Virginia. They <a
+href="http://llimllib.f2o.org/illinois_number/illinois.py?team=hampden+sydney">beat</a>
+the <a
+href="http://www.longwoodlancers.com/index.asp?path=mbasket">Longwood
+Lancers</a>, who managed only one win all season.
+<li>Both Division I one-win teams, <a
+href="http://llimllib.f2o.org/illinois_number/illinois.py?team=army">Army</a>
+and the aforementioned <a
+href="http://llimllib.f2o.org/illinois_number/illinois.py?team=longwood">Longwood</a>,
+had Illinois Numbers of 6
+<li>As far as I can tell, the only Division I school without an Illinois Number
+is lowly Savannah State, who went 0-28 this season.
+<li>For this type of task - parsing text, building a relatively small tree, and
+playing with it - Python is the best. I love playing with data in the
+interpreter, coding very very high-level data structures in minutes, and trying
+things out as fast as I can type them.<p></ul>
+<a name="illinois_txt_foot1">[1]: Let me mention that, if you're a stats geek,
+you should have been reading <a href="http://kenpom.com">Ken's site</a> for a
+while. Go there for his interesting custom college basketball ranking system,
+stay for the game analysis on his blog.<p>
+[2]: The data analyzed here does not include tonight's North Carolina game,
+since I coded everything this afternoon. Tonight was the first time I was 
+rooting for a sports team just to keep my blog consistent, but NC's defense was just too good for the Fightin' Illini.
+<!--keywords: python, basketball, illinois, sports, stats-->
+<!--time: 4-05-05 23:13-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2005-04-06T04:13:00Z</dc:date></item><item><title>Sketch of an Open Source Data Repository</title><guid isPermaLink="false">entry/open_data</guid><link>http://llimllib.f2o.org/blog/serve/entry/open_data</link><description>One of the largest obstacles to creating effective data-mining software is the scarcity of good data sets. If good data ...</description><content:encoded><![CDATA[One of the largest obstacles to creating effective data-mining software is the
+scarcity of good data sets. If good data sets were easily available to people
+on the web, I think it's likely that more people would come up with innovative
+data mining applications. Some data sets that I would like to see:<p>
+<ul><li><b>Stock Data</b>: I've been looking for a good repository of stock
+data (on and off) for quite a while, and I've yet to find one.
+<li><b>Del.icio.us Data</b>: How cool are the possibilities with a big
+del.icio.us data dump? Has anyone created one? You could graph cliques of
+users, find similar tags, find tag misspellings, or do a hundred other
+interesting things with the data.
+<li><b>Audioscrobbler Data</b>: Audioscrobbler publishes a data dump (available
+<a href="http://www.audioscrobbler.com/data/">here</a>; it relates users of the
+<a href="http://www.audioscrobbler.com">audioscrobbler</a> system to the songs
+that they listen to.
+<li><b>Scientific Data</b>: Often, experiments generate more data than the
+researchers who run the experiment can handle. Opening scientific data sets
+could provide some interesting results due to the "many eyes" syndrome.
+<li><b>Game Data</b>: There are hundreds of data sets of IRC poker games,
+internet chess games, internet go games, and other games just waiting to be
+gathered in one central location.
+<li><b>Literary Data</b>: The <a href="http://www.promo.net/pg/">Gutenberg
+Project</a> makes over 6000 books available in text on the web, but they are
+not in a data-mining-friendly format. If tagged appropriately, it could be
+trivial for me to graph comma frequency rates over the last 100 years to see if
+they changed, or maybe even do something <em>interesting</em>.
+<li><b>Internet Data</b>: Different collections of websites - corporate
+websites, academic websites, random collections of websites.
+<li><b>Open Source Code</b>: <a href="http://www.koders.com/">Koders</a> has 
+shown that searching open source code can be valuable; certailnly interesting
+statistics could be derived from a large collection of open source code.
+</ul>
+<p><h2>Problems</h2><p>
+I can imagine several practical problems with such a data source. First is
+copyright; assuring that the site had a copyright for so much data would be a
+daunting task. Perhaps the responsibility for the copyright could be held by
+the submitter?<p>
+The format of the data would also be an interesting problem. To make the data
+worthwhile, it would likely have to be constrained to some known subset of
+well-documented data formats. It would require a fairly large effort to convert
+existing data to an acceptable format, and verify that the data is
+in the correct format.<p>
+Documenting the meaning of the data contained in the files would also be a 
+daunting challenge, requiring a fairly large effort. If the repository
+contained a lot of data, but nobody knew what it meant, it would be
+worhless.<p>
+Finally, the site's success would be a part of its problem. Transferring large
+data sets over the internet would create a hell of a bandwidth bill. Finding a
+way to deal with this bill - through donations, advertising, or perhaps a fee
+for use of the site - would be crucial to its success.<p>
+<h2>Conclusions</h2><p>
+The value of such a website is, in my mind, undeniable. If you could build a
+community of users around it, I believe that novel applications of data-mining
+techniques would inevitably arise. While administrative problems would be
+significant, the success of such large open sites as <a
+href="http://sf.net">Sourceforge</a> and <a
+href="http://wikipedia.com">Wikipedia</a> leads me to believe that it's a
+conceivable project.
+<!--keywords: data_mining, open_source, programming, computer -->
+<!--time: 02-02-05 23:18 -->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2005-02-03T05:18:00Z</dc:date></item><item><title>Python Generics, Guards, and Overloading</title><guid isPermaLink="false">entry/pygenerics</guid><link>http://llimllib.f2o.org/blog/serve/entry/pygenerics</link><description>As I said in my last post , I've been looking erlang lately, and I'm very impressed with generic functions, ...</description><content:encoded><![CDATA[As I said in my <a
+href="http://llimllib.f2o.org/blog/serve/entry/erlang.html">last post</a>,
+I've been looking <a href="http://erlang.org">erlang</a> lately, and I'm very
+impressed with generic functions, pattern matching, and guards. As I read more
+code, I only like them more and more. I'm inclined to agree with 
+<a href="http://dirtsimple.org">Phillip</a> that
+they
+<a href="http://dirtsimple.org/2005/01/like-acid-for-frameworks.html">"capture 
+something really fundamental"</a> about programming.<p>
+(disclaimer: I am new to this style of programming.
+I'm just thinking out loud. People have probably already had this
+discussion in more detail.)<p>
+As you know if you have been keeping up with Python blogs, 
+Phillip has been working hard on adding the aforementioned features to Python by
+abusing decorators (hey, he admitted it). Here's what a generic factorial 
+function can look like with his <code>dispatch</code> module:<p>
+<textarea rows="11" cols="50">@dispatch.generic()
+def fact(n):
+    """Factorial"""
+
+@fact.when('n == 0')
+def ret_one(n):
+    return 1
+
+@fact.when('n > 0')
+def do_fact(n):
+    return n * fact(n-1)</textarea><p>
+While it's very cool that it works, I find it hard to imagine a less Pythonic
+syntax than this. Defining a new function name for each version of 
+<code>fact</code> really hurts
+readability, and the guards become more prominent than the
+actual function definition. Compare it with the Erlang version, and its
+deficiencies become clearer:<p>
+<textarea rows="4" cols="50">fact(0) ->
+    1;
+fact(N) ->
+    N * fact(N-1).</textarea><p>
+So, if we want generics in Python, what would they ideally look like? Well, that
+question interests me, so I'm going to go into pie-in-the-sky mode and throw
+this out:<p>
+<textarea rows="4" cols="50">def fact(0):
+    return 1
+def fact(n):
+    return n * fact(n-1)</textarea><p>
+Isn't that pretty? In my imaginary world,
+<code>fact(0)</code> is automatically translated into a guard that only allows 
+the first function to be called when <code>n</code> is 0. What are guards, and 
+what do they look like in Bill-Mill-land?
+Some code should make it clear:<p>
+<textarea rows="4" cols="50">def move_pointer(x, y) when x > 0 and y > 0:
+    #move the pointer
+def move_pointer(x, y):
+    raise CoordsError, "Negative coord"</textarea><p>
+I don't think I even need to explain that code; if x and y are positive, the 
+first function is called. Else, the second one is called. It <b>just makes sense</b>.
+If you guessed that the function <code>fact(0)</code> above would expand to
+<code>fact(n) when n == 0:</code> , then you're following along. More
+generally, any constant in the parameter list could be expanded by the
+interpreter into a guard.<p>
+This next example demonstrates both overloading, and the use of guards for
+dynamic type checking. Imagine that this follows immediately after the previous
+code sample:<p>
+<textarea rows="6" cols="50">def move_pointer((x, y)) when adapt(y, int):
+    #call looks like: move_pointer(point)
+def move_pointer(*args):
+    #handle default match; Python should raise
+    #an error if no function match is found
+    #and no default match is provided</textarea><p>
+The first function accepts one argument, a 2-tuple, and unpacks it 
+to the variables <code>x</code> and <code>y</code>. If <code>y</code>
+can be adapted to an <code>int</code>, then the function is called. If none
+of the more specific <code>move_pointer</code> functions can be found, then 
+the default, <code>move_pointer(*args)</code> would be called. If no default
+were found, an exception would be raised.<p>
+Basically, what I'm dreaming of in this post is stealing some elegant
+syntax for Phillip's work from Erlang and porting it to Python. I think 
+that generics, guards, and overloading are a better addition to Python
+than is static typing, bringing some of the benefits that have been proposed
+for static typing, without the drawbacks.<p>
+UPDATE: Added return statements to the first "imaginary Python" code sample. I
+never meant to leave them off. Thanks to <a 
+href="http://www.drbeat.li/">Beat Bolli</a> for pointing this out.
+<!--keywords: erlang, python, generic_functions, language, syntax, design, computer, programming-->
+<!--time: 01-13-05 23:42-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2005-01-14T05:42:00Z</dc:date></item><item><title>A Pythonista's Impressions of Erlang</title><guid isPermaLink="false">entry/erlang</guid><link>http://llimllib.f2o.org/blog/serve/entry/erlang</link><description>I am planning to write a poker server in Erlang . Why? A couple of reasons. First off, I have ...</description><content:encoded><![CDATA[I am planning to write a poker server in 
+<a href="http://erlang.org">Erlang</a>. Why? A couple of reasons.
+First off, I have heard that the concurrency support in it is excellent.
+Secondly, A quick glance gave me the impression that it was, at least, not
+brain-dead. Third, it's been a long time since I learned a new language, so I'm
+planning to do it for kicks.<p>
+As such, for the last few days, I've been playing around with the language, and
+I have begun to form my opinions on it. Since I've been pretty busy, I haven't
+had too much time to play with it, and as such my opinions are half-baked.
+Since that never stopped me from writing before, here they are.<p>
+If I'm wrong somewhere (and I'm sure I am) drop me a comment, and I'll fix it.
+<p>
+<h2>The Good</h2><p>
+<ul>
+<li><b>Interpreter</b>: Erlang has a shell that is very similar to Python's. I
+am totally addicted to the Python shell, so this makes experimentation quite a
+bit easier. It features some comforting functions: m(module_name). lists the
+functions exported by module_name, and length([1,2,3]). returns 3.
+<li><b>Pattern Matching</b>: I *love* this feature. If I were to make a serious
+switch to Erlang, pattern matching would be a large reason. I'm not sure how
+well it works in large applications yet, but it certainly feels elegant to
+me.<p>
+With pattern matching, you can define one function multiple times, and Erlang
+will pick the appropriate function based on its signature. Perhaps an example 
+will help; you can define your basic factorial function like so:<p>
+<textarea rows="4" cols="50">fact(0) ->
+    1;
+fact(N) ->
+    N * fact(N-1).</textarea><p>
+Erlang will automatically call the first function when the argument is zero,
+and the second one otherwise.
+<li><b>Guards</b>: Similar to pattern matching, guards help Erlang figure out
+which function to call by setting a basic precondition for one or more 
+parameters. Thus, we could revise our factorial function in a silly way to use
+guards:<p>
+<textarea rows="4" cols="50">fact(N) when N > 0 ->
+    N * fact(N-1);
+fact(0) ->
+    1.</textarea><p>
+As you can see, this is a silly way to use guards, but I think it gives a good
+quick indication of what they do.
+<li><b>Data Structures</b>: Erlang, for the most part, has a good, rich set
+of data structures. Lists are as powerful as they should be, and it has list
+comprehensions (which have quickly become one of my favorite Python features).
+Tuples work nearly the same as they do in Python as well.<p>
+Unlike Python, Erlang features atoms. Atoms, which have no Python equivalent,
+consist of any identifier which starts with a lower-case letter or any
+single-quoted string. It seems that Erlang's idiom for dictionaries uses tuples
+and atoms:<p>
+<textarea rows="2" cols="50">Mydict = {{anatom, 12}, {'atom w space', 15},
+    {atomsarekeys, 12}}.</textarea><p>
+Erlang does (obviously) have variables, but they must start with a capital 
+letter to be distinguished from atoms. There is also a record type, but I do not
+have a good enough understanding of it yet to explain it.
+<li><b>The Philosophy</b>: The most abstract point here, I think that Erlang
+seems to encourage good, readable code. After just a few hours in the language,
+I feel comfortable enough to dive into the Erlang httpd server and try to
+understand what's going on. Considering that other functional languages have
+only given me frustration in this respect, I think it bodes very well for
+Erlang to be good in this regard.
+</ul>
+<h2>The Not-Sure-If-It's-Good-Or-Not</h2><p>
+<ul>
+<li><b>Variable Binding</b>: Variables, once bound in a scope, cannot be 
+reassigned to
+another value in the same scope. I really like Python's binding scheme, where 
+variables are just names, and may be assigned to refer to anything. However, I
+can imagine the variable binding restriction catching a bunch of silly errors.
+I haven't used it enough (read: at all) to make a judgment on whether it's
+worthwhile or not.<p>
+On the upside, it does seem to encourage short functions, which I think is a
+good thing. Erlang in general seems to encourage short functions which are used by other objects; I am in the process of studying the Erlang idiom of 
+supervisors and workers.
+<li><b>Concurrency</b>: Although it looks neat, I've yet to get in and play
+with Erlang's concurrency, so I don't want to render a decision on it.
+</ul>
+<h2>The Bad</h2><p>
+<ul>
+<li><b>No String Type</b>: Let me repeat this for emphasis: There Is No String
+Type In Erlang. Arrrggggh! Why would you do this?<p>
+A string is treated, you guessed it, as a sequence of ASCII codes in a list.
+It's C all over again. The shell tries to "guess" when a list is
+actually a string, which is a pain if a list you create just happens to contain
+values in the printable ASCII range.<p>
+<li><b>Error messages</b>: Erlang's error messages are totally undecipherable
+for a newbie. Here's what happens when you call a function with the wrong
+number of arguments:<p>
+<textarea rows="5" cols="50">** exited: {undef,[{shell_default,length,[[1,2,3],12]},
+                   {erl_eval,do_apply,5},
+                   {shell,exprs,6},
+                   {shell,eval_loop,3}]} **</textarea><p>Got it?
+<li><b>Documentation</b>: Most of the links to documentation on
+<a href="http://erlang.org">erlang.org</a> are broken. When you finally do get
+to the docs (mysteriously at erlang.se instead of erlang.org), there are some
+real gems. When you click on "Complete List of BIFs" (BIF = built-in function)
+in the reference manual, you get "For a complete list of BIFs, their 
+arguments and return values, refer to erlang(3).".<p>
+The kicker? When I downloaded and installed Erlang, the man pages either
+weren't installed or weren't put in the right place. So, as a newbie, I am left
+digging away from the main erlang site just to find out what the f$%$ing
+built-in functions are. Not a good sign.
+<li><b>The; Punctuation. Is, Weird -></b>: Maybe this is one of the not sure
+things, but I'm pretty sure I don't like some of Erlang's punctuation. I don't
+mind the '->', but I oftentimes have to look at the docs to figure out whether
+I should be using a ';' or a '.' to end a statement. Furthermore, the error
+messages, as I've already shown, are less than helpful in guiding you to the
+source of the syntax error.
+</ul>
+<p>Well, that's it for now. I'm sure I left some stuff out, and I'm sure you
+disagree with some of what I've said, so leave me a comment with what you
+think or drop me an <a href="mailto:llimllib@f2o.org">email</a>.<p>
+Overall, I think Erlang has some neat features - especially pattern matching
+and guards. Furthermore, if what everyone says is true, its concurrency is fast
+and well-designed. Although the lack of proper documentation is a turn-off, I
+feel like I'll be able to learn what I need to know from reading the very
+readily available code. I'm still going to give it a shot, which is a good
+sign.
+<!--keywords: erlang, programming, computer, language, syntax, design-->
+<!--time: 1-10-05 11:54-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2005-01-10T17:54:00Z</dc:date></item><item><title>Thoughts on Stuff (Python, Poker)</title><guid isPermaLink="false">entry/newyear05</guid><link>http://llimllib.f2o.org/blog/serve/entry/newyear05</link><description>After completing the redecorator (as much as it's ever gonna be done), I basically dropped off the face of the ...</description><content:encoded><![CDATA[After completing the redecorator (as much as it's ever gonna be done), I
+basically dropped off the face of the internet. The week after Christmas, I
+was busy playing with my new toys (Metal Gear Solid 3 is addictive) and
+planning to go visit my college friends for a New Year party.<p>
+To make a long story short, New Year's day, Saturday, my friend and I ended up 
+in Atlantic City gambling. I didn't leave until Monday morning.<p>
+Anyway, since I haven't been coding, I've had a while to think about some
+things. Much randomness follows.<p>
+<h2>Python</h2><p>
+There has been all kinds of commotion about optional static types. If you could
+guess from how I felt about <a 
+href="http://llimllib.f2o.org/blog/serve/entry/redecorator.html">decorators</a>,
+I'm not much of a fan of the proposed new syntax. Guido says that all kinds of
+people want this feature, but since when has this been so important to the BDFL?
+Furthermore, who are all these people that want static typing? Where are they 
+hiding?<p>
+Ian <a href="http://blog.ianbicking.org/peopleneedtochill.html">tells us</a> to
+chill, but the thought of static types in python is genuinely disturbing. One
+day before Guido posted his first blog, I wrote about how I was scared of the
+c++ification of python, based on decorators. If static types were added, that
+transition would be complete.<p>
+Chris Petrilli is a lot <a 
+href="http://www.amber.org/~petrilli/archive/2005/01/05/more_static_typing_nonsense.html">smarter</a>
+than me, and wrote what I wanted to say <a
+href="http://www.amber.org/~petrilli/archive/2004/12/23/static_typing_and_python.html">better</a>
+than I could say it myself. Peter William Lount chips in with a well-written
+<a href="http://smalltalk.org/articles/article_20050105_a2.html">article</a>
+with the same conclusion as Chris. Finally, Hans Nowak comes closest to my
+own opinion that <a 
+href="http://zephyrfalcon.org/weblog2/arch_e10_00710.html#e717">python wouldn't
+be python with static types</a>.<p>
+<h2>Poker</h2><p>
+To this point, I have kept this blog pretty programming-centric. While that
+remains my main interest, I am also interested in games. My current main
+interest is poker, although I have already dabbled in Go research in
+college.<p>
+While I was in Atlantic City, a very simple strategy at the poker tables netted
+me a decent amount of money (about 13 small blinds per hour) at low-limit 
+tables.
+Basically, I played extraordinarily tightly. I figure that I played about 1% of
+the hands that were dealt to me, only the cream of the crop plus my favorite
+not-so-hot hand. I probably played another 1% or 2% of hands based on
+situational factors, such as being on a blind or being alone against a bad
+player.<p>
+When I was in a hand, I played it very aggressively. I almost always bet the
+maximum; I wanted to use my table image of conservatism to scare my opponents.
+The great thing about the bad players that congregate at low-limit tables,
+especially on holiday, is that they will often play to the river and then fold.
+While I usually had more than one caller up to the turn, I rarely ever had to
+show down against more than one player, and often had the pot folded to me.<p>
+<h2>Poker Programming</h2><p>
+On my <a href="http://llimllib.f2o.org/code.html">code</a> page, you'll see
+that I wrote a python framework for poker bots on the <a
+href="http://games.cs.ualberta.ca/webgames/poker/">poki poker</a>
+servers at the University of Alberta. Soon, I'd like to reimplement and make
+significant improvements to their poker server.<p>
+I will probably implement this server in <a href="http://erlang.org">Erlang</a>.
+Why? Just for kicks, and because the language looks pretty sweet. 
+Thanks to
+<a href="http://patricklogan.blogspot.com/2004/12/even-more-on-reliability-and-static.html">Patrick Logan</a>
+both for responding sensibly to a comment of mine, and for reminding me that I
+wanted to try Erlang.<p>
+I tried installing Erlang last night, but was unsuccessful. The install went
+OK, but then when I tried to verify the installation as the documentation told
+me to (toolbar:start().), it didn't work.<p>
+UPDATE: While I was writing this, I noticed the period after the start()
+function. I'm so conditioned to python that I didn't notice it, and erlang
+appears to work now. I'll update on my progress soon.<p>
+Happy New Year, everybody.
+<!--keywords: python, static_types, erlang, poker, newyear-->
+<!--time: 1-05-05 22:49-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2005-01-06T04:49:00Z</dc:date></item><item><title>Dear Guido,</title><guid isPermaLink="false">entry/guido</guid><link>http://llimllib.f2o.org/blog/serve/entry/guido</link><description>RSS works .</description><content:encoded><![CDATA[RSS <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=85551">works</a>.
+<!--keywords: python, guido, rss, short-->
+<!--time: 12-23-04 08:02-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2004-12-23T14:02:00Z</dc:date></item><item><title>Collected Responses to Comments on &quot;The Redecorator&quot;</title><guid isPermaLink="false">entry/redec_response</guid><link>http://llimllib.f2o.org/blog/serve/entry/redec_response</link><description>Phillip J. Eby writes: the issue with his use of decorators (to me anyway) wasn't that he used them, but ...</description><content:encoded><![CDATA[<a href="http://dirtsimple.org/">Phillip J. Eby</a> writes:<p>
+<blockquote>the issue with his use of decorators (to me anyway) wasn't that he 
+used them, but that he had a really silly name for the decorator.  Instead of 
+@param, it should've been called something like @call_with or @test_with.
+Then, the code would have made more sense when reading.</blockquote><p>
+While I agree with your point, Phillip, I still feel that there's a greater
+issue at hand. I don't think that Ian's use of a decorator to create a testing
+function is simpler than the alternative he prevents. Thus, I don't think that
+he should use a decorator in that circumstance.<p>
+<blockquote>With properly named and documented decorators, it shouldn't be 
+necessary to understand their implementation</blockquote><p>
+I've always had problems with this theory. Know the interface, and assume that
+it works by "magic", it says. While that's fine in theory, I find that I am far
+less effective when I use a framework or interface and not what goes on behind
+it. It may just be that the way I think requires me to understand the
+underlying technology in a way that other people don't need to, but I am just
+not comfortable using an implementation of something I don't understand.<p>
+Obviously, there have to be exceptions, as some things would require an
+indordinate amount of effort to understand deeply. While I allow that this is
+sometimes true (CPython and wxWindows come to mind), I work hard to increase my
+understanding of the underlying technology every time I get a chance to do so.
+I find that the more I know about it, the better my code gets, and that I often
+get "aha!" moments as I grasp more of the framework.<p>
+Furthermore, it seems to me that this statement is less true in Python than in
+Java, as Python allows extraordinary simplicity. This is one of the main
+reasons why I like the language, and this is one of the reasons I dislike 
+extensions to it which encourage complexity.<p>
+<a href=http://effbot.org/">Fredrik</a> writes:<p>
+<blockquote>I'm beginning to realize that the people who are the most 
+enthusiastic about things like metaclasses, decorators, 
+nested-functions-instead-of-classes, etc. do not think in the same Python as 
+I do</blockquote><p>
+I don't know if I'd state it quite that strongly, but I do see a new trend in
+the way that people want to use python. I find myself using nested functions,
+but very occasionally, and only in limited circumstances. I mainly find them 
+useful in mathematical contexts.<p>
+What scares me is what I see as the c++ification (if I may coin a term) of our
+language. The community seems content to move towards adding language features
+that are useful only to the wizards of the language. This is fine for the
+wizards, but it tends to create a second class of programmer. These
+second-class programmers, who just want to get things done, understand the 
+basics of the language, but simply assume that code which contains metaphors 
+they don't understand is unreadable.<p>
+I think that metaclasses (which I just assume I don't understand, myself) and
+decorators (which required me to waste a lot of time just to understand how
+simple they are) are both steps down this road, unfortunately.<p>
+<a href="http://apipes.blogspot.com/2004/12/bill-mill-on-decorators.html">Tim
+Lesher</a> writes on his blog:<p>
+<blockquote>My only, weak answer [to "why should I use a metaclass?"] was, "If 
+you think you need one, you don't. 
+If you know you need one, why are you taking advice from me?"</blockquote><p>
+That is exactly what I meant to say when I asked people to leave decorators to
+the Other People. The set of features that require 
+this sort of response is almost exactly equivalent to
+the set of features that I don't like.<p>
+Finally, <a href="http://bob.pycs.net/">Bob Ippolito</a>, who really should
+pick <a href="http://pyblosxom.sourceforge.net">pyblosxom</a> for his new blog
+server (/marketing), writes:
+<blockquote>Personally, I think that decorators serve a useful purpose.  There 
+are many cases where they save you from spelling out an identifier three times.
+Repetition is stupid, and Python doesn't otherwise have a lot of repetition, 
+but function transformations need them since functions are statements and not 
+expressions.<p>
+Maybe I should just use lisp instead.</blockquote>
+In my mind, simplicity is a greater goal of python than is the avoidance of
+repetition. GvR has often made it clear that limiting the number of keystrokes
+is not one of his guiding factors in desiging the language ("
+This is *not* a number-of-keystrokes argument. You know I don't care
+much about that."). I'd rather see him choose simplicity over features which
+remove keystrokes at the cost of added complexity, unless the feature adds a
+<em>lot</em> of power. I don't think that decorators meet this criteria.<p>
+A lisp master's code might do something complicated in 10 lines, while it takes
+a Python wizard 25. However, it is a hell of a lot easier for a person with
+only a moderate understanding of each language to figure out the python wizard's
+code than it is for him to understand the equivalent lisp code (IMHO,
+naturally). This is a feature of Python that I like.<p>
+Wizards can have their lisp, I'd rather save my limited brainpower for getting
+things done in a readable way, even if it's not in the fewest lines of code
+possible.
+<!--keywords: meta-blog, python, decorators, lisp, metaclass, responses-->
+<!--time: 12-22-04 18:28 -->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2004-12-23T00:28:00Z</dc:date></item><item><title>The Redecorator</title><guid isPermaLink="false">entry/redecorator</guid><link>http://llimllib.f2o.org/blog/serve/entry/redecorator</link><description>I hate decorators. Although they have a few valid uses, I think they're almost always the wrong design choice. In ...</description><content:encoded><![CDATA[I hate decorators. Although they have a few valid uses, I think they're almost 
+always the wrong design choice. In fact, on Friday, after reading
+<a href="http://blog.ianbicking.org/explaining-decorators.html">Ian Bicking's</a>
+blog entry about them, I began writing a long
+rant about why they were usually a poor choice.<p>
+It was at this point that I realized that I'm not good at writing rants. It's
+just not what I like to do.<p>
+However, I do like to write Python - so I thought of a way to register my 
+displeasure with our new language feature. The idea was so simple that I knew I
+had to do it. I would negate decorators.<p>
+The Redecorator is a fairly simple script which utilizes the fact that
+decorators are merely simple typographical operators to negate them. It takes
+a python source file as input, and produces another as output. The output file
+should be stripped of decorators, but be functionally equivalent to the input
+file.<p>
+Although it's fairly simple, it ended up being longer than I thought it would
+be. The Redecorator currently stands at 117 lines, most of them code. It is not
+production code; I've only tested it on a really simple test file. 
+It will likely bork on files with mixed tabs and spaces (but you
+shouldn't have those anyway, you know). It's only been tested on Linux, but
+it should be cross-platform.<p>
+You can get the code 
+<a href="http://llimllib.f2o.org/files/redecorate.py">here</a> and the file
+I used to test it with
+<a href="http://llimllib.f2o.org/files/dec_test.py">here</a>. I run it with:
+./redecorate.py &lt; dec_test.py &gt; dec_out.py , but it can take files for
+input and output. Read the docstring.<p>
+<h2>Rant (this is not a rant)</h2><p>
+Writing this script actually taught me quite a bit more than I thought it
+would. It forced me to read the 
+<a href="http://www.python.org/peps/pep-0318.html">PEP for decorators</a>, which convinced me (grudgingly, and on
+my third time through) that there are valid uses for decorators. I now know in
+what order decorators are applied, and exactly (I think) what they really do.<p>
+However, I still think that uses like 
+<a href="http://blog.ianbicking.org/explaining-decorators.html">Ian's</a> are incorrect uses of decorators. Unless a decorator
+significantly simplifies a function, I don't think that it should be decorated.
+In his blog entry, the first solution is simple, direct, and to the point; the
+second solution is impossible to understand without much more thought than it
+deserves.<p>
+What, then, are valid decorators? That's a matter of opinion, naturally. 
+I think that staticmethod and classmethod are good uses of decorators, and
+<a href="http://www.lonelylion.com/pipermail/chipy/2004-December/000534.html">this</a>
+decorator seems to really
+simplify what could be an otherwise complicated function.<p>
+I still do not feel that these use cases are significant enough to warrant
+inclusion of decorators into python. They don't do enough to merit the
+confusion that they will cause new programmers when they first encounter them.
+As always, though, I'll live with it, because I think in python by now.<p>
+<h2>Finally</h2><p>
+This is not a rant, despite the brief section above. I'm not a good
+writer, and I haven't fully sketched out my thoughts on decorators. Think of
+this post as my bit of civil disobedience in the python world. Think of it as
+a plea for simplicity in the language I love so much.<p>
+Please leave the decorators to other people, and write your code without the
+sugar. Make the world just a little bit simpler.
+<p>
+<strong>Update 12-24-04</strong>: fixed handling of multiple decorators. Merry Christmas!
+<!--keywords: redecorator, python, programming, decorators-->
+<!--time:12-21-04 22:18-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2004-12-22T04:18:00Z</dc:date></item><item><title>Keywords Plugin Update</title><guid isPermaLink="false">entry/keyword_update</guid><link>http://llimllib.f2o.org/blog/serve/entry/keyword_update</link><description>Inspired by Justus' comments on my templating article, I made a couple of updates to my keywords plugin which I ...</description><content:encoded><![CDATA[Inspired by Justus' comments on my
+<a href="http://llimllib.f2o.org/blog/serve/entry/templating.html">templating</a>
+article, I made a couple of updates to my keywords plugin which I had been
+meaning to make for a while.<p>
+First off, you'll see that the keyword 
+list on the left only contains the top 20 most common keywords, sorted by 
+frequency. Second, 
+<a href="http://llimllib.f2o.org/blog/serve/keyword/python+job">http://llimllib.f2o.org/blog/serve/keyword/python+job</a>
+should now bring up all entries with both the python and the job keyword on
+them.<p>
+The updated plugin is available 
+<a href="http://llimllib.f2o.org/files/meta_plugins.tar.gz">here</a>.
+<!--keywords: meta_plugins, meta-data, pyblosxom, python -->
+<!--time: 12-15-04 23:51 -->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2004-12-16T05:51:00Z</dc:date></item><item><title>Miscellany</title><guid isPermaLink="false">entry/juststarted</guid><link>http://llimllib.f2o.org/blog/serve/entry/juststarted</link><description>It's not my style to blog a link; you can go to my del.icio.us page if you want to see ...</description><content:encoded><![CDATA[It's not my style to blog a link; you can go to my 
+<a href="http://del.icio.us/llimllib">del.icio.us</a> page if you want to see
+my links. Regardless, I liked 
+<a href="http://jaynes.colorado.edu/PythonIdioms.html">this</a> link so much that I thought I would share it.<p>
+Basically, the page consists of a list of Python idioms that every person who
+wants to be functional with the language should know by heart. Although I
+disagree with some of his suggestions (sometimes he overemphasizes generality -
+see his "ideal" for the last suggestion), I found myself looking at my
+favorite language in a slightly new way after reading them.<p>
+<h2>The Job</h2>
+After presenting that link, I'll say that my Python stuff is on hold for now.
+My web host still has not installed PIL, so I can't put any images on there, and
+more importantly, I just started my 
+<a href="http://llimllib.f2o.org/blog/serve/keyword/job">new job</a> on Monday.
+I still have free time, but not as much, and I'm too stressed out to program
+when I come home. Once I get settled down, I'm sure I'll be able to get back
+to it.<p>
+For now, I have to go to work and use VB (shudder) and PL/SQL, which is slowly
+coming back to me. One VB script in particular that I saw this afternoon
+contains 140 global variables and nearly 10,000 lines of code. All of this
+was hidden behind an interface for one function in those 10,000 lines of code.
+I'm not looking forward to digging into that.<p>
+<h2>Anecdote</h2>
+Today, at work, I was looking through some PL/SQL code by the guy I'm supposed 
+to learn to assist. I noticed offhand from his code that there was an lstrip()
+oracle function. "Neat", I thought, and went on reading.<p>
+Later on, I imported
+some data with an extra space into the database, and it had an extra space
+appended to it. "No problem", I thought, remembering earlier, and wrote up a
+query to remove it. When it didn't work, I spent about a half hour looking for
+docs on the rstrip function, only to find that it is called rtrim.<p>
+I'm so addicted to python that I mentally convert other code into it.
+<!--keywords: job, vb, python, idioms, computer -->
+<!--time: 12-14-04 23:45-->
+]]></content:encoded><category domain="http://llimllib.f2o.org">entry</category><dc:date>2004-12-15T05:45:00Z</dc:date></item></channel></rss>

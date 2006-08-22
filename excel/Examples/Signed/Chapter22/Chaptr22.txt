@@ -1,0 +1,294 @@
+Dim WithEvents gMailItem As MailItem ' Global variable to trap MailItem events
+Dim WithEvents gExplorer As Explorer ' Global variable to trap Explorer events
+'
+' Listing 22.1. A procedure that enumerates the first- and
+' second-level folders in the Outlook namespace.
+'
+Sub EnumerateFolders()
+    Dim ns As NameSpace
+    Dim folder As MAPIFolder
+    Dim subfolder As MAPIFolder
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Run through the first-level folders
+    '
+    For Each folder In ns.Folders
+        Debug.Print folder.Name
+        '
+        ' Run through the second-level folders, if any
+        '
+        If folder.Folders.Count > 1 Then
+            For Each subfolder In folder.Folders
+                Debug.Print "   " & subfolder.Name
+            Next 'subfolder
+        End If
+    Next 'folder
+    Set ns = Nothing
+End Sub
+'
+' Listing 22.2. A procedure to test the PickFolder method
+'
+Sub PickFolderTest()
+    Dim ns As NameSpace
+    Dim folder As MAPIFolder
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Display the Select Folder dialog box
+    '
+    Set folder = ns.PickFolder
+    '
+    ' Test the return value
+    '
+    If Not folder Is Nothing Then
+        MsgBox "You picked " & folder.Name
+    End If
+End Sub
+'
+' Listing 22.3. A procedure that toggles the Web view
+' on and off for the currently displayed folder.
+'
+Sub ToggleWebView()
+    Dim ns As NameSpace
+    Dim exp As Explorer
+    Dim tempFolder As MAPIFolder
+    Dim currFolder As MAPIFolder
+    '
+    ' Set up the namespace and get the explorer
+    '
+    Set ns = ThisOutlookSession.Session
+    Set exp = Application.ActiveExplorer
+    '
+    ' Save the current folder
+    '
+    Set currFolder = exp.CurrentFolder
+    '
+    ' Move temporarily to the root
+    '
+    Set exp.CurrentFolder = ns.Folders(1)
+    '
+    ' Toggle Web view for the current folder
+    '
+    currFolder.WebViewOn = Not currFolder.WebViewOn
+    '
+    ' Return to the current folder
+    '
+    Set exp.CurrentFolder = currFolder
+End Sub
+'
+' Listing 22.4. A Function that determines the
+' e-mail address of the sender.
+'
+Function SenderAddress(msg As MailItem) As String
+    Dim replyItem As MailItem
+    '
+    ' Create a temporary reply
+    '
+    Set replyItem = msg.Reply
+    '
+    ' The Reply's "To" property holds the sender's address
+    '
+    SenderAddress = replyItem.To
+    Set replyItem = Nothing
+End Function
+'
+' Use this procedure to test the SenderAddress function.
+'
+Sub SenderAddressTest()
+    Dim ns As NameSpace
+    Dim ib As MAPIFolder
+    '
+    ' Set up the namespace and Inbox
+    '
+    Set ns = ThisOutlookSession.Session
+    Set ib = ns.GetDefaultFolder(olFolderInbox)
+    '
+    ' Display the sender's address for a message
+    '
+    MsgBox SenderAddress(ib.Items(2))
+End Sub
+'
+' Listing 22.5. A procedure that processes Inbox messages.
+'
+Sub ProcessInboxMessages()
+    Dim ns As NameSpace
+    Dim ib As MAPIFolder
+    Dim msg As MailItem
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Get the default Inbox folder
+    '
+    Set ib = ns.GetDefaultFolder(olFolderInbox)
+    '
+    ' Run through each item in the Inbox
+    '
+    For Each msg In ib.Items
+        '
+        ' Flag important messages
+        '
+        If msg.Importance = olImportanceHigh Then
+            msg.FlagStatus = olFlagMarked
+            msg.FlagRequest = "Handle this, will ya!"
+            msg.FlagDueBy = Date + 7
+            msg.Importance = olImportanceNormal
+            msg.Save
+        End If
+        '
+        ' Look for expired flags
+        '
+        If msg.FlagDueBy < Date Then
+            msg.Display
+            MsgBox "The displayed message has an expired flag!"
+        End If
+        '
+        ' Move sensitive messages to "Confidential" folder
+        '
+        If msg.Sensitivity = olConfidential Then
+            msg.Move ns.Folders(1).Folders("Confidential")
+        End If
+    Next 'msg
+End Sub
+'
+' Listing 22.6. A procedure that sends an e-mail message
+'
+Sub SendAMessage()
+    Dim ns As NameSpace
+    Dim msg As MailItem
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Create the new MailItem
+    '
+    Set msg = Application.CreateItem(olMailItem)
+    '
+    ' Specify the recipient, subject, and body
+    ' and then send the message
+    '
+    With msg
+        '
+        ' Adjust the following address!
+        '
+        .Recipients.Add "bitbucket@mcfedries.com"
+        .Subject = "Just Testing"
+        .Body = "This is only a test"
+        .Send
+    End With
+End Sub
+'
+' Listing 22.7. A procedure that creates a forwarded message
+' and deletes any existing attachments before sending it.
+'
+Sub ForwardAndDeleteAttachments()
+    Dim ns As NameSpace
+    Dim ib As MAPIFolder
+    Dim msg As MailItem
+    Dim att As Attachment
+    '
+    ' Set up the namespace and Inbox
+    '
+    Set ns = ThisOutlookSession.Session
+    Set ib = ns.GetDefaultFolder(olFolderInbox)
+    '
+    ' Create the forwarded MailItem
+    '
+    Set msg = ib.Items(ib.Items.Count).Forward
+    With msg
+        '
+        ' Delete all the attachments
+        '
+        For Each att In .Attachments
+            att.Delete
+        Next 'att
+        '
+        ' Send it (change the address!)
+        '
+        .Recipients.Add "selene@mcfedries.com"
+        .Send
+    End With
+End Sub
+'
+' Listing 22.8. A procedure that stores a password
+' in a folder's Description property.
+'
+Sub SetPassword()
+    Dim ns As NameSpace
+    Dim folder As MAPIFolder
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Save the password in the folder's Description property
+    '
+    Set folder = ns.Folders(1).Folders("Confidential")
+    folder.Description = "password"
+End Sub
+
+'
+' Listing 22.9. An event handler that asks the user for
+' a password before switching to the "Confidential" folder.
+'
+Private Sub gExplorer_BeforeFolderSwitch(ByVal NewFolder As Object, Cancel As Boolean)
+    If NewFolder.Name = "Confidential" Then
+        pwd = InputBox("Please enter the password for this folder:")
+        If pwd <> NewFolder.Description Then
+            Cancel = True
+        End If
+    End If
+End Sub
+'
+' Use this event handler to insure that the gExplorer
+' global variable gets instantiated at startup
+'
+Private Sub Application_Startup()
+    Set gExplorer = Application.ActiveExplorer
+End Sub
+'
+' Listing 22.10. An event handler for the MailItem object's Send event.
+'
+Private Sub gMailItem_Send(Cancel As Boolean)
+    Dim result As Integer
+    result = MsgBox("Do you want to save this message in Sent Items?", vbYesNo)
+    If result = vbNo Then
+        gMailItem.DeleteAfterSubmit = True
+    End If
+End Sub
+'
+' Listing 22.11. A procedure that sends an e-mail message and
+' references the global gMailItem variable to trap events.
+'
+Sub SendAMessage2()
+    Dim ns As NameSpace
+    '
+    ' Set up the namespace
+    '
+    Set ns = ThisOutlookSession.Session
+    '
+    ' Create the new MailItem using the
+    ' gMailItem global variable
+    '
+    Set gMailItem = Application.CreateItem(olMailItem)
+    '
+    ' Specify the recipient, subject, and body
+    ' and then send the message
+    '
+    With gMailItem
+        '
+        ' Adjust the following address!
+        '
+        .Recipients.Add "bitbucket@mcfedries.com"
+        .Subject = "Just Testing Events"
+        .Body = "This is only an events test"
+        .Send
+    End With
+End Sub

@@ -1,0 +1,350 @@
+2004-03-09 Will Guaraldi <willg at bluesock dot org>
+	* Minor adjustments to Walk, Replacer, and parse in the
+	  tools module.
+
+2004-03-08 Will Guaraldi <willg at bluesock dot org>
+	* Added the runCallback method to the PyBlosxom object to
+	  enable command-line executed callbacks.
+
+2004-02-24  Theodore W. Leung  <twl at sauria dot com>
+	* Added Atom 0.3 flavour.
+
+2004-02-23  Theodore W. Leung  <twl at sauria dot com>
+	* Migrated comments/feedback system to use the new handler
+	  architecture.
+	* Removed unnecessary cgi scripts.
+
+2004-02-22  Theodore W. Leung  <twl at sauria dot com>
+	* Implement blogger.deletePost -- use at your own risk.
+
+2004-02-21  Theodore W. Leung  <twl at sauria dot com>
+	* Fix for blasterattacko comment SMTP exploit.
+	* Add a configuration flag to control behavior when used in 
+	  conjunction with metaweblog API.
+
+2004-02-19 Will Guaraldi <willg at bluesock dot org>
+	* added testinstallation mode to ease pyblosxom installation and
+	  configuration
+	* added a "codebase" parameter to config.py allowing users
+	  to put their PyBlosxom installation wherever they want without
+	  having to edit their pyblosxom.cgi script.
+
+2004-02-18 Will Guaraldi <willg at bluesock dot org>
+	* added plugin_utils.get_plugin_by_name function
+
+2004-02-17 Will Guaraldi <willg at bluesock dot org>
+	* replaced the existing xmlrpc code with an xmlrpc dispatcher
+	  plugin and an xmlrpc blogger plugin.
+	* added a handle callback allowing plugins to handle an entire
+	  PyBlosxom request as they so desire.
+
+2004-02-15 Will Guaraldi <willg at bluesock dot org>
+	* added the portalocker locking code to the tools module.
+
+2004-02-13  Theodore W. Leung  <twl at sauria dot com>
+	* overhauled autoping
+
+2004-02-07 Theodore W. Leung <twl at sauria dot com>
+	* added a logger
+
+2004-01-31 Will Guaraldi <willg at bluesock dot org>
+	* massive overhaul of the code base to remove the registry
+	  and global variables.  we're now passing the Request object
+	  to almost all the callbacks.
+
+2004-01-25 Theodore W. Leung <twl at sauria dot com>
+	* refactored pyblosxom.py startup to create a common_start for cgis.
+
+2003-08-08 Will Guaraldi <willg at bluesock dot org>
+	* changed variable expansion rules to handle functions 
+	  with valid argument lists
+
+2003-07-31 Will Guaraldi <willg at bluesock dot org>
+	* added setup.py
+
+2003-07-28 Wari Wahab <wari@homedotwaridotorg>
+	* Python 2.1 compatability changes
+
+2003-07-28 Will Guaraldi <willg at bluesock dot org>
+	* documentation changes
+
+2003-07-23 Wari Wahab <wari@homedotwaridotorg>
+	* encoding fixes
+
+2003-06-24 Wari Wahab <wari@homedotwaridotorg>
+	* Updated the xmlrpc plugins system
+	* Moved and removed a whole lot of files around
+	* Flavour_examples now part of contrib instead
+
+2003-06-17 Wari Wahab <wari@homedotwaridotorg>
+	* Updated renderers to use the callback system
+	* Added documentation for cb_renderer()
+	* Cleaned up setup.py installation script
+
+2003-06-08 Will Guaraldi <willg at bluesock dot org>
+	* Revamped the plugin system so that plugin directories can be defined
+	  by the user and is no longer tied to the pyblosxom system
+
+2003-05-27 Wari Wahab <wari@homedotwaridotorg>
+	* Major restructuring taken place. Removed libs/ from existence and
+	  renamed it to a more dist friendly Pyblosxom/
+
+2003-04-22  Theodore W. Leung  <twl at sauria dot com>
+	* Update conditionalhttp to work when comments are present
+	* w3cdate is now provided by the w3cdate plugin, not entries/base.py
+
+2003-04-20  Theodore W. Leung  <twl at sauria dot com>
+	* Update autoping to use new pyblosxom internals
+
+2003-04-20 Wari Wahab <wari at home dot wari dot org>
+	* Added blog_encoding configuration, default set to iso-8859-1
+	* Templates read are converted to unicode
+
+2003-04-02 Wari Wahab <wari at home dot wari dot org>
+	* Deprecated $tb, we have an almost working feedback plugin, and also
+	  $tb is very much dependent on the MovableType Standalone Trackback
+	  Tool, which has no business in pyblosxom land except for in a
+	  plugin.
+	* Removed $tb of course needs a $tb plugin replacement, hence the
+	  standalonetrackbacktool.py (What a long name)
+
+2003-04-01 Wari Wahab <wari at home dot wari dot org>
+	* Definitely not an all fools day joke. Moved entryparsers to the much
+	  cleaner and unified callback mechanisms. Callback added -
+	  entryparser
+
+2003-03-28 Wari Wahab <wari at home dot wari dot org>
+	* Moved preformatters to be plugins. This is a much cleaner approach
+	  then what have been done previously. Callbacks added - preformat and
+	  postformat
+
+2003-03-26 Will Guaraldi <willg at bluesock dot org>
+	* Re-wrote the callback chain mechanisms so it's a passive
+	  registration chain like blosxom and it's more magical and
+	  versatile.
+
+2003-03-24 Will Guaraldi <willg at bluesock dot org>
+	* Adjusted initialize_plugins to load plugins in the plugins
+	  directory in alphanumeric order if the "load_plugins" key
+	  is not set in the config file.  Otherwise we load the plugins
+	  in the "load_plugins" list in the order they're listed.
+
+2003-03-21  Theodore W. Leung  <twl at sauria dot com>
+	* Updated the lucene.py plugin to take configuration parameters 
+          from config.py.  Added documentation
+	* Updated the logstats.py plugin to take configuration parameters
+	  from config.py.  
+	* Added support for plugins in the BlosxomRenderer.  These plugins
+	  are based on the Perl blosxom 2.0 callbacks. 
+
+2003-03-11 Blake Winston (with some followup from Will Guaraldi)
+        * Introduced the EntryBase API and adjusted the code base so that
+	  content can be dynamically created from whatever is handling
+	  the URL.
+
+2003-03-01 Will Guaraldi <willg at bluesock dot org>
+	* Changes initialize_plugins(...) to load plugins listed in
+	  the "load_plugins" key in the config file.  If no "load_plugins"
+	  key is set, then we don't load any plugins.  We load plugins
+	  in the order of the "load_plugins" list.
+
+2003-02-16 Wari Wahab <pyblosxom@wari.per.sg>
+	* Pyblosxom core rendering code can now use seperate renderers
+	  defined by the user. This means that if a user wants to use other
+	  templating system, it possible now. Possibilities includes renderers
+	  using Cheetah, Albatross, empy templating system, or even
+	  HTML Template that most perl users have known and love. Right now,
+	  included renderers are the blosxom templating system and a debug
+	  renderer
+	* Updated most plugins to include renderers in their load mechanism so
+	  that they can use it if needed.
+
+2003-02-11 Wari Wahab <pyblosxom@wari.per.sg>
+	* Config.py no longer used an INI file, this will load faster than
+	  having an INI file to parse
+	* Updated config.py with values that reflect the current pyblosxom CVS
+	  state.
+	* py['tb_data'] no longer a default value in pyblosxom.py
+	* Added a contrib/entryparsers/ directory and basically store what we
+	  can handle over there. Users get a standard txt.py entryparser as
+	  default
+	* Added a modified version of autoping code from Sam Ruby that's cache
+	  and entryparsers compliant. Sadly you need to modify one line in the
+	  code that states where you you installed pyblosxom (This is not in
+	  config)
+
+2003-02-10 Wari Wahab <pyblosxom@wari.per.sg>
+	* Added ability for pyblosxom to read entries of different extensions,
+	  given a proper extension driver, this means that if you associate
+	  .doc files as word documents, and you have libs.entryparsers.doc.py
+	  that handles word documents and fill up entryData with the
+	  respective data that a template needs, then dropping in such
+	  document is easy as creating an entry.
+	  Other extensions planned would be XHTML and what nots. These
+	  entryparsers do not need to use preformatters, the txt.py '.txt'
+	  handler shows how you can use the cache and preformatters if you
+	  need it (cache is necesary for slow entryparsers)
+	* External utiliies can now use this mechanism to get the data they
+	  need to get values from entries other than .txt
+
+2003-02-08 Wari Wahab <pyblosxom@wari.per.sg>
+	* Totally restructured the way caching works now. Two types of cache
+	  drivers now available, a file pickle (works like pyblosxom 0.6 but
+	  you can specify a different directory to store files) and a driver
+	  to cache data in a python shelve
+	* Optimized pyblosxom.py to not read entries at all when data is
+	  already cached
+
+2003-02-07 Wari Wahab <pyblosxom@wari.per.sg>
+	* Fixed PATH_INFO data that was actually set when using cgiwrap even
+	  if it's empty
+
+2003-02-02 Wari Wahab <pyblosxom@wari.per.sg> pyblosxom 0.6
+	* Released as version 0.6
+
+2003-01-29 Wari Wahab <pyblosxom@wari.per.sg>
+	* Added configuration override feature in flavours. This allows users
+	  to modify their main configuration based on the templates' needs.
+	  There could be problems though is users change essential
+	  configuration items like datadir. To activate this feature, simple
+	  create a file called config.$flav where $flav is replaced by
+	  whatever flavours the users are overriding the configuration. The
+	  contents are key-value pairs, for example
+	  ------
+	  num_entries 9999
+	  ------
+	  This will change the value that was configured in config.py.
+
+2003-01-27 Wari Wahab <pyblosxom@wari.per.sg>
+	* Fixed some ugly defaults in the example flavours
+
+2003-01-22 Wari Wahab <pyblosxom@wari.per.sg>
+	* Changed the text/xml detection just in case someone wants to use
+	  application/rss+xml as the content-type for rss feeds. This will
+	  ensure that anything that ends with xml will be have the content
+	  'sanitized' with escaped < & > for xml. See
+	  http://www.intertwingly.net/blog/1142.html for details
+
+2003-01-15 Wari Wahab <pyblosxom@wari.per.sg>
+	* Modified 404_handler.py to work with new pyblosxom subsystem
+
+2003-01-15 Will http://www.bluesock.org/~willg/me/
+	* Split the plugin initializtion into two stages - initialization and
+	  load.
+	* Added an api module which holds things the plugin can register with
+	  to receive specific event notices as well as become part of the
+	  callback chains for manipulating data.
+	* Added a filestats function to the tools module which wraps os.stat
+	  as well as other members in the api.filestats callback chain.
+	* Added a pyfilenamemtime module that examines file names and if they
+	  match yyyy-mm-dd-HH-MM, then it fixes the mtime on the os.stat
+	  tuple.
+	
+
+2003-01-09 Wari Wahab <pyblosxom@wari.per.sg>
+	* Cleanup some codes of the main pyblosxom.cgi
+	* Remove conditionalHTTP and 404 error generator to be plugins (placed
+	  in the contrib directory so users have to choice to include it in or
+	  not)
+	* Added weblogs.com and blo.gs pings plugin, also in the contrib
+	  directory
+
+2003-01-07 Wari Wahab <pyblosxom@wari.per.sg>
+	* Removed two files from the plugins directory because they are not
+	  relevant to the new drop-in plugins architecture
+	* Thanks to Will of http://www.bluesock.org/~willg/ I now have usable
+	  drop-in plugin implementation. TODO: Some form of documentation for
+	  plugins in the Wiki
+
+2003-01-05 Wari Wahab <pyblosxom@wari.per.sg>
+	* Fixed directory recursion when depth is more than one
+	* Made rendering of categories to work more like blosxom (Do not honor
+	  num_entries)
+
+2002-11-25 Wari Wahab <pyblosxom@wari.per.sg>
+	* Made Conditional HTTP as a user option
+
+2002-11-23 Wari Wahab <pyblosxom@wari.per.sg>
+	* 3rd Revision release
+	* Changes in preformatters. All preformatters now resides in
+	  libs/preformatters/ directory. The do not have the preformatter_
+	  prefix in the filename anymore. Preformatters should still work
+	  without changes except for the filename. If possible (for the
+	  future) preformatters should subclass PreFormatterBase
+	* Entry bugs fixed, if you set a date or category in PATH_INFO, you
+	  should get a full list of entries other than just py['num_entries']
+	* Support for Etag and Last-Modified. Should save some bandwidth here.
+	  Unfortunately not a user definable option yet
+	* Pyblosxom now generates 404 errors when a query returns no entries
+	* Added 404_handler.py in contrib directory for users interested in
+	  Funky Caching
+	* Added an excellent preformatter from John Abe
+	* Added a funky preformatter script by Abe Fettig
+	* pyarchives.py is now located in libs/plugins/ directory, to clean up
+	  distribution as well as for future expansion
+	* added logRequest() method in libs/tools.py. Look at pyblosxom.py on
+	  how to activate it (grep logRequest pyblosxom.py). This is useful if
+	  you cannot get access to your own raw http logs. Log format is NCSA
+	  httpd compatible, so you can use tools like webalizer to analyze
+	  your log files.
+	* NOT in this version - Fixes for Windows Webservers. See - 
+	  http://roughingit.subtlehints.net/py_stuff/thingsTodo/pyblosxom_for_Win32_.html
+
+	
+2002-11-03 Wari Wahab <pyblosxom@wari.per.sg>
+	* 2nd Revision release
+	* Added fix to reading files that pyblosxom cannot read by Nick
+	* Flavour Overrides implementation, requested by Wam and done by Nick
+	* Default Parser implementation (by Nick as well)
+	* Code splitup in bite sized chunks
+	* You can add new variables just by using #var stuff in your entries,
+	  useful for "who's responsible" in blogs
+	* Pickles cache files, make pyblosxom really fast (Disabled by
+	  default)
+	* Improved date handling instead of a boring <span>, you can now use
+	  divs, see date_header and date_footer in flavours (request and
+	  partly coded by Juri Pakaste of Straw RSS parser tool)
+	* Includes code to show Monthly archives (see pyarchives.py)
+	  enabled by:
+	        from libs import pyarchives
+		          self.py['archivelinks'] =
+		pyarchives.genLinearArchive(self.py['datadir'],
+			  self.py['base_url'])
+	  so you can use $archivelinks in your flavours. Comment out the two
+	  lines in libs/pyblosxom.py to disable
+	* Murdered more bugs too minor to list out
+			   
+
+2002-09-15 Wari Wahab <pyblosxom@wari.per.sg>
+	* 1st Revision Release - pyblosxom 0+5i_rev1
+	
+	* Fixed sorting mechanism so that it's blagg compatible
+	
+	* New $tags to support better permalinks, these are:
+	$base_url      - URL of pyblosxom
+	$file_path     - Path right up to the filename, without .txt extension
+	$absolute_path - Directory name without filename attached
+
+	* ESF format added in by default:
+	See http://www.aquarionics.com/nodes/view.php?name=esf
+
+	* Links to posts now supports full pathname + flavour:
+	eg: http://roughingit.subtlehints.net/pyblosxom/category/filename.flavour
+	Where flavour is html, rss3, esf or many others possible with
+	templates
+
+	* Supports caching of pages that uses a preformatter (Disabled by default):
+	This speeds up rendering the pages especially if the preformatters are
+	very show.
+
+	* Configuration using Windows style INI:
+	Really helps if you upgrade pyblosxom a lot and hate changing data in
+	the code, just edit *configFile* variable to point to your INI file
+
+	* XML-RPC interface, supports bloggerAPI:
+	Disabled by default, requires the blogs directory to be writable by
+	the webserver, different categories shows up as differing blogIDs,
+	tested with w.bloggar and jericho
+	
+2002-09-15 Wari Wahab <pyblosxom@wari.per.sg>
+	* Initial Release - pyblosxom 0+5i

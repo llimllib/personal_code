@@ -1,0 +1,44 @@
+e is accepted
+0 is not accepted
+1 is not accepted
+00 is accepted
+01 is not accepted
+10 is not accepted
+11 is accepted
+000 is not accepted
+001 is not accepted
+010 is not accepted
+011 is not accepted
+100 is not accepted
+101 is not accepted
+110 is not accepted
+111 is not accepted
+01110 is not accepted
+001100 is not accepted
+0100010 is not accepted
+0111001 is not accepted
+10001000 is not accepted
+10000001 is not accepted
+01010101010 is not accepted
+e is not accepted
+0 is not accepted
+1 is not accepted
+00 is not accepted
+01 is not accepted
+10 is not accepted
+11 is accepted
+000 is not accepted
+001 is not accepted
+010 is not accepted
+011 is not accepted
+100 is not accepted
+101 is not accepted
+110 is not accepted
+111 is accepted
+01110 is not accepted
+001100 is not accepted
+0100010 is not accepted
+0111001 is not accepted
+10001000 is not accepted
+10000001 is not accepted
+01010101010 is not accepted

@@ -1,0 +1,113 @@
+__author__ = "Bill Mill - bill.mill@gmail.com"
+__version__ = "1.0"
+__url__ = "http://llimllib.f2o.org/blog"
+__description__ = "Provides a pyblosxom keyword system"
+
+from Pyblosxom import tools
+tools.make_logger('c:/code/web/newf2o/blog/log/pyblosxom.log')
+log = tools.log
+
+def verify_installation(request):
+    """
+    This is for verifying that this is installed correctly.
+    """
+    #TODO: check for base_url
+    #      check that keywords is not an actual directory
+    return 1
+
+def get_keywords(l):
+    """Parse a line and return a list of keywords"""
+    keywords = []
+    if not l[-3:] == '-->': return l[-3:]
+    l = l[l.find(':')+1:-3].strip()    #snip <!--keywords: and -->
+    while 1:
+        comma = l.find(',')
+        if comma < 0:
+            keywords.append(l)
+            break
+        keywords.append(l[:comma])
+        l = l[comma+1:].strip()
+    return keywords
+
+def cb_story(request):
+    """Parse the keywords from a story
+
+    They should be in a comment which starts at the beginning of a line and
+    looks like:
+    <!--keywords: alpha, beta, gamma-->
+    """
+    #in the future, I may want to do this parsing when all files are read
+    #from the drive
+    entry = request["entry"]
+
+    story = entry.getData()
+    calls = 0
+    k = []
+    for line in story.split('\n'):
+        if line.startswith('<!--keywords:'):
+            calls += 1
+            k = get_keywords(line)
+            k.sort()
+            break
+    for i in range(len(k)):
+        base = request['request'].getConfiguration()['base_url']
+        k[i] = '<a href="%s/keyword/%s">%s</a>' % (base, k[i], k[i])
+    if k: entry["keywords"] = ' '.join(k)
+    else: entry["keywords"] = str(k)
+
+def cb_pathinfo(args):
+    request = args['request']
+    urltrigger = 'keyword' #change this to read a config parameter later
+
+    from Pyblosxom import tools
+    tools.make_logger(request.getConfiguration()['logfile'])
+
+    path = request.getHttp().get('PATH_INFO', '')
+    path = [x for x in path.split('/') if x != '']
+    tools.log('path: %s' % path)
+    if urltrigger in path and len(path) == 2:
+        request.getData()['keyword'] = path[1]
+        tools.log('keyword: %s' % path[1])
+    return None     #no matter what, keep processing like normal
+                    #is this what we really want to do? (date processing?)
+
+def cb_filelist(args):
+    #pseudocode
+    #if not keyword search: return None (exit to default)
+    #else find all files with keyword, return them
+    request = args['request']
+    data = request.getData()
+    #log('filelist')
+    log('filelist: %s' % str(request.getData()))
+    if not data.has_key('is_keyword'): return None
+    
+    from Pyblosxom import tools
+
+    filelist = tools.Walk(request, data['root_datadir'], int(config['depth']))
+
+    renderlist = []
+    for f in filelist:
+        entry = FileEntry(request, f, data['root_datadir'])
+        entrylist.append((entry._mtime, entry))
+
+    # this sorts entries by mtime in reverse order.  entries that have
+    # no mtime get sorted to the top.
+    entrylist.sort()
+    entrylist.reverse()
+    entrylist = [x[1] for x in entrylist]
+
+    #if data
+"""I may try to use pathinfo and filelist
+
+def cb_handle(args):
+    req = args['request']
+    pyhttp = req.getHttp()
+    config = req.getConfiguration()
+
+    urltrigger = config.get('keyword_urltrigger', '/keyword')
+
+    path_info = pyhttp['PATH_INFO']
+    if not path_info.startswith(urltrigger):
+        return 0  #it's not a keyword request, so do nothing and exit
+    else:         #handle our keyword request
+        return 0"""

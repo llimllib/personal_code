@@ -1,0 +1,16 @@
+PyCon Sprints Day 2
+<p>
+I woke up late today -- the after effects of jet lag flying in the wrong direction (West to East).
+</p><p>
+People highlights of the day:
+</p><p style="text-indent:20pt;">
+I officially met <a href="http://www.mechanicalcat.net/richard/log">Richard Jones</a> (who I'd knowingly met the day before) via his need to borrow a cell phone charger.
+</p><p style="text-indent:20pt;">
+I also got to spend some time talking to Kragen Sitaker -- our orbits have slowly been converging over the years, and this was another step in that direction.
+</p><p>
+Technical highlight of the day
+</p><p style="text-indent:20pt;">
+I fixed a bug in <a href="http://initd.org/tracker/pysqlite">pysqlite-2.0</a> that kept it from building on OS X.  The patch is going into SVN.  
+</p><p>
+The Chandler sprint starts today, so things really start to heat up...
+</p>

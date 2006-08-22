@@ -1,0 +1,1535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+  <HEAD>
+    <TITLE>Precise timing in C || kuro5hin.org</TITLE>
+    <STYLE TYPE="text/css">
+<!--
+ .osdn{
+   text-decoration: none;
+   font-family: verdana, arial, helvetica, sans-serif;
+   color: #eeeeee;
+ }
+ .header{
+   text-decoration: none;
+   color: #000;
+ }
+ .justified{
+}
+ a:hover.adlink { color: #006699; }
+ a.adlink { color: #006699; }
+-->
+</style>
+
+
+<LINK REL="icon" HREF="/images/tinyk5.png" TYPE="image/png">
+<LINK REL="SHORTCUT ICON" HREF="/images/tinyk5.png">
+
+
+    
+</HEAD>
+
+  <BODY bgcolor="#FFFFFF" text="#222222" LINK="#003767" ALINK="#c0c0c0" VLINK="#4185aa"
+      marginwidth=0 marginheight=0 topmargin=0 leftmargin=0>
+
+    <!-- Begin standard logo/sections header -->
+    <!--Begin Header -->
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+        <tr valign="bottom">
+                <td rowspan="3" width="299" valign="bottom"><a href="http://www.kuro5hin.org"><img src="/images/header/kuro5hin2.gif" width="298" height="60" border="0" ALT="Kuro5hin.org: technology and culture, from the trenches"></a></td>
+                <td height="47"> </td>
+        </tr>
+        <tr>
+                <td align="right" valign="bottom"><font face="Verdana, arial, sans-serif" size="1"><A HREF="/newuser">create account</a> | <A HREF="/special/faq">help/FAQ</a> | <A HREF="/special/contact">contact</a> | <A HREF="/special/links">links</a> | <A HREF="/find">search</a> | <A HREF="/special/irc">IRC</a> | <A HREF="/section/sitenews">site news</a></font></td>
+        </tr>
+        <tr>
+                <td align="right" valign="middle"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" height="22" bgcolor="#eeeeee" align="center">
+        <tr height="22">
+                <td background="/images/header/table_bkg3.gif" align="left" height="22" valign="top"><a href="http://www.kuro5hin.org"><img src="/images/header/left_edge3.gif" width="67" height="22" border="0" alt="["></a></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" border="0" height="22" ALT=""></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><strong><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/__all__">Everything</a></font></strong></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Diary">Diaries</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/tech">Technology</a></font></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/science">Science</a></font></td>              
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/culture">Culture</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fnp">Politics</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/media">Media</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/news">News</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/internet">Internet</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/op-ed">Op-Ed</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fiction">Fiction</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Meta">Meta</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/mlp">MLP</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="right" height="22"><img src="/images/header/rt_edge3.gif" width="1" height="22" border="0" alt="]"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+	<tr>
+		<td align="right">
+<font face="Verdana, arial, sans-serif" size="1"><b>We need your support:</b> <a href="/submitad">buy an ad</a> | 
+<a href="/subscribe">premium membership</a> | <a href="http://www.jinxgear.com/kuro5hin">k5 store</a></font>
+</td>
+	</tr>
+</table>
+<!--End Header -->
+    <!-- End standard logo/sections header -->
+    
+    <P>
+
+    <!-- Story stuff -->
+    <TABLE WIDTH="98%" BORDER=0 CELLPADDING=5 CELLSPACING=0 ALIGN="center">
+      <TR>
+        <TD VALIGN="top" WIDTH="75%">
+          <!-- begin summary of story -->
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=3 CELLSPACING=0>
+	<TR>
+		<TD VALIGN="top" WIDTH="12" align="center">
+			<center>
+			
+			<A HREF="/print/2003/9/3/135554/1668"><img src="/images/print3.gif" WIDTH="15" HEIGHT="15" ALT="[P]" border=0></A>
+			</center>
+		</TD>
+		<TD WIDTH="100%">
+			<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=3><B><A HREF="/story/2003/9/3/135554/1668" style="text-decoration:none;"><font color="#000000">Precise timing in C</font></A> (<A CLASS="section_link" href="/section/Diary">Diaries</a>)</B></FONT><BR>
+			<img src="/images/clear.gif" HEIGHT="5" WIDTH="1" ALT=""><br>
+			<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>By <A HREF="/user/llimllib">llimllib</A> <BR>Wed Sep 3rd, 2003 at 01:55:54 PM EST </FONT><BR>
+			
+			
+		</TD>
+		<TD ALIGN="right" WIDTH="80">
+			<A HREF="/user/llimllib/diary"><IMG SRC="/images/topics/books.jpg" WIDTH="80" HEIGHT="50" ALT="llimllib's Diary" ALIGN="right" BORDER=0></a>
+		
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="12"><IMG SRC="/images/clear.gif" WIDTH="12" HEIGHT="1" ALT=""></TD>
+		<TD COLSPAN=2 CLASS="justified">
+			<P>
+			<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+			
+		So, I'm trying to time various sorts to test their performance on small, large, and medium data sets for my algorithms class. I found and used time.h and sys/time.h, but was only able to get my answers in seconds, when I need milliseconds. How does one get more precise timing in C? Is there a standard header to do this, or will I need to download a library?
+			</FONT>
+			</P>
+			<P>
+			<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2> </FONT>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 HEIGHT=3>
+			<HR WIDTH="100%" SIZE=1 NOSHADE>
+		</TD>	
+	</TR>
+</TABLE>
+<!-- end summary of story-->
+
+<!-- begin story body -->
+<P>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=3 CELLSPACING=0>
+<TR>
+<TD WIDTH="12"><IMG SRC="/images/clear.gif" ALT="" WIDTH="12"></TD>
+<TD WIDTH="100%" class="justified">
+
+
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2></FONT>
+
+</TD>
+</TR>
+</TABLE>
+<P>
+<!-- end story body -->
+        </TD>
+        <TD VALIGN="top" WIDTH="25%">
+          <table cellpadding="1" border="0" width="100%" bgcolor="#000000" cellspacing="0">
+<tr><td width="100%">
+<table cellpadding="1" border="0" width="100%" bgcolor="#006699" cellspacing="0">
+<tr><td width="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Sponsors</FONT>
+</td></tr></table>
+</td></tr></table>
+<table cellpadding="1" border="0" width="100%" cellspacing="0">
+<tr>
+ <td>
+  
+  <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+            <a href="http://www.voxel.net/"><img alt="Voxel dot net" height="31" border="0" src="/images/voxel_k5.gif" width="158"></a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <font size="-2"><a href="http://voxel.net/index.php?svc.managedserver">Managed Servers</a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <a href="http://voxel.net/index.php?svc.rails">Managed Clusters</a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <a href="http://voxel.net/index.php?svc.vhost">Virtual Hosting</a></font>
+<br>
+<center><hr width="60%" size=1 noshade></center>
+<table width="100%" border=0 cellpadding=2 cellspacing=0>
+ <tr>
+  <td colspan=2>
+   <center><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><strong><a href="http://www.kuro5hin.org/redirect/1491?url=http://www.johncompanies.com">Collocated Linux/FreeBSD Server<br>As low as $45/month</a></strong></FONT></center>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2">Root on your own FreeBSD or Linux server</font></FONT></td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2"><strong>Very</strong> fast, triple-homed network</font></FONT></td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2">NO hardware or setup fees, unlimited support</font></FONT></td>
+ </tr>
+ <tr>
+  <td colspan=2 align="right"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2"><a href="/story/2003/4/14/104336/193">Testimonials from K5 Users</a></font></FONT></td>
+ </tr>
+</table>
+    </td>
+</tr>
+</table>
+<p>
+          <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#000000">
+<TR><TD WIDTH="100%">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#006699">
+<TR><TD WIDTH="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Login</FONT>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR><TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><FORM ACTION="/" METHOD="post">
+<TABLE BORDER=0 width="100%" align="center" CELLPADDING=1 CELLSPACING=0>
+  <TR>
+    <TD COLSPAN=2>
+	  <CENTER></CENTER>
+    </TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+      <CENTER>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+      <B><A CLASS="light" HREF="/newuser">Make a new account</A></B>
+      </FONT>
+      </CENTER>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right">
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL>Username:</SMALL></FONT>
+    </TD>
+    <TD>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL><INPUT TYPE="text" SIZE=12 NAME="uname"></SMALL></FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right">
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL>Password:</SMALL></FONT>
+    </TD>
+    <TD>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL><INPUT TYPE="password" SIZE=12 NAME="pass"></SMALL></FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right" COLSPAN=2>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+      <INPUT TYPE="submit" NAME="login" VALUE="Login">
+      <INPUT TYPE="submit" NAME="mailpass" VALUE="Mail Password">
+      </FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+      <br><CENTER><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2><b>Note:</b> You must accept a cookie to log in.</FONT></CENTER>
+    </TD>
+  </TR>
+</TABLE>
+</FORM>
+
+</FONT></TD></TR>
+</TABLE>
+<P>
+          
+          
+          
+          
+          <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#000000">
+<TR><TD WIDTH="100%">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#006699">
+<TR><TD WIDTH="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Related Links</FONT>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR><TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <A CLASS="light" HREF="/?op=section;section=Diary;user=diary_35158">llimllib's Diary</A><BR></FONT></TD></TR>
+</TABLE>
+<P>
+          
+        </TD>
+      </TR>
+    </TABLE>
+    <!-- X story stuff -->
+    
+    <BR>
+
+    <!-- comments -->
+    
+    
+    <CENTER>	
+      <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN="center">
+    <TR>
+        <TD>
+                <FORM ACTION="/#" METHOD="post">
+                <INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+                <INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/3/135554/1668">
+                
+        <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#ffffff" align="center">
+
+                <TR>
+                        <TD VALIGN="middle" align="center">
+                                <FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+								View:
+                                <SMALL>
+                                        <SELECT NAME="commenttype" SIZE=1>
+		<OPTION VALUE="mixed">Mixed (default)
+		<OPTION VALUE="topical">Topical Only
+		<OPTION VALUE="editorial">Editorial Only
+		<OPTION VALUE="all">All Comments
+		<OPTION VALUE="none">No Comments</SELECT>
+                                </SMALL>
+                                Display:
+                                <SMALL>
+                                <SELECT NAME="commentmode" SIZE=1>
+		<OPTION VALUE="threaded">Threaded
+		<OPTION VALUE="minimal">Minimal
+		<OPTION VALUE="nested" SELECTED>Nested
+		<OPTION VALUE="flat">Flat
+		<OPTION VALUE="flat_unthread">Flat Unthreaded<OPTION VALUE="dthreaded">Dynamic Threaded<OPTION VALUE="dminimal">Dynamic Minimal</SELECT>
+                                </SMALL>
+                                Sort:
+                                <SMALL>
+                                <SELECT NAME="commentrating" SIZE=1>
+		<OPTION VALUE="unrate_highest">Unrated, then Highest
+		<OPTION VALUE="highest">Highest Rated First
+		<OPTION VALUE="lowest">Lowest Rated First
+		<OPTION VALUE="dontcare" SELECTED>Ignore Ratings
+		</SELECT>
+                                </SMALL>
+                                <SMALL>
+                                <SELECT NAME="commentorder" SIZE=1>
+		<OPTION VALUE="newest">Newest First
+		<OPTION VALUE="oldest">Oldest First
+		</SELECT>
+                                </SMALL>
+
+<INPUT TYPE="submit" NAME="setcomments" VALUE="Set">
+</FONT>
+</TD></TR>
+</TABLE>
+</FORM></TD>
+    </TR>
+</TABLE>
+    </CENTER>
+
+      <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR BGCOLOR="#eeeeee">
+<TD align="center" WIDTH="100%"><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+<A CLASS="light" HREF="/story/2003/9/3/135554/1668">Precise timing in C</A> | <B>31</B> comments (31 topical, 0 editorial, 0 hidden) 
+</FONT>
+</TD>
+</TR>
+</TABLE><FORM NAME="rate" ACTION="/" METHOD="POST">
+						<INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/3/135554/1668">
+						<INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+						<INPUT TYPE="hidden" NAME="pid" VALUE="0"><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="28"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>RDTSC</B> (<A HREF="/comments/2003/9/3/135554/1668/28?mode=alone;showrate=1#28">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/28#28">#28</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:13483">Bad Harmony</a> on Thu Sep 4th, 2003 at 04:40:30 PM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>If you are running on a reasonably modern Intel box, write a function in assembler that returns the value of the RDTSC instruction. The counter is driven by the CPU clock, so you will have to adjust for the system's clock speed to get normal units of time.
+ <BR><p>
+<em>54º40' or Fight!</em><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="29"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I'd love to</B> (<A HREF="/comments/2003/9/3/135554/1668/29?mode=alone;showrate=1#29">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/29#29">#29</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Thu Sep 4th, 2003 at 05:20:54 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>but I don't have the skills. Care to point me to a tutorial/documentation that would make this conceivable?<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/28#28">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="30"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>RDTSC</B> (<A HREF="/comments/2003/9/3/135554/1668/30?mode=alone;showrate=1#30">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/30#30">#30</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:13483">Bad Harmony</a> on Thu Sep 4th, 2003 at 08:37:08 PM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>What OS/compiler are you using? Here are a couple of examples that I grabbed from google:<p>
+unsigned long long read_timer() { _asm { rdtsc } }<p>
+inline __int64 __fastcall RDTSC( )<br>
+{<br>
+&nbsp; _asm{<br>
+&nbsp; &nbsp; rdtsc<br>
+&nbsp; }<br>
+}<p>
+void <br>
+GetTimeNT( u64* t ) <br>
+{ <br>
+&nbsp; &nbsp; u32 lo, hi; <p>
+&nbsp; &nbsp; // Read the Time-Stamp Counter register into 'lo' and 'hi. <br>
+&nbsp; &nbsp; __asm <br>
+&nbsp; &nbsp; { <br>
+&nbsp; &nbsp; &nbsp; &nbsp; // If this is the Metrowerks compiler. <br>
+#ifdef __MWERKS__ <p>
+&nbsp; &nbsp; &nbsp; &nbsp; rdtsc <p>
+#else // Visual C++ Compiler doesn't recognize the 'rdtsc' <br>
+&nbsp; &nbsp; &nbsp; // instruction so the opcodes are used instead. <p>
+&nbsp; &nbsp; &nbsp; &nbsp; __emit &nbsp;0fh <br>
+&nbsp; &nbsp; &nbsp; &nbsp; __emit &nbsp;031h <br>
+#endif <br>
+&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; lo, eax <br>
+&nbsp; &nbsp; &nbsp; &nbsp; mov &nbsp; hi, edx <br>
+&nbsp; &nbsp; } <p>
+&nbsp; &nbsp; // Combine the low and high 32-bit parts into a single <br>
+&nbsp; &nbsp; // 64-bit number and return the result. <br>
+&nbsp; &nbsp; *t = ( (u64) hi &lt;&lt; 32 ) | (u64) lo; <br>
+} <p>
+The value returned is a 64-bit counter that is incremented by the system clock. So on a 500 MHz Pentium II, each tick is 2 nS. &nbsp;To use, do something like:<p>
+int<br>
+main(int argc, char **argv)<br>
+{<br>
+&nbsp; __int64 t1, t2;<br>
+&nbsp; long elapsed;<p>
+&nbsp; /* start measurement */<br>
+&nbsp; t1 = RDTSC();<p>
+&nbsp; /* call code under test */<br>
+&nbsp; foo();<p>
+&nbsp; /* stop measurement */<br>
+&nbsp; t2 = RDTSC();<p>
+&nbsp; /* compute elapsed time in microseconds, 500 MHz CPU */<br>
+&nbsp; elapsed = (long) ((t2 - t1)/500);<p>
+&nbsp; return 0;<br>
+};<br>
+<BR><p>
+<em>54º40' or Fight!</em><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/29#29">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="31"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>myriad questions</B> (<A HREF="/comments/2003/9/3/135554/1668/31?mode=alone;showrate=1#31">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/31#31">#31</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Thu Sep 4th, 2003 at 08:54:33 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>as for OS/compiler, I'm using linux 2.4/gcc.<br><br><ol><li>What is with the two types in the declaration of RDTSC() and read_timer()? <li>Why is the GetTimeNT(...) function never called, as far as I can see?<li>What does _asm{ rdtsc } do, and why is it in two seperate functions, each with different style, only one of which is called, as far as I can see? I assume that _asm{ ... } means execute in assembly code whatever is in the _asm block?<li>What header file needs to be included, or is this a feature of the compiler?<li>What does __fastcall mean?</ol><BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/30#30">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="32"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>RDTSC</B> (<A HREF="/comments/2003/9/3/135554/1668/32?mode=alone;showrate=1#32">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/32#32">#32</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:13483">Bad Harmony</a> on Thu Sep 4th, 2003 at 09:13:52 PM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>This is supposed to work on Linux:<p>
+extern __inline__ unsigned long long int rdtsc()<br>
+&nbsp; &nbsp;{<br>
+&nbsp; &nbsp; &nbsp;unsigned long long int x;<br>
+&nbsp; &nbsp; &nbsp;__asm__ volatile (&quot;.byte 0x0f, 0x31&quot; : &quot;=A&quot; (x));<br>
+&nbsp; &nbsp; &nbsp;return x;<br>
+&nbsp; &nbsp;}<p>
+1. Those were three different examples of reading the time-stamp counter, for different compilers. The code is compiler dependent.<p>
+2. It was just another example.<p>
+3. The _asm is a compiler directive to interpret the argument as assembly language instructions.<p>
+4. You shouldn't need any extra header files.<p>
+5. __fastcall is a keyword that tells the compiler what calling convention to use for the function. This is OS and compiler dependent.<BR><p>
+<em>54º40' or Fight!</em><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/31#31">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="27"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>gettimeofday</B> (<A HREF="/comments/2003/9/3/135554/1668/27?mode=alone;showrate=1#27">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/27#27">#27</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:45656">dn</a> on Thu Sep 4th, 2003 at 01:39:30 AM EST<BR>(<A CLASS="light" HREF="mailto:k5 (at) teco (hypen) xaco (dot) com">k5 (at) teco (hypen) xaco (dot) com</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Use a computer that nobody else is using.
+
+<p>Find out what the granularity of the timer is, and make each pass through your loop take several times as long (say, 10X).
+
+<p>Run the measurement multiple times on identical data. Throw out the long-duration outliers: those are probably when you got preempted by something else. Average the remaining values.
+
+<p>Don't run anything else while it's working. Leave the mouse and keyboard alone. Pull the network plug if necessary.
+
+<p>Don't print the results to a terminal or file as you go: save them in memory and print them when you're through with all timing measurements. What can happen is that the next pass will get preempted by printing/saving the results for the previous pass, which breaks the numbers but you can't tell by looking.<BR><p>&nbsp; &nbsp; I &#9829;<br> TOXIC<br>WASTE<br>
+<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="22"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Timing doesn't work in multiuser OSs</B> (<A HREF="/comments/2003/9/3/135554/1668/22?mode=alone;showrate=1#22">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/22#22">#22</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:25989">Stavr0</a> on Wed Sep 3rd, 2003 at 03:52:01 PM EST<BR>(<A CLASS="light" HREF="mailto:K5 Expendable Crewmember">K5 Expendable Crewmember</A>) <A CLASS="light" HREF="http://www.kuro5hin.org/user/Stavr0/diary">http://www.kuro5hin.org/user/Stavr0/diary</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>If you're on anything than pure MS-DOS (not even Windows 98)  all your timing (even at nanosec precision) will be broken because of the multitasking OS that takes away CPU time from your algorithm.
+<p>
+You'd probably want to count iterations instead.  'this while() loop was executed nnnn times, this compare was executed nnnnn times' and so on.<BR> - - -  <br>
+<i>Pax Americana : Oderint Dum Metuant</i><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="24"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>&quot;take away&quot; how?</B> (<A HREF="/comments/2003/9/3/135554/1668/24?mode=alone;showrate=1#24">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/24#24">#24</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:6900">mikpos</a> on Wed Sep 3rd, 2003 at 04:12:47 PM EST<BR>(<A CLASS="light" HREF="mailto:mikpos@shaw.ca">mikpos@shaw.ca</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>If you mean other processes taking time away, then no problem.  If you look at user time instead of real time (e.g. use setitimer()/getitimer() instead of gettimeofday()/clock()/other useless friends), you'll be close enough.<p>
+If you mean the OS itself taking time away, then MS-DOS will also take time away from the algorithm.   Under MS-DOS, an ISR is called ~18 times per second to update the clock, which takes CPU time away from your algorithm.  Probably quite insignificant, but then again I consider timer interrupts under other OSes to be quite insignificant as well.<p>
+Using a real-time OS might be an idea, though.<BR><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/22#22">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="23"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>fair approximations are OK with me</B> (<A HREF="/comments/2003/9/3/135554/1668/23?mode=alone;showrate=1#23">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/23#23">#23</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 03:55:19 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>like ucblockhead suggested, I plan to run the code repeatedly, hoping to get a fair approximation of how quickly it runs.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/22#22">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="16"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>clock</B> (<A HREF="/comments/2003/9/3/135554/1668/16?mode=alone;showrate=1#16">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/16#16">#16</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:9027">ucblockhead</a> on Wed Sep 3rd, 2003 at 03:00:01 PM EST<BR>(<A CLASS="light" HREF="mailto:ucblockhead at is.worsethanhitler.org">ucblockhead at is.worsethanhitler.org</A>) <A CLASS="light" HREF="http://www.ucblockhead.org/journal">http://www.ucblockhead.org/journal</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>If you want millisecond accuracy, look at "clock()" and "CLOCKS_PER_SECOND", both of which are standard C.  clock() returns the number of OS clock ticks.  CLOCKS_PER_SECOND is a constant set to the number of clock ticks per second, obviously.
+<p>
+The accuracy depends on the OS.  Under Windows, it's 10 milliseconds (I believe for Linux as well).  (Though MSVC pretends to have 1 millesecond accuracy...it just always returns a multiple of ten.  I believe this is for POSIX compliance.)  It also starts the clock at 0 on program execution, but I believe that not all versions do that.
+<p>
+So you time something like this:
+<p>
+<code>
+clock_t s = clock();
+//stuff
+float delta = (float)(clock()-s)/(float)CLOCKS_PER_SEC;
+</code>
+<p>
+You can get better accuracy by running a large number of times and averaging.<BR>-----------------------<br>
+<a href="http://www.kuro5hin.org/comments/2003/6/30/23526/2591/27#27"><i>This is k5.  We're all tools</i></a> - duxup<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="15"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Thought of using a profiler?</B> (<A HREF="/comments/2003/9/3/135554/1668/15?mode=alone;showrate=1#15">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/15#15">#15</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:34012">5pectre</a> on Wed Sep 3rd, 2003 at 02:47:42 PM EST<BR>(<A CLASS="light" HREF="mailto:spectre (at) thinkgeek (dot) co (dot) uk">spectre (at) thinkgeek (dot) co (dot) uk</A>) <A CLASS="light" HREF="http://www.thinkgeek.co.uk">http://www.thinkgeek.co.uk</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>I got a B for <a href="http://users.aber.ac.uk/fmt1/cs211_assignment_2.pdf">this</a> piece of crap ;)<BR><br>
+<i>"Let us kill the English, their concept of individual rights might undermine the power of our beloved tyrants!!" - Lisa Simpson</i> [<a href="http://www.politicalcompass.org"> -1.50 / -7.74</a>]
+<br><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="18"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I like the Cartman quote</B> (<A HREF="/comments/2003/9/3/135554/1668/18?mode=alone;showrate=1#18">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/18#18">#18</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 03:09:11 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>and the goofy style of writing. What's with the underneath the line quotes, though?<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/15#15">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="20"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Underneath the line?</B> (<A HREF="/comments/2003/9/3/135554/1668/20?mode=alone;showrate=1#20">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/20#20">#20</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:34012">5pectre</a> on Wed Sep 3rd, 2003 at 03:32:13 PM EST<BR>(<A CLASS="light" HREF="mailto:spectre (at) thinkgeek (dot) co (dot) uk">spectre (at) thinkgeek (dot) co (dot) uk</A>) <A CLASS="light" HREF="http://www.thinkgeek.co.uk">http://www.thinkgeek.co.uk</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Well, I mainly put the quotes in to fill out the report, it was supposed to be 6 pages and I only did three. The professor in question called the assignment "Find out the best sorting algorithm for Unnaturally Pneumatic Lady Relic Thief VI", so i guessed he wouldn't mind the humour ;)
+<p>
+This is the email I got from him:
+<p>
+Your grade was: B 
+
+Comments (if any) that you may find useful: 
+  "Good C code let down by lack of code comments and dubious testing.  All three
+sorts have near-identical results, which is wrong.  The report was a little short
+of information and analysis, though it's always nice to see Eric Cartman playing
+his part in computer science.  Sorry about the mark but remember, ""you will
+respect my authoritaah!"""
+<p>
+<BR><br>
+<i>"Let us kill the English, their concept of individual rights might undermine the power of our beloved tyrants!!" - Lisa Simpson</i> [<a href="http://www.politicalcompass.org"> -1.50 / -7.74</a>]
+<br><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/18#18">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="21"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I need to have your professor</B> (<A HREF="/comments/2003/9/3/135554/1668/21?mode=alone;showrate=1#21">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/21#21">#21</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 03:34:13 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>seriously.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/20#20">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="12"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Additional info.</B> (<A HREF="/comments/2003/9/3/135554/1668/12?mode=alone;showrate=1#12">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/12#12">#12</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:3688">i</a> on Wed Sep 3rd, 2003 at 02:40:30 PM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Look up the introsort whitepaper and see how the authors measured performance of various algorithms.<BR><sup><sup>&mdash;<br>People with sigs that reverse the reply line are gay</sup></sup><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="14"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>will do</B> (<A HREF="/comments/2003/9/3/135554/1668/14?mode=alone;showrate=1#14">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/14#14">#14</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 02:45:57 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>plus, that sort looks cool, and I don't think it's in my book. I can't read the paper now, no .ps file reader on these computers. Thanks.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/12#12">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="10"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Under BSD</B> (<A HREF="/comments/2003/9/3/135554/1668/10?mode=alone;showrate=1#10">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/10#10">#10</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:38063">omghax</a> on Wed Sep 3rd, 2003 at 02:34:56 PM EST<BR>(<A CLASS="light" HREF="mailto:onlyihavehandle@hotmail.com">onlyihavehandle@hotmail.com</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>There are function calls like getrusage(2) - I don't know the resolution but they could be helpful, check your documentation.<p>
+Consider compiling separate programs for each sort and using &quot;time&quot; or &quot;timex&quot; to get a measurement.<p>
+Additionally, you could write a small timer routine in assembly (80x86 and VAX are among the architectures that provide easy ways to do this) and use it in your program.<BR><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="11"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>AHA</B> (<A HREF="/comments/2003/9/3/135554/1668/11?mode=alone;showrate=1#11">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/11#11">#11</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:38063">omghax</a> on Wed Sep 3rd, 2003 at 02:38:55 PM EST<BR>(<A CLASS="light" HREF="mailto:onlyihavehandle@hotmail.com">onlyihavehandle@hotmail.com</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Look into clock_gettime(3) - nanosecond resolution and POSIX compliant to boot.<BR><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/10#10">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="13"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>time structure</B> (<A HREF="/comments/2003/9/3/135554/1668/13?mode=alone;showrate=1#13">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/13#13">#13</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 02:43:23 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>It appears that what I missed was the tv_usec or tv_nsec part of the timeval (or timespec) structure, which holds the milliseconds. Appreciate the help, I'll be done TAing this lab in 5 minutes, I'll go home and test it.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/11#11">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="17"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>be careful</B> (<A HREF="/comments/2003/9/3/135554/1668/17?mode=alone;showrate=1#17">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/17#17">#17</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:9027">ucblockhead</a> on Wed Sep 3rd, 2003 at 03:06:16 PM EST<BR>(<A CLASS="light" HREF="mailto:ucblockhead at is.worsethanhitler.org">ucblockhead at is.worsethanhitler.org</A>) <A CLASS="light" HREF="http://www.ucblockhead.org/journal">http://www.ucblockhead.org/journal</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Just because it has a nanosecond field doesn't mean that it is accurate to one nanosecond.<BR>-----------------------<br>
+<a href="http://www.kuro5hin.org/comments/2003/6/30/23526/2591/27#27"><i>This is k5.  We're all tools</i></a> - duxup<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/13#13">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="19"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>understood</B> (<A HREF="/comments/2003/9/3/135554/1668/19?mode=alone;showrate=1#19">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/19#19">#19</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 03:10:38 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>man page reading will wait until I am on my machine...the last kids haven't left yet...<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/17#17">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="7"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Template.</B> (<A HREF="/comments/2003/9/3/135554/1668/7?mode=alone;showrate=1#7">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/7#7">#7</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:26951">awgsilyari</a> on Wed Sep 3rd, 2003 at 02:18:48 PM EST<BR>(<A CLASS="light" HREF="mailto:moc.wnlaruen@ttocs">moc.wnlaruen@ttocs</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>struct timeval begin_tv, end_tv;<p>
+void begin_timer()<br>
+{<br>
+&nbsp; &nbsp; gettimeofday(&amp;begin_tv);<br>
+}<p>
+double end_timer()<br>
+{<br>
+&nbsp; &nbsp; double elapse;<p>
+&nbsp; &nbsp; gettimeofday(&amp;end_tv);<br>
+&nbsp; &nbsp; elapse &nbsp;= (double)end_tv.sec + (double)end.tv_usec * 1e-6;<br>
+&nbsp; &nbsp; elapse -= (double)begin_tv.sec + (double)begin.tv_usec * 1e-6;<br>
+&nbsp; &nbsp; return elapse;<br>
+}<BR><br>--------<br>
+<i>Please direct SPAM to john@neuralnw.com</i>
+<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="4"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>GetTimeOfDay.</B> (<A HREF="/comments/2003/9/3/135554/1668/4?mode=alone;showrate=1#4">3.50 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/4#4">#4</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:2122">squigly</a> on Wed Sep 3rd, 2003 at 02:11:40 PM EST<BR>(<A CLASS="light" HREF="mailto:squigs@postmaster.co.uk">squigs@postmaster.co.uk</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>In &lt;sys/time.h&gt; under Unix, there's a GetTimeOfDay function that gives microsecond precision. &nbsp;<p>
+Really, you shouldn't use these though since executionm time can vary depending on load. &nbsp;Profilers (e.g. gprof) give a much better result.<BR><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="8"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Not necessarily</B> (<A HREF="/comments/2003/9/3/135554/1668/8?mode=alone;showrate=1#8">5.00 / 3</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/8#8">#8</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:26951">awgsilyari</a> on Wed Sep 3rd, 2003 at 02:23:37 PM EST<BR>(<A CLASS="light" HREF="mailto:moc.wnlaruen@ttocs">moc.wnlaruen@ttocs</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>gprof is a sampling profiler, meaning it just examines the value of the program counter in small slices to see where execution is.<p>
+Anyone with a background in signal theory will tell you that this is prone to temporal aliasing. If a routine is being invoked at nearly the same frequency as the profiler, you'll see temporal "interference," with the function appearing to either take way more time than it really does, or way less.<p>
+gprof adds function prolog/epilog code to keep correct invocation counts. But the timings can be off massively in certain circumstances.<p>
+If you want to profile the execution time of a particular routine, the best way is to actually insert a timing call.<BR><br>--------<br>
+<i>Please direct SPAM to john@neuralnw.com</i>
+<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/4#4">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="5"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I've never done this sort of timing</B> (<A HREF="/comments/2003/9/3/135554/1668/5?mode=alone;showrate=1#5">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/5#5">#5</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 02:16:39 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>And once I'm back on my machine, I'll try gprof. I guess it never struck me that there were tools to do this outside of code. duh.<br><br>Right now, I'm being a TA in a comp sci 1 class though, stupid windows lab machines.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/4#4">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="3"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I have seen the light!</B> (<A HREF="/comments/2003/9/3/135554/1668/3?mode=alone;showrate=1#3">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/3#3">#3</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 02:03:27 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Practical answers and empirical evidence be damned! Head for the high hills of theory, for that is where the only *real* work is! Math never lies!<BR><br>Peace.<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="6"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>You are correct it never does lie [nt]</B> (<A HREF="/comments/2003/9/3/135554/1668/6?mode=alone;showrate=1#6">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/6#6">#6</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:42304">StormShadow</a> on Wed Sep 3rd, 2003 at 02:17:30 PM EST<BR>(<A CLASS="light" HREF="mailto:Proud To Be An American:">Proud To Be An American:</A>) <A CLASS="light" HREF="Where At Least I Know I Am Free">Where At Least I Know I Am Free</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><BR><p><br>-----------------<br>
+oderint dum metuant - Cicero<br>
+We aren't killing enough of our [America's] enemies.
+Re-elect Bush in 2004 - Me<br>
+<b>12/2003: This account is now closed. Password scrambled. Its been a pleasure.</b></p><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/3#3">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="9"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>ehhh</B> (<A HREF="/comments/2003/9/3/135554/1668/9?mode=alone;showrate=1#9">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/9#9">#9</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 02:27:55 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Within its own system, it does not lie. Math, as a system, is based on logical consistency. As such, correct mathematical statements cannot technically lie. However, predicted results are often very different from actual ones, making the math appear to lie. So, IMHO, math both lies and doesn't.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/6#6">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="25"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>That is twisted logic...</B> (<A HREF="/comments/2003/9/3/135554/1668/25?mode=alone;showrate=1#25">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/25#25">#25</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:42304">StormShadow</a> on Wed Sep 3rd, 2003 at 08:00:55 PM EST<BR>(<A CLASS="light" HREF="mailto:Proud To Be An American:">Proud To Be An American:</A>) <A CLASS="light" HREF="Where At Least I Know I Am Free">Where At Least I Know I Am Free</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>...the experimental results differ from the theoretical because of uncertainties, errors, approximations or incomplete knowledge not because the mathematics "lies" -- a lie by definition is an attempt at deception. If you walk over to me and ask where is the local public library and I give you the wrong answer because I myself am misinformed, did I lie to you? Of course not.<BR><p><br>-----------------<br>
+oderint dum metuant - Cicero<br>
+We aren't killing enough of our [America's] enemies.
+Re-elect Bush in 2004 - Me<br>
+<b>12/2003: This account is now closed. Password scrambled. Its been a pleasure.</b></p><BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/9#9">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="26"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>all I'm saying</B> (<A HREF="/comments/2003/9/3/135554/1668/26?mode=alone;showrate=1#26">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/26#26">#26</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Wed Sep 3rd, 2003 at 10:32:38 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>is that mathematics is not truth when it's translated to the world. Many people accept that a model is truth without considering that it may differ from the real world in reality.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/3/135554/1668/25#25">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="2"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Check</B> (<A HREF="/comments/2003/9/3/135554/1668/2?mode=alone;showrate=1#2">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/3/135554/1668/2#2">#2</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:29589">jgerman</a> on Wed Sep 3rd, 2003 at 02:01:34 PM EST<BR>(<A CLASS="light" HREF="mailto:jgermank5NO@SPAMyahoo.com">jgermank5NO@SPAMyahoo.com</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>setitimer(2) though there are some gotcha's if I recall. 
+
+<p>
+Google around for high resolution timers  in C and you shoudl turn something up.
+<p>
+<BR><p>if textbooks were a kuro5hin user, they would probably be Silent Chris. because textbooks piss me off. <i>-- anaesthesis</i><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</FORM><TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR BGCOLOR="#eeeeee">
+<TD align="center" WIDTH="100%"><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+<A CLASS="light" HREF="/story/2003/9/3/135554/1668">Precise timing in C</A> | <B>31</B> comments (31 topical, 0 editorial, 0 hidden) 
+</FONT>
+</TD>
+</TR>
+</TABLE>
+
+    <CENTER>	
+      <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN="center">
+    <TR>
+        <TD>
+                <FORM ACTION="/#" METHOD="post">
+                <INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+                <INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/3/135554/1668">
+                
+        <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#ffffff" align="center">
+
+                <TR>
+                        <TD VALIGN="middle" align="center">
+                                <FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+								View:
+                                <SMALL>
+                                        <SELECT NAME="commenttype" SIZE=1>
+		<OPTION VALUE="mixed">Mixed (default)
+		<OPTION VALUE="topical">Topical Only
+		<OPTION VALUE="editorial">Editorial Only
+		<OPTION VALUE="all">All Comments
+		<OPTION VALUE="none">No Comments</SELECT>
+                                </SMALL>
+                                Display:
+                                <SMALL>
+                                <SELECT NAME="commentmode" SIZE=1>
+		<OPTION VALUE="threaded">Threaded
+		<OPTION VALUE="minimal">Minimal
+		<OPTION VALUE="nested" SELECTED>Nested
+		<OPTION VALUE="flat">Flat
+		<OPTION VALUE="flat_unthread">Flat Unthreaded<OPTION VALUE="dthreaded">Dynamic Threaded<OPTION VALUE="dminimal">Dynamic Minimal</SELECT>
+                                </SMALL>
+                                Sort:
+                                <SMALL>
+                                <SELECT NAME="commentrating" SIZE=1>
+		<OPTION VALUE="unrate_highest">Unrated, then Highest
+		<OPTION VALUE="highest">Highest Rated First
+		<OPTION VALUE="lowest">Lowest Rated First
+		<OPTION VALUE="dontcare" SELECTED>Ignore Ratings
+		</SELECT>
+                                </SMALL>
+                                <SMALL>
+                                <SELECT NAME="commentorder" SIZE=1>
+		<OPTION VALUE="newest">Newest First
+		<OPTION VALUE="oldest">Oldest First
+		</SELECT>
+                                </SMALL>
+
+<INPUT TYPE="submit" NAME="setcomments" VALUE="Set">
+</FONT>
+</TD></TR>
+</TABLE>
+</FORM></TD>
+    </TR>
+</TABLE>
+    </CENTER>
+    <!-- X comments -->
+
+    <P>
+    
+        <CENTER>
+      <P>
+
+<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 align="center" width="500">
+<TR>
+<TD VALIGN="baseline" align="right">
+<A HREF="http://www.kuro5hin.org/"><IMG SRC="/images/kuro5hin.png" WIDTH=88 HEIGHT=31 BORDER=0 ALT="kuro5hin.org"></a>
+</td><TD ALIGN="left">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE="2">
+<FORM NAME="Search" ACTION="/" METHOD="GET">
+<INPUT TYPE="hidden" NAME="op" VALUE="search">
+<INPUT TYPE="text" SIZE=20 NAME="string"><INPUT TYPE="submit" VALUE="Search"></form></font> 
+</td>
+</tr>
+</table>
+
+      <P>
+<center><a href="http://www.kuro5hin.org/backend.rdf"><img src="/images/rssblue.gif" width="29" height="15" border=0 alt="[XML]"></a></center>
+      <FONT size=1 color="#303030" face="arial,helvetica">
+        All trademarks and copyrights on this page are owned by their respective companies.  The Rest © 2000 - 2003 Kuro5hin.org Inc.<BR>See our <A HREF="http://www.kuro5hin.org/special/legal">legalese page</a> for copyright policies. Please also read our <A HREF="/special/privacy">Privacy Policy</a>.<BR>Kuro5hin.org is powered by <A HREF="http://www.fsf.org">Free Software</a>, including <A HREF="http://apache.org/">Apache</a>, <A HREF="http://www.perl.org/">Perl</a>, and <A HREF="http://www.slackware.com/">Linux</a>, The <A HREF="http://scoop.kuro5hin.org/">Scoop Engine</a> that runs this site is freely available, under the terms of the GPL.<BR>Need some help? Email <A HREF="mailto:help@kuro5hin.org">help@kuro5hin.org</a>.<br>
+<a href="http://www.indifferenthonest.com/deadbeat/">Erik Benson</a> is a <a href="http://www.indifferenthonest.com/deadbeat/">deadbeat</a>.
+</font>
+
+      <P>
+
+      <TABLE BORDER=0 CELLPADDING=10 CELLSPACING=0 width="90%" align="center">
+    <TR>
+        <td><A HREF="http://scoop.kuro5hin.org"><IMG SRC="/images/powered_shovel2.gif" ALT="Powered by Scoop" BORDER=0></A></td>
+        <TD align="center">
+<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+
+<A HREF="/newuser">create account</a> |
+<A HREF="/special/faq">help/FAQ</a> |
+<A HREF="/special/mission">mission</a> |
+<A HREF="/special/links">links</a> |
+<A HREF="/search">search</a> |
+<A HREF="/special/irc">IRC</a> |
+<A HREF="/special/voting"><B>YOU</b> choose the stories!</a>
+</FONT></TD>
+        <td align="right"><a href="http://jinxhackwear.com/"><img src="/images/jinxbutton.jpg" border=0 width="88" height="31" alt="K5 Store by Jinx Hackwear"></a> <a href="http://www.newsisfree.com/"><img width="88" height="31" border="0" src="/images/nif_button.gif" alt="Syndication Supported by NewsIsFree"></a></td>
+    </TR>
+</TABLE>
+     </center></BODY>
+</HTML>

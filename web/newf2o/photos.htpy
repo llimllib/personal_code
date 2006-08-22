@@ -1,0 +1,11 @@
+<py print_header('Photos', "images/photos_header.jpg") >
+        <h1>Photos</h1>
+        You'll have to content yourself with what's on the headers for now,
+        since I don't yet know exactly how I want to display them. Rest assured
+        that the customer is priority #1 at Bill Mill enterprises, so the
+        pictures my public demands will return!<p><p>
+        And, since Scott's bought me a beer more than once, I'll link to his <a 
+        href="http://www.loonrentals.com/ni138/default.htm">condo at Loon Mountain<a>.
+        Heading to New Hampshire to ski? Rent his badass condo. I hope he loans
+        it to me for putting this up on my site.
+<py print_footer() >

@@ -1,0 +1,6 @@
+## The only thing that should be contained in this file is the conf dictionary
+## which has configuration details. Feel free to change the values.
+
+self.conf = {
+'cards' : 'standard',
+}

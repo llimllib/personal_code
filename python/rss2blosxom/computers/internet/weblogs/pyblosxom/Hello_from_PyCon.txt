@@ -1,0 +1,6 @@
+Hello from PyCon
+<p>
+Greetings from my session at PyCon 2005!
+</p><p>
+This is a demonstration of the Metaweblog API plugin for PyBlosxom
+</p>

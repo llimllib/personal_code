@@ -1,0 +1,36 @@
+More Cache Than You
+There are a dizzying array of bad "cache" puns to be made, and while I'm
+blogging about my pyblosxom cache, I'll try and use them all.<p>
+Surprisingly, today I got quite a bit of work done after Thanksgiving dinner on
+the pyblosxom cache I've been working on. First, I altered it to use multiple
+files which mirror the datadir, just like the meta plugin does. Second, I
+altered it to lock the files it's using; I need to go back and do that for the
+meta plugin.
+It was nice to see that a file locking mechanism had already been built into
+Pyblosxom.tools; it saved me quite a bit of work having to dig one up. Finally,
+I documented my code as it comes closer to release.<p>
+What I'm going to write about, though, is the big change I made: I moved the
+caching code into pyblosxom.py. I don't believe that it's possible to fully
+accomplish what I want it to accomplish as a plugin. If the filelist_cache were
+a plugin, and another plugin implemented the filelist callback, I could not
+guarantee that the cache's callback would be called first. This is a problem,
+since it means that I can't check the cache before returning the data.<p>
+Imagine, for example, that a user requests http://myblog/keyword/python . What
+I want is for my cache to see if it has already searched for "keyword/python", so
+that it can return it immediately if it has. However, since the keywords plugin
+implements the filelist callback, it takes control of the request, and iterates
+through the datadir, parsing every file. This is exactly what I want to
+avoid.<p>
+So my cache plugin needs to act <em>before</em> the filelist callback;
+currently, this can only be implemented by changing the default pyblosxom
+request handler. I will be submitting a patch for this in another couple of
+days, but I'm not sure if the cache is general enough to justify its inclusion
+in the default request handler.<p>
+The reason that I think it may be worthwhile is the enormous benefit it seems
+to provide. I tested the plugin on Linux and Windows today, and with a large
+number of blogs, it's been providing a consistent speedup of 30%-50%. This
+difference is really quite enormous in the scheme of things, and I think the
+people who have large pyblosxom sites would see immediate benefits from this
+change.
+<!-- keywords: pyblosxom, python, cache, computer -->
+<!-- time: 11-26-04 02:15 -->

@@ -1,0 +1,19 @@
+#
+# Project file for project "empget"
+# Saved: 2003-04-17, 18:31:43
+#
+# Copyright (C) 2003  <>
+#
+
+DESCRIPTION =  
+
+VERSION = 0.1 
+
+AUTHOR =  
+
+EMAIL =  
+
+MAINSCRIPT = empget.py 
+
+VCS = None 
+

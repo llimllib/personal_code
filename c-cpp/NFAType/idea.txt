@@ -1,0 +1,49 @@
+str = input string [001]
+  |
+  |
+  V
+is_accepted(str)
+  |
+  |
+  V
+next_state(t, 0) [t-e,u,e,w;u-1,v;v-1,u;w-0,x;x-0,w]
+  |
+  |
+  V
+returns "e:u;e:w;"
+  |
+  |
+  V
+next_state(u:0)
+  |
+  |
+  V
+returns ""
+  |
+  |
+  V
+next_state(w:0)
+  |
+  |
+  V
+returns "x:0"
+  |
+  |
+  V
+next_state(x:0)
+  |
+  |
+  V
+returns "w:0"
+  |
+  |
+  V
+next_state(w:1)
+  |
+  |
+  V
+returns ""
+  |
+  |
+  V
+return false

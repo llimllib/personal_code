@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<HTML>
+<HEAD>
+<TITLE>Enscript Output</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#1F00FF" ALINK="#FF0000" VLINK="#9900DD">
+<A NAME="top">
+<A NAME="file1">
+<H1>delbackup.py</H1>
+
+<PRE>
+<I><FONT COLOR="#B22222">#!/c/Python23/python.exe
+</FONT></I><B><FONT COLOR="#BC8F8F">&quot;&quot;&quot;
+Backup del.icio.us to Gmail
+
+Released into the public domain 4.10.05 by Bill Mill
+
+Please use as you see fit, but this code carries NO EXPRESS WARRANTIES.
+I don't even know what that means, but all the legal types put that in caps.
+This code might make your computer gain intelligence and start to take over
+the world for all I know. However, it also might just save a copy of each
+of the pages you've linked to from your del.icio.us account to your gmail
+account.
+
+The only non-standard library this script requires is cElementTree; it's
+available at http://effbot.org/zone/celementtree.htm . Thanks to Fredrik
+for his parser.
+
+To set up, simply fill in your delicious and gmail user name and password 
+where the script tells you to. Then run this file with &quot;python delbackup.py&quot;
+and sit back and relax. If it fails with a &quot;server reset connection&quot; error, 
+or something similar, just start it to running again - it should be smart
+enough to pick up where it left off.
+
+If you hack on this file to add something, if you love or hate the script, 
+or if you just got something to get off your chest, drop me a line at 
+bill.mill@gmail.com.
+
+TODO:
+o command line parameters:
+    o suppress output
+    o delete the backup directory when done
+    o save only the content of the HTML pages downloaded; I like it outputting
+      the full HTML the way it does, but others won't
+o detect what pages have already been uploaded to gmail by some 
+  non-brain dead mechanism 
+o Figure out how to get the connection to gmail SMTP to quit gracefully
+o Allow some other XML parsers (I def won't do this, but others might want to)
+o Make i18n actually work? It might, but I haven't tested.
+o Let the good times roll
+&quot;&quot;&quot;</FONT></B>
+<B><FONT COLOR="#A020F0">import</FONT></B> cElementTree as ce
+<B><FONT COLOR="#A020F0">import</FONT></B> urllib2, os, md5, sys, re, smtplib
+<I><FONT COLOR="#B22222">#necessary because of smtplib bug, or gmail SMTP server bug?
+</FONT></I><B><FONT COLOR="#A020F0">from</FONT></B> socket <B><FONT COLOR="#A020F0">import</FONT></B> sslerror
+
+<I><FONT COLOR="#B22222">######################
+</FONT></I><I><FONT COLOR="#B22222"># Fill in your user name and pw; this is all you should *have* to configure
+</FONT></I><I><FONT COLOR="#B22222">######################
+</FONT></I>delicious_user = <B><FONT COLOR="#BC8F8F">&quot;&quot;</FONT></B>
+delicious_pw = <B><FONT COLOR="#BC8F8F">&quot;&quot;</FONT></B>
+gmail_user = <B><FONT COLOR="#BC8F8F">&quot;&quot;</FONT></B>
+gmail_pw = <B><FONT COLOR="#BC8F8F">&quot;&quot;</FONT></B>
+
+update = <B><FONT COLOR="#BC8F8F">&quot;http://del.icio.us/api/posts/update&quot;</FONT></B>
+all = <B><FONT COLOR="#BC8F8F">&quot;http://del.icio.us/api/posts/all&quot;</FONT></B>
+
+<B><FONT COLOR="#A020F0">def</FONT></B> <B><FONT COLOR="#0000FF">gmail_connect</FONT></B>(user, pw):
+    server = smtplib.SMTP(<B><FONT COLOR="#BC8F8F">'smtp.gmail.com'</FONT></B>)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+    server.login(user, pw)
+    <B><FONT COLOR="#A020F0">return</FONT></B> server
+
+<B><FONT COLOR="#A020F0">def</FONT></B> <B><FONT COLOR="#0000FF">gmail_quit</FONT></B>(server):
+    server.quit()
+
+<B><FONT COLOR="#A020F0">def</FONT></B> <B><FONT COLOR="#0000FF">send_msg</FONT></B>(msg, server):
+    <B><FONT COLOR="#A020F0">global</FONT></B> gmail_user, gmail_pw
+    to = gmail_user + <B><FONT COLOR="#BC8F8F">'+del.icio.us@gmail.com'</FONT></B>
+    from_ = gmail_user + <B><FONT COLOR="#BC8F8F">'+del.icio.us@gmail.com'</FONT></B>
+    title = msg.split(<B><FONT COLOR="#BC8F8F">'\n'</FONT></B>, 1)[0]
+    msg = <B><FONT COLOR="#BC8F8F">&quot;To: %s\r\nFrom: %s\r\nSubject: %s\r\n\r\n%s\r\n&quot;</FONT></B> % \
+        (to, from_, title, msg)
+    server.sendmail(from_, to, msg)
+
+<B><FONT COLOR="#A020F0">def</FONT></B> <B><FONT COLOR="#0000FF">size</FONT></B>(path):
+    bytes = os.stat(path)[6]
+    <B><FONT COLOR="#A020F0">return</FONT></B> bytes / (1024.0 * 1024) <I><FONT COLOR="#B22222">#return size in megabytes
+</FONT></I>
+<B><FONT COLOR="#A020F0">def</FONT></B> <B><FONT COLOR="#0000FF">make_auth</FONT></B>(username,password):
+    authinfo = urllib2.HTTPBasicAuthHandler()
+    authinfo.add_password(<B><FONT COLOR="#BC8F8F">'del.icio.us API'</FONT></B>, <B><FONT COLOR="#BC8F8F">'http://del.icio.us'</FONT></B>, username, password)
+    opener = urllib2.build_opener(authinfo)
+    urllib2.install_opener(opener)
+
+<B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;Checking if del.icio.us has been updated&quot;</FONT></B>
+auth = make_auth(delicious_user, delicious_pw)
+update = urllib2.urlopen(update).read()
+<B><FONT COLOR="#A020F0">try</FONT></B>:
+    <B><FONT COLOR="#A020F0">if</FONT></B> update != open(<B><FONT COLOR="#BC8F8F">'update'</FONT></B>, <B><FONT COLOR="#BC8F8F">'r'</FONT></B>).read():
+        open(<B><FONT COLOR="#BC8F8F">'update'</FONT></B>, <B><FONT COLOR="#BC8F8F">'w'</FONT></B>).write(update)
+        sys.exit(0)
+        <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;Updating all.xml&quot;</FONT></B>
+        open(<B><FONT COLOR="#BC8F8F">'all.xml'</FONT></B>, <B><FONT COLOR="#BC8F8F">'w'</FONT></B>).write(urllib2.urlopen(all).read())
+    <B><FONT COLOR="#A020F0">else</FONT></B>:
+        <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;all.xml is fresh&quot;</FONT></B>
+<B><FONT COLOR="#A020F0">except</FONT></B> IOError:
+    <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;Creating all.xml&quot;</FONT></B>
+    open(<B><FONT COLOR="#BC8F8F">'update'</FONT></B>, <B><FONT COLOR="#BC8F8F">'w'</FONT></B>).write(update)
+    x = urllib2.urlopen(all).read()
+    open(<B><FONT COLOR="#BC8F8F">'all.xml'</FONT></B>, <B><FONT COLOR="#BC8F8F">'w'</FONT></B>).write(x)
+
+<B><FONT COLOR="#A020F0">try</FONT></B>:
+    os.mkdir(<B><FONT COLOR="#BC8F8F">'./backup'</FONT></B>)
+<B><FONT COLOR="#A020F0">except</FONT></B> OSError:
+    <B><FONT COLOR="#A020F0">pass</FONT></B>
+os.chdir(<B><FONT COLOR="#BC8F8F">'./backup'</FONT></B>)
+
+gmail = gmail_connect(gmail_user, gmail_pw)
+
+<B><FONT COLOR="#A020F0">for</FONT></B> e, post <B><FONT COLOR="#A020F0">in</FONT></B> ce.iterparse(<B><FONT COLOR="#BC8F8F">'../all.xml'</FONT></B>):
+    <B><FONT COLOR="#A020F0">if</FONT></B> post.tag != <B><FONT COLOR="#BC8F8F">&quot;post&quot;</FONT></B>:
+        <B><FONT COLOR="#A020F0">continue</FONT></B>
+    data = dict(post.items())
+    <I><FONT COLOR="#B22222">#turn any utf-8 data into binary strings
+</FONT></I>    name = data[<B><FONT COLOR="#BC8F8F">'href'</FONT></B>][7:].encode(<B><FONT COLOR="#BC8F8F">'utf-8'</FONT></B>)
+    desc = data[<B><FONT COLOR="#BC8F8F">'description'</FONT></B>].encode(<B><FONT COLOR="#BC8F8F">'utf-8'</FONT></B>)
+    ext = data.get(<B><FONT COLOR="#BC8F8F">'extended'</FONT></B>, <B><FONT COLOR="#BC8F8F">''</FONT></B>).encode(<B><FONT COLOR="#BC8F8F">'utf-8'</FONT></B>)
+    tags = data.get(<B><FONT COLOR="#BC8F8F">'tag'</FONT></B>, <B><FONT COLOR="#BC8F8F">''</FONT></B>).encode(<B><FONT COLOR="#BC8F8F">'utf-8'</FONT></B>)
+    <I><FONT COLOR="#B22222">#make the url into a valid filename
+</FONT></I>    <I><FONT COLOR="#B22222">#\W = not([a-zA-Z0-9_]), except unicode-aware
+</FONT></I>    name = re.sub(<B><FONT COLOR="#BC8F8F">'\W'</FONT></B>, <B><FONT COLOR="#BC8F8F">'_'</FONT></B>, name)[-200:]
+    <B><FONT COLOR="#A020F0">try</FONT></B>:
+        <B><FONT COLOR="#A020F0">if</FONT></B> <B><FONT COLOR="#A020F0">not</FONT></B> os.path.isfile(name):
+            <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;getting %s as %s&quot;</FONT></B> % (data[<B><FONT COLOR="#BC8F8F">'href'</FONT></B>], name)
+            f = open(name, <B><FONT COLOR="#BC8F8F">'w'</FONT></B>)
+            f.write(desc + <B><FONT COLOR="#BC8F8F">'\n'</FONT></B>)
+            f.write(ext + <B><FONT COLOR="#BC8F8F">'\n'</FONT></B>)
+            f.write(<B><FONT COLOR="#BC8F8F">'Tags: '</FONT></B> + tags + <B><FONT COLOR="#BC8F8F">'\n'</FONT></B>)
+            f.write(data[<B><FONT COLOR="#BC8F8F">'href'</FONT></B>] + <B><FONT COLOR="#BC8F8F">'\n'</FONT></B>)
+            f.write(urllib2.urlopen(data[<B><FONT COLOR="#BC8F8F">'href'</FONT></B>]).read())
+            f.close()
+            <B><FONT COLOR="#A020F0">if</FONT></B> size(name) &lt; 1:
+                <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;Emailing %s to %s+del.icio.us@gmail.com&quot;</FONT></B> % \
+                (name, gmail_user)
+                msg = open(name, <B><FONT COLOR="#BC8F8F">'r'</FONT></B>).read()
+                send_msg(msg, gmail)
+    <B><FONT COLOR="#A020F0">except</FONT></B> urllib2.URLError:
+        <B><FONT COLOR="#A020F0">print</FONT></B> <B><FONT COLOR="#BC8F8F">&quot;couldn't find page: %s&quot;</FONT></B> % (data[<B><FONT COLOR="#BC8F8F">'href'</FONT></B>])
+        f.close()
+        <B><FONT COLOR="#A020F0">continue</FONT></B>
+</PRE>
+<HR>
+<ADDRESS>Generated by <A HREF="http://www.iki.fi/~mtr/genscript/">GNU enscript 1.6.4</A>.</ADDRESS>
+</BODY>
+</HTML>

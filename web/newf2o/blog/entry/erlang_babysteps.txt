@@ -1,0 +1,52 @@
+Erlang Baby Steps
+A couple of weeks ago, I made a <a 
+href="http://llimllib.f2o.org/blog/serve/keyword/erlang">big show</a> of
+starting to take up erlang. Up until now, however, I haven't delivered anything
+on what I'd said. Unfortunately, real life has been a pain. On top of work,
+I've been playing indoor winter <a
+href="http://www.whatisultimate.com/what/what_game_en.html">ultimate</a>,
+snowboarding, and nursing a persistant leg injury.<p>
+With the snow melting, my leg healing, and getting used to the working
+schedule, I've finally found time to get back to hacking. So, I present to you
+the Fisher-Price My First Server, Erlang/OTP edition. It even comes with a
+bonus client.<p>
+<h2>Grepping httpd and OTP</h2>
+I began studying Erlang by examining the httpd included in the distribution.
+I've since read copious amounts of source code, drawn a lot of diagrams, and
+consumed a lot of caffeine. Along the way, I think I got a pretty good idea of
+what was going on.<p>
+The first stumbling block was <a 
+href="http://www.erlang.se/doc/doc-5.4.3/doc/design_principles/part_frame.html">OTP</a>.
+In short, OTP is a set of modules which abstract the functionality of different
+types of servers to assist you in writing them. For example, a <a 
+href="http://www.erlang.se/doc/doc-5.4.3/doc/design_principles/sup_princ.html#5">supervisor</a>
+monitors child servers, restarting or killing them as necessary, and a <a
+href="http://www.erlang.se/doc/doc-5.4.3/doc/design_principles/gen_server.html">gen_server</a>
+helps handle some common server tasks, such as starting up, shutting down, and
+maintaining state.<p>
+It took me a while to understand more specifically what magic OTP was up to,
+but I eventually started to understand the concept. It helped to imagine a tree
+of processes, where a higher one guides the ones below it, and to draw that
+tree out for a complex program such as the httpd server. Ideally, this sort of
+structure should lead to a loosely coupled, robust server. I can't speak to
+that, yet, but it seems to make intuitive sense.<p>
+<h2>The Idea</h2>
+Once I had a basic understanding of what was going on in httpd, I got the itch
+to write my own little server. To make it as simple as possible, I decided it
+should have two commands, which it took from the user via the command line: 
+send and recv.<p>
+When the user typed the send command, the code would prompt him for a line of
+text to send to the server. When he typed the recv command, the server would
+send back all that he had typed so far. The idea was to keep it blindingly
+simple, so that I was testing my understanding of erlang and OTP basics, and
+not worrying about a complex protocol.<p>
+<h2>The Code</h2>
+The code is divided into two files: <a
+href="http://llimllib.f2o.org/files/fp_server.erl">fp_server.erl</a> and <a
+href="http://llimllib.f2o.org/files/fp_client.erl">fp_client.erl</a>. To run
+the server and client, download the two files into a directory and start the
+erlang interpreter by typing "erl" at the command line.<p>
+Once inside the erlang interpreter, compile each file by typing
+<pre>c(fp_server).</pre> then <pre>c(fp_client).</pre>. Don't worry about the
+warnings that come up. To start the server, type <pre>fp_server:start().</pre>
+.

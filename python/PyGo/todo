@@ -1,0 +1,9 @@
+TODO
+
+* do something with status bar? remove it?
+* make game work with 13/9 board sizes (make image, add it in)
+* redo the new game screen
+* check the final_score algorithm in gogame
+* make names consistent
+* make pygo and comp players
+* import/export SGF files

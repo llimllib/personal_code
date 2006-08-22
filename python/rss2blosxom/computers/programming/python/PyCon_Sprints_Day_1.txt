@@ -1,0 +1,10 @@
+PyCon Sprints Day 1
+<p>
+The PyCon sprints are underway.   This year, the Zope sprint(s) seem to be the largest, as well as the sprint for PyPy.  
+</p><p style="text-align:center;">
+
+</p><p style="text-align:center;">
+<a href="http://www.sauria.com/blog/images/Image(264).jpg" onclick="window.open('http://www.sauria.com/blog/images/Image(264).jpg','popup','width=640,height=480,scrollbars=no,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=yes,left=0,top=0');return false"><img src="http://www.sauria.com/blog/images/Image(264)-tm.jpg" height="100" width="133" border="1" hspace="4" vspace="4" alt="Image(264)" /></a>
+</p><p>
+The Chander sprint doesn't start until Monday, so in the meantime, I've been catching up on the day that I missed on the plane, and having good conversations.
+</p>

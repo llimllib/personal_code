@@ -1,0 +1,19 @@
+Metadata-Version: 1.0
+Name: pyblosxom
+Version: 1.0.0
+Summary: pyblosxom weblog engine
+Home-page: http://roughingit.subtlehints.net/pyblosxom
+Author: Wari Wahab
+Author-email: wari@home.wari.org
+License: MIT
+Description: Pyblosxom is a weblog engine that uses the filesystem as the database of
+        your entries.
+        
+Platform: UNKNOWN
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: Environment :: Console (Text Based), Web Environment
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: License :: OSI Approved :: MIT/X Consortium License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content

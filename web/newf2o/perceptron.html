@@ -1,0 +1,127 @@
+<html><head><title>Bill Mill - Words</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="main">
+    <div id="img">
+        <img src="images/perceptron_header.jpg">
+    </div>
+    <div id="floatleft">
+        <a href="code.html">code</a><br>
+        <a href="words.html">words</a><br>
+        <a href="blog">blog</a><br>
+        <a href="photos.html">photos</a><p>
+        <a href="http://del.icio.us/llimllib">bookmarks</a><p>
+        hosting by:<br><a href="http://f2o.org">f2o</a><p>
+    </div>
+    <div id="bodytext">
+<h1>Perceptrons: Introduction to Machine Learning</h1>
+	Imagine that you have apples and bananas. Your apples and bananas are in one pile, but you want them to be in separate piles. You don't want to pay some worker to separate the fruits, so you're building a machine to do it. This machine only has two pieces of information about them: their size and how yellow they are. What it needs is a function to discriminate between apples and bananas, so that it can sort them.<p>
+
+One way to find a function to discriminate between two classes of things is to use a perceptron. A perceptron is a simple iterative algorithm for finding a discriminant function; in other words, it can find a function to separate our apples and bananas. Although they can only separate two classes of data, and have some other limitations, perceptrons are still an interesting introduction to learning techniques.<p>
+<b>Introduction</b><p>
+
+Let's imagine that you've charted your data on apples and bananas (<em>figure 1</em>). Fortunately, the two groups form neat clusters, so all we need to do is draw a line between them. The condition of being able to draw a line between two groups is called "linear separability".<p>
+
+<img src="http://llimllib.f2o.org/ptron/points.png" height="450" width="600"><br><em>figure 1</em><p>
+
+Since we want to find a line between the two groups, we'll have to introduce some math. Mainly I'll use some simple algebra and geometry. Don't worry if you don't understand it all right away, just keep reading. It should all start to make sense eventually.<p>
+
+To find a line between the apples and bananas, we'll assign weights to an x and a y coordinate, add a bias b, and set the equation equal to 0. Thus, we have an equation for the line w<sub>1</sub>*x + w<sub>2</sub>*y + b = 0.<p>
+
+We call the <a href="http://mathworld.wolfram.com/Vector.html">vector</a> <b>w</b> a weight vector (bold letters denote vectors), which in this case looks like [w1, w2].  The number of weights will be equal to the number of variables in any input vector, which is called the dimensionality of the input vector. Technically, a perceptron tries to find a hyperplane to separate points in an n-dimensional space. In this case, that hyperplane is a line.<p>
+
+<b>Code (technical details)</b><p>
+
+If you are math and/or code averse, but still interested, you can skip this section and the next, right to "Application".<p>
+
+I've coded an <a href="http://llimllib.f2o.org/ptron/perceptron.zip">example perceptron</a> in the language <a href="http://python.org">Python</a>, using <a href="http://www.gnuplot.info/">gnuplot</a>, <a href="http://gnuplot-py.sourceforge.net/">gnuplot.py</a> to draw pretty graphs, and <a href="http://www.stsci.edu/resources/software_hardware/numarray">numarray</a> for the math. The code definitely runs on at least Windows and Linux, and it should run on OS X.<p>
+
+<b>Algorithm</b><p>
+
+What we have is a vector <b>x</b> of data points and a vector <b>y</b> of classifications. <b>y</b> is of the same dimension as <b>x</b>, and an element y<sub>i</sub> in <b>y</b> is either 1 (banana) or -1 (apple). We'll pass these into our perceptron along with a number n, where 0 &lt; n &lt; 1.<p>
+
+The parameter n is called the learning rate, whose purpose is to affect how quickly the perceptron converges. If n is too high, the discriminant line will swing wildly. Too low, and it won't change quickly enough. n only changes the rate at which the perceptron learns, so it will still converge no matter what n you choose.<p>
+
+<code>def perceptron(x, y, n):</code><p>
+
+Now we set our weights, our bias, a mistake counter, an iteration counter, and a boolean variable all to 0. "na." stands for numarray, my linear algebra library. na.zeros(N, type) creates an NxN zero matrix of type.<p>
+
+<code>     w = na.zeros(x[0].shape[0], na.Float32) #weights<br>
+    b = 0                                   #bias<br>
+    k = 0                                   #error count<br>
+
+    iteration = 0                           #number of iterations<br>
+    mistake_free = 0</code><p>
+
+Our main loop is simple. When the perceptron has made a mistake classifying one of the pieces of data, mistake_free is set to false, and we want to continue trying to find a discriminant line. In the case where the input data is not separable, we want to stop iterating our loop at some point. In this case, I've chosen 100 as the iteration limit.
+<p>
+<code>    while not mistake_free and iteration &lt; 100:<br>
+        iteration += 1<br>
+
+        mistake_free = 1 </code>
+<p>
+Each iteration, we want to loop through x (our known data points) and calculate the perceptron's current classification of each one. If the perceptron correctly identifies each banana as a banana and each apple as an apple, we're done. Otherwise, we're going to have to change <b>w</b> and b.<p>
+
+<code>        for i in range(len(x)):<br>
+            actual_out = na.dot(w, x[i]) + b #&lt;w*x&gt; + b<br>
+
+            if y[i] * actual_out &gt;= 0:       #if correctly classified.
+</code>
+<p>
+If we made a mistake, we  update the weights such that <b>w</b> = <b>w</b> + n * y[i] * <b>x[i]</b>. Remember that n is our learning rate and y[i] is the correct classification of the current point x[i]. Also, set the bias so b = b + y[i] - actual_out, where actual_out is the incorrect output of the perceptron for x[i].<p>
+The reason for the weight updates is fairly simple. If the perceptron misclassified a banana as an apple, we want to move the discriminant down a bit, so we subtract n*x[i] from w. Conversely, we add n*x[i] to w if it was too low. The bias update works similarly.<p>
+
+  <p>
+<code>                w += n * y[i] * x[i]<br>
+                b += y[i] - actual_out<br>
+                k += 1<br>
+                mistake_free = 0</code><p>
+
+Finally, we just return our weights, our bias, and our mistake counter. While we don't strictly need to return the mistake counter, it's good to know how long it took the perceptron to classify your data correctly. It can help you choose a better learning rate or see that your data is poorly separated.<p>
+
+<code>    return (w, b, k)</code><p>
+
+<b>Application</b><p>
+
+So, now that we've got our data all gathered  and our perceptron set up, it's time to apply it. To do so, we put the coordinates of the data points in <b>x</b>, and their corresponding classes, represented by 1 or -1, in <b>y</b>. The result will look something like figure 2. (It will look slightly different if you run the program yourself, since the points are generated randomly.)<p>
+
+<img src="http://llimllib.f2o.org/ptron/line.png" height="450" width="600"><br><em>figure 2</em><p>
+
+We now have a set of weights [w<sub>1</sub>, w<sub>2</sub>] and a bias b which make it easy to determine if an unknown piece of fruit is probably a banana or probably an apple. Given its size (s) and its yellowness (t), we simply plug these two numbers back into our original equation, w<sub>1</sub>*s + w<sub>2</sub>*t + b, and if the result is positive, we have a banana. If the result is negative, we have an apple. If the result is 0, we have a point on the discriminant line, which means we're unsure about which it is.<p>
+
+<b>History</b><p>
+
+Perceptrons were introduced in 1956 by Frank Rosenblatt, with the intention of reproducing the way that brains work. For a time, especially in the early 1960s, they were researched quite heavily. In 1969, Minsky and Papert wrote <i>Perceptrons</i>, a book which highlighted the limitations of the technique. They proved that a perceptron could only solve linearly separable problems, famously showing that it could not solve for the binary XOR.<p>
+
+Before <i>Perceptrons</i>, researchers had been creating networks of perceptrons, but almost nobody had studied their limitations. The book stifled nearly all research into them during the 1970s and early 1980s. However, in the 1980s, researchers discovered that multilayer perceptrons did not have the limitations that Minsky had conjectured they did, and neural network research began again in earnest.<p>
+
+<b>Conclusions</b><p>
+
+For simple two-class classification tasks, perceptrons can function as a quick and dirty method of finding a discriminant. They will run quickly, and are guaranteed to find a solution if one exists. Furthermore, the algorithm is very simple to implement and widely studied.<p>
+
+The real power of the perceptron, however, lies in networking them. A series of interconnected perceptrons, in modified form, is the basis of a <a href="http://en.wikipedia.org/wiki/Neural_network">neural network</a>. A neural network of two layers is capable of learning any continuous function, and it will perform better on poorly separated and noisy data. Of course, with this power comes difficulty, as neural networks are fairly complicated and difficult to use.<p>
+
+<b>Bibliography</b><p>
+
+Bishop, Christopher M. <em>Neural Networks for Pattern Recognition</em>, Oxford University Press, 1995.<p>
+
+Cristianini, Nello. <em>Support Vector Machines</em>, Cambridge University Press, 2000.<p>
+
+Minsky, M. L. and Papert, S. A. <em>Perceptrons</em>, MIT Press, 1969.<p>
+
+<em>Perceptrons</em>, http://en.wikipedia.org/wiki/Perceptrons.<p>
+
+Rosenblatt, Frank. <em>The Perceptron: A Probabilistic Model for Information Storage and Organization in the Brain</em>, Cornell Aeronautical Laboratory, Psychological Review, v65, No. 6, pp. 386-408, 1958.</FONT>
+
+
+    </div>
+        <div id="footer">
+        Everything on this site is entirely copyright free unless otherwise
+        noted.<br>Distribute it as
+        you wish, but <a href="mailto:llimllib@f2o.org">let me know</a> if you
+        like it.
+        </div>
+</div>
+</body></html>
+

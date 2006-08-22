@@ -1,0 +1,9 @@
+Wiki Changes pages
+<p>
+I'm using (reluctantly) more wiki's nowadays.   I dislike them for many reasons, the top two being:
+</p><ol>
+<li>It is hard to find stuff in them (yes, I have heard of Google, but it seems wrong to have to use Google to search your own Wiki)</li>
+<li>It is hard to keep up with them.  The OSAF TWiki has e-mail notify which is evil.  Fortunately it has an RSS feed, except that the RSS feed has so little information in it that you have to click each entry and go back to the wiki to have any idea of what the changes were.</li>
+</ol><p>
+The new <a href="http://wiki.43folders.com">43Folders Wiki</a> has the best <a href="http://wiki.43folders.com/index.php?title=Special:Recentchanges&#38;feed=rss">Changes RSS feed</a> that I've seen yet.  You get a nice side by side diff that shows you exactly what changed.  [ Ok, I'm a geek because I can read unified diffs ].   I like it.
+</p>

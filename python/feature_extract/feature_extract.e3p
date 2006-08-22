@@ -1,0 +1,27 @@
+#
+# Project file for project "feature_extract"
+# Saved: 2003-07-15, 12:20:05
+#
+# Copyright (C) 2003 Bill Mill <llimllib@f2o.org>
+#
+
+VERSION = 0.1 
+
+AUTHOR = Bill Mill 
+
+EMAIL = llimllib@f2o.org 
+
+SOURCES = fe.py \
+	gogame.py \
+	sgflib.py \
+	typelib.py \
+	PCA.py 
+
+MAINSCRIPT = fe.py 
+
+VCS = None 
+
+OTHERS = expert.dat \
+	debug.dat \
+	random.dat 
+

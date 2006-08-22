@@ -1,0 +1,2 @@
+#!/bin/bash
+g++ -O -Wall sort.cpp main.cpp -o sort_students

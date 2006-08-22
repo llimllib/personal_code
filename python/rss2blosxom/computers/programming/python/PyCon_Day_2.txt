@@ -1,0 +1,8 @@
+PyCon Day 2
+<p>
+Today I was pre-occupied with Chandler stuff.   Our talk this morning had a few demo glitches, but it seems like it was well received.   I'm relieved that people seemed to connect with what we were able to show during the talk.  Twenty minutes just isn't a lot of time, especially when most people have never seen or downloaded Chandler before.   If you are interested in the details of what we talked about, the Wiki version of our paper is up, and there's a longer tutorial that goes with it.  Our open space in the afternoon was also well attended, and people had lots of questions about what they saw.  One of the attendees works for Wingware, and he was able to answer some questions that I had about Wing.
+</p><p>
+I went to the talks on PyChinko, PJE's generic function talk, and Alex Martelli's talk on generators/iterators.  In hindsight, I wish that I had gone to Alex's other talk on Metaclasses and Descriptors.   My graduate school minor was in AI, so a good portion of the PyChinko talk was a review.  It is good to know that it is in the same space as cwm for when I (someday) get around to experimenting.
+</p><p>
+One more day of PyCon and just the PyBlosxom talk to give.
+</p>

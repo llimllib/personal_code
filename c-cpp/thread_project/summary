@@ -1,0 +1,67 @@
+Thread Project
+
+Florian Halili
+Bill Mill
+John Quinn
+
+Summary of this project:
+
+The programs contained in this file should already run on Unix glibc 2.3
+systems (such as Red Hat Linux 8 and 9). If not, there is a Makefile included;
+just type "make" to make all the examples, which are contained, for the most
+part, in their own directories. The executable examples have the prefix "ex_".
+Most have been tested to work under cygwin.
+
+Part A (ex_race_cond, race_cond/race.cpp):
+
+The file race.cpp, which compiles into ex_race_cond, sets up two threads and
+causes them to enter into a race condition exactly as described in the text.
+
+Part B (ex_mutex, mutex/mutex.cpp, ex_petersons, petersons/petersons.cpp)
+
+The file mutex.cpp solves the race condition using mutexes, while petersons.cpp
+solves it using peterson's software solution. On my Red Hat 9 machine, the
+performance of the former is far better than the latter. Sample time outputs
+follow:
+
+$ time ./ex_mutex 
+Creating thread 0
+Creating thread 1
+Thread #1: 10000000
+Thread #0: 10000000
+
+real    0m8.311s
+user    0m7.870s
+sys 0m0.410s
+
+
+
+As you can see, although it executed its main loop 100 times more often than the
+peterson's algorithm example did, the mutex example ran much faster. Clearly
+waiting in the while() loop to obtain the lock is very ineffecient on my 
+machine.
+
+Part C (ex_p_v, p_v/p_v_mutex.cpp)
+
+Despite a considerable amount of effort by John, Florian, and I, we were unable
+to use the book's algorithm to implement the P() and V() operations. Although
+it seems to work occasionally, it most often fails. We were unable to determine
+why this was true.
+
+We also searched unsuccessfully for other alternatives.
+
+Part D (ex_buffer, bound_buffer/bound_buffer.cpp, ex_sleep_buffer,
+        bound_buffer/sleep_buffer.cpp)
+
+The first example, ex_buffer, implements the bounded buffer problem, using
+semaphores for protection of the buffer. It will read from a file "f1" and print
+all of its contents exactly to "f2". It is clear that, on my machine, when
+this program is run, the Producer fills up the buffer, the Consumer empties it,
+and then the cycle continues ad nauseum.
+
+To remedy this, ex_sleep_buffer adds random sleep times to both threads. In
+this example, the buffer eventually fills up (because I set the Producer's sleep
+shorter than the Consumer's), but it does not do so in a direct fashion.
+
+When you run the program, the Producer will print the number of empty buffer
+slots each time it produces a number for the buffer.

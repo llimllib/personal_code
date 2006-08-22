@@ -1,0 +1,66 @@
+PyCon preview
+<p>
+I'm flying out for PyCon in the morning, so that I'll be there bright and early (especially for west coast time) for the sprints.
+</p><p>
+Here are the talks that I'm most interested in and why.
+</p><p>
+There are a pair of talks related to type inference.  If we have to have static typing, I prefer to obtain it via type inference, as opposed to lots of declarations or optional declarations.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#11">Localized Type-Inference in Python</a></li>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#78">PyPy and type inference</a></li>
+</ul><p>
+I've been interested in Roundup for a while - I could use something like it for personal use.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#12">The Roundup Issue Tracker</a></li>
+</ul><p>
+Python is a lot like Lisp in that there are lots of tricks that you can play.  In fact, it's a lot like C++ for similar reasons.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#36">Descriptors, Decorators, Metaclasses: Python's "Black Magic"?</a></li>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#37">Iterators and Generators: it ain't your gramps' loop any more!</a></li>
+</ul><p>
+PJE is talking about generic functions, and I'm curious to see where his explorations have lead him.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#53">Writing Efficient Rule-Driven Software in Python</a></li>
+</ul><p>
+There are a bunch of sessions blocks where I am torn.
+</p><p>
+In one pair of blocks, Bob Ippolito is going to do intense coverage of PyObjC, which is of interest to me personally.  If I'm going to do any heavy Macintosh programming, it's going to be via PyObjC.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#57">Introduction to PyObjC</a></li>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#58">PyObjC Hacking</a></li>
+</ul><p>
+opposite Bob's talks are a pair of talks on testing
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#10">Agile Testing with Python Test Frameworks</a></li>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#45">py.test and the py lib</a></li>
+</ul><p>
+In another block we have talk on Python on Series 60 (one of the reasons I bought a Series 60 phone
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#16">Python for Series 60</a></li>
+</ul><p>
+up against PyLucene, which I want to go to for moral support
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#27">Pulling Java Lucene into Python:  PyLucene</a></li>
+</ul><p>
+up against Abe Fettig's Yarn, which I'm interested in for personal reasons.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#56">Yarn: Working with Messages in Diverse Formats and Protocols</a></li>
+</ul><p>
+And of course there had to be a conflict between my PyBlosxom talk
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#64">PyBlosxom: A microkernel approach to blogging</a></li>
+</ul><p>
+and Glyph's peer to peer talk
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#73">The Personal Internet Endpoint: Using Python and Twisted to write Reliable Peer-To-Peer Programs</a></li>
+</ul><p>
+There is also the talk that Katie and I are giving on building parcels in Chandler, which is going to be challenging because 30 minutes just isn't going to be enough.
+</p><ul>
+<li><a href="http://www.python.org/moin/PyConDC2005/Presentations#26">An Introduction to building Chandler parcels</a></li>
+</ul><p>
+There's a lot of action happening at the sprints this year:  There's a mega PyPy sprint, the core Python sprint, and probably a huge Twisted sprint.   We are doing a 2 day sprint to build some parcels for Chandler.  If we succeed, I'd like to show them during our talk.
+</p><p>
+And like any conference, there will be the hallway conversations, the conversations over meals, the late night hacking in the halls  and more.   I'm already tired thinking about it all.   But it's going to be great fun.  PyCon was the best conference I went to last year, so expectations are high for this time around.  Things will be a little different this time around because there will be a lot more OSAF people attending.
+</p><p>
+I'm not exactly sure how much I'll be liveblogging PyCon.  It is a ton of work to do it right, and the novelty of doing it has worn off.  We'll probably do the SubEthaEdit thing like we did next year.  Bear tells me he is bringing his wireless keyboard so he can type *really* fast.  Given that he already types scarily fast, we're going to have to have a fire extinguisher handy for when the keyboard catches fire.  If we do the SubEthaEdit thing, I'll be posting files <a href="http://www.sauria.com/~twl/conferences/pycon2005/">here</a>.
+</p>

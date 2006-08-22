@@ -1,0 +1,10 @@
+DirectoryIndex serve
+<Files config.py>
+    deny from all
+</Files>
+
+#force "serve" to be a python file
+<Files serve>
+ForceType application/cgi-script
+SetHandler cgi-script
+</Files>

@@ -1,0 +1,4 @@
+Comments Administrator v.0001
+I am in the process of writing a simple comment administrator for
+pyblosxom. Right now, it's very beta, but if you want to try it, check out
+<a href="http://llimllib.f2o.org/files/commentAdmin.py">

@@ -1,0 +1,21 @@
+<py print_header('Words', "images/words_header.jpg") >
+        <h1>Words</h1>
+        <p><a href="files/William_Mill_resume.doc">Resume (doc)</a><br>
+        <a href="files/William_Mill_resume.txt">Resume (txt)</a><p>
+        My resume.
+        <p><a href="files/lsi_paper.pdf">Analysis of the Values in the LSI term-term matrix (PDF)</a><p>
+        An academic paper, coauthored with Dr. Kontostathis, which analyzes
+        the possibility of approximating the 
+        <a href="http://javelina.cet.middlebury.edu/lsa/out/lsa_definition.htm">latent
+        semantic index</a> of a matrix. It also explains what that means, in
+        case you didn't catch it the first time.
+        <p><a href="perceptron.html">Perceptron Tutorial</a><p>
+        A tutorial, originally published at kuro5hin.org, describing
+        the mathematics, uses, and creation of a simple perceptron in python.
+        <p>
+        <p><a href="LoginTutorial.html">PHP Login Tutorial</a><p>
+        My tutorial on how to create a secure PHP Login for a webpage. It's
+        been read at least 60,000 times, both here and at PHPComplete, where it
+        was originally posted. Since PHPComplete no longer exists, I've cleaned
+        it up and posted it here.
+<py print_footer() >

@@ -1,0 +1,6 @@
+Chandler 0.5
+<p>
+Yesterday we released version 0.5 of Chandler.  The official announcement is <a href="http://www.osafoundation.org/archives/000893.html">here</a>.  Mitch's disclaimer about the suitability of 0.5 for end users is <a href="http://blogs.osafoundation.org/mitch/000894.html#000894">here</a>.
+</p><p>
+0.5 was supposed to be done before PyCon, so that we could say "and everything that we're showing you can be done in the 0.5 drop".  Obviously, we didn't make it in time for PyCon.   If your are interested in finding out more about how to write a parcel, you can read our PyCon <a href="http://www.python.org/pycon/2005/papers/26/">paper</a>.   We also have a <a href="http://wiki.osafoundation.org/bin/view/Chandler/ZaoBaoTutorial">tutorial</a> that fills in some of the details that we didn't have time to cover for PyCon.   Also, you can try out the parcels that were done at the PyCon sprints, which are in <a href="http://code-bear.com/bearlog/">bear</a>'s subversion <a href="http://code-bear.com/websvn/listing.php?repname=chandler&#38;path=%2F&#38;sc=0">repository</a>.   There's some additional documentation that we know we need to do as a result of feedback from the sprints, so I'll post again when that information becomes available.
+</p>

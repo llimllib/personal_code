@@ -1,0 +1,35 @@
+Miscellany
+It's not my style to blog a link; you can go to my 
+<a href="http://del.icio.us/llimllib">del.icio.us</a> page if you want to see
+my links. Regardless, I liked 
+<a href="http://jaynes.colorado.edu/PythonIdioms.html">this</a> link so much that I thought I would share it.<p>
+Basically, the page consists of a list of Python idioms that every person who
+wants to be functional with the language should know by heart. Although I
+disagree with some of his suggestions (sometimes he overemphasizes generality -
+see his "ideal" for the last suggestion), I found myself looking at my
+favorite language in a slightly new way after reading them.<p>
+<h2>The Job</h2>
+After presenting that link, I'll say that my Python stuff is on hold for now.
+My web host still has not installed PIL, so I can't put any images on there, and
+more importantly, I just started my 
+<a href="http://llimllib.f2o.org/blog/serve/keyword/job">new job</a> on Monday.
+I still have free time, but not as much, and I'm too stressed out to program
+when I come home. Once I get settled down, I'm sure I'll be able to get back
+to it.<p>
+For now, I have to go to work and use VB (shudder) and PL/SQL, which is slowly
+coming back to me. One VB script in particular that I saw this afternoon
+contains 140 global variables and nearly 10,000 lines of code. All of this
+was hidden behind an interface for one function in those 10,000 lines of code.
+I'm not looking forward to digging into that.<p>
+<h2>Anecdote</h2>
+Today, at work, I was looking through some PL/SQL code by the guy I'm supposed 
+to learn to assist. I noticed offhand from his code that there was an lstrip()
+oracle function. "Neat", I thought, and went on reading.<p>
+Later on, I imported
+some data with an extra space into the database, and it had an extra space
+appended to it. "No problem", I thought, remembering earlier, and wrote up a
+query to remove it. When it didn't work, I spent about a half hour looking for
+docs on the rstrip function, only to find that it is called rtrim.<p>
+I'm so addicted to python that I mentally convert other code into it.
+<!--keywords: job, vb, python, idioms, computer -->
+<!--time: 12-14-04 23:45-->

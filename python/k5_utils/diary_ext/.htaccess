@@ -1,0 +1,2 @@
+RemoveHandler .py
+AddEncoding text/python .py

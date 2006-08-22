@@ -1,0 +1,24 @@
+Memory Management Project Readme
+Bill Mill
+4.2.04
+
+I've implemented both the first-fit and next-fit algorithms in my code. Both
+are located in the mm_request function in mem.py. It is clear that the first-
+fit algorithm performs better than the next-fit. Over 1000 iterations with
+a = 18 and d = 8, we see these results:
+
+first-fit: a: 18 d: 8 utilization: 72.8% performance: 9.986 holes/iteration
+next-fit:  a: 18 d: 8 utilization: 72.5% performance: 11.425 holes/iteration
+
+Which are quite typical of the results; first fit has a slight utilization edge
+which gets larger as the standard deviation gets larger. It also examines
+significantly less holes per iteration. Complete results can be found in the
+file data.out, included with this file.
+
+You can see how performance and utilization with each algorithm vary as the
+average request size varies in the perf_graph.png and utilization_graph.png
+files, respectively. These further demonstrate the clear superiority of the
+first fit algorithm.
+
+The test driver for the program is located in test.py, and may be run using the
+command "python test.py" without quotes.

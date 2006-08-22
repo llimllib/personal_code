@@ -1,0 +1,47 @@
+player 9 calls for $50. Active: 50
+gb: 0
+oncall
+player 0 calls for $50. Active: 50
+player 1 calls for $50. Active: 50
+player 2 calls for $50. Active: 50
+player 3 calls for $50. Active: 50
+player 4 calls for $50. Active: 50
+player 5 calls for $50. Active: 50
+player 6 calls for $50. Active: 50
+player 7 calls for $25. Active: 50
+player 7 calls for $0. Active: 0
+player 8 calls for $0. Active: 0
+player 9 calls for $0. Active: 0
+gb: 0
+oncheck
+player 0 calls for $0. Active: 0
+player 1 calls for $0. Active: 0
+player 2 calls for $0. Active: 0
+player 3 calls for $0. Active: 0
+player 4 calls for $0. Active: 0
+player 5 calls for $0. Active: 0
+player 7 calls for $0. Active: 0
+player 8 calls for $0. Active: 0
+player 9 calls for $0. Active: 0
+gb: 0
+oncheck
+player 0 calls for $0. Active: 0
+player 1 calls for $0. Active: 0
+player 2 calls for $0. Active: 0
+player 3 calls for $0. Active: 0
+player 4 calls for $0. Active: 0
+player 5 calls for $0. Active: 0
+player 7 calls for $0. Active: 0
+player 8 calls for $0. Active: 0
+player 9 calls for $0. Active: 0
+gb: 0
+oncheck
+player 0 calls for $0. Active: 0
+player 1 calls for $0. Active: 0
+player 2 calls for $0. Active: 0
+player 3 calls for $0. Active: 0
+player 4 calls for $0. Active: 0
+player 5 calls for $0. Active: 0
+./mycmpn 3C 4H aS 9C 8C 5C 5D jS qS 4S aC tD jH jC aD 5S 3S 2S qH 8H -- 9H 7S 8D 6H 9D  
+['5']
+gb: 0

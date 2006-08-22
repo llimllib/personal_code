@@ -1,0 +1,17 @@
+- ability to save territory/score in SGF as node
+- editing and adding of properties (especially comments)
+- better display of variations
+- better display of common properties
+- optionally show atari
+- ability to play problems
+- handling of line-break in SGF values
+- allow resizing of canvas to scale board
+- better Tk packing
+- ability to create problems
+- numbers in showgo need to make mask if not on stone
+- partial boards in showgo
+
+- user management
+- pluggable computer players
+- internet server games
+- point-to-point network games

@@ -1,0 +1,71 @@
+.main {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	background-color: #639FBD;
+	background-position: center top;
+	padding: 0px;
+	width: 650px;
+	border: 1px solid #000000;
+	margin: auto;
+	text-align: center;
+	text-decoration: none;
+}
+.navbar {
+	font-weight: bold;
+	color: 639CBD;
+	background-color: #005A7B;
+	text-align: left;
+	margin: 10px 0px 0px;
+	padding: 0px;
+	height: 15px;
+	width: 100%;
+}
+.navtext {
+	text-decoration: none;
+	color: #FFFFFF;
+	margin: 0px;
+}
+.navtext:hover {
+	color: #6699CC;
+}
+.navimg {
+	margin-top: -10px;
+	margin-right: 10px;
+
+}
+.bodytext {
+	text-align: left;
+	margin-top: 40px;
+	margin-left: 20px;
+	font-size: 14px;
+	width: 440px;
+	margin-bottom: 20px;
+}
+
+.body {
+	background-color: #CCCCCC;
+}
+.nav {
+	margin-left: 20px;
+}
+.floatright {
+	margin-top: 35px;
+	float: right;
+	width: 150px;
+}
+
+.rightbox {
+	padding: 4px;
+	background-color: #6699CC;
+	margin: 10px 10px 0px 0px;
+	border: 1px dotted #000000;
+	text-align: left;
+}
+bodytext:visited,floatright:visited {
+	color: #006666;
+}
+.link {
+	color: #006666;
+	text-decoration: none;
+}

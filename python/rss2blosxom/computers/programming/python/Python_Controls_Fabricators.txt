@@ -1,0 +1,8 @@
+Python Controls Fabricators
+<p>
+[via <a href="http://www.windley.com/archives/2005/03/bits_and_atoms.shtml">Phil Windley's Technometria | Bits and Atoms</a> ]:
+</p><blockquote>
+He envisions a world of cheap personal fabricators. He&#8217;s put together a prototype for $20,000 that includes a laser cutter, a sign cutter, and a milling machine that are all controlled through an extension to Python. They&#8217;ve put these in rural areas around the world. There is not just a digital divide, there&#8217;s a fabrication divide. He shows a video of kids in Ghana using one of these prototypes to make things they want. He shows how rural Indians fabricated a part for about $1.00 to test the quality of milk&#8212;something that&#8217;s very important to them. Local computers and technology for local needs.
+</blockquote><p>
+Another step on the path to world domination?
+</p>

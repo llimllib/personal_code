@@ -1,0 +1,34 @@
+Pyblosxom Hacking Continued
+Tonight, I reimplemented the default path handler in a plugin. My goal was
+to gain a deep understanding of it, because I have an idea that may prove to
+help dynamic pyblosxom rendering quite a bit. At the same time, I think I made
+it quite a bit clearer (it was a big mess before - sorry to whoever wrote it).
+I tested its performance, and found it to be, on average, about .002 seconds 
+slower than the default.<p>
+To time it, I used this simple script:
+<p><h2>timeurl.py</h2><br>
+<textarea rows="10" cols="50">
+#!/usr/bin/env wpython
+import urllib
+import timeit
+
+PAGE = "http://localhost/blox_devel/pyblosxom/pyblosxom.cgi"
+url = urllib.URLopener()
+t = timeit.Timer('url.open(PAGE).read()', \
+    'from __main__ import url, PAGE')
+print t.timeit(100)   #repeat 100 times
+</textarea><p>
+The idea which I believe may help dynamic rendering performance is
+entry_list caching. Using Robert Wall's
+<a href="http://robwall.com/article/32/pyblosxom-performance-analysis">profiling</a>
+script, I found that 22% of a request for the main page was spent generating
+the file list. On his results, if I read them correctly, that number was nearly
+50%. If I was to pickle the file_list of a common query, it would add time
+to the first user's access, but could remove a significant load for subsequent
+user accesses. If I do it right, I may even be able to delay the caching
+until after the page is rendered.<p>
+During testing of the new pathinfo plugin, I discovered errors in my metatime
+module, so I'm going to work on fixing those. Hopefully I'll fix that tonight,
+and then tomorrow I'll have my choice of working on caching or static rendering.
+<!--keywords: pyblosxom, python, computer -->
+<!--time: 11-15-04 00:04-->

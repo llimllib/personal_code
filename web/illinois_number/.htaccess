@@ -1,0 +1,4 @@
+<Files *.py>
+    ForceType application/cgi-script
+    SetHandler cgi-script
+</Files>

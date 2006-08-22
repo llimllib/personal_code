@@ -1,0 +1,1 @@
+gs -dBATCH -dNOPAUSE -sDEVICE=png256 -sOutputFile=./test.png ./deerwester_lsi.pdf

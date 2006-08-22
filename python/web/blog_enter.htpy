@@ -1,0 +1,11 @@
+<py print_header('Enter a new blog:', 'images/words_header.jpg') >
+    <div id="blog_enter">
+        <form action="blog.py" method="POST">
+        Title: <input type="text" name="title">
+        <br>
+        Body: <textarea name="blog_body"></textarea>
+        <br>
+        <input type="submit" value="Post Blog">
+        </form>
+    </div>
+<py print_footer() >

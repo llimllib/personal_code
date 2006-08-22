@@ -1,0 +1,39 @@
+Find Unique Del.icio.us Posts
+I frequently find that I use del.icio.us tags as a means to browse all
+bookmarks with a certain tag. Unfortunately, the "link of the moment" often
+overwhelms the rest of the links, making the category hard to browse.
+Furthermore, I want to browse every link with the given tag, not just the
+popular ones, so the popular section won't work.<p>
+For example, today I bought a new 
+<a href="http://www.apple.com/ipodphoto/">iPod photo</a>, so I wanted to see
+what python hacks there are for working with the iPod. I went to <a
+href="http://del.icio.us/tag/python+ipod">http://del.icio.us/tag/python+ipod</a>,
+but as you can see, it's cluttered with repeat links. Naturally, to fix it, I
+thought I'd hack something up.<p>
+<h2>The Script</h2><p>
+A problem on del.icio.us is that there are no RSS feeds available for the
+tag pages. Fortunately, I had already written a function to screenscrape 
+del.icio.us pages. Given an open del.icio.us file handle, it scrapes the links 
+and all relevant information from the page.<p>
+Given that function, it was pretty easy to get what I wanted. Since I can only
+scrape one page per second per the API docs, it's slow, but it's not too often
+that I want to use it, so it's not bad.<p>
+I wrote a quick CGI wrapper for the whole thing so that I could use it, but it
+would be trivial to make it output information on the command line or within
+another python program. If you're interested in the code, it's available <a
+href="http://llimllib.f2o.org/files/delparse.py">here</a>. gen_tag(...) is the
+function most likely to be of use to somebody; it's a generator which scrapes 
+a del.icio.us page and yields individual posts.
+It doesn't handle utf-8 right now, but it does otherwise work
+on every del.icio.us page I've tried it on; if you improve it, please <a
+href="mailto:llimllib@f2o.org">drop me a line</a>.
+You can see an example output of the cgi script <a 
+href="http://llimllib.f2o.org/del_uniq/unique.html">right here</a>.<p>
+<h2>Footnote</h2><p>
+While I've got everyone's attention (hah!), does anybody have a del.icio.us data
+dump that I could play with? I'd be willing to pay for the transportation of a
+CD plus interest. I have a half-a%$ed script to pull the data, but I don't feel
+like sucking all that bandwidth. Have your people email <a 
+href="mailto:llimllib@f2o.org">my people</a> if you can help me out.
+<!--keywords: python, del.icio.us, screen_scrape, programming -->
+<!--time: 05-09-05 23:15 -->

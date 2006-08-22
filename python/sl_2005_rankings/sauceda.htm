@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<TITLE>Sauceda Rating System Description</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF">
+<h2>Sauceda Rating System Description</h2>
+
+This rating system is based on the Elo rating formula for chess.  I
+developed it a few years ago for football, and recently expanded it for
+other sports.<p>
+
+For each game, 1 "game point" is disputed.  The winning team gets the
+largest part, and the loser gets the rest.  The formula is:
+<p><center><b> gp = 1 - 0.4 ^ (1 + pd/11) </b></center><p>
+(Note:  the 11 constant is a typical value for basketball; for other sports it may be
+smaller). <p>
+As an example, here are sample <b>gp</b> values for several margins of victory.
+<dl>
+<dd>Team wins by 1 point: <b>gp = 0.632</b> (the opponent gets <b>0.368</b>)
+<dd>Team wins by 10 points: <b>gp = 0.826</b>
+<dd>Team wins by 20 points: <b>gp = 0.924</b>
+</dl>
+
+Elo's formula states that a team's "winning expectancy" (<b>we</b>) can be determined by<p>
+<b><center>we = 1 /(1 + 10 ^(Rb - Ra)/400)</b></center><p>
+where Ra is the team's rating and Rb is the opponent's rating.  Basicly, <b>we</b> gives the percentage of game points that a team should win against a given opponent.<p>
+
+A team's total <b>we</b> and <b>gp</b> can be obtained by summing over each of its games. 
+The new rating is calculated by<p>
+<b><center>Rn = Ro + K (gp - we)</center></b><p>
+where Rn is the new rating, Ro is the original rating, and K is an constant that determines the speed of convergence.<p>
+
+If a team's overall performance is better than expected (i.e. <b>gp > we</b>), then its rating will improve (notice that this does not necessarily require winning!).  Conversely, the opponents' ratings will decline.
+Each team begins with the same initial rating (1000).  With each iteration these ratings will adjust themselves until equilibrium is reached. <p>
+
+The published ratings also include a homefield correction variable that likewise reaches an equilibrium.
+The modified formula is:<p>
+<b><center>we = 1 /(1 + 10 ^(Rb - Ra +/- h)/400)</b></center><p>
+
+<b>Making Predictions</b><p>
+As it stands, the formula for <b>we</b> should approximate the expected game points (<b>gp</b>).
+However, it would be more interesting to instead estimate the probability of victory.  This is accomplished by replacing 400 with an appropriate prediction constant (<b>k</b>), which will vary among the various sports.  As an example, assume that k = 300, Ra = 1100, and Rb = 900.  Then the probability that A would defeat B is<p>
+
+<b><center>1 / (1 + 10 ^ (900 - 1100)/300)  = 0.8227 = 82.27%</center></b><p>
+
+In general, to find the probability that A defeats B use the following prediction formula:<p>
+<b><center>1 / (1 + 10 ^ (Rb - Ra +/- h) / k))</b></center><p>
+
+
+<hr><ADDRESS><a href="mailto:eduardo.sauceda@bigfoot.com">Eduardo Sauceda</A>,
+edited by <A HREF="mailto:kemassey@vt.edu">Kenneth Massey</A></ADDRESS>
+<A HREF="../index.htm">Massey's Ratings and Rankings</A> |
+<A HREF="index.htm">Theory</A>
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+A Brief Introduction to Python Threads
+by Bill Mill
+
+    Sometimes, you have two or more tasks in a program that are independent of each other, and you want to have them run concurrently. One solution to this problem is to use threads. A thread is something like a mini-process inside your program which shares its memory with its parent. Because of this shared memory, threads have less creation overhead than processes. If you need more introduction to threads than I'll give you here, read <a href="http://www.informit.com/content/index.asp?product_id=%7B13E17048-D8FD-4FC5-B173-3119F0813A71%7D&022204">this</a> excellent article.
+    My main task here is to describe to you how the Python thread classes work. If you have any experience with Python, it should come as no surprise to you that the thread interface is both rich and simple. Furthermore, Python provides an interface both for traditional C-style thread functions and Java-style thread classes, as well as a variety of locks, semaphores, and condition variables.
+
+The thread class
+    The first Python interface I'll discuss is the thread class. This class provides a simple, low-level threading interface with which you'll be familiar if you've programmed in C with threads. With this class, you simply tell python to start a thread, give it the name of the function and its arguments, and Python does the rest. Here's a sample:
+
+import thread, time
+
+def HelloWorld():
+    print "Hello from thread %d" % thread.get_ident()
+
+if __name__ == "__main__":
+    num_threads = 5
+    for i in range(num_threads):
+        x = thread.start_new_thread(HelloWorld, ())
+    time.sleep(3)
+
+    We use two functions from the thread library here. The first, thread.get_ident(), simply returns the id number of the thread. Each thread is guaranteed to have a unique id number. The next function is the thread.start_new_thread function. This function simply takes the name of the function to call and a tuple of the parameters with which to call it.
+    The final interesting part of this script is the time.sleep command. This needs to be here to tell the main thread to wait a few seconds so that the threads can finish working. Child threads created with thread.start_new_thread() have an undefined behavior when the main thread of the program exits. On most platforms, you should be aware that they simply exit without carrying out their task.
+
+The threading class
+    The alternative, high-level Python threading library is cleverly named threading. This library assumes that you'll write your own subclass of the threading.Thread class. Once you've done that, you simply override the run() method of the Thread class to tell the thread what to do once it's started. It will be easier to see with an example:
+
+import threading
+
+class HelloWorld(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def run(self):
+        print "Hello from thread %s" % self.getName()
+
+if __name__ == "__main__":
+    num_threads = 5
+    for i in range(num_threads):
+        thread = HelloWorld()
+        thread.setName(str(i))
+        thread.start()
+
+    Now HelloWorld is a class which subclasses threading.Thread and overrides its run() method. To create a new thread, we simply create a new instance of the class and call its inherited start() method. Each thread also has a setName() and getName() method, which do just what you expect. An interesting note about the threading library is that, unlike the thread library, it will wait for all of your threads to finish before it exits. Also, multiple threads may now have the same name; it's just a label, and may be any arbitrary string.
+
+Problems with threads

@@ -1,0 +1,16 @@
+## The only thing that should be contained in this file is the conf dictionary
+## which has configuration details. Feel free to change the values.
+
+self.conf = {
+'black_image' : 'images/black.png',
+'black_move_image' : 'images/black_move.png',
+'white_image' : 'images/white.png',
+'white_move_image' : 'images/white_move.png',
+'board19' : 'images/GoBoard1.png',
+'board13' : '',
+'board9' : '',
+'komi' : '5.5',
+'boardsize' : '19',
+'player1' : 'human',
+'player2' : 'human'
+}

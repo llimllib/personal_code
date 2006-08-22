@@ -1,0 +1,17 @@
+PyCon Day 3
+<p>
+Here's my report on day 3 of PyCon.
+</p><p>
+Greg Stein gave the keynote for Day 3.  He talked a lot about how Google is using Python, which was pretty interesting.   I had no idea that Google was using Python so much -- I bet that's news to the rest of the world as well.  The SubEthaEdit crew did a really good job of <a href="http://www.sauria.com/~twl/conferences/pycon2005/20050325/Python%20at%20Google.html">transcribing</a> the slides for Greg's talk.    <a href="http://simon.incutio.com/">Simon Willison</a> joined us for that SubEthaEdit session, apparently his first, and we met in person after the session was over -- courtesy of SubEthaEdit as IRC channel.   I hope that the content of Greg's talk will make it easier for people to use Python.
+</p><p>
+<a href="http://www.livejournal.com/users/glyf/">Glyph Lefkowitz</a> read my blog entry about being disappointed to miss his talk, so he invited me to sit with him during lunch and he did  a practice run, so I got to see his talk after all.
+</p><p>
+My favorite talk of the day was <a href="http://www.fettig.net/weblog/">Abe Fettig</a>'s talk on <a href="http://yarnproject.org/">Yarn</a>.  Abe's talk got delayed (and I suspect a little shortened) by the talk before his going long.   Yarn lets you convert messages in one format into another format, using various protocols.  So if you want to get Atom over SMTP, you can do that, which is pretty cool.  Abe is even turning Google search results and del.icio.us bookmarks into messages that can be manipulated by Yarn.    It turns out that you can also search the messages, which is kind of nifty.   Yarn preserves the underlying representation of the message, so that changing an attribute of an RSS message via Yarn's API, actually modifies the original RSS data.  This is also pretty cool.   I think that Yarn would fit really nicely with the import/export functionality in Chandler.  
+<br />Itamar's talk on Fast Networking in Python was also educational.   
+</p><p>
+My talk on <a href="http://pyblosxom.sourceforge.net/">PyBlosxom</a> went pretty well, especially since it was in the last block of the conference, and opposite Glyph's talk.  I did meet a few happy PyBlosxom users, and one person promised to send his patches to the mailing list, so I'm happy with that result.  <a href="http://www.bluesock.org/~willg/blog/">Will</a> pushed out version 1.2 yesterday, too.
+</p><p>
+PyCon was really fun this year, although not quite as fun as last year because I actually had stuff to do during the course of the week.
+</p><p>
+A bunch of us OSAF'ers bolted after my talk ended, because I had a flight to make.   At the end of the talk, Steve Holden remarked to me that he had read my account of getting home from PyCon 2004, and that he hoped I would have an easier time of it this year.  You'll have to wait until the next post to find out the details of what happened, but suffice it to say that this post is being brought to you courtesy of US Airways, United Airlines, Alaska Airlines, Marriott International, the Washington State Ferries, and <a href="http://www.mobilisa.com/home.aspx">Mobilisa</a>...
+</p>

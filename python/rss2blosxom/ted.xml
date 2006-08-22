@@ -1,0 +1,498 @@
+<?xml version="1.0"?>
+
+<rss version="2.0"
+     xmlns:admin="http://webns.net/mvcb/"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:html="http://www.w3.org/1999/html"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+     xmlns:pingback="http://madskills.com/public/xml/rss/module/pingback/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+  <channel>
+    <title>Ted Leung on the air</title>
+    <link>http://www.sauria.com/blog/</link>
+    <description>Ted Leung on the air: Open Source, Java, Python, and ...</description>
+    <language>en-us</language>
+    <ttl>60</ttl>
+    <skipHours>
+      <hour>11</hour>
+      <hour>12</hour>
+      <hour>13</hour>
+      <hour>14</hour>
+      <hour>15</hour>
+    </skipHours>
+    <admin:generatorAgent rdf:resource="http://roughingit.subtlehints.net/pyblosxom/0+5i" />
+    <admin:errorReportsTo rdf:resource="mailto:twl@sauria.com" />
+	    <item>
+      <title>Zen and the Art of Apache Maintenance</title>
+      <link>http://www.sauria.com/blog/2005/04/06#1268</link>
+      <description>&lt;p&gt;
+Slashdot  &lt;a href=&quot;http://apache.slashdot.org/article.pl?sid=05/04/05/1951228&amp;#38;from=rss&quot; id=&quot;05/04/05/1951228&amp;#38;from=rss&quot;&gt;pointed&lt;/a&gt; to this &lt;a href=&quot;http://www.madpenguin.org/cms/html/62/3847.html&quot;&gt;article&lt;/a&gt; about the ASF Infrathon, an in person gathering of Apache people for the purpose of keeping the ASF systems running.   The issue of project infrastructure is one that I&apos;ve come across a few time recently.   At the PyCon sprints there was a discussion of these topics in the context of the PSF.   We need to do a better job of exchanging this kind of information between various parts of the open source community.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/open_source/asf</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-04-06T13:11:25-07:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/open_source/asf/1268</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/open_source/asf/1268</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/04/06#1268"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/open_source/asf/1268</wfw:comment>
+    </item>
+	    <item>
+      <title>Are Hippies all that&apos;s left?</title>
+      <link>http://www.sauria.com/blog/2005/04/05#1267</link>
+      <description>&lt;p&gt;
+It seems that the &lt;a href=&quot;http://cld.blog-city.com/read/1175080.htm&quot;&gt;Netbeans&lt;/a&gt; and &lt;a href=&quot;http://beust.com/weblog/archives/000258.html&quot;&gt;Eclipse&lt;/a&gt; partisans are trading one ups over the inclusion of hippie-expansion in their text editors.   I like hippie expansion -- I&apos;ve been using it since my days as a grad student in the early 90&apos;s.  However, I&apos;m puzzled by the fuss over it.  According to my copy of the  Emacs Lisp sources, hippie-expansion has been around since at least 1992.  Is it really such a great achievement to be incorporating this feature 8 or 13 years after it appears in Emacs?   I&apos;m being  a little extreme here, but it seems crazy to be touting the appearance of hippie-expansion as some indicator of IDE prowess.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/java</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-04-05T23:30:13-07:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/java/1267</comments>
+      <slash:comments>3</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/java/1267</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/04/05#1267"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/java/1267</wfw:comment>
+    </item>
+	    <item>
+      <title>Chandler 0.5</title>
+      <link>http://www.sauria.com/blog/2005/03/31#1266</link>
+      <description>&lt;p&gt;
+Yesterday we released version 0.5 of Chandler.  The official announcement is &lt;a href=&quot;http://www.osafoundation.org/archives/000893.html&quot;&gt;here&lt;/a&gt;.  Mitch&apos;s disclaimer about the suitability of 0.5 for end users is &lt;a href=&quot;http://blogs.osafoundation.org/mitch/000894.html#000894&quot;&gt;here&lt;/a&gt;.
+&lt;/p&gt;&lt;p&gt;
+0.5 was supposed to be done before PyCon, so that we could say &quot;and everything that we&apos;re showing you can be done in the 0.5 drop&quot;.  Obviously, we didn&apos;t make it in time for PyCon.   If your are interested in finding out more about how to write a parcel, you can read our PyCon &lt;a href=&quot;http://www.python.org/pycon/2005/papers/26/&quot;&gt;paper&lt;/a&gt;.   We also have a &lt;a href=&quot;http://wiki.osafoundation.org/bin/view/Chandler/ZaoBaoTutorial&quot;&gt;tutorial&lt;/a&gt; that fills in some of the details that we didn&apos;t have time to cover for PyCon.   Also, you can try out the parcels that were done at the PyCon sprints, which are in &lt;a href=&quot;http://code-bear.com/bearlog/&quot;&gt;bear&lt;/a&gt;&apos;s subversion &lt;a href=&quot;http://code-bear.com/websvn/listing.php?repname=chandler&amp;#38;path=%2F&amp;#38;sc=0&quot;&gt;repository&lt;/a&gt;.   There&apos;s some additional documentation that we know we need to do as a result of feedback from the sprints, so I&apos;ll post again when that information becomes available.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/open_source/osaf/chandler</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-31T22:16:38-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/open_source/osaf/chandler/1266</comments>
+      <slash:comments>2</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/open_source/osaf/chandler/1266</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/31#1266"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/open_source/osaf/chandler/1266</wfw:comment>
+    </item>
+	    <item>
+      <title>Stand and Deliver - a robot!</title>
+      <link>http://www.sauria.com/blog/2005/03/30#1265</link>
+      <description>&lt;p&gt;
+This month&apos;s Wired has the &lt;a href=&quot;http://www.wired.com/wired/archive/13.04/robot.html&quot;&gt;story&lt;/a&gt; of four &quot;undocumented&quot; students from Carl Hayden Community High School in Phoenix, who won an undersea robotics competition against teams from a number of universities, including MIT.   I read the article last night on the Web, and then discovered the issue of Wired buried in the unopened PyCon mail backlog.  The article begins with a picture of the team holding up their robot.   The entire story brought to mind the movie &lt;a href=&quot;http://www.imdb.com/title/tt0094027/&quot;&gt;Stand and Deliver&lt;/a&gt;, which recount Jaime Escalante&apos;s successful effort to teach a bunch of poor students A.P. calculus.
+&lt;/p&gt;&lt;p&gt;
+I&apos;m not at all sorry that these four beat out my alma mater.   Motivation and talent are as important as training, and I&apos;ve worked with many fine engineers who didn&apos;t graduate from any big name schools with any fancy degrees.  It stories like theirs, like the PBS televised MIT 2.70 final contest, like the scramble of trying to rescue the Apollo 13 command module, that fired my imagination when I was a boy.   I&apos;m glad that these four have had this experience, and hope that something can be worked out so that they can continue their studying and building. I&apos;m going to &lt;a href=&quot;http://www.wired.com/wired/archive/13.04/donate.html&quot;&gt;do&lt;/a&gt; my part.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">education</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-30T22:41:46-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/education/1265</comments>
+      <slash:comments>2</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/education/1265</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/30#1265"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/education/1265</wfw:comment>
+    </item>
+	    <item>
+      <title>Wiki Changes pages</title>
+      <link>http://www.sauria.com/blog/2005/03/29#1264</link>
+      <description>&lt;p&gt;
+I&apos;m using (reluctantly) more wiki&apos;s nowadays.   I dislike them for many reasons, the top two being:
+&lt;/p&gt;&lt;ol&gt;
+&lt;li&gt;It is hard to find stuff in them (yes, I have heard of Google, but it seems wrong to have to use Google to search your own Wiki)&lt;/li&gt;
+&lt;li&gt;It is hard to keep up with them.  The OSAF TWiki has e-mail notify which is evil.  Fortunately it has an RSS feed, except that the RSS feed has so little information in it that you have to click each entry and go back to the wiki to have any idea of what the changes were.&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;
+The new &lt;a href=&quot;http://wiki.43folders.com&quot;&gt;43Folders Wiki&lt;/a&gt; has the best &lt;a href=&quot;http://wiki.43folders.com/index.php?title=Special:Recentchanges&amp;#38;feed=rss&quot;&gt;Changes RSS feed&lt;/a&gt; that I&apos;ve seen yet.  You get a nice side by side diff that shows you exactly what changed.  [ Ok, I&apos;m a geek because I can read unified diffs ].   I like it.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/internet</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-29T22:06:55-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/internet/1264</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/internet/1264</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/29#1264"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/internet/1264</wfw:comment>
+    </item>
+	    <item>
+      <title>Hacks and Macs</title>
+      <link>http://www.sauria.com/blog/2005/03/29#1263</link>
+      <description>&lt;p&gt;
+&lt;a href=&quot;http://paulgraham.com/mac.html&quot;&gt;According to Paul Graham&lt;/a&gt;, the Mac is the hackers machine of choice.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/operating_systems/macosx</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-29T21:41:17-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/operating_systems/macosx/1263</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/operating_systems/macosx/1263</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/29#1263"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/operating_systems/macosx/1263</wfw:comment>
+    </item>
+	    <item>
+      <title>Organic or Mechanic?</title>
+      <link>http://www.sauria.com/blog/2005/03/28#1262</link>
+      <description>&lt;p&gt;
+Like personality sorters?  Try this &lt;a href=&quot;http://www.randsinrepose.com/archives/2005/02/20/organics_and_mechanics.html&quot;&gt;article&lt;/a&gt; from Rands in Repose.  I don&apos;t think I had seen the Organic/Mechanic distinction before.   It also links to another &lt;a href=&quot;http://www.randsinrepose.com/archives/2003/08/05/incrementalists_completionists.html&quot;&gt;article&lt;/a&gt; on Incrementalists and Completionists, which I think is kind of related to Shirky&apos;s &lt;a href=&quot;http://www.corante.com/many/archives/2005/03/09/one_world_two_maps_thoughts_on_the_wikipedia_debate.php&quot;&gt;Radial vs Cartesian&lt;/a&gt;.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">people</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-28T23:34:46-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/people/1262</comments>
+      <slash:comments>1</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/people/1262</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/28#1262"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/people/1262</wfw:comment>
+    </item>
+	    <item>
+      <title>Getting home from PyCon 2005</title>
+      <link>http://www.sauria.com/blog/2005/03/27#1261</link>
+      <description>&lt;p&gt;
+I think I&apos;ve recovered enough from the trip home to write about it.  I suppose I should just accept that this is going to be an annual ritual.
+&lt;/p&gt;&lt;p&gt;
+Our car trip from GWU to Dulles was reasonably speedy -- we only made a few minor wrong turns, and we learned a few things about Washington D.C. from &lt;a href=&quot;http://code-bear.com/bearlog/&quot;&gt;bear&lt;/a&gt;, who seems to know something about everything.    So we arrived at Dulles with plenty of time to spare, made our way through security without any problems, and walked to Concourse B, which is where all of us were flying out of.  &lt;a href=&quot;http://dirtsimple.org/&quot;&gt;PJE&lt;/a&gt; and I were flying from adjacent gates, and Alec was flying from a gate down the hall a bit.   I was originally schedule to fly from Dulles to Pittsburgh on United/US Airways Express and then pickup a United flight from Pittsburgh to Seattle.  The problem arose when the US Airways flight was cancelled due to mechanical trouble.
+&lt;/p&gt;&lt;p&gt;
+The agents at the gate immediately got to work at trying to get people onto flights.  There was a Dulles to Chicago to Seattle flight which the guy next to me managed to get onto.  Alas, it looks like he got the only remaining seat on the Chicago to Seattle flight.   All the rest of the combinations were physically impossible (I wouldn&apos;t be able to get to the appropriate concourse in time), so the agent told me that I didn&apos;t really have any choice but to fly the next day.   The thought of going all the way back to D.C. and coming back the next day was definitely unappealing, and we did manage to find a hotel close to the airport.  Unfortunately, I could not persuade them the issue me a voucher for the hotel.   There was also a problem &quot;getting control&quot; of my United ticket (the whole thing was purchased through United.com) to issue me a new ticket, so I was issued a hand written ticket (a Flight Interruption Manifest) and sent on my way.
+&lt;/p&gt;&lt;p&gt;
+Before leaving the gate, I sat down and called United, since I had purchased the ticket through them.  The woman that I spoke with looked at her computer and saw that the flight had been cancelled due to a mechanical problem, and told me that yes, United would issue me a hotel and meal voucher in this case.  All I had to do was go to the United customer service desk in Concourse C.
+&lt;/p&gt;&lt;p&gt;
+So, information in hand, and feeling slightly less grumpy, I backtracked and took a mobile lounge over to Concourse C, where I discovered that the customer service desk was swamped by a late Orlando flight many of whose passengers had missed connections.   So I stood in line for about 90 minutes, talking with a the fellow in front of me in order to pass the time.   When I arrived at the counter, the agent told me that they couldn&apos;t help me and that they wouldn&apos;t issue me the voucher.  Apparently, the claim is that United wasn&apos;t responsible since it was a US Airways flight.  The flight also had a United flight number, and United certainly didn&apos;t have any problems being responsible for taking all of the money when I bought the ticket.   I was pretty unhappy.   I was even more unhappy when they told me I had to go back to US Airways.   The did advise me to go to the US Airways luggage desk (which is outside the security zone, so if you leave you pretty much can&apos;t get back in).   
+&lt;/p&gt;&lt;p&gt;
+By now it was almost 9PM (we had arrived around 4:30PM), and I was hungry, cranky, and tired.   I had to go to the luggage desk anyway to get my suitcase, so I took the mobile lounge (again) back to the main portion of the airport and went to the US Airways luggage desk, where I got my bag (at least they got that right), and was told that I could not be issued a voucher because my flight originated in Dulles.   Apparently if I was connecting in Dulles, they would have issued me a voucher.   So now I had both airlines flim-flamming me, and I was out the extra money for a hotel stay and the time lost due to having stand in line, etc.   At that point, I just gave up, and caught the shuttle to the hotel, where I had dinner (at 10PM) and went to bed early (11PM) to be ready for the next morning.
+&lt;/p&gt;&lt;p&gt;
+On Saturday I got up at 4:45AM for a 7:35AM flight on Alaska Airlines.   (I didn&apos;t know Alaska even flew to Dulles, not that it mattered.  Julie and I had a bad experience with Alaska many years ago, and I&apos;ve avoided them whenever possible ever since.  This weekend&apos;s misadventures are making me reconsider that.).    I bumped around Dulles for a little while trying to find the Alaska counter (it was small and out of the way), and I was hoping that I wasn&apos;t going to have any problems with the handwritten ticket bit.  Thankfully, there was no hassle over that, although I found it odd that I was assigned my seat by the agent asking another agent what seats they had left.    While I was there (there wasn&apos;t anybody else in line) I asked their opinion on what was proper for the previous days situation, figuring that they didn&apos;t have any stake in the matter.   Their opinion was the the originating airline (US Airways) was at fault.   I suppose I&apos;m going to try to call them on Monday, but I have low expectations at this point.   The only other odd thing that happened was that a fellow took the bag I was checking and asked me to follow him and watch the bag go through a large x-ray machine.  After that, I was directed to the gate.
+&lt;/p&gt;&lt;p&gt;
+Of course, before you can get to the gates, you have to go through airport security,  This time, I was the winner of a special screening, so I was wanded up, down, and sideways, while another TSA employee picked her way through my bag.    The search didn&apos;t get any worse than having to loosen my belt, so I considered myself lucky.  This was followed by yet another ride in the infernal mobile lounge.  
+&lt;/p&gt;&lt;p&gt;
+I arrived at the gate with plenty of time to spare, and settled in to wait.   I found a power outlet and plugged in the Powerbook and my phone and was sucking down my e-mail when I heard, &quot;Is that Ted?&quot;.   I looked up and discovered Anna Ravenscroft and Alex Martelli coming into the gate.   Alex is starting at Google on Monday, and they were flying to San Jose (via Seattle) to get settled.    I was glad for the company, and we talked about the conference, Chandler, Google and various other topics.  Then it came up that they were sitting in the emergency exit row, which they considered a benefit.   They were in seats 12E and 12F.   I was in seat 12D.  Remember I told you that my seat was assigned in an unusual manner?   So we spent the entire flight together, talking, napping, etc.   I knew Anna a little bit from last year&apos;s PyCon and being drafted into their wedding toast at OSCON, but I had never really talked much to Alex.   Alex is one of those people whose reputation precedes him, and I had been in a few of his sessions earlier in the week and learned quite a bit.  I also learned a decent amount from the Python Cookbook, which he, Anna, and David Ascher edited (the new second edition has just come out).    So it turned out that I got a really pleasant surprise to take some of the sting out of the previous day&apos;s events.
+&lt;/p&gt;&lt;p&gt;
+We landed in Seattle 5 minutes early, which was good because Alex and Anna had a tight connection.  I bade them farewell and made my way to baggage claim.    My bag  came up really quickly, so I dashed out to the garage and grabbed a cab.   I was expecting to miss the 11:25AM ferry and having to wait for the 12:20PM ferry, but the efficient baggage handling meant that I actually caught the earlier boat with a few minutes to spare.   I spent the boat ride uploading the last of the PyCon SubEthaEdit notes and posting yesterday&apos;s entry.    Julie needed to get the girls off to a rehearsal, so I grabbed a cab home.  I didn&apos;t even mind when the cab needed to stop along the way to pick someone else up -- I was just so happy to be home.
+&lt;/p&gt;&lt;p&gt;
+I&apos;m still not sure what travel lesson I should have learned from all of this.  I am definitely going to try to avoid flights with connections, but I already try to do that.   Certainly, I&apos;ll work to avoid connections between different airlines as well.   I&apos;ve &quot;punished&quot;  a number of airlines by trying to avoid flying on them, but all the other airlines seem to have problems as well.   Anna suggested that I try Frontier Airlines -- she and Alex are heavy travelers, and she recommended Frontier highly, so I&apos;m going to give that a try the next time I can.  At the end of it, I&apos;m highly distrustful of both US Airways and United.  That&apos;s especially bad for United, since I supposedly have some kind of relationship with them as a frequent flyer.   Not that it made a bit of difference this weekend.   All it took was a few hours to destroy a few years worth of goodwill.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">misc</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-27T23:35:01-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/misc/1261</comments>
+      <slash:comments>4</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/misc/1261</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/27#1261"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/misc/1261</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Day 3</title>
+      <link>http://www.sauria.com/blog/2005/03/26#1260</link>
+      <description>&lt;p&gt;
+Here&apos;s my report on day 3 of PyCon.
+&lt;/p&gt;&lt;p&gt;
+Greg Stein gave the keynote for Day 3.  He talked a lot about how Google is using Python, which was pretty interesting.   I had no idea that Google was using Python so much -- I bet that&apos;s news to the rest of the world as well.  The SubEthaEdit crew did a really good job of &lt;a href=&quot;http://www.sauria.com/~twl/conferences/pycon2005/20050325/Python%20at%20Google.html&quot;&gt;transcribing&lt;/a&gt; the slides for Greg&apos;s talk.    &lt;a href=&quot;http://simon.incutio.com/&quot;&gt;Simon Willison&lt;/a&gt; joined us for that SubEthaEdit session, apparently his first, and we met in person after the session was over -- courtesy of SubEthaEdit as IRC channel.   I hope that the content of Greg&apos;s talk will make it easier for people to use Python.
+&lt;/p&gt;&lt;p&gt;
+&lt;a href=&quot;http://www.livejournal.com/users/glyf/&quot;&gt;Glyph Lefkowitz&lt;/a&gt; read my blog entry about being disappointed to miss his talk, so he invited me to sit with him during lunch and he did  a practice run, so I got to see his talk after all.
+&lt;/p&gt;&lt;p&gt;
+My favorite talk of the day was &lt;a href=&quot;http://www.fettig.net/weblog/&quot;&gt;Abe Fettig&lt;/a&gt;&apos;s talk on &lt;a href=&quot;http://yarnproject.org/&quot;&gt;Yarn&lt;/a&gt;.  Abe&apos;s talk got delayed (and I suspect a little shortened) by the talk before his going long.   Yarn lets you convert messages in one format into another format, using various protocols.  So if you want to get Atom over SMTP, you can do that, which is pretty cool.  Abe is even turning Google search results and del.icio.us bookmarks into messages that can be manipulated by Yarn.    It turns out that you can also search the messages, which is kind of nifty.   Yarn preserves the underlying representation of the message, so that changing an attribute of an RSS message via Yarn&apos;s API, actually modifies the original RSS data.  This is also pretty cool.   I think that Yarn would fit really nicely with the import/export functionality in Chandler.  
+&lt;br /&gt;Itamar&apos;s talk on Fast Networking in Python was also educational.   
+&lt;/p&gt;&lt;p&gt;
+My talk on &lt;a href=&quot;http://pyblosxom.sourceforge.net/&quot;&gt;PyBlosxom&lt;/a&gt; went pretty well, especially since it was in the last block of the conference, and opposite Glyph&apos;s talk.  I did meet a few happy PyBlosxom users, and one person promised to send his patches to the mailing list, so I&apos;m happy with that result.  &lt;a href=&quot;http://www.bluesock.org/~willg/blog/&quot;&gt;Will&lt;/a&gt; pushed out version 1.2 yesterday, too.
+&lt;/p&gt;&lt;p&gt;
+PyCon was really fun this year, although not quite as fun as last year because I actually had stuff to do during the course of the week.
+&lt;/p&gt;&lt;p&gt;
+A bunch of us OSAF&apos;ers bolted after my talk ended, because I had a flight to make.   At the end of the talk, Steve Holden remarked to me that he had read my account of getting home from PyCon 2004, and that he hoped I would have an easier time of it this year.  You&apos;ll have to wait until the next post to find out the details of what happened, but suffice it to say that this post is being brought to you courtesy of US Airways, United Airlines, Alaska Airlines, Marriott International, the Washington State Ferries, and &lt;a href=&quot;http://www.mobilisa.com/home.aspx&quot;&gt;Mobilisa&lt;/a&gt;...
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-26T11:46:21-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1260</comments>
+      <slash:comments>2</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1260</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/26#1260"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1260</wfw:comment>
+    </item>
+	    <item>
+      <title>Hello from PyCon</title>
+      <link>http://www.sauria.com/blog/2005/03/25#1259</link>
+      <description>&lt;p&gt;
+Greetings from my session at PyCon 2005!
+&lt;/p&gt;&lt;p&gt;
+This is a demonstration of the Metaweblog API plugin for PyBlosxom
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/internet/weblogs/pyblosxom</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-25T11:37:07-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/internet/weblogs/pyblosxom/1259</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/internet/weblogs/pyblosxom/1259</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/25#1259"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/internet/weblogs/pyblosxom/1259</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Day 2</title>
+      <link>http://www.sauria.com/blog/2005/03/25#1258</link>
+      <description>&lt;p&gt;
+Today I was pre-occupied with Chandler stuff.   Our talk this morning had a few demo glitches, but it seems like it was well received.   I&apos;m relieved that people seemed to connect with what we were able to show during the talk.  Twenty minutes just isn&apos;t a lot of time, especially when most people have never seen or downloaded Chandler before.   If you are interested in the details of what we talked about, the Wiki version of our paper is up, and there&apos;s a longer tutorial that goes with it.  Our open space in the afternoon was also well attended, and people had lots of questions about what they saw.  One of the attendees works for Wingware, and he was able to answer some questions that I had about Wing.
+&lt;/p&gt;&lt;p&gt;
+I went to the talks on PyChinko, PJE&apos;s generic function talk, and Alex Martelli&apos;s talk on generators/iterators.  In hindsight, I wish that I had gone to Alex&apos;s other talk on Metaclasses and Descriptors.   My graduate school minor was in AI, so a good portion of the PyChinko talk was a review.  It is good to know that it is in the same space as cwm for when I (someday) get around to experimenting.
+&lt;/p&gt;&lt;p&gt;
+One more day of PyCon and just the PyBlosxom talk to give.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-25T07:36:55-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1258</comments>
+      <slash:comments>1</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1258</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/25#1258"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1258</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Day 1</title>
+      <link>http://www.sauria.com/blog/2005/03/24#1257</link>
+      <description>&lt;p&gt;
+PyCon has a slightly different feel to it this year.  I think it&apos;s due to the size and being split up across multiple floors of a building.   It&apos;s still a fun conference, but it has a slightly less intimate feel to it.   That probably doesn&apos;t impact the talks very much, but it does reduce the chances of running into folks in the hallways.  
+&lt;/p&gt;&lt;p&gt;
+It probably also feels different because there are more OSAF people here this year.   This year, we&apos;re more like some of the other projects.  In addition to myself, we also have three people in the Eastern timezone who are working full time on Chandler.  That means that we&apos;re using PyCon as precious face time, just like many of the other projects are.   I missed most of the afternoon sessions while catching up, working through issues in person, and preparing for our presentation.   The two presentations that I&apos;m giving might have something to do with the different feel as well.
+&lt;/p&gt;&lt;p&gt;
+I did manage to make it to some sessions, though.   The highlights of today was the Mac track, which included appscript and Bob Ippolito&apos;s two &lt;a href=&quot;http://bob.pythonmac.org/archives/2005/03/23/pyobjc-at-pycon/&quot;&gt;talks&lt;/a&gt; on PyObjC.   Perhaps next year we&apos;ll start to see some other projects making use of all the good work that the PyObjC folks have been doing.   The next best talk was Brett Cannon&apos;s talk on Localized Type-Inference.  This was a &quot;good science&quot; talk, in the sense that scientifically, negative results are just as important as positive results (see the notes for the gory details).  So while I appreciated the talk from that point of view, I was disappointed that type inference in the local cases is so hard.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-24T08:50:49-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1257</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1257</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/24#1257"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1257</wfw:comment>
+    </item>
+	    <item>
+      <title>Attention java.blogs readers...</title>
+      <link>http://www.sauria.com/blog/2005/03/24#1256</link>
+      <description>&lt;p&gt;
+I&apos;m switching the feed that java.blogs picks up, so that only Java related posts will appear.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/java</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-24T08:48:41-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/java/1256</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/java/1256</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/24#1256"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/java/1256</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Subethaedit notes</title>
+      <link>http://www.sauria.com/blog/2005/03/23#1255</link>
+      <description>&lt;p&gt;
+Lots of the usual suspects are back from last year, so there is a decent sized effort to provide you with &lt;a href=&quot;http://www.sauria.com/~twl/conferences/pycon2005/&quot;&gt;notes&lt;/a&gt; of the PyCon 2005 sessions.   PyCon is much larger next year, so one of the auditoriums has not wireless, which may hamper getting transcripts of some of the larger talks.  
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-23T08:42:23-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1255</comments>
+      <slash:comments>4</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1255</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/23#1255"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1255</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Sprints Day 4</title>
+      <link>http://www.sauria.com/blog/2005/03/23#1254</link>
+      <description>&lt;p&gt;
+The two groups have finished their parcels to the level where we can show them as part of our presentation on Thursday.   I think this is great - It helps a bit with the presentation nerves as well.   
+&lt;/p&gt;&lt;p&gt;
+Other happenings at the sprints:
+&lt;/p&gt;&lt;p&gt;
+PJE and Bob Ippolito have been hard at work on &lt;a href=&quot;http://peak.telecommunity.com/DevCenter/PythonEggs&quot;&gt;PythonEggs&lt;/a&gt;.   This is going to be really good for Python -- it should make delivering applications of all kinds (including Chandler) much easier.
+&lt;br /&gt;
+&lt;br /&gt;Best quote of the day: &quot;You know what?  I&apos;ll eat the microseconds.&quot;
+&lt;/p&gt;&lt;p&gt;
+Donovan Preston showed me his  LivePage Test framework yesterday, and I forgot to mention it.  Donovan is one of those folks who was doing AJAX stuff before the current AJAX hype got started.   The stuff that I saw looked really useful for people who want to try to build richer in browser applications.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-23T08:07:51-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1254</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1254</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/23#1254"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1254</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Sprints Day 3</title>
+      <link>http://www.sauria.com/blog/2005/03/22#1253</link>
+      <description>&lt;p&gt;
+Day 3 was the first day of the Chandler sprint.   We had two people who joined us with the goal of learning to write a parcel.  We&apos;ve split into two groups.  One group is working on a parcel for working with del.icio.us bookmarks, and the other group is working on a parcel for grabbing pictures from Flickr.
+&lt;/p&gt;&lt;p&gt;
+A sprint like this is a good way to get live feedback, and we&apos;ve gotten a lot of feedback so far.  The two groups are making good progress.  We spent a bunch of time getting infrastructure setup -- a subversion repository, some wiki pages to record notes, sorting out the various builds, and doing some tutorial/walkthrough.   So it wasn&apos;t until after lunch until the groups sat down to work on their projects.  
+&lt;/p&gt;&lt;p&gt;
+So far things are going pretty well -- it looks like both groups will get basic functionality done by the end of tomorrow, and I&apos;d like to be able to show the fruits of their labor as part of our presentation on Thursday.    We have gotten a lot of feedback about things that are hard, error-prone, or redundant.   It&apos;s also clear that we need to work some more on documentation.   So it feels like there&apos;s good information exchange - Bill, Mark, and Kragen are learning how to write parcels, and we&apos;re learning a lot about the kind of support that we need to work on.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-22T16:44:44-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1253</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1253</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/22#1253"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1253</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Sprints Day 2</title>
+      <link>http://www.sauria.com/blog/2005/03/21#1252</link>
+      <description>&lt;p&gt;
+I woke up late today -- the after effects of jet lag flying in the wrong direction (West to East).
+&lt;/p&gt;&lt;p&gt;
+People highlights of the day:
+&lt;/p&gt;&lt;p style=&quot;text-indent:20pt;&quot;&gt;
+I officially met &lt;a href=&quot;http://www.mechanicalcat.net/richard/log&quot;&gt;Richard Jones&lt;/a&gt; (who I&apos;d knowingly met the day before) via his need to borrow a cell phone charger.
+&lt;/p&gt;&lt;p style=&quot;text-indent:20pt;&quot;&gt;
+I also got to spend some time talking to Kragen Sitaker -- our orbits have slowly been converging over the years, and this was another step in that direction.
+&lt;/p&gt;&lt;p&gt;
+Technical highlight of the day
+&lt;/p&gt;&lt;p style=&quot;text-indent:20pt;&quot;&gt;
+I fixed a bug in &lt;a href=&quot;http://initd.org/tracker/pysqlite&quot;&gt;pysqlite-2.0&lt;/a&gt; that kept it from building on OS X.  The patch is going into SVN.  
+&lt;/p&gt;&lt;p&gt;
+The Chandler sprint starts today, so things really start to heat up...
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-21T09:06:18-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1252</comments>
+      <slash:comments>1</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1252</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/21#1252"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1252</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon Sprints Day 1</title>
+      <link>http://www.sauria.com/blog/2005/03/20#1251</link>
+      <description>&lt;p&gt;
+The PyCon sprints are underway.   This year, the Zope sprint(s) seem to be the largest, as well as the sprint for PyPy.  
+&lt;/p&gt;&lt;p style=&quot;text-align:center;&quot;&gt;
+
+&lt;/p&gt;&lt;p style=&quot;text-align:center;&quot;&gt;
+&lt;a href=&quot;http://www.sauria.com/blog/images/Image(264).jpg&quot; onclick=&quot;window.open(&apos;http://www.sauria.com/blog/images/Image(264).jpg&apos;,&apos;popup&apos;,&apos;width=640,height=480,scrollbars=no,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=yes,left=0,top=0&apos;);return false&quot;&gt;&lt;img src=&quot;http://www.sauria.com/blog/images/Image(264)-tm.jpg&quot; height=&quot;100&quot; width=&quot;133&quot; border=&quot;1&quot; hspace=&quot;4&quot; vspace=&quot;4&quot; alt=&quot;Image(264)&quot; /&gt;&lt;/a&gt;
+&lt;/p&gt;&lt;p&gt;
+The Chander sprint doesn&apos;t start until Monday, so in the meantime, I&apos;ve been catching up on the day that I missed on the plane, and having good conversations.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-20T08:29:34-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1251</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1251</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/20#1251"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1251</wfw:comment>
+    </item>
+	    <item>
+      <title>PyCon preview</title>
+      <link>http://www.sauria.com/blog/2005/03/18#1250</link>
+      <description>&lt;p&gt;
+I&apos;m flying out for PyCon in the morning, so that I&apos;ll be there bright and early (especially for west coast time) for the sprints.
+&lt;/p&gt;&lt;p&gt;
+Here are the talks that I&apos;m most interested in and why.
+&lt;/p&gt;&lt;p&gt;
+There are a pair of talks related to type inference.  If we have to have static typing, I prefer to obtain it via type inference, as opposed to lots of declarations or optional declarations.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#11&quot;&gt;Localized Type-Inference in Python&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#78&quot;&gt;PyPy and type inference&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+I&apos;ve been interested in Roundup for a while - I could use something like it for personal use.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#12&quot;&gt;The Roundup Issue Tracker&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+Python is a lot like Lisp in that there are lots of tricks that you can play.  In fact, it&apos;s a lot like C++ for similar reasons.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#36&quot;&gt;Descriptors, Decorators, Metaclasses: Python&apos;s &quot;Black Magic&quot;?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#37&quot;&gt;Iterators and Generators: it ain&apos;t your gramps&apos; loop any more!&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+PJE is talking about generic functions, and I&apos;m curious to see where his explorations have lead him.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#53&quot;&gt;Writing Efficient Rule-Driven Software in Python&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+There are a bunch of sessions blocks where I am torn.
+&lt;/p&gt;&lt;p&gt;
+In one pair of blocks, Bob Ippolito is going to do intense coverage of PyObjC, which is of interest to me personally.  If I&apos;m going to do any heavy Macintosh programming, it&apos;s going to be via PyObjC.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#57&quot;&gt;Introduction to PyObjC&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#58&quot;&gt;PyObjC Hacking&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+opposite Bob&apos;s talks are a pair of talks on testing
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#10&quot;&gt;Agile Testing with Python Test Frameworks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#45&quot;&gt;py.test and the py lib&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+In another block we have talk on Python on Series 60 (one of the reasons I bought a Series 60 phone
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#16&quot;&gt;Python for Series 60&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+up against PyLucene, which I want to go to for moral support
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#27&quot;&gt;Pulling Java Lucene into Python:  PyLucene&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+up against Abe Fettig&apos;s Yarn, which I&apos;m interested in for personal reasons.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#56&quot;&gt;Yarn: Working with Messages in Diverse Formats and Protocols&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+And of course there had to be a conflict between my PyBlosxom talk
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#64&quot;&gt;PyBlosxom: A microkernel approach to blogging&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+and Glyph&apos;s peer to peer talk
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#73&quot;&gt;The Personal Internet Endpoint: Using Python and Twisted to write Reliable Peer-To-Peer Programs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+There is also the talk that Katie and I are giving on building parcels in Chandler, which is going to be challenging because 30 minutes just isn&apos;t going to be enough.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.python.org/moin/PyConDC2005/Presentations#26&quot;&gt;An Introduction to building Chandler parcels&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;
+There&apos;s a lot of action happening at the sprints this year:  There&apos;s a mega PyPy sprint, the core Python sprint, and probably a huge Twisted sprint.   We are doing a 2 day sprint to build some parcels for Chandler.  If we succeed, I&apos;d like to show them during our talk.
+&lt;/p&gt;&lt;p&gt;
+And like any conference, there will be the hallway conversations, the conversations over meals, the late night hacking in the halls  and more.   I&apos;m already tired thinking about it all.   But it&apos;s going to be great fun.  PyCon was the best conference I went to last year, so expectations are high for this time around.  Things will be a little different this time around because there will be a lot more OSAF people attending.
+&lt;/p&gt;&lt;p&gt;
+I&apos;m not exactly sure how much I&apos;ll be liveblogging PyCon.  It is a ton of work to do it right, and the novelty of doing it has worn off.  We&apos;ll probably do the SubEthaEdit thing like we did next year.  Bear tells me he is bringing his wireless keyboard so he can type *really* fast.  Given that he already types scarily fast, we&apos;re going to have to have a fire extinguisher handy for when the keyboard catches fire.  If we do the SubEthaEdit thing, I&apos;ll be posting files &lt;a href=&quot;http://www.sauria.com/~twl/conferences/pycon2005/&quot;&gt;here&lt;/a&gt;.
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-18T00:13:21-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1250</comments>
+      <slash:comments>0</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1250</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/18#1250"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1250</wfw:comment>
+    </item>
+	    <item>
+      <title>Python Controls Fabricators</title>
+      <link>http://www.sauria.com/blog/2005/03/17#1249</link>
+      <description>&lt;p&gt;
+[via &lt;a href=&quot;http://www.windley.com/archives/2005/03/bits_and_atoms.shtml&quot;&gt;Phil Windley&apos;s Technometria | Bits and Atoms&lt;/a&gt; ]:
+&lt;/p&gt;&lt;blockquote&gt;
+He envisions a world of cheap personal fabricators. He&amp;#8217;s put together a prototype for $20,000 that includes a laser cutter, a sign cutter, and a milling machine that are all controlled through an extension to Python. They&amp;#8217;ve put these in rural areas around the world. There is not just a digital divide, there&amp;#8217;s a fabrication divide. He shows a video of kids in Ghana using one of these prototypes to make things they want. He shows how rural Indians fabricated a part for about $1.00 to test the quality of milk&amp;#8212;something that&amp;#8217;s very important to them. Local computers and technology for local needs.
+&lt;/blockquote&gt;&lt;p&gt;
+Another step on the path to world domination?
+&lt;/p&gt;</description>
+      <category domain="http://www.sauria.com">computers/programming/python</category>
+      <dc:creator>Ted Leung (twl@sauria.com)</dc:creator>
+      <dc:date>2005-03-17T00:03:48-08:00</dc:date>
+      <comments>http://www.sauria.com/blog/computers/programming/python/1249</comments>
+      <slash:comments>1</slash:comments>
+      <trackback:ping>http://www.sauria.com/blog/trackback/computers/programming/python/1249</trackback:ping>
+      <pingback:server rdf:resource="http://www.sauria.com/blog/xmlrpc"/>
+      <pingback:target rdf:resource="http://www.sauria.com/blog/2005/03/17#1249"/>
+      <wfw:comment>http://www.sauria.com/blog/commentAPI/computers/programming/python/1249</wfw:comment>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,891 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+  <HEAD>
+    <TITLE>Diary of a debugger || kuro5hin.org</TITLE>
+    <STYLE TYPE="text/css">
+<!--
+ .osdn{
+   text-decoration: none;
+   font-family: verdana, arial, helvetica, sans-serif;
+   color: #eeeeee;
+ }
+ .header{
+   text-decoration: none;
+   color: #000;
+ }
+ .justified{
+}
+ a:hover.adlink { color: #006699; }
+ a.adlink { color: #006699; }
+-->
+</style>
+
+
+<LINK REL="icon" HREF="/images/tinyk5.png" TYPE="image/png">
+<LINK REL="SHORTCUT ICON" HREF="/images/tinyk5.png">
+
+
+    
+</HEAD>
+
+  <BODY bgcolor="#FFFFFF" text="#222222" LINK="#003767" ALINK="#c0c0c0" VLINK="#4185aa"
+      marginwidth=0 marginheight=0 topmargin=0 leftmargin=0>
+
+    <!-- Begin standard logo/sections header -->
+    <!--Begin Header -->
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+        <tr valign="bottom">
+                <td rowspan="3" width="299" valign="bottom"><a href="http://www.kuro5hin.org"><img src="/images/header/kuro5hin2.gif" width="298" height="60" border="0" ALT="Kuro5hin.org: technology and culture, from the trenches"></a></td>
+                <td height="47"> </td>
+        </tr>
+        <tr>
+                <td align="right" valign="bottom"><font face="Verdana, arial, sans-serif" size="1"><A HREF="/newuser">create account</a> | <A HREF="/special/faq">help/FAQ</a> | <A HREF="/special/contact">contact</a> | <A HREF="/special/links">links</a> | <A HREF="/find">search</a> | <A HREF="/special/irc">IRC</a> | <A HREF="/section/sitenews">site news</a></font></td>
+        </tr>
+        <tr>
+                <td align="right" valign="middle"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" height="22" bgcolor="#eeeeee" align="center">
+        <tr height="22">
+                <td background="/images/header/table_bkg3.gif" align="left" height="22" valign="top"><a href="http://www.kuro5hin.org"><img src="/images/header/left_edge3.gif" width="67" height="22" border="0" alt="["></a></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" border="0" height="22" ALT=""></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><strong><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/__all__">Everything</a></font></strong></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Diary">Diaries</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/tech">Technology</a></font></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/science">Science</a></font></td>              
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/culture">Culture</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fnp">Politics</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/media">Media</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/news">News</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/internet">Internet</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/op-ed">Op-Ed</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fiction">Fiction</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Meta">Meta</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/mlp">MLP</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="right" height="22"><img src="/images/header/rt_edge3.gif" width="1" height="22" border="0" alt="]"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+	<tr>
+		<td align="right">
+<font face="Verdana, arial, sans-serif" size="1"><b>We need your support:</b> <a href="/submitad">buy an ad</a> | 
+<a href="/subscribe">premium membership</a> | <a href="http://www.jinxgear.com/kuro5hin">k5 store</a></font>
+</td>
+	</tr>
+</table>
+<!--End Header -->
+    <!-- End standard logo/sections header -->
+    
+    <P>
+
+    <!-- Story stuff -->
+    <TABLE WIDTH="98%" BORDER=0 CELLPADDING=5 CELLSPACING=0 ALIGN="center">
+      <TR>
+        <TD VALIGN="top" WIDTH="75%">
+          <!-- begin summary of story -->
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=3 CELLSPACING=0>
+	<TR>
+		<TD VALIGN="top" WIDTH="12" align="center">
+			<center>
+			
+			<A HREF="/print/2003/9/29/73116/8107"><img src="/images/print3.gif" WIDTH="15" HEIGHT="15" ALT="[P]" border=0></A>
+			</center>
+		</TD>
+		<TD WIDTH="100%">
+			<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=3><B><A HREF="/story/2003/9/29/73116/8107" style="text-decoration:none;"><font color="#000000">Diary of a debugger</font></A> (<A CLASS="section_link" href="/section/Diary">Diaries</a>)</B></FONT><BR>
+			<img src="/images/clear.gif" HEIGHT="5" WIDTH="1" ALT=""><br>
+			<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>By <A HREF="/user/llimllib">llimllib</A> <BR>Mon Sep 29th, 2003 at 07:31:16 AM EST </FONT><BR>
+			
+			
+		</TD>
+		<TD ALIGN="right" WIDTH="80">
+			<A HREF="/user/llimllib/diary"><IMG SRC="/images/topics/books.jpg" WIDTH="80" HEIGHT="50" ALT="llimllib's Diary" ALIGN="right" BORDER=0></a>
+		
+		</TD>
+	</TR>
+	<TR>
+		<TD WIDTH="12"><IMG SRC="/images/clear.gif" WIDTH="12" HEIGHT="1" ALT=""></TD>
+		<TD COLSPAN=2 CLASS="justified">
+			<P>
+			<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+			
+		Been working on an algorithms assignment for about 14 hours straight now.<p>
+music: Skatalites - Rough &amp; Tough
+			</FONT>
+			</P>
+			<P>
+			<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2> </FONT>
+			</P>
+		</TD>
+	</TR>
+	<TR>
+		<TD COLSPAN=3 HEIGHT=3>
+			<HR WIDTH="100%" SIZE=1 NOSHADE>
+		</TD>	
+	</TR>
+</TABLE>
+<!-- end summary of story-->
+
+<!-- begin story body -->
+<P>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=3 CELLSPACING=0>
+<TR>
+<TD WIDTH="12"><IMG SRC="/images/clear.gif" ALT="" WIDTH="12"></TD>
+<TD WIDTH="100%" class="justified">
+
+
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>4:45: I have to write a program implementing a simulated printer queue. I spent about 4 hours on it yesterday, and I'm on about hour 14 today. This program has been a bastard from start to finish, and I need to have it done in 3.5 hours. I have to do it in MSVC, which sucks. My program keeps b0rking when I switch from debug compilation to -O2.<br>Fiona Apple - Paper bag<p>debugging...<p>4:57: fixed that one, had a long overflow, switched to unsigned long, that seemed to work. Now, however, it seems that my queue never empties.<br>Pink Floyd - Money<p>debugging...<p>5:08: alright, the queue is sometimes empty, and I'm getting reasonable average times, urgent prints go faster than normal ones. The queue never seems to be full, so I've kicked it up to some higher numbers, which leaves me more time to type while I wait for the days to simulate.<br>Black Star - B Boys Will B Boys<p>debugging...</p>5:26: Fucked if I know. Behavior seems random. When I start my search at a high number of jobs per day, the queue is never empty, even as the number decreases. When I start it at a low number, search goes much faster, but the queue is never full, even when they reach the same number. arrggggggh. It's cold outside.<br>Rage Against The Machine - Guerilla Radio<p>debugging...<p>5:43: hands shaking. tired. Considered replacing my queue implementation, decided against it. Not even sure what's messed up. Giving up isn't an option anymore, two hours of sleep would just be worse than not sleeping until I'm done with my classes. Definitely skipping work in the math help room this afternoon.<br>Lovage - Everyone has a Summer<p>debugging...<p>6:05: Wow, breakthrough. I'm still in bad physical shape, my head seems to drift off from my body every once in a while, I'm actually surprised I was coherent enough to make a breakthrough. I wasn't reinitializing the probability that a job will be printed (jobs per day / cycles per workday) when I started a new simulation. This means I've effectively been running and rerunning the same godawful simulation for the past hour, and why the simulation was different if I started it at 4000 jobs per day vs. 10000. Still no sunlight, I'm surprised.<br>Muddy Waters - Sad Sad day<p>debugging...<p>6:50: Sunlight, code improving, documentation being done. I also improved a tricky algorithm by a lot, I think. I have to print this out in 40 minutes if I go to the class, 1:40 if I don't. work.<br>Beethoven - 6th Symphony (unknown orchestra)<p>debugging...<p>7:29: OK, it works. my new algorithm works about 100 times faster than the previous one. Once morning came, I felt a remarkable clarity. Unfortunately, I don't think I have enough time to finish documenting the code and go to class, so I'll be working on his code while he's giving class. My professor doesn't really care, fortunately. I can't wait to get real food.<br>People Under the Stairs - Acid Raindrops</FONT>
+
+</TD>
+</TR>
+</TABLE>
+<P>
+<!-- end story body -->
+        </TD>
+        <TD VALIGN="top" WIDTH="25%">
+          <table cellpadding="1" border="0" width="100%" bgcolor="#000000" cellspacing="0">
+<tr><td width="100%">
+<table cellpadding="1" border="0" width="100%" bgcolor="#006699" cellspacing="0">
+<tr><td width="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Sponsors</FONT>
+</td></tr></table>
+</td></tr></table>
+<table cellpadding="1" border="0" width="100%" cellspacing="0">
+<tr>
+ <td>
+  
+  <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+            <a href="http://www.voxel.net/"><img alt="Voxel dot net" height="31" border="0" src="/images/voxel_k5.gif" width="158"></a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <font size="-2"><a href="http://voxel.net/index.php?svc.managedserver">Managed Servers</a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <a href="http://voxel.net/index.php?svc.rails">Managed Clusters</a><br>
+<IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <a href="http://voxel.net/index.php?svc.vhost">Virtual Hosting</a></font>
+<br>
+<center><hr width="60%" size=1 noshade></center>
+<table width="100%" border=0 cellpadding=2 cellspacing=0>
+ <tr>
+  <td colspan=2>
+   <center><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><strong><a href="http://www.kuro5hin.org/redirect/1491?url=http://www.johncompanies.com">Collocated Linux/FreeBSD Server<br>As low as $45/month</a></strong></FONT></center>
+  </td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2">Root on your own FreeBSD or Linux server</font></FONT></td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2"><strong>Very</strong> fast, triple-homed network</font></FONT></td>
+ </tr>
+ <tr>
+  <td valign="top"><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></td>
+  <td><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2">NO hardware or setup fees, unlimited support</font></FONT></td>
+ </tr>
+ <tr>
+  <td colspan=2 align="right"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><font size="-2"><a href="/story/2003/4/14/104336/193">Testimonials from K5 Users</a></font></FONT></td>
+ </tr>
+</table>
+    </td>
+</tr>
+</table>
+<p>
+          <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#000000">
+<TR><TD WIDTH="100%">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#006699">
+<TR><TD WIDTH="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Login</FONT>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR><TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><FORM ACTION="/" METHOD="post">
+<TABLE BORDER=0 width="100%" align="center" CELLPADDING=1 CELLSPACING=0>
+  <TR>
+    <TD COLSPAN=2>
+	  <CENTER></CENTER>
+    </TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+      <CENTER>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+      <B><A CLASS="light" HREF="/newuser">Make a new account</A></B>
+      </FONT>
+      </CENTER>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right">
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL>Username:</SMALL></FONT>
+    </TD>
+    <TD>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL><INPUT TYPE="text" SIZE=12 NAME="uname"></SMALL></FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right">
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL>Password:</SMALL></FONT>
+    </TD>
+    <TD>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><SMALL><INPUT TYPE="password" SIZE=12 NAME="pass"></SMALL></FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD align="right" COLSPAN=2>
+      <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+      <INPUT TYPE="submit" NAME="login" VALUE="Login">
+      <INPUT TYPE="submit" NAME="mailpass" VALUE="Mail Password">
+      </FONT>
+    </TD>
+  </TR>
+  <TR>
+    <TD COLSPAN=2>
+      <br><CENTER><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2><b>Note:</b> You must accept a cookie to log in.</FONT></CENTER>
+    </TD>
+  </TR>
+</TABLE>
+</FORM>
+
+</FONT></TD></TR>
+</TABLE>
+<P>
+          
+          
+          
+          <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#000000">
+<TR><TD WIDTH="100%">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#006699">
+<TR><TD WIDTH="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Poll</FONT>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR><TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+	<!-- begin poll form -->
+	<FORM ACTION="/" METHOD="POST">
+    <INPUT TYPE="hidden" NAME="op" VALUE="view_poll">
+    <INPUT TYPE="hidden" NAME="qid" VALUE="1064824381_XnRdxMsL">
+    <INPUT type="hidden" name="ispoll" value="1"><b>I'm</b><br>
+		<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=0>
+			<TR>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>insane</FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> 0% </FONT></TD>
+			</TR>
+			<TR>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>tired</FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> 50% </FONT></TD>
+			</TR>
+			<TR>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>wired</FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> 25% </FONT></TD>
+			</TR>
+			<TR>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"></FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>all of the above</FONT></TD>
+				<TD valign="top"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> 25% </FONT></TD>
+			</TR>
+		</TABLE>
+	</FORM>
+	<!-- end poll form -->
+	<P>
+	<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>
+    <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN="center">
+	<TR>
+		
+	<TD COLSPAN="3" ALIGN="center"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Votes: <b>4</b></FONT></TD>
+	
+	<TR> 
+	<TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><a href="/poll/1064824381_XnRdxMsL">Results</a></FONT></TD>
+	<TD ALIGN="center" WIDTH=15><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>|</FONT></TD>
+    <TD ALIGN="right"><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <a href="/?op=search;type=polls;search=Search">Other Polls</a></FONT></TD></TR>
+	
+	</TABLE>
+	</FONT>
+	<!-- end poll content --></FONT></FONT></TD></TR>
+</TABLE>
+<P>
+          <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#000000">
+<TR><TD WIDTH="100%">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0 BGCOLOR="#006699">
+<TR><TD WIDTH="100%">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#FFFFFF">Related Links</FONT>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR><TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><IMG SRC="/images/lidisc.gif" BORDER=0 ALT="o" WIDTH="12" HEIGHT="12"> <A CLASS="light" HREF="/?op=section;section=Diary;user=diary_35158">llimllib's Diary</A><BR></FONT></TD></TR>
+</TABLE>
+<P>
+          
+        </TD>
+      </TR>
+    </TABLE>
+    <!-- X story stuff -->
+    
+    <BR>
+
+    <!-- comments -->
+    
+    
+    <CENTER>	
+      <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN="center">
+    <TR>
+        <TD>
+                <FORM ACTION="/#" METHOD="post">
+                <INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+                <INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/29/73116/8107">
+                
+        <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#ffffff" align="center">
+
+                <TR>
+                        <TD VALIGN="middle" align="center">
+                                <FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+								View:
+                                <SMALL>
+                                        <SELECT NAME="commenttype" SIZE=1>
+		<OPTION VALUE="mixed">Mixed (default)
+		<OPTION VALUE="topical">Topical Only
+		<OPTION VALUE="editorial">Editorial Only
+		<OPTION VALUE="all">All Comments
+		<OPTION VALUE="none">No Comments</SELECT>
+                                </SMALL>
+                                Display:
+                                <SMALL>
+                                <SELECT NAME="commentmode" SIZE=1>
+		<OPTION VALUE="threaded">Threaded
+		<OPTION VALUE="minimal">Minimal
+		<OPTION VALUE="nested" SELECTED>Nested
+		<OPTION VALUE="flat">Flat
+		<OPTION VALUE="flat_unthread">Flat Unthreaded<OPTION VALUE="dthreaded">Dynamic Threaded<OPTION VALUE="dminimal">Dynamic Minimal</SELECT>
+                                </SMALL>
+                                Sort:
+                                <SMALL>
+                                <SELECT NAME="commentrating" SIZE=1>
+		<OPTION VALUE="unrate_highest">Unrated, then Highest
+		<OPTION VALUE="highest">Highest Rated First
+		<OPTION VALUE="lowest">Lowest Rated First
+		<OPTION VALUE="dontcare" SELECTED>Ignore Ratings
+		</SELECT>
+                                </SMALL>
+                                <SMALL>
+                                <SELECT NAME="commentorder" SIZE=1>
+		<OPTION VALUE="newest">Newest First
+		<OPTION VALUE="oldest">Oldest First
+		</SELECT>
+                                </SMALL>
+
+<INPUT TYPE="submit" NAME="setcomments" VALUE="Set">
+</FONT>
+</TD></TR>
+</TABLE>
+</FORM></TD>
+    </TR>
+</TABLE>
+    </CENTER>
+
+      <TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR BGCOLOR="#eeeeee">
+<TD align="center" WIDTH="100%"><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+<A CLASS="light" HREF="/story/2003/9/29/73116/8107">Diary of a debugger</A> | <B>12</B> comments (12 topical, 0 editorial, 0 hidden) 
+</FONT>
+</TD>
+</TR>
+</TABLE><FORM NAME="rate" ACTION="/" METHOD="POST">
+						<INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/29/73116/8107">
+						<INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+						<INPUT TYPE="hidden" NAME="pid" VALUE="0"><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="9"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>On tricky code</B> (<A HREF="/comments/2003/9/29/73116/8107/9?mode=alone;showrate=1#9">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/9#9">#9</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:48635">Guybrush Threepwood</a> on Mon Sep 29th, 2003 at 12:24:04 PM EST<BR>(<A CLASS="light" HREF="mailto:gt@meleeisland.net">gt@meleeisland.net</A>) <A CLASS="light" HREF="www.lucasarts.com/products/monkey/default.htm">www.lucasarts.com/products/monkey/default.htm</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it. -- Brian W. Kernighan<p>
+A pint of grog to you, sir.<BR>A pint of grog to you, sir.<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="12"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I love that quote</B> (<A HREF="/comments/2003/9/29/73116/8107/12?mode=alone;showrate=1#12">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/12#12">#12</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 01:24:48 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>can't remember where I read it, maybe Guido van Rossum said it somewhere?<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/9#9">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="8"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I'm sorry.</B> (<A HREF="/comments/2003/9/29/73116/8107/8?mode=alone;showrate=1#8">2.50 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/8#8">#8</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:15284">tkatchev</a> on Mon Sep 29th, 2003 at 10:28:46 AM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>The diary of a <em>who?</em><BR><p>
+&nbsp;&nbsp; -- Signed, Lev Andropoff, cosmonaut.
+<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="11"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>n. de ^bug er</B> (<A HREF="/comments/2003/9/29/73116/8107/11?mode=alone;showrate=1#11">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/11#11">#11</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 01:24:05 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>1. a person who attempts to remove errors from computer programs that *should* work.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/8#8">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="6"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>9:03 handed it in</B> (<A HREF="/comments/2003/9/29/73116/8107/6?mode=alone;showrate=1#6">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/6#6">#6</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 09:05:34 AM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>I have a pretty bad stomach ache. I ate half a big bag of pretzels. Not sure whether to stay awake, go to breakfast, take a nap, or what.<br>Tom Petty - The Joker<BR><br>Peace.<BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="7"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>If you have time</B> (<A HREF="/comments/2003/9/29/73116/8107/7?mode=alone;showrate=1#7">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/7#7">#7</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:7159">Canthros</a> on Mon Sep 29th, 2003 at 10:09:39 AM EST<BR> <A CLASS="light" HREF="http://www.punchdrunkmonkeyman.com">http://www.punchdrunkmonkeyman.com</A></FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Nap.<p>
+An hour or two, and no more, 'cause you'll screw up your sleep schedule if you do. Then go to bed early this evening, and be sure to get lunch and dinner.<p>
+FWIW, I spent most of my last year of college with a sleep cycle that shifted around the clock about once a week. For about six months, I found myself up all night once a week. <em>Ugh</em>.<BR><br>--<br>It's now obvious you are either A) Gay or B) Female, or possibly both.<br>&mdash; <a href="/comments/2003/8/4/141245/4932/16#16">RyoCokey</a><BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/6#6">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="10"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>I'm pretty much there</B> (<A HREF="/comments/2003/9/29/73116/8107/10?mode=alone;showrate=1#10">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/10#10">#10</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 01:21:50 PM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>I have to do work in big bunches, and so I end up slaughtering myself for a few days, then sleeping a few. Usually I'll have a night at 4, and the rest at 1 or 2, but last night was a special exception. I would love to have a regular schedule, but unfortunately, I'm not stable enough to do it.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/7#7">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="3"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>Sleep deprivation -&gt; bad code</B> (<A HREF="/comments/2003/9/29/73116/8107/3?mode=alone;showrate=1#3">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/3#3">#3</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:4527">swr</a> on Mon Sep 29th, 2003 at 08:01:48 AM EST<BR> </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2><p>Working into the wee hours of the morning is <em>usually</em> a bad idea.</p>
+
+<p>Once you've slept, you'll probably realize your new algorithm that is 100 times faster has some fatal flaw. That happens pretty often when doing the all-nighter thing. The "extra" time you spend working on the code usually translates into roughly 2x that time in debugging.</p>
+
+<p>In my experience, the only way to reliably get away with an all-nighter is to have the critical stuff finished by 2 or 3 am, then the rest (until work/school starts the next morning) is minor fixes, tweaks, and polish. Trivial stuff is the most one can can reasonably expect to accomplish when sleep deprived.</p>
+
+<BR><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="4"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>agreed, kind of</B> (<A HREF="/comments/2003/9/29/73116/8107/4?mode=alone;showrate=1#4">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/4#4">#4</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 08:23:01 AM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>There's a middle period that I reserve for trivial coding, between, say, 4:00 - 6:00. That's when I hit my ebb. I find that the crack of dawn brings me a nice burst of decent coding; not coincidentally, that's when I thought of the far better algorithm.<p>In general though, I agree that it's better to *try* and avoid such binges, as they do tend to produce shitty code, although they produce a lot of code. As always, it's a tradeoff.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/3#3">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+<!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="1"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>It's the music</B> (<A HREF="/comments/2003/9/29/73116/8107/1?mode=alone;showrate=1#1">5.00 / 2</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/1#1">#1</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:25943">vnsnes</a> on Mon Sep 29th, 2003 at 07:41:08 AM EST<BR>(<A CLASS="light" HREF="mailto:vnsnes at y!">vnsnes at y!</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Jazz, hard rock, blues, classical... you need to get into a groove, man. Get yo-self in the zone, man. ;-) This musical cacophony is messing with your mind. <p>
+What were you on, btw? Coffee, Dew, pills?<BR><BR></FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+<DL><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="5"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>i was about to post the same thing</B> (<A HREF="/comments/2003/9/29/73116/8107/5?mode=alone;showrate=1#5">5.00 / 1</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/5#5">#5</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:26422">tps12</a> on Mon Sep 29th, 2003 at 08:46:52 AM EST<BR>(<A CLASS="light" HREF="mailto:tps12@columbia...edu">tps12@columbia...edu</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>Also, nothing sets you right after an all nighter than a stiff drink with the sunrise.<BR><BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/1#1">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD><DT></DT><DD><!-- comment start -->
+<TABLE CELLPADDING=6 CELLSPACING=0 BORDER=0>
+<TR><TD width="100%">
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0 BGCOLOR="#006699">
+  <TR>
+    <TD width="100%">
+      <TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 BGCOLOR="#eeeeee" width="100%">
+        <TR>
+          <TD WIDTH="100%"><A NAME="2"></A>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2> <B>no drugs</B> (<A HREF="/comments/2003/9/29/73116/8107/2?mode=alone;showrate=1#2">none / 0</A>) (<A CLASS="light" HREF="/comments/2003/9/29/73116/8107/2#2">#2</A>)</FONT> <BR>
+          <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>by <A HREF="/user/uid:35158">llimllib</a> on Mon Sep 29th, 2003 at 07:44:08 AM EST<BR>(<A CLASS="light" HREF="mailto:llimllib at f2o .. org">llimllib at f2o .. org</A>) </FONT>
+          </TD>
+        </TR>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+<BR>
+<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+  <TR>
+    <TD>
+    <FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2>I had an 8oz coffee, but that was at 11:00 or so, and 8oz doesn't do much anyway.<p>As for the music, the mix keeps me grooving. When I write (prose or poetry, that is) I like less of a mix; usually I'll put on my jazz playlist, or electronics mix, depending on my mood. Nothing beats writing to "Kind Of Blue". When I code, however, I like variety.<BR><br>Peace.<BR>[  <A CLASS="light" HREF="/comments/2003/9/29/73116/8107/1#1">Parent</A>  ]</FONT>
+    </TD>
+  </TR>
+</TABLE>
+</TD></TR></TABLE>
+
+
+<!-- end comment -->
+
+</DD></DL>
+
+<!-- end comment -->
+
+</FORM><TABLE WIDTH="100%" BORDER=0 CELLPADDING=1 CELLSPACING=0>
+<TR BGCOLOR="#eeeeee">
+<TD align="center" WIDTH="100%"><FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+<A CLASS="light" HREF="/story/2003/9/29/73116/8107">Diary of a debugger</A> | <B>12</B> comments (12 topical, 0 editorial, 0 hidden) 
+</FONT>
+</TD>
+</TR>
+</TABLE>
+
+    <CENTER>	
+      <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 ALIGN="center">
+    <TR>
+        <TD>
+                <FORM ACTION="/#" METHOD="post">
+                <INPUT TYPE="hidden" NAME="op" VALUE="displaystory">
+                <INPUT TYPE="hidden" NAME="sid" VALUE="2003/9/29/73116/8107">
+                
+        <TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BGCOLOR="#ffffff" align="center">
+
+                <TR>
+                        <TD VALIGN="middle" align="center">
+                                <FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+								View:
+                                <SMALL>
+                                        <SELECT NAME="commenttype" SIZE=1>
+		<OPTION VALUE="mixed">Mixed (default)
+		<OPTION VALUE="topical">Topical Only
+		<OPTION VALUE="editorial">Editorial Only
+		<OPTION VALUE="all">All Comments
+		<OPTION VALUE="none">No Comments</SELECT>
+                                </SMALL>
+                                Display:
+                                <SMALL>
+                                <SELECT NAME="commentmode" SIZE=1>
+		<OPTION VALUE="threaded">Threaded
+		<OPTION VALUE="minimal">Minimal
+		<OPTION VALUE="nested" SELECTED>Nested
+		<OPTION VALUE="flat">Flat
+		<OPTION VALUE="flat_unthread">Flat Unthreaded<OPTION VALUE="dthreaded">Dynamic Threaded<OPTION VALUE="dminimal">Dynamic Minimal</SELECT>
+                                </SMALL>
+                                Sort:
+                                <SMALL>
+                                <SELECT NAME="commentrating" SIZE=1>
+		<OPTION VALUE="unrate_highest">Unrated, then Highest
+		<OPTION VALUE="highest">Highest Rated First
+		<OPTION VALUE="lowest">Lowest Rated First
+		<OPTION VALUE="dontcare" SELECTED>Ignore Ratings
+		</SELECT>
+                                </SMALL>
+                                <SMALL>
+                                <SELECT NAME="commentorder" SIZE=1>
+		<OPTION VALUE="newest">Newest First
+		<OPTION VALUE="oldest">Oldest First
+		</SELECT>
+                                </SMALL>
+
+<INPUT TYPE="submit" NAME="setcomments" VALUE="Set">
+</FONT>
+</TD></TR>
+</TABLE>
+</FORM></TD>
+    </TR>
+</TABLE>
+    </CENTER>
+    <!-- X comments -->
+
+    <P>
+    
+        <CENTER>
+      <P>
+
+<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 align="center" width="500">
+<TR>
+<TD VALIGN="baseline" align="right">
+<A HREF="http://www.kuro5hin.org/"><IMG SRC="/images/kuro5hin.png" WIDTH=88 HEIGHT=31 BORDER=0 ALT="kuro5hin.org"></a>
+</td><TD ALIGN="left">
+<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE="2">
+<FORM NAME="Search" ACTION="/" METHOD="GET">
+<INPUT TYPE="hidden" NAME="op" VALUE="search">
+<INPUT TYPE="text" SIZE=20 NAME="string"><INPUT TYPE="submit" VALUE="Search"></form></font> 
+</td>
+</tr>
+</table>
+
+      <P>
+<center><a href="http://www.kuro5hin.org/backend.rdf"><img src="/images/rssblue.gif" width="29" height="15" border=0 alt="[XML]"></a></center>
+      <FONT size=1 color="#303030" face="arial,helvetica">
+        All trademarks and copyrights on this page are owned by their respective companies.  The Rest © 2000 - 2003 Kuro5hin.org Inc.<BR>See our <A HREF="http://www.kuro5hin.org/special/legal">legalese page</a> for copyright policies. Please also read our <A HREF="/special/privacy">Privacy Policy</a>.<BR>Kuro5hin.org is powered by <A HREF="http://www.fsf.org">Free Software</a>, including <A HREF="http://apache.org/">Apache</a>, <A HREF="http://www.perl.org/">Perl</a>, and <A HREF="http://www.slackware.com/">Linux</a>, The <A HREF="http://scoop.kuro5hin.org/">Scoop Engine</a> that runs this site is freely available, under the terms of the GPL.<BR>Need some help? Email <A HREF="mailto:help@kuro5hin.org">help@kuro5hin.org</a>.<br>
+<a href="http://www.indifferenthonest.com/deadbeat/">Erik Benson</a> is a <a href="http://www.indifferenthonest.com/deadbeat/">deadbeat</a>.
+</font>
+
+      <P>
+
+      <TABLE BORDER=0 CELLPADDING=10 CELLSPACING=0 width="90%" align="center">
+    <TR>
+        <td><A HREF="http://scoop.kuro5hin.org"><IMG SRC="/images/powered_shovel2.gif" ALT="Powered by Scoop" BORDER=0></A></td>
+        <TD align="center">
+<FONT FACE="arial, Helvetica, Sans-Serif" SIZE=2>
+
+<A HREF="/newuser">create account</a> |
+<A HREF="/special/faq">help/FAQ</a> |
+<A HREF="/special/mission">mission</a> |
+<A HREF="/special/links">links</a> |
+<A HREF="/search">search</a> |
+<A HREF="/special/irc">IRC</a> |
+<A HREF="/special/voting"><B>YOU</b> choose the stories!</a>
+</FONT></TD>
+        <td align="right"><a href="http://jinxhackwear.com/"><img src="/images/jinxbutton.jpg" border=0 width="88" height="31" alt="K5 Store by Jinx Hackwear"></a> <a href="http://www.newsisfree.com/"><img width="88" height="31" border="0" src="/images/nif_button.gif" alt="Syndication Supported by NewsIsFree"></a></td>
+    </TR>
+</TABLE>
+     </center></BODY>
+</HTML>

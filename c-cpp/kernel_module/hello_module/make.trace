@@ -1,0 +1,112 @@
+execve("/usr/bin/make", ["make"], [/* 23 vars */]) = 0
+uname({sys="Linux", node="facultystaff-144-147.ursinus.edu", ...}) = 0
+brk(0)                                  = 0x806b000
+old_mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x55016000
+open("/etc/ld.so.preload", O_RDONLY)    = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY)      = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=79505, ...}) = 0
+old_mmap(NULL, 79505, PROT_READ, MAP_PRIVATE, 3, 0) = 0x55017000
+close(3)                                = 0
+open("/lib/i686/libc.so.6", O_RDONLY)   = 3
+read(3, "\177ELF\1\1\1\0\0\0\0\0\0\0\0\0\3\0\3\0\1\0\0\0\300Z\1"..., 512) = 512
+fstat64(3, {st_mode=S_IFREG|0755, st_size=1548424, ...}) = 0
+old_mmap(NULL, 1275588, PROT_READ|PROT_EXEC, MAP_PRIVATE, 3, 0) = 0x5502b000
+old_mmap(0x5515d000, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED, 3, 0x132000) = 0x5515d000
+old_mmap(0x55160000, 9924, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x55160000
+close(3)                                = 0
+munmap(0x55017000, 79505)               = 0
+brk(0)                                  = 0x806b000
+brk(0x806c000)                          = 0x806c000
+brk(0)                                  = 0x806c000
+open("/usr/lib/locale/locale-archive", O_RDONLY|O_LARGEFILE) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=30301680, ...}) = 0
+mmap2(NULL, 2097152, PROT_READ, MAP_PRIVATE, 3, 0) = 0x55163000
+close(3)                                = 0
+rt_sigaction(SIGHUP, {0x804af50, [HUP], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGQUIT, {0x804af50, [QUIT], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGINT, {0x804af50, [INT], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGTERM, {0x804af50, [TERM], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGXCPU, {0x804af50, [XCPU], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGXFSZ, {0x804af50, [XFSZ], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+rt_sigaction(SIGCHLD, {SIG_DFL}, {SIG_DFL}, 8) = 0
+getcwd("/c/code/c-cpp/kernel_module/hello_module", 4096) = 41
+brk(0)                                  = 0x806c000
+brk(0x806d000)                          = 0x806d000
+stat64("/usr/include", {st_mode=S_IFDIR|0755, st_size=8192, ...}) = 0
+stat64("/usr/gnu/include", 0xfeffe0d0)  = -1 ENOENT (No such file or directory)
+stat64("/usr/local/include", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+stat64("/usr/include", {st_mode=S_IFDIR|0755, st_size=8192, ...}) = 0
+rt_sigaction(SIGCHLD, {0x8051450, [], SA_RESTORER|SA_INTERRUPT, 0x550535d8}, NULL, 8) = 0
+rt_sigaction(SIGUSR1, {0x8053370, [USR1], SA_RESTORER|SA_RESTART, 0x550535d8}, {SIG_DFL}, 8) = 0
+brk(0)                                  = 0x806d000
+brk(0x806e000)                          = 0x806e000
+brk(0)                                  = 0x806e000
+brk(0x806f000)                          = 0x806f000
+brk(0)                                  = 0x806f000
+brk(0x8070000)                          = 0x8070000
+stat64(".", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+open(".", O_RDONLY|O_NONBLOCK|O_LARGEFILE|O_DIRECTORY) = 3
+fstat64(3, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+fcntl64(3, F_SETFD, FD_CLOEXEC)         = 0
+brk(0)                                  = 0x8070000
+brk(0x8071000)                          = 0x8071000
+getdents64(3, /* 5 entries */, 4096)    = 144
+getdents64(3, /* 0 entries */, 4096)    = 0
+close(3)                                = 0
+open("Makefile", O_RDONLY|O_LARGEFILE)  = 3
+fstat64(3, {st_mode=S_IFREG|0755, st_size=165, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x55363000
+read(3, "INCLUDE := /lib/modules/`uname -"..., 4096) = 165
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+munmap(0x55363000, 4096)                = 0
+brk(0)                                  = 0x8071000
+brk(0x8072000)                          = 0x8072000
+brk(0)                                  = 0x8072000
+brk(0x8073000)                          = 0x8073000
+stat64("RCS", 0xfeffe080)               = -1 ENOENT (No such file or directory)
+stat64("SCCS", 0xfeffe080)              = -1 ENOENT (No such file or directory)
+stat64("Makefile", {st_mode=S_IFREG|0755, st_size=165, ...}) = 0
+gettimeofday({1075926518, 911747}, NULL) = 0
+brk(0)                                  = 0x8073000
+brk(0x8074000)                          = 0x8074000
+stat64("default", 0xfeffdf10)           = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/locale.alias", O_RDONLY) = 3
+fstat64(3, {st_mode=S_IFREG|0644, st_size=2601, ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x55363000
+read(3, "# Locale name alias data base.\n#"..., 4096) = 2601
+read(3, "", 4096)                       = 0
+close(3)                                = 0
+munmap(0x55363000, 4096)                = 0
+brk(0)                                  = 0x8074000
+brk(0x8075000)                          = 0x8075000
+open("/usr/share/locale/en_US.UTF-8/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en_US.utf8/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en_US/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en.UTF-8/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en.utf8/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+open("/usr/share/locale/en/LC_MESSAGES/make.mo", O_RDONLY) = -1 ENOENT (No such file or directory)
+fstat64(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 1), ...}) = 0
+mmap2(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x55363000
+write(1, "make -C /lib/modules/`uname -r`/"..., 60) = 60
+pipe([3, 4])                            = 0
+close(4)                                = 0
+fcntl64(3, F_SETFD, FD_CLOEXEC)         = 0
+rt_sigprocmask(SIG_BLOCK, [HUP INT QUIT TERM XCPU XFSZ], NULL, 8) = 0
+vfork()                                 = 17772
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+wait4(-1, /bin/sh: line 1: include/asm-i386/asm_offsets.h.tmp: No such file or directory
+mv: can't stat source include/asm-i386/asm_offsets.h.tmp
+make[1]: *** [include/asm-i386/asm_offsets.h] Error 1
+[WIFEXITED(s) && WEXITSTATUS(s) == 2], 0, NULL) = 17772
+--- SIGCHLD (Child exited) @ 0 (0) ---
+sigreturn()                             = ? (mask now [])
+write(2, "make: ", 6make: )                   = 6
+write(2, "*** [default] Error 2", 21*** [default] Error 2)   = 21
+write(2, "\n", 1
+)                       = 1
+rt_sigprocmask(SIG_BLOCK, [HUP INT QUIT TERM XCPU XFSZ], NULL, 8) = 0
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+chdir("/c/code/c-cpp/kernel_module/hello_module") = 0
+munmap(0x55363000, 4096)                = 0
+exit_group(2)                           = ?

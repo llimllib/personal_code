@@ -1,0 +1,12 @@
+PyCon Sprints Day 4
+<p>
+The two groups have finished their parcels to the level where we can show them as part of our presentation on Thursday.   I think this is great - It helps a bit with the presentation nerves as well.   
+</p><p>
+Other happenings at the sprints:
+</p><p>
+PJE and Bob Ippolito have been hard at work on <a href="http://peak.telecommunity.com/DevCenter/PythonEggs">PythonEggs</a>.   This is going to be really good for Python -- it should make delivering applications of all kinds (including Chandler) much easier.
+<br />
+<br />Best quote of the day: "You know what?  I'll eat the microseconds."
+</p><p>
+Donovan Preston showed me his  LivePage Test framework yesterday, and I forgot to mention it.  Donovan is one of those folks who was doing AJAX stuff before the current AJAX hype got started.   The stuff that I saw looked really useful for people who want to try to build richer in browser applications.
+</p>

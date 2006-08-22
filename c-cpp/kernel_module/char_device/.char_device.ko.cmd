@@ -1,0 +1,1 @@
+cmd_/c/code/c-cpp/kernel_module/char_device/char_device.ko := ld -m elf_i386 -r -o /c/code/c-cpp/kernel_module/char_device/char_device.ko /c/code/c-cpp/kernel_module/char_device/char_device.o /c/code/c-cpp/kernel_module/char_device/char_device.mod.o

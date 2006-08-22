@@ -1,0 +1,34 @@
+IMPORTANT SECURITY NOTE FOR MICROSOFT OFFICE 2000
+=================================================
+
+Microsoft has introduced security settings in Word, Excel,
+and PowerPoint. These security settings determine whether
+or not you can run Visual Basic for Applications macros.
+While a detailed list of all the security features and
+what they mean to you is beyond the scope of this document,
+we will cover what you need to know to run the macros
+embedded within some of the documents we have provided on
+the CD-ROM for your perusal and use.
+
+Microsoft Office 2000 installs with security set to high.
+This means that all macros will be disabled without warning.
+By switching your security settings to Medium, you will be
+warned about the macro and given the option to enable or
+disable the embedded macros. By switching your security
+settings to Low, embedded macros will be enabled
+automatically.
+
+Some of you won't have the option of changing the security
+level because your security policy is set by a network
+or security administrator in a corporation. On the CD-ROM
+in the SOURCE directory are two directories called SIGNED
+and UNSIGNED. Placed within the SIGNED directory are
+documents that we have signed using a Verisign Class 3
+certificate. If you open our signed code when your security
+setting is set to High, you will be asked to trust
+documents signed by us for use on your machine.
+
+NOTE: Verisign Class 3 certificates issued for Office 2000
+will expire after one year. You will be told the certificate
+has expired, but you will still be able to enable macros
+within the documents.

@@ -1,0 +1,150 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>eHire Golden</title>
+
+<SCRIPT language="JavaScript" SRC="includes/md5.js"></SCRIPT>
+<script language="JavaScript">
+<!--
+	function doForm() {
+		var error = "";
+		if(document.hashed.username.value.length < 5 || document.hashed.username.value.length > 15)
+			error += "Please enter a username of between 5 and 15 characters\n";
+		if(document.hashed.passhash.value.length < 5 || document.hashed.passhash.value.length > 15)
+			error += "Please enter a password of between 5 and 15 characters\n";
+		if(error == "") {
+			document.hashed.passhash.value = calcMD5(document.hashed.passhash.value);
+			document.hashed.passhash.value += "4915739";
+			document.hashed.passhash.value = calcMD5(document.hashed.passhash.value);
+			document.hashed.submit();
+		}
+		else {
+			alert(error);
+			return false;
+		}
+	}
+-->
+</SCRIPT>
+		
+<link href="/includes/ehiregolden.css" rel="stylesheet" type="text/css">
+<script language="JavaScript1.2" src="/includes/javafunc.js"></script>
+<script language="JavaScript">
+
+function mmLoadMenus() {
+  if (window.mm_menu_0802115102_0) return;
+  window.mm_menu_0802115102_0 = new Menu("root",120,20,"Arial, Helvetica, sans-serif",10,"#000000","#000000","#f2d560","#d3ae11","left","middle",3,0,100,-5,7,true,true,true,0,false,false);
+  mm_menu_0802115102_0.addMenuItem("Post A Job","window.open('./demo/postajob.php', '_parent');");
+  mm_menu_0802115102_0.addMenuItem("Job Tracking","window.open('./demo/jobtracking.php', '_parent');");
+  mm_menu_0802115102_0.fontWeight="bold";
+  mm_menu_0802115102_0.hideOnMouseOut=true;
+  mm_menu_0802115102_0.menuBorder=1;
+  mm_menu_0802115102_0.menuLiteBgColor = '#000000';
+  mm_menu_0802115102_0.menuBorderBgColor='#000000';
+  mm_menu_0802115102_0.bgColor='#000000';
+  window.mm_menu_0802142255_1 = new Menu("root",120,20,"Arial, Helvetica, sans-serif",10,"#000000","#000000","#f2d560","#d3ae11","left","middle",3,0,100,-5,7,true,true,true,0,false,false);
+  mm_menu_0802142255_1.addMenuItem("Revenue Model","window.open('./sales/revmodel.php', '_parent');");
+  mm_menu_0802142255_1.addMenuItem("Sales Territories","window.open('./sales/territories.php', '_parent');");
+  mm_menu_0802142255_1.addMenuItem("Fee Schedule","window.open('./sales/feeschedule.php', '_parent');");
+  mm_menu_0802142255_1.addMenuItem("FAQ","window.open('./sales/faq.php', '_parent');");
+  mm_menu_0802142255_1.fontWeight="bold";
+  mm_menu_0802142255_1.hideOnMouseOut=true;
+  mm_menu_0802142255_1.menuBorder=1;
+  mm_menu_0802142255_1.menuLiteBgColor='#000000';
+  mm_menu_0802142255_1.menuBorderBgColor='#000000';
+  mm_menu_0802142255_1.bgColor='#000000';
+
+  mm_menu_0802142255_1.writeMenus();
+} // mmLoadMenus()</script>
+<script language="JavaScript1.2" src="/images/nav/mm_menu.js"></script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="MM_preloadImages('/images/nav/images/navbar_r1_c2_f2.gif','/images/nav/images/navbar_r1_c3_f2.gif','/images/nav/images/navbar_r1_c4_f2.gif','/images/nav/images/navbar_r1_c5_f2.gif','/images/nav/images/navbar_r1_c6_f2.gif','/images/nav/images/navbar_r1_c7_f2.gif')">
+<table width="755" border="0" cellpadding="0" cellspacing="0" align="center">
+  <!--DWLayoutTable-->
+  <tr> 
+    <td width="755" height="4"><img src="/images/spacer.gif" width="755" height="4"></td>
+  </tr>
+  <tr> 
+    <td height="4"><img src="/images/spacer.gif" width="755" height="4"></td>
+  </tr>
+  <tr style="background: black"> 
+    <td height="75"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td> <img src="/images/spacer.gif" width="350" height="5" align="top"><br> 
+            <a href="http://www.ehiregolden.com">
+		<img src="/images/logowithstar.gif" width="290" height="44" align="left" border="0"></a></td>
+          <td><img src="/images/spacer.gif" width="146" height="10"><img src="/images/search.gif"> 
+            <input type="text" height="20" width="20"></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr> 
+    <td height="2"><img src="/images/spacer.gif" width="755" height="2"></td>
+  </tr>
+  <tr style="background: black"> 
+    <td height="19"> <script language="JavaScript1.2">mmLoadMenus();</script> 
+      <table border="0" cellpadding="0" cellspacing="0" width="650" align="right">
+        <tr> 
+          <td><img name="navbar_r1_c1" src="/images/nav/images/navbar_r1_c1.gif" width="136" height="20" border="0" alt=""></td>
+          <td><a href="/postajob.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navbar_r1_c2','','/images/nav/images/navbar_r1_c2_f2.gif',1);"><img name="navbar_r1_c2" src="/images/nav/images/navbar_r1_c2.gif" width="86" height="20" border="0" alt="Hiregolden.com"></a></td>
+          <td><a href="/tracking.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navbar_r1_c3','','/images/nav/images/navbar_r1_c3_f2.gif',1);"><img name="navbar_r1_c3" src="/images/nav/images/navbar_r1_c3.gif" width="99" height="20" border="0" alt=""></a></td>
+          <td><a href="/hiringsolutions.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navbar_r1_c4','','/images/nav/images/navbar_r1_c4_f2.gif',1);"><img name="navbar_r1_c4" src="/images/nav/images/navbar_r1_c4.gif" width="112" height="20" border="0" alt=""></a></td>
+          <td><a href="#" onMouseOut="MM_swapImgRestore();MM_startTimeout()" onMouseOver="MM_showMenu(window.mm_menu_0802115102_0,1,19,null,'navbar_r1_c5');MM_swapImage('navbar_r1_c5','','/images/nav/images/navbar_r1_c5_f2.gif',1);"><img name="navbar_r1_c5" src="/images/nav/images/navbar_r1_c5.gif" width="62" height="20" border="0" alt=""></a></td>
+          <td><a href="#" onMouseOut="MM_swapImgRestore();MM_startTimeout()" onMouseOver="MM_showMenu(window.mm_menu_0802142255_1,1,19,null,'navbar_r1_c6');MM_swapImage('navbar_r1_c6','','/images/nav/images/navbar_r1_c6_f2.gif',1);"><img name="navbar_r1_c6" src="/images/nav/images/navbar_r1_c6.gif" width="61" height="20" border="0" alt=""></a></td>
+          <td><a href="contactus.php" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('navbar_r1_c7','','/images/nav/images/navbar_r1_c7_f2.gif',1);"><img name="navbar_r1_c7" src="/images/nav/images/navbar_r1_c7.gif" width="94" height="20" border="0" alt=""></a></td>
+          </tr>
+      </table> </td>
+  </tr>
+ </table>
+<table width="755" border="0" cellpadding="0" cellspacing="0" align="center" style="padding-top: 4px">
+  <!--DWLayoutTable-->
+	<tr valign="top"> 
+    	<td height="40" colspan="5" valign="top" class="arrowtext"><img src="images/spacer.gif" width="20" height="5">
+		<img src="images/redarrow.gif" align="absmiddle"> Log In
+    	</td>
+	</tr> 
+</table>
+
+<table width="755" border="0" cellpadding="0" cellspacing="0" align="center" style="padding-top: 4px">
+ <tr align="center"> 
+ 	<td valign="top"><img src="images/topdoubleline.gif" width="550" height="10"></td>
+</tr>
+<FORM ACTION="validate.php" METHOD="post" name="hashed">
+<tr>
+    <td align="left" style="font-size: 14px"><br>
+        <img src="images/spacer.gif" width="200" height="150" align="left"> <br>
+      <br>Username: 
+      <input name="username" type="text" size="25" tabindex="1">
+      <br>
+        <img src="images/spacer.gif" width="305" height="1"> 
+        <INPUT name="button" TYPE="button" onclick="doForm();" VALUE="Enter" tabindex="3">
+      <br>
+      Password:&nbsp; <input type="password" size="25" name="passhash" tabindex="2">
+      <br>
+      <br>
+        <img src="images/spacer.gif" width="95" height="1"><a href="forgot.php" style="text-decoration: underline; color: blue;">forgot 
+        your password?</a><br>
+      <br><br>
+    </td>
+</tr>
+</FORM>
+  <tr align="center"> 
+    <td valign="bottom"><img src="images/bottomdoubleline.gif" width="550" height="10"></td>
+  </tr>
+</table>
+	
+ <table width="755" border="0" cellpadding="0" cellspacing="0" align="center">
+    <tr> 
+    <td height="50" colspan="3" valign="top" style="background: url(/images/bottombar.gif); repeat-x;">
+<p style="font-size: 10px; font-style: italic;">&nbsp;</p></td>
+  </tr>
+  <tr> 
+    <td height="53" colspan="3" valign="top" style="font-size: 12px; font-weight: bold;"><img src="/images/spacer.gif" width="20" height="5">
+    <a href="register.php" class="arrowtext"><img src="/images/redarrow.gif" align="absmiddle" border="0"> Register</a><img src="/images/spacer.gif" width="10" height="1">
+	
+      <p style="font-size: 10px"><font color="#999999">&copy; 
+	  Copyright 2002 Hire Golden, Inc. </font></p></td>
+  </tr>
+</table>
+</body>
+</html>

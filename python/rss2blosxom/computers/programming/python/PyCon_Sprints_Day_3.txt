@@ -1,0 +1,8 @@
+PyCon Sprints Day 3
+<p>
+Day 3 was the first day of the Chandler sprint.   We had two people who joined us with the goal of learning to write a parcel.  We've split into two groups.  One group is working on a parcel for working with del.icio.us bookmarks, and the other group is working on a parcel for grabbing pictures from Flickr.
+</p><p>
+A sprint like this is a good way to get live feedback, and we've gotten a lot of feedback so far.  The two groups are making good progress.  We spent a bunch of time getting infrastructure setup -- a subversion repository, some wiki pages to record notes, sorting out the various builds, and doing some tutorial/walkthrough.   So it wasn't until after lunch until the groups sat down to work on their projects.  
+</p><p>
+So far things are going pretty well -- it looks like both groups will get basic functionality done by the end of tomorrow, and I'd like to be able to show the fruits of their labor as part of our presentation on Thursday.    We have gotten a lot of feedback about things that are hard, error-prone, or redundant.   It's also clear that we need to work some more on documentation.   So it feels like there's good information exchange - Bill, Mark, and Kragen are learning how to write parcels, and we're learning a lot about the kind of support that we need to work on.
+</p>

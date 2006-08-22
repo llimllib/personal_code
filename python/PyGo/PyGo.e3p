@@ -1,0 +1,30 @@
+#
+# Project file for project "PyGo"
+# Saved: 2003-05-26, 02:04:47
+#
+# Copyright (C) 2003 Bill Mill <llimllib@f2o.org>
+#
+
+DESCRIPTION = A wxPython go game 
+
+VERSION = 0.1 
+
+AUTHOR = Bill Mill 
+
+EMAIL = llimllib@f2o.org 
+
+SOURCES = goBoard.py \
+	gtp.py \
+	go_random.py \
+	gtp_server.py \
+	go_players.py \
+	gogame.py \
+	go_referee.py 
+
+MAINSCRIPT = goBoard.py 
+
+VCS = None 
+
+OTHERS = images \
+	TODO 
+

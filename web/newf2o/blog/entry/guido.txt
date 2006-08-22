@@ -1,0 +1,4 @@
+Dear Guido,
+RSS <a href="http://www.artima.com/weblogs/viewpost.jsp?thread=85551">works</a>.
+<!--keywords: python, guido, rss, short-->
+<!--time: 12-23-04 08:02-->

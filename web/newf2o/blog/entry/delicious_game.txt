@@ -1,0 +1,36 @@
+The de.licio.us game
+I'm sure other people have done this, but for the past couple of weeks I've
+been playing the <a href="http://del.icio.us">del.icio.us</a> game all by 
+myself.<p>
+"But Bill," I can hear you thinking, "What is this del.icio.us game that you
+speak of?".<p>
+Well, I'm glad you asked. It's very simple. To play, you simply go about your 
+daily business
+(or more likely procrastination) on the interweb, bookmarking interesting pages
+to del.icio.us as I'm sure you already do. Every so often, you check
+your user page (at http://del.icio.us/your_user_name) and look at your links.
+You win points by checking out who else has copied your bookmarked pages - look
+for the little link that says "and x other people".<p>
+There is a sliding point scale, which I am making up arbitrarily right now,
+since I
+don't need to keep score with myself. Use this as a guide, but feel free to
+give yourself points for whatever you feel is pointsworthy. It's a little like
+<a href="http://www.geocities.com/SoHo/Nook/2990/cb_rules.htm">Calvinball</a>. Anyway, here's my scale:<br /><ul>
+<li><em>15 points</em>: You were the
+first one to link a page which has been linked to more than 50 times.
+<li><em>10 points</em>: You were the first one to link a page which has been
+linked to more than 25 times, but 50 or less times.
+<li><em>6 points</em>: You were the first to post a link after a 24-hour "dead
+link period" where nobody else did it, and 4 or more people followed your lead
+in a day.
+<li><em>4 points</em>: You have, by far, the wittiest comment on a link with
+more than 4 other people in its list.
+<li><em>2 points</em>: Your hair really looks nice today.
+<li><em>-12 points</em>: You are the last person to post that stupid but
+popular link that
+everybody thought was funny yesterday, but is totally passe today.
+</ul><p>
+Everybody count up your scores, link to this post, and show off your high score
+to your friends!
+<!--keywords: humor, ego, games, del.icio.us, meta-meta-data-->
+<!--time: 12-8-04 22:23 -->

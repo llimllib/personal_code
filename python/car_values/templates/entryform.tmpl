@@ -1,0 +1,14 @@
+<html><head><title>Enter your car search parameters:</title></head>
+<body>
+    <form method="POST" name="makezipform" action="show_cars">
+    <select name="make">
+    Car Manufacturer:
+    #for $make, $code in $make_codes
+        <option value="$code">$make</option>
+    #end for
+    <p>
+    Zip Code:
+        <input name="zipcode" length="5">
+    <input type="submit" value="Submit">
+    </form>
+</body></html>

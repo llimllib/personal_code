@@ -1,0 +1,4 @@
+Zen and the Art of Apache Maintenance
+<p>
+Slashdot  <a href="http://apache.slashdot.org/article.pl?sid=05/04/05/1951228&#38;from=rss" id="05/04/05/1951228&#38;from=rss">pointed</a> to this <a href="http://www.madpenguin.org/cms/html/62/3847.html">article</a> about the ASF Infrathon, an in person gathering of Apache people for the purpose of keeping the ASF systems running.   The issue of project infrastructure is one that I've come across a few time recently.   At the PyCon sprints there was a discussion of these topics in the context of the PSF.   We need to do a better job of exchanging this kind of information between various parts of the open source community.
+</p>

@@ -1,0 +1,23 @@
+  <br/>
+  <div class="blosxomCommentForm">
+   <form method="post" action="$base_url/$file_path" name="comments_form">
+   <input type="hidden" name="secretToken" value="pleaseDontSpam" />
+   <input name="parent" type="hidden" value="$file_path" />
+   <input name="title" type="hidden" value="$title" />
+   Name:<br />
+   <input maxlength="50" name="author" size="50" type="text" value="$cmt_author" /><br />
+    <br />
+   E-mail:<br />
+   <input maxlength="75" name="email" size="50" type="text" value="$cmt_email" /><br />
+   <br />
+   URL:<br />
+
+   <input maxlength="100" name="url" size="50" type="text" value="$cmt_link" /><br />
+   <br />
+   Comment:<br />
+   <textarea cols="50" name="body" rows="12">$cmt_description</textarea><br />
+   <br />
+   <input name="Submit" type="submit" value="Submit" />
+   <input name="preview" type="submit" value="Preview" /> 
+   </form>
+   </div>

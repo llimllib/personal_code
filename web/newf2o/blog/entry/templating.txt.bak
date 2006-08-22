@@ -1,0 +1,138 @@
+Battle of the Lightweight Python Templates
+I have a couple of requirements for my in-development photo gallery. First, I
+want to have a limited number of pictures appear on each page of the gallery,
+and to allow people to page through the pages of the gallery. Second, I don't
+want to make the user count up how many photos are in each gallery page and
+enter them into their config.py; the software should be smart enough to figure
+that out.<p>
+Unfortunately, these requirements together mean that it would be uncomfortable
+to use the current pyblosxom templating system for the templates of my photo
+gallery. To make it work, I would imagine that a gallery template would look
+something like this:<p>
+<textarea cols="60" rows="12"><div id="photos">
+<a href="$base_url/$photo_trigger">Home</a><p>
+<a href="$photo1_url"><img src="$thumb1"></a>
+<a href="$photo2_url"><img src="$thumb2"></a>
+<a href="$photo3_url"><img src="$thumb3"></a>
+<br />
+<a href="$photo4_url"><img src="$thumb4"></a>
+<a href="$photo5_url"><img src="$thumb5"></a>
+<a href="$photo6_url"><img src="$thumb6"></a>
+<br />
+<a href="$next_page">next</a><br>
+<a href="$prev_page">previous</a>
+</div></textarea><p>
+I would then have to parse the template to pull index numbers from inside the
+variable names and figure out how many photos were in the template, so that I
+could show only that many pictures, as well as figure out if there's a next
+page or not. Furthermore, I would have to append all variables associated with
+a picture with that picture's index. In general, it would be really messy.<p>
+To fix the issues with such a templating scheme, I came up with a template that
+looked like this:<p>
+<textarea cols="60" rows="12"><div id="photos">
+<a href="$base_url/$photo_trigger">Home</a><p>
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<br />
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<photo><a href="$photo_url"><img src="$thumb"></a></photo>
+<br />
+<a href="$next_page">next</a><br>
+<a href="$prev_page">previous</a>
+</div></textarea><p>
+Now, each &lt;photo&gt; tag tells the gallery that it's in the "namespace" (to
+use the term loosely) for
+the next picture, obviating the need for index numbers on variables. I hacked
+up a script to parse the template, count the photo tags, split up the sections
+enclosed between <photo> tags, and do variable replacement on them with 
+consecutive photoEntry dictionaries. This allowed me to use the pyblosxom
+variable replacement algorithm for most of the heavy lifting, and the templates
+looked OK.<p>
+However, when I did this, I wasn't entirely satisfied. I remembered back in my
+PHP days, that I would have done it differently. As you can see, there are 2
+repeated rows of 3 photos each, with a &lt;br&gt; in between. Why not go
+heavier on the template and allow looping? I figured there would be a few
+python packages ready-made for this, and went hunting.<p>I found 2 right away in
+the <a href="http://www.pythonweb.org/">Python Web Modules</a> -
+<a href="http://www.cheetahtemplate.org/">Cheetah</a> and 
+<a href="http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/162292">Xyaptu</a>.
+I was more
+immediately impressed with Xyaptu's syntax, but both looked easy enough, so I
+gave them both a shot. I would have tried out Cheetah first, but a test page
+like this:<p>
+<textarea cols="60" rows="5"><html><head>$title</head><body>
+This page has _${var}_ substitution.<br>
+#for $i in $photos:
+    $i.location
+#end for
+</body></html></textarea><p>
+took over 2 seconds to parse. This was clearly unacceptable, as the gallery is
+going to be rendering pages on the fly. I fiddled with Xyaptu for a while,
+fixing it to my needs a little bit, and it was clearly much faster and simpler.
+I decided to give it a shot,
+so I went ahead and coded up the whole gallery page.
+The Xyaptu template looked like this:<p>
+<textarea cols="60" rows="14"><div id="photos">
+<a href="$base_url/$photo_trigger">Home</a><p>
+<py-line code="num_photos = 6" />
+<py-line code="next_page = next(num_photos, len(photos), page, base_url, path_info)" />
+<py-open code="for i in range(min(num_photos, len(photos))):" />
+    <py-open code="if i and i%3 == 0:" />
+        <br />
+    <py-close />
+    <a href="$base_url/$photo_trigger/${photos[(page*num_photos) + i]['photofile']}"><img src="${photos[i]['thumb']}"></a>
+<py-close />
+<br />
+<a href="$next_page">next</a><br>
+<a href="$prev_page">previous</a>
+</div></textarea><p>
+The Xyaptu templates are a lot more powerful than my hack, but the code didn't
+turn out nearly as neat as I'd hoped. Furthermore, it meant embedding some
+logic within the template, which I realized I had wanted to avoid. What seemed
+so natural in my PHP days now feels awkward and forced.<p>
+The final nail in Xyaptu's coffin came when I tested its speed against my 
+simple &lt;photo&gt; tag hack. Xyaptu timed a reasonable .05 seconds to parse
+this simple template, but my code did the same thing in an almost-nonexistant
+.005 seconds. I don't attribute the difference to my coding ability, but
+rather to the specific nature of my hack.<p>
+I was able to customize Xyaptu fairly easily to replace unbound variables with
+empty strings, and I even hacked it up so that it didn't add extra empty lines
+to my code. It is short, simple, and reasonably fault tolerant. I also believe
+that its performance would be adequate for a dynamic web application. It would
+certainly add a lot of power to the gallery's templating system.<p>
+However, in this case. I think my hack surpasses it for simplicity and 
+elegance. The added power of Xyaptu is simply not worthwhile for the increased
+complexity and learning curve it brings.<p>
+If somebody would be interested in a Xyaptu template plugin 
+for Pyblosxom, I would be glad to write it, since I did all kinds of work to
+customize it for pyblosxom already. It seems to me, though, that it would be a
+step backwards. If somebody would like a Cheetah plugin, they'll have to
+write it themselves, because I don't feel that the program is fast enough to
+power a dynamic website.<p>
+I did not try any more template plugins, because seeing the results of such
+plugins made me more satisfied with my current solution. The only
+different, interesting, idea that came up in my template search is 
+<a href="http://www.entrian.com/PyMeld/">PyMeld</a>.<p>
+In PyMeld, you manipulate the HTML template directly from python, selecting
+elements by ids which you must insert. I like the idea, but I don't want to
+force the users of my photo gallery to be python programmers (even though
+they're very likely to be anyway). It seems to me that PyMeld has the opposite
+problem of PHP - it puts some of the display information inside the code of
+the web application.<p>
+<h2>Status of the gallery</h2><p>
+I'm glad I didn't let anybody download it before today, since there was a bug
+in it which was creating all kinds of extra thumbnails and medium images. I
+found this out when my disk filled up, but it fortunately caused me no damage.
+(I'm not that bad a programmer, I swear).<p>
+I spent a couple of hours trying to
+wrap <a href="http://home.arcor.de/ahuggel/exiv2/">exiv2</a> 
+with <a href="http://www.swig.org/">Swig</a> so that I could use
+it from python, but was unsuccessful. I still don't have a good meta-data
+solution for photos, so if you have any ideas, let me know.<p>
+<h2>Question</h2><p>
+Has anybody actually used the keyword categorization on my site? Found it
+useful? Found it broken? Thought about using it somewhere else?
+<!--keywords: meta-data, python, photo_gallery, template, computer-->
+<!--time: 12-12-04 22:03-->

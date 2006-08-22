@@ -1,0 +1,28 @@
+Process and Resource Manager
+Bill Mill
+Operating Systems
+3.19.04
+
+To run the process manager, simply type "python shell.py" in a command shell.
+
+The process manager implements these functions (all arguments are required):
+
+ps                   list all processes and resources, and information about 
+                      them
+cr [name] [priority] create a process with a given name and priority
+kill [name/pid]      destroy a process with a given name or process id
+req [rid]            request a resource with a given resource id
+rel [rid]            release the resource with the given resource id
+susp [name/pid]      suspend a process with a given name or process id
+act [name/pid]       activate a process with a given name or process id
+time                 simulate an IO timeout
+req_io               request the IO resource
+rel_io               release the IO resource
+
+The files contained in this project are:
+shell.py:       The interactive shell
+scheduler.py:   The scheduler and all the functions listed above
+process.py:     Process control block, resource control block, and priority
+                queue definitions
+
+I don't understand how to demonstrate a deadlock situation.

@@ -1,0 +1,43 @@
+ NFA Programming Assignment 
+3. Nondeterministic Finite Automata 
+
+The abstract data type representing nondeterministic finite automata comprises 
+five main parts, which correspond to the five components in the definition of 
+the automata: the set Q of states, the alphabet Sigma, the start state S, the 
+set F of final states, and the transition relation Delta. Notice that Delta is a
+relation and that Delta is not required to be a function as it is for a finite
+state automaton. This means that the validation of an automaton is much simpler. 
+On the other hand, as we would expect in a nondeterministic setting, determining 
+whether a string is accepted or rejected is much more complicated. An additional 
+data member of the abstract data type is the number of transitions. 
+
+Programming Assignment 
+
+Define and test a C++ class NFAType. The elements of the underlying sets are 
+characters. 
+
+There are six private members of the class: 
+• a representation of the set Q of states 
+• a representation of the alphabet Sigma 
+• the start state S 
+• a representation of the set F of final states 
+• a representation of the transition function Delta 
+• the number of transitions, NumTransitions 
+
+
+All public members of the class are functions: 
+
+• a constructor NFAType 
+• a function write that prints the components of an automaton 
+• a function is_valid to test that the components define an automaton 
+• a function NextState that returns a next state when given a state and a symbol 
+• a function is_accepted that tests that a given string is accepted by the 
+  automaton 
+
+
+Hand in the following extensively documented files: 
+
+• a C++ specification file nfatypes 
+• a C++ implementation file nfatype 
+• a C++ program nfatest.cpp (with output) that thoroughly tests your 
+  implementation  

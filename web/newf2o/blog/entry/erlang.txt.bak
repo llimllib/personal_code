@@ -1,0 +1,120 @@
+A Pythonista's Impressions of Erlang
+I am planning to write a poker server in 
+<a href="http://erlang.org">Erlang</a>. Why? A couple of reasons.
+First off, I have heard that the concurrency support in it is excellent.
+Secondly, A quick glance gave me the impression that it was, at least, not
+brain-dead. Third, it's been a long time since I learned a new language, so I'm
+planning to do it for kicks.<p>
+As such, for the last few days, I've been playing around with the language, and
+I have begun to form my opinions on it. Since I've been pretty busy, I haven't
+had too much time to play with it, and as such my opinions are half-baked.
+Since that never stopped me from writing before, here they are.<p>
+If I'm wrong somewhere (and I'm sure I am) drop me a comment, and I'll fix it.
+<p>
+<h2>The Good</h2><p>
+<ul>
+<li><b>Interpreter</b>: Erlang has a shell that is very similar to Python's. I
+am totally addicted to the Python shell, so this makes experimentation quite a
+bit easier. It features some comforting functions: m(module_name). lists the
+functions exported by module_name, and length([1,2,3]). returns 3.
+<li><b>Pattern Matching</b>: I *love* this feature. If I were to make a serious
+switch to Erlang, pattern matching would be a large reason. I'm not sure how
+well it works in large applications yet, but it certainly feels elegant to
+me.<p>
+With pattern matching, you can define one function multiple times, and Erlang
+will pick the appropriate function based on its signature. Perhaps an example 
+will help; you can define your basic factorial function like so:<p>
+<textarea rows="4" cols="50">fact(0) ->
+    1;
+fact(N) ->
+    N * fact(N-1).</textarea><p>
+Erlang will automatically call the first function when the argument is zero,
+and the second one otherwise.
+<li><b>Guards</b>: Similar to pattern matching, guards help Erlang figure out
+which function to call by setting a basic precondition for one or more 
+parameters. Thus, we could revise our factorial function in a silly way to use
+guards:<p>
+<textarea rows="4" cols="50">fact(N) when N > 0 ->
+    N * fact(N-1);
+fact(0) ->
+    1.</textarea><p>
+As you can see, this is a silly way to use guards, but I think it gives a good
+quick indication of what they do.
+<li><b>Data Structures</b>: Erlang, for the most part, has a good, rich set
+of data structures. Lists are as powerful as they should be, and it has list
+comprehensions (which have quickly become one of my favorite Python features).
+Tuples work nearly the same as they do in Python as well.<p>
+Unlike Python, Erlang features atoms. Atoms, which have no Python equivalent,
+consist of any identifier which starts with a lower-case letter or any
+single-quoted string. It seems that Erlang's idiom for dictionaries uses tuples
+and atoms:<p>
+<textarea rows="2" cols="50">Mydict = {{anatom, 12}, {'atom w space', 15},
+    {atomsarekeys, 12}}</textarea><p>
+Erlang does (obviously) have variables, but they must start with a capital 
+letter to be distinguished from atoms. There is also a record type, but I do not
+have a good enough understanding of it yet to explain it.
+<li><b>The Philosophy</b>: The most abstract point here, I think that Erlang
+seems to encourage good, readable code. After just a few hours in the language,
+I feel comfortable enough to dive into the Erlang httpd server and try to
+understand what's going on. Considering that other functional languages have
+only given me frustration in this respect, I think it bodes very well for
+Erlang to be good in this regard.
+</ul>
+<h2>The Not-Sure-If-It's-Good-Or-Not</h2><p>
+<ul>
+<li><b>Variable Binding</b>: Variables, once bound in a scope, cannot be 
+reassigned to
+another value in the same scope. I really like Python's binding scheme, where 
+variables are just names, and may be assigned to refer to anything. However, I
+can imagine the variable binding restriction catching a bunch of silly errors.
+I haven't used it enough (read: at all) to make a judgement on whether it's
+worthwhile or not.<p>
+On the upside, it does seem to encourage short functions, which I think is a
+good thing. Erlang in general seems to encourage short functions which are used by other objects; I am in the process of studying the Erlang idiom of 
+supervisors and workers.
+<li><b>Concurrency</b>: Although it looks neat, I've yet to get in and play
+with Erlang's concurrency, so I don't want to render a decision on it.
+</ul>
+<h2>The Bad</h2><p>
+<ul>
+<li><b>No String Type</b>: Let me repeat this for emphasis: There Is No String
+Type In Erlang. Arrrggggh! Why would you do this?<p>
+A string is treated, you guessed it, as a sequence of ASCII codes in a list.
+It's C all over again. The shell tries to "guess" when a list is
+actually a string, which is a pain if a list you create just happens to contain
+values in the printable ASCII range.<p>
+<li><b>Error messages</b>: Erlang's error messages are totally undecipherable
+for a newbie. Here's what happens when you call a function with the wrong
+number of arguments:<p>
+<textarea rows="5" cols="50">** exited: {undef,[{shell_default,length,[[1,2,3],12]},
+                   {erl_eval,do_apply,5},
+                   {shell,exprs,6},
+                   {shell,eval_loop,3}]} **</textarea><p>Got it?
+<li><b>Documentation</b>: Most of the links to documentation on
+<a href="http://erlang.org">erlang.org</a> are broken. When you finally do get
+to the docs (mysteriously at erlang.se instead of erlang.org), there are some
+real gems. When you click on "Complete List of BIFs" (BIF = built-in function)
+in the reference manual, you get "For a complete list of BIFs, their 
+arguments and return values, refer to erlang(3).".<p>
+The kicker? When I downloaded and installed Erlang, the man pages either
+weren't installed or weren't put in the right place. So, as a newbie, I am left
+digging away from the main erlang site just to find out what the f$%$ing
+built-in functions are. Not a good sign.
+<li><b>The; Punctuation. Is, Weird -></b>: Maybe this is one of the not sure
+things, but I'm pretty sure I don't like some of Erlang's punctuation. I don't
+mind the '->', but I oftentimes have to look at the docs to figure out whether
+I should be using a ';' or a '.' to end a statement. Furthermore, the error
+messages, as I've already shown, are less than helpful in guiding you to the
+source of the syntax error.
+</ul>
+<p>Well, that's it for now. I'm sure I left some stuff out, and I'm sure you
+disagree with some of what I've said, so leave me a comment with what you
+think or drop me an <a href="mailto:llimllib@f2o.org">email</a>.<p>
+Overall, I think Erlang has some neat features - especially pattern matching
+and guards. Furthermore, if what everyone says is true, its concurrency is fast
+and well-designed. Although the lack of proper documentation is a turn-off, I
+feel like I'll be able to learn what I need to know from reading the very
+readily available code. I'm still going to give it a shot, which is a good
+sign.
+<!--keywords: erlang, programming, computer, language, syntax, design-->
+<!--time: 1-10-05 11:54-->

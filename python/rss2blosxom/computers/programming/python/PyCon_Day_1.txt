@@ -1,0 +1,8 @@
+PyCon Day 1
+<p>
+PyCon has a slightly different feel to it this year.  I think it's due to the size and being split up across multiple floors of a building.   It's still a fun conference, but it has a slightly less intimate feel to it.   That probably doesn't impact the talks very much, but it does reduce the chances of running into folks in the hallways.  
+</p><p>
+It probably also feels different because there are more OSAF people here this year.   This year, we're more like some of the other projects.  In addition to myself, we also have three people in the Eastern timezone who are working full time on Chandler.  That means that we're using PyCon as precious face time, just like many of the other projects are.   I missed most of the afternoon sessions while catching up, working through issues in person, and preparing for our presentation.   The two presentations that I'm giving might have something to do with the different feel as well.
+</p><p>
+I did manage to make it to some sessions, though.   The highlights of today was the Mac track, which included appscript and Bob Ippolito's two <a href="http://bob.pythonmac.org/archives/2005/03/23/pyobjc-at-pycon/">talks</a> on PyObjC.   Perhaps next year we'll start to see some other projects making use of all the good work that the PyObjC folks have been doing.   The next best talk was Brett Cannon's talk on Localized Type-Inference.  This was a "good science" talk, in the sense that scientifically, negative results are just as important as positive results (see the notes for the gory details).  So while I appreciated the talk from that point of view, I was disappointed that type inference in the local cases is so hard.
+</p>

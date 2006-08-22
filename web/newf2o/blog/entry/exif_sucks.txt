@@ -1,0 +1,41 @@
+EXIF Sucks
+What I want is simple. I want to be able to go through a directory of pictures
+and annotate them. I want to store the annotation inside the pictures, and I
+want to extract that information with python. This has proved to be damned near
+impossible.<p>
+While there are <a href="http://pyexif.sourceforge.net/">several</a>
+<a href="http://www.pythonware.com/products/pil/">tools</a> <a
+href="http://home.cfl.rr.com/genecash/">available</a> to extract exif data from
+python, none of them appear to be able to write exif data. Thus, I cannot store
+visitor's comments in the python files, which is one way I was considering 
+storing them.<p>
+Oh well, I'm flexible, I thought, I can add comments using a client-side
+tool and just extract them with these scripts. After wrestling unsuccessfuly 
+with <a href="http://sourceforge.net/projects/libexif">gexif</a> for an hour 
+or so, I realized that I would need a comment editor on my Windows partition
+too. Based on a quick search, there was nothing palatable for that.<p>
+So, Exif was out; I can dump information from it, but not put it in. A quick
+glance at the horribly written standards document told me that I wasn't going
+to spend the time to write a python module to insert comments into jpeg files,
+especially when the authors of much more serious programs hadn't even braved
+those waters.<p>
+I checked out <a href="http://fotonotes.net/spec/">FotoNotes</a>, but there
+exist no python modules for working with it, so it's out. I checked out 
+<a href="http://www.spack.org/wiki/IptcSpecification">IPTC</a>,
+but it has exactly the same limitations as exif - lots of tools read its data,
+but I found no decent ones for writing it.
+<p>I've yet to check out
+<a href="http://jigsaw.w3.org/rdfpic/">RDFPic</a>, but at this point I feel
+like using jpeg image meta-data is so brittle as to be worthless. I don't trust
+that anybody else is ever going to be able to extract the meta-data from the
+file in the future, so why should I go through extra effort to put it in there 
+in the first place?<p>
+And that's the story of why I think I'm going to store image meta-data outside 
+of image files, contrary to every meta-data principle I have.<p>
+<h2>Postscript</h2><p>
+Now that I have that off my chest, I will say that the image gallery is moving
+forward nicely. As soon as I can get my host to install PIL, I'll have a
+working demo up here. At the moment, they're appearing lethargic at best. More
+information when events warrant.
+<!--keywords: meta-data, jpeg, exif, iptc, fotonotes, rdfpic, computer, programming-->
+<!--time: 12-07-04 00:48-->

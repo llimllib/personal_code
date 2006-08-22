@@ -1,0 +1,81 @@
+' Listing 10.3. A procedure that displays text in the Access status bar.
+'
+Sub StatusBarText()
+    Dim frm As Form
+    Dim strStatus As String
+    Dim ctrlCount As Integer
+    Dim i As Integer
+    Dim start As Long
+    '
+    ' Open the Orders form
+    '
+    DoCmd.OpenForm "Startup", acDesign
+    Set frm = Forms!Startup
+    '
+    ' Get the control count
+    '
+    ctrlCount = frm.Controls.Count
+    '
+    ' Loop through the controls
+    '
+    For i = 0 To ctrlCount - 1
+        '
+        ' Update the status bar text
+        '
+        strStatus = "Control " & i + 1 & " of " & ctrlCount
+        SysCmd acSysCmdSetStatus, strStatus
+        '
+        ' Delay for half a second
+        '
+        start = Timer
+        Do While Timer < (start + 0.5)
+            DoEvents
+        Loop
+    Next i
+    '
+    ' Clear the status bar
+    '
+    SysCmd acSysCmdClearStatus
+End Sub
+
+' Listing 10.4. A procedure that displays a progress meter in the Access status bar.
+'
+Sub StatusBarProgressMeter()
+    Dim frm As Form
+    Dim ctrlCount As Integer
+    Dim i As Integer
+    Dim start As Long
+    '
+    ' Open the Orders form
+    '
+    DoCmd.OpenForm "Startup", acDesign
+    Set frm = Forms!Startup
+    '
+    ' Get the control count
+    '
+    ctrlCount = frm.Controls.Count
+    '
+    ' Initialize the progress meter
+    '
+    SysCmd acSysCmdInitMeter, "Control Loop:", ctrlCount
+    '
+    ' Loop through the controls
+    '
+    For i = 0 To ctrlCount - 1
+        '
+        ' Update the progress meter
+        '
+        SysCmd acSysCmdUpdateMeter, i + 1
+        '
+        ' Delay for half a second
+        '
+        start = Timer
+        Do While Timer < (start + 0.5)
+            DoEvents
+        Loop
+    Next i
+    '
+    ' Clear the status bar
+    '
+    SysCmd acSysCmdRemoveMeter
+End Sub

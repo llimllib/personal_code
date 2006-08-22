@@ -1,0 +1,4 @@
+Attention java.blogs readers...
+<p>
+I'm switching the feed that java.blogs picks up, so that only Java related posts will appear.
+</p>

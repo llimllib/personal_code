@@ -1,0 +1,1547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF
+ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ xmlns="http://purl.org/rss/1.0/"
+ xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/"
+ xmlns:dc="http://purl.org/dc/elements/1.1/"
+ xmlns:syn="http://purl.org/rss/1.0/modules/syndication/"
+ xmlns:admin="http://webns.net/mvcb/"
+>
+
+<channel rdf:about="http://del.icio.us/">
+<title>del.icio.us</title>
+<link>http://del.icio.us/</link>
+<description></description>
+<items>
+ <rdf:Seq>
+  <rdf:li rdf:resource="http://phonophunk.phreakin.com/articles/ie-fix-for-gaps-between-list-items.php" />
+  <rdf:li rdf:resource="http://www.quicksilverweb.net/sbucks/sbcharts.htm" />
+  <rdf:li rdf:resource="http://www.newcomicreviews.com/temp/spidey/rotate.php" />
+  <rdf:li rdf:resource="http://www.goodfonts.org/" />
+  <rdf:li rdf:resource="http://www.darkhorse.com/" />
+  <rdf:li rdf:resource="http://www.tolleson.com/" />
+  <rdf:li rdf:resource="http://www.marvel.com/" />
+  <rdf:li rdf:resource="http://www.pythonapocrypha.com/projects/pyco/" />
+  <rdf:li rdf:resource="http://www.worth1000.com/cache/contest/contestcache.asp?contest_id=3837&amp;display=photography#entries" />
+  <rdf:li rdf:resource="http://www.marveldirectory.com/" />
+  <rdf:li rdf:resource="http://www.lexisnexis.com/news/" />
+  <rdf:li rdf:resource="http://wellstyled.com/tools/dummy-cz/vogon.php" />
+  <rdf:li rdf:resource="http://www.dccomics.com/" />
+  <rdf:li rdf:resource="http://www.dansherman.com/2005/01/cool-ecommerce-tool-but-does-it.html" />
+  <rdf:li rdf:resource="http://www.dcuguide.com/Who_Home.php" />
+  <rdf:li rdf:resource="http://kintera.sitestream.com/ferrell_qt_hi.mov" />
+  <rdf:li rdf:resource="http://javascript-reference.info/" />
+  <rdf:li rdf:resource="http://www.dept3.com/" />
+  <rdf:li rdf:resource="http://www.returnofdesign.com/spectacle/" />
+  <rdf:li rdf:resource="http://www.fulltiltpoker.com/links.html" />
+  <rdf:li rdf:resource="http://www.workingforchange.com/column_lst.cfm?AuthrId=43" />
+  <rdf:li rdf:resource="http://www.freedom-to-tinker.com/archives/000744.html" />
+  <rdf:li rdf:resource="http://www.redmeat.com/redmeat/" />
+  <rdf:li rdf:resource="http://www.asofterworld.com/" />
+  <rdf:li rdf:resource="http://louisrosenfeld.com/home/bloug_archive/000330.html" />
+  <rdf:li rdf:resource="http://www.marcpeters.co.uk/video-quality-tips.html" />
+  <rdf:li rdf:resource="http://www.last.fm/" />
+  <rdf:li rdf:resource="http://www.spamusement.com/" />
+  <rdf:li rdf:resource="http://www.15seconds.com/issue/050106.htm" />
+  <rdf:li rdf:resource="http://www.spreadfirefox.com/?q=node/view/9711" />
+  <rdf:li rdf:resource="http://www.lewrockwell.com/rockwell/red-state-fascism.html" />
+  <rdf:li rdf:resource="http://ftpservertools.tripod.com/downloads.htm" />
+  <rdf:li rdf:resource="http://www.nature.com/physics/physics.taf?file=/physics/highlights/7021-1.html" />
+  <rdf:li rdf:resource="http://extempore.livejournal.com/" />
+  <rdf:li rdf:resource="http://www.templinbrinkdesign.com/" />
+  <rdf:li rdf:resource="http://www.latimes.com/" />
+  <rdf:li rdf:resource="http://www.democracynow.org/article.pl?sid=05/01/03/1447225" />
+  <rdf:li rdf:resource="http://s3.yousendit.com/" />
+  <rdf:li rdf:resource="http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2" />
+  <rdf:li rdf:resource="http://viebrock.ca/code/32/virtual-hosts-on-os-x" />
+  <rdf:li rdf:resource="http://www.planetbollywood.com/" />
+  <rdf:li rdf:resource="http://www.feedforall.com/public/rss-graphic-tool.htm" />
+  <rdf:li rdf:resource="http://www.waterproofmusic.com/swimp3.html" />
+  <rdf:li rdf:resource="http://simon.incutio.com/archive/2005/01/05/swissMaps" />
+  <rdf:li rdf:resource="http://www.doom9.org/mpg/dvd2svcd-basic.htm" />
+  <rdf:li rdf:resource="http://www.onlamp.com/pub/a/onlamp/2005/01/06/svn_homedir.html" />
+  <rdf:li rdf:resource="http://www.isohunt.com/" />
+  <rdf:li rdf:resource="http://www.goodfonts.org/index.html" />
+  <rdf:li rdf:resource="http://www.fullcontactpoker.com/" />
+  <rdf:li rdf:resource="http://www.google.com/search?hl=en&amp;q=speed+of+light+in+furlongs+per+fortnight&amp;btnG=Google+Search" />
+  <rdf:li rdf:resource="http://www.bettertimesinfo.org/foodchallenge.htm" />
+  <rdf:li rdf:resource="http://www.bl.uk/collections/treasures/digitisation6.html" />
+  <rdf:li rdf:resource="http://members.ozemail.com.au/~imcfadyen/situations.htm" />
+  <rdf:li rdf:resource="http://www.mikedoughty.com/main.html" />
+  <rdf:li rdf:resource="http://channels.lockergnome.com/web/archives/20050111_link_popularity.phtml" />
+  <rdf:li rdf:resource="http://www.paulbeard.org/wordpress/index.php?p=2430" />
+  <rdf:li rdf:resource="http://www.cnn.com/" />
+  <rdf:li rdf:resource="http://www.marcpeters.co.uk/encoding.html" />
+  <rdf:li rdf:resource="http://www.doom9.org/index.html?/mpg/dvdshrink31-mmo.htm" />
+  <rdf:li rdf:resource="http://www.planeandpilotmag.com/" />
+  <rdf:li rdf:resource="http://blog.warmbrain.com/justblogit/" />
+  <rdf:li rdf:resource="http://www.bugmenot.com/" />
+  <rdf:li rdf:resource="http://blog.livedoor.jp/takapon_jp/archives/11921911.html" />
+  <rdf:li rdf:resource="http://yro.slashdot.org/article.pl?sid=05/01/06/2324211&amp;tid=95&amp;tid=185&amp;tid=1&amp;tid=17" />
+  <rdf:li rdf:resource="http://www.nefisa.co.uk/" />
+  <rdf:li rdf:resource="http://www.webaim.org/techniques/articles/hiddentext" />
+  <rdf:li rdf:resource="http://www.thalcos.com/rq.htm" />
+  <rdf:li rdf:resource="http://www.soundkeepers.com/GRE/" />
+  <rdf:li rdf:resource="http://www.telegraph.co.uk/health/main.jhtml?xml=/health/2005/01/04/hdiet04.xml&amp;sSheet=/health/2005/01/05/ixhmain.html" />
+  <rdf:li rdf:resource="http://www.weebls-stuff.com/" />
+  <rdf:li rdf:resource="http://gorgias.de/mfe/" />
+  <rdf:li rdf:resource="http://aronsson.se/wikipaper.html" />
+  <rdf:li rdf:resource="http://www.filmdeveloper.com/" />
+  <rdf:li rdf:resource="http://www.sitepoint.com/blog-post-view?id=222195" />
+  <rdf:li rdf:resource="http://www.patc.net/index.htm" />
+  <rdf:li rdf:resource="http://www.adventurejournalist.com/notebook/" />
+  <rdf:li rdf:resource="http://www.google.com/webhp?complete=1" />
+  <rdf:li rdf:resource="http://www.seoconsultants.com/css/colors/web-safe.asp" />
+  <rdf:li rdf:resource="http://www.chillingeffects.org/" />
+  <rdf:li rdf:resource="http://www.zurqui.com/crinfocus/paper/airplane.html" />
+  <rdf:li rdf:resource="http://www.knowledgehound.com/topics/film.htm" />
+  <rdf:li rdf:resource="http://www.momscancer.com/" />
+  <rdf:li rdf:resource="http://www.pac-audio.com/products/aai.htm" />
+  <rdf:li rdf:resource="http://dmextension.mozdev.org/" />
+  <rdf:li rdf:resource="http://cnb-host1.clickandbuild.com/cnb/shop/sfa" />
+  <rdf:li rdf:resource="http://www.joefino.com/index.html" />
+  <rdf:li rdf:resource="http://www.macosxhints.com/article.php?story=20050105164804763" />
+  <rdf:li rdf:resource="http://www.cadre.qc.ca/pointe/article.php?id_article=93" />
+  <rdf:li rdf:resource="http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2" />
+  <rdf:li rdf:resource="http://www.dv.com/" />
+  <rdf:li rdf:resource="http://www.macosxhints.com/article.php?story=20050105054852773" />
+  <rdf:li rdf:resource="http://del.icio.us/" />
+  <rdf:li rdf:resource="http://www.ctomer.com/" />
+  <rdf:li rdf:resource="http://www.mezzoblue.com/archives/2005/01/06/dhtml_05/index.php" />
+  <rdf:li rdf:resource="http://www.azcentral.com/ent/best2003/ae/articles/0914bestfestivals14.html" />
+  <rdf:li rdf:resource="http://www.musclesurf.com/" />
+  <rdf:li rdf:resource="http://www.phoenix.gov/parks/herievnt.html?location=heritage*&amp;orgURL=http://inphx:8000/" />
+  <rdf:li rdf:resource="http://www.i2p.net/" />
+  <rdf:li rdf:resource="http://www.wddg.com/" />
+  <rdf:li rdf:resource="http://www.ordnancesurvey.co.uk/oswebsite/products/osmastermap/xml/svgexample.html" />
+ </rdf:Seq>
+</items>
+</channel>
+
+<item rdf:about="http://phonophunk.phreakin.com/articles/ie-fix-for-gaps-between-list-items.php">
+<title>CSS Bugs: Fix for IE / Win gap between list items</title>
+<link>http://phonophunk.phreakin.com/articles/ie-fix-for-gaps-between-list-items.php</link>
+<dc:creator>Woody</dc:creator>
+<dc:date>2005-01-07T04:23Z</dc:date>
+<dc:subject>css hacks</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/css" />
+    <rdf:li resource="http://del.icio.us/tag/hacks" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.quicksilverweb.net/sbucks/sbcharts.htm">
+<title>Starbucks Drinks Simplified (kinda)</title>
+<link>http://www.quicksilverweb.net/sbucks/sbcharts.htm</link>
+<dc:creator>a1l3n</dc:creator>
+<dc:date>2005-01-07T04:23Z</dc:date>
+<dc:subject>coffee</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/coffee" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.newcomicreviews.com/temp/spidey/rotate.php">
+<title>Spiderman panel remixes</title>
+<link>http://www.newcomicreviews.com/temp/spidey/rotate.php</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:23Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.goodfonts.org/">
+<title>Essential Fonts For Designers | 300 Free Truetype Fonts You Should Have</title>
+<link>http://www.goodfonts.org/</link>
+<dc:creator>wcsian</dc:creator>
+<dc:date>2005-01-07T04:23Z</dc:date>
+<dc:subject>webmaster</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/webmaster" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.darkhorse.com/">
+<title>Dark Horse Comics</title>
+<link>http://www.darkhorse.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.tolleson.com/">
+<title>Tolleson Design</title>
+<link>http://www.tolleson.com/</link>
+<dc:creator>smittyext248</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>design logo packaging print sf</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/design" />
+    <rdf:li resource="http://del.icio.us/tag/print" />
+    <rdf:li resource="http://del.icio.us/tag/logo" />
+    <rdf:li resource="http://del.icio.us/tag/packaging" />
+    <rdf:li resource="http://del.icio.us/tag/sf" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.marvel.com/">
+<title>Marvel.com - Marvel Next</title>
+<link>http://www.marvel.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.pythonapocrypha.com/projects/pyco/">
+<title>Pyco - create a standalone windows executable</title>
+<link>http://www.pythonapocrypha.com/projects/pyco/</link>
+<dc:creator>gaba</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>python</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/python" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.worth1000.com/cache/contest/contestcache.asp?contest_id=3837&amp;display=photography#entries">
+<title>Worth1000.com | Photography Contests | Are you Worthy%u2122 | contest</title>
+<link>http://www.worth1000.com/cache/contest/contestcache.asp?contest_id=3837&amp;display=photography#entries</link>
+<dc:creator>rhynodesigns</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>Nature Photos</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Photos" />
+    <rdf:li resource="http://del.icio.us/tag/Nature" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.marveldirectory.com/">
+<title>Marvel Directory</title>
+<link>http://www.marveldirectory.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:22Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.lexisnexis.com/news/">
+<title>LexisNexis</title>
+<link>http://www.lexisnexis.com/news/</link>
+<description>US Politics &amp; World News %u2013 President George Bush, White House, Domestic Issues, Iraq, War on Terror, Middle East, World Leaders</description>
+<dc:creator>chaizzilla</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>news</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/news" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://wellstyled.com/tools/dummy-cz/vogon.php">
+<title>Vogon Poetry Generator (in czech)</title>
+<link>http://wellstyled.com/tools/dummy-cz/vogon.php</link>
+<dc:creator>natrik</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>trippy</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/trippy" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.dccomics.com/">
+<title>DC Comics</title>
+<link>http://www.dccomics.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.dansherman.com/2005/01/cool-ecommerce-tool-but-does-it.html">
+<title>Dan Sherman: Cool Ecommerce Tool - But Does it Increase Revenue?</title>
+<link>http://www.dansherman.com/2005/01/cool-ecommerce-tool-but-does-it.html</link>
+<dc:creator>pc4media</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<taxo:topics>
+  <rdf:Bag>
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.dcuguide.com/Who_Home.php">
+<title>The Unofficial Who's Who in the DC Universe</title>
+<link>http://www.dcuguide.com/Who_Home.php</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://kintera.sitestream.com/ferrell_qt_hi.mov">
+<title>Will Ferrell as Bush</title>
+<link>http://kintera.sitestream.com/ferrell_qt_hi.mov</link>
+<dc:creator>jehza</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>Bush comedy politics satire</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Bush" />
+    <rdf:li resource="http://del.icio.us/tag/politics" />
+    <rdf:li resource="http://del.icio.us/tag/satire" />
+    <rdf:li resource="http://del.icio.us/tag/comedy" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://javascript-reference.info/">
+<title>JavaScript Reference</title>
+<link>http://javascript-reference.info/</link>
+<description>Quick reference card for JavaScript</description>
+<dc:creator>ssoriche</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>JavaScript</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/JavaScript" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.dept3.com/">
+<title>Department 3</title>
+<link>http://www.dept3.com/</link>
+<dc:creator>smittyext248</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>design interactive logo packaging portfolio print sf</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/design" />
+    <rdf:li resource="http://del.icio.us/tag/portfolio" />
+    <rdf:li resource="http://del.icio.us/tag/logo" />
+    <rdf:li resource="http://del.icio.us/tag/packaging" />
+    <rdf:li resource="http://del.icio.us/tag/interactive" />
+    <rdf:li resource="http://del.icio.us/tag/print" />
+    <rdf:li resource="http://del.icio.us/tag/sf" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.returnofdesign.com/spectacle/">
+<title>Spectacle - Design Resources</title>
+<link>http://www.returnofdesign.com/spectacle/</link>
+<dc:creator>shanabak</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>resource webdesign</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/webdesign" />
+    <rdf:li resource="http://del.icio.us/tag/resource" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.fulltiltpoker.com/links.html">
+<title>Full Tilt Poker.com</title>
+<link>http://www.fulltiltpoker.com/links.html</link>
+<description>The link page on full tilt is pretty useful</description>
+<dc:creator>luke9</dc:creator>
+<dc:date>2005-01-07T04:21Z</dc:date>
+<dc:subject>Poker</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Poker" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.workingforchange.com/column_lst.cfm?AuthrId=43">
+<title>This Modern World</title>
+<link>http://www.workingforchange.com/column_lst.cfm?AuthrId=43</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.freedom-to-tinker.com/archives/000744.html">
+<title>Freedom to Tinker: Predictions for 2005</title>
+<link>http://www.freedom-to-tinker.com/archives/000744.html</link>
+<dc:creator>tnlg</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>forecasting</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/forecasting" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.redmeat.com/redmeat/">
+<title>Red Meat - from the secret files of Max Cannon</title>
+<link>http://www.redmeat.com/redmeat/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.asofterworld.com/">
+<title>A softer world.</title>
+<link>http://www.asofterworld.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://louisrosenfeld.com/home/bloug_archive/000330.html">
+<title>Folksonomies?  How about Metadata Ecologies? from Lou Rosenfeld</title>
+<link>http://louisrosenfeld.com/home/bloug_archive/000330.html</link>
+<dc:creator>vanderwal</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>folksonomy infoecology metadata</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/folksonomy" />
+    <rdf:li resource="http://del.icio.us/tag/metadata" />
+    <rdf:li resource="http://del.icio.us/tag/infoecology" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.marcpeters.co.uk/video-quality-tips.html">
+<title>High Quality Video Encoding</title>
+<link>http://www.marcpeters.co.uk/video-quality-tips.html</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>audio dvd editing tips tutorials video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/editing" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+    <rdf:li resource="http://del.icio.us/tag/dvd" />
+    <rdf:li resource="http://del.icio.us/tag/audio" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.last.fm/">
+<title>Last.FM</title>
+<link>http://www.last.fm/</link>
+<description>Your personal music network - Personalised online radio station</description>
+<dc:creator>mauftarkie</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>music</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/music" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.spamusement.com/">
+<title>Spamusement</title>
+<link>http://www.spamusement.com/</link>
+<dc:creator>stimpson</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>comics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comics" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.15seconds.com/issue/050106.htm">
+<title>15 Seconds : Debugging a SQL Stored Procedure from inside SQL Server 2000 Query Analyzer</title>
+<link>http://www.15seconds.com/issue/050106.htm</link>
+<dc:creator>ron.richardson</dc:creator>
+<dc:date>2005-01-07T04:20Z</dc:date>
+<dc:subject>development sql</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/development" />
+    <rdf:li resource="http://del.icio.us/tag/sql" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.spreadfirefox.com/?q=node/view/9711">
+<title>New mosaic image available - Spread Firefox</title>
+<link>http://www.spreadfirefox.com/?q=node/view/9711</link>
+<description>Guy is making a mosais of the Firefox logo out of FF compliant sites.  I suggested Sprint for white and DisneySites for blue.. and there are several disneysites images in there... w00t!!</description>
+<dc:creator>zelph</dc:creator>
+<dc:date>2005-01-07T04:19Z</dc:date>
+<dc:subject>cool firefox followup madeComment</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/madeComment" />
+    <rdf:li resource="http://del.icio.us/tag/firefox" />
+    <rdf:li resource="http://del.icio.us/tag/cool" />
+    <rdf:li resource="http://del.icio.us/tag/followup" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.lewrockwell.com/rockwell/red-state-fascism.html">
+<title>The Reality of Red-State Fascism by Llewellyn H. Rockwell, Jr.</title>
+<link>http://www.lewrockwell.com/rockwell/red-state-fascism.html</link>
+<dc:creator>genome_q</dc:creator>
+<dc:date>2005-01-07T04:19Z</dc:date>
+<dc:subject>fascism politics</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/politics" />
+    <rdf:li resource="http://del.icio.us/tag/fascism" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://ftpservertools.tripod.com/downloads.htm">
+<title>FTPServerTools Downloads</title>
+<link>http://ftpservertools.tripod.com/downloads.htm</link>
+<description>What are these things? Well they are tools for use in various ftp servers. They are made because I was very dissatisfied with almost all the scripts and tools that I saw for various servers. Also the tools only worked for one server and not for another.</description>
+<dc:creator>sroutier</dc:creator>
+<dc:date>2005-01-07T04:19Z</dc:date>
+<dc:subject>_TOREAD comp.tools.ftp</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/_TOREAD" />
+    <rdf:li resource="http://del.icio.us/tag/comp.tools.ftp" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.nature.com/physics/physics.taf?file=/physics/highlights/7021-1.html">
+<title>nature physics portal - research highlights - Natural selection acts on the quantum world</title>
+<link>http://www.nature.com/physics/physics.taf?file=/physics/highlights/7021-1.html</link>
+<dc:creator>mulberry</dc:creator>
+<dc:date>2005-01-07T04:19Z</dc:date>
+<dc:subject>physics quantum</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/physics" />
+    <rdf:li resource="http://del.icio.us/tag/quantum" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://extempore.livejournal.com/">
+<title>Paul Phillips' Journal</title>
+<link>http://extempore.livejournal.com/</link>
+<dc:creator>luke9</dc:creator>
+<dc:date>2005-01-07T04:19Z</dc:date>
+<dc:subject>Poker</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Poker" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.templinbrinkdesign.com/">
+<title>Templin Brink Design</title>
+<link>http://www.templinbrinkdesign.com/</link>
+<dc:creator>smittyext248</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>design logo packaging portfolio print sf</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/design" />
+    <rdf:li resource="http://del.icio.us/tag/sf" />
+    <rdf:li resource="http://del.icio.us/tag/logo" />
+    <rdf:li resource="http://del.icio.us/tag/print" />
+    <rdf:li resource="http://del.icio.us/tag/packaging" />
+    <rdf:li resource="http://del.icio.us/tag/portfolio" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.latimes.com/">
+<title>Los Angeles Times - latimes.com</title>
+<link>http://www.latimes.com/</link>
+<dc:creator>oldsieb</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>news</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/news" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.democracynow.org/article.pl?sid=05/01/03/1447225">
+<title>The Mire of Death, Lies and Atrocities: Robert Fisk Looks Back at 2004</title>
+<link>http://www.democracynow.org/article.pl?sid=05/01/03/1447225</link>
+<dc:creator>woweezowee</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>folter irak journalism usa</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/irak" />
+    <rdf:li resource="http://del.icio.us/tag/usa" />
+    <rdf:li resource="http://del.icio.us/tag/folter" />
+    <rdf:li resource="http://del.icio.us/tag/journalism" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://s3.yousendit.com/">
+<title>YouSendIt | Email large files quickly, securely, and easily!</title>
+<link>http://s3.yousendit.com/</link>
+<dc:creator>Mike626</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>@Web:Tools</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/@Web:Tools" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2">
+<title>ONLamp.com: Calculating Entropy for Data Mining</title>
+<link>http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2</link>
+<dc:creator>dvschramm</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<taxo:topics>
+  <rdf:Bag>
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://viebrock.ca/code/32/virtual-hosts-on-os-x">
+<title>viebrock.ca › Virtual Hosts on OS X</title>
+<link>http://viebrock.ca/code/32/virtual-hosts-on-os-x</link>
+<dc:creator>pixelsmoke</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>Hosts OSX Virtual</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/OSX" />
+    <rdf:li resource="http://del.icio.us/tag/Virtual" />
+    <rdf:li resource="http://del.icio.us/tag/Hosts" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.planetbollywood.com/">
+<title>Planet Bollywood</title>
+<link>http://www.planetbollywood.com/</link>
+<dc:creator>xega</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>Bollywood</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Bollywood" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.feedforall.com/public/rss-graphic-tool.htm">
+<title>Free RSS Graphic Tool</title>
+<link>http://www.feedforall.com/public/rss-graphic-tool.htm</link>
+<dc:creator>Woody</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>online_tools</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/online_tools" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.waterproofmusic.com/swimp3.html">
+<title>SwiMP3 Waterproof MP3 Player</title>
+<link>http://www.waterproofmusic.com/swimp3.html</link>
+<dc:creator>tony.stevenson</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>exercise mp3 music</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/mp3" />
+    <rdf:li resource="http://del.icio.us/tag/music" />
+    <rdf:li resource="http://del.icio.us/tag/exercise" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://simon.incutio.com/archive/2005/01/05/swissMaps">
+<title>Simon Willison: map.search.ch</title>
+<link>http://simon.incutio.com/archive/2005/01/05/swissMaps</link>
+<dc:creator>FalsePositives</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>DHTML XMLHttpRequest</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/XMLHttpRequest" />
+    <rdf:li resource="http://del.icio.us/tag/DHTML" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.doom9.org/mpg/dvd2svcd-basic.htm">
+<title>Doom 9 - DVD2SVCD basic setup</title>
+<link>http://www.doom9.org/mpg/dvd2svcd-basic.htm</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>config conversion movies software tips tutorials video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/software" />
+    <rdf:li resource="http://del.icio.us/tag/config" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/conversion" />
+    <rdf:li resource="http://del.icio.us/tag/movies" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.onlamp.com/pub/a/onlamp/2005/01/06/svn_homedir.html">
+<title>ONLamp.com: Keeping Your Life in Subversion</title>
+<link>http://www.onlamp.com/pub/a/onlamp/2005/01/06/svn_homedir.html</link>
+<dc:creator>jploudre</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>backup ssh svn</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/svn" />
+    <rdf:li resource="http://del.icio.us/tag/ssh" />
+    <rdf:li resource="http://del.icio.us/tag/backup" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.isohunt.com/">
+<title>isoHunt - IRC and Bit Torrent Search Engine</title>
+<link>http://www.isohunt.com/</link>
+<dc:creator>xega</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>IRC</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/IRC" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.goodfonts.org/index.html">
+<title>Essential Fonts For Designers | 300 Free Truetype Fonts You Should Have</title>
+<link>http://www.goodfonts.org/index.html</link>
+<dc:creator>shanabak</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>fonts webdesign</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/webdesign" />
+    <rdf:li resource="http://del.icio.us/tag/fonts" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.fullcontactpoker.com/">
+<title>FullContactPoker</title>
+<link>http://www.fullcontactpoker.com/</link>
+<description>Daniel Negreanu's Poker Site</description>
+<dc:creator>luke9</dc:creator>
+<dc:date>2005-01-07T04:18Z</dc:date>
+<dc:subject>Poker</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Poker" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.google.com/search?hl=en&amp;q=speed+of+light+in+furlongs+per+fortnight&amp;btnG=Google+Search">
+<title>Google Search: speed of light in furlongs per fortnight</title>
+<link>http://www.google.com/search?hl=en&amp;q=speed+of+light+in+furlongs+per+fortnight&amp;btnG=Google+Search</link>
+<dc:creator>fid</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>science</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/science" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.bettertimesinfo.org/foodchallenge.htm">
+<title>MEETING THE FOOD STAMP CHALLENGE WITH LOCAL FOODS</title>
+<link>http://www.bettertimesinfo.org/foodchallenge.htm</link>
+<dc:creator>askliu</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>food</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/food" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.bl.uk/collections/treasures/digitisation6.html">
+<title>Turning the Pages</title>
+<link>http://www.bl.uk/collections/treasures/digitisation6.html</link>
+<description>British Library's,...</description>
+<dc:creator>murali</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<taxo:topics>
+  <rdf:Bag>
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://members.ozemail.com.au/~imcfadyen/situations.htm">
+<title>Situation Comedy.</title>
+<link>http://members.ozemail.com.au/~imcfadyen/situations.htm</link>
+<description>why australia has no decent situation comedies</description>
+<dc:creator>jimmythemagnet</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>australia comedy culture</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/comedy" />
+    <rdf:li resource="http://del.icio.us/tag/culture" />
+    <rdf:li resource="http://del.icio.us/tag/australia" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.mikedoughty.com/main.html">
+<title>Mike Doughty Music</title>
+<link>http://www.mikedoughty.com/main.html</link>
+<dc:creator>m750</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>music</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/music" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://channels.lockergnome.com/web/archives/20050111_link_popularity.phtml">
+<title>Link Popularity (Marketing)</title>
+<link>http://channels.lockergnome.com/web/archives/20050111_link_popularity.phtml</link>
+<dc:creator>jhesch</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>marketing search_engine</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/marketing" />
+    <rdf:li resource="http://del.icio.us/tag/search_engine" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.paulbeard.org/wordpress/index.php?p=2430">
+<title>a crank’s progress » UPDATED: CNN does RSS? ladies and gentlemen, start your newsreaders</title>
+<link>http://www.paulbeard.org/wordpress/index.php?p=2430</link>
+<dc:creator>Woody</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>feeds</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/feeds" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.cnn.com/">
+<title>CNN.com</title>
+<link>http://www.cnn.com/</link>
+<dc:creator>oldsieb</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>news</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/news" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.marcpeters.co.uk/encoding.html">
+<title>Introduction to Video Encoding</title>
+<link>http://www.marcpeters.co.uk/encoding.html</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>audio dvd editing tips tutorials video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/editing" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+    <rdf:li resource="http://del.icio.us/tag/dvd" />
+    <rdf:li resource="http://del.icio.us/tag/audio" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.doom9.org/index.html?/mpg/dvdshrink31-mmo.htm">
+<title>Doom9.net - The Definitive DVD Backup Resource</title>
+<link>http://www.doom9.org/index.html?/mpg/dvdshrink31-mmo.htm</link>
+<dc:creator>shanabak</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>backup dvd movies tutorials</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/backup" />
+    <rdf:li resource="http://del.icio.us/tag/dvd" />
+    <rdf:li resource="http://del.icio.us/tag/movies" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.planeandpilotmag.com/">
+<title>Plane &amp; Pilot Magazine | For Active Piston-Engine Pilots</title>
+<link>http://www.planeandpilotmag.com/</link>
+<dc:creator>musti</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>x-plane</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/x-plane" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://blog.warmbrain.com/justblogit/">
+<title>JustBlogIt with a simple right-click.</title>
+<link>http://blog.warmbrain.com/justblogit/</link>
+<dc:creator>wayoftheironpaw</dc:creator>
+<dc:date>2005-01-07T04:17Z</dc:date>
+<dc:subject>blog extension firefox mozilla</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/mozilla" />
+    <rdf:li resource="http://del.icio.us/tag/firefox" />
+    <rdf:li resource="http://del.icio.us/tag/extension" />
+    <rdf:li resource="http://del.icio.us/tag/blog" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.bugmenot.com/">
+<title>BugMeNot.com</title>
+<link>http://www.bugmenot.com/</link>
+<dc:creator>oldsieb</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>indespensible</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/indespensible" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://blog.livedoor.jp/takapon_jp/archives/11921911.html">
+<title>社長日記:1/6(木) バイオ案件などなど</title>
+<link>http://blog.livedoor.jp/takapon_jp/archives/11921911.html</link>
+<dc:creator>miyagawa</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>blog livedoor</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/livedoor" />
+    <rdf:li resource="http://del.icio.us/tag/blog" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://yro.slashdot.org/article.pl?sid=05/01/06/2324211&amp;tid=95&amp;tid=185&amp;tid=1&amp;tid=17">
+<title>Slashdot | World's Shortest P2P App: 15 Lines</title>
+<link>http://yro.slashdot.org/article.pl?sid=05/01/06/2324211&amp;tid=95&amp;tid=185&amp;tid=1&amp;tid=17</link>
+<dc:creator>tnlg</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>coolapp</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/coolapp" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.nefisa.co.uk/">
+<title>Yoshi (Nefisa)</title>
+<link>http://www.nefisa.co.uk/</link>
+<description>Be Good People</description>
+<dc:creator>robbytherobot</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>Art Cool Music Writers</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Music" />
+    <rdf:li resource="http://del.icio.us/tag/Art" />
+    <rdf:li resource="http://del.icio.us/tag/Writers" />
+    <rdf:li resource="http://del.icio.us/tag/Cool" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.webaim.org/techniques/articles/hiddentext">
+<title>An accessible method of hiding HTML content</title>
+<link>http://www.webaim.org/techniques/articles/hiddentext</link>
+<dc:creator>splintered</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>accessibility web</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/web" />
+    <rdf:li resource="http://del.icio.us/tag/accessibility" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.thalcos.com/rq.htm">
+<title>RuneSlayer</title>
+<link>http://www.thalcos.com/rq.htm</link>
+<description>RuneQuest: Slayers, the free weird fantasy roleplaying game that is truly some sort of bastard spawn.</description>
+<dc:creator>crnixon</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>roleplaying</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/roleplaying" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.soundkeepers.com/GRE/">
+<title>GRE Vocabulary Builder</title>
+<link>http://www.soundkeepers.com/GRE/</link>
+<dc:creator>jehza</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>GRE vocabulary</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/GRE" />
+    <rdf:li resource="http://del.icio.us/tag/vocabulary" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.telegraph.co.uk/health/main.jhtml?xml=/health/2005/01/04/hdiet04.xml&amp;sSheet=/health/2005/01/05/ixhmain.html">
+<title>Telegraph | Health | The no-diet diet: it's a question of habit</title>
+<link>http://www.telegraph.co.uk/health/main.jhtml?xml=/health/2005/01/04/hdiet04.xml&amp;sSheet=/health/2005/01/05/ixhmain.html</link>
+<dc:creator>glass</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>interest</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/interest" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.weebls-stuff.com/">
+<title>Weebls Stuff - News</title>
+<link>http://www.weebls-stuff.com/</link>
+<description>Toons, Games,...</description>
+<dc:creator>murali</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<taxo:topics>
+  <rdf:Bag>
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://gorgias.de/mfe/">
+<title>Gorgias' Firefox Extensions</title>
+<link>http://gorgias.de/mfe/</link>
+<description>For the Add Bookmark Here extension</description>
+<dc:creator>wayoftheironpaw</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>extension firefox mozilla</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/mozilla" />
+    <rdf:li resource="http://del.icio.us/tag/firefox" />
+    <rdf:li resource="http://del.icio.us/tag/extension" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://aronsson.se/wikipaper.html">
+<title>Operation of a Large Scale, General Purpose Wiki Website</title>
+<link>http://aronsson.se/wikipaper.html</link>
+<dc:creator>coyotejoe</dc:creator>
+<dc:date>2005-01-07T04:16Z</dc:date>
+<dc:subject>wiki</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/wiki" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.filmdeveloper.com/">
+<title>FilmDeveloper.com : Film</title>
+<link>http://www.filmdeveloper.com/</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>editing film magazine tips tutorials tv video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/film" />
+    <rdf:li resource="http://del.icio.us/tag/tv" />
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+    <rdf:li resource="http://del.icio.us/tag/editing" />
+    <rdf:li resource="http://del.icio.us/tag/magazine" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.sitepoint.com/blog-post-view?id=222195">
+<title>2005: The year of the DOM - SitePoint DHTML &amp; CSS Blog</title>
+<link>http://www.sitepoint.com/blog-post-view?id=222195</link>
+<dc:creator>FalsePositives</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>DTHML</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/DTHML" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.patc.net/index.htm">
+<title>Potomac Appalachian Trail Club</title>
+<link>http://www.patc.net/index.htm</link>
+<dc:creator>isaacwedin</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>camping trails</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/camping" />
+    <rdf:li resource="http://del.icio.us/tag/trails" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.adventurejournalist.com/notebook/">
+<title>adventure journalist : the notebook</title>
+<link>http://www.adventurejournalist.com/notebook/</link>
+<dc:creator>balsum</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>All Star</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/All" />
+    <rdf:li resource="http://del.icio.us/tag/Star" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.google.com/webhp?complete=1">
+<title>Google</title>
+<link>http://www.google.com/webhp?complete=1</link>
+<dc:creator>Woody</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>XMLHttpRequest dhtml examples</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/dhtml" />
+    <rdf:li resource="http://del.icio.us/tag/XMLHttpRequest" />
+    <rdf:li resource="http://del.icio.us/tag/examples" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.seoconsultants.com/css/colors/web-safe.asp">
+<title>Web Safe Color Chart - Paired Color Values</title>
+<link>http://www.seoconsultants.com/css/colors/web-safe.asp</link>
+<dc:creator>jehza</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>webdesign</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/webdesign" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.chillingeffects.org/">
+<title>Chilling Effects Clearinghouse</title>
+<link>http://www.chillingeffects.org/</link>
+<dc:creator>duncan7</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>law speech</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/law" />
+    <rdf:li resource="http://del.icio.us/tag/speech" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.zurqui.com/crinfocus/paper/airplane.html">
+<title>Paper airplane - The best paper airplane in the world!</title>
+<link>http://www.zurqui.com/crinfocus/paper/airplane.html</link>
+<dc:creator>SpaceLana</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>kids origami play</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/play" />
+    <rdf:li resource="http://del.icio.us/tag/kids" />
+    <rdf:li resource="http://del.icio.us/tag/origami" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.knowledgehound.com/topics/film.htm">
+<title>Film, TV and Video Tutorials: Filming, editing, lighting, sound, funding...</title>
+<link>http://www.knowledgehound.com/topics/film.htm</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<dc:subject>editing film movies tips tutorials tv video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/film" />
+    <rdf:li resource="http://del.icio.us/tag/tv" />
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/movies" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+    <rdf:li resource="http://del.icio.us/tag/editing" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.momscancer.com/">
+<title>comic strip on "mom's cancer"</title>
+<link>http://www.momscancer.com/</link>
+<dc:creator>Ellebeam</dc:creator>
+<dc:date>2005-01-07T04:15Z</dc:date>
+<taxo:topics>
+  <rdf:Bag>
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.pac-audio.com/products/aai.htm">
+<title>AAI</title>
+<link>http://www.pac-audio.com/products/aai.htm</link>
+<dc:creator>mstress</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>iPod</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/iPod" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://dmextension.mozdev.org/">
+<title>mozdev.org - dmextension: index</title>
+<link>http://dmextension.mozdev.org/</link>
+<dc:creator>wayoftheironpaw</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>extension firefox mozilla</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/mozilla" />
+    <rdf:li resource="http://del.icio.us/tag/firefox" />
+    <rdf:li resource="http://del.icio.us/tag/extension" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://cnb-host1.clickandbuild.com/cnb/shop/sfa">
+<title>The Scotland Collection - Store Entrance</title>
+<link>http://cnb-host1.clickandbuild.com/cnb/shop/sfa</link>
+<dc:creator>jehza</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>Scotland soccer</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/Scotland" />
+    <rdf:li resource="http://del.icio.us/tag/soccer" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.joefino.com/index.html">
+<title>Joe Finocchiaro Design</title>
+<link>http://www.joefino.com/index.html</link>
+<dc:creator>smittyext248</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>design logo portfolio typography</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/design" />
+    <rdf:li resource="http://del.icio.us/tag/portfolio" />
+    <rdf:li resource="http://del.icio.us/tag/logo" />
+    <rdf:li resource="http://del.icio.us/tag/typography" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.macosxhints.com/article.php?story=20050105164804763">
+<title>macosxhints - Use Mail's scriptability to archive messages</title>
+<link>http://www.macosxhints.com/article.php?story=20050105164804763</link>
+<dc:creator>yjsoon</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>macosxhints mail</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/macosxhints" />
+    <rdf:li resource="http://del.icio.us/tag/mail" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.cadre.qc.ca/pointe/article.php?id_article=93">
+<title>Allocution de Robert Bisaillon rapporté par "Le Point E"</title>
+<link>http://www.cadre.qc.ca/pointe/article.php?id_article=93</link>
+<description>CUEILLETTE DE NOTES DE DIVERS PARTICIPANTS PRISES LORS DE LA SESSION DE FORMATION DES PERSONNES-RESSOURCES DU 1ER DÉCEMBRE 2004 par Pauline Langlais</description>
+<dc:creator>Mariotoutdego</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>community management</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/community" />
+    <rdf:li resource="http://del.icio.us/tag/management" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2">
+<title>ONLamp.com: Calculating Entropy for Data Mining</title>
+<link>http://www.onlamp.com/pub/a/php/2005/01/06/entropy.html?page=2</link>
+<dc:creator>ramil</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>php</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/php" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.dv.com/">
+<title>DV - Home Page</title>
+<link>http://www.dv.com/</link>
+<dc:creator>elephant_walk</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>audio magazine tips tutorials video</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/audio" />
+    <rdf:li resource="http://del.icio.us/tag/video" />
+    <rdf:li resource="http://del.icio.us/tag/magazine" />
+    <rdf:li resource="http://del.icio.us/tag/tutorials" />
+    <rdf:li resource="http://del.icio.us/tag/tips" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.macosxhints.com/article.php?story=20050105054852773">
+<title>macosxhints - A script to export artist and album data from iTunes</title>
+<link>http://www.macosxhints.com/article.php?story=20050105054852773</link>
+<dc:creator>yjsoon</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>itunes macosxhints</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/macosxhints" />
+    <rdf:li resource="http://del.icio.us/tag/itunes" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://del.icio.us/">
+<title>del.icio.us</title>
+<link>http://del.icio.us/</link>
+<dc:creator>oldsieb</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>indespensible</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/indespensible" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.ctomer.com/">
+<title>Gravelog - home of Translate</title>
+<link>http://www.ctomer.com/</link>
+<dc:creator>wayoftheironpaw</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>extension firefox mozilla</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/mozilla" />
+    <rdf:li resource="http://del.icio.us/tag/firefox" />
+    <rdf:li resource="http://del.icio.us/tag/extension" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.mezzoblue.com/archives/2005/01/06/dhtml_05/index.php">
+<title>mezzoblue  §  DHTML '05</title>
+<link>http://www.mezzoblue.com/archives/2005/01/06/dhtml_05/index.php</link>
+<dc:creator>Woody</dc:creator>
+<dc:date>2005-01-07T04:14Z</dc:date>
+<dc:subject>XMLHttpRequest dhtml</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/dhtml" />
+    <rdf:li resource="http://del.icio.us/tag/XMLHttpRequest" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.azcentral.com/ent/best2003/ae/articles/0914bestfestivals14.html">
+<title>Best International Festivals of the Year</title>
+<link>http://www.azcentral.com/ent/best2003/ae/articles/0914bestfestivals14.html</link>
+<dc:creator>sir_schultz</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>weekend</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/weekend" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.musclesurf.com/">
+<title>MuscleSurf.com - Xenadrine,Creatine,Whey Protein,Hydroxycut,Myoplex,N Large</title>
+<link>http://www.musclesurf.com/</link>
+<description>Cheap supplements</description>
+<dc:creator>spacemanspiff</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>fitness</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/fitness" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.phoenix.gov/parks/herievnt.html?location=heritage*&amp;orgURL=http://inphx:8000/">
+<title>Heritage &amp; Science Park Calendar</title>
+<link>http://www.phoenix.gov/parks/herievnt.html?location=heritage*&amp;orgURL=http://inphx:8000/</link>
+<dc:creator>sir_schultz</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>weekend</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/weekend" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.i2p.net/">
+<title>Welcome to I2P</title>
+<link>http://www.i2p.net/</link>
+<dc:creator>yjsoon</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>bittorrent networking</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/networking" />
+    <rdf:li resource="http://del.icio.us/tag/bittorrent" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.wddg.com/">
+<title>WDDG</title>
+<link>http://www.wddg.com/</link>
+<dc:creator>smittyext248</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>design la ny portfolio</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/ny" />
+    <rdf:li resource="http://del.icio.us/tag/la" />
+    <rdf:li resource="http://del.icio.us/tag/design" />
+    <rdf:li resource="http://del.icio.us/tag/portfolio" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+<item rdf:about="http://www.ordnancesurvey.co.uk/oswebsite/products/osmastermap/xml/svgexample.html">
+<title>Interactive example of SVG Maps</title>
+<link>http://www.ordnancesurvey.co.uk/oswebsite/products/osmastermap/xml/svgexample.html</link>
+<description>How to use SVG to create maps</description>
+<dc:creator>karlcow</dc:creator>
+<dc:date>2005-01-07T04:13Z</dc:date>
+<dc:subject>GML SVG carte cartographie cartography map</dc:subject>
+<taxo:topics>
+  <rdf:Bag>
+    <rdf:li resource="http://del.icio.us/tag/SVG" />
+    <rdf:li resource="http://del.icio.us/tag/map" />
+    <rdf:li resource="http://del.icio.us/tag/cartography" />
+    <rdf:li resource="http://del.icio.us/tag/GML" />
+    <rdf:li resource="http://del.icio.us/tag/carte" />
+    <rdf:li resource="http://del.icio.us/tag/cartographie" />
+  </rdf:Bag>
+</taxo:topics>
+</item>
+
+</rdf:RDF>
+

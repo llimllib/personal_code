@@ -1,0 +1,4 @@
+Are Hippies all that's left?
+<p>
+It seems that the <a href="http://cld.blog-city.com/read/1175080.htm">Netbeans</a> and <a href="http://beust.com/weblog/archives/000258.html">Eclipse</a> partisans are trading one ups over the inclusion of hippie-expansion in their text editors.   I like hippie expansion -- I've been using it since my days as a grad student in the early 90's.  However, I'm puzzled by the fuss over it.  According to my copy of the  Emacs Lisp sources, hippie-expansion has been around since at least 1992.  Is it really such a great achievement to be incorporating this feature 8 or 13 years after it appears in Emacs?   I'm being  a little extreme here, but it seems crazy to be touting the appearance of hippie-expansion as some indicator of IDE prowess.
+</p>

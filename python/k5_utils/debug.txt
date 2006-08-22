@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<HTML>
+  <HEAD>
+    <TITLE>kuro5hin.org || Search || Comments By</TITLE>
+    <STYLE TYPE="text/css">
+<!--
+ .osdn{
+   text-decoration: none;
+   font-family: verdana, arial, helvetica, sans-serif;
+   color: #eeeeee;
+ }
+ .header{
+   text-decoration: none;
+   color: #000;
+ }
+ .justified{
+}
+ a:hover.adlink { color: #006699; }
+ a.adlink { color: #006699; }
+-->
+</style>
+
+
+<LINK REL="icon" HREF="/images/tinyk5.png" TYPE="image/png">
+<LINK REL="SHORTCUT ICON" HREF="/images/tinyk5.png">
+
+
+    
+  </HEAD>
+
+  <BODY bgcolor="#FFFFFF" text="#222222" LINK="#003767" ALINK="#c0c0c0" VLINK="#4185aa" 
+      marginwidth=0 marginheight=0 topmargin=0 leftmargin=0>
+
+    <!-- Begin standard logo/sections header -->
+    <!--Begin Header -->
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+        <tr valign="bottom">
+                <td rowspan="3" width="299" valign="bottom"><a href="http://www.kuro5hin.org"><img src="/images/header/kuro5hin2.gif" width="298" height="60" border="0" ALT="Kuro5hin.org: technology and culture, from the trenches"></a></td>
+                <td height="47"> </td>
+        </tr>
+        <tr>
+                <td align="right" valign="bottom"><font face="Verdana, arial, sans-serif" size="1"><A HREF="/newuser">create account</a> | <A HREF="/special/faq">help/FAQ</a> | <A HREF="/special/contact">contact</a> | <A HREF="/special/links">links</a> | <A HREF="/find">search</a> | <A HREF="/special/irc">IRC</a> | <A HREF="/section/sitenews">site news</a></font></td>
+        </tr>
+        <tr>
+                <td align="right" valign="middle"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" height="22" bgcolor="#eeeeee" align="center">
+        <tr height="22">
+                <td background="/images/header/table_bkg3.gif" align="left" height="22" valign="top"><a href="http://www.kuro5hin.org"><img src="/images/header/left_edge3.gif" width="67" height="22" border="0" alt="["></a></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" border="0" height="22" ALT=""></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><strong><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/__all__">Everything</a></font></strong></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Diary">Diaries</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/tech">Technology</a></font></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+				<td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/science">Science</a></font></td>              
+				<td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/culture">Culture</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fnp">Politics</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/media">Media</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/news">News</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/internet">Internet</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" nowrap><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/op-ed">Op-Ed</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/fiction">Fiction</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/Meta">Meta</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22" width="5"><img src="/images/header/spacer3.gif" width="1" height="22" border="0" ALT="|"></td>
+                <td background="/images/header/table_bkg3.gif" align="center" height="22"><font face="Verdana, arial, sans-serif" size="1"><A CLASS="header" HREF="/section/mlp">MLP</a></font></td>
+                <td background="/images/header/table_bkg3.gif" align="right" height="22"><img src="/images/header/rt_edge3.gif" width="1" height="22" border="0" alt="]"></td>
+        </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="98%" align="center">
+	<tr>
+		<td align="right">
+<font face="Verdana, arial, sans-serif" size="1"><b>We need your support:</b> <a href="/submitad">buy an ad</a> | 
+<a href="/subscribe">premium membership</a></font>
+</td>
+	</tr>
+</table>
+<!--End Header -->
+    <!-- End standard logo/sections header -->
+     
+    <P>
+    
+    <TABLE BORDER=0 WIDTH="98%" ALIGN="center" CELLPADDING=5 CELLSPACING=0>
+      <TR>
+        <TD VALIGN="top" WIDTH="75%">
+          
+          
+          
+			<TABLE WIDTH="100%" BORDER=0 CELLPADDING=0 CELLSPACING=0>
+			<TR BGCOLOR="#EEEEEE">
+				<TD><FONT FACE="verdana, arial, helvetica, sans-serif"><B>comment_by search results</B></FONT></TD>
+			</TR>
+		<TR>
+			<TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#333333">
+			<FORM NAME="Search" ACTION="/" METHOD="GET">
+			<INPUT TYPE="hidden" NAME="op" VALUE="search">
+			<INPUT TYPE="hidden" NAME="offset" VALUE="0">
+			<INPUT TYPE="hidden" NAME="old_count" VALUE="30">
+			<B>Find:</B> 
+		<SELECT NAME="type" SIZE=1>
+	
+			<OPTION VALUE="author">Authors
+			<OPTION VALUE="comment">Comments
+			<OPTION VALUE="comment_by" SELECTED>Comments By
+			<OPTION VALUE="diary">Diaries
+			<OPTION VALUE="diary_by">Diaries By
+			<OPTION VALUE="polls">Polls
+			<OPTION VALUE="story">Stories
+			<OPTION VALUE="user">Users
+		</SELECT> 
+			<B>In:</B> 
+		<SELECT NAME="topic" SIZE=1>
+		<OPTION VALUE="">All Topics
+		<OPTION VALUE="culture">Culture
+		<OPTION VALUE="etc">/etc
+		<OPTION VALUE="focus">Focus On...
+		<OPTION VALUE="food">Food
+		<OPTION VALUE="freedom">Freedom
+		<OPTION VALUE="hardware">Hardware
+		<OPTION VALUE="help">Help! (Ask Kuro5hin)
+		<OPTION VALUE="humour">Humour
+		<OPTION VALUE="internet">Internet
+		<OPTION VALUE="interviews">Interviews
+		<OPTION VALUE="kuro5hin.org">Kuro5hin.org
+		<OPTION VALUE="movies">Movies
+		<OPTION VALUE="music">Music
+		<OPTION VALUE="news">News
+		<OPTION VALUE="politics">Politics
+		<OPTION VALUE="reviews">Books
+		<OPTION VALUE="roundtable">Round Table
+		<OPTION VALUE="science">Science
+		<OPTION VALUE="scoop">Scoop
+		<OPTION VALUE="security">Security
+		<OPTION VALUE="software">Software
+		<OPTION VALUE="tech">Technology
+		<OPTION VALUE="youknow">You Know...
+		</SELECT> 
+		<SELECT NAME="section" SIZE=1>
+		<OPTION VALUE="">All Sections
+		<OPTION VALUE="__front_page__">Front Page
+		
+          <option value="advertisements">Advertisements</option>
+          <option value="columns">Columns</option>
+          <option value="culture">Culture</option>
+          <option value="Diary">Diaries</option>
+          <option value="fiction">Fiction</option>
+          <option value="fnp">Politics</option>
+          <option value="Help">Help / FAQ</option>
+          <option value="internet">Internet</option>
+          <option value="media">Media</option>
+          <option value="Meta">Meta</option>
+          <option value="mlp">MLP</option>
+          <option value="news">News</option>
+          <option value="op-ed">Op-Ed</option>
+          <option value="science">Science</option>
+          <option value="sitenews">Site News</option>
+          <option value="store">K5 Store</option>
+          <option value="support_k5">Support Kuro5hin</option>
+          <option value="tech">Technology</option>
+		</SELECT><BR>  
+			<B>Containing:</B> <INPUT TYPE="text" NAME="string" VALUE="llimllib" SIZE=30>
+			<INPUT TYPE="submit" NAME="search" VALUE="Search"> <INPUT type="checkbox" name="search_archive" value="yes" > Search Archive<BR>
+			<B>Results:</B> 
+			<SELECT NAME="count" SIZE=1>
+			<OPTION VALUE="10">10
+			<OPTION VALUE="20">20
+			<OPTION VALUE="30" SELECTED>30
+			<OPTION VALUE="40">40
+			<OPTION VALUE="50">50
+			</SELECT>  
+			    <INPUT type=checkbox name="story_view" value="long" >
+				View story summaries
+				
+			<BR> 
+			<CENTER>
+			<TABLE WIDTH="100%" CELLPADDING=0 CELLSPACING=0 BORDER=0>
+				<TR>
+				<TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#333333">&nbsp;
+		</FONT>
+		</TD>
+		<TD ALIGN="right">
+		<FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#333333">
+			<INPUT TYPE="submit" NAME="next" VALUE="Next Page &gt;&gt;">
+			</FONT>
+			</TD>
+			</TR>
+			</TABLE>
+			</CENTER>
+			</FONT>
+			</TD>
+		</TR>
+		<TR>
+			<TD><FONT FACE="verdana, arial, helvetica, sans-serif" SIZE=2 COLOR="#333333">Found 30 results.<P>
+			
+			<B>1) <A HREF="/comments/2003/5/30/2539/95423/28#28">I was too lazy to look it up at 4AM</A></B> [<A HREF="/comments/2003/5/30/2539/95423/28?mode=alone;showrate=1#28">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 03:06:03 PM EST<BR>attached to <A HREF="/story/2003/5/30/2539/95423">No more NT!</A><P>
+			<B>2) <A HREF="/comments/2003/5/30/121634/153/48#48">that is one accurate fortune!</A></B> [<A HREF="/comments/2003/5/30/121634/153/48?mode=alone;showrate=1#48">5.00 / 1</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 02:07:00 PM EST<BR>attached to <A HREF="/story/2003/5/30/121634/153">...And Now the Queuestions...</A><P>
+			<B>3) <A HREF="/comments/2003/5/30/122820/932/23#23">never thought of those that way...</A></B> [<A HREF="/comments/2003/5/30/122820/932/23?mode=alone;showrate=1#23">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 02:02:25 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>4) <A HREF="/comments/2003/5/30/122820/932/22#22">1 on the list</A></B> [<A HREF="/comments/2003/5/30/122820/932/22?mode=alone;showrate=1#22">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 02:01:32 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>5) <A HREF="/comments/2003/5/30/122820/932/18#18">haven't read capote</A></B> [<A HREF="/comments/2003/5/30/122820/932/18?mode=alone;showrate=1#18">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 01:38:34 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>6) <A HREF="/comments/2003/5/30/122820/932/15#15">I meant the ultilingo link</A></B> [<A HREF="/comments/2003/5/30/122820/932/15?mode=alone;showrate=1#15">none / 0</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 01:12:19 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>7) <A HREF="/comments/2003/5/30/122820/932/14#14">my sincerest apologies</A></B> [<A HREF="/comments/2003/5/30/122820/932/14?mode=alone;showrate=1#14">5.00 / 1</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 01:10:31 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>8) <A HREF="/comments/2003/5/30/122820/932/11#11">2 go on the list</A></B> [<A HREF="/comments/2003/5/30/122820/932/11?mode=alone;showrate=1#11">5.00 / 1</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:56:13 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>9) <A HREF="/comments/2003/5/30/121634/153/14#14">Hint for 8)</A></B> [<A HREF="/comments/2003/5/30/121634/153/14?mode=alone;showrate=1#14">5.00 / 1</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:51:20 PM EST<BR>attached to <A HREF="/story/2003/5/30/121634/153">...And Now the Queuestions...</A><P>
+			<B>10) <A HREF="/comments/2003/5/30/122820/932/9#9">a classic</A></B> [<A HREF="/comments/2003/5/30/122820/932/9?mode=alone;showrate=1#9">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:49:41 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>11) <A HREF="/comments/2003/5/30/121634/153/12#12">20 answers (or is it?)</A></B> [<A HREF="/comments/2003/5/30/121634/153/12?mode=alone;showrate=1#12">5.00 / 1</A>] Replies: <B>2</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:48:45 PM EST<BR>attached to <A HREF="/story/2003/5/30/121634/153">...And Now the Queuestions...</A><P>
+			<B>12) <A HREF="/comments/2003/5/30/122820/932/8#8">oh, and, forgot to say</A></B> [<A HREF="/comments/2003/5/30/122820/932/8?mode=alone;showrate=1#8">5.00 / 1</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:47:25 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>13) <A HREF="/comments/2003/5/30/122820/932/6#6">I don't get it</A></B> [<A HREF="/comments/2003/5/30/122820/932/6?mode=alone;showrate=1#6">none / 0</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:46:02 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>14) <A HREF="/comments/2003/5/30/122820/932/5#5">never heard that</A></B> [<A HREF="/comments/2003/5/30/122820/932/5?mode=alone;showrate=1#5">none / 0</A>] Replies: <B>0</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:44:50 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>15) <A HREF="/comments/2003/5/30/122820/932/3#3">all too common</A></B> [<A HREF="/comments/2003/5/30/122820/932/3?mode=alone;showrate=1#3">5.00 / 1</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 12:41:52 PM EST<BR>attached to <A HREF="/story/2003/5/30/122820/932">Your Chance to Show Off Your Creativity</A><P>
+			<B>16) <A HREF="/comments/2003/5/30/2539/95423/19#19">caught that, did you?</A></B> [<A HREF="/comments/2003/5/30/2539/95423/19?mode=alone;showrate=1#19">none / 0</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 03:26:05 AM EST<BR>attached to <A HREF="/story/2003/5/30/2539/95423">No more NT!</A><P>
+			<B>17) <A HREF="/comments/2003/5/30/2539/95423/17#17">maybe you could get infinitera some asses then?</A></B> [<A HREF="/comments/2003/5/30/2539/95423/17?mode=alone;showrate=1#17">5.00 / 1</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 03:19:03 AM EST<BR>attached to <A HREF="/story/2003/5/30/2539/95423">No more NT!</A><P>
+			<B>18) <A HREF="/comments/2003/5/30/2539/95423/16#16">wow - you rebel</A></B> [<A HREF="/comments/2003/5/30/2539/95423/16?mode=alone;showrate=1#16">5.00 / 1</A>] Replies: <B>1</B>
+			<BR>posted by <A HREF="/user/uid:35158">llimllib</A> on 05/30/2003 03:17:32 AM EST<BR>attached to <A HREF="/story/2003/5/30/2539/95423">No more NT!</A><P>
+			<B>19) <A HREF="/comments/2003/5/30/2539/95423/13#13">lighten up, buddy</A></B> [<A HREF="/comments/2003/5/30/2539/95423/13?mode=alone;showrate=1#13">none / 0</A>] Replies: <B>1</B>

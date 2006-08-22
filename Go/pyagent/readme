@@ -1,0 +1,108 @@
+-------------------------------------
+pyGoAgent v.0.01 Install Instructions
+-------------------------------------
+
+To install pyGoAgent, simply unzip the archive containing it
+into a directory. Into that directory will be placed the 
+pyGoAgent itself, as well as a script 'twogtp1or2.py', which
+can be used to play pyGoAgent against any go program that
+supports the Go Text Protocol.
+
+-----------------
+Running pyGoAgent
+-----------------
+
+Currently, pyGoAgent only supports the Go Text Protocol, and
+not human interaction. Also, it currently only contains a
+random move generator. To play pyGoAgent against itself or
+another engine, use the program 'twogtp1or2.py' with at least
+the following arguments:
+
+--white [command for program to play white]
+--black [command for program to play black]
+--sgffile [file path to put the sgf file for the game in]
+--boardsize [number of squares in a row of the board]
+--komi [number of komi]
+--verbose [0 for silent, 1 for verbose]
+
+For a complete listing, see the file itself. To use pyGoAgent,
+simply call the file with no arguments.
+
+twogtp1or2.py comes from the GnuGo project and is licensed under
+the GPL. GnuGo's home page is currently located at:
+http://www.gnu.org/software/gnugo/
+
+---------------
+About pyGoAgent
+---------------
+
+pyGoAgent is a fledgling framework for the creation of Go engines,
+designed to simplify the life of the Go programmer. I wanted to
+create it in Python, because the logic of the board and 
+communication can be written very quickly and with less debugging
+in python than a C-style compiled language. At the same time, the
+heavy move generation code can also be written in C or C++ with
+very little hassle, due to Python's excellent integration with 
+those languages.
+The class structure of the program is as follows
+
++---------------------+
+| communication (GTP) |
++---------------------+
+         |
+         |
++-----------------------+       +----------------+
+| Board Logic (go_game) |-------| Groups (group) |
++-----------------------+       +----------------+
+         |
+         |
++---------------------------+
+| Move Engine (rand_engine) |
++---------------------------+
+
+-------------
+communication
+-------------
+
+This class handles communication between the program and the outside
+world. The only method that this class must implement is run_main_loop
+such that calling communication.run_main_loop() will execute the
+main parsing loop of the program.
+
+-----------
+Board Logic
+-----------
+
+This class handles the agent's internal representation of a Go Board.
+It makes groups, handles removing and adding pieces, prevents Ko
+situations (repeated board positions), stores all board positions,
+and asks the engine to generate moves. It must implement the following
+functions:
+
+set_komi(self, komi)
+set_boardsize(self, size)
+clear_board(self)
+play(self, move)
+genmove(self)
+final_score(self)
+get_name(self)
+get_version(self)
+
+See the code itself for details.
+
+-----------
+Move Engine
+-----------
+
+This class is responsible for generating a move given a color and a
+certain board position. It may maintain its own internal representation
+of the board, it may use the representation of the class above it,
+or it may combine the two. The engine will be informed of any changes to
+the state of the board by the board logic class. It must implement:
+
+play(self, color, x, y)
+clear_board(self)
+genmove(self)
+should_pass(self)
+
+See the code for details.

@@ -1,0 +1,4 @@
+Hacks and Macs
+<p>
+<a href="http://paulgraham.com/mac.html">According to Paul Graham</a>, the Mac is the hackers machine of choice.
+</p>

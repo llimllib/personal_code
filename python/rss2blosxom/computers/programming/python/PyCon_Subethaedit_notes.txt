@@ -1,0 +1,4 @@
+PyCon Subethaedit notes
+<p>
+Lots of the usual suspects are back from last year, so there is a decent sized effort to provide you with <a href="http://www.sauria.com/~twl/conferences/pycon2005/">notes</a> of the PyCon 2005 sessions.   PyCon is much larger next year, so one of the auditoriums has not wireless, which may hamper getting transcripts of some of the larger talks.  
+</p>

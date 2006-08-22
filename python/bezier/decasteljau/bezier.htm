@@ -1,0 +1,143 @@
+<html><head>
+<title>DeCasteljau Algorithm</title></head>
+<body alink="#ffffff" background="bezier_files/sourcererbg.jpg" bgcolor="#660033" link="#ffff66" text="#ffcccc" vlink="#999999">
+<center><font size="+4">DeCasteljau Algorithm</font><br>
+Hamburg (Germany), the 19th September 1999. Written by
+Nils Pipenbrinck aka <a href="mailto:submissive@cubic.org">Submissive/Cubic &amp;
+$eeN</a><p>
+Damn, this is boring. Bring me back to
+the <a href="http://www.cubic.org/%7Esubmissive/sourcerer/source.htm">Code-Corner!</a></p></center><br><p></p> <hr>
+
+
+<p><font color="#cccfff" size="+2">Table Of Contents</font></p><p>
+</p><ul type="square">
+<font size="+1">
+<li> <a href="#ma1">Introduction</a>
+</li><li> <a href="#ma2">DeCasteljau Algorithm</a>
+</li><li> <a href="#ma3">Example Code</a>
+</li><li> <a href="#ma4">Final Words (and thoughts)</a>
+</li></font>
+</ul>
+
+<p></p><p>
+</p><ul>
+<li><p><font color="#cccfff" size="+1"><a name="ma1">Introduction
+</a></font></p><p>
+Month passed since I wrote my last article here. Since I'm working fulltime
+now (I stoped my studies) my time is limited.<br>
+Enough personal shit. Lets get to the point:
+I learned a nice way to calculate bezier-curves a couple of weeks ago. This
+algorithm is that nice and easy to understand. So if you ever had problems
+remembering the basis-matrix of bezier curves don't worry... after this article
+you'll never need it again.<br><br>
+First remember what a bezier curve is:<br>
+</p><center><img src="bezier_files/bezier1.gif" alt="bezier-curve with control-points" border="0"></center><br>
+It's a curve defined by 4 control-points (named a to d). The curve starts at the first
+point (a) and smoothly interpolates into the last one (d). The two points (b and c) in the
+middle define the incoming and outgoing tangents and indirectly the curvature
+of our bezier-curve.
+<p></p>
+
+</li><li><p><font color="#cccfff" size="+1"><a name="ma2">DeCasteljau Subdivision</a></font></p><p>
+I think the best way to explain the DeCasteljau algorithm is to use an example.<br><br>
+The bezier-curve has 4 control-points. And we can connect these 4 points with 3 lines (shown in red). I also
+build 3 new points which are the midpoints of the new lines (shown as green dots).<br>
+</p><center><img src="bezier_files/bezier2.gif" alt="step1" border="0"></center><br>
+These points can again be used to build two new lines (green). Again we also calculate the midpoints
+of these lines (blue dots).<br>
+<center><img src="bezier_files/bezier3.gif" alt="step2" border="0"></center><br>
+Finally we connect the blue dots and build a final line (blue. If you
+zoom into the image you might be able to see
+the blue line.. it's hard to see). Again we calculate the midpoint.
+This point is one of the points that define the bezier-curve.<br>
+<center><img src="bezier_files/bezier4.gif" alt="step3" border="0"></center><br>
+Now we can calculate one single point of the bezier curve. That's nice, but of
+no real use. Usually we want to calculate any point on the curve. To do this we
+only have to change the way we calculate the new points. Instead of always taking
+the midpoint we can use simple <b>linear interpolation</b> to calculate any point in the
+lines. If we do so we can calculate any point on the bezier-curve. And that's what we
+want to do.<br>
+<p></p></li>
+
+<li><p><font color="#cccfff" size="+1"><a name="ma3">Example Code</a></font></p><p>
+
+I think there is not much to say about this simple c-code... it's easy, and with the
+explanations above you should be able to understand how it works. Feel free to rip/modify/rape
+this code...
+</p><pre>
+#include &amp;ltstdio.h&gt; // for printf
+
+struct point
+{
+  float x;
+  float y;
+};
+
+
+
+// --------------------------------------------------------------
+// 4 points define the bezier-curve.. These are the points used
+// for the example-images on this page.
+// --------------------------------------------------------------
+point a = { 40, 100 };
+point b = { 80, 20  };
+point c = { 150, 180 };
+point d = { 260, 100 };
+
+
+
+void lerp (point &amp;dest, point &amp;a, point &amp;b, float t)
+// -------------------------------------------------
+// simple linear interpolation between two points
+// -------------------------------------------------
+{
+  dest.x = a.x + (b.x-a.x)*t;
+  dest.y = a.y + (b.y-a.y)*t;
+}
+
+
+
+void bezier (point &amp;dest, float t)
+// --------------------------------------------------------
+// evaluate a point on a bezier-curve. t goes from 0 to 1.0
+// --------------------------------------------------------
+{
+  point ab,bc,cd,abbc,bccd;
+  lerp (ab, a,b,t);           // point between a and b (green)
+  lerp (bc, b,c,t);           // point between b and c (green)
+  lerp (cd, c,d,t);           // point between c and d (green)
+  lerp (abbc, ab,bc,t);       // point between ab and bc (blue)
+  lerp (bccd, bc,cd,t);       // point between bc and cd (blue)
+  lerp (dest, abbc,bccd,t);   // point on the bezier-curve (black)
+}
+
+
+
+void main (void)
+// -------------------------------------------
+// small test program.. just prints the points
+// -------------------------------------------
+{
+  point p;
+  for ( int i=0; i&amp;lt1000; i++ )
+  {
+    float t = (float)i/999.0;
+    bezier (p,t);
+    printf ("%f %f\n", p.x, p.y);
+  }
+}
+</pre>
+<p></p></li>
+
+
+<li><p><font color="#cccfff" size="+1"><a name="ma4">Final Words (and thoughts)</a></font></p><p>
+Hm... it took me one hour to write that stuff. I think I'll write one or two more pages
+in the next week.<br><br>
+One think I forgot.. This page here only dealt with cubic bezier curves. You can also
+calculate quadratic beziers (the ones defined with just 3 points). All you have to do
+is start with 3 instead of 4 points. The same can of course be done with more than
+4 points. If you need a higher order bezier just use as many points as you want to... the
+algorithm works with any order beziers (I wonder who needs higher order curves...).
+</p><p> As always you might want to contact me: This is my
+email: <a href="mailto:submissive@cubic.org">Submissive@cubic.org</a> </p><p></p>
+</li></ul> <hr> <p></p> <p></p>And now bring me back to the <a href="http://www.cubic.org/%7Esubmissive/sourcerer/source.htm">Code-Corner!</a><br><p></p> <p></p> <p></p> </body></html>

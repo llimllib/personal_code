@@ -1,0 +1,134 @@
+Linux version 2.4.18-14 (bhcompile@stripples.devel.redhat.com) (gcc version 3.2 20020903 (Red Hat Linux 8.0 3.2-7)) #1 Wed Sep 4 13:35:50 EDT 2002
+BIOS-provided physical RAM map:
+ BIOS-e820: 0000000000000000 - 000000000009fc00 (usable)
+ BIOS-e820: 000000000009fc00 - 00000000000a0000 (reserved)
+ BIOS-e820: 0000000000100000 - 000000000ffe2800 (usable)
+ BIOS-e820: 000000000ffe2800 - 0000000010000000 (reserved)
+ BIOS-e820: 00000000feda0000 - 00000000fee00000 (reserved)
+ BIOS-e820: 00000000ffb80000 - 0000000100000000 (reserved)
+0MB HIGHMEM available.
+255MB LOWMEM available.
+On node 0 totalpages: 65506
+zone(0): 4096 pages.
+zone(1): 61410 pages.
+zone(2): 0 pages.
+Dell Latitude machine detected. Enabling interrupts during APM calls.
+Kernel command line: ro root=LABEL=/ hdc=ide-scsi
+ide_setup: hdc=ide-scsi
+Initializing CPU#0
+Detected 1063.104 MHz processor.
+Speakup v-1.00 CVS: Tue Jun 11 14:22:53 EDT 2002 : initialized
+Console: colour VGA+ 80x25
+Calibrating delay loop... 2115.76 BogoMIPS
+Memory: 253004k/262024k available (1326k kernel code, 6588k reserved, 999k data, 212k init, 0k highmem)
+Dentry cache hash table entries: 32768 (order: 6, 262144 bytes)
+Inode cache hash table entries: 16384 (order: 5, 131072 bytes)
+Mount cache hash table entries: 4096 (order: 3, 32768 bytes)
+ramfs: mounted with options: <defaults>
+ramfs: max_pages=31881 max_file_pages=0 max_inodes=0 max_dentries=31881
+Buffer cache hash table entries: 16384 (order: 4, 65536 bytes)
+Page-cache hash table entries: 65536 (order: 6, 262144 bytes)
+CPU: Before vendor init, caps: 0383f9ff 00000000 00000000, vendor = 0
+CPU: L1 I cache: 16K, L1 D cache: 16K
+CPU: L2 cache: 256K
+CPU: After vendor init, caps: 0383f9ff 00000000 00000000 00000000
+Intel machine check architecture supported.
+Intel machine check reporting enabled on CPU#0.
+CPU:     After generic, caps: 0383f9ff 00000000 00000000 00000000
+CPU:             Common caps: 0383f9ff 00000000 00000000 00000000
+CPU: Intel(R) Celeron(TM) CPU                1066MHz stepping 01
+Enabling fast FPU save and restore... done.
+Enabling unmasked SIMD FPU exception support... done.
+Checking 'hlt' instruction... OK.
+POSIX conformance testing by UNIFIX
+mtrr: v1.40 (20010327) Richard Gooch (rgooch@atnf.csiro.au)
+mtrr: detected mtrr type: Intel
+PCI: PCI BIOS revision 2.10 entry at 0xfbfee, last bus=2
+PCI: Using configuration type 1
+PCI: Probing PCI hardware
+Unknown bridge resource 2: assuming transparent
+PCI: Discovered primary peer bus 08 [IRQ]
+PCI: Using IRQ router PIIX [8086/248c] at 00:1f.0
+PCI: Found IRQ 11 for device 00:1f.1
+PCI: Sharing IRQ 11 with 02:00.0
+isapnp: Scanning for PnP cards...
+isapnp: No Plug & Play device found
+speakup:  initialized device: /dev/synth, node (MAJOR 10, MINOR 25)
+Linux NET4.0 for Linux 2.4
+Based upon Swansea University Computer Society NET3.039
+Initializing RT netlink socket
+apm: BIOS version 1.2 Flags 0x03 (Driver version 1.16)
+Starting kswapd
+VFS: Diskquotas version dquot_6.5.0 initialized
+pty: 2048 Unix98 ptys configured
+Serial driver version 5.05c (2001-07-08) with MANY_PORTS MULTIPORT SHARE_IRQ SERIAL_PCI ISAPNP enabled
+ttyS1 at 0x02f8 (irq = 3) is a 16550A
+PCI: Found IRQ 11 for device 00:1f.6
+PCI: Sharing IRQ 11 with 00:1f.5
+Real Time Clock Driver v1.10e
+oprofile: mapping APIC.
+oprofile: enabled local APIC. Err code 00000000
+oprofile 0.2 loaded, major 254
+block: 480 slots per queue, batch=120
+Uniform Multi-Platform E-IDE driver Revision: 6.31
+ide: Assuming 33MHz system bus speed for PIO modes; override with idebus=xx
+PIIX4: IDE controller on PCI bus 00 dev f9
+PCI: Enabling device 00:1f.1 (0005 -> 0007)
+PCI: Found IRQ 11 for device 00:1f.1
+PCI: Sharing IRQ 11 with 02:00.0
+PIIX4: chipset revision 2
+PIIX4: not 100% native mode: will probe irqs later
+    ide0: BM-DMA at 0xbfa0-0xbfa7, BIOS settings: hda:DMA, hdb:pio
+    ide1: BM-DMA at 0xbfa8-0xbfaf, BIOS settings: hdc:DMA, hdd:pio
+hda: IC25N010ATDA04-0, ATA DISK drive
+hdc: IBM-DARA-218000, ATA DISK drive
+ide0 at 0x1f0-0x1f7,0x3f6 on irq 14
+ide1 at 0x170-0x177,0x376 on irq 15
+blk: queue c03c0004, I/O limit 4095Mb (mask 0xffffffff)
+blk: queue c03c0004, I/O limit 4095Mb (mask 0xffffffff)
+hda: 19640880 sectors (10056 MB) w/347KiB Cache, CHS=1222/255/63, UDMA(100)
+ide-floppy driver 0.99.newide
+Partition check:
+ hda: hda1 hda2 hda3 hda4
+Floppy drive(s): fd0 is 1.44M
+FDC 0 is a post-1991 82077
+NET4: Frame Diverter 0.46
+RAMDISK driver initialized: 16 RAM disks of 4096K size 1024 blocksize
+ide-floppy driver 0.99.newide
+md: md driver 0.90.0 MAX_MD_DEVS=256, MD_SB_DISKS=27
+md: Autodetecting RAID arrays.
+md: autorun ...
+md: ... autorun DONE.
+NET4: Linux TCP/IP 1.0 for NET4.0
+IP Protocols: ICMP, UDP, TCP, IGMP
+IP: routing cache hash table of 2048 buckets, 16Kbytes
+TCP: Hash tables configured (established 16384 bind 32768)
+Linux IP multicast router 0.06 plus PIM-SM
+NET4: Unix domain sockets 1.0/SMP for Linux NET4.0.
+RAMDISK: Compressed image found at block 0
+Freeing initrd memory: 65k freed
+VFS: Mounted root (ext2 filesystem).
+Freeing unused kernel memory: 212k freed
+usb.c: registered new driver usbdevfs
+usb.c: registered new driver hub
+usb-uhci.c: $Revision: 1.275 $ time 13:44:31 Sep  4 2002
+usb-uhci.c: High bandwidth mode enabled
+PCI: Found IRQ 11 for device 00:1d.0
+PCI: Sharing IRQ 11 with 01:00.0
+PCI: Setting latency timer of device 00:1d.0 to 64
+usb-uhci.c: USB UHCI at I/O 0xbf80, IRQ 11
+usb-uhci.c: Detected 2 ports
+usb.c: new USB bus registered, assigned bus number 1
+hub.c: USB hub found
+hub.c: 2 ports detected
+usb-uhci.c: v1.275:USB Universal Host Controller Interface driver
+usb.c: registered new driver hiddev
+usb.c: registered new driver hid
+hid-core.c: v1.8.1 Andreas Gal, Vojtech Pavlik <vojtech@suse.cz>
+hid-core.c: USB HID support drivers
+mice: PS/2 mouse device common for all mice
+hub.c: USB new device connect on bus1/1, assigned device number 2
+input0: USB HID v1.10 Mouse [Logitech USB-PS/2 Optical Mouse] on usb1:2.0
+Adding Swap: 530136k swap-space (priority -1)
+SCSI subsystem driver Revision: 1.00
+scsi0 : SCSI host adapter emulation for IDE ATAPI devices

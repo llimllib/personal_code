@@ -1,0 +1,3 @@
+<py print_header('Photos', 'images/photos_header.jpg') >
+    <py insert_pics() >
+<py print_footer() >

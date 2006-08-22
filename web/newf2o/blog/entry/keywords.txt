@@ -1,0 +1,71 @@
+Del.icio.us-style keyword blogging
+I have completed working prototype plugin for keyword blogging. You will see,
+at the bottom of any blog article, a list of keywords similar to what you
+might see on <a href="http://del.icio.us">del.icio.us</a>. If you try clicking
+on one of the links, you should be brought to a page with all entries
+containing that keyword.<p>
+I hope that this will provide an easier method for browsing blog entries;
+instead of being rigidly categorized, I hope that they'll be more browseable
+and interconnected. There are interesting possibilities for graphing the
+connections, and keeping statistics on connections, but for right now I'm just
+happy that it's working.<p>
+<h2>Implementation</h2><p>
+It took me just over a day to implement my keyword plugin, and there was only
+one major snafu that required me to write some, well, "interesting" code.
+Throughout the process of writing the plugin, I have become more and more 
+impressed with the way that pyblosxom is coded. Its infinite configureability
+makes anything possible; more complicated things just mean that you have to
+rewrite more of the engine.<p>
+The first thing that I had to decide was the encoding of the keywords. Since
+pyblosxom blogs are simply text files uploaded to the server, it didn't make
+sense to enter the metadata separately. Since they were in the text file, and
+I needed them to not render with the HTML of a blog, I decided to put them in
+a comment within the blog. With my plugin, any line beginning with 
+"&lt;!--keywords:" and ending with "--&gt;" is a tag line.<p>
+The first step in getting my plugin working was to get a story to display
+its own keywords. To do this, I simply overrode cb_story (the hook which is
+called right before a story is rendered), parsed the file for keyword lines,
+and set any keywords equal to the $keywords pyblosxom variable. They could
+then be displayed in the article simply by referencing the variable $keywords.
+<p>
+Because I needed each keyword to be a link to a keyword search for itself, and
+because the simple pyblosxom templating language can only display a single
+variable, I had two choices. I could either extend the templating language
+to include function calls or iteration, or I could simply make the whole
+sequence of links right there in the cb_story function. For now, I've done the
+latter, since it was simpler.<p>
+Once I had the keywords displaying, the next step was to make it possible
+to search for a keyword. No problem - I'll just override the cb_pathinfo hook,
+and if there's a "/keyword/" starting the URL, take control of the selection
+of files to be displayed.<p>
+Once I'd gotten searching for the "/keyword/" part of the URL down, I realized
+that I had a major problem. How could I find the keywords when they were
+buried in the blog files themselves? Searching through all the text of all
+the blogs didn't seem like a sensible solution, but there was no easy way to
+implement a new piece of metadata for each file. I was stuck.<p>
+After thinking about how to implement the metadata for a while, I decided that
+it was important enough that it deserved a general solution. After all, there
+are lots of possibly interesting bits of data about a blog entry - keywords,
+category, comments, trackbacks, and lots of other possibilities. So the meta
+module came into being.<p>
+The meta module, right now, simply mirrors each "*.txt" file with a "*.meta"
+file. Inside the meta file is a 
+<a href="http://www.python.org/doc/current/lib/module-pickle.html">pickled</a>
+dictionary representing keywords of the "*.txt" entry. If the meta file already
+exists, the module simply loads that and does no parsing of the blog entry.
+In the future, I would like it to be a more general solution to the problem
+of metadata. I intend to implement, at the least, a new comments module
+using it.<p>
+Since the meta module loads up its information (hopefully quickly) right at the
+cb_start hook, which is called on plugin initialization, it makes enough
+information about each blog entry available that keyword searching is easy. I
+now simply scan through the meta information dictionary of each file and see
+if the requested keyword is present. If it is, the file is included for
+rendering, and if not, it's excluded.<p>
+And that's what I spent the last day and a half doing. Hopefully somebody
+will find it worthwhile, but I know that I learned an awful lot doing it. I
+will release my code in a couple of days, when I know that it works and I've
+set it up a little more generally. If you're interested in it, please leave
+a comment or drop me an <a href="mailto:llimllib@f2o.org">email</a> with
+suggestions or flames.
+<!--keywords: python, pyblosxom, metadata, plugin-->
