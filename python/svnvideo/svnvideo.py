@@ -14,8 +14,17 @@ def genimage(diff):
     pass
 
 def groupdiffs(diffs):
-    #TODO
-    return []
+    state = diffs[0][0:2]
+    storage = []
+    for line in diffs[1:]:
+        new_state = line[0:2]
+        #we don't even want to deal with 
+        if new_state == "  ": continue
+        if new_state == state: storage.append(line)
+        else:
+            yield storage
+            state = new_state
+            storage = [line]
 
 def applydiff(text, diff):
     print text
@@ -34,8 +43,11 @@ def makemovie(url, size):
         if r2:
             diffs = list(d.compare(r1.splitlines(), r2.splitlines()))
             diffs = [line for line in diffs if not line.startswith("? ")]
-            print "\n".join(diffs)
             for group in groupdiffs(diffs):
+                #FIXME: if I want to do groups like this, I'll need to
+                #figure out how to apply them to the file
+                print group
+                raw_input("<enter> to continue")
                 images.append(genimage(r2))
             r1 = r2
 
