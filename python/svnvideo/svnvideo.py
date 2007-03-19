@@ -1,14 +1,14 @@
 from pysvn import Client, ClientError, Revision, opt_revision_kind
 import Image
 
-def getrev(url, rev):
+def getrev(client, url, rev):
     diff = None
     try:
-        diff = c.diff('/tmp/', url, 
-            revision1=Revision(opt_revision_kind.number, i),
-            revision2=Revision(opt_revision_kind.number, i+1))
+        diff = client.diff('/tmp/', url, 
+            revision1=Revision(opt_revision_kind.number, rev),
+            revision2=Revision(opt_revision_kind.number, rev+1))
     except ClientError:
-        print "Error grabbing revision %s of %s" % (i, url)
+        print "Error grabbing revision %s of %s" % (rev, url)
     return diff
 
 def genimage(diff):
@@ -19,13 +19,13 @@ def applydiff(text, diff):
     print diff
 
 def makemovie(url, size):
-    c = Client()
+    client = Client()
     images = []
     r1 = ""
-    maxrev = c.info2(url)[0][1]['rev'].number
+    maxrev = client.info2(url)[0][1]['rev'].number
 
     for rev in range(1, maxrev):
-        diff = getrev(url, rev)
+        diff = getrev(client, url, rev)
         if diff:
             r2 = applydiff(r1, diff)
             images.append(genimage(r2))
