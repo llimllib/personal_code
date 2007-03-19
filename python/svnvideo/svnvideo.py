@@ -33,7 +33,8 @@ def makemovie(url, size):
         r2 = getrev(client, url, rev)
         if r2:
             diffs = list(d.compare(r1.splitlines(), r2.splitlines()))
-            print diffs
+            diffs = [line for line in diffs if not line.startswith("? ")]
+            print "\n".join(diffs)
             for group in groupdiffs(diffs):
                 images.append(genimage(r2))
             r1 = r2
