@@ -32,19 +32,22 @@ def gen_one(text, size):
         y += DELTA_Y
     i.show()
 
-def gen_diff(r1, r2, size):
+def gen_diff(r1, r2, diff, size):
     i = Image.new("RGB", size, (255, 255, 255))
     d = Draw(i)
     font = ImageFont.truetype('ProFontWindows.ttf', 12)
     y = 0
-    import pdb; pdb.set_trace()
-    for l1, l2 in map(None, r1.splitlines(), r2.splitlines()):
-        if l1 != l2:
-            d.text((LMARGIN, y), l2, font=FONT, fill='green')
-        else:
-            d.text((LMARGIN, y), l2, font=FONT, fill='black')
-        y += DELTA_Y
-    i.show()
+    print diff
+    raw_input("is that what you wanted?")
+    for g in groupdiffs(diff):
+        print g
+        raw_input("is that what you wanted?")
+    #    if l1 != l2:
+    #        d.text((LMARGIN, y), l2, font=FONT, fill='green')
+    #    else:
+    #        d.text((LMARGIN, y), l2, font=FONT, fill='black')
+    #    y += DELTA_Y
+    #i.show()
 
 def groupdiffs(diffs):
     state = diffs[0][0:2]
@@ -61,15 +64,16 @@ def makemovie(url, size):
     client = Client()
     images = []
     r1 = ""
-    maxrev = client.info2(url)[0][1]['rev'].number
+    log = client.log(url)
+    versions = sorted([l['revision'].number for l in log])
 
-    for rev in range(1, maxrev):
+    for rev in versions:
         (r2, diff) = getrev(client, url, rev)
         if r2 and not diff:
             #really wish I had multiple dispatch here
             images.append(gen_one(r2, size))
         elif r2 and diff:
-            images.append(gen_diff(r1, r2, size))
+            images.extend(gen_diff(r1, r2, diff, size))
         r1 = r2
         raw_input('<enter> to continue')
 
