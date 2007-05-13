@@ -1,0 +1,28 @@
+The Interview 
+#time 11-16-04 02:23
+#keywords job, library, pl/sql
+Last week, I got called by a recruiter who found my resume on the
+web. We talked a little bit, but I didn't expect anything to come of it. When
+she didn't call me back on Friday, I expected more of the same today. However,
+at 10 AM the phone rang, and you can guess who was on the line.<p> We met this
+afternoon to talk about the job. I was nervous about the interview, but I
+didn't have to be. Michelle, the recruiter, was very friendly and open about
+what the position was and how I fit into it (and how I didn't). After our
+interview, which took about an hour, she called up the employer and got me an
+interview.<p>
+The problem: the job requires PL/SQL, which I have only used in
+the context of my one college database class, 2 years ago now. Since I was
+researching at the time, I didn't think much of the class, and didn't pay a
+whole lot of attention. Since the interview is Wednesday, today has become The
+Day Of PL/SQL.  Unfortunately, I couldn't find my PL/SQL textbook (although I
+found the other, utterly useless, textbook from that class) and I don't have an
+Oracle server to connect to and test out statements. Hopefully, one day will be
+long enough for a refresher course.<p>
+I'm going to the <a
+href="http://wesleyan.edu">Wesleyan</a> library in the morning to find a book
+and study up. Their science library is an absolute gem 
+- unlike my college's library was, theirs is overflowing with computer science
+books.  Not only do they have academic, journal type books, but they have
+general-purpose technology books galore. When I discovered the place, I
+wandered around for 3 hours, just reading random books, and finding new
+spots. I'm a geek.

@@ -1,0 +1,37 @@
+Cache Money
+#time 11-24-04 01:28
+#keywords pyblosxom, cache
+I've successfully implemented a new caching system for Pyblosxom. The one that
+exists is confusing to me, and actually slowed pyblosxom performance in my
+tests. Initial testing of my cache plugin shows a speedup of 10%-30%, depending
+on the size and amount of the entries in the blog to be parsed.<p>
+I've been testing the cache on Fedora Core 3 with Apache 2.0.52 and Python
+2.3.4, and I've been using the <a
+href="http://jakarta.apache.org/jmeter/">JMeter</a> testing program which I
+mentioned before. JMeter has been set to have 2 threads bang away at the server
+simultaneously for 50 repetitions each.<p>
+With my cache plugin (Filecache) and a very large blog directory, (about 1000 entries
+between 30 and 120 kilobytes each, ~47M total) the average request takes
+about 1.7 seconds. Without the cache, that number jumps up to 2.15 or so. With
+the included cache, that number stays around 2.15.<p>
+Filecache works by implementing the filelist callback. It uses the request to
+the pyblosxom server as a key into a big dictionary which maps requests to
+filelists, which it stores in a file
+specified by a configuration parameter. For example, if a user requests
+http://example.com/pyblosxom.cgi/2004/Nov/12/test , the plugin looks in the
+cache to see if "2004/Nov/12/test" has been cached. If it has, it loads the
+filelist associated with that key and returns it. If it hasn't, it goes through
+the normal filelist procedure, but at the end, it stores the filelist into the
+cache.<p>
+There is still a good deal of work to be done; for example, I have to figure
+out when to refresh the cache. It could be done via a user command - for
+example, whenever the user appends ?refreshCache=True to a page - or via a
+timeout. Also, do I need to lock the cache file, so that two Apache threads
+don't try to write to it at the same time? Should the cache be spread across
+multiple files, like it is in the default caching mechanism? This could slow
+access, but would also decrease memory usage.<p>
+On the whole, though, I think that this should be a drop-in plugin which
+increases the speed of your pyblosxom site 10%-30%. Hopefully I'll have it in a
+state where it can be released in 2-3 days, but I don't know how much time I'll
+have over the holiday weekend. Since it's only 96 lines, and probably 60 of
+those are actually code, I don't think it should take me too long.

@@ -1,0 +1,64 @@
+Rating My Summer League With Python
+#keywords python, statistics, rankings, programming, elo, sauceda
+#time 6-24-05 21:41
+I play <a href="http://www.ultimatehandbook.com/uh">Ultimate</a> (sometimes
+incorrectly called <a href="http://whatisultimate.com">ultimate frisbee</a>), 
+which is one of the
+reasons I've been very light on blogging this summer. As well as playing for my
+club <a href="http://www2.upa.org/scores/scores.cgi?div=127&page=3&team=3448">team</a>,
+I play in the Connecticut <a href="http://ctultimate.com">summer league</a>.<p>
+This is fun, but as a stats nerd, I have to do something beyond just play. As
+such, last summer I began 
+<a href="http://llimllib.f2o.org/elo/elo.html">ranking</a> the teams in my
+league. I started out intending to use an 
+<a href="http://collegerpi.com/rpifaq.html#Formula">RPI</a>-style formula, but
+it seemed from my reading that there were better algorithms out there. In
+particular, I liked 
+<a href="http://www.usatoday.com/sports/sagarin/bkt0405.htm">Sagarin's</a> ELO
+rankings, which do not take into account margin of victory. Fortunately, I
+found the <a href="http://www.masseyratings.com/theory/sauceda.htm">Sauceda</a>
+ratings, which do, since I think they are significant in my summer league.<p>
+After a little tinkering with the constants, I came up with a python
+<a href="http://billmill.org/static/files/elo.py">module</a> to perform the Sauceda
+calculations, and another 
+<a href="http://billmill.org/static/files/webpage.py">one</a> to print out a 
+web page for me. The webpage module is likely to be of little use to anyone,
+except to serve as an example of how to use the elo module. You can see the
+output <a href="http://llimllib.f2o.org/elo/elo.html">here</a> if you didn't
+click on the link already.<p>
+<h2>The Sauceda Rating System</h2><p>
+The basic idea of the Sauceda rating is that when two teams play a game, they
+contest one "game point". This is then combined with a team's "winning
+expectancy", which is a function of the difference in the two teams' ratings,
+to update each team's rating.<p>
+The "game point" division is done via the following formula, where pd is the
+game's point differential (i.e. 4 if a team wins 9-5) and pdv is the relative
+value of the point differential:<p>
+<code>gp = 1 - .4 ** (1 + (pd / pdv))</code><p>
+Unless a game is tied, in which case each team gets .5, I use this formula to
+determine the winner's game point percentage, and the remainder goes to the
+loser. Pdv is a parameter which should be tweaked to provide the
+best results for the sport under consideration; I use 4.5 for Ultimate (games
+go to 9 or 13 in summer league), while the
+author of the ranking system uses 11 for basketball.<p>
+Next up, we calculate each team's winning expectancy, where Ra is the current
+team's rating, and Rb is their opponent's rating:<p>
+<code>we = 1 / (1 + 10 ** ((Rb - Ra) / 400)</code><p>
+Finally, once we know a team's win expectancy (we) and share of the game point
+(gp), we can update their ranking, where R0 is their current ranking:<p>
+<code>R_new = R0 + K * (gp - we)</code><p>
+K is another parameter to tweak; I use 60, currently. I've tweaked all the
+parameters based on last year's Connecticut ultimate season, so they work for
+me, but you'll probably have to find values that work for whatever particular
+sport or game you'll be ranking.<p>
+<h2>Conclusion</h2>
+I just wanted to share the algorithm I've been using to rank teams in my summer
+league, since I think it's pretty neat. There's a lot more interesting stuff
+about rating algorithms to talk about, but I think I've rambled long enough for
+now. If you haven't yet, you can go see
+<a href="http://llimllib.f2o.org/elo/elo.html">the ratings</a> for my summer
+league to get an idea of what, practically, this algorithm does. (You can also
+see the neat diagrams I used matplotlib to generate).<p>
+Thanks go to Eduardo Sauceda and Ken
+Massey for publishing the algorithm, which I've used with only tweaks to the
+parameters.

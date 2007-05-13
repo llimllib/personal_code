@@ -1,0 +1,60 @@
+Sketch of an Open Source Data Repository
+#time 02-02-05 23:18
+#keywords data_mining, open_source, programming, computer
+One of the largest obstacles to creating effective data-mining software is the
+scarcity of good data sets. If good data sets were easily available to people
+on the web, I think it's likely that more people would come up with innovative
+data mining applications. Some data sets that I would like to see:<p>
+<ul><li><b>Stock Data</b>: I've been looking for a good repository of stock
+data (on and off) for quite a while, and I've yet to find one.
+<li><b>Del.icio.us Data</b>: How cool are the possibilities with a big
+del.icio.us data dump? Has anyone created one? You could graph cliques of
+users, find similar tags, find tag misspellings, or do a hundred other
+interesting things with the data.
+<li><b>Audioscrobbler Data</b>: Audioscrobbler publishes a data dump (available
+<a href="http://www.audioscrobbler.com/data/">here</a>; it relates users of the
+<a href="http://www.audioscrobbler.com">audioscrobbler</a> system to the songs
+that they listen to.
+<li><b>Scientific Data</b>: Often, experiments generate more data than the
+researchers who run the experiment can handle. Opening scientific data sets
+could provide some interesting results due to the "many eyes" syndrome.
+<li><b>Game Data</b>: There are hundreds of data sets of IRC poker games,
+internet chess games, internet go games, and other games just waiting to be
+gathered in one central location.
+<li><b>Literary Data</b>: The <a href="http://www.promo.net/pg/">Gutenberg
+Project</a> makes over 6000 books available in text on the web, but they are
+not in a data-mining-friendly format. If tagged appropriately, it could be
+trivial for me to graph comma frequency rates over the last 100 years to see if
+they changed, or maybe even do something <em>interesting</em>.
+<li><b>Internet Data</b>: Different collections of websites - corporate
+websites, academic websites, random collections of websites.
+<li><b>Open Source Code</b>: <a href="http://www.koders.com/">Koders</a> has 
+shown that searching open source code can be valuable; certailnly interesting
+statistics could be derived from a large collection of open source code.
+</ul>
+<p><h2>Problems</h2><p>
+I can imagine several practical problems with such a data source. First is
+copyright; assuring that the site had a copyright for so much data would be a
+daunting task. Perhaps the responsibility for the copyright could be held by
+the submitter?<p>
+The format of the data would also be an interesting problem. To make the data
+worthwhile, it would likely have to be constrained to some known subset of
+well-documented data formats. It would require a fairly large effort to convert
+existing data to an acceptable format, and verify that the data is
+in the correct format.<p>
+Documenting the meaning of the data contained in the files would also be a 
+daunting challenge, requiring a fairly large effort. If the repository
+contained a lot of data, but nobody knew what it meant, it would be
+worhless.<p>
+Finally, the site's success would be a part of its problem. Transferring large
+data sets over the internet would create a hell of a bandwidth bill. Finding a
+way to deal with this bill - through donations, advertising, or perhaps a fee
+for use of the site - would be crucial to its success.<p>
+<h2>Conclusions</h2><p>
+The value of such a website is, in my mind, undeniable. If you could build a
+community of users around it, I believe that novel applications of data-mining
+techniques would inevitably arise. While administrative problems would be
+significant, the success of such large open sites as <a
+href="http://sf.net">Sourceforge</a> and <a
+href="http://wikipedia.com">Wikipedia</a> leads me to believe that it's a
+conceivable project.

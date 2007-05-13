@@ -1,0 +1,72 @@
+Thoughts on Stuff (Python, Poker)
+#time 1-05-05 22:49
+#keywords python, static_types, erlang, poker, newyear
+After completing the redecorator (as much as it's ever gonna be done), I
+basically dropped off the face of the internet. The week after Christmas, I
+was busy playing with my new toys (Metal Gear Solid 3 is addictive) and
+planning to go visit my college friends for a New Year party.<p>
+To make a long story short, New Year's day, Saturday, my friend and I ended up 
+in Atlantic City gambling. I didn't leave until Monday morning.<p>
+Anyway, since I haven't been coding, I've had a while to think about some
+things. Much randomness follows.<p>
+<h2>Python</h2><p>
+There has been all kinds of commotion about optional static types. If you could
+guess from how I felt about <a 
+href="http://billmill.org/redecorator.html">decorators</a>,
+I'm not much of a fan of the proposed new syntax. Guido says that all kinds of
+people want this feature, but since when has this been so important to the BDFL?
+Furthermore, who are all these people that want static typing? Where are they 
+hiding?<p>
+Ian <a href="http://blog.ianbicking.org/peopleneedtochill.html">tells us</a> to
+chill, but the thought of static types in python is genuinely disturbing. One
+day before Guido posted his first blog, I wrote about how I was scared of the
+c++ification of python, based on decorators. If static types were added, that
+transition would be complete.<p>
+Chris Petrilli is a lot <a 
+href="http://www.amber.org/~petrilli/archive/2005/01/05/more_static_typing_nonsense.html">smarter</a>
+than me, and wrote what I wanted to say <a
+href="http://www.amber.org/~petrilli/archive/2004/12/23/static_typing_and_python.html">better</a>
+than I could say it myself. Peter William Lount chips in with a well-written
+<a href="http://smalltalk.org/articles/article_20050105_a2.html">article</a>
+with the same conclusion as Chris. Finally, Hans Nowak comes closest to my
+own opinion that <a 
+href="http://zephyrfalcon.org/weblog2/arch_e10_00710.html#e717">python wouldn't
+be python with static types</a>.<p>
+<h2>Poker</h2><p>
+To this point, I have kept this blog pretty programming-centric. While that
+remains my main interest, I am also interested in games. My current main
+interest is poker, although I have already dabbled in Go research in
+college.<p>
+While I was in Atlantic City, a very simple strategy at the poker tables netted
+me a decent amount of money (about 13 small blinds per hour) at low-limit 
+tables.
+Basically, I played extraordinarily tightly. I figure that I played about 1% of
+the hands that were dealt to me, only the cream of the crop plus my favorite
+not-so-hot hand. I probably played another 1% or 2% of hands based on
+situational factors, such as being on a blind or being alone against a bad
+player.<p>
+When I was in a hand, I played it very aggressively. I almost always bet the
+maximum; I wanted to use my table image of conservatism to scare my opponents.
+The great thing about the bad players that congregate at low-limit tables,
+especially on holiday, is that they will often play to the river and then fold.
+While I usually had more than one caller up to the turn, I rarely ever had to
+show down against more than one player, and often had the pot folded to me.<p>
+<h2>Poker Programming</h2><p>
+On my <a href="http://llimllib.f2o.org/code.html">code</a> page, you'll see
+that I wrote a python framework for poker bots on the <a
+href="http://games.cs.ualberta.ca/webgames/poker/">poki poker</a>
+servers at the University of Alberta. Soon, I'd like to reimplement and make
+significant improvements to their poker server.<p>
+I will probably implement this server in <a href="http://erlang.org">Erlang</a>.
+Why? Just for kicks, and because the language looks pretty sweet. 
+Thanks to
+<a href="http://patricklogan.blogspot.com/2004/12/even-more-on-reliability-and-static.html">Patrick Logan</a>
+both for responding sensibly to a comment of mine, and for reminding me that I
+wanted to try Erlang.<p>
+I tried installing Erlang last night, but was unsuccessful. The install went
+OK, but then when I tried to verify the installation as the documentation told
+me to (toolbar:start().), it didn't work.<p>
+UPDATE: While I was writing this, I noticed the period after the start()
+function. I'm so conditioned to python that I didn't notice it, and erlang
+appears to work now. I'll update on my progress soon.<p>
+Happy New Year, everybody.

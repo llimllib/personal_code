@@ -1,0 +1,22 @@
+Create a PDF Calendar with Python + ReportLab
+#time 11-16-05 22:20
+#keywords calendar, python, programming, computer, pdf, reportlab
+Today, I needed a quick and dirty PDF calendar generator. Fortunately, with
+python handy, it was blazingly easy to knock one up. Using the <a
+href="http://docs.python.org/lib/module-calendar.html">calendar moduule</a>
+and the <a href="http://www.reportlab.org/rl_toolkit.html">ReportLab PDF
+library</a>, it took me about 10 minutes to learn enough of the API to get
+started, and another couple of hours to finish the script - you can find it
+<a href="http://billmill.org/static/files/pdf_calendar.py">here</a>.<p>
+Usage is pretty simple:<p>
+<textarea rows="6" cols="60">from pdf_calendar import createCalendar
+#create a December, 2005 PDF
+c = createCalendar(12, 2005, filename="blog_calendar.pdf")
+#now add January, 2006 to the end
+createCalendar(1, 2006, canvas=c)
+c.save()</textarea><p>
+This script will create a PDF file called "blog_calendar.pdf" with two pages,
+one for December 2005 followed by one for January 2006. More details can be
+found inside the script.<p>
+<b>update</b>: Now with <a 
+href="http://billmill.org/static/files/blog_calendar.pdf">sample output</a>.

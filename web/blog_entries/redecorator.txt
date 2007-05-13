@@ -1,0 +1,60 @@
+The Redecorator
+#time 12-21-04 22:18
+#keywords redecorator, python, programming, decorators
+I hate decorators. Although they have a few valid uses, I think they're almost 
+always the wrong design choice. In fact, on Friday, after reading
+<a href="http://blog.ianbicking.org/explaining-decorators.html">Ian Bicking's</a>
+blog entry about them, I began writing a long
+rant about why they were usually a poor choice.<p>
+It was at this point that I realized that I'm not good at writing rants. It's
+just not what I like to do.<p>
+However, I do like to write Python - so I thought of a way to register my 
+displeasure with our new language feature. The idea was so simple that I knew I
+had to do it. I would negate decorators.<p>
+The Redecorator is a fairly simple script which utilizes the fact that
+decorators are merely simple typographical operators to negate them. It takes
+a python source file as input, and produces another as output. The output file
+should be stripped of decorators, but be functionally equivalent to the input
+file.<p>
+Although it's fairly simple, it ended up being longer than I thought it would
+be. The Redecorator currently stands at 117 lines, most of them code. It is not
+production code; I've only tested it on a really simple test file. 
+It will likely bork on files with mixed tabs and spaces (but you
+shouldn't have those anyway, you know). It's only been tested on Linux, but
+it should be cross-platform.<p>
+You can get the code 
+<a href="http://billmill.org/static/files/redecorate.py">here</a> and the file
+I used to test it with
+<a href="http://billmill.org/static/files/dec_test.py">here</a>. I run it with:
+./redecorate.py &lt; dec_test.py &gt; dec_out.py , but it can take files for
+input and output. Read the docstring.<p>
+<h2>Rant (this is not a rant)</h2><p>
+Writing this script actually taught me quite a bit more than I thought it
+would. It forced me to read the 
+<a href="http://www.python.org/peps/pep-0318.html">PEP for decorators</a>, which convinced me (grudgingly, and on
+my third time through) that there are valid uses for decorators. I now know in
+what order decorators are applied, and exactly (I think) what they really do.<p>
+However, I still think that uses like 
+<a href="http://blog.ianbicking.org/explaining-decorators.html">Ian's</a> are incorrect uses of decorators. Unless a decorator
+significantly simplifies a function, I don't think that it should be decorated.
+In his blog entry, the first solution is simple, direct, and to the point; the
+second solution is impossible to understand without much more thought than it
+deserves.<p>
+What, then, are valid decorators? That's a matter of opinion, naturally. 
+I think that staticmethod and classmethod are good uses of decorators, and
+<a href="http://www.lonelylion.com/pipermail/chipy/2004-December/000534.html">this</a>
+decorator seems to really
+simplify what could be an otherwise complicated function.<p>
+I still do not feel that these use cases are significant enough to warrant
+inclusion of decorators into python. They don't do enough to merit the
+confusion that they will cause new programmers when they first encounter them.
+As always, though, I'll live with it, because I think in python by now.<p>
+<h2>Finally</h2><p>
+This is not a rant, despite the brief section above. I'm not a good
+writer, and I haven't fully sketched out my thoughts on decorators. Think of
+this post as my bit of civil disobedience in the python world. Think of it as
+a plea for simplicity in the language I love so much.<p>
+Please leave the decorators to other people, and write your code without the
+sugar. Make the world just a little bit simpler.
+<p>
+<strong>Update 12-24-04</strong>: fixed handling of multiple decorators. Merry Christmas!

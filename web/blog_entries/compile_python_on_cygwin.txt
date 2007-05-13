@@ -1,0 +1,22 @@
+How To Compile Python Extensions On Windows/Cygwin
+#time 7-28-06 10:26
+#keywords python, cygwin, gcc, mingw, C, C++, programming
+There are a lot of descriptions out there of how to do this, and most of them
+are outdated or just plain wrong. Here's what worked for me, yesterday. It
+assumes you've got Cygwin + gcc and the windows version of python 2.4, all
+installed into the default locations:<p>
+<ol>
+<li>Get <a href="http://sebsauvage.net/python/pexports-0.42h.zip">pexport</a>
+and extract it into a directory
+<li>copy c:/Winnt/system32/python24.dll to the pexport directory
+<li>run pexports python24.dll > python24.def
+<li>run dlltool --dllname python24.dll --def python24.def --output-lib
+libpython24.a
+<li>copy libpython24.a to c:\python24\libs\
+<li>run c:\python24\python.exe setup.py build --compiler=mingw32
+</ol>
+This worked well enough for me to build <a
+href="http://probstat.sourceforge.net">probstat</a> successfully - I haven't
+tried it with anything else. I hope it helps, but if it doesn't work... as
+always, ask <a
+href="http://groups.google.com/group/comp.lang.python">c.l.p.</a>

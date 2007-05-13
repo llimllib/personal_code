@@ -1,0 +1,40 @@
+Converting Sourcesafe to Subversion
+#time 11-01-06 14:27
+#keywords python, sourcesafe, subversion
+One of my first tasks at my new job was to convince them that they needed to
+switch away from sourcesafe and onto something better. We talked about
+<a href="http://www.sourcegear.com/vault/index.html">SourceGear Vault</a>, but
+we decided it was too expensive and didn't have the community support that
+subversion had.<p>
+Because my team had already switched off of subversion and onto sourcesafe
+before I and another developer started working, it was a bit of an uphill
+struggle to get them to agree to the change. Fortunately, after filling up
+several long wiki pages of discussion between team members, I wrote up a
+detailed comparison of the three options under consideration. It must have been
+convincing, because almost immediately after I wrote it, the team agreed to try
+subversion again.<p>
+Since I had fought so hard for the switch, I became the one
+responsible for the switchover and future maintenance of the subversion
+repository. I was scared that switching was going to be <b>extremely</b>
+difficult, due to the closed nature of sourcesafe, but was pleased to find <a
+href="http://www.pumacode.org/projects/vss2svn">vss2svn</a>, a utility to
+run the conversion for me. Despite the fact that it's in perl (ha ha), it runs
+very nicely, and converted my repository with no loss of change history into a
+subversion dump file.<p>
+The only issue I had with vss2svn is that once you've converted all your code
+into subversion, your *.*proj and *.sln files still have subversion crap inside
+them, and when you try to open them, Visual Studio complains. Furthermore,
+there are lots of *.scc files, which are sourcesafe lock files, scattered
+throughout your projects.<p>
+To fix this, I wrote a little <a
+href="http://billmill.org/static/files/clean_up_sourcesafe.py">python
+script</a> which will go through your project directories, cleaning up all the
+leftover junk. It deletes all *scc files, and goes into all *proj,
+*.vdproj, and *.sln files and cleans them out.<p>
+To use it, simply drop it at the root of a working copy of your new subversion
+repository, cd to that directory, and run the script with "python
+clean_up_sourcesafe.py". The only thing you should
+be careful about is that the file will run recursively for all folders below
+its current working directory. I can't guarantee that it'll work for you, but I
+will say that it's worked for me through several test conversions.<p>
+Good luck with your conversion, I hope it makes you as happy as it makes me :)

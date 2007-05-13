@@ -1,0 +1,50 @@
+First Snow, and a debugging puzzle
+#time 11-14-04 00:00
+#keywords snow, pyblosxom, python
+Well, last night it snowed for the first time this winter here (Connecticut,
+USA). For most people, that's an unfortunate sign that it's getting cold, but
+I love the winter. Snow is so austere and beautiful - it has a quiet quality
+that I love. It's always an exciting day for me when it snows for the first
+time. One of my ex-girlfriends said I had a "snow face" which only came out
+when it snowed.<p>
+Anyway, I've now become a developer for pyblosxom, as Will so kindly
+<a href="http://www.bluesock.org/~willg/blog/dev/pyblosxom/billmilletal.html">pointed
+out</a> in his blog. I hope that I'll be up to the task, and hope that we can
+improve pyblosxom a lot. For right now, I'm hacking on meta-data, but I plan
+to work on static rendering when I've got it in some form of working state.<p>
+So, being a developer and all, I had to download the CVS source for pyblosxom
+and run it, to see if my new plugins work with it. Fortunately, the keywords
+and meta plugins ran with no changes and only one addition to config.py. I knew
+that was too good to be true, though, and I was right.<p>
+Once I had those working, I needed to see if the metatime plugin worked. Well,
+it kinda works, and is presenting me with an interesting problem. At first,
+nothing was working. However, after I inserted some debugging code, it started
+working perfectly. The debugging code is as follows:<p>
+<textarea cols="50" rows="4">###delete me
+from tools import log
+for l in data["entry_list"]:
+    log("pyblox day: %s" % l['da'])</textarea><p>
+Can you guess which part of this simple statement is the crucial one which 
+causes everything to work all of a sudden? I couldn't either, so I tested it -
+it's the <code>l['da']</code>. <code>l['mo']</code> has the same effect, 
+but not just <code>l</code>. Something in __getitem__ must be causing the entry
+to do... something. I haven't quite figured that out yet.<p>
+<h2>Yet more on meta-data</h2><p>
+So, as Will points out, pyblosxom needs some sort of meta-data database. I felt
+that the way to store this information in the most pyblosxom-ish way was to
+store it in the file in such a way that it can be ignored easily if necessary,
+and then to be read into pickles if it's not going to be ignored. This, while
+not an optimal solution, is at least a simple one, and that seems to be a tenet
+of pyblosxom. It may be the most appealing aspect of pyblosxom for hackers
+like me who like to be close to source code.<p>
+What I wonder though, is, what are the solutions of other blogging packages?
+I think that a relational database is way too complex for this type of
+situation, so what's left? My original plan was just to simply leave the
+meta-data inside the blog files, but that makes it difficult to search files
+by their meta-data. If all the meta-data were in the files, you'd have to parse
+every file to do a keyword search. With my system of files and parallel meta
+files, it means unpickling a bunch of files, which (hopefully) is quite a bit
+faster. I should benchmark this.<p>
+Anyway, enough rambling, enjoy the winter weather if you get it, and listen to 
+my personal
+<a href="http://www.last.fm/iframes/playeraction.php?a=personalradio&profile=2101152">radio station</a>.

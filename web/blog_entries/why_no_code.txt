@@ -1,0 +1,84 @@
+Why Publish CS Papers Without Code?
+#time 03-12-07 07:29
+#keywords Computer Science, cs, programming, computer, python, haskell, science
+<p>Imagine that you read a paper analyzing "Hamlet" in great detail. Intrigued, 
+you went to the bookstore to look for a copy, only to find that there were 
+none. Confused, you checked the library - nothing. Finally, you went online to 
+shakespeare.com, only to find a note saying that "Hamlet" was still being 
+edited and would be released Any Day Now.</p>
+<p>Unfortunately, an analogous situation is the norm in the world of academic 
+computer science. Graduate students and professors produce code by the 
+truckload, and a majority of them produce only papers about their work. While 
+this is certainly <a href="http://www.cs.waikato.ac.nz/~ml/">not</a> <a 
+href="http://www.bluej.org/">always</a> <a 
+href="https://www.drproject.org/">the</a> <a 
+href="http://www.haskell.org/ghc/">case</a>, it was difficult for me to even 
+find these examples of academic source code. In all four cases, it has proven 
+very useful to programmers outside of academia.</p>
+<h1>Life, not Math</h1>
+<p>The fact is, computer science research is more like biology research than it 
+is like mathematical research. For an experiment to be valid, it should be 
+repeatable. If you're publishing analyses of programs without publishing the 
+code that was analyzed, how can the community possibly verify what you 
+claim?</p>
+<p>Bugs are endemic to source code everywhere, and there is no reason to 
+believe that academic code is any different. All of the analysis in the world 
+is irrelevant if the program you are analyzing has a subtle bug embedded in it.  
+We, computer scientists, should expect and demand that published, well tested 
+code be made available with every paper which claims to analyze or draw 
+conclusions from a program of any significant size.</p>
+<h1>A Problem of Environment?</h1>
+<p>At the moment, there is just no easy way to do this. Where the open 
+source world has <a href="http://sf.net">SourceForge</a> and other project 
+hosting sites, there is no similar environment where academic papers can live 
+alongside the code they reference. Instead, computer science researchers are 
+encouraged to publish papers in traditional, copyright-locked, academic 
+journals. These journals are not prepared to handle large volumes of code, nor 
+should they be. Computer science research was made for the web, and there 
+should be a home for it on the web.</p>
+<p>It is intimidating for a harried academic that just wants to get work done, 
+and advance in his field, to have to set up the host of tools required to share 
+code effectively. If there were a SourceForge-for-academics site where they 
+could simply register their paper, drop in the source code, and have a project 
+ready made for them, it would be much more likely that they would participate.  
+If such a project were to gain steam, the network effect would make it an 
+invaluable resource for academic and industry programmers alike. Collaboration 
+and open code sharing would lead to much more rapid progress in the field, and 
+hopefully encourage the greater rigor that other fields require of their 
+practitioners.</p>
+<h1>Two Different Worlds</h1>
+<p>Right now, academics and open-source programmers live largely in two 
+separate, often parallel, worlds. Where they do collide, as they do in the 
+Haskell language, there is often extremely interesting work being produced.  
+Each brings a different, interesting, viewpoint to the table, and greater 
+coordination between the two would have nearly universal benefits for 
+programmers of every stripe.</p>
+<p>So free the code! If you're an academic programmer, consider publishing the 
+code that you have, regardless of what you may think of it. Consider asking the 
+journal that you publish in to retain copyright over your work. If you're an 
+open source programmer, look for some work in a field that interests you, and 
+email the author if he hasn't released his code. Ask him an interesting 
+question, and convince him that his code would be useful. If you're both, tell 
+the world your ideas for how we can all work better together.</p>
+<h1>Update:</h1>
+<p>I've been contacted already by two scientists who care about the 
+reproducibility of programs. First, <a 
+href="http://www.cs.mu.oz.au/~gavinb/index.php">Gavin Baker</a> wrote to tell 
+me about the <a href="http://itk.org">insight toolkit</a>, which "is a 
+cross-platform open-source image processing toolkit for performing registration 
+and segmentation" that attempts to provide reference implementations of 
+published algorithms. He also pointed me towards <a 
+href="http://www.insight-journal.org/">The Insight Journal</a>, which allows 
+authors to publish open articles which are automatically verified with CMake.  
+This is exactly the type of thing I was hoping to hear about.</p>
+<p>Only a few minutes later, "I. Vlad" wrote to tell me that computational 
+geophysicists have a similar system called <a 
+href="http://rsf.sourceforge.net/">Madagascar</a>, which uses SCons to provide 
+automated verification of results. Furthermore, they encourage the use of open 
+data sets from <a href="http://software.seg.org/">the website</a> for the 
+Society of Exploration Geophysicists.</p>
+<p>Good to hear that these scientists are out there making stuff happen, while 
+I sit here on my duff.</p>
+<h1>Update 2</h1>
+<p>Made a correction to the update. (Made it clear that the Madagascar project 
+did not set up the SEG site - sloppy writing on my part).</p>

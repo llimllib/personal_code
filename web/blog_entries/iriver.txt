@@ -1,0 +1,21 @@
+No Development Today
+#time 11-12-04 00:00
+#keywords music, audioscrobbler, last.fm, iRiver
+I've been playing with my new 
+<a href="http://reviews.cnet.com/iRiver_H120_20GB/4505-6490_7-30571493.html">mp3
+player</a> too long, so no development news today. The player, an iRiver 
+ihp-120, is excellent so far. I wanted it over an iPod because it simply acts
+as an external hard drive, with no acrobatics. It works on every platform; 
+although I haven't tried it on my Linux partition yet, I've read that
+usb_hotplug detects it just like any other portable hd.<p>
+The only other thing I've been doing is uploading my music profile to a
+recommendations/community music site, and I'm very impressed with it. The site
+is called <a href="http://www.audioscrobbler.com">Audioscrobbler</a>, and it's
+related closely to <a href="http://last.fm">last.fm</a>. To use them both (at
+the same time) just download a winamp (or iTunes or xmms or...) plugin to
+your computer and play music like normal. In the background, it uploads to
+their servers what songs you've been playing, and builds your profile from
+that information.<p>
+You can see what I've been listening to at
+<a href="http://www.last.fm/user/llimllib">my profile</a> page at last.fm, and
+even listen to a radio station consisting of random songs from my playlist.

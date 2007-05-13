@@ -1,0 +1,13 @@
+If You Care About Pyblosxom, You Must Read This
+#time 11-23-04 01:59
+#keywords pyblosxom, python, link
+And yes, I did just use all kinds of capital letters there, but you need to
+read this if you care about the development of pyblosxom: <a href="http://dsandler.org/wp/archives/2004/11/21/how-i-learned-to-stop-worrying-and-love-wordpress">link</a>. <p>
+<blockquote>This summer, I set aside my five or six half-implementations of a new pure-Python weblog package, and set about making pyblosxom work. I was able to build (roughly) the new dsandler.org design you see here without too much trouble, including some code tweaks (so I'd have the right data around in my page templates). I knew I'd have some more hardcore plugin writing to do in order to buil'd some of the fancier features I had imagined (including something as simple as next-day/previous-day links, which are hard in the pyblosxom architecture), but I'd gotten the site to a point where I wanted to fill it with data and make it live. As soon as I wrote a script to import the old dsandler.org entries into pyblosxom, I discovered that I had a new problem.<p>
+
+Actually, it was an old problem.<p>
+
+The blosxom variants have no caching, no by-date indices, no data structures of any kind to reduce the dependency on recursive descent of all files in all directories.</blockquote>
+I know it's a feature, but it sure would be nice to have some plugins that
+reduced the reliance on parsing directories. This is good motivation for what
+I've been doing.

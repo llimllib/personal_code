@@ -1,0 +1,27 @@
+Broadcom Wireless on a Dell Inspiron 8600
+#time 10-30-06 23:14
+#keywords ubuntu, wireless, dell
+Until recently, I was unsure if my Broadcom 4306 chipset wireless modem would
+work at all under Ubuntu. I had unsuccessfully tried to install it with Dapper
+Drake, and my first attempt with Edgy Eft was unsuccessful as well. <p>
+One thing that I am sure of is that the native bcm43xx driver certainly does not
+work with this particular card. Actually, and worse, it seems to work at first,
+before it starts to intermittently lose connection every 2 minutes or so.
+Frustrated, I decided to give Ubuntu one more try, and installed a clean
+system.<p>
+To get my card working in Edgy Eft, I did the following:<p>
+<ol>
+<li>Grab the wireless card drivers from support.dell.com for my card.
+<li>"sudo apt-get install ndiswrapper-utils-1.8" . <b>Note:</b> it is crucial to
+install version 1.8, and not just ndiswrapper-utils, which defaults to version
+1.1 for some reason.
+<li>"sudo ndiswrapper -i /Directory/Where/Driver/Is/Unpacked/bcmwl5.inf"
+<li>"sudo modprobe ndiswrapper"
+<li>"sudo ndiswrapper -m"
+<li>"sudo apt-get install wifi-radar"
+</ol>
+
+Now I can use wifi-radar to browse and connect to wireless networks, and
+everything in my world is good. In fact, I just sat on my couch watching an avi format
+<a href="http://www.imdb.com/title/tt0144117/">movie</a> streamed from my Windows file 
+server over the wireless network. Thanks, Ubuntu.
