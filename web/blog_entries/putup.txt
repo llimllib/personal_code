@@ -49,3 +49,7 @@ suck</a>, or <a
 href="http://developer.mozilla.org/en/docs/Drawing_Graphics_with_Canvas">&lt;canvas&gt;</a>
 will be a viable answer to flash.<p>
 If that day doesn't come soon, it may come too late.<p>
+<b>Update:</b> jerf at reddit <a 
+href="http://programming.reddit.com/info/1sijf/comments/c1sj3h">takes a 
+slightly different angle</a>, but says some things that I think but that I failed to get 
+across.<p>
