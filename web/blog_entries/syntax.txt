@@ -7,7 +7,7 @@ would use <a href="http://pygments.org">pygments</a> to highlight inline source
 code in entries. If you load this plugin, just put code in a block like: 
 &lt;code lang="language_name"&gt; ...code... &lt;/code&gt;<p>
 I think it's a nice illustration of the simplicity of cherry blossom; see how 
-little it gets in your way. The source is 42 lines long, and only four of them 
+little it gets in your way. The source is 42 lines long, and only five of them 
 are devoted to making Cherry Blossom happy.<p>
 To test it out, here's its own source code. Note that you can't have the token 
 &lt;/code&gt; in your source; I avoided it with an empty comment in the 
