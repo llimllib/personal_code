@@ -21,9 +21,6 @@ which currently runs this site. Since I was a developer on Pyblosxom, I can
 tell you that it has an extremely similar design, modified in places where I 
 thought it could use updating. It should parse Pyblosxom blog entries without 
 any changes.
-<p>I'm currently working on updating it to use cherrypy 3, which was recently 
-released, but don't expect that, or any development on this project, to move 
-rapidly.
 
 <p><h1>Reportlab PDF Calendar Generator</h1>
 <p>The title's pretty self-explanatory. The code's described further <a 
