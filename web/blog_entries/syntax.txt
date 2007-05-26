@@ -1,0 +1,58 @@
+New For Cherry Blossom: Syntax Highlighting
+#time 05-26-07 10:46
+#keywords syntax, python, cherry_blossom, cherrypy, pygments
+This morning's project was to write a <a 
+href="http://billmill.org:9561/cherry_blossom">cherry blossom</a> plugin that 
+would use <a href="http://pygments.org">pygments</a> to highlight inline source 
+code in entries. If you load this plugin, just put code in a block like: 
+&lt;code lang="language_name"&gt; ...code... &lt;/code&gt;<p>
+I think it's a nice illustration of the simplicity of cherry blossom; see how 
+little it gets in your way. The source is 43 lines long, and only four of them 
+are devoted to making Cherry Blossom happy.<p>
+To test it out, here's its own source code. Note that you can't have the token 
+&lt;/code&gt; in your source; I avoided it with an empty comment in the 
+regex:<p>
+<code lang="python">"""Prerequisites: pygments (http://pygments.org)
+
+Configuration for SyntaxHighlight module should be in a [SyntaxHighlight] 
+    secion of your cherryblossom.conf file.
+
+options:
+syntax_style (string): Style to use for highlighting text. Check out the style 
+    documentation at http://pygments.org/docs/styles/ and take the styles out 
+    for a test drive at http://pygments.org/demo/"""
+
+import cherrypy as cpy
+import re
+import pygments
+from pygments.lexers import get_lexer_by_name
+from pygments.formatters import HtmlFormatter
+from utils import config
+
+CODE_RE = re.compile("<code (?:\s*lang=(.*?))*>(.*?)<(?#)/code>", re.S)
+
+class SyntaxHighlight(object):
+    def __init__(self, parent): pass
+
+    def cb_story_start(self, entries):
+        self.render_css = True
+
+    #story is an Entry object
+    def cb_story(self, story):
+        for lang, code in CODE_RE.findall(story._text):
+            if not lang: lang = "python"
+
+            try:
+                lexer = get_lexer_by_name(lang.strip('"'))
+            except ClassNotFound:
+                return
+            formatter = HtmlFormatter(style=config("syntax_style", "default", 
+                "SyntaxHighlight"))
+            code = pygments.highlight(code, lexer, formatter)
+
+            if self.render_css:
+                code = '<style type="text/css">%s</style>\\n%s' % \
+                    (formatter.get_style_defs(), code)
+                self.render_css = False
+            story._text = CODE_RE.sub(code, story._text, 1)</code>
+<p>I should also mention, kudos to the pygments guys, your module rocks.
