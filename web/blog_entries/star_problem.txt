@@ -23,11 +23,11 @@ challenge, I took it up.<p>
 #(7,9,10,11), 
 #(12,10,8,6), 
 #
-# So, given twelve variables:
-vars = range(1, 13)
+# So, given the first twelve integers
+ints = range(1, 13)
 #
 # we can test if we have a satisfied solution:
-def solved(vars):
+def solved(perm):
     #lines are the same as above, but with one subtracted from each number to
     #make them into array indices
     lines = [(0,2,4,6), (0,3,7,10), 
@@ -35,7 +35,7 @@ def solved(vars):
     (6,8,9,10), 
     (11,9,7,5)]
     for line in lines:
-        if sum(vars[i] for i in line) != 26:
+        if sum(perm[i] for i in line) != 26:
             return False
     return True
 
@@ -56,7 +56,7 @@ def pretty_print_star(permutation):
 # permute function:
 # (requires probstat: http://probstat.sourceforge.net/ )
 import probstat
-for perm in probstat.Permutation(vars):
+for perm in probstat.Permutation(ints):
     if solved(perm):
         print "found solution!"
         pretty_print_star(perm)
