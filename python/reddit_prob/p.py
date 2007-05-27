@@ -15,7 +15,7 @@
 #(12,10,8,6), 
 #
 # So, given twelve variables:
-#vars = range(1, 13)
+vars = range(1, 13)
 #
 # we can test if we have a satisfied solution:
 def solved(vars):
@@ -47,7 +47,7 @@ def pretty_print_star(permutation):
 # permute function:
 # (requires probstat: http://probstat.sourceforge.net/ )
 import probstat
-for perm in probstat.Permutation(range(1, 13)):
+for perm in probstat.Permutation(vars):
     if solved(perm):
         print "found solution!"
         pretty_print_star(perm)
