@@ -1,0 +1,28 @@
+The Ideal Computer Science Education
+#time 06-10-07 17:49
+#keywords computer science, education, programming, python
+The quality, or lack thereof, of modern university computer science programs is 
+one of the topics that comes up <a 
+href="http://programming.reddit.com/info/1jlyq/comments">over</a> <a 
+href="http://programming.reddit.com/info/1v114/comments">and</a> <a 
+href="http://programming.reddit.com/info/yvr3/comments/cyw5v">over</a> <a 
+href="http://programming.reddit.com/info/mkr7/comments/cms19">again</a> <a 
+href="http://programming.reddit.com/info/9zfb/comments">among</a> <a 
+href="http://programming.reddit.com/info/mmju/comments">programmers</a> online.  
+Often, the argument devolves into shouting between two groups; one of them, the 
+Hackers, argue that they learned it all on their own, or that the information 
+they learned in school was useless when they could have been out making money 
+and learning things that matter. The other, the Programmers, argue that the 
+Hackers can't possibly understand the underpinnings of the technology they're 
+using, and will often do things the Wrong Way (TM).<p>
+
+Having attended a <a href="http://www.ursinus.edu/">school</a> with a <a 
+href="http://academic.ursinus.edu/mathcs/majors%20and%20minors.htm#CS">fairly 
+mathematical curriculum</a>, but considering myself largely to be a hacker, I 
+think often about the differences between the two groups, and I think that I 
+know a way to bring them together. Basically, I want here to sketch out how I 
+would implement a <a 
+href="http://steve-yegge.blogspot.com/2006/07/wizard-school.html">better CS 
+program</a>.<p>
+<h2>The Axioms</h2><p>
+<ul>Written programming tests are stupid
