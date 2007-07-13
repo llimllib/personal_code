@@ -5,7 +5,6 @@ def factorial( n ):
         return n * factorial( n-1 )
 
 class Permutation:
-
     def __init__( self, items ):
         seq = list( items[:] )
         n = len( seq )
@@ -89,4 +88,4 @@ if __name__ == "__main__":
     print 'loop with __iter__'
     print '---------------'
     for perm in x:
-        print perm 
+        print perm

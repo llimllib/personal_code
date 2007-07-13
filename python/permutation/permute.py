@@ -9,9 +9,10 @@ def perm1(lst):
 
     Also note that this algorithm modifies lst in place.
     """
-    yield lst #should I assume you've processed the first permutation?
-              #for now, I'll work with algorithms which return all permutations
-              #including the trivial one (makes usage prettier)
+    yield lst 
+
+    if len(lst) == 1: return
+
     n = len(lst) - 1
     while 1:
         j = n - 1
@@ -39,6 +40,12 @@ def perm2(lst):
     Also note that this algorithm modifies lst in place.
     """
     yield lst
+    if len(lst) == 1: return
+    if len(lst) == 2:
+        lst[0], lst[1] = lst[1], lst[0]
+        yield lst
+        return
+
     n = len(lst) - 1
     while 1:
         #half the time, j = n-1, so we can just switch n-1 with n
@@ -65,10 +72,14 @@ def perm2(lst):
 def perm3(lst):
     """implementation of Knuth's answer to exercise 1, fascicle 2b, TAOCP"""
     yield lst
+
+    if len(lst) == 1: return
+    if len(lst) == 2:
+        lst[0], lst[1] = lst[1], lst[0]
+        yield lst
+        return
+
     n = len(lst) - 1
-    #need to special case a 2-element list
-    if n == 1:
-        yield [lst[1], lst[0]]
     while 1:
         #half the time, j = n-1, so we can just switch n-1 with n
         if lst[-2] < lst[-1]:
@@ -82,8 +93,7 @@ def perm3(lst):
         else:
             #and now we know that n-2 > n-1, so start j at n-3
             j = n - 3
-            if j < 0: return #need to terminate here because an index of -1
-                             #is perfectly valid in python (hit when n = 2)
+            if j < 0: return
             y = lst[j]
             x = lst[-3]
             z = lst[-1]
@@ -116,6 +126,8 @@ def perm4(lst):
     """
     if max([lst.count(x) for x in lst]) > 1: raise "no repeated elements"
     yield lst
+    if len(lst) == 1: return
+ 
     n = len(lst) - 1
     c = [0 for i in range(n+1)]
     o = [1 for i in range(n+1)]
@@ -138,15 +150,19 @@ def perm4(lst):
 
 def perm5(lst):
     p = NPermutation(len(lst))
-    for perm in p: yield p
+    for perm in p: yield perm
 
 def clp_perm(l):
+"""yanked and modified from: 
+http://mail.python.org/pipermail/python-list/2002-November/171907.html"""
+    if len(l) == 1: yield l; return
+
     pop, insert, append = l.pop, l.insert, l.append
 
     def halfperm():
         ll = l
         llen = len(ll)
-        if llen <= 2:
+        if llen == 2:
             yield ll
             return
         aRange = range(llen)
@@ -164,40 +180,79 @@ def clp_perm(l):
         yield h
         h.reverse()
 
+def xcombinations(items, n):
+    if n==0: yield []
+    else:
+        for i in xrange(len(items)):
+            for cc in xcombinations(items[:i]+items[i+1:],n-1):
+                yield [items[i]]+cc
+
+def xpermutations(items):
+    return xcombinations(items, len(items))
 
 def test(f):
-    #first let's do a simple test for correctness
-    arr = [1,2,3]
-    perms = [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
-    perms_ = []
-    for i in f(arr):
-        print i
-        perms_.append(i[:])
-    if [perms.count(p) for p in perms] != [1,1,1,1,1,1]:
-        print perms_
-        raise "%s is not correct!" % f.__name__
-    
+    #note! all algorithms presented here expect the array to be sorted and not
+    #empty.
+    tests = [([1], [[1]]),
+                ([1,2], [[1,2], [2,1]]),
+                ([1,2,3], [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], 
+                            [3,2,1]]),
+                ([1,2,3,4], [[1,2,3,4],[1,2,4,3],[1,3,2,4],[1,3,4,2],[1,4,2,3],
+                            [1,4,3,2],[2,1,3,4],[2,1,4,3],[2,3,1,4],[2,3,4,1],
+                            [2,4,1,3],[2,4,3,1],[3,1,2,4],[3,1,4,2],[3,2,1,4],
+                            [3,2,4,1],[3,4,1,2],[3,4,2,1],[4,1,2,3],[4,1,3,2],
+                            [4,2,1,3],[4,2,3,1],[4,3,1,2],[4,3,2,1]]),
+                (['a','b','c'], [['a','b','c'],['a','c','b'],['b','a','c'],
+                                ['b','c','a'],['c','a','b'],['c','b','a']]),
+            ]
+    failure = False
+    for example, expected in tests:
+        actual = []
+        try:
+            for p in f(example):
+                #copy array, since modifications occur in-place
+                actual.append(p[:])
+            if [expected.count(p) for p in actual] != [1] * len(expected) or \
+                [actual.count(p) for p in expected] != [1] * len(expected):
+                print "%s failed on %s (%s)" % (f.__name__, example, actual)
+                failure = True
+        except Exception, msg:
+            print "Error in %s on input %s" % (f.__name__, example)
+            failure = True
+
+    if not failure:
+        print "%s passed" % f.__name__
+    return not failure
+
+def speed(f):
     #and now we can test for speed
-    arr = [1,2,3,4,5,6,7,8,9,10]
+    arr = range(10)
     facten = 10*9*8*7*6*5*4*3*2
     count = 0
     t1 = time.time()
-    for i in f(arr): #list(f(arr)) stores it in memory, I'd like to avoid that
+    for i in f(arr): #list(f(arr)) stores it in memory, let's avoid that
         count += 1    
     t2 = time.time()
     if count != facten:
         raise "Incorrect number of iterations for %s!" % f.__name__
     print '%s: %f' % (f.__name__, t2 - t1)
 
+try: all
+except:
+    def all(iterable):
+        for i in iterable:
+            if not i: return False
+        return True
+
 if __name__ == '__main__':
-    #test(perm1)
-    #test(perm2)
-    #test(perm3)
-    #test(perm4)
-    #test(clp_perm)
-    test(perm5)
+    from permute_c import Permute2
+    funcs = [perm1, perm2, perm3, perm4, clp_perm, Permute2]
+    #funcs = [xpermutations, perm5] #the graveyard of the too-slow
     try:
         import probstat
-        test(probstat.Permutation)
-    except ImportError:
-        print "probstat not installed"
+        funcs.append(probstat.Permutation)
+    except: pass
+
+    tests = [test(f) for f in funcs]
+    if all(tests):
+        for f in funcs: speed(f)
