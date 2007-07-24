@@ -114,10 +114,34 @@ liftm takes a function "f" from (a -> b), in this case (Number . read) which is 
 and returns a function of one argument (to which we give (many1 digit)) which does the following:
     assign the argument to a variable "a'" (!!? <- does something I don't understand.)
     return (f a')
+
+From the manual (http://www.haskell.org/onlinereport/exps.html):
+    A do expression provides a more conventional syntax for monadic programming. It allows an 
+    expression such as
+
+      putStr "x: "    >> 
+      getLine         >>= \l ->
+      return (words l)
+
+    to be written in a more traditional way as:
+
+      do putStr "x: "
+         l <- getLine
+         return (words l)
+So it shouldn't change the type at all. WTF! TODO: email haskell-cafe.
 -}
 parseNumber = do
     digits <- (many1 digit)
     return ((Number . read) digits)
+
+-- is equivalent to
+
+parseNumberNoDo = many1 digit >>= /l -> return ((Number . read) l)
+
+-- which is not equivalent to
+
+-- parseNumberWrong = return ((Number . read) (many1 digit))
+-- because why?
 
 {-
 Woohoo! this one works. But what magic is <- doing? It must be making (many1 digit) into
