@@ -141,7 +141,10 @@ parseNumberNoDo = many1 digit >>= \l -> return ((Number . read) l)
 -- which is not equivalent to
 
 -- parseNumberWrong = return ((Number . read) (many1 digit))
--- because why?
+-- because it's a sequence thing? If so, why does liftM work?
+--   because we pass (Number . read) to it, not the whole series;
+--   it translates (Number . read) into a function which does exactly
+--   what we see above.
 
 {-
 Woohoo! this one works. But what magic is <- doing? It must be making (many1 digit) into
