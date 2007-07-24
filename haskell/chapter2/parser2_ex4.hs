@@ -43,7 +43,27 @@ user.
         Round to single --- 3.141593
 0.6L0
         Extend to long --- .600000000000000
+
+Looking at the exact schema 
+(http://www.schemers.org/Documents/Standards/R5RS/HTML/r5rs-Z-H-10.html#%_sec_7.1.1), 
+we can have:
+
+#i#b001010010
+or
+#b#i001010101
+or
+#o1234567
 -}
+
+radix = do char '#'
+           x <- oneOf "bodx"
+           return "#" ++ [x]
+
+precision = do char '#'
+               x <- oneOf "ei"
+               return "#" ++ [x]
+
+prefix = do { oneOf radix; oneOf precision <|> oneOf precision; oneOf radix
 
 parseNumber2 = do prefix <- prefix
                   return prefix
