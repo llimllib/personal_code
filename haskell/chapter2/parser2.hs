@@ -136,7 +136,7 @@ parseNumber = do
 
 -- is equivalent to
 
-parseNumberNoDo = many1 digit >>= /l -> return ((Number . read) l)
+parseNumberNoDo = many1 digit >>= \l -> return ((Number . read) l)
 
 -- which is not equivalent to
 
