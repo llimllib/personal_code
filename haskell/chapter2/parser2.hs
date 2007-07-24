@@ -13,7 +13,6 @@ data LispVal = Atom String
 
 symbol = oneOf "!$#%&|*+-/:<=>?@^_~"
 spaces = skipMany1 space
-notEndString = do 
 parseString = do char '"'
                  x <- many (noneOf "\"")
                  char '"'
@@ -49,7 +48,7 @@ parseAtom = do first <- letter <|> symbol
  value inside the monad, giving us back a Parser LispVal", instead of a Parser
  String (huh?). liftM is in the Monad module.
 -}
-parseNumber = >>= (Number . read) $ (many1 digit)
+parseNumber = liftM (Number . read) $ (many1 digit)
 {- Why doesn't this work:
 do return (Number . read) $ (many1 digit)
 ?
