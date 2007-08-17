@@ -17,8 +17,8 @@ Indeed, a quick look look at the mysqldump <a
 href="http://mysql.bkbits.net:8080/mysql-5.2/client/mysqldump.c?PAGE=anno&REV=%2b">source 
 code</a> shows that it just constructs a query of the form: "SELECT * FROM 
 <em>table</em> [WHERE <em>condition</em>] [ORDER BY <em>field</em>]":<p>
-<code lang="c">dynstr_append_checked(&query_string, "SELECT /*!40001 
-SQL_NO_CACHE */ * FROM ");
+<code lang="c">dynstr_append_checked(&query_string, 
+    "SELECT /*!40001 SQL_NO_CACHE */ * FROM ");
 dynstr_append_checked(&query_string, result_table);
 
 if (where)
