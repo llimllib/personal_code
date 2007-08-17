@@ -111,7 +111,8 @@ def get_n_rows(conn, table, n, **kwargs):
 
     i = 0
     row = cur.fetchone()
-    insert_stmts = [] while row and i < n:
+    insert_stmts = [] 
+    while row and i < n:
         i += 1
         #note that the MySQLdb source suggests that conn.literal is 
         # private; I see no problem with using it, as it just loads the 
