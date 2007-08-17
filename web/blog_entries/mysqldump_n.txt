@@ -80,6 +80,10 @@ I want:
 <code lang="python">"""
 get_n_rows retrieves n rows from a given table on MySQLdb connection conn
 
+conn:  open MySQLdb connection object
+table: string; name of the table which we are generating queries for
+n:     int; number of rows to output from table
+
 Legal kwargs:
     reverse: bool; whether to return rows in reverse order (requires idCol)
     idCol:   string; results will be sorted on this column if reverse is 
