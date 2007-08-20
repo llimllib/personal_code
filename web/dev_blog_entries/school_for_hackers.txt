@@ -1,0 +1,21 @@
+School For Hackers
+#time 08-19-07 00:05
+#keywords school, education, programming, hackers, academic
+
+TODO: intro
+
+What I'd like to propose is a design for a school intended for the other half 
+of the spectrum, the hackers.
+
+A quick note on terminology: I will henceforth refer to traditional university 
+computer science classes as "college" and to my hypothetical new school as "the 
+school".
+
+<h2>The Axioms</h2><br>
+
+<h3>Flexibility</h3><br>
+Not every student learns at the same pace. In college, each course moves at one 
+pace, regardless of the capability of any particular student.
+
+<h3>Openness</h3><br>
+<h3>Students First</h3><br>
