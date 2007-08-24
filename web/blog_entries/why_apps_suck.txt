@@ -1,0 +1,107 @@
+Why Applications Suck (Part 1)
+#Keywords: applications, computer, programming, internet, storage
+Why do people outside of corporations overwhelmingly use webmail instead of 
+email clients? Long before rich email clients like gmail were available, people 
+have flocked to the internet email client - messaging has been the killer 
+feature of the web for a long time now.<p>
+But why?<p>
+The answer is simple: Overwhelmingly, users do not want to install programs, 
+and users do not want their data stored on their computer. In that order of 
+importance.<p>
+<h2>Users Don't Want to Install Programs</h2><p>
+Let's examine the process of getting a popular, free, email client like <a 
+href="http://www.mozilla.com/en-US/thunderbird/">Thunderbird</a> installed. To 
+do so, imagine that we're instructing our kindly aunt Tilly how to install 
+it.<p>
+Now Tilly is no old fogie, she's been using Microsoft Word at work for over a 
+decade now, and she knows her way around msn.com. However, she just decided to 
+strike out looking for a new job, and wants to finally use that personal email 
+address that came with her cable internet. She's got us trapped on the phone, 
+and "we know computers", so here's roughly what we'll tell her to do:<p>
+<ol><li>type google.com in the address bar
+<li>type in "thunderbird"; press enter
+<li>click on the first result
+<li>click on "Download Thunderbird"
+<li>click "OK"
+<li>choose a place to save it (Just use the desktop, Tilly!)
+<li>minimize the browser
+<li>hunt for the file named "Thunderbird"
+</ol><p>
+
+And, ohmigod, we're not even close to done. She's still got to run the 
+installer (3-4 clicks minimum), which involves selecting an installation 
+directory (a what?), then open the program, open the tools -> accounts menu 
+option, find the documentation for her service provider's email tools, copy 
+them into the "add new account" wizard (another 3-4 clicks) where appropriate, 
+remember her user name and password, and then download all the email she's had 
+sitting there since she hasn't checked it ever.<p>
+Now, finally, she's ready to use her email client. It's just that easy!<p>
+Let's compare the process for getting her up and running with gmail:<p>
+<ol><li>type "gmail.com" in the address bar
+<li>click on "sign up for gmail"
+<li>fill out a form (a task she probably knows how to do)
+<li>click on "I accept. Create my account."
+</ol><p>
+Now, Tilly may not be the most technological mind around, but she's also no 
+dummy. I know which one I'd rather direct her to do.<p>
+Desktop application install is a problem.<p>
+<h2>Do We Even Want to Fix This?</h2>
+Many web 2.0-savvy types will tell us that this isn't a big deal. In the 
+future, all of our applications should be inside our browser, and to speak 
+otherwise is heresy!  The desktop is dead! Sure, Javascript + Json + the 
+browser has limitations, but those restrictions are liberating! Get used to it, 
+or perish!</p>
+Well, bah humbug. Here's what's good about the web: The easy posting, viewing, 
+and navigating of documents described by URIs.<p>
+That's it.<p>
+Let me repeat it for clarity: The web, in your browser, is <em>only really good 
+at</em> sending discrete data, displaying discrete documents and navigating in between 
+them.<p>
+Phew.<p>
+The whole paradigm is absolutely superb at getting this job done. The system of 
+hyperlinks, URIs, DNS, and HTTP over TCP/IP is the greatest achievement that 
+computer programmers have achieved, a massive global effort that has managed to  
+stay amazingly open and coherent. It "Just Works" enough to change the way 
+information is distributed, businesses are run and even how society is 
+structured.<p>
+Anything amenable to being represented as discrete visual documents has taken 
+to the internet like a duck to water. Chief among them is email; check out the 
+<a href="http://www.alexa.com/site/ds/top_sites?ts_mode=global&lang=none">top 
+100 global</a> Alexa websites and see how many "social networks" in how many 
+languages are in the top 100. Sites displaying news (documents) and photographs 
+(documents) and information about software (documents) make up most of the 
+rest.<p>
+What's left among those 100 is the elephant in the room; the Killer Internet 
+Application: search. Even Microsoft's lame search engine finds its way into the 
+top 100 because people will do whatever they need to in order to search the 
+web; it's the only way to get an effective handle on the information in the 
+Great Hyperlinked Mass. I believe it's the exception to my "web is only good at 
+documents" theory that proves the rule.<p>
+<h2>Search Works, so Let's Put All our Apps On the Web</h2>
+Since the web gained massive worldwide popularity in the mid-1990s, an enormous 
+amount of effort has been spent on making the browser into an application 
+development platform.  The Great Mozilla Rewrite basically shut that browser 
+down between 1998 and 2002 in order to make it an application platform.  
+Microsoft developed activeX, Sun pushed Java applets as the solution, Adobe 
+developed SVG, and Macromedia developed its Flash player.<p>
+Nowadays, Firefox is pushing &lt;canvas&gt;, Microsoft has released 
+Silverlight, Macromedia has become Adobe, and Flash is the only one of the 
+first generation technologies still breathing oxygen as a development 
+platform.<p>
+Furthermore, with the invention of Google Gears, <a 
+href="http://joyeur.com/2007/03/22/joyent-slingshot">Joyent Slingshot</a>, the 
+aforementioned Silverlight, or Adobe Air, you might soon be able to (gasp) save 
+files to the host computer! That's right, in 10 years we've almost gotten to 
+the point where a program running in a browser can save a file on your hard 
+drive and read it when you're offline.<p>
+The problem is that, fundamentally, a browser is <em>still</em> only good at 
+one thing: documents. Its whole paradigm is set up that way. What does the 
+"back button" mean when you're playing a game of asteroids? What does "home" 
+mean while you're editing a photo? Does an address bar on an mp3 player need to 
+be so <em>in your face</em>?<p>
+<h2>We Can Fix This</h2>
+So, instead of shoehorning our applications inside of the browser window 
+because it's convenient, let's do something radical: bring our "real software" 
+applications into the modern age of the internet.<p>
+In the next article, we'll talk about how software installation came to suck so 
+badly, and how to go about bringing it up to the web era.<p>
