@@ -1,5 +1,5 @@
 Why Applications Suck (Part 1)
-#Keywords: applications, computer, programming, internet, storage
+#Keywords applications, computer, programming, internet, storage
 #time 08-24-07 01:50
 Why do people outside of corporations overwhelmingly use webmail instead of 
 email clients? Long before rich email clients like gmail were available, people 
