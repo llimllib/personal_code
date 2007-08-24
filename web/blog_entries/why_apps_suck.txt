@@ -69,9 +69,9 @@ Anything amenable to being represented as discrete visual documents has taken
 to the internet like a duck to water. Chief among them is email; check out the 
 <a href="http://www.alexa.com/site/ds/top_sites?ts_mode=global&lang=none">top 
 100 global</a> Alexa websites and see how many "social networks" in how many 
-languages are in the top 100. Sites displaying news (documents) and photographs 
-(documents) and information about software (documents) make up most of the 
-rest.<p>
+languages are in the top 100. Sites displaying news (documents), photographs 
+(documents), videos (strictly as documents), and information about software 
+(documents) make up most of the rest.<p>
 What's left among those 100 is the elephant in the room; the Killer Internet 
 Application: search. Even Microsoft's lame search engine finds its way into the 
 top 100 because people will do whatever they need to in order to search the 
