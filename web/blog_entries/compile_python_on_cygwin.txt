@@ -19,4 +19,6 @@ This worked well enough for me to build <a
 href="http://probstat.sourceforge.net">probstat</a> successfully - I haven't
 tried it with anything else. I hope it helps, but if it doesn't work... as
 always, ask <a
-href="http://groups.google.com/group/comp.lang.python">c.l.p.</a>
+href="http://groups.google.com/group/comp.lang.python">c.l.p.</a><p>
+<b>UPDATE</b>: To compile python extensions with python 2.5, check out <a
+href="http://boodebr.org/main/python/build-windows-extensions">this</a> link.<p>
