@@ -50,7 +50,7 @@ class reversefile(object):
         end = self.end
         self.end = 0
         self._f.seek(0)
-        return self._f.read(end).strip()</code><p>
+        return self._f.read(end).strip("\\n")</code><p>
 You can see the whole thing, with source and some very brief tests I hacked up, 
 <a 
 href="http://billmill.org:9561/personal_code/browser/python/reversefile/reversefile.py?rev=57">here</a>.
