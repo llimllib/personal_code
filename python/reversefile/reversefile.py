@@ -1,4 +1,4 @@
-import os, stat
+import os
 
 class reversefile(object):
     """Iterate backwards through a file. f should be an open file handle"""
@@ -16,13 +16,22 @@ class reversefile(object):
         while pos >= 0:
             self._f.seek(pos)
             if self._f.read(1) == '\n':
-                return self._f.read(end - pos)
+                end = self.end
+                self.end = pos
+                return self._f.read(end - pos - 1)
             pos -= 1
+
+        end = self.end
+        self.end = 0
+        self._f.seek(0)
+        return self._f.read(end).strip()
 
 def test_reversefile():
     tests = [
-"""something\n""",
-"""other""",
+"",
+"\n",
+"something\n",
+"other",
 """alpha
 beta
 gamma""",
@@ -31,20 +40,25 @@ Who knows but I'm going to need some test text that's for sure.
 What edge conditions should I be testing? This implementation leaves
 no bufsize borders to test; that's a pretty nice property. I guess that
 I can test with an empty string and a bare \n. I'm going to rely on tests
-without manually compiled answers, because this is a pretty basic function."""]
+without manually compiled answers, because this is a pretty basic function."""
+    ]
 
     for t in tests:
-        expected = list(reversed(t.split("\n")))
+        print "testing: <%s>" % t
 
         #write out the file for testing
         testfile = file("deleteme.tmp", "w")
         testfile.write(t)
         testfile.close()
 
+        expected = list(reversed(
+            [l.strip('\n') for l in file("deleteme.tmp").readlines()]))
+
         got = list(reversefile(file("deleteme.tmp")))
 
         if got != expected:
-            raise """failure with %s
+            raise """failure with 
+%s
 =======================
 %s""" % (expected, got)
 
