@@ -24,7 +24,7 @@ class reversefile(object):
         end = self.end
         self.end = 0
         self._f.seek(0)
-        return self._f.read(end).strip()
+        return self._f.read(end).strip("\n")
 
 def test_reversefile():
     tests = [
