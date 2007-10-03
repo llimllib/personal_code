@@ -10,7 +10,7 @@ When I came back to finish the job this evening, I figured that I ought to go
 look at the <a 
 href="http://ftp.bg.openbsd.org/OpenBSD/src/usr.bin/tail/">source</a> of tail 
 for some inspiration. Surely the unix hackers had figured this problem out long 
-ago? And, sure enough, in <a 
+ago? In <a 
 href="http://ftp.bg.openbsd.org/OpenBSD/src/usr.bin/tail/reverse.c">reverse.c</a>, 
 I found the inspiration I needed:<p>
 <code lang="c">    for (; pos >= start; pos--) {

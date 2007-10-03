@@ -104,5 +104,6 @@ be so <em>in your face</em>?<p>
 So, instead of shoehorning our applications inside of the browser window 
 because it's convenient, let's do something radical: bring our "real software" 
 applications into the modern age of the internet.<p>
-In the next article, we'll talk about how software installation came to suck so 
-badly, and how to go about bringing it up to the web era.<p>
+In the <a href="why_apps_suck2.html">next article</a>, we'll talk about how 
+software installation came to suck so 
+badly, with an eye towards how to go about bringing it up to the web era.<p>

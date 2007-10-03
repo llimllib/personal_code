@@ -1,6 +1,6 @@
-Why Applications Suck: How to Fix Them (Part 2)
+Why Applications Suck: How We Got Here (Part 2)
 #Keywords: applications, computer, programming, internet, storage
-#time 08-24-07 01:50
+#time 08-28-07 01:31
 In the <a href="why_apps_suck.html">previous article</a>, I presented the 
 hypotheses that modern desktop applications suck because they're a pain to 
 install, and that web-based applications are not going to be the answer for 
@@ -15,12 +15,12 @@ way up to the mid-1990s was pretty simple stuff - you distributed your
 application on <a href="http://en.wikipedia.org/wiki/Magnetic_tapes">some</a> 
 <a href="http://en.wikipedia.org/wiki/Floppy_disk">sort</a> of <a 
 href="http://en.wikipedia.org/wiki/Cd-rom">physical</a> <a 
-href="http://en.wikipedia.org/wiki/Dvd">media</a>. Then users either ran the 
+href="http://en.wikipedia.org/wiki/Dvd">media</a>. Users either ran the 
 program from the drive, copied it manually to their computers, or used an 
 install program on the disk to get it onto their hard drive.<p>
 
-In the mid-1990s, along with the increased availability of the internet, came a 
-disruptive new force for application distribution: the internet. Although the 
+In the mid-1990s, the popularity of the internet made it a disruptive
+mechanism for application distribution. Although the 
 slow connection speeds at the time made large downloads painful, their utility 
 was clearly apparent. Sites like <a 
 href="http://en.wikipedia.org/wiki/Tucows#Shareware_Download_Site">Tucows</a> 
@@ -45,10 +45,10 @@ contained within, and automatically start a setup program.<p>
 
 <h2>Unix To The Rescue</h2><p>
 
-While all this was happening to application distribution in the PC world, the 
-Unix geeks were busy <a 
-href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">figuring</a> out a 
-<a href="http://en.wikipedia.org/wiki/Ports_collection">better</a> way to 
+While the internet was ever so slowly changing application distribution in the 
+PC world, Unix geeks were busy figuring out a <a 
+href="http://en.wikipedia.org/wiki/Ports_collection">better</a> <a 
+href="http://en.wikipedia.org/wiki/Advanced_Packaging_Tool">way</a> to 
 distribute software. The free nature of many of the programs distributed on 
 Unix systems meant that the users of those systems could innovate the way in 
 which they were shared.  Just because programmer A wrote a program didn't mean 
@@ -60,7 +60,7 @@ application installation space since the invention of magnetic tape: a central
 repository of programs composed largely of small parts and the dependancy 
 information necessary to construct full programs out of those parts. On these 
 systems, all a user had to do to install a program called "Liebniz" was to type 
-"<install-command> Liebniz", and the system would do the following:<p>
+"<em>install-command</em> Liebniz", and the system would do the following:<p>
 
 <ul><li>Go to a central repository and look up Liebniz</li>
 <li>Download the source or binary associated with the program</li>
@@ -73,21 +73,29 @@ This innovation reduced application installation from the often painful unix
 compilation process to a one-line command that even non-expert users could 
 understand. Soon, the idea had <a 
 href="http://en.wikipedia.org/wiki/Yellow_dog_Updater%2C_Modified">spread</a> 
-to many <a href="http://www.blastwave.org/about.html">other</a> <a 
+to <a href="http://klik.atekon.de/">many</a> <a 
+href="http://www.blastwave.org/about.html">other</a> <a 
 href="http://www.macports.org/">systems</a>, even <a 
 href="http://windows-get.sourceforge.net/">that OS you've heard of</a>.<p>
 
 <h2>And Everyone Was Englightened and Happy, Right?</h2><p>
 
-Unfortunately, even within the open source community, which now has its shiny 
-one-step installers, <a 
+Even within the open source community, which now has its shiny one-step 
+installers, <a 
 href="http://osnews.com/story.php/16956/Decentralised-Installation-Systems">not 
-everyone is satisfied</a>. With the coming of web applications, "installing" 
-remote programs can be a simple matter of clicking a link in your browser,
-security concerns about systems where essentially random "maintainers" get to 
-run scripts as root on your computer persist, and the difficulty of retaining 
-active maintainers of massive numbers of programs becomes more and more 
-obvious.<p>
+everyone is satisfied</a>. With the coming of web applications, desktop apps 
+have to compete with programs whose "installation" can be a single click in 
+your browser. Also, security concerns about systems where essentially random 
+"maintainers" get to run scripts as root on your computer persist, and the 
+difficulty of retaining active maintainers of massive numbers of programs is 
+becoming more and more apparent.<p>
+
+And so, a third wave of installers has begun to appear. In these systems, the 
+packagers and distributors are cut out of the loop, with the responsibility of 
+package maintenance returned to the programmers themselves. Since this is 
+mostly a new method of package distribution, each system does its job 
+differently. What follows is a survey of a few interesting systems I found [1].
+
 
 In the third, and final, part of the series, we'll talk about what has been 
 done about these concerns, and what more could be done in the future.<p>
