@@ -1,21 +1,24 @@
 School For Hackers
 #time 08-19-07 00:05
 #keywords school, education, programming, hackers, academic
+<blockquote>In fact, of all the different types of people I've known, hackers 
+and painters are among the most alike.
 
-TODO: intro
+What hackers and painters have in common is that they're both makers. Along 
+with composers, architects, and writers, what hackers and painters are trying 
+to do is make good things...
 
-What I'd like to propose is a design for a school intended for the other half 
-of the spectrum, the hackers.
+Hackers need to understand the theory of computation about as much as painters 
+need to understand paint chemistry. You need to know how to calculate time and 
+space complexity and about Turing completeness. You might also want to remember 
+at least the concept of a state machine, in case you have to write a parser or 
+a regular expression library.
+-Paul Graham</blockquote>
 
-A quick note on terminology: I will henceforth refer to traditional university 
-computer science classes as "college" and to my hypothetical new school as "the 
-school".
+In this essay I will propose a school designed specifically for the type of 
+hacker Graham talks about in his superb essay <a 
+href="http://www.paulgraham.com/hp.html">"Hackers and Painters"</a>. It is an 
+experiment to see what educational theory might follow from the presumption 
+that programmers are "makers" instead of scientists.
 
-<h2>The Axioms</h2><br>
 
-<h3>Flexibility</h3><br>
-Not every student learns at the same pace. In college, each course moves at one 
-pace, regardless of the capability of any particular student.
-
-<h3>Openness</h3><br>
-<h3>Students First</h3><br>
