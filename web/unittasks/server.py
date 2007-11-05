@@ -50,8 +50,8 @@ class Unittask:
         res = db.query("""
             function(doc) { 
                 if (doc.type == 'User')
-                    map(null, doc); 
-            }""")
+                    map([doc._id, doc.password], doc); 
+            }""", key=["llimllib", self.hash("tao")])
         template = "<html><body>count: %s<br>list: %s</body></html>"
         rows = list(res)
         rowss = str(rows)
