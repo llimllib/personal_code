@@ -1,0 +1,71 @@
+ <html>
+ <head>
+    <style type="text/css">a.test { font-weight: bold; color:red; text-decoration:none; }
+                           a:visited.test { color:red; font-size:100px;}
+    </style>
+    <script type="text/javascript" src="static/jquery-1.2.1.js"></script>
+    <script type="text/javascript" src="static/jquery.blockUI.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var loginForm = $("#login");
+        $.blockUI(loginForm, {width: '275px'});
+        $("#loginSubmit").click(function(){
+            $.unblockUI();
+            $("#taskName").focus();
+        });
+
+        //on form submit, do our ajax
+        $("#newtask").submit(function(){
+            var taskName =    $("#taskName");
+            var frequency =   $("#frequency");
+            $.getJSON("newTaskAjax", 
+                {"taskName":  taskName.val(),
+                 "frequency": frequency.val(),
+                }, 
+                function(resp) {
+                    $("#taskTable").append("<tr><td>"+resp.taskName
+                                          +"</td><td>"+resp.frequency
+                                          +"</td></tr>");
+                });
+            taskName.val("")
+            frequency.val("")
+            taskName.focus()
+            return false;
+        });
+
+        $("#frequency").keydown(function(event){
+            var key = String.fromCharCode(event.keyCode);
+            if (!key.match(/\d/)) return false;
+        });
+    });
+   </script>
+ </head>
+ <body>
+    <form id="newtask" name="newtask" method="POST" action="newTaskAjax">
+    <table><tr><td>Task Name</td>
+    <td>Task Frequency</td></tr>
+    <tr><td>
+        <input id="taskName" type="text">
+    </td><td>
+        Once every <input id="frequency" type="text"> days
+    </td><td>
+        <input type="submit" value="add">
+    </td></tr></table>
+    </form>
+    <table id="taskTable"><tr><td>Task</td><td>Status</td></tr>
+    </table>
+ </body>
+    <!-- invisible login div -->
+    <div id="login" style="display:none; cursor: default"> 
+        <h1>Login</h1> 
+        <table><tr><td>
+        login:</td><td>
+        <input type="text" id="username" /> 
+        </td></tr><tr><td>
+        password:</td><td>
+        <input type="password" id="password" /> 
+        </td></tr></table>
+        <input type="submit" id="loginSubmit" value="login" />
+    </div>
+</div> 
+ </html>
