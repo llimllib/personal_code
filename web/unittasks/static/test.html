@@ -36,17 +36,43 @@
  </head>
  <body>
     <form id="newtask" name="newtask" method="POST" action="newTaskAjax">
-    <table><tr><td>Task Name</td>
-    <td>Task Frequency</td></tr>
-    <tr><td>
-        <input id="taskName" type="text">
-    </td><td>
-        Once every <input id="frequency" type="text"> days
-    </td><td>
-        <input type="submit" value="add">
-    </td></tr></table>
+        <table><tr><td>Task Name</td>
+        <td>Task Frequency</td></tr>
+        <tr><td>
+            <input id="taskName" type="text">
+        </td><td>
+            Once every <input id="frequency" type="text"> days
+        </td><td>
+            <input type="submit" value="add">
+        </td></tr></table>
     </form>
     <table id="taskTable"><tr><td>Task</td><td>Status</td></tr>
     </table>
+
+    <p>
+
+    <form id="newuser" method="POST" action="adduser">
+        <table><tr><td>username:</td><td>
+            <input name="user" type="text">
+        </td></tr><tr><td>password:</td><td>
+            <input name="pw" type="password">
+        </td></tr><tr><td>
+            <input type="submit" value="add user">
+        </td></tr>
+        </table>
+    </form>
+    
+    <p>
+
+    <form id="login" method="POST" action="isuserp">
+        <table><tr><td>username:</td><td>
+            <input name="user" type="text">
+        </td></tr><tr><td>password:</td><td>
+            <input name="pw" type="password">
+        </td></tr><tr><td>
+            <input type="submit" value="login">
+        </td></tr>
+        </table>
+    </form>
  </body>
  </html>
