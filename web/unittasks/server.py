@@ -34,29 +34,9 @@ class Unittask:
     def isuserp(self, user, pw):
         db = Server("http://localhost:8888/")['unit_tasks']
         if len(list(db.view('_design/users/isvalid', 
-                            key={"username": user, 
-                                 "password": self.hash(pw)}))):
+                        key=[user, self.hash(pw)]))) == 1:
             return "Success!"
         return "Failure :("
-
-    @cpy.expose
-    def deleteme(self):
-        db = Server("http://localhost:8888/")['unit_tasks']
-        #I'm thinking about this all wrong. You don't pass data into
-        # a query; it's like an index, you just pass it the key that you're
-        #trying to collect. I'm not quite sure how you set this up to, for
-        #example, validate a user, but I've got an idea that this is where I'm
-        #getting hung up.
-        res = db.query("""
-            function(doc) { 
-                if (doc.type == 'User')
-                    map([doc._id, doc.password], doc); 
-            }""", key=["llimllib", self.hash("tao")])
-        template = "<html><body>count: %s<br>list: %s</body></html>"
-        rows = list(res)
-        rowss = str(rows)
-        return template % (len(rows), rowss.replace('<', "&lt;"))
-
 
     @cpy.expose
     def newTaskAjax(self, taskName, frequency):
@@ -71,13 +51,9 @@ def create_database():
         "_id":    "_design/users",
         "views": {
             "isvalid": """
-                function(doc) {
-                    if (doc.Type == 'User' &&
-                        key.username == doc._id &&
-                        key.password == doc.password)
-                    {
-                        map(null, doc);
-                    }
+                function(doc) { 
+                    if (doc.type == 'User')
+                        map([doc._id, doc.password], doc); 
                 }"""
         }
     })
@@ -85,6 +61,7 @@ def create_database():
     User(_id="llimllib", password=md5("tao").hexdigest()).store(db)
 
 def debug():
+    #just a place for putting handy stuff to run
     db = Server('http://localhost:8888/')['unit_tasks']
 
     f = db["_design/users"]
@@ -92,9 +69,7 @@ def debug():
             "isvalid": """
                 function(doc) {
                     if (doc.type == 'User')
-                    {
-                        map(null, doc);
-                    }
+                        map([doc._id, doc.password], doc);
                 }"""
         }
     db["_design/users"] = f
