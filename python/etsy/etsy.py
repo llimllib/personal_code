@@ -1,5 +1,5 @@
 from urllib import urlopen
-from xml.etree.ElementTree import XML, iterparse
+from xml.etree.ElementTree import iterparse
 
 ids = [42346, 77290, 729]
 prefix = "http://api.etsy.com/feeds/xml_user_details.php?id="
