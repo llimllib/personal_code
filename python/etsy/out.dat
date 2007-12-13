@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <user id="42346">
+    <user_name>Lollibomb</user_name>
+    <is_active>true</is_active>
+    <is_seller>true</is_seller>
+    <city>Jersey City and South Florida</city>
+    <country>United States</country>
+    <listings count="95">
+      <listing id="8430930">
+        <image_id>15851816</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d15/9fd/</image_path>
+        <listing_id>8430930</listing_id>
+      </listing>
+      <listing id="8430502">
+        <image_id>15850401</image_id>
+        <image_path>http://images.etsy.com/all_images/0/07a/f2f/</image_path>
+        <listing_id>8430502</listing_id>
+      </listing>
+      <listing id="8430363">
+        <image_id>15849900</image_id>
+        <image_path>http://images.etsy.com/all_images/4/4f0/0da/</image_path>
+        <listing_id>8430363</listing_id>
+      </listing>
+      <listing id="8428549">
+        <image_id>15843612</image_id>
+        <image_path>http://images.etsy.com/all_images/d/dad/514/</image_path>
+        <listing_id>8428549</listing_id>
+      </listing>
+      <listing id="8425212">
+        <image_id>15832753</image_id>
+        <image_path>http://images.etsy.com/all_images/b/b7d/f66/</image_path>
+        <listing_id>8425212</listing_id>
+      </listing>
+      <listing id="8424938">
+        <image_id>15831793</image_id>
+        <image_path>http://images.etsy.com/all_images/c/c28/cbc/</image_path>
+        <listing_id>8424938</listing_id>
+      </listing>
+      <listing id="8419677">
+        <image_id>15815138</image_id>
+        <image_path>http://images.etsy.com/all_images/f/fbf/28c/</image_path>
+        <listing_id>8419677</listing_id>
+      </listing>
+      <listing id="8418651">
+        <image_id>15811728</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f0d/8db/</image_path>
+        <listing_id>8418651</listing_id>
+      </listing>
+      <listing id="8411371">
+        <image_id>15788192</image_id>
+        <image_path>http://images.etsy.com/all_images/b/b50/edc/</image_path>
+        <listing_id>8411371</listing_id>
+      </listing>
+      <listing id="8410417">
+        <image_id>15785260</image_id>
+        <image_path>http://images.etsy.com/all_images/2/2eb/40e/</image_path>
+        <listing_id>8410417</listing_id>
+      </listing>
+      <listing id="8405736">
+        <image_id>15770314</image_id>
+        <image_path>http://images.etsy.com/all_images/7/71f/5fa/</image_path>
+        <listing_id>8405736</listing_id>
+      </listing>
+      <listing id="8403287">
+        <image_id>15762632</image_id>
+        <image_path>http://images.etsy.com/all_images/e/ee5/a4e/</image_path>
+        <listing_id>8403287</listing_id>
+      </listing>
+      <listing id="8395960">
+        <image_id>15738570</image_id>
+        <image_path>http://images.etsy.com/all_images/4/4bc/7df/</image_path>
+        <listing_id>8395960</listing_id>
+      </listing>
+      <listing id="8394681">
+        <image_id>15734411</image_id>
+        <image_path>http://images.etsy.com/all_images/9/96c/1ae/</image_path>
+        <listing_id>8394681</listing_id>
+      </listing>
+      <listing id="8393891">
+        <image_id>15731839</image_id>
+        <image_path>http://images.etsy.com/all_images/0/071/94b/</image_path>
+        <listing_id>8393891</listing_id>
+      </listing>
+      <listing id="8393673">
+        <image_id>15731113</image_id>
+        <image_path>http://images.etsy.com/all_images/9/9ef/0e6/</image_path>
+        <listing_id>8393673</listing_id>
+      </listing>
+      <listing id="8393664">
+        <image_id>15731083</image_id>
+        <image_path>http://images.etsy.com/all_images/b/bc5/ae8/</image_path>
+        <listing_id>8393664</listing_id>
+      </listing>
+      <listing id="8377601">
+        <image_id>15679533</image_id>
+        <image_path>http://images.etsy.com/all_images/7/7d6/89d/</image_path>
+        <listing_id>8377601</listing_id>
+      </listing>
+      <listing id="8377562">
+        <image_id>15679419</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f5b/41b/</image_path>
+        <listing_id>8377562</listing_id>
+      </listing>
+      <listing id="8370656">
+        <image_id>15656618</image_id>
+        <image_path>http://images.etsy.com/all_images/9/998/9a1/</image_path>
+        <listing_id>8370656</listing_id>
+      </listing>
+      <listing id="8343934">
+        <image_id>15569717</image_id>
+        <image_path>http://images.etsy.com/all_images/8/8dc/ed1/</image_path>
+        <listing_id>8343934</listing_id>
+      </listing>
+      <listing id="8329911">
+        <image_id>15523914</image_id>
+        <image_path>http://images.etsy.com/all_images/1/1b4/fe8/</image_path>
+        <listing_id>8329911</listing_id>
+      </listing>
+      <listing id="8322057">
+        <image_id>15498878</image_id>
+        <image_path>http://images.etsy.com/all_images/1/193/e7b/</image_path>
+        <listing_id>8322057</listing_id>
+      </listing>
+      <listing id="8313958">
+        <image_id>15472272</image_id>
+        <image_path>http://images.etsy.com/all_images/4/44f/433/</image_path>
+        <listing_id>8313958</listing_id>
+      </listing>
+      <listing id="8312473">
+        <image_id>15467430</image_id>
+        <image_path>http://images.etsy.com/all_images/0/006/403/</image_path>
+        <listing_id>8312473</listing_id>
+      </listing>
+      <listing id="8307582">
+        <image_id>15451096</image_id>
+        <image_path>http://images.etsy.com/all_images/4/40f/6db/</image_path>
+        <listing_id>8307582</listing_id>
+      </listing>
+      <listing id="8307571">
+        <image_id>15451069</image_id>
+        <image_path>http://images.etsy.com/all_images/3/3c4/a08/</image_path>
+        <listing_id>8307571</listing_id>
+      </listing>
+      <listing id="8302498">
+        <image_id>15434492</image_id>
+        <image_path>http://images.etsy.com/all_images/1/1cf/c90/</image_path>
+        <listing_id>8302498</listing_id>
+      </listing>
+      <listing id="8271323">
+        <image_id>15333647</image_id>
+        <image_path>http://images.etsy.com/all_images/2/201/7aa/</image_path>
+        <listing_id>8271323</listing_id>
+      </listing>
+      <listing id="8271118">
+        <image_id>15332708</image_id>
+        <image_path>http://images.etsy.com/all_images/0/094/2f2/</image_path>
+        <listing_id>8271118</listing_id>
+      </listing>
+      <listing id="8269981">
+        <image_id>15329181</image_id>
+        <image_path>http://images.etsy.com/all_images/e/ec2/575/</image_path>
+        <listing_id>8269981</listing_id>
+      </listing>
+      <listing id="8255710">
+        <image_id>15282402</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d41/12d/</image_path>
+        <listing_id>8255710</listing_id>
+      </listing>
+      <listing id="8250133">
+        <image_id>15264316</image_id>
+        <image_path>http://images.etsy.com/all_images/6/67b/5f3/</image_path>
+        <listing_id>8250133</listing_id>
+      </listing>
+      <listing id="8235818">
+        <image_id>15217893</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f21/704/</image_path>
+        <listing_id>8235818</listing_id>
+      </listing>
+      <listing id="8197826">
+        <image_id>15094882</image_id>
+        <image_path>http://images.etsy.com/all_images/2/27c/241/</image_path>
+        <listing_id>8197826</listing_id>
+      </listing>
+      <listing id="8193338">
+        <image_id>15080467</image_id>
+        <image_path>http://images.etsy.com/all_images/6/67a/1c6/</image_path>
+        <listing_id>8193338</listing_id>
+      </listing>
+      <listing id="8185285">
+        <image_id>15054358</image_id>
+        <image_path>http://images.etsy.com/all_images/3/39e/799/</image_path>
+        <listing_id>8185285</listing_id>
+      </listing>
+      <listing id="8178701">
+        <image_id>15033370</image_id>
+        <image_path>http://images.etsy.com/all_images/2/22c/d52/</image_path>
+        <listing_id>8178701</listing_id>
+      </listing>
+      <listing id="8172808">
+        <image_id>15014693</image_id>
+        <image_path>http://images.etsy.com/all_images/8/82a/a07/</image_path>
+        <listing_id>8172808</listing_id>
+      </listing>
+      <listing id="8170957">
+        <image_id>15008465</image_id>
+        <image_path>http://images.etsy.com/all_images/b/b77/c25/</image_path>
+        <listing_id>8170957</listing_id>
+      </listing>
+      <listing id="8161258">
+        <image_id>14977246</image_id>
+        <image_path>http://images.etsy.com/all_images/4/46f/3de/</image_path>
+        <listing_id>8161258</listing_id>
+      </listing>
+      <listing id="8158747">
+        <image_id>14968962</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f74/2e3/</image_path>
+        <listing_id>8158747</listing_id>
+      </listing>
+      <listing id="8150845">
+        <image_id>14943212</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f05/2b7/</image_path>
+        <listing_id>8150845</listing_id>
+      </listing>
+      <listing id="8146147">
+        <image_id>14927723</image_id>
+        <image_path>http://images.etsy.com/all_images/a/a9d/d7f/</image_path>
+        <listing_id>8146147</listing_id>
+      </listing>
+      <listing id="6003935">
+        <image_id>9696651</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d90/df4/</image_path>
+        <listing_id>6003935</listing_id>
+      </listing>
+      <listing id="8131422">
+        <image_id>14881160</image_id>
+        <image_path>http://images.etsy.com/all_images/4/460/c19/</image_path>
+        <listing_id>8131422</listing_id>
+      </listing>
+      <listing id="8126693">
+        <image_id>14865929</image_id>
+        <image_path>http://images.etsy.com/all_images/b/b5f/a0f/</image_path>
+        <listing_id>8126693</listing_id>
+      </listing>
+      <listing id="8115857">
+        <image_id>14830477</image_id>
+        <image_path>http://images.etsy.com/all_images/6/6d8/8b9/</image_path>
+        <listing_id>8115857</listing_id>
+      </listing>
+      <listing id="8110918">
+        <image_id>14814798</image_id>
+        <image_path>http://images.etsy.com/all_images/c/cb3/72e/</image_path>
+        <listing_id>8110918</listing_id>
+      </listing>
+      <listing id="8109147">
+        <image_id>14808919</image_id>
+        <image_path>http://images.etsy.com/all_images/0/02a/1cf/</image_path>
+        <listing_id>8109147</listing_id>
+      </listing>
+      <listing id="8098540">
+        <image_id>14774684</image_id>
+        <image_path>http://images.etsy.com/all_images/a/a1b/c6b/</image_path>
+        <listing_id>8098540</listing_id>
+      </listing>
+      <listing id="8096988">
+        <image_id>14769513</image_id>
+        <image_path>http://images.etsy.com/all_images/3/38f/91d/</image_path>
+        <listing_id>8096988</listing_id>
+      </listing>
+      <listing id="8092506">
+        <image_id>14755214</image_id>
+        <image_path>http://images.etsy.com/all_images/4/416/cfb/</image_path>
+        <listing_id>8092506</listing_id>
+      </listing>
+      <listing id="8085565">
+        <image_id>14733087</image_id>
+        <image_path>http://images.etsy.com/all_images/8/862/637/</image_path>
+        <listing_id>8085565</listing_id>
+      </listing>
+      <listing id="8084520">
+        <image_id>14729658</image_id>
+        <image_path>http://images.etsy.com/all_images/0/01f/6d4/</image_path>
+        <listing_id>8084520</listing_id>
+      </listing>
+      <listing id="8083978">
+        <image_id>14727813</image_id>
+        <image_path>http://images.etsy.com/all_images/5/5d4/054/</image_path>
+        <listing_id>8083978</listing_id>
+      </listing>
+      <listing id="8082465">
+        <image_id>14722910</image_id>
+        <image_path>http://images.etsy.com/all_images/3/37d/dc9/</image_path>
+        <listing_id>8082465</listing_id>
+      </listing>
+      <listing id="8081588">
+        <image_id>14720064</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d91/f4d/</image_path>
+        <listing_id>8081588</listing_id>
+      </listing>
+      <listing id="8081112">
+        <image_id>14718538</image_id>
+        <image_path>http://images.etsy.com/all_images/9/966/879/</image_path>
+        <listing_id>8081112</listing_id>
+      </listing>
+      <listing id="8080090">
+        <image_id>14715324</image_id>
+        <image_path>http://images.etsy.com/all_images/2/2ac/414/</image_path>
+        <listing_id>8080090</listing_id>
+      </listing>
+      <listing id="8058222">
+        <image_id>14644137</image_id>
+        <image_path>http://images.etsy.com/all_images/8/841/295/</image_path>
+        <listing_id>8058222</listing_id>
+      </listing>
+      <listing id="5194710">
+        <image_id>14970806</image_id>
+        <image_path>http://images.etsy.com/all_images/e/e0d/167/</image_path>
+        <listing_id>5194710</listing_id>
+      </listing>
+      <listing id="8033569">
+        <image_id>14564193</image_id>
+        <image_path>http://images.etsy.com/all_images/8/822/8b0/</image_path>
+        <listing_id>8033569</listing_id>
+      </listing>
+      <listing id="8018596">
+        <image_id>14515535</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d05/7e4/</image_path>
+        <listing_id>8018596</listing_id>
+      </listing>
+      <listing id="7994510">
+        <image_id>14435936</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f47/476/</image_path>
+        <listing_id>7994510</listing_id>
+      </listing>
+      <listing id="7978374">
+        <image_id>14383332</image_id>
+        <image_path>http://images.etsy.com/all_images/9/950/446/</image_path>
+        <listing_id>7978374</listing_id>
+      </listing>
+      <listing id="7973215">
+        <image_id>14366891</image_id>
+        <image_path>http://images.etsy.com/all_images/2/2a8/c80/</image_path>
+        <listing_id>7973215</listing_id>
+      </listing>
+      <listing id="7970374">
+        <image_id>14357618</image_id>
+        <image_path>http://images.etsy.com/all_images/9/9ef/c3c/</image_path>
+        <listing_id>7970374</listing_id>
+      </listing>
+      <listing id="7894786">
+        <image_id>14115742</image_id>
+        <image_path>http://images.etsy.com/all_images/7/772/c3b/</image_path>
+        <listing_id>7894786</listing_id>
+      </listing>
+      <listing id="7886028">
+        <image_id>14087532</image_id>
+        <image_path>http://images.etsy.com/all_images/c/cd3/f9d/</image_path>
+        <listing_id>7886028</listing_id>
+      </listing>
+      <listing id="6317806">
+        <image_id>12264413</image_id>
+        <image_path>http://images.etsy.com/all_images/6/698/1ab/</image_path>
+        <listing_id>6317806</listing_id>
+      </listing>
+      <listing id="7869011">
+        <image_id>14033215</image_id>
+        <image_path>http://images.etsy.com/all_images/d/d67/9d4/</image_path>
+        <listing_id>7869011</listing_id>
+      </listing>
+      <listing id="6257976">
+        <image_id>12264907</image_id>
+        <image_path>http://images.etsy.com/all_images/b/bae/3d9/</image_path>
+        <listing_id>6257976</listing_id>
+      </listing>
+      <listing id="7778306">
+        <image_id>13740934</image_id>
+        <image_path>http://images.etsy.com/all_images/7/741/73e/</image_path>
+        <listing_id>7778306</listing_id>
+      </listing>
+      <listing id="7776851">
+        <image_id>13735964</image_id>
+        <image_path>http://images.etsy.com/all_images/8/806/736/</image_path>
+        <listing_id>7776851</listing_id>
+      </listing>
+      <listing id="7732615">
+        <image_id>13584822</image_id>
+        <image_path>http://images.etsy.com/all_images/7/7a2/7c0/</image_path>
+        <listing_id>7732615</listing_id>
+      </listing>
+      <listing id="7657468">
+        <image_id>13343673</image_id>
+        <image_path>http://images.etsy.com/all_images/3/3cb/0ef/</image_path>
+        <listing_id>7657468</listing_id>
+      </listing>
+      <listing id="7632726">
+        <image_id>13264287</image_id>
+        <image_path>http://images.etsy.com/all_images/8/8ed/7d3/</image_path>
+        <listing_id>7632726</listing_id>
+      </listing>
+      <listing id="7553586">
+        <image_id>13009938</image_id>
+        <image_path>http://images.etsy.com/all_images/2/20e/135/</image_path>
+        <listing_id>7553586</listing_id>
+      </listing>
+      <listing id="7544653">
+        <image_id>12981259</image_id>
+        <image_path>http://images.etsy.com/all_images/1/104/51c/</image_path>
+        <listing_id>7544653</listing_id>
+      </listing>
+      <listing id="7465949">
+        <image_id>12849885</image_id>
+        <image_path>http://images.etsy.com/all_images/2/2d0/c0c/</image_path>
+        <listing_id>7465949</listing_id>
+      </listing>
+      <listing id="7481371">
+        <image_id>12774678</image_id>
+        <image_path>http://images.etsy.com/all_images/6/61d/64c/</image_path>
+        <listing_id>7481371</listing_id>
+      </listing>
+      <listing id="7467082">
+        <image_id>12728354</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f78/da0/</image_path>
+        <listing_id>7467082</listing_id>
+      </listing>
+      <listing id="7450658">
+        <image_id>12675696</image_id>
+        <image_path>http://images.etsy.com/all_images/4/4b7/92f/</image_path>
+        <listing_id>7450658</listing_id>
+      </listing>
+      <listing id="7427054">
+        <image_id>12599087</image_id>
+        <image_path>http://images.etsy.com/all_images/7/791/fc2/</image_path>
+        <listing_id>7427054</listing_id>
+      </listing>
+      <listing id="7425445">
+        <image_id>12593736</image_id>
+        <image_path>http://images.etsy.com/all_images/7/7c3/afa/</image_path>
+        <listing_id>7425445</listing_id>
+      </listing>
+      <listing id="7381954">
+        <image_id>12453414</image_id>
+        <image_path>http://images.etsy.com/all_images/8/8d4/e95/</image_path>
+        <listing_id>7381954</listing_id>
+      </listing>
+      <listing id="7362601">
+        <image_id>12391434</image_id>
+        <image_path>http://images.etsy.com/all_images/6/65f/097/</image_path>
+        <listing_id>7362601</listing_id>
+      </listing>
+      <listing id="7257370">
+        <image_id>12052079</image_id>
+        <image_path>http://images.etsy.com/all_images/e/e0f/2c9/</image_path>
+        <listing_id>7257370</listing_id>
+      </listing>
+      <listing id="6939065">
+        <image_id>11025058</image_id>
+        <image_path>http://images.etsy.com/all_images/d/de2/1ce/</image_path>
+        <listing_id>6939065</listing_id>
+      </listing>
+      <listing id="6931309">
+        <image_id>10997615</image_id>
+        <image_path>http://images.etsy.com/all_images/0/059/ae9/</image_path>
+        <listing_id>6931309</listing_id>
+      </listing>
+      <listing id="6837916">
+        <image_id>10702216</image_id>
+        <image_path>http://images.etsy.com/all_images/b/bdf/2f6/</image_path>
+        <listing_id>6837916</listing_id>
+      </listing>
+      <listing id="6787043">
+        <image_id>10540377</image_id>
+        <image_path>http://images.etsy.com/all_images/1/13f/353/</image_path>
+        <listing_id>6787043</listing_id>
+      </listing>
+      <listing id="6773471">
+        <image_id>10496182</image_id>
+        <image_path>http://images.etsy.com/all_images/f/f06/0df/</image_path>
+        <listing_id>6773471</listing_id>
+      </listing>
+      <listing id="6758884">
+        <image_id>10449426</image_id>
+        <image_path>http://images.etsy.com/all_images/3/307/c1e/</image_path>
+        <listing_id>6758884</listing_id>
+      </listing>
+    </listings>
+    <image_id>5220895</image_id>
+    <image_path>http://images.etsy.com/all_images/f/f2e/39a/</image_path>
+    <shop_name>Lollibomb</shop_name>
+    <title>Lollibomb Beauty™ ::  ONE DOLLAR SHIPPING SALE</title>
+    <text>■ FREE SAMPLES WITH EVERY ORDER ~ ORDERS ARE CURRENTLY TAKING 1-9 BUSINESS DAYS WITH MANY ORDERS SHIPPING SAME DAY■&#13;
+&#13;
+■ HOLIDAY DELIVERY  ■ &#13;
+U.S. CUSTOMERS, please place your order by December 20 to receive your goods in time for Christmas.  INTERNATIONAL CUSTOMERS, orders placed at this point will not be received in time for the holidays.  &#13;
+&#13;
+■ GIFT GIVING ■&#13;
+Gift shipping, gift wrap, and an included holiday message in your gift order are available.  Please be sure to specify if you will require these services in the Buyer's Notes at time of purchase, and I will gladly get you and yours all hooked up!&#13;
+&#13;
+■ $1 Shipping going on now for domestic orders over $30 with the code: $1SHIP in the Buyer's Notes. CODE MUST BE USED AT TIME OF PURCHASE TO BE ELIGIBLE FOR THIS DISCOUNT. ■</text>
+    <last_updated>1197519943.83</last_updated>
+    <create_date>1147466517.23</create_date>
+    <feedback_percentage>99.953746531</feedback_percentage>
+    <feedback_total>2162</feedback_total>
+    <bio>Etsy Storque Spotlight Interview:  http://www.etsy.com/storque/section/spotlight/article/etsy-success-stories-lollibomb/533/&#13;
+&#13;
+Etsy Featured Seller Interview:&#13;
+http://www.etsy.com/featured_seller.php?featured_user_id=42346&#13;
+&#13;
+♥ Please be sure to read my profile for information on when you can expect your order, international shipping, and payment methods.  UPDATED 12/12/07  ♥&#13;
+&#13;
+&#13;
+♥♥♥♥♥HOLIDAY INFO♥♥♥♥♥&#13;
+For United States customers, please get your orders in by December 20 to receive your goodies in time for the holidays.  Please be advised that international orders received after the December 5 are not guaranteed to arrive in time for the holidays.&#13;
+&#13;
+♥ Gift shipping available: Please put your gift recipient's address in the shipping info when placing your Etsy order.&#13;
+♥ Gift wrapping available: Let me know if you need your treats wrapped up with a note and I'll get you hooked up!  Please put this info in the Buyer's Notes at time of purchase.&#13;
+♥ Freeze alert: If you live in a snowy area, some of my products may freeze if left in the mailbox or on your doorstep.  Please plan accordingly.&#13;
+&#13;
+Please allow me at least 3 days to respond to convos, as I am a sweatshop of one and am working hard to get your orders out.  For faster assistance, you can always AIM me at welovelollibomb and I will happily help.&#13;
+&#13;
+♥♥♥♥♥DISCOUNT PROGRAMS♥♥♥♥♥&#13;
+Our RECYCLE PROGRAM is designed to give back to you when you give back your used product containers. If you do not currently have a recycle program in your community, simply rinse out 5 of your used product containers and return them to Lollibomb Beauty™  for one free gift out of our Etsy store up to $15!&#13;
+&#13;
+These containers are eligible in our recycling program:&#13;
+♥ 1/2 Oz. - 2 Oz. - 8 Oz. Whipped Body Frostings&#13;
+♥ 4 Oz. Body Sprays&#13;
+♥ 4 Oz. Sugar Scrubs + Body Polishes&#13;
+&#13;
+In the event that your community DOES have a recycling program in place, please rinse them out and recycle them within your area instead of sending them back to Lollibomb Beauty™. Instead, e-mail luca@welovelollibomb.com or convo to submit 5 Etsy Transaction ID's on the eligible products that you have recycled locally for your free item.&#13;
+&#13;
+&#13;
+♥♥♥♥♥ Once Upon A Time♥♥♥♥♥&#13;
+&#13;
+Lollibomb Beauty™ (Formerly Lushbox, Inc.) is the creation of one slightly addled twenty-something disinterested in boring bath and body products and dissatisfied with conventional fragrances.  Sure, anyone can slather themselves with vanilla body butter, but what about the more indulgent dessert scents, like Deep Fried Ice Cream or Buttermilk Pancakes?  Earthy scents like New Age Girl and Lucky Bamboo were also a must, as girls cannot survive on sweet smelling fragrances alone.  Creamsicle and Cherry Lemonade became necessary considerations in the scent department to satisfy the fruit itch.  Now armed with a bevy of delicious fragrances that range from mild to wild, Lollibomb Beauty™ has found it’s place on every bad girl’s bathroom shelf, with products that include super thick moisturizers, luscious body washes and soy milk baths, decadent organic sugar scrubs, and more!  With the addition of natural cosmetic products, now you can look as good as you smell with mineral foundation powders, lip glosses, and other delightful makeup treats.&#13;
+&#13;
+Everything you see here has Luca of Lollibomb’s personal stamp of approval, and she believes that you'll agree this is stuff is oh-so-good, and good for you!  All items are created in small batches to ensure ultimate freshness, utilizing high quality ingredients sure to make you feel great.  Come experience what thousands of pretty-smelling girls and boys in the know have already discovered, and catch the buzz on Lollibomb Beauty™ !&#13;
+&#13;
+Lollibomb Beauty™  is a member of the ever fabulous Etsy Green and Clean Guild, EtsyNJ, and Etsy For Animals Street Team.&#13;
+&#13;
+♥♥♥♥♥CONTACT ME♥♥♥♥♥&#13;
+- Send a convo to Lollibomb&#13;
+- E-mail me at luca@welovelollibomb.com&#13;
+- AIM me at welovelollibomb&#13;
+&#13;
+♥♥♥♥♥Happy Everything from Lollibomb Beauty™ ♥♥♥♥♥&#13;
+&#13;
+Knock out your holiday shopping with Lollibomb!  We've got a little something for everyone on your list all year round.  Gift wrapping and gift shipping is always available.&#13;
+&#13;
++  We ship internationally&#13;
++  We combine shipping worldwide&#13;
++  We will ship your gifts to the recipient with a holiday card and your choice of wording.&#13;
++  Gift wrapping always available&#13;
+&#13;
+&#13;
+♥♥♥♥♥Smooch Smooch Smooch♥♥♥♥♥&#13;
+Lollibomb Beauty™ loves these people, and you should, too!&#13;
++ http://fortcloudy.etsy.com&#13;
++ http://withsugarontop.etsy.com&#13;
++ http://relishdress.etsy.com&#13;
++ http://cubistliterature.etsy.com&#13;
++ http://coffincolors.etsy.com&#13;
++ http://SnitchesGetStitches.etsy.com&#13;
++ http://buttonempire.etsy.com&#13;
++ http://dragonflycrafts.etsy.com&#13;
++ http://soapylove.etsy.com&#13;
++ http://ciaralovesyou.etsy.com&#13;
++ http://kateblack.etsy.com&#13;
++ http://totusmel.etsy.com&#13;
++ http://flamestitch.etsy.com&#13;
+&#13;
+...There's like a million more people I'd love for you to patronize.  If you're new to Etsy and looking for something in particular, please do not hesitate to convo me for a recommended seller and I'll happily refer you to one of Etsy's finest!&#13;
+&#13;
+&#13;
+♥♥♥♥♥PAYMENT♥♥♥♥♥&#13;
+I accept all major credit cards, PayPal, and e-check via PayPal for domestic and international orders. Payment is appreciated within a week of removing the item from my shop unless other arrangements have been previously made.&#13;
+&#13;
+I DO NOT ACCEPT PERSONAL CHECKS AT THIS TIME.  You are welcome to pay via e-Check through PayPal, but please note that this method will typically take up to 2 weeks to clear, and your order will not ship until your payment has been received.  I have also discontinued accepting money order and concealed cash until further notice.&#13;
+&#13;
+&#13;
+♥♥♥♥♥TURNAROUND + SHIPPING♥♥♥♥♥&#13;
+Items are typically shipped within 1-9 business days of cleared payment, and are shipped via USPS First Class or Priority Mail. I aim for same or next day turnaround, and you can help me get it out the door quick by ensuring that your shipping address is up-to-date and making sure that you have your fragrance choices ready to go in the Buyer's Notes.&#13;
+&#13;
+Please allow a little extra time if you have a particularly large or a custom order, as I am a one woman shop and prepare most of my goodies to order just for you!  In the event I am traveling or attending craft shows, turnaround may be a bit longer so that I may give everyone's orders the time and attention they deserve and still squeeze in some much needed shut eye.&#13;
+&#13;
+Next day shipping is available if you need your order right away or by a certain date for orders $75 and under.  An additional $5 rush shipping charge will apply.  Please do not hesitate to contact me to discuss getting your order by a certain date, as I will gladly assist you.  If I do not know you need it by a particular date, your order will ship within 1-8 business days.&#13;
+&#13;
+Please note that I do not believe in making money off shipping costs, and the charges to ship encompass the actual postage amount and shipping supplies to get your goodies to you safe and sound.  Also keep in mind that while a moisturizer may contain 2 or 8 ounces of product, it weighs several ounces more when shipping and this will affect the shipping rate.  If you have any questions about combined shipping, please contact me prior to buying items out of my shop, and I will gladly assist you.  Sometimes the shipping may be off in the cart, and I'll gladly assist you in sending a corrected invoice reflecting the actual shipping charges.  &#13;
+&#13;
+&#13;
+♥♥♥♥♥INTERNATIONAL SHIPPING♥♥♥♥♥&#13;
+International orders are shipped approximately once a week, as it requires me to walk it into the post office.  I typically ship via USPS Airmail.  This service does not provide a tracking number, unfortunately.  I will consider using a different carrier upon request that does offer package tracking, but border fees may be applied and will be your responsibility.&#13;
+&#13;
+PLEASE ALLOW UP TO 6 WEEKS FOR YOUR ORDER TO REACH YOU IF YOU ARE OUTSIDE OF THE UNITED STATES.  Border inspections, poor weather, and other delays may occur between the order leaving my hands and reaching your country.  Please take this into consideration at your time of purchase.  USPS Express Mail does offer tracking, but this is a pricey mail service.  Please contact me for shipping estimate if you would prefer this shipping method so that you may have tracking.  In the event your package does not reach you within 6 weeks, please contact me prior to leaving feedback and I will gladly assist you.  No one wants your package to reach you more than I do.  =D&#13;
+&#13;
+♥♥♥♥♥CUSTOM ORDERS + REQUESTS♥♥♥♥♥&#13;
+Many of my items can be modified to your specific liking. Want a splash of hemp seed oil in your Vegan Whipped Body Frosting? You got it! Need the sweet almond oil scratched from the sugar scrub? No problem! I can also add microshimmers or colorant, or leave colorant out altogether.  I can also create CUSTOM LABELS so that you can give a gift with a bang for any of your gift giving occasions.  You're the boss, applesauce! Please convo me for details, as additional charges may apply.&#13;
+&#13;
+&#13;
+♥♥♥♥♥RETURNS + EXCHANGES♥♥♥♥♥&#13;
+If you are not 112% satisfied with your purchase, I will gladly accept all unopened/unused bath products within 30 days of original purchase. Please e-mail sales@welovelollibomb.com for directions on how to return an item.&#13;
+&#13;
+Returns, exchanges, and store credits are not accepted for the following items: &#13;
+* Opened and/or used bath products &#13;
+* Opened and/or used cosmetic items &#13;
+* Any edible products.&#13;
+&#13;
+Samples are now available for most cosmetic and bath products so that you can try it out before you purchase a larger size.&#13;
+&#13;
+&#13;
+♥♥♥♥♥NO PUFFING + PET FRIENDLY♥♥♥♥♥&#13;
+All products are created in a smoke-free but pet-friendly environment.  I can assure you that my four-legged friends have not comprised the integrity of the products I create.  &#13;
+&#13;
+&#13;
+♥♥♥♥♥SALES TAX♥♥♥♥♥&#13;
+6% sales tax is collected from Florida residents.&#13;
+&#13;
+&#13;
+♥♥♥♥♥NO ANIMAL TESTING♥♥♥♥♥&#13;
+All bath, body, and cosmetic ingredients are specifically purchased from critter friendly companies that do not test on animals. I test products on myself, and am usually coated in about 5 separate lotion scents. &#13;
+&#13;
+&#13;
+♥♥♥♥♥INGREDIENTS♥♥♥♥♥&#13;
+Ingredient lists are offered on all products so that you can make an informed decision as to what you put on your body.  Your health is more important to me than "guarding" a recipe from competitors.  You have the right to know up front what is in any product you plan on putting on your body, and you shouldn't have to go out of your way to ask a prospective seller.  Every effort is made to avoid unnecessary chemical additives and to offer products which utilize natural ingredients. I seek out environmentally and health conscience suppliers when creating my bath products...Your health and happiness is very important to me! All products are very best quality, using only fresh and superior ingredients. I'm sure you'll see (and feel!) the difference from substandard store-bought brands. It should go without saying that all fragrance oils, colorants, and other product components are safe for the intended use.&#13;
+&#13;
+If you have skin sensitivities, allergies, or any other potential issues that could interfere with your enjoyment of my products, please pay close attention to what ingredients are used in each product. If you have any questions as to what a particular ingredient is, feel free to convo me and I'll be happy to explain. Your purchase indicates that you understand what ingredients comprise your purchased item. Lollibomb Beauty LLC. will not be held liable for any adverse reaction when using our products due to improper use or inattention to the listed ingredients. Each product is designed with your safety and enjoyment in mind, and I am more than happy to offer you any additional information you need!&#13;
+&#13;
+&#13;
+♥♥♥♥♥CONSIGNMENT + WHOLESALE INQUIRIES♥♥♥♥♥&#13;
+If you are interested in stocking Lollibomb Beauty™  on your website or retail store, I have very competitive wholesale rates and would be delighted to create a package for you within your budget.  Please send me a convo or e-mail me at luca@welovelollibomb.com.&#13;
+&#13;
+I will consider consignment opportunities for select boutiques and spas that fit the Lollibomb Beauty™  vibe.&#13;
+&#13;
+&#13;
+♥♥♥♥♥MY COMMITMENT TO YOU♥♥♥♥♥&#13;
+Nooo, don't worry, I'm not dropping to one knee and offering you a ring or anything. But I will say that you are very important to me, and are the heart of Lollibomb Beauty™ ! I am committed to ensuring that you receive prompt shipping and a spectacular product. I am committed to creating safe and health conscience products that you will enjoy until the bottom of the jar. I am committed to your health and happiness. I am committed to making your every experience with me and my company a memorable one. &#13;
+&#13;
+I welcome all comments and suggestions that you have to offer. Even if you just want to say hi, drop me a note! I'd love to hear from you.&#13;
+&#13;
+Contact me by sending me a convo, e-mailing me at luca@welovelollibomb.com, or IM'ing me through AIM at welovelollibomb.&#13;
+&#13;
+With clove-licked kisses and catnip dreams, &#13;
+&#13;
+Luca&#13;
+♥ http://www.flickr.com/welovelollibomb&#13;
+♥ http://www.myspace.com/welovelollibomb&#13;
+♥ http://lollibomb.etsy.com&#13;
+&#13;
+&#13;
+:::CURRENT SCENT LIST:::&#13;
+Convo me for the latest and greatest.</bio>
+    <location></location>
+  </user>
+</root>
