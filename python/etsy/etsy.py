@@ -5,6 +5,10 @@ http://effbot.org/zone/element-index.htm)
 
 Simply execute this file to count the number of users in each city and print 
 out a running total.
+
+Bill Mill
+12/13/07
+http://billmill.org
 """
 
 from urllib import urlopen
