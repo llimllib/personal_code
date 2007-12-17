@@ -121,3 +121,7 @@ declaration from execution, which I often find to be a useful pattern.
 href="http://www.base4.net/blog.aspx?ID=409">first person</a> to discover this 
 simplification, I did figure it out on my own and I thought it was neat enough 
 to share.
+<p>A quick disclaimer: the code here is modified from the original to remove 
+some details, and is completely untested, and probably doesn't compile.  You 
+may, however, use it or distribute it as you see fit; it's licensed under the 
+<a href="http://sam.zoy.org/wtfpl/">wtfpl</a>.
