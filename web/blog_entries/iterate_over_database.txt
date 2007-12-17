@@ -1,0 +1,123 @@
+Iterating Over Database Results in C#
+#time 12-17-07 23:14
+#keywords database, c#, programming, computer, python, iterator
+<p>At my job, we use what is essentially a custom C# ORM. Soon after I arrived, 
+we adopted this idiom to pull a DB connection from the pool and run a query:
+<code lang="csharp"> class Something
+{
+    public int ourIdiom(long identifier)
+    {
+        using (DBConnection db = new DBConnection())
+        {
+            using (IDataReader rec = db.execQuery(@"
+                SELECT some, rows
+                FROM  Table1 t1, Table2 t2
+                WHERE t1.t2id = t2.id
+                AND   t1.id = ?",
+                identifier))
+            {
+                while (rec.Read())
+                    doSomething();
+                return 1;
+            }
+        }
+    }
+}
+</code>
+<p>Which is nice because it disposes of both the connection and the dataReader 
+properly on failure, but ugly because it uses a whole bunch of boilerplate.  
+Unfortunately, because doSomething() needs to execute inside both 
+<code>using</code> statements, and we weren't using C# 2.0 until a few months 
+ago, the only way to avoid the boilerplate would have been to pass in 
+delegates.
+<p>This would have been just as ugly as keeping the boilerplate in the code, so 
+we stuck with the using<sup>2</sup> idiom.
+<p>Since our switchover to 2.0 a few months ago, I've had an idea that I could 
+make this idiom more concise and remove some boilerplate that I didn't get a 
+chance to try until this week. Using 2.0's iterators, which seem awfully 
+familiar from my python work, that can be reduced to:
+<code lang="csharp">class Something
+{
+    public int ourIdiom(long identifier)
+    {
+        foreach (IDataReader rec in new SQL().Query(@"
+            SELECT some, rows
+            FROM  Table1 t1, Table2 t2
+            WHERE t1.t2id = t2.id
+            AND   t1.id = ?",
+            identifier))
+        {
+            doSomething();
+        }
+        return 1;
+    }
+}
+</code>
+<p>With some fairly simple code:
+<code lang="csharp">public class SQL : 
+    System.Collections.Generic.IEnumerable<IDataReader>
+    {
+        string m_sql;
+        ArrayList m_sqlparams;
+
+        public SQL()
+        {
+        }
+
+        public SQL query(string sql, params object[] sqlparams)
+        {
+            m_sql = sql;
+            m_sqlparams = new ArrayList(sqlparams);
+            return this;
+        }
+
+        IEnumerator<IDataReader> IEnumerable<IDataReader>.GetEnumerator()
+        {
+            using (clsDBConnection db = new clsDBConnection(m_dbname))
+            {
+                using (IDataReader rec = db.execQuery(m_sql, m_sqlparams))
+                {
+                    yield return rec;
+                }
+            }
+        }
+
+        //this is required because IEnumerable<> inherits IEnumerable. bleh.
+        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator() }
+    }
+}</code>
+<p>This code should come in handy for more reasons than just its cleanliness.  
+First off, if you ever need to change the idiom for accessing the DB, it's 
+stored conveniently in one place.
+<p>Second, It makes a prepared SQL call into something like a <a 
+href="http://en.wikipedia.org/wiki/Thunk">thunk</a>: a bit of code representing 
+a future computation that can then be passed around to be performed later. An 
+example:
+<code lang="csharp">void setUpQueries(nameId, addressId, custId)
+{
+    List<SQL> stringsWeNeed = new List(new object[]{
+        new SQL().query("SELECT name FROM names WHERE id=?", nameId),
+        new SQL().query("SELECT addy FROM addresses WHERE id=?", addressId),
+        new SQL().query("SELECT zip FROM customers WHERE id=?", custId)});
+
+    List<string> strings = getOurStrings(stringsWeNeed);
+
+    mangleStrings(strings);
+}
+
+List<string> getOurStrings(List<SQL> queries)
+{
+    List<string> strings = new List<string>();
+    foreach (SQL query in queries)
+    {
+        foreach (IDataReader rec in query)
+            strings.Add(rec.GetString(0));
+    }
+    return strings;
+}</code>
+<p>While the example is silly, this property can be exploited to seperate 
+declaration from execution, which I often find to be a useful pattern.
+<p>Though I am far from the <a 
+href="http://www.base4.net/blog.aspx?ID=409">first person</a> to discover this 
+simplification, I did figure it out on my own and I thought it was neat enough 
+to share.
