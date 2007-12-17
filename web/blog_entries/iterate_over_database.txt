@@ -1,5 +1,5 @@
 Iterating Over Database Results in C#
-#time 12-17-07 23:14
+#time 12-17-07 01:13
 #keywords database, c#, programming, computer, python, iterator
 <p>At my job, we use what is essentially a custom C# ORM. Soon after I arrived, 
 we adopted this idiom to pull a DB connection from the pool and run a query:
