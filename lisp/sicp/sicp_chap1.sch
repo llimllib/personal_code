@@ -176,3 +176,30 @@
 ;; (+ (+ (+ 1 (+ 1 (+ (cc 1 1) => 1 as above (cc -4 2) => 0)))) 1)
 ;; (+ (+ (+ 1 (+ 1 (+ 1)))) 1)
 ;; => 4
+;;
+;; my more detailed notes show that it takes 54 steps to generate this answer.
+;; if we want to really show the order of growth in space/steps, we'll need to
+;; implement an instrumented version of the code.
+;;
+;; One thing we *can* say about it is that the space and steps grow together, since
+;; each invocation of (cc ...) does 1 step: either return an int or add 2 other
+;; (cc ...)s together; thus we can implement a single counter:
+(define invocations 0)
+(define (count-change-invocations min max)
+  (cond (< min max) ((count-change-instrument min)
+                     (print min max) ;; this never prints?
+                     (print invocations) ;; XXX: this function doesn't work
+                     (count-change-invocations (+ min 1) max))))
+(define (count-change-instrument amount)
+  (set! invocations 0)
+  (cc2 amount 5))
+(define (cc2 amount kinds-of-coins)
+  ;; increment our invocations counter
+  (set! invocations (+ invocations 1))
+  (cond ((= amount 0) 1)
+        ((or (< amount 0) (= kinds-of-coins 0)) 0)
+        (else (+ (cc2 amount
+                     (- kinds-of-coins 1))
+                 (cc2 (- amount
+                        (first-denomination kinds-of-coins))
+                     kinds-of-coins)))))
