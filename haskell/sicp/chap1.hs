@@ -1,4 +1,5 @@
 module Chap1 where
+import Data.Map (fromList, lookup)
 
 -- exercise 1.2
 onepoint2 = (5 + 4 + (2 - (3 - 6 + (4 / 5))))
@@ -87,3 +88,26 @@ pasc row = rowgen $ pasc (row-1)
 -- And another side note: whenever writing haskell, I can't avoid the feeling
 -- that someone, somewhere, could write my code in 1/5 the lines. Not sure
 -- how I feel about that.
+
+-- just for fun, countchange in Haskell:
+-- a literal translation, because I don't know enough haskell for a better one:
+
+count_change amount = cc amount 5
+
+cc amount kinds_of_coins 
+    | amount == 0         = 1                                
+    | amount < 0          = 0
+    | kinds_of_coins == 0 = 0
+    | otherwise = (cc amount (kinds_of_coins - 1))
+                  + (cc (amount - (Data.Map.lookup kinds_of_coins fd)) kinds_of_coins)
+
+-- What would be the right way to define this map in haskell? In python I'd do:
+-- denominations = {1:1, 2:5, 3:10, 4:25, 5:50} and be done with it
+first_denomination x
+    | x == 1 = 1
+    | x == 2 = 5
+    | x == 3 = 10
+    | x == 4 = 25
+    | x == 5 = 50
+
+fd = fromList [(1,1), (2,5), (3,10), (4,25), (5,50)]
