@@ -31,7 +31,7 @@ must carry meaning if the poem is to be any good. We value the poem for the
 beauty not only of the story or image given, but of the way in which it is 
 constructed as well. It tends to be much denser and more compact than prose.  
 When you read it, you must proceed carefully and consider the meaning of each 
-word, and each group of word, and pay attention for double meanings and 
+word, and each group of words, and pay attention for double meanings and 
 allusions if you are to grasp it fully.
 <p>To help us decide how we read code, let's go to a <a 
 href="http://mitpress.mit.edu/sicp/full-text/book/book-Z-H-11.html#%_idx_730">particularly 
