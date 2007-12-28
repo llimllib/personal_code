@@ -1,6 +1,6 @@
 Poe on Programming
 #time 12-28-07 01:14
-#keywords poe, literature, programming, python
+#keywords poe, literature, programming, python, poetry
 One of the strongest influences on my programming has always been an essay I 
 read in my sophomore year of high school, around about the same time I began to 
 feel the magic of programming. Mr. Carino was a young man just out of college, 
