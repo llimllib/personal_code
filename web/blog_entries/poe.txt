@@ -60,7 +60,7 @@ corresponding depressions- the whole being deprived, through the extremeness of
 its length, of the vastly important artistic element, totality, or unity of 
 effect.</blockquote>
 <p>In the first sentence of this paragraph, Poe provides an alternate metric to 
-<a href="steve-yegge.blogspot.com/2007/12/codes-worst-enemy.html">Yegge's</a> 
+<a href="http://steve-yegge.blogspot.com/2007/12/codes-worst-enemy.html">Yegge's</a> 
 metric of "code size" - that of "unity of impression". Beautiful code is that 
 which is not composed of "a succession of brief.. poetical effects", but of 
 just the poem. It is code without filler, bureaucracy, or artifice, regardless 
