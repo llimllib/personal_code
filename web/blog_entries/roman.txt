@@ -1,0 +1,89 @@
+Beautiful Code
+#time 01-12-08 03:32
+#keywords haskell, code, programming
+This bit of code for converting numbers into their Roman numeral equivalents 
+was posted by <a 
+href="http://programming.reddit.com/info/658ys/comments/c02vm1j">geezusfreak</a> 
+on reddit, and I found it so alarmingly pretty that I'm going to spend some 
+time to break it down.  This exercise is largely for my own edification, but 
+perhaps somebody else will learn a bit along the way. Here's the code:
+<p><code lang="haskell">import List
+import Control.Arrow
+
+romanize = concat . unfoldr next
+    where next 0 = Nothing
+          next x = Just $ second (x-) $ head $ filter ((<=x) . snd) numerals
+          numerals = [("M", 1000), ("CM", 900), ("D", 500), ("CD", 400),
+                      ("C", 100),  ("XC", 90),  ("L", 50),  ("XL", 40),
+                      ("X", 10),   ("IX", 9),   ("V", 5),   ("IV", 4),
+                      ("I", 1)]</code>
+<p>Starting from the inside out is usually the easiest method of understanding 
+blocks like this, so we'll look first at the "numerals" list. It is, simply, a 
+list of tuples matching Roman numerals to their value. Importantly, it's 
+ordered from largest to smallest; we'll see why shortly.</p>
+<p>The meat of this snippet comes in the "next" function:
+<p><code lang="haskell">next 0 = Nothing
+next x = Just $ second (x-) $ head $ filter ((<=x) . snd) numerals</code>
+<p>This function is going to return either Nothing (in the base case) or Just a 
+tuple of type (String, Integer), where the string is the largest roman numeral 
+that's smaller than x and the int is the difference between x and the value of 
+that roman numeral.
+<p>The first thing we do is filter out the numerals larger than x; we can run 
+some quick tests at the interactive console to see how this works:
+<p><code lang="haskell">Prelude> let numerals = [("M", 1000), ("CM", 900), ("D", 500)]
+Prelude> filter ((<=900) . snd) numerals
+[("CM",900),("D",500)]</code>
+<p>We use head to grab the largest numeral we can squeeze into the current 
+value:
+<p><code lang="haskell">Prelude> head $ filter ((<=900) . snd) numerals 
+("CM",900)</code>
+<p>Then we subtract the value of the roman numeral from the current value of x, 
+in order to return the remainder to be operated on next:
+<p><code lang="haskell">Prelude> :m Control.Arrow
+Prelude Control.Arrow> second (900-) $ head $ filter ((<=900) . snd) numerals
+("CM",0)
+Prelude Control.Arrow> second (915-) $ head $ filter ((<=915) . snd) numerals
+("CM",15)</code>
+<p>And, finally, we wrap it up in a Maybe monad, so that the main function can 
+handle the base case transparently:
+<p><code lang="haskell">Prelude Control.Arrow> Just $ second (915-)  $ head $ 
+    filter ((<=915) .  snd) numerals
+Just ("CM",15)</code>
+<p>And now we're getting pretty close! What we have is a function that returns 
+either Nothing or a tuple containing a letter to add to our roman numeral and 
+the next value to operate on. All we have left is the code to drive the 
+operation:
+<p><code lang="haskell">romanize = concat . unfoldr next</code>
+<p>The use of unfoldr helps explain why we've wrapped next up in Maybe; here's 
+its type:
+<p><code lang="haskell">Prelude Control.Arrow> :m List
+Prelude List> :t unfoldr
+unfoldr :: (b -> Maybe (a, b)) -> b -> [a]</code>
+<p>So we'll take a function from b -> Maybe (a, b), a value of type b, and 
+return a list of [a]. In our case, a = String and b = Integer.
+<p>All unfoldr does is call the function it's given as a first argument, which 
+returns a tuple or Nothing. If it's a tuple, it appends its first element to a 
+list and calls the same function with the second element. If it's Nothing, it 
+returns the list it's built up to this point.
+<p>As we can see, that matches up perfectly with the "next" function we've 
+already defined, and the unfoldr will build up a list of roman numeral strings:
+<p><code lang="haskell">Prelude> :m Control.Arrow List
+Prelude Control.Arrow List> let numerals = [("X", 10), ("IX", 9), ("V", 5), 
+("IV", 4), ("I", 1)]
+Prelude Control.Arrow List> let next x = if x==0 then Nothing               
+    else Just $ second (x-) $ head $ filter ((<=x) . snd) numerals
+Prelude Control.Arrow List> unfoldr next 9
+["IX"]
+Prelude Control.Arrow List> unfoldr next 8
+["V","I","I","I"]</code>
+<p>(We had to mangle the definition of next a bit to fit into the interactive 
+interpreter, but we haven't changed anything fundamental about it.)
+<p>Finally, all we have to do is concatenate the strings into our final result:
+<p><code lang="haskell">Prelude Control.Arrow List> (concat . unfoldr next) 8
+"VIII"</code>
+<p><h2>Conclusion</h2>
+<p>Phew - that's an awful lot of information stuffed into a few pretty lines! I 
+still have a hell of a time geting the types to match up so that I can write 
+stuff like this, but that doesn't mean that I can't appreciate the beauty of 
+how it all fits together. The original function presented here is tight in the 
+very best sense of the word.
