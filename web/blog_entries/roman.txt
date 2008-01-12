@@ -3,7 +3,7 @@ Beautiful Code
 #keywords haskell, code, programming
 This bit of code for converting numbers into their Roman numeral equivalents 
 was posted by <a 
-href="http://programming.reddit.com/info/658ys/comments/c02vm1j">geezusfreak</a> 
+href="http://programming.reddit.com/info/658ys/comments/c02vm1j">geezusfreeek</a> 
 on reddit, and I found it so alarmingly pretty that I'm going to spend some 
 time to break it down.  This exercise is largely for my own edification, but 
 perhaps somebody else will learn a bit along the way. Here's the code:
