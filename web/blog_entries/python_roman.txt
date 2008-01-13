@@ -70,3 +70,21 @@ something. The unfold() trick works really well, and translates easily into
 an imperative, pythonic implementation; I'll look for ways to use it in the 
 future. And, finally, I'm pretty jealous of Haskell's function combination
 abilities.
+<p><h2>Updates</h2>
+<p>In the <a href="http://programming.reddit.com/info/65bpf/comments/">comments</a>
+at reddit, nostrademons posts a nicer unfold function:
+<p><code lang="python">def unfold(f, x):
+    while True:
+        w, x = f(x)
+        yield w</code>
+<p>And Kay Schluehr prefers the iterative solution:
+<p><code lang="python"> numerals = (("M", 1000), ("CM", 900), ("D", 500), ("CD", 400),
+("C", 100),("XC", 90),("L", 50),("XL", 40), ("X", 10), ("IX", 9), ("V", 5), 
+("IV", 4), ("I", 1))
+
+def romanize(n):
+    roman = []
+    for ltr, num in numerals:
+        (k,n) = divmod(n, num)
+        roman.append(ltr*k)
+    return "".join(roman)</code>
