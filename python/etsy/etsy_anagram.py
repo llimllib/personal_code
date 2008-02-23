@@ -12,7 +12,7 @@ http://billmill.org
 
 def isAnagram(w1, w2):
     """ return true if w1 and w2 contain exactly the same letters """
-    return set(w1) == set(w2)
+    return sorted(list(w1)) == sorted(list(w2))
 
 if __name__ == "__main__":
     tests = [("test", "sett", True),
@@ -21,8 +21,9 @@ if __name__ == "__main__":
         ("longword", "drowgnol", True),
         ("alpha", "beta", False),
         ("", "a", False),
-        ("a", "", False)]
+        ("a", "", False),
+        ("test", "set", False)] #failed on previous version
     
     for w1, w2, expected in tests:
-        assert(anagram(w1, w2) == expected)
+        assert(isAnagram(w1, w2) == expected)
         print ".",
