@@ -22,6 +22,13 @@ tell you that it has an extremely similar design, modified in places where I
 thought it could use updating. It should parse Pyblosxom blog entries without 
 any changes.
 
+<p><h1>Python Unfold</h1></p>
+<p>After I <a href="http://billmill.org/roman.html">analyzed</a> some Haskell
+code to generate roman numerals that I saw on reddit and really liked, I <a 
+href="http://billmill.org/python_roman.html">explored</a> the same problem
+in python. To do so, I wrote an iterative unfold for python, which, to my
+knowledge, had not been done before.
+
 <p><h1>Reverse File Iterator</h1></p>
 <p>I couldn't easily find a code snippet for iterating backwards over a file in 
 python, so I
