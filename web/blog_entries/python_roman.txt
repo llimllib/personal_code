@@ -88,3 +88,6 @@ def romanize(n):
         (k,n) = divmod(n, num)
         roman.append(ltr*k)
     return "".join(roman)</code>
+<p>David Pollak contributes a Scala unfold and romanize <a
+href="http://scala-blogs.org/2008/01/roman-numerals-in-scala.html">at
+his blog</a>.
