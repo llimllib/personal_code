@@ -3,9 +3,7 @@ Pong in 30 Lines
 #keywords nodebox, python, programming
 <a href="http://nodebox.net">NodeBox</a> rocks. Copy this code into the 
 nodebox window and hit apple-R to play pong.
-<p><code lang="python">from math import cos, sin, radians
-
-size(400,400)
+<p><code lang="python">size(400,400)
 speed(40)
 
 ball_diameter = 20
