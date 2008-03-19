@@ -1,0 +1,58 @@
+Pong in 30 Lines
+#time 03-19-08 00:14
+#keywords nodebox, python, programming
+<a href="http://nodebox.net">NodeBox</a> rocks. Copy this code into the 
+nodebox window and hit apple-R to play pong.
+<p><code lang="python">from math import cos, sin, radians
+
+size(400,400)
+speed(40)
+
+ball_diameter = 20
+paddle_size = 75
+v_x, v_y = (3, 4)
+p_x, p_y = (10, 10)
+bounce = 1.2
+points = []
+computer = WIDTH / 2
+compuspeed = 10
+
+def draw():
+    global v_x, v_y, p_x, p_y, points, bounce, computer, compuspeed
+    
+    if not -ball_diameter < p_y < HEIGHT + ball_diameter:
+        text("Game Over", WIDTH/2, HEIGHT/2)
+        if p_y < 0: text("You win!", WIDTH/2, HEIGHT/2+20)
+        else:       text("Computer wins", WIDTH/2, HEIGHT/2-20)
+        return
+
+    paddle_left = min(max(MOUSEX, 0), WIDTH-paddle_size)
+    ny = p_y + v_y
+    nx = p_x + v_x
+    
+    if nx + (ball_diameter/2) > computer + paddle_size: computer += compuspeed
+    elif p_x + v_x < computer:                          computer -= compuspeed
+    rect(computer, 0, paddle_size, 4, roundness=2)
+
+    if ny + ball_diameter > HEIGHT and v_y > 0 \
+    and paddle_left < nx + (ball_diameter / 2) < paddle_left + paddle_size:
+        v_y = -v_y * bounce
+        v_x = (nx - paddle_left - (paddle_size / 2)) * .25
+        ny = HEIGHT - ball_diameter
+    if ny < 0 and v_y < 0 \
+    and computer < nx + (ball_diameter / 2) < computer + paddle_size:
+        v_y = -v_y * bounce
+        v_x = (nx - computer - (paddle_size / 2)) * .25
+        ny = 0
+    elif nx + ball_diameter > WIDTH or nx < 0:
+        v_x = -v_x
+        
+    mx = max(0, min(MOUSEX, WIDTH - paddle_size))
+    rect(mx, HEIGHT-4, paddle_size, 4, roundness=2)
+
+    p_x = nx
+    p_y = ny
+    oval(p_x, p_y, ball_diameter, ball_diameter)</code><p>
+<p>I'd never written a game before, and they say you aren't allowed if you 
+don't start with pong, so here it is. I was actually just playing around with 
+motion in NodeBox for a seperate project, and did this for fun.
