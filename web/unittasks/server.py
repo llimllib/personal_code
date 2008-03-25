@@ -35,8 +35,8 @@ class Unittask:
         db = Server("http://localhost:8888/")['unit_tasks']
         if len(list(db.view('_design/users/isvalid', 
                         key=[user, self.hash(pw)]))) == 1:
-            return "Success!"
-        return "Failure :("
+            return "1"
+        return "0"
 
     @cpy.expose
     def newTaskAjax(self, taskName, frequency):

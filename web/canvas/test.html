@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>Canvasser</title>
+    <script type="text/javascript">
+    function draw(){
+        var canvas = document.getElementById('tutorial');
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            var color = "rgb(0,0,0)";
+
+            function rect(x1, y1, x2, y2) {
+                ctx.fillRect(x1, y1, x2, y2);
+            }
+
+            function fill(r, g, b) {
+                color = "rgb(" + r + "," + g + "," + b + ")";
+                ctx.fillStyle = color;
+            }
+
+            function oval(x, y, width, height) {
+                ctx.save();
+                ctx.translate(x+width/2, y+height/2);
+                var max = Math.max(width, height);
+                ctx.scale(width/max, height/max);
+                ctx.beginPath();
+                ctx.arc(0, 0, max/2, 0, 2*Math.PI, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function line(x1, y1, x2, y2) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            function text(str, x, y) {
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.mozDrawText(str);
+                alert(x);
+                ctx.restore();
+            }
+
+            try {
+                ctx.clearRect(0,0,250,400);
+                eval(document.getElementById('program').value);
+            } catch (e) {
+                alert(e);
+            }
+        }
+    }
+    </script>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+  </head>
+  <body>
+    <table><tr><td valign="top">
+    <canvas id="tutorial" width="250" height="400"></canvas>
+    </td><td>
+    <textarea rows=30 cols=100 id="program">
+    </textarea>
+<!-- the beginnings of a test of oval():
+fill(100, 100, 0);
+rect(10, 10, 10, 30);
+
+fill(0, 100, 100);
+rect(100, 100, 50, 150);
+fill(0, 200, 200);
+oval(100, 100, 50, 150);
+
+rect(10, 50, 40, 40);
+fill(0,200,0);
+oval(10,50,40,40);
+-->
+    <input type="submit" onclick="draw()">
+    </td></tr><td>
+    </table>
+  </body>
+</html>
+
