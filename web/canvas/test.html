@@ -2,19 +2,94 @@
   <head>
     <title>Canvasser</title>
     <script type="text/javascript">
+    //TODO: implement image(), skew(), choice(), grid()
+    //TODO: implement transform(mode=CENTER)
+    //TODO: resizable editing box (see saved doc)
+    //TODO: what to do about text? Detect Firefox? SVG fonts?
+    //TODO: how to implement reset()?
+    //TODO: does the background() element make any sense here?
+    //TODO: implement image exporting
+    //TODO: test with some stuff from the web
+    //TODO: write a test suite/runner
+    //TODO: figure out clipping. what is it, how hard to implement?
+    //TODO: syntax highlighting? command completion? 
+    //      (http://marijn.haverbeke.nl/codemirror/)
+    //TODO: integrate with forms
+    //TODO: animation
+    //TODO: give this a name
+    //TODO: check in
     function draw(){
-        var canvas = document.getElementById('tutorial');
+        var canvas = document.getElementById('canvas');
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
-            var color = "rgb(0,0,0)";
 
-            function rect(x1, y1, x2, y2) {
-                ctx.fillRect(x1, y1, x2, y2);
+            function deg2rad(d) {
+                return (Math.PI * d) / 180;
             }
 
-            function fill(r, g, b) {
-                color = "rgb(" + r + "," + g + "," + b + ")";
-                ctx.fillStyle = color;
+            function size(h, w) {
+                canvas.height = h;
+                canvas.width = w;
+            }
+
+            function random(a, b) {
+                if (a == undefined && b == undefined)
+                    return Math.random();
+                else if (b == undefined)
+                    return Math.random() * a;
+                else
+                    //XXX: is this evenly distributed?
+                    return Math.floor(Math.random() * (b-a+1)) + a
+            }
+
+            function _colorString(r, g, b, a) {
+                if (g == undefined && b == undefined && a == undefined)
+                    color = "rgb(" + r + "," + r + "," + r + ")";
+                else if (a == undefined)
+                    color = "rgb(" + r + "," + g + "," + b + ")";
+                else
+                    color = "rgba(" + r + "," + g + "," + b + "," + a + ")";
+                return color;
+            }
+
+            function fill(r, g, b, a) {
+                if (r > 0 && r < 1) r = Math.floor(r * 255);
+                if (g != undefined && g > 0 && g < 1) g = Math.floor(g * 255);
+                if (b != undefined && b > 0 && b < 1) b = Math.floor(b * 255);
+
+                ctx.fillStyle = _colorString(r,g,b,a);
+            }
+            function nofill() { ctx.fillStyle = _colorString(0,0,0,0); }
+            
+            //NOTE: the NodeBox "stroke" just sets the stroke color;
+            //      the canvas stroke() function actually strokes a path
+            function stroke(r, g, b, a) {
+                if (r > 0 && r < 1) r = Math.floor(r * 255);
+                if (g != undefined && g > 0 && g < 1) g = Math.floor(g * 255);
+                if (b != undefined && b > 0 && b < 1) b = Math.floor(b * 255);
+
+                ctx.strokeStyle = _colorString(r,g,b,a);
+            }
+            function nostroke() { ctx.strokeStyle = _colorString(0,0,0,0); }
+            function strokewidth(n) { ctx.lineWidth = n; }
+
+            function rect(x1, y1, w, h) {
+                ctx.fillRect(x1, y1, w, h);
+                ctx.strokeRect(x1, y1, w, h);
+                /* this works but doesn't join the lines nicely
+                 * (remove as soon as we're in source control)
+                ctx.save();
+                ctx.translate(x1, y1);
+                ctx.beginPath();
+                ctx.moveTo(0,0);
+                ctx.lineTo(w + 1, 0);
+                ctx.lineTo(w + 1, h + 1);
+                ctx.lineTo(0, h + 1);
+                ctx.lineTo(-1, -1);
+                ctx.stroke();
+                ctx.fill();
+                ctx.closePath();
+                ctx.restore();*/
             }
 
             function oval(x, y, width, height) {
@@ -24,7 +99,9 @@
                 ctx.scale(width/max, height/max);
                 ctx.beginPath();
                 ctx.arc(0, 0, max/2, 0, 2*Math.PI, 0);
+                ctx.stroke();
                 ctx.fill();
+                ctx.closePath();
                 ctx.restore();
             }
 
@@ -34,6 +111,7 @@
                 ctx.moveTo(x1, y1);
                 ctx.lineTo(x2, y2);
                 ctx.stroke();
+                ctx.closePath();
                 ctx.restore();
             }
 
@@ -41,15 +119,54 @@
                 ctx.save();
                 ctx.translate(x, y);
                 ctx.mozDrawText(str);
-                alert(x);
                 ctx.restore();
             }
+
+            function translate(x, y) { ctx.translate(x,y); }
+
+            function rotate(angle) { ctx.rotate(-deg2rad(angle)); }
+
+            function scale(sx, sy) { ctx.scale(sx, sy); }
+
+            function beginpath(x, y) { 
+                if (x == undefined || y == undefined)
+                    ctx.beginPath(); 
+                else
+                {
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                }
+            }
+
+            function push() { ctx.save(); }
+            function pop() { ctx.restore(); }
+
+            function endpath() { 
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            function moveto(x, y) { ctx.moveTo(x, y); }
+
+            function lineto(x, y) { ctx.lineTo(x, y); }
+
+            function curveto(cp1x, cp1y, cp2x, cp2y, x, y) {
+                ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+            }
+
+            ctx.save();
+            nostroke();
+            fill(0);
+            var color = "rgb(0,0,0)";
+            var open_state = 0;
 
             try {
                 ctx.clearRect(0,0,250,400);
                 eval(document.getElementById('program').value);
             } catch (e) {
                 alert(e);
+            } finally {
+                ctx.restore();
             }
         }
     }
@@ -60,15 +177,15 @@
   </head>
   <body>
     <table><tr><td valign="top">
-    <canvas id="tutorial" width="250" height="400"></canvas>
+    <textarea rows=30 cols=70 id="program"></textarea>
     </td><td>
-    <textarea rows=30 cols=100 id="program">
-    </textarea>
-<!-- the beginnings of a test of oval():
-fill(100, 100, 0);
-rect(10, 10, 10, 30);
-
-fill(0, 100, 100);
+    <canvas id="canvas" width="250" height="400"></canvas>
+    </td></tr><tr><td>
+    <input type="submit" value="draw" onclick="draw()">
+    </td></tr></table>
+  </body>
+</html>
+<!-- oval test:
 rect(100, 100, 50, 150);
 fill(0, 200, 200);
 oval(100, 100, 50, 150);
@@ -77,9 +194,29 @@ rect(10, 50, 40, 40);
 fill(0,200,0);
 oval(10,50,40,40);
 -->
-    <input type="submit" onclick="draw()">
-    </td></tr><td>
-    </table>
-  </body>
-</html>
+<!-- Draw a transparent oval on a background object:
+fill(100,200,100);
+rect(10, 10, 100, 100);
 
+nofill();
+stroke(1);
+oval(10, 10, 100, 100);
+--> 
+<!-- from the nodebox docs, draw a triangle:
+beginpath(10,10);
+lineto(40, 40);
+lineto(80, 40);
+endpath();
+-->
+<!-- from the nodebox docs, draw a little hoopteydo:
+beginpath(10,10);
+curveto(100,100,50,0,100,100);
+endpath();
+-->
+<!-- from the nodebox docs, draw a reverse 7:
+beginpath(10, 10);
+lineto(40, 10);
+moveto(10, 10);
+lineto(40, 80);
+endpath();
+-->
