@@ -1,6 +1,11 @@
 <html>
   <head>
     <title>Viewji</title>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="textbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(setupTextBox);
+    </script>
     <script type="text/javascript">
     //TODO: implement image(), skew(), choice(), grid()
     //TODO: implement transform(mode=CENTER)
@@ -9,25 +14,36 @@
     //TODO: how to implement reset()?
     //TODO: does the background() element make any sense here?
     //TODO: implement image exporting
-    //TODO: test with some stuff from the web
     //TODO: write a test suite/runner
     //TODO: figure out clipping. what is it, how hard to implement?
     //TODO: syntax highlighting? command completion? 
     //      (http://marijn.haverbeke.nl/codemirror/)
     //TODO: integrate with forms
     //TODO: animation
+    //TODO: can you disable the stupid "script is taking too long" warning?
     function draw(){
         var canvas = document.getElementById('canvas');
+        var dbg = document.getElementById("debug");
+        var drawbtn = document.getElementById("drawbtn");
+
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
+            var WIDTH = canvas.width;
+            var HEIGHT = canvas.height;
 
-            function deg2rad(d) {
+            function debug(s) {
+                dbg.value += s.toString().substring(0,3) + "\n";
+            }
+
+            function radians(d) {
                 return (Math.PI * d) / 180;
             }
 
             function size(h, w) {
                 canvas.height = h;
                 canvas.width = w;
+                WIDTH = w;
+                HEIGHT = h;
             }
 
             function random(a, b) {
@@ -41,6 +57,15 @@
             }
 
             function _colorString(r, g, b, a) {
+                if (r > 0 && r < 1) r = Math.floor(r * 255);
+                if (g != undefined && g > 0 && g < 1) g = Math.floor(g * 255);
+                if (b != undefined && b > 0 && b < 1) b = Math.floor(b * 255);
+
+                if (r < 0) r = 0; if (r > 255) r = 255;
+                if (g < 0) g = 0; if (g > 255) g = 255;
+                if (b < 0) b = 0; if (b > 255) b = 255;
+                if (a < 0) a = 0; if (a > 1) a = 1;
+
                 if (g == undefined && b == undefined && a == undefined)
                     color = "rgb(" + r + "," + r + "," + r + ")";
                 else if (a == undefined)
@@ -51,10 +76,6 @@
             }
 
             function fill(r, g, b, a) {
-                if (r > 0 && r < 1) r = Math.floor(r * 255);
-                if (g != undefined && g > 0 && g < 1) g = Math.floor(g * 255);
-                if (b != undefined && b > 0 && b < 1) b = Math.floor(b * 255);
-
                 ctx.fillStyle = _colorString(r,g,b,a);
             }
             function nofill() { ctx.fillStyle = _colorString(0,0,0,0); }
@@ -62,10 +83,6 @@
             //NOTE: the NodeBox "stroke" just sets the stroke color;
             //      the canvas stroke() function actually strokes a path
             function stroke(r, g, b, a) {
-                if (r > 0 && r < 1) r = Math.floor(r * 255);
-                if (g != undefined && g > 0 && g < 1) g = Math.floor(g * 255);
-                if (b != undefined && b > 0 && b < 1) b = Math.floor(b * 255);
-
                 ctx.strokeStyle = _colorString(r,g,b,a);
             }
             function nostroke() { ctx.strokeStyle = _colorString(0,0,0,0); }
@@ -74,23 +91,11 @@
             function rect(x1, y1, w, h) {
                 ctx.fillRect(x1, y1, w, h);
                 ctx.strokeRect(x1, y1, w, h);
-                /* this works but doesn't join the lines nicely
-                 * (remove as soon as we're in source control)
-                ctx.save();
-                ctx.translate(x1, y1);
-                ctx.beginPath();
-                ctx.moveTo(0,0);
-                ctx.lineTo(w + 1, 0);
-                ctx.lineTo(w + 1, h + 1);
-                ctx.lineTo(0, h + 1);
-                ctx.lineTo(-1, -1);
-                ctx.stroke();
-                ctx.fill();
-                ctx.closePath();
-                ctx.restore();*/
             }
 
             function oval(x, y, width, height) {
+                if (width <= 0 || height <= 0) return;
+
                 ctx.save();
                 ctx.translate(x+width/2, y+height/2);
                 var max = Math.max(width, height);
@@ -122,7 +127,7 @@
 
             function translate(x, y) { ctx.translate(x,y); }
 
-            function rotate(angle) { ctx.rotate(-deg2rad(angle)); }
+            function rotate(angle) { ctx.rotate(-radians(angle)); }
 
             function scale(sx, sy) { ctx.scale(sx, sy); }
 
@@ -157,13 +162,16 @@
             fill(0);
             var color = "rgb(0,0,0)";
             var open_state = 0;
+            dbg.value = "";
+            drawbtn.value = "working...";
 
             try {
-                ctx.clearRect(0,0,250,400);
+                ctx.clearRect(0,0,WIDTH,HEIGHT);
                 eval(document.getElementById('program').value);
             } catch (e) {
                 alert(e);
             } finally {
+                drawbtn.value = "draw";
                 ctx.restore();
             }
         }
@@ -175,11 +183,22 @@
   </head>
   <body>
     <table><tr><td valign="top">
-    <textarea rows=30 cols=70 id="program"></textarea>
-    </td><td>
-    <canvas id="canvas" width="250" height="400"></canvas>
+        <div id="textDiv" style="left:0px;top:0px;
+        width:400px;height:400px;position:relative;">
+            <textarea id="program" style="width:400px;height:400px;
+            left:0px;top:0px;position:absolute;"></textarea>
+            <div id="handleCorner" style="width:5px;height:5px;
+                background-color:LightGreen;position:absolute;left:400px;
+                top:400px;cursor:se-resize;"></div>
+        </div>
+    </div>
+    </td><td valign="top">
+        <canvas id="canvas" width="250" height="400"></canvas>
     </td></tr><tr><td>
-    <input type="submit" value="draw" onclick="draw()">
+        <input type="submit" id="drawbtn" value="draw" onclick="draw()">
+    </td></tr>
+    <tr><td colspan=2>
+        <textarea id="debug" rows="100" cols="80"></textarea>
     </td></tr></table>
   </body>
 </html>
@@ -217,4 +236,12 @@ lineto(40, 10);
 moveto(10, 10);
 lineto(40, 80);
 endpath();
+-->
+<!-- drawing a radial background:
+size(400,400)
+g = ctx.createRadialGradient(200, 200, 0, 200, 200, 100)
+g.addColorStop(0, "rgb(0,100,0)")
+g.addColorStop(1, "rgb(100,0,100)")
+ctx.fillStyle=g
+rect(0,0,WIDTH,HEIGHT)
 -->
