@@ -119,5 +119,32 @@ for (i=0; i<n; i++)\n\
   beginpath(0, 0)\n\
   curveto(0, 0, i, i, i/0.75, dy)\n\
   endpath()\n\
-}\n"
+}\n",
+"push();\n\
+translate(30,30);\n\
+rect(10,10,100,100);\n\
+rotate(20);\n\
+fill(0,255,0);\n\
+rect(20,20,50,50);\n\
+rotate(20);\n\
+fill(255,0,255);\n\
+rect(30,30,25,25);\n\
+rotate(20);\n\
+fill(0,255,255);\n\
+rect(40,40,13,13);\n\
+pop();\n\
+\n\
+fill(100,200,10);\n\
+oval(100, 200, 100, 200);\n\
+\n\
+stroke(1);\n\
+beginpath(150,200);\n\
+lineto(200,300);\n\
+lineto(150,400);\n\
+lineto(100,300);\n\
+endpath();\n\
+\n\
+beginpath(50,300);\n\
+lineto(300,300);\n\
+endpath();\n"
 ]
