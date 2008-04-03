@@ -1,6 +1,7 @@
 demos = [
 "//source derived from: \n\
 //http://nodebox.net/code/index.php/Superfolia_|_root_source_code \n\
+//caution! this may take a bit, just be patient \n\
 \n\
 function radial_gradient(colors, x, y, radius)\n\
 {\n\
