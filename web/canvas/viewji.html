@@ -197,18 +197,18 @@
     </td></tr>
     <tr><td valign="top">
         <div id="textDiv" style="left:0px;top:0px;
-        width:500px;height:400px;position:relative;">
+        width:500px;height:400px;position:relative;margin-bottom:10px">
             <textarea id="program" style="width:500px;height:400px;
             left:0px;top:0px;position:absolute;"></textarea>
             <div id="handleCorner" style="width:5px;height:5px;
                 background-color:LightGreen;position:absolute;left:500px;
                 top:400px;cursor:se-resize;"></div>
         </div>
+        <input type="submit" id="drawbtn" value="draw" onclick="draw()">
     </div>
     </td><td valign="top">
         <canvas id="canvas" width="250" height="400"></canvas>
     </td></tr><tr><td valign="top">
-        <input type="submit" id="drawbtn" value="draw" onclick="draw()">
     </td></tr>
     <tr><td colspan=2>
         <textarea id="debug" rows="30" cols="80"></textarea>
