@@ -1,8 +1,9 @@
 <html>
   <head>
     <title>Viewji</title>
-    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-1.2.3.js"></script>
     <script type="text/javascript" src="textbox.js"></script>
+    <script type="text/javascript" src="demos.js"></script>
     <script type="text/javascript">
         $(document).ready(setupTextBox);
     </script>
@@ -21,10 +22,14 @@
     //TODO: integrate with forms
     //TODO: animation
     //TODO: can you disable the stupid "script is taking too long" warning?
+    function demo(n) {
+        document.getElementById("program").value = demos[n];
+    }
     function draw(){
         var canvas = document.getElementById('canvas');
         var dbg = document.getElementById("debug");
         var drawbtn = document.getElementById("drawbtn");
+        var dbgs = new Array();
 
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
@@ -32,7 +37,8 @@
             var HEIGHT = canvas.height;
 
             function debug(s) {
-                dbg.value += s.toString().substring(0,3) + "\n";
+                //dbg.value += s;
+                dbgs.push(s);
             }
 
             function radians(d) {
@@ -168,6 +174,7 @@
             try {
                 ctx.clearRect(0,0,WIDTH,HEIGHT);
                 eval(document.getElementById('program').value);
+                dbg.value = dbgs.join("\n");
             } catch (e) {
                 alert(e);
             } finally {
@@ -182,13 +189,19 @@
     </style>
   </head>
   <body>
-    <table><tr><td valign="top">
+    <table>
+    <tr><td colspan=2>
+        Demos: 
+        <a href="#" onclick="demo(0)">Superfolia</a>
+        <a href="#" onclick="demo(1)">Fireworks</a>
+    </td></tr>
+    <tr><td valign="top">
         <div id="textDiv" style="left:0px;top:0px;
-        width:400px;height:400px;position:relative;">
-            <textarea id="program" style="width:400px;height:400px;
+        width:500px;height:400px;position:relative;">
+            <textarea id="program" style="width:500px;height:400px;
             left:0px;top:0px;position:absolute;"></textarea>
             <div id="handleCorner" style="width:5px;height:5px;
-                background-color:LightGreen;position:absolute;left:400px;
+                background-color:LightGreen;position:absolute;left:500px;
                 top:400px;cursor:se-resize;"></div>
         </div>
     </div>
@@ -198,7 +211,7 @@
         <input type="submit" id="drawbtn" value="draw" onclick="draw()">
     </td></tr>
     <tr><td colspan=2>
-        <textarea id="debug" rows="100" cols="80"></textarea>
+        <textarea id="debug" rows="30" cols="80"></textarea>
     </td></tr></table>
   </body>
 </html>
