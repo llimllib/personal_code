@@ -52,7 +52,7 @@ function root(x, y, angle, depth, alpha, decay) {\n\
             oval(x-w/6, y-w/6, w/3, w/3)\n\
             \n\
             // Create a branching root.\n\
-            if (random() > 0.8 && depth > 0)\n\
+            if (random() > 0.85 && depth > 0)\n\
                 root(x, y, angle, depth-1, alpha);\n\
             \n\
             x = dx\n\
