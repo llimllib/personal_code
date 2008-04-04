@@ -30,6 +30,7 @@
         var dbg = document.getElementById("debug");
         var drawbtn = document.getElementById("drawbtn");
         var dbgs = new Array();
+        var autoclose = true;
 
         if (canvas.getContext) {
             var ctx = canvas.getContext("2d");
@@ -37,7 +38,6 @@
             var HEIGHT = canvas.height;
 
             function debug(s) {
-                //dbg.value += s;
                 dbgs.push(s);
             }
 
@@ -51,6 +51,8 @@
                 WIDTH = w;
                 HEIGHT = h;
             }
+
+            function autoclosepath(b) { autoclose = b; }
 
             function random(a, b) {
                 if (a == undefined && b == undefined)
@@ -151,7 +153,8 @@
             function pop() { ctx.restore(); }
 
             function endpath() { 
-                ctx.closePath();
+                if (autoclose)
+                    ctx.closePath();
                 ctx.stroke();
             }
 
@@ -172,6 +175,7 @@
             drawbtn.value = "working...";
 
             try {
+                size(400,200);
                 ctx.clearRect(0,0,WIDTH,HEIGHT);
                 eval(document.getElementById('program').value);
                 dbg.value = dbgs.join("\n");
@@ -258,4 +262,28 @@ g.addColorStop(0, "rgb(0,100,0)")
 g.addColorStop(1, "rgb(100,0,100)")
 ctx.fillStyle=g
 rect(0,0,WIDTH,HEIGHT)
+-->
+<!-- spirograph
+function circle_equation(r, dt, center_x, center_y) {
+    var t = 0.0
+        return function() {
+        var x = center_x + Math.cos(t) * r
+        var y = center_y + Math.sin(t) * r
+        t += dt
+        return [x, y]
+    }
+}
+
+autoclosepath(false)
+eq = circle_equation(85, 9, 100, 200)
+z = eq()
+x = z[0]; y = z[1]
+stroke(0)
+beginpath(x, y)
+for (i=0; i < 76; i++) {
+    z = eq()
+    x = z[0]; y = z[1]
+    lineto(x, y)
+}
+endpath()
 -->
