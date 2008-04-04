@@ -265,8 +265,10 @@ rect(0,0,WIDTH,HEIGHT)
 -->
 <!-- spirograph
 function circle_equation(r, dt, center_x, center_y) {
-    var t = 0.0
-        return function() {
+    var t = 0
+    var center_x = 0
+    var center_y = 0
+    return function() {
         var x = center_x + Math.cos(t) * r
         var y = center_y + Math.sin(t) * r
         t += dt
@@ -274,13 +276,20 @@ function circle_equation(r, dt, center_x, center_y) {
     }
 }
 
+size(550, 550)
+fill(.2, .2, .2)
+rect(0,0,HEIGHT, WIDTH)
+stroke(100,100,100);
+strokewidth(.25)
+
+translate(HEIGHT/2, WIDTH/2)
 autoclosepath(false)
-eq = circle_equation(85, 9, 100, 200)
+eq = circle_equation(240, 4.5)
 z = eq()
 x = z[0]; y = z[1]
-stroke(0)
+
 beginpath(x, y)
-for (i=0; i < 76; i++) {
+for (i=0; i < 74; i++) {
     z = eq()
     x = z[0]; y = z[1]
     lineto(x, y)
