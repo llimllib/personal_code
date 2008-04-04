@@ -296,3 +296,43 @@ for (i=0; i < 74; i++) {
 }
 endpath()
 -->
+<!-- Spirograph 2: combinations
+//Circles Demo
+//Derived from:
+//http://www.nodebox.net/code/index.php/Mark_Meyer_|_Parametric_surfaces
+
+function circle_equation(r, dt) {
+    var t = 0
+    var center_x = 0
+    var center_y = 0
+    return function() {
+        var x = center_x + Math.cos(t) * r
+        var y = center_y + Math.sin(t) * r
+        t += dt
+        return [x, y]
+    }
+}
+
+size(550, 550)
+fill(.2, .2, .2)
+rect(0,0,HEIGHT, WIDTH)
+stroke(200,200,200);
+strokewidth(.25)
+translate(HEIGHT/2, WIDTH/2)
+autoclosepath(false)
+
+eq1 = circle_equation(100, 1)
+eq2 = circle_equation(150, 1.75)
+
+a = eq1(); b = eq2()
+x1 = a[0]; y1 = a[1]
+x2 = b[0]; y2 = b[1]
+
+beginpath(x1+x2, y1+y2)
+for (i=0; i < 360*2; i++) {
+    lineto(x1+x2, y1+y2)
+    a = eq1(); b = eq2()
+    x1 = a[0]; y1 = a[1]
+    x2 = b[0]; y2 = b[1]
+}
+endpath()-->
