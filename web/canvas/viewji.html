@@ -22,6 +22,7 @@
     //TODO: integrate with forms
     //TODO: animation
     //TODO: can you disable the stupid "script is taking too long" warning?
+    //TODO: color modes
     function demo(n) {
         document.getElementById("program").value = demos[n];
     }
@@ -336,3 +337,97 @@ for (i=0; i < 360*2; i++) {
     x2 = b[0]; y2 = b[1]
 }
 endpath()-->
+
+<!-- there is quite a large difference visible in this diagram; debug!
+//Circles Demo
+//Derived from:
+//http://www.nodebox.net/code/index.php/Mark_Meyer_|_Parametric_surfaces_|_circle_curves
+
+function circle_equation(r, dt) {
+    var t = 0
+    var center_x = 0
+    var center_y = 0
+    return function() {
+        var x = center_x + Math.cos(t) * r
+        var y = center_y + Math.sin(t) * r
+        t += dt
+        return [x, y]
+    }
+}
+
+size(550, 550)
+fill(50, 51, 47)
+rect(0,0,HEIGHT, WIDTH)
+stroke(201,204,190, .7);
+strokewidth(.25)
+translate(HEIGHT/2, WIDTH/2)
+autoclosepath(false)
+
+b = 5.5
+eq1 = circle_equation(-135, -b)
+eq2 = circle_equation(-165, b)
+eq3 = circle_equation(150, b)
+eq4 = circle_equation(325, b)
+
+a = eq1();
+x1 = a[0]; y1 = a[1]
+a = eq1();
+x2 = a[0]; y2 = a[1]
+
+beginpath(x1+x2, y1+y2)
+for (i=0; i < 360*2; i++) {
+    a = eq1(); b = eq2(); c = eq3(); d = eq4()
+    x1 = a[0]; y1 = a[1]
+    x2 = b[0]; y2 = b[1]
+    x3 = c[0]; y3 = c[1]
+    x4 = d[0]; y4 = c[1]
+    curveto(x4, y4, x3, y3, x1+x2, y1+y2)
+}
+endpath()
+-->
+
+<!-- This one is turned 90 degrees on its side!
+//Derived from:
+//http://www.nodebox.net/code/index.php/Mark_Meyer_|_Parametric_surfaces_|_circles_curve_steady_point
+
+function circle_equation(r, dt) {
+    var t = 0
+    var center_x = 0
+    var center_y = 0
+    return function() {
+        var x = center_x + Math.cos(t) * r
+        var y = center_y + Math.sin(t) * r
+        t += dt
+        return [x, y]
+    }
+}
+
+size(550, 550)
+fill(50, 51, 47)
+rect(0,0,HEIGHT, WIDTH)
+stroke(201,204,190, .7);
+strokewidth(.25)
+translate(HEIGHT/2, WIDTH/2)
+autoclosepath(false)
+
+eq1 = circle_equation(250, 4)
+eq2 = circle_equation(400, -4)
+
+a = eq1(); b = eq2()
+x1 = a[0]; y1 = a[1]
+x2 = b[0]; y2 = b[1]
+
+for (i=0; i < 360; i++) {
+    beginpath(-60, 0)
+    curveto(x1, y1, x2, y2, 60, 0)
+    a = eq1(); b = eq2()
+    x1 = a[0]; y1 = a[1]
+    x2 = b[0]; y2 = b[1]
+    curveto(x1, y1, x2, y2, 0, -120)
+    a = eq1(); b = eq2()
+    x1 = a[0]; y1 = a[1]
+    x2 = b[0]; y2 = b[1]
+    curveto(x1, y1, x2, y2, -60, 0)
+    endpath()
+}
+-->
