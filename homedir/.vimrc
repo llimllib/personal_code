@@ -3,7 +3,11 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 
-colorscheme breeze
+if has("gui_running")
+    colorscheme breeze 
+else
+    colorscheme delek
+endif
 
 " this doesn't work on windaz
 " set backspace=indent,eol,start
@@ -65,10 +69,17 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
 ":set formatoptions=aw2tq to get reformatted paragraphs
-set guifont=Monaco:h14
+set guifont=Inconsolata:h14.00
 
 map <F8> iimport pdb; pdb.set_trace()
 inoremap <F8> import pdb; pdb.set_trace()
 
 map gn gt
 map gN gT
+
+"J deletes EOLs - very useful on mac keyboard!
+"
+"z10<CR> will set the current split to 10 lines. Ah ha!
+
+"CTRL-W r				*CTRL-W_r* *CTRL-W_CTRL-R* *E443*
+" rotate windows down or right
