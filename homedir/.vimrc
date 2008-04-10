@@ -30,6 +30,7 @@ map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
+map <C-_> <C-W>_
 
 "try this again
 set autoindent
@@ -83,3 +84,22 @@ map gN gT
 
 "CTRL-W r				*CTRL-W_r* *CTRL-W_CTRL-R* *E443*
 " rotate windows down or right
+
+set vb t_vb=
+
+let g:dbext_default_profile_PG = 'type=PGSQL:user=fuse_fuse:dbname=fusebox'
+
+function! MyLabel(n)
+  if exists('t:name')
+    return t:name
+  else
+    return ''
+  endif
+endfunction
+
+function! MyGuiTabLine()
+ let s = '%{MyLabel(' . tabpagenr() . ')}'
+ return s
+endfunction
+
+set guitablabel=%!MyGuiTabLine()

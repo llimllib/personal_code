@@ -16,3 +16,5 @@ export MANPATH=$MANPATH:/opt/local/man
 
 export PATH=$PATH:/usr/local/bin
 export SITE_PACKAGES="/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages/"
+
+shopt -s nocaseglob
