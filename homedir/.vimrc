@@ -31,6 +31,8 @@ map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
 map <C-_> <C-W>_
+imap <C-D> require 'ruby-debug'; debugger
+nmap <C-D> orequire 'ruby-debug'; debugger
 
 "try this again
 set autoindent
@@ -103,3 +105,16 @@ function! MyGuiTabLine()
 endfunction
 
 set guitablabel=%!MyGuiTabLine()
+
+" vim -b : edit binary using xxd-format!
+augroup Binary
+  au!
+  au BufReadPre   *.ttf,*.dfont let &bin=1
+  au BufReadPost  *.ttf,*.dfont if &bin | %!xxd
+  au BufReadPost  *.ttf,*.dfont set ft=xxd | endif
+  au BufWritePre  *.ttf,*.dfont if &bin | %!xxd -r
+  au BufWritePre  *.ttf,*.dfont endif
+  au BufWritePost *.ttf,*.dfont if &bin | %!xxd
+  au BufWritePost *.ttf,*.dfont set nomod | endif
+augroup END
+
