@@ -118,3 +118,17 @@ augroup Binary
   au BufWritePost *.ttf,*.dfont set nomod | endif
 augroup END
 
+if has("spell")
+  " turn spelling off by default
+  set nospell
+
+  " toggle spelling with F4 key
+  map <F4> :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+
+  " they were using white on white
+  highlight PmenuSel ctermfg=black ctermbg=lightgray
+
+  " limit it to just the top 10 items
+  set sps=best,10                    
+endif
+
