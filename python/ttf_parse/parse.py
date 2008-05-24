@@ -172,11 +172,12 @@ for i, table in enumerate(subtables):
         #need not contain any valid mappings. It can simply map the single character
         #code 0xFFFF to the missing character glyph, glyph 0.  
         assert len(endCode) == len(startCode) == len(idDelta) == len(idRangeOffset) 
-        data += (tuple(zip(startCode, endCode, idDelta, idRangeOffset)),) 
-        for char in data[7]:
-            #start must be <= end; I don't understand why they can = 
-            assert char[0] <= char[1] 
+        data += (endCode, startCode, idDelta, idRangeOffset)
+        for i in range(len(endCode)):
+            #start must be <= end; I don't understand why they can be equal
+            assert endCode[i] >= startCode[i]
 
         print "table %s type 4:\n%s" % (i, data) 
-    else: print "unable to read format %s of table %s" % (format, i)
+    else:
+        print "unable to read format %s of table %s" % (format, i)
 
