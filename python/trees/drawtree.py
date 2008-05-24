@@ -1,22 +1,30 @@
 from gen import Tree
+import demo_trees; reload(demo_trees)
 from demo_trees import trees
 import reingold_thread; reload(reingold_thread)
 from reingold_thread import reingold_tilford as rt
 #from reingold_naive import reingold_tilford as rt
+import buchheim; reload(buchheim)
 from buchheim import buchheim
 
-#print trees[5][0]
-t = buchheim(trees[5])
-#t = rt(trees[5])
+t = buchheim(trees[9])
 
 r = 30
 rh = r*1.5
 rw = r*1.5
 stroke(0)
 
+DEBUG = True
+
 def drawt(root, depth):
     global r
     oval(root.x * rw, depth * rh, r, r)
+    if DEBUG:
+        fill(0)
+        fontsize(10)
+        text("%s" % (round(root.x, 1)), root.x*rw + (rw/7), depth * rh + 1.6*(rh / 3))
+        text("%s" % (root.tree), root.x*rw + (rw/7), depth * rh + (rh / 3))
+        fill(1)
     for child in root.children:
         drawt(child, depth+1)
 
@@ -34,6 +42,7 @@ def sign(x):
 from math import atan, sin, cos, pi
 def dottedline(x1, y1, x2, y2):
     segment = 5
+    if x2 == x1: print "fucked up"; return
     if x2 - x1 > 0:
         theta = atan(float(y2-y1)/float(x2-x1))
     else:
@@ -57,7 +66,7 @@ def drawthreads(root, depth):
                        c.x * rw + (r/2), (depth+2) * rh + (r/2))
         drawthreads(child, depth+1)
 
-size(500, 500)
+size(1000, 500)
 translate(2, 2)
 drawconn(t, 0)
 stroke(0,.4,.6)
@@ -65,3 +74,4 @@ drawthreads(t, 0)
 stroke(0)
 fill(1,1,1)
 drawt(t, 0)
+print "=-------==--------="

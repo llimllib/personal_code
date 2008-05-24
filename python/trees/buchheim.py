@@ -56,6 +56,7 @@ def firstwalk(v, distance=1.):
             v.x = 0.
     else:
         default_ancestor = v.children[0]
+        if str(v) == "G": import pdb; pdb.set_trace()
         for w in v.children:
             firstwalk(w)
             default_ancestor = apportion(w, default_ancestor, distance)
@@ -111,6 +112,7 @@ def apportion(v, default_ancestor, distance):
 
 def move_subtree(wl, wr, shift):
     subtrees = wr.number - wl.number
+    print wl, wr, wr.number, wl.number, shift, subtrees, shift/subtrees
     wr.change -= shift / subtrees
     wr.shift += shift
     wl.change += shift / subtrees
@@ -120,6 +122,7 @@ def move_subtree(wl, wr, shift):
 def execute_shifts(v):
     shift = change = 0
     for w in v.children[::-1]:
+        print "shift: ", w, shift, w.change
         w.x += shift
         w.mod += shift
         change += w.change
@@ -145,5 +148,5 @@ if __name__ == "__main__":
     from demo_trees import trees
     from reingold_thread import p as printtree
 
-    dt = buchheim(trees[3], 6)
+    dt = buchheim(trees[9])
     printtree(dt)
