@@ -122,46 +122,47 @@ ptr = table_directory['cmap'][1]
 #UInt16 	idRangeOffset[segCount] 	Offset in bytes to glyph indexArray, or 0 	 
 #UInt16 	glyphIndexArray[variable] 	Glyph index array
 #for now we'll just load those first 7 variables to see what's going on
+cmap_tables = []
 for i, table in enumerate(subtables):
     _, _, offset = table
     start = ptr + offset * i
-    #sometimes format is not a short. We'll ignore these cases.
+    #sometimes format is not a short. We'll ignore these cases, especially since they
+    #make use of a datatype whose representation is not specified, and I have no examples
+    #from which to test.
     format = unpack(">H", buf[start:start+2])[0]
     if format == 0:
         fmt = ">3H256B"
         data = unpack(fmt, buf[start:start+calcsize(fmt)])
+        data = tuple(data[:3]) + (tuple(data[3:]), )
+        cmap_tables.append(data)
         print "table %s type 0:\n%s" % (i, data)
     elif format == 4:
         fmt = ">7H"
         sz = calcsize(fmt)
         data = unpack(fmt, buf[start:start + sz])
+        format, length, language, segCountX2, searchRange, entrySelector, rangeShift = data
+        segCount = data[3] / 2
         cur = start + sz
 
-        segCount = data[3] / 2
 
-        fmt = ">%sH" % segCount
-        sz = calcsize(fmt)
-        endCode = unpack(fmt, buf[cur:cur + sz])
-        cur = cur + sz
+        def getShortArray(ptr, buf, segCount):
+            fmt = ">%sH" % segCount
+            sz = calcsize(fmt)
+            shortArr = unpack(fmt, buf[cur:cur + sz])
+            return shortArr, cur + sz
+            
+        endCode, cur = getShortArray(cur, buf, segCount)
         assert endCode[-1] == 0xFFFF
 
-        assert unpack(">H", buf[cur:cur+2]) == (0,)
+        assert unpack(">H", buf[cur:cur+2])[0] == 0
         cur += 2
 
-        fmt = ">%sH" % segCount
-        sz = calcsize(fmt)
-        startCode = unpack(fmt, buf[cur:cur + sz])
-        cur = cur + sz
+        startCode, cur = getShortArray(cur, buf, segCount)
+        assert startCode[-1] == 0xFFFF
 
-        fmt = ">%sH" % segCount
-        sz = calcsize(fmt)
-        idDelta = unpack(fmt, buf[cur:cur + sz])
-        cur = cur + sz
-
-        fmt = ">%sH" % segCount
-        sz = calcsize(fmt)
-        idRangeOffset = unpack(fmt, buf[cur:cur + sz])
-        cur = cur + sz
+        idDelta, cur = getShortArray(cur, buf, segCount)
+        idRangeOffset, cur = getShortArray(cur, buf, segCount)
+        glyphIndexArray, _ = getShortArray(cur, buf, (start + length - cur) / 2)
 
         #To use these arrays, it is necessary to search for the first endCode that is
         #greater than or equal to the character code to be mapped. If the corresponding
@@ -172,12 +173,39 @@ for i, table in enumerate(subtables):
         #need not contain any valid mappings. It can simply map the single character
         #code 0xFFFF to the missing character glyph, glyph 0.  
         assert len(endCode) == len(startCode) == len(idDelta) == len(idRangeOffset) 
-        data += (endCode, startCode, idDelta, idRangeOffset)
         for i in range(len(endCode)):
             #start must be <= end; I don't understand why they can be equal
+            #I'd also like to make stronger assertions, but I'm still not real clear
+            #on what's allowed to go in the idDelta and idRangeOffset fields
             assert endCode[i] >= startCode[i]
 
-        print "table %s type 4:\n%s" % (i, data) 
+        cmap_tables.append(data + (endCode, startCode, idDelta, idRangeOffset, glyphIndexArray))
+
+        print "table %s type 4:\n%s" % (i, cmap_tables[-1]) 
     else:
         print "unable to read format %s of table %s" % (format, i)
+
+#well, I'm still not quite sure how the mapping works, and I know that my format 4 table
+#reading is incomplete because I ignore the final element of the table, because the spec
+#does not make it clear how many elements are in it. Nonetheless, let's press on to 
+#reading some glyphs.
+
+#here is the spec for a glyph header:
+#int16 	numberOfContours 	If the number of contours is positive or zero, it is a single glyph;
+#                           If the number of contours is -1, the glyph is compound
+#FWord 	xMin 	Minimum x for coordinate data
+#FWord 	yMin 	Minimum y for coordinate data
+#FWord 	xMax 	Maximum x for coordinate data
+#FWord 	yMax 	Maximum y for coordinate data
+
+#and for a simple glyph:
+#uint16 	endPtsOfContours[n] 	Array of last points of each contour; n is the number of 
+#                                   contours; array entries are point indices
+#uint16 	instructionLength 	Total number of bytes needed for instructions
+#uint8 	instructions[instructionLength] 	Array of instructions for this glyph
+#uint8 	flags[variable] 	Array of flags
+#uint8 or int16 	xCoordinates[] 	Array of x-coordinates; the first is relative to (0,0), 
+#                                   others are relative to previous point
+#uint8 or int16 	yCoordinates[] 	Array of y-coordinates; the first is relative to (0,0),
+#                                   others are relative to previous point
 
