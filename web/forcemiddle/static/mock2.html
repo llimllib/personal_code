@@ -1,0 +1,32 @@
+<html><head><title>Force Middle Discs</title>
+	<script type="text/javascript" src="jquery-1.2.1.min.js"></script>
+    <script type="text/javascript">
+jQuery.preloadImages = function()
+{
+  for(var i = 0; i<arguments.length; i++)
+  {
+    jQuery("<img>").attr("src", arguments[i]);
+  }
+}
+
+var cur = 0;
+$(document).ready(function() {
+    $.preloadImages("logo2.gif", "logo3.gif", "logo4.gif", "logo5.gif");
+    $("#next").click(function() {
+        cur = (cur + 1) % 5;
+        var n = cur+1;
+        var name = "logo" + n;
+        $("#logo").attr("src", name + ".gif");
+        $("#name").attr("innerHTML", name);
+        return false;
+    })
+});
+
+    </script>
+</head>
+<body>
+<img style="position:absolute; top:-10; left:80;" src="background.jpg">
+<img style="position:absolute; top:0; left:0;" src="/static/logo1.gif" id="logo">
+<a href="#" id="next" style="position:absolute; top:200; left:900;">next</a>
+<h4 id="name" style="position:absolute; top:160; left:900;">logo1</h4>
+</body></html>
