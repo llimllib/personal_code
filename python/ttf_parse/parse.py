@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from struct import unpack, calcsize
 
 buf = file('Vera.ttf').read()
@@ -110,15 +112,15 @@ ptr = table_directory['cmap'][1]
 #the second is type 4:
 #UInt16  	format  	Format number is set to 4  	 
 #UInt16 	length 	Length of subtable in bytes 	 
-#UInt16 	language 	Language code for this encoding subtable, or zero if language-independent 	 
+#UInt16 	language 	Language code for this encoding subtable, or zero if language-independent
 #UInt16 	segCountX2 	2 * segCount 	 
 #UInt16 	searchRange 	2 * (2**FLOOR(log2(segCount))) 	 
 #UInt16 	entrySelector 	log2(searchRange/2) 	 
 #UInt16 	rangeShift 	(2 * segCount) - searchRange 	 
 #UInt16 	endCode[segCount] 	Ending character code for each segment, last = 0xFFFF. 	
 #UInt16 	reservedPad 	This value should be zero 	
-#UInt16 	startCode[segCount] 	Starting character code for each segment 	
-#UInt16 	idDelta[segCount] 	Delta for all character codes in segment 	 
+#UInt16 	startCode[segCount] 	Starting character code for each segment
+#UInt16 	idDelta[segCount] 	Delta for all character codes in segment 
 #UInt16 	idRangeOffset[segCount] 	Offset in bytes to glyph indexArray, or 0 	 
 #UInt16 	glyphIndexArray[variable] 	Glyph index array
 #for now we'll just load those first 7 variables to see what's going on

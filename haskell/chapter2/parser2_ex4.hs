@@ -4,6 +4,7 @@ import IO
 import Text.ParserCombinators.Parsec hiding (spaces)
 import Monad
 
+
 parseNumber = liftM (Number . read) $ (many1 digit)
 
 {- 
@@ -57,13 +58,16 @@ or
 
 radix = do char '#'
            x <- oneOf "bodx"
-           return "#" ++ [x]
+           return $ "#" ++ [x]
 
 precision = do char '#'
                x <- oneOf "ei"
-               return "#" ++ [x]
+               return $ "#" ++ [x]
 
-prefix = do { oneOf radix; oneOf precision <|> oneOf precision; oneOf radix
+prefix = do r <- oneOf radix
+            p <- oneOf precision
+            -- for now, assume both radix and precision
+            return r ++ p
 
 parseNumber2 = do prefix <- prefix
                   return prefix
@@ -75,7 +79,7 @@ parseNumber2 = do prefix <- prefix
 data LispVal = Atom String
              | List [LispVal]
              | DottedList [LispVal] LispVal
-             | Number Integer
+             | Number [String] Integer
              | String String
              | Bool Bool
 

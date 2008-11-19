@@ -13,6 +13,7 @@ data LispVal = Atom String
 
 symbol = oneOf "!$#%&|*+-/:<=>?@^_~"
 spaces = skipMany1 space
+-- notEndString = do 
 parseString = do char '"'
                  x <- many (noneOf "\"")
                  char '"'
@@ -49,6 +50,11 @@ parseAtom = do first <- letter <|> symbol
  String (huh?). liftM is in the Monad module.
 -}
 parseNumber = liftM (Number . read) $ (many1 digit)
+{- Why doesn't this work:
+do return (Number . read) $ (many1 digit)
+?
+-}
+--liftM (Number . read) $ many1 digit
 
 parseExpr = parseAtom <|> parseString <|> parseNumber
 
@@ -58,5 +64,4 @@ readExpr input = case parse parseExpr "lisp" input of
     Right val -> "Found value"
 
 main = do args <- getArgs
-          putStrLn (args !! 0)
           putStrLn (readExpr (args !! 0))
