@@ -1,0 +1,73 @@
+/*
+	CMUA 
+	Author: Justin Michaliga
+	Date: 	Mon, March 24th, 2008
+ */
+ 
+ body{margin: 0px; padding: 0px; background-color: #8F0000; font-family: Geneva, Arial, Helvetica, sans-serif; font-size:13px;}
+ 
+h1, h2, h3, h4, h5{font-family: "Century Gothic", Arial, sans-serif;}
+ 
+a{color: #FF9900;}
+a:link{color: #FF9900;}
+a:visited{color: #FF9933;}
+a:hover{color: #FFCC00;}
+ 
+p{}
+input{font-size: 12px; border: 1px solid #FFAAAA; padding: 2px; width: 150px;}
+ 
+ #container{width: 860px; margin: 0px auto;}
+ #header{width: 860px; height: 200px; background: url('../images/header.jpg') no-repeat;}
+ #navigation{margin: 0px auto; width: 610px; float: right; height: 75px; display: block}
+		  
+  #nav{position: relative; top: 0px; left: 10px; padding: 0px; list-style: none; width: 600px;}
+  #nav li{float: left; display: block; position: relative; width: 100px; margin-left: 35px;}
+  #nav li a.on{display: block; height: 50px; padding: 0 !important;}
+  #nav li a.on strong{display: none;}
+    	  li#events a.on {background: transparent url(../images/nav-e.jpg) top left no-repeat;}
+		  li#events a.on:hover {background-position: bottom left;}     
+		  li#leagues a.on {background: transparent url(../images/nav-l.jpg) top left no-repeat;}
+		  li#leagues a.on:hover {background-position: bottom left;}
+		  li#directions a.on {background: transparent url(../images/nav-d.jpg) top left no-repeat;}
+		  li#directions a.on:hover {background-position: bottom left;} 
+		  li#links a.on {background: transparent url(../images/nav-li.jpg) top left no-repeat;}
+		  li#links a.on:hover {background-position: bottom left;}
+		     
+#top{float: left; width: 860px; background: url('../images/top.jpg') no-repeat; height: 50px;}
+#subheader{position: relative; width: 860px; height: 50px;}
+#date{float: right; text-align: right; width: 250px; color: #AAA; margin-right: 30px;}
+#weather{float: left; width: 220px; text-align: right; color: #AAA; margin-left: 20px;}
+
+#logo{float: left; width: 250px; height: 150px;}
+	#logo a{position: relative; left: 20px; top:0px; display: block; 
+		width: 200px; height:100px; padding: 0 !important; background:  url(../images/cmualogo.jpg) no-repeat;}
+	#logo h1{margin: 0;}
+	#logo h1 strong{display: none;}
+
+
+#login{float: left; width: 250px; margin-left: 10px; color: #990000;}
+ #login p{font-size: 10px; margin-top: -10px;}
+ 
+#form{float: right; margin-right: 30px; font-size: 9px;}
+	#form p{font-size: 9px; margin: 0px; padding: 0px;}
+	#form label{text-align: right;}
+	#form .button{width:100px; background-color: #AA7777; border: 1px #553333 solid; color: #990000;}
+	
+#wrap{float: left; width: 860px; margin: 0px; padding: 0px; background: #F0EFE1 url('../images/side.jpg') repeat-y;}
+ #side{float: left; width: 230px; padding: 10px 0px 0px 10px;}
+ 	#side h3{color: #555;}
+	#side ol, #side ul{font-size: 11px;}
+		#side li{margin-bottom: 15px;}
+	#side p{font-size:12px; line-height: 1.8em;}
+	
+ #content{float: right; width: 590px; background-color: #F0EFE1; padding: 10px 0px 0px 10px;}
+ 	#content h2{font-size: 24px; color: #990000;}
+	#content p{font-size:14px;}
+
+ #registration{width: 840px; padding: 10px 0px 15px 10px;}
+ #regsuccess{width: 440px;
+            margin-left: 24%; margin-right: 20%;
+            padding: 20px 0px 0px 0px;}
+
+ #footer{float: left; width: 860px; background: url('../images/bottom.jpg') no-repeat; font-size: 11px; color: #330000; height: 50px;}
+ 	#footer p{position: relative; left: 290px; top: 5px; width: 600px; font-size: 10px; color: #AAAAAA;}

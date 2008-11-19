@@ -1,0 +1,290 @@
+-- MySQL dump 10.11
+--
+-- Host: localhost    Database: mdultimate
+-- ------------------------------------------------------
+-- Server version	5.0.45
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `News`
+--
+
+DROP TABLE IF EXISTS `News`;
+CREATE TABLE `News` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` text NOT NULL,
+  `body` text NOT NULL,
+  `author` bigint(20) NOT NULL default '0',
+  `newsdt` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `News`
+--
+
+LOCK TABLES `News` WRITE;
+/*!40000 ALTER TABLE `News` DISABLE KEYS */;
+INSERT INTO `News` VALUES (1,'This is the first news item','This is news!',0,'2006-11-20 10:00:00'),(3,'This is another news item','I\'m so damn meta you can\'t even handle it.',0,'2006-11-22 18:32:10'),(4,'New News!','Things have happened!',0,'2006-11-22 18:33:03'),(5,'this one\'s gonna work','I think?',0,'2006-11-24 09:22:16'),(6,'This is the demo site','The demo is now working on my personal web site.',0,'2006-11-29 10:34:57');
+/*!40000 ALTER TABLE `News` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ci_sessions`
+--
+
+DROP TABLE IF EXISTS `ci_sessions`;
+CREATE TABLE `ci_sessions` (
+  `session_id` varchar(40) NOT NULL default '0',
+  `ip_address` varchar(16) NOT NULL default '0',
+  `user_agent` varchar(50) NOT NULL default '',
+  `last_activity` int(10) unsigned NOT NULL default '0',
+  `session_data` text NOT NULL,
+  PRIMARY KEY  (`session_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ci_sessions`
+--
+
+LOCK TABLES `ci_sessions` WRITE;
+/*!40000 ALTER TABLE `ci_sessions` DISABLE KEYS */;
+INSERT INTO `ci_sessions` VALUES ('e7c90d7879819af11034618d4fbea526','127.0.0.1','Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en',1209925524,'a:36:{s:14:\"flash:old:name\";s:9:\"Bill Mill\";s:17:\"flash:old:address\";s:13:\"4138 Falls Rd\";s:14:\"flash:old:city\";s:9:\"Baltimore\";s:15:\"flash:old:state\";s:2:\"MD\";s:13:\"flash:old:zip\";s:5:\"21211\";s:16:\"flash:old:phone1\";s:10:\"8608823587\";s:16:\"flash:old:phone3\";s:10:\"8608823588\";s:16:\"flash:old:phone2\";s:10:\"8608823589\";s:13:\"flash:old:dob\";s:7:\"9/22/82\";s:16:\"flash:old:gender\";s:1:\"M\";s:25:\"flash:old:mailing_address\";s:19:\"bill.mill@gmail.com\";s:18:\"flash:old:category\";s:1:\"3\";s:25:\"flash:old:club_experience\";s:22:\"Medicine Men/Baltimore\";s:17:\"flash:old:baggage\";s:16:\"My lady Sam Wood\";s:18:\"flash:old:baggage2\";s:16:\"My lady Sam Wood\";s:17:\"flash:old:league1\";s:31:\"Monday Night Co-ed Draft League\";s:17:\"flash:old:league2\";s:0:\"\";s:17:\"flash:old:addnews\";s:19:\"Submit Registration\";s:14:\"flash:new:name\";s:9:\"Bill Mill\";s:17:\"flash:new:address\";s:13:\"4138 Falls Rd\";s:14:\"flash:new:city\";s:9:\"Baltimore\";s:15:\"flash:new:state\";s:2:\"MD\";s:13:\"flash:new:zip\";s:5:\"21211\";s:16:\"flash:new:phone1\";s:10:\"8608823587\";s:16:\"flash:new:phone3\";s:10:\"8608823588\";s:16:\"flash:new:phone2\";s:10:\"8608823589\";s:13:\"flash:new:dob\";s:7:\"9/22/82\";s:16:\"flash:new:gender\";s:1:\"M\";s:25:\"flash:new:mailing_address\";s:19:\"bill.mill@gmail.com\";s:18:\"flash:new:category\";s:1:\"3\";s:25:\"flash:new:club_experience\";s:22:\"Medicine Men/Baltimore\";s:17:\"flash:new:baggage\";s:16:\"My lady Sam Wood\";s:18:\"flash:new:baggage2\";s:16:\"My lady Sam Wood\";s:17:\"flash:new:league1\";s:31:\"Monday Night Co-ed Draft League\";s:17:\"flash:new:league2\";s:0:\"\";s:17:\"flash:new:addnews\";s:19:\"Submit Registration\";}');
+/*!40000 ALTER TABLE `ci_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `league`
+--
+
+DROP TABLE IF EXISTS `league`;
+CREATE TABLE `league` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `league`
+--
+
+LOCK TABLES `league` WRITE;
+/*!40000 ALTER TABLE `league` DISABLE KEYS */;
+/*!40000 ALTER TABLE `league` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `player`
+--
+
+DROP TABLE IF EXISTS `player`;
+CREATE TABLE `player` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `name` text NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `state` char(2) NOT NULL,
+  `zip` char(5) NOT NULL,
+  `home_phone` varchar(20) default NULL,
+  `work_phone` varchar(20) default NULL,
+  `cell_phone` varchar(20) default NULL,
+  `birthdate` date NOT NULL,
+  `gender` tinyint(4) default NULL,
+  `email_address` varchar(255) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `player`
+--
+
+LOCK TABLES `player` WRITE;
+/*!40000 ALTER TABLE `player` DISABLE KEYS */;
+/*!40000 ALTER TABLE `player` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `register`
+--
+
+DROP TABLE IF EXISTS `register`;
+CREATE TABLE `register` (
+  `name` varchar(1024) default NULL,
+  `address` varchar(1024) default NULL,
+  `city` varchar(1024) default NULL,
+  `state` varchar(1024) default NULL,
+  `zip` varchar(1024) default NULL,
+  `phone1` varchar(1024) default NULL,
+  `phone2` varchar(1024) default NULL,
+  `dob` varchar(1024) default NULL,
+  `gender` varchar(1024) default NULL,
+  `mailing_address` varchar(1024) default NULL,
+  `category` varchar(1024) default NULL,
+  `rating` varchar(1024) default NULL,
+  `club_experience` varchar(1024) default NULL,
+  `baggage` varchar(1024) default NULL,
+  `league` varchar(1024) default NULL,
+  `id` bigint(20) NOT NULL auto_increment,
+  `phone3` varchar(1024) default NULL,
+  `baggage2` varchar(1024) default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `register`
+--
+
+LOCK TABLES `register` WRITE;
+/*!40000 ALTER TABLE `register` DISABLE KEYS */;
+INSERT INTO `register` VALUES ('Bill Mill','4138 Falls Rd','Baltimore','MD','21211','8608823587','','9/22/82','M','bill.mill@gmail.com','5','','Medicine Men','My lady Sam Wood','1',1,NULL,NULL),('Bill Mill','4138 Falls Rd','Baltimore','MD','21211','8608823587','8608823589','9/22/82','M','bill.mill@gmail.com','3','','Medicine Men/Baltimore','My lady Sam Wood','1',2,'8608823588','My lady Sam Wood'),('Bill Mill','4138 Falls Rd','Baltimore','MD','21211','8608823587','8608823589','9/22/82','M','bill.mill@gmail.com','3','','Medicine Men/Baltimore','My lady Sam Wood','1',3,'8608823588','My lady Sam Wood');
+/*!40000 ALTER TABLE `register` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `registrant`
+--
+
+DROP TABLE IF EXISTS `registrant`;
+CREATE TABLE `registrant` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `player_id` bigint(20) unsigned NOT NULL,
+  `league_id` bigint(20) unsigned NOT NULL,
+  `team_id` bigint(20) unsigned default NULL,
+  `category` tinyint(3) unsigned NOT NULL,
+  `rating` float default '-1',
+  `last_club` varchar(255) default '',
+  `unable_to_play` text,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `registrant`
+--
+
+LOCK TABLES `registrant` WRITE;
+/*!40000 ALTER TABLE `registrant` DISABLE KEYS */;
+/*!40000 ALTER TABLE `registrant` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_role`
+--
+
+DROP TABLE IF EXISTS `security_role`;
+CREATE TABLE `security_role` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `name` varchar(45) NOT NULL default '',
+  `created` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `security_role`
+--
+
+LOCK TABLES `security_role` WRITE;
+/*!40000 ALTER TABLE `security_role` DISABLE KEYS */;
+INSERT INTO `security_role` VALUES (1,'Admin','2006-11-17 21:08:28','0000-00-00 00:00:00'),(2,'Member','2006-11-17 21:08:28','0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `security_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `security_role_user`
+--
+
+DROP TABLE IF EXISTS `security_role_user`;
+CREATE TABLE `security_role_user` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `security_role_id` bigint(20) NOT NULL default '0',
+  `user_id` bigint(20) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `security_role_user`
+--
+
+LOCK TABLES `security_role_user` WRITE;
+/*!40000 ALTER TABLE `security_role_user` DISABLE KEYS */;
+INSERT INTO `security_role_user` VALUES (1,2,1),(2,1,1),(3,2,2);
+/*!40000 ALTER TABLE `security_role_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `team`
+--
+
+DROP TABLE IF EXISTS `team`;
+CREATE TABLE `team` (
+  `id` bigint(20) unsigned NOT NULL auto_increment,
+  `league_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `team`
+--
+
+LOCK TABLES `team` WRITE;
+/*!40000 ALTER TABLE `team` DISABLE KEYS */;
+/*!40000 ALTER TABLE `team` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `user_name` varchar(45) NOT NULL default '',
+  `password` varchar(40) NOT NULL default '',
+  `email` varchar(120) NOT NULL default '',
+  `activated` tinyint(1) NOT NULL default '0',
+  `activation_code` varchar(50) default NULL,
+  `forgotten_password_code` varchar(50) default NULL,
+  `last_visit` datetime default NULL,
+  `created` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `modified` timestamp NOT NULL default '0000-00-00 00:00:00',
+  `name` varchar(120) NOT NULL default '',
+  `street_addr1` varchar(255) NOT NULL default '',
+  `street_addr2` varchar(255) NOT NULL default '',
+  `phone` varchar(25) NOT NULL default '',
+  `zip` varchar(10) NOT NULL default '',
+  `city` varchar(255) NOT NULL default '',
+  `state` char(2) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'llimllib','2836ccbed1d3c5aa8918a926292d120b5d70bed6','bill.mill@gmail.com',1,'','','0000-00-00 00:00:00','2006-11-20 21:46:44','0000-00-00 00:00:00','Bill Mill','23 Foster Ave','','8608823587','21224','Baltimore','MD'),(2,'guest','35675e68f4b5af7b995d9205ad0fc43842f16450','user@example.com',1,'','','0000-00-00 00:00:00','2006-11-21 04:08:17','0000-00-00 00:00:00','Just a User','23 Foster Ave','','8602248483','21224','Baltimore','MD'),(3,'miyagi','31ea678c44dc4e8e22ccfd165592dd71a30e46ae','',1,NULL,NULL,NULL,'2008-05-03 04:51:24','0000-00-00 00:00:00','Justin Michaliga','','','','','','');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2008-05-04 18:32:55

@@ -1,0 +1,52 @@
+/*
+	CMUA 
+	Author: Justin Michaliga
+	Date: 	Mon, March 24th, 2008
+ */
+ 
+ body{margin: 0px; padding: 0px; background: #8F0000 url(../images/head-bg.gif) repeat-x; font-family: Geneva, Arial, Helvetica, sans-serif; font-size:13px;}
+ 
+h1, h2, h3, h4, h5{font-family: "Century Gothic", Arial, sans-serif;}
+#wrap strong{font-weight: bold; font-size: 13px; font-family: Arial, Helvetica, sans-serif;}
+ 
+a{color: #FF9900;}
+a:link{color: #FF9900;}
+a:visited{color: #FF9933;}
+a:hover{color: #FFCC00;}
+ 
+p{}
+ 
+ #container{width: 860px; margin: 0px auto;}
+ #header{width: 860px; height: 200px;}
+ #navigation{margin: 0px auto; width: 860px; height: 125px; background: url(../images/head-bg.gif) repeat-x;}
+ 
+  #nav{margin: 0px; padding: 0px; list-style: none;}
+  #nav li{float: left; display: block; position: relative; text-align: center;}
+  #nav li a.on{display: block; height: 200px; padding: 0 !important;}
+  #nav li a.on strong{display: none;}
+    	  li#about a.on {background: transparent url(../images/nav-directions.jpg) top left no-repeat; width: 160px;}
+		  li#about a.on:hover {}  
+    	  li#leagues a.on {background: transparent url(../images/nav-leagues.jpg) top left no-repeat; width: 160px;}
+		  li#leagues a.on:hover {} 
+		  li#home a.on{background: transparent url(../images/logo.jpg) top left no-repeat; width: 220px;}	
+    	  li#events a.on {background: transparent url(../images/nav-events.jpg) top left no-repeat; width: 160px;}
+		  li#events a.on:hover {}     
+		  li#links a.on {background: transparent url(../images/nav-link.jpg) top left no-repeat; width: 160px;}
+		  li#links a.on:hover {}   
+
+#subheader{position: relative; top: -80px; width: 860px; height: 50px;}
+#date-weather{float: left; width: 250px; margin-left: 30px; color: #CCCCCC;}
+#login{float: right; width: 280px; margin-right: 30px; color: #CCCCCC;}
+ #login p{font-size: 12px;}
+
+#wrap{float: left; position: relative; width: 860px; top: -80px; margin: 0px; padding: 0px; background-color: #FFF;}
+ #side{float: left; width: 250px; background-color:#DDDDDD; padding: 10px 0px 0px 10px; border-top: 15px solid #CCC;}
+ 	#side h3{color: #555;}
+	#side p{font-size:11px; line-height: 1.8em;}
+ #content{float: right; width: 590px; background-color: #FFFFFF; padding: 10px 0px 20px 10px;}
+ 	#content h2{font-size: 24px; color: #990000;}
+ #registration{width: 840px; background-color: #FFFFFF; padding: 10px 0px 15px 10px;}
+ #regsuccess{width: 440px; background-color: #FFFFFF; 
+            margin-left: 24%; margin-right: 20%;
+            padding: 20px 0px 0px 0px;}
+ #footer{float: left; width: 98%; margin-left: 10px; font-size: 11px; color: #330000;}

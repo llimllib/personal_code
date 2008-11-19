@@ -1,0 +1,98 @@
+/* CSS Document */
+body{background: #0e3f59 url(../static/bg.gif) repeat-y center top;}
+/* body{background: #0e3f59 url(/static/bg.gif) repeat-y center top;} */
+
+a{text-decoration: none; color: #5E8FA9;}
+a:hover{color: #00adef;}
+
+h3{color:#0e3f59; font-family: Arial, Helvetica, sans-serif; font-size: 21px; padding: 5px; background-color: #00adef; text-transform:uppercase;}
+h4{color:#0e3f59; font-family: Arial, Helvetica, sans-serif; font-size: 20px; padding: 5px; text-transform:uppercase;}
+h5{color:#0e3f59; font-family: Arial, Helvetica, sans-serif; font-size: 18px; padding: 0px; text-transform:uppercase;}
+h6{color:#0e3f59; font-family: Arial, Helvetica, sans-serif; font-size: 14px; padding: 0px; padding-left: 10px;}
+ul #dir { margin-bottom: 10px; }
+
+hr{border: #0e3f59 solid 1px;}
+
+ul{list-style-type: circle; font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #0e3f59;}
+li{font-family: Arial, Helvetica, sans-serif; 
+	font-size: 12px; /*color:#5E8FA9;*/ line-height: 1.5em;}
+li span{color: #0e3f59; font-size: 10px; margin-left: 5px; margin-top: 5px;}
+td{	font-family: Arial, Helvetica, sans-serif;	color: #0e3f59;
+	font-size: 11px; padding: 5px;}
+
+p{font-family: Arial, Helvetica, sans-serif; text-indent: 3em;
+	font-size: 11px; color:#0e3f59; letter-spacing: 0.08em; line-height: 1.5em;}
+p#list{ text-indent: 0em; margin-top: -15px;}
+
+#container{clear: left; width: 750px; position: relative;
+	margin: 0px auto; background-position: center top;}
+
+#header{
+	background-image: url("../static/openlogo.jpg"); background-repeat: no-repeat;
+	width: 730px;
+	position: relative;
+	top: 0px;
+	left: 10px;
+	clear: both;
+	height: 250px;
+}
+#header strong{display: none;}
+
+#headnav{float: right; width: 70px; position: relative; top: 10px;}
+  #nav{margin: 0px; padding: 0px; list-style: none; float: right; width: 70px; clear: none;}
+  #nav li{display: block; float: left; position: relative;}
+  #nav li a.on{display: block; height: 25px; padding: 0 !important;}
+  #nav li a.on strong{display: none;}
+		  li#contact a.on {width: 70px; background: transparent url(../static/nav-contact.gif) top left no-repeat;}
+		  li#contact a.on:hover {background-position: bottom left;}
+		
+#navigation{float: left; width: 565px; border-bottom: 5px solid #0e3f59; position: relative; top: 210px; }
+  #mainnav{padding-left: 20px; margin: 0px; list-style: none; float: left; width: 500px; clear: none; }
+  #mainnav li{display: block;float: left; position: relative; z-index: 5;}
+  #mainnav li a.on{display: block; height: 25px; padding: 0 !important;}
+  #mainnav li a.on strong{display: none;}
+    	  li#about a.on {width: 65px; background: transparent url(../static/nav-about.gif) top left no-repeat;}
+		  li#about a.on:hover {background-position: bottom left;}
+  		  li#teams a.on {width: 65px; background: transparent url(../static/nav-teams.gif) top left no-repeat;}
+		  li#teams a.on:hover {background-position: bottom left;}
+		  li#hotels a.on {width: 65px; background: transparent url(../static/nav-hotels.gif) top left no-repeat;}
+		  li#hotels a.on:hover {background-position: bottom left;}
+		  li#contact a.on {width: 65px; background: transparent url(../static/nav-contact.gif) top left no-repeat;}
+		  li#contact a.on:hover {background-position: bottom left;}
+		  li#directions a.on {width: 95px; background: transparent url(../static/nav-directions.gif) top left no-repeat;}
+		  li#directions a.on:hover {background-position: bottom left;}
+		  li#sponsors a.on {width: 95px; background: transparent url(../static/nav-sponsors.gif) top left no-repeat;}
+		  li#sponsors a.on:hover {background-position: bottom left;}
+
+#content{width: 700px; position: relative; left: 25px; }
+
+#maincontent{width: 500px; float: left;}
+	#maincontent p{font-size: 12px; font-family:Arial, Helvetica, sans-serif;}
+	
+.title{font-weight: bold; text-align: right;}
+.footer{font-family: Arial, Helvetica, sans-serif;	color: #0e3f59; font-size: 9px;}
+	
+#sidebar{width: 175px; position: relative; left: 40px; background-color:#5E8FA9; height: 100%; padding: 5px; float: left; top: 0px;}
+	#sidebar h5{font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #0e3f59; margin: 5px; padding: 5px;}
+	#sidebar p{font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: #EEE;}
+	#sidebar a{text-decoration: none;}
+		#sidebar ul{line-height: 20px;}
+	#sidebar li{font-family: Arial, Helvetica, sans-serif;
+		color: #d8e8de; font-size: 11px;}
+	#sidebar li a{color: #d8e8FF; font-size: 11px; text-decoration: none;}
+	#sidebar li a:hover{color: #FFFFFF; border-bottom: #00adef solid 1px}
+
+#footer{
+	clear: both;	
+	margin: 0px auto;
+	border-color:#0e3f59;
+	border-top: 5px solid;
+	border-bottom: 5px solid;
+	position: relative;
+	width: 750px;
+	background-color: #00adef;
+	bottom: 0px;
+	text-align: center;
+	margin: 0px;
+}
+#footer p{color: #0e3f59; font-size: 14px;}

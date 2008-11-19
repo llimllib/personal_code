@@ -1,0 +1,12 @@
+show tables;
+select * from user;
+#insert into user (user_name, password, email, activated, name)
+#values ('miyagi', sha1('kai'), '', 1, 'Justin Michaliga');
+select password, sha1("tao"), sha1("guest") from user;
+desc register;
+select * from register;
+select * from News;
+-- delete from register;
+-- alter table register add column baggage2 varchar(1024);
+-- alter table register add column address2 varchar(1024);
+alter table register add column exceptions text;

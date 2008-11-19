@@ -1,0 +1,55 @@
+body {font-family: "Trebuchet MS", Verdana, sans-serif;
+      color: #004e87;
+      font-size: .9em}
+
+h1 {font-size:1.6em;white-space:nowrap}
+h2 {font-size:1.2em;white-space:nowrap}
+
+a:link {text-decoration:none;font-weight:bold}
+a:visited {text-decoration:none;font-weight:normal}
+a:hover {text-decoration:underline;font-weight:bold}
+a:active {text-decoration:underline}
+
+/* Main page style */
+#main{
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+/* Navigation Bar style */
+#navbar{
+  float: left;
+  width: 100px;
+  padding-right: 10px;
+  font-size: 1.2em;
+  line-height: 150%;
+}
+
+#main_content{
+  width: 540px;
+  margin-left: 110px;
+  margin-right: 10px;
+}
+
+/* Page header style */
+#header{
+  height: 60px;
+  width: 650px;
+}
+
+/* Page footer style */
+#footer{
+  height: 30px;
+  width: 650px;
+  font-size: .8em;
+  font-style: italic;
+ }
+ 
+#hotel_table{
+   vertical-align:top;
+   font-size:.9em;
+   padding:20px;
+   border-spacing:10px;
+ }
+
