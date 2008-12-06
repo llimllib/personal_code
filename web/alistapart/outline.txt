@@ -1,0 +1,7 @@
+* Intro 2
+* Limit 1: Local Storage 3
+* Limit 2: Custom Hardware (dual monitor, fullscreen, scanner, webcam, etc) 3
+* Limit 3: Custom Fonts 3
+* Limit 4: Cross-Domain Data 3
+* Call for innovation 2
+* Outro 2
