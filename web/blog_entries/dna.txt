@@ -1,6 +1,7 @@
 DNA on Programming
+#time 01-22-08 22:25
 #keywords computer, programming, dna
-<blockquote>"Well, what we called a computer in 1977 was really a kind of electric abacus, but..."<p>
+<blockquote><p>"Well, what we called a computer in 1977 was really a kind of electric abacus, but..."<p>
 "Oh, now, don't underestimate the abacus," said Reg. "In skilled hands it's a very sophisticated calculating device. Furthermore it requires no power, can be made with any materials you have to hand, and never goes bing in the middle of an important piece of work."<p>
 "So an electric one would be particularly pointless," said Richard.<p>
 "True enough," conceded Reg.<p>
