@@ -44,4 +44,17 @@ majority of internet users, and discuss some of the issues around those
 limits.</p>
 
 <h2>Cross-domain Communication</h2>
-<p>
+
+<p>Should Facebook be allowed to communicate with Flickr via your browser, with
+your credentials?  Of course not - that leads to all kinds of security
+problems, like cross-site scripting attacks. What if spammers hacked Flickr and
+used an XSS attack to friend themselves to everyone?<p>
+
+<p>On the other hand, it is pretty neat that I can piggyback off google's copy
+of jquery. Or put disqus comments on my blog without worrying about installing
+anything to my server. Or put any one of a million "badges" on my website that
+display live data about me or my friends off my favorite websites.</p>
+
+<p>The browser has a serious schizophrenia about websites telling the client to pull
+data from other sites; it's allowed if it's the source of an iframe, image, css
+or javascript file, but it's not 
