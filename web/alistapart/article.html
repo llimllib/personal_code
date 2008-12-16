@@ -10,4 +10,21 @@ standards. Many of these limitations have workarounds, often quite baroque,
 that let us do what we want at the cost of infuriating complexity.</p>
 <p>After the Great Web Standards Stagnation of 2000-2007, a new era of browser 
 competition and the arrival of HTML 5 have finally begun to introduce new 
-capabilities for web developers. 
+capabilities for web developers, so it's worth surveying what can and cannot 
+now be done with pure Javascript and DOM in the browser.</p>
+<h2>Local Storage</h2>
+<p>Storing data locally on a user's computer has been handled up to now by one 
+official mechanism, HTTP cookies, and a host of other hacks. Each mechanism has 
+major drawbacks, including but not limited to security leaks, small amounts of 
+storage, inefficient bandwidth use, and excessive server load.</p>
+<p>HTML 5 promises to do away with these hacks, offering simple, standard, 
+local data storage in a couple of flavors. <var>localStorage</var> offers 
+persistent data per website, and <var>
+<p>Surprisingly, <a
+href="http://msdn.microsoft.com/en-us/library/cc197062(VS.85).aspx">Internet 
+Explorer</a> is among those leading the way in support for HTML 5 storage, with 
+IE 8 beta 2 supporting both methods proposed in the spec. Webkit nightlies do 
+too, although neither Safari nor Chrome does. Firefox 3 supports an older 
+version of the spec.
+
+<h2>Graphics</h2>
