@@ -22,7 +22,7 @@ run the conversion for me. Despite the fact that it's in perl (ha ha), it runs
 very nicely, and converted my repository with no loss of change history into a
 subversion dump file.<p>
 The only issue I had with vss2svn is that once you've converted all your code
-into subversion, your *.*proj and *.sln files still have subversion crap inside
+into subversion, your *.*proj and *.sln files still have sourcesafe crap inside
 them, and when you try to open them, Visual Studio complains. Furthermore,
 there are lots of *.scc files, which are sourcesafe lock files, scattered
 throughout your projects.<p>
