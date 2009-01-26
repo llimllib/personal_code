@@ -111,3 +111,11 @@ first_denomination x
     | x == 5 = 50
 
 fd = fromList [(1,1), (2,5), (3,10), (4,25), (5,50)]
+
+-- / doesn't do integer divion, so you need to use `div`. Haskell will give
+-- you unreadable error messages otherwise </grumble grumble>
+fast_expt_iter b n = _fast_expt_iter b n 1
+  where _fast_expt_iter b 0 a = a
+        _fast_expt_iter b n a
+          | n `mod` 2 == 0 = _fast_expt_iter (b*b) (n `div` 2) a
+          | otherwise      = _fast_expt_iter b (n-1) (a*b)
