@@ -111,3 +111,12 @@ first_denomination x
     | x == 5 = 50
 
 fd = fromList [(1,1), (2,5), (3,10), (4,25), (5,50)]
+
+-- exercise 1.16
+fast_expt_iter :: Int -> Int -> Int
+fast_expt_iter b n = _fast_expt_iter b n 1
+  where
+    _fast_expt_iter b 0 a = a
+    _fast_expt_iter b n a
+      | n `mod` 2 == 0 = _fast_expt_iter (b*b) (n `div` 2) a
+      | otherwise      = _fast_expt_iter b (n-1) (a*b) 
