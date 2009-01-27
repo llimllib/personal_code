@@ -115,8 +115,25 @@ fd = fromList [(1,1), (2,5), (3,10), (4,25), (5,50)]
 -- exercise 1.16
 -- / doesn't do integer divion, so you need to use `div`. Haskell will give
 -- you unreadable error messages otherwise </grumble grumble>
+fast_expt_iter :: (Num a, Integral b) => a -> b -> a
 fast_expt_iter b n = _fast_expt_iter b n 1
   where _fast_expt_iter b 0 a = a
         _fast_expt_iter b n a
           | n `mod` 2 == 0 = _fast_expt_iter (b*b) (n `div` 2) a
           | otherwise      = _fast_expt_iter b (n-1) (a*b)
+
+-- exercise 1.17
+double :: (Num a) => a -> a
+double x = x + x
+
+-- in python I'd say if x % 2 != 0: raise SomeException; what's the haskell way?
+halve :: (Integral a) => a -> a
+halve x = x `div` 2
+
+m :: (Num a, Integral b) => a -> b -> a
+m a 0 = 0
+m a b = m_ a b 0
+  where m_ a 0 acc = acc
+        m_ a b acc
+          | b `mod` 2 == 0 = m_ (double a) (halve b) acc
+          | otherwise      = m_ a (b - 1) (acc + a)
