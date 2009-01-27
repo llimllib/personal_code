@@ -112,6 +112,7 @@ first_denomination x
 
 fd = fromList [(1,1), (2,5), (3,10), (4,25), (5,50)]
 
+-- exercise 1.16
 -- / doesn't do integer divion, so you need to use `div`. Haskell will give
 -- you unreadable error messages otherwise </grumble grumble>
 fast_expt_iter b n = _fast_expt_iter b n 1
