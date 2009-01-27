@@ -122,7 +122,6 @@ fast_expt_iter b n = _fast_expt_iter b n 1
           | n `mod` 2 == 0 = _fast_expt_iter (b*b) (n `div` 2) a
           | otherwise      = _fast_expt_iter b (n-1) (a*b)
 
--- exercise 1.17
 double :: (Num a) => a -> a
 double x = x + x
 
@@ -130,10 +129,17 @@ double x = x + x
 halve :: (Integral a) => a -> a
 halve x = x `div` 2
 
+-- exercise 1.17
 m :: (Num a, Integral b) => a -> b -> a
 m a 0 = 0
-m a b = m_ a b 0
-  where m_ a 0 acc = acc
-        m_ a b acc
-          | b `mod` 2 == 0 = m_ (double a) (halve b) acc
-          | otherwise      = m_ a (b - 1) (acc + a)
+m a b | b `mod` 2 == 0 = double $ m a (halve b)
+      | otherwise      = a + m a (b - 1)
+
+--exercise 1.18
+m' :: (Num a, Integral b) => a -> b -> a
+m' a 0 = 0
+m' a b = m_ a b 0
+   where m_ a 0 acc = acc
+         m_ a b acc
+           | b `mod` 2 == 0 = m_ (double a) (halve b) acc
+           | otherwise      = m_ a (b - 1) (acc + a)
