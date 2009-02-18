@@ -1,0 +1,18 @@
+<html><head><title>Test Page</title>
+<script src="jquery-1.3.1.min.js"></script>
+<script src="pixastic.core.js"></script>
+<script src="pixastic.jquery.js"></script>
+<script src="actions/histogram.js"></script>
+<script>
+$(document).ready(function(){
+});
+function hist() {
+  $("#testimg").pixastic("histogram",
+		{average:false,paint:true,color:"rgb(255,0,0)",returnValue:{}});
+}
+</script>
+</head>
+<body>
+<img id="testimg" src="test.jpg" onload="hist()">
+</body>
+</html>
