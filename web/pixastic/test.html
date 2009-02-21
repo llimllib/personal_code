@@ -4,15 +4,27 @@
 <script src="pixastic.jquery.js"></script>
 <script src="actions/histogram.js"></script>
 <script>
+var histogram = {};
 $(document).ready(function(){
 });
+function drawhist() {
+  var ctx = $("#histcanvas")[0].getContext("2d");
+  var max = Math.max.apply(null, histogram.values);
+  jQuery.each(histogram.values, function(i,x) {
+    var pct = (histogram.values[i] / max) * 100;
+    ctx.fillStyle = "rgb(0,0,0);";
+    ctx.fillRect(i, 100, 1, -Math.round(pct));
+  });
+}
 function hist() {
   $("#testimg").pixastic("histogram",
-		{average:false,paint:true,color:"rgb(255,0,0)",returnValue:{}});
+		{average:false,paint:false,color:"rgb(255,0,0)",returnValue:histogram});
+  drawhist();
 }
 </script>
 </head>
 <body>
 <img id="testimg" src="test.jpg" onload="hist()">
+<canvas id="histcanvas" width="255" height="100"></canvas>
 </body>
 </html>
