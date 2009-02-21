@@ -5,6 +5,22 @@
  */
 
 Pixastic.Actions.histogram = {
+  //TODO: we should probably make an object out of the data from prepareData and put this
+  //      function in there and eliminate the data param. Have a version that does without
+  //      the w and h too.
+  visitRect : function(data, w, h, visitor) {
+    var w4 = w*4;
+    var y = h;
+    do {
+      var offsetY = (y-1)*w4;
+      var x = w;
+      do {
+        var offset = offsetY + (x*4-4);
+        visitor(data[offset], data[offset+1], data[offset+2], data[offset+3]);
+      } while (--x);
+    } while (--y);
+  },
+
 	process : function(params) {
 
 		var average = !!(params.options.average);
@@ -29,22 +45,10 @@ Pixastic.Actions.histogram = {
 			}
 
 			var rect = params.options.rect;
-			var w = rect.width;
-			var h = rect.height;
-			var w4 = w*4;
-			var y = h;
-			do {
-				var offsetY = (y-1)*w4;
-				var x = w;
-				do {
-					var offset = offsetY + (x*4-4);
-					var brightness = average ? 
-						Math.round((data[offset]+data[offset+1]+data[offset+2])/3)
-						: Math.round(data[offset]*0.3 + data[offset+1]*0.59 + data[offset+2]*0.11);
-					values[brightness]++;
-
-				} while (--x);
-			} while (--y);
+      this.visitRect(data, rect.width, rect.height, function(r, g, b, a) {
+        var brightness = average ?  Math.round((r+g+b)/3) : Math.round(r*0.3 + g*0.59 + b*0.11);
+        values[brightness]++;
+      });
 
 			if (paint) {
 				var maxValue = 0;
