@@ -4,7 +4,7 @@
  * MIT License [http://www.opensource.org/licenses/mit-license.php]
  */
 
-Pixastic.Actions.histogram = {
+Pixastic.Actions.colorhistogram = {
   //TODO: we should probably make an object out of the data from prepareData and put this
   //      function in there and eliminate the data param. Have a version that does without
   //      the w and h too.
@@ -25,58 +25,39 @@ Pixastic.Actions.histogram = {
     arr = [];
     for (var i=0; i<256; i++) { arr[i] = default_value; }
     return arr
-  }
+  },
 
 	process : function(params) {
-		var average = !!(params.options.average);
-		var paint = !!(params.options.paint);
-		var color = params.options.color || "rgba(255,255,255,0.5)";
 		var values = [];
 		if (typeof params.options.returnValue != "object") {
-			params.options.returnValue = {values:[]};
+			params.options.returnValue = {rvals:[], gvals:[], bvals:[]};
 		}
 		var returnValue = params.options.returnValue;
 		if (typeof returnValue.values != "array") {
-			returnValue.values = [];
+			returnValue.rvals = [];
+			returnValue.gvals = [];
+			returnValue.bvals = [];
 		}
-		values = returnValue.values;
 
 		if (Pixastic.Client.hasCanvasImageData()) {
 			var data = Pixastic.prepareData(params);
 			params.useData = false;
 
       //TODO these aren't returned yet
-      var r = array256(0);
-      var g = array256(0);
-      var b = array256(0);
+      var rvals = this.array256(0);
+      var gvals = this.array256(0);
+      var bvals = this.array256(0);
 
 			var rect = params.options.rect;
       this.visitRect(data, rect.width, rect.height, function(r, g, b, a) {
-        //TODO: user should be able to pass in weights
-        var brightness = average ?  Math.round((r+g+b)/3) : Math.round(r*0.3 + g*0.59 + b*0.11);
-        values[brightness]++;
+        rvals[r]++;
+        gvals[g]++;
+        bvals[b]++;
       });
 
-			if (paint) {
-				var maxValue = 0;
-				for (var i=0;i<256;i++) {
-					if (values[i] > maxValue) {
-						maxValue = values[i];
-					}
-				}
-				var heightScale = params.height / maxValue;
-				var widthScale = params.width / 256;
-				var ctx = params.canvas.getContext("2d");
-				ctx.fillStyle = color;
-				for (var i=0;i<256;i++) {
-					ctx.fillRect(
-						i * widthScale, params.height - heightScale * values[i],
-						widthScale, values[i] * heightScale
-					);
-				}
-			}
-
-			returnValue.values = values;
+			returnValue.rvals = rvals;
+			returnValue.gvals = gvals;
+			returnValue.bvals = bvals;
 
 			return true;
 		}

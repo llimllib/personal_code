@@ -3,28 +3,66 @@
 <script src="pixastic.core.js"></script>
 <script src="pixastic.jquery.js"></script>
 <script src="actions/histogram.js"></script>
+<script src="actions/colorhistogram.js"></script>
 <script>
 var histogram = {};
+var colorhistogram = {};
+
 $(document).ready(function(){
 });
+
 function drawhist() {
   var ctx = $("#histcanvas")[0].getContext("2d");
+  ctx.fillStyle = "rgb(0,0,0);";
+
   var max = Math.max.apply(null, histogram.values);
+
   jQuery.each(histogram.values, function(i,x) {
     var pct = (histogram.values[i] / max) * 100;
-    ctx.fillStyle = "rgb(0,0,0);";
     ctx.fillRect(i, 100, 1, -Math.round(pct));
   });
 }
+
+function drawcolorhist() {
+  var ctx = $("#colorhistcanvas")[0].getContext("2d");
+  var rmax = Math.max.apply(null, colorhistogram.rvals);
+  var bmax = Math.max.apply(null, colorhistogram.bvals);
+  var gmax = Math.max.apply(null, colorhistogram.gvals);
+
+  function colorbars(max, vals, color) {
+    ctx.fillStyle = color;
+    jQuery.each(vals, function(i,x) {
+      var pct = (vals[i] / max) * 100;
+      ctx.fillRect(i, 100, 1, -Math.round(pct));
+    });
+  }
+
+  colorbars(rmax, colorhistogram.rvals, "rgb(255,0,0)");
+  colorbars(gmax, colorhistogram.gvals, "rgb(0,255,0)");
+  colorbars(bmax, colorhistogram.bvals, "rgb(0,0,255)");
+}
+
+
 function hist() {
   $("#testimg").pixastic("histogram",
 		{average:false,paint:false,color:"rgb(255,0,0)",returnValue:histogram});
   drawhist();
 }
+function colorhist() {
+  $("#testimg2").pixastic("colorhistogram",
+		{color:"rgb(255,0,0)",returnValue:colorhistogram});
+  drawcolorhist();
+}
 </script>
 </head>
 <body>
-<img id="testimg" src="test.jpg" onload="hist()">
-<canvas id="histcanvas" width="255" height="100"></canvas>
+<div>
+  <img id="testimg" src="test.jpg" onload="hist()">
+  <canvas id="histcanvas" width="255" height="100"></canvas>
+</div>
+<div>
+  <img id="testimg2" src="test.jpg" onload="colorhist()">
+  <canvas id="colorhistcanvas" width="255" height="100"></canvas>
+</div>
 </body>
 </html>
