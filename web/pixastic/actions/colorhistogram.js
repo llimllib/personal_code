@@ -43,7 +43,6 @@ Pixastic.Actions.colorhistogram = {
 			var data = Pixastic.prepareData(params);
 			params.useData = false;
 
-      //TODO these aren't returned yet
       var rvals = this.array256(0);
       var gvals = this.array256(0);
       var bvals = this.array256(0);
