@@ -1,0 +1,13 @@
+The Digital Image Part 1: The Histogram
+#kewyrods KJ
+#date KJ
+<p>As I have recently taken up <a 
+href="http://flickr.com/user/llimllib">photography</a>, I've been using Adobe 
+Lightroom to manage and manipulate my photographs. While I've learned some 
+things about how to manipulate its settings to make my photographs better, I 
+realized that I don't understand in a deep way how manipulation of digital 
+photographs works.
+<p>As such, I present here part 1 of a series examining in detail the analysis 
+and manipulation of digital photographs. In it, we'll look at how an image can 
+be thought of as a matrix of pixels, is represented as an array in javascript, 
+what a histogram is, and we'll build a javscript function 
