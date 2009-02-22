@@ -42,12 +42,12 @@ function drawcolorhist() {
   colorbars(bmax, colorhistogram.bvals, "rgb(0,0,255)");
 }
 
-
 function hist() {
   $("#testimg").pixastic("histogram",
 		{average:false,paint:false,color:"rgb(255,0,0)",returnValue:histogram});
   drawhist();
 }
+
 function colorhist() {
   $("#testimg2").pixastic("colorhistogram",
 		{color:"rgb(255,0,0)",returnValue:colorhistogram});
