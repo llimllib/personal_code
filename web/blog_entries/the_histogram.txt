@@ -10,4 +10,18 @@ photographs works.
 <p>As such, I present here part 1 of a series examining in detail the analysis 
 and manipulation of digital photographs. In it, we'll look at how an image can 
 be thought of as a matrix of pixels, is represented as an array in javascript, 
-what a histogram is, and we'll build a javscript function 
+what a histogram is, and we'll look at how to build a couple histograms.
+
+<p><h2>Wait… Javascript?</h2>
+<p>You read that right, we'll be using javascript for this project. Thanks to
+Jacob Seidelin's <a href="http://www.pixastic.com/">Pixastic</a> library, all 
+the heavy lifting and DOM manipulation is taken care of for us, and I can write 
+some demos that will work, live, in your browser<sup><a 
+href="#foot1">1</a></sup>.
+<p>Although it may be helpful to understand javascript to get the most out of 
+this article, nearly all of it should be readable without any prior knowledge.
+
+<p><h2>The Image</h2>
+<p>The most intuitive, simple way to think of a digital image is as a table of 
+pixels. Each pixel has a color, and displaying the image is as simple as 
+putting the table up on the screen in proper sequence.
