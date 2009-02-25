@@ -126,9 +126,9 @@ function colorbars(max, vals, color, y) {
   });
 }
 
-colorbars(rmax, colorhistogram.rvals, "rgb(255,0,0)", 100);
-colorbars(gmax, colorhistogram.gvals, "rgb(0,255,0)", 200);
-colorbars(bmax, colorhistogram.bvals, "rgb(0,0,255)", 300);</code>
+colorbars(rmax, rvals, "rgb(255,0,0)", 100);
+colorbars(gmax, gvals, "rgb(0,255,0)", 200);
+colorbars(bmax, bvals, "rgb(0,0,255)", 300);</code>
 
 <p><a name="foot1"><sup>1</sup>: As opposed to pigment, which is governed by <a 
 href="http://en.wikipedia.org/wiki/Subtractive_color">subtractive color</a></a>
