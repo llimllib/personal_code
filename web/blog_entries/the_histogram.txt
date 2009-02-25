@@ -1,0 +1,18 @@
+Image Porgramming in Javascript: The Histogram
+#time
+<p>Recently, I've spent a lot of my time <a 
+href="http://flickr.com/photos/llimllib">taking photographs</a>. When I get 
+home from taking pictures, I immediately pop open Lightroom to import the 
+images, pick out my favorites, and publish them.
+<p>As a programmer, though, it was bothering me that I don't know 
+<em>exactly</em> what's happening behind the scenes with my images. What's 
+<em>really</em> happening when I adjust the "saturation" slider for a photo?  
+How does sharpening work, and what does its "amount" mean?
+<p>Sure, I could go read books to find out, but there's only way to really know 
+what's happening: write a program to do it. This article represents part 1 of 
+what will hopefully become a series on programming the digital image with 
+javascript.
+<h2>Wait, Javascript?</h2>
+<p>Sure thing! With the recent adoption of the &lt;canvas&gt; element into 
+modern browsers, javascript now has the capability to load, display, and 
+manipulate images at the pixel level. 
