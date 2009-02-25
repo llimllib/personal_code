@@ -15,7 +15,7 @@ href="https://www.drproject.org/">the</a> <a
 href="http://www.haskell.org/ghc/">case</a>, it was difficult for me to even 
 find these examples of academic source code. In all four cases, it has proven 
 very useful to programmers outside of academia.</p>
-<h1>Life, not Math</h1>
+<h2>Life, not Math</h2>
 <p>The fact is, computer science research is more like biology research than it 
 is like mathematical research. For an experiment to be valid, it should be 
 repeatable. If you're publishing analyses of programs without publishing the 
@@ -27,7 +27,7 @@ is irrelevant if the program you are analyzing has a subtle bug embedded in it.
 We, computer scientists, should expect and demand that published, well tested 
 code be made available with every paper which claims to analyze or draw 
 conclusions from a program of any significant size.</p>
-<h1>A Problem of Environment?</h1>
+<h2>A Problem of Environment?</h2>
 <p>At the moment, there is just no easy way to do this. Where the open 
 source world has <a href="http://sf.net">SourceForge</a> and other project 
 hosting sites, there is no similar environment where academic papers can live 
@@ -46,7 +46,7 @@ invaluable resource for academic and industry programmers alike. Collaboration
 and open code sharing would lead to much more rapid progress in the field, and 
 hopefully encourage the greater rigor that other fields require of their 
 practitioners.</p>
-<h1>Two Different Worlds</h1>
+<h2>Two Different Worlds</h2>
 <p>Right now, academics and open-source programmers live largely in two 
 separate, often parallel, worlds. Where they do collide, as they do in the 
 Haskell language, there is often extremely interesting work being produced.  
@@ -60,7 +60,7 @@ open source programmer, look for some work in a field that interests you, and
 email the author if he hasn't released his code. Ask him an interesting 
 question, and convince him that his code would be useful. If you're both, tell 
 the world your ideas for how we can all work better together.</p>
-<h1>Update:</h1>
+<h2>Update:</h2>
 <p>I've been contacted already by two scientists who care about the 
 reproducibility of programs. First, <a 
 href="http://www.cs.mu.oz.au/~gavinb/index.php">Gavin Baker</a> wrote to tell 
@@ -79,6 +79,6 @@ data sets from <a href="http://software.seg.org/">the website</a> for the
 Society of Exploration Geophysicists.</p>
 <p>Good to hear that these scientists are out there making stuff happen, while 
 I sit here on my duff.</p>
-<h1>Update 2</h1>
+<h2>Update 2</h2>
 <p>Made a correction to the update. (Made it clear that the Madagascar project 
 did not set up the SEG site - sloppy writing on my part).</p>
