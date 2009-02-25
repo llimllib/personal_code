@@ -11,8 +11,8 @@ var colorhistogram = {};
 $(document).ready(function(){
 });
 
-function drawhist() {
-  var ctx = $("#histcanvas")[0].getContext("2d");
+function drawhist(canvasname) {
+  var ctx = $(canvasname)[0].getContext("2d");
   ctx.fillStyle = "rgb(0,0,0);";
 
   var max = Math.max.apply(null, histogram.values);
@@ -45,7 +45,10 @@ function drawcolorhist() {
 function hist() {
   $("#testimg").pixastic("histogram",
 		{average:false,paint:false,color:"rgb(255,0,0)",returnValue:histogram});
-  drawhist();
+  drawhist("#perhistcanvas");
+  $("#testimg").pixastic("histogram",
+        {average:true,paint:false,color:"rgb(255,0,0)",returnValue:histogram});
+  drawhist("#avghistcanvas");
 }
 
 function colorhist() {
@@ -61,8 +64,11 @@ function colorhist() {
   <canvas id="colorhistcanvas" width="255" height="300"></canvas>
 </div>
 <div>
-  <img id="testimg" src="jump.jpg" onload="hist()">
-  <canvas id="histcanvas" width="255" height="100"></canvas>
+  <img id="testimg" src="jump.jpg" onload="hist()" style="float:left">
+  <p>Average:<br>
+  <canvas id="avghistcanvas" width="255" height="100"></canvas><br>
+  <p>Perceptual Average:<br>
+  <canvas id="perhistcanvas" width="255" height="100"></canvas>
 </div>
 </body>
 </html>
