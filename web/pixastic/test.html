@@ -29,17 +29,17 @@ function drawcolorhist() {
   var bmax = Math.max.apply(null, colorhistogram.bvals);
   var gmax = Math.max.apply(null, colorhistogram.gvals);
 
-  function colorbars(max, vals, color) {
+  function colorbars(max, vals, color, y) {
     ctx.fillStyle = color;
     jQuery.each(vals, function(i,x) {
       var pct = (vals[i] / max) * 100;
-      ctx.fillRect(i, 100, 1, -Math.round(pct));
+      ctx.fillRect(i, y, 1, -Math.round(pct));
     });
   }
 
-  colorbars(rmax, colorhistogram.rvals, "rgb(255,0,0)");
-  colorbars(gmax, colorhistogram.gvals, "rgb(0,255,0)");
-  colorbars(bmax, colorhistogram.bvals, "rgb(0,0,255)");
+  colorbars(rmax, colorhistogram.rvals, "rgb(255,0,0)", 100);
+  colorbars(gmax, colorhistogram.gvals, "rgb(0,255,0)", 200);
+  colorbars(bmax, colorhistogram.bvals, "rgb(0,0,255)", 300);
 }
 
 function hist() {
@@ -57,12 +57,12 @@ function colorhist() {
 </head>
 <body>
 <div>
-  <img id="testimg" src="test.jpg" onload="hist()">
-  <canvas id="histcanvas" width="255" height="100"></canvas>
+  <img id="testimg2" src="jump.jpg" onload="colorhist()">
+  <canvas id="colorhistcanvas" width="255" height="300"></canvas>
 </div>
 <div>
-  <img id="testimg2" src="test.jpg" onload="colorhist()">
-  <canvas id="colorhistcanvas" width="255" height="100"></canvas>
+  <img id="testimg" src="jump.jpg" onload="hist()">
+  <canvas id="histcanvas" width="255" height="100"></canvas>
 </div>
 </body>
 </html>

@@ -8,7 +8,7 @@ Pixastic.Actions.colorhistogram = {
   //TODO: we should probably make an object out of the data from prepareData and put this
   //      function in there and eliminate the data param. Have a version that does without
   //      the w and h too.
-  visitRect : function(data, w, h, visitor) {
+  each_pixel : function(data, w, h, visitor) {
     var w4 = w*4;
     var y = h;
     do {
@@ -27,41 +27,41 @@ Pixastic.Actions.colorhistogram = {
     return arr
   },
 
-	process : function(params) {
-		var values = [];
-		if (typeof params.options.returnValue != "object") {
-			params.options.returnValue = {rvals:[], gvals:[], bvals:[]};
-		}
-		var returnValue = params.options.returnValue;
-		if (typeof returnValue.values != "array") {
-			returnValue.rvals = [];
-			returnValue.gvals = [];
-			returnValue.bvals = [];
-		}
+  process : function(params) {
+    var values = [];
+    if (typeof params.options.returnValue != "object") {
+      params.options.returnValue = {rvals:[], gvals:[], bvals:[]};
+    }
+    var returnValue = params.options.returnValue;
+    if (typeof returnValue.values != "array") {
+      returnValue.rvals = [];
+      returnValue.gvals = [];
+      returnValue.bvals = [];
+    }
 
-		if (Pixastic.Client.hasCanvasImageData()) {
-			var data = Pixastic.prepareData(params);
-			params.useData = false;
+    if (Pixastic.Client.hasCanvasImageData()) {
+      var data = Pixastic.prepareData(params);
+      params.useData = false;
 
       var rvals = this.array256(0);
       var gvals = this.array256(0);
       var bvals = this.array256(0);
 
-			var rect = params.options.rect;
-      this.visitRect(data, rect.width, rect.height, function(r, g, b, a) {
+      var rect = params.options.rect;
+      this.each_pixel(data, rect.width, rect.height, function(r, g, b, _) {
         rvals[r]++;
         gvals[g]++;
         bvals[b]++;
       });
 
-			returnValue.rvals = rvals;
-			returnValue.gvals = gvals;
-			returnValue.bvals = bvals;
+      returnValue.rvals = rvals;
+      returnValue.gvals = gvals;
+      returnValue.bvals = bvals;
 
-			return true;
-		}
-	},
-	checkSupport : function() {
-		return Pixastic.Client.hasCanvasImageData();
-	}
+      return true;
+    }
+  },
+  checkSupport : function() {
+    return Pixastic.Client.hasCanvasImageData();
+  }
 }
