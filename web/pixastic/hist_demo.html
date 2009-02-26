@@ -64,10 +64,12 @@ function colorhist() {
   <canvas id="colorhistcanvas" width="255" height="300"></canvas>
 </div>
 <div>
-  <img id="testimg" src="jump.jpg" onload="hist()" style="float:left">
+  <div style="margin-right: 5px; float:left;">
+    <img id="testimg" src="jump.jpg" onload="hist()">
+  </div>
   <p>Average:<br>
   <canvas id="avghistcanvas" width="255" height="100"></canvas><br>
-  <p>Perceptual Average:<br>
+  <p>Weighted Average:<br>
   <canvas id="perhistcanvas" width="255" height="100"></canvas>
 </div>
 </body>

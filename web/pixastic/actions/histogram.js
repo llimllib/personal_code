@@ -46,7 +46,7 @@ Pixastic.Actions.histogram = {
 
 			var rect = params.options.rect;
       this.visitRect(data, rect.width, rect.height, function(r, g, b, a) {
-        //TODO: user should be able to pass in weights
+        //TODO: user should be able to pass in weights?
         var brightness = average ?  Math.round((r+g+b)/3) : Math.round(r*0.3 + g*0.59 + b*0.11);
         values[brightness]++;
       });

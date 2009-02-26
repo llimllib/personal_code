@@ -1,4 +1,4 @@
-Image Programming in Javascript: The Histogram
+Image Programming in JavaScript: The Histogram
 <p>Recently, I've spent a lot of my time <a 
 href="http://flickr.com/photos/llimllib">taking photographs</a>. When I get 
 home from taking pictures, I immediately pop open Lightroom to import the 
@@ -12,20 +12,21 @@ photo?  How does sharpening work, and what does its "amount" mean?
 <p>Sure, I could go read books to find out, but there's only way to really know 
 what's happening: write a program to do it. This article represents part 1 of 
 what will hopefully become a series on programming the digital image with 
-javascript.
+JavaScript.
 
-<h2>Wait, Javascript?</h2>
+<h2>Wait, JavaScript?</h2>
 
 <p>Sure thing! With the recent adoption of the &lt;canvas&gt; element into 
-modern browsers, javascript has gained the ability to load, display, and 
+modern browsers, JavaScript has gained the ability to load, display, and 
 manipulate images at the pixel level. In addition, Jacob Seidelin recently 
 created the <a href="http://www.pixastic.com/">Pixastic</a> library to do the 
 heavy DOM and canvas lifting for us.
 
-<p>As much as possible, I'll be using Pixastic as a base because javascript is 
+<p>As much as possible, I'll be using Pixastic as a base because JavaScript is 
 a reasonably enjoyable programming language, the framework is new and simple, 
-and I can show neat demos right in the browser. I'll also be using jQuery, 
-because it makes writing cross-browser javascript much more pleasant.
+and I can show neat demos right in the browser. I'll also be using <a 
+href="http://jquery.com">jQuery</a>, because it makes writing cross-browser 
+JavaScript much more pleasant.
 
 <h2>Jumping Right In: What Is a Digital Image?</h2>
 
@@ -73,8 +74,8 @@ one for each of the colors in a pixel.
 lot of midrange reds and greens, and not a whole lot of dark colors, though 
 there is a spike at pure black. I won't go over what a histogram means for your 
 photography; you should read what <a 
-href="http://www.luminous-landscape.com/tutorials/understanding-series/understanding-histograms.shtml">photography 
-experts</a> have to say about that.
+href="http://www.luminous-landscape.com/tutorials/understanding-series/understanding-histograms.shtml">better 
+photographers</a> have to say about that.
 
 <h2>On To The Source</h2>
 
@@ -84,7 +85,7 @@ drawing the histogram. To gather the data, we'll initialize three arrays with
 through each pixel in the image and add one in the appropriate histogram slot 
 for each color. That's it!
 
-<p><code lang="javascript">function array256(default_value) {
+<p><code lang="JavaScript">function array256(default_value) {
   arr = [];
   for (var i=0; i<256; i++) { arr[i] = default_value; }
   return arr;
@@ -112,7 +113,7 @@ canvas is only 100 pixels tall, and any histogram value could be greater than
 100, we'll scale each value as the percentage of the maximum value in the 
 histogram.
 
-<p><code lang="javascript">//get a reference to the canvas to draw on
+<p><code lang="JavaScript">//get a reference to the canvas to draw on
 var ctx = $("#colorhistcanvas")[0].getContext("2d");
 var rmax = Math.max.apply(null, rvals);
 var bmax = Math.max.apply(null, bvals);
@@ -130,5 +131,41 @@ colorbars(rmax, rvals, "rgb(255,0,0)", 100);
 colorbars(gmax, gvals, "rgb(0,255,0)", 200);
 colorbars(bmax, bvals, "rgb(0,0,255)", 300);</code>
 
-<p><a name="foot1"><sup>1</sup>: As opposed to pigment, which is governed by <a 
-href="http://en.wikipedia.org/wiki/Subtractive_color">subtractive color</a></a>
+<p>You can see this code in action at the top half of the <a 
+href="http://billmill.org/static/pixastic/hist_demo.html">histogram demo 
+page</a>.
+
+<h2>A Mean Feat</h2>
+
+<p>Most of the time, the three histograms are more information than we need.  
+Instead, we want to be able to tell at a glance whether we've overexposed or 
+underexposed the shot, and a single histogram can give us all the information 
+we need. In this case, all we need is an average of the three histograms.
+
+<p>The obvious way to average the three histograms is to weight them all 
+equally, sum each value, and divide by three. You'll see this histogram under 
+"Average" on the <a 
+href="http://billmill.org/static/pixastic/hist_demo.html">demo page</a>.
+
+<p>However, not all colors appear equally bright to human perception, so the 
+equally weighted histogram is commonly replaced with one more heavily weighted 
+towards green, which appears brightest. A commonly given figure is 30% red, 59% 
+green, and 11% blue, the results of which you can see in the "weighted average" 
+histogram on the <a 
+href="http://billmill.org/static/pixastic/hist_demo.html">demo</a>.
+
+<h2>Conclusion</h2>
+
+<p>Hopefully, this article lays a solid base on which I can begin building up 
+to show more complex and interesting image transformations with JavaScript and 
+pixastic. It should have given you a basic understanding of how an image is 
+formed and how to build several different types of histograms from it. For a 
+more detailed understanding, I encourage you to study the code given in the 
+demo page; it should all be pretty simple.
+
+<p>If you have any questions or comments, please feel free to drop me <a 
+href="mailto:bill.mill@gmail.com">an email</a>.
+
+<p><h5><a name="foot1"><sup>1</sup>: As opposed to pigment, which is governed 
+by <a href="http://en.wikipedia.org/wiki/Subtractive_color">subtractive 
+color</a></a></h5>
