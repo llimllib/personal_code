@@ -7,17 +7,21 @@ Pixastic.Actions.weighted_desaturate = {
       var x = w;
       do {
         var offset = offsetY + (x-1)*4;
-        visit(offset, data[offset], data[offset+1], data[offset+2], data[offset+3]);
+        newval = visit(data[offset], data[offset+1], data[offset+2], data[offset+3]);
+        data[offset]   = newval[0] || data[offset];
+        data[offset+1] = newval[1] || data[offset+1];
+        data[offset+2] = newval[2] || data[offset+2];
+        data[offset+3] = newval[3] || data[offset+3];
       } while (--x);
     } while (--y);
-  }
+  },
 
 	process : function(params) {
     var rweight = params.options.r;
     var gweight = params.options.g;
     var bweight = params.options.b;
 
-    var scale = 100 / (r + g + b);
+    var scale = 1 / (rweight + gweight + bweight);
     rweight *= scale;
     gweight *= scale;
     bweight *= scale;
@@ -27,13 +31,14 @@ Pixastic.Actions.weighted_desaturate = {
 			var rect = params.options.rect;
 			var w = rect.width;
 			var h = rect.height;
-      each_pixel(data, w, h, function(i, r, g, b, a) {
+      this.each_pixel(data, w, h, function(r, g, b, a) {
         brightness = r * rweight + g * gweight + b * bweight;
-        data[i] = data[i+1] = data[i+2] = brightness;
-      }
+        return [brightness, brightness, brightness];
+      });
 			return true;
     }
-  }
+  },
+
 	checkSupport : function() {
 		return Pixastic.Client.hasCanvasImageData();
 	}
