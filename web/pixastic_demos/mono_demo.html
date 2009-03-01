@@ -1,0 +1,68 @@
+<html><head><title>Test Page</title>
+<script src="pixastic/jquery-1.3.1.min.js"></script>
+<script src="pixastic/pixastic.core.js"></script>
+<script src="pixastic/pixastic.jquery.js"></script>
+<script src="pixastic/actions/weighted_desaturate.js"></script>
+<script src="pixastic/actions/colorhistogram.js"></script>
+<script>
+$(document).ready(function(){
+});
+
+function redonly() {
+  $("#redimg").pixastic("weighted_desaturate", {r:100, g:0, b:0});
+}
+function greenonly() {
+  $("#greenimg").pixastic("weighted_desaturate", {r:100, g:100, b:0});
+}
+function blueonly() {
+  $("#blueimg").pixastic("weighted_desaturate", {r:0, g:0, b:100});
+}
+
+function enablecontrols() {
+  $("#desatbtn").attr("disabled", false)
+}
+
+var need_reset = false;
+
+function useract() {
+  if (need_reset) reset();
+  need_reset = true;
+
+  $("#userimg").pixastic("weighted_desaturate",
+    {r: parseFloat($("#r").val()),
+     g: parseFloat($("#g").val()),
+     b: parseFloat($("#b").val())
+  });
+}
+
+function reset() {
+  need_reset = false;
+
+	var old = document.getElementById("userimg");
+	var img = new Image();
+	img.src = old.src||old.imgsrc;
+	img.id = "userimg";
+	img.setAttribute("style", old.getAttribute("style"));
+	old.parentNode.replaceChild(img, old);
+}
+</script>
+</head>
+<body>
+<div>
+  From left to right, original, red channel, blue channel, green channel:<br>
+  <img id="baseline" src="jump.jpg">
+  <img id="redimg" src="jump.jpg" onload="redonly()">
+  <img id="greenimg" src="jump.jpg" onload="greenonly()">
+  <img id="blueimg" src="jump.jpg" onload="blueonly()">
+</div>
+<div>
+  <img id="userimg" src="jump.jpg" onload="enablecontrols()"
+  style="float:left; margin-right: 5px;">
+  r: <input type="text" id="r"> <br>
+  g: <input type="text" id="g"> <br>
+  b: <input type="text" id="b"> <br>
+  <input id="desatbtn" type="submit" onclick="useract()" value="desaturate" disabled>
+  <input type="reset" onclick="reset()">
+</div>
+</body>
+</html>
