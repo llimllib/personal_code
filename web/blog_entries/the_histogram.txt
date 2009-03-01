@@ -1,4 +1,6 @@
 Image Programming in JavaScript: The Histogram
+#time 02-26-09 01:14
+#keywords image, javascript, programming
 <p>Recently, I've spent a lot of my time <a 
 href="http://flickr.com/photos/llimllib">taking photographs</a>. When I get 
 home from taking pictures, I immediately pop open Lightroom to import the 
@@ -33,8 +35,8 @@ JavaScript much more pleasant.
 <p>In the spirit of <acronym title="You Ain't Gonna Need It">YAGNI</acronym>, 
 we're going to accept a superficial answer to this question, at least for now.  
 We're basically going to pretend that all images are in color and represented 
-in the same colorspace in the same way. Our provisional definition of a digital 
-image is this:
+in the same color space in the same way. Our provisional definition of a 
+digital image is this:
 
 <p><blockquote>A <em>Digital Image</em> is a sequence of pixels, each of which 
 is represented by a 3-byte tuple (red, green, blue). The value of each element 
@@ -49,7 +51,7 @@ represent a pure red pixel, the tuple (0, 255, 0) a pure green one, and (0, 0,
 
 <p>Since we're mixing light<sup><a href="#foot1">1</a></sup>, the colors are <a 
 href="http://en.wikipedia.org/wiki/Additive_color">additive</a>, which means 
-that they get lighter when mixed. Thus (255, 255, 0) represents a mixiture of 
+that they get lighter when mixed. Thus (255, 255, 0) represents a mixture of 
 red and green which produces yellow, (0, 255, 255) represents green and blue 
 combined to form magenta, and so on as you can see in the chart to the right.
 
@@ -64,28 +66,38 @@ you shine all three colors on it, you get white. Thus, it makes sense that (0,
 
 <p>There are of course lots of colors in between the pure ones I talked about 
 above, represented by the all the possible color tuples with values between 0 
-and 255. The <em>histogram</em> of an image is simply a chart showing the 
-frequency of each value from 0 to 255. Here is an image with three histograms, 
-one for each of the colors in a pixel.
+and 255. In order to understand an image at a glance, it's often helpful to see 
+just how often each color occurs in that image. The histogram allows us to do 
+just that.
+
+<p>To the right is the basic schematic of a histogram. The y-axis represents 
+the frequency of each color value, which are represented on the x-axis. The 
+left side of the histogram shows darker colors and the right side lighter.
+
+<p><blockquote>The <em>histogram</em> of an image is a chart of how often each 
+possible value or range of values for a color occurs in that image</blockquote>
+
+<p>Below is an image next to the histograms for its red, green, and blue 
+values, respectively.
 
 <p><img src="/static/images/jump_hist.png">
 
 <p>We can see that there are a lot of light blues, presumably in the the sky, a 
 lot of midrange reds and greens, and not a whole lot of dark colors, though 
 there is a spike at pure black. I won't go over what a histogram means for your 
-photography; you should read what <a 
+photography; you should read what a <a 
 href="http://www.luminous-landscape.com/tutorials/understanding-series/understanding-histograms.shtml">better 
-photographers</a> have to say about that.
+photographer</a> has to say about that.
 
 <h2>On To The Source</h2>
 
 <p>There are 2 major steps in creating histograms: gathering the data and 
 drawing the histogram. To gather the data, we'll initialize three arrays with 
-255 slots, one array slot for each of the color values. Then we'll just loop 
+256 slots, one array slot for each of the color values. Then we'll just loop 
 through each pixel in the image and add one in the appropriate histogram slot 
 for each color. That's it!
 
-<p><code lang="JavaScript">function array256(default_value) {
+<p><code lang="javascript">function array256(default_value) {
   arr = [];
   for (var i=0; i<256; i++) { arr[i] = default_value; }
   return arr;
@@ -108,12 +120,12 @@ of this code is three arrays, each containing the count of each possible value
 of one color in the image.
 
 <p>To simplify the display of these histograms, we'll draw on a &lt;canvas&gt; 
-255 pixels wide, so that each possible color occupies one pixel. Since our 
+256 pixels wide, so that each possible color occupies one pixel. Since our 
 canvas is only 100 pixels tall, and any histogram value could be greater than 
 100, we'll scale each value as the percentage of the maximum value in the 
 histogram.
 
-<p><code lang="JavaScript">//get a reference to the canvas to draw on
+<p><code lang="javascript">//get a reference to the canvas to draw on
 var ctx = $("#colorhistcanvas")[0].getContext("2d");
 var rmax = Math.max.apply(null, rvals);
 var bmax = Math.max.apply(null, bvals);
@@ -133,7 +145,9 @@ colorbars(bmax, bvals, "rgb(0,0,255)", 300);</code>
 
 <p>You can see this code in action at the top half of the <a 
 href="http://billmill.org/static/pixastic/hist_demo.html">histogram demo 
-page</a>.
+page</a>. Note that the histograms on that page are being generated by
+JavaScript when you load the page, so you can look into the source and
+see exactly how the process works.
 
 <h2>A Mean Feat</h2>
 
@@ -147,10 +161,10 @@ equally, sum each value, and divide by three. You'll see this histogram under
 "Average" on the <a 
 href="http://billmill.org/static/pixastic/hist_demo.html">demo page</a>.
 
-<p>However, not all colors appear equally bright to human perception, so the 
-equally weighted histogram is commonly replaced with one more heavily weighted 
-towards green, which appears brightest. A commonly given figure is 30% red, 59% 
-green, and 11% blue, the results of which you can see in the "weighted average" 
+<p>However, not all colors appear equally bright to human eyes, so the equally 
+weighted histogram is commonly replaced with one more heavily weighted towards 
+green, which appears brightest. A commonly given figure is 30% red, 59% green, 
+and 11% blue, the results of which you can see in the "weighted average" 
 histogram on the <a 
 href="http://billmill.org/static/pixastic/hist_demo.html">demo</a>.
 
@@ -158,7 +172,7 @@ href="http://billmill.org/static/pixastic/hist_demo.html">demo</a>.
 
 <p>Hopefully, this article lays a solid base on which I can begin building up 
 to show more complex and interesting image transformations with JavaScript and 
-pixastic. It should have given you a basic understanding of how an image is 
+Pixastic. It should have given you a basic understanding of how an image is 
 formed and how to build several different types of histograms from it. For a 
 more detailed understanding, I encourage you to study the code given in the 
 demo page; it should all be pretty simple.
