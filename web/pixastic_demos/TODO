@@ -1,3 +1,2 @@
-* pixastic has no tests?
-* get the Visitor function in somewhere reasonable
-* where is the documentation? Handwritten?
+* warn when user doesn't have capable browser
+* fix mystery windows bug? histogram.values is null for tofocsend?
