@@ -19,3 +19,14 @@ a green, and a blue component, and how each of those has a value between 0 and
 <p>What I didn't tell you then was that it's often useful to consider just the
 red components of pixels in an image, just the green components, or just the
 blue components.
+
+<p><blockquote>A <em>channel</em> of an image I<sub>1</sub> is an image
+I<sub>2</sub> composed entirely of one component of I<sub>1</sub></blockquote>
+
+<p>So when we talk about the <em>red channel</em> of an image, we're talking
+about the image that results from simply zeroing out the green and blue
+components for each of its pixels. It's best to see it in action:
+
+<p><img src="rgb_jump.jpg">
+
+<p>
