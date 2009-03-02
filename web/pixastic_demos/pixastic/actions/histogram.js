@@ -22,7 +22,6 @@ Pixastic.Actions.histogram = {
   },
 
 	process : function(params) {
-
 		var average = !!(params.options.average);
 		var paint = !!(params.options.paint);
 		var color = params.options.color || "rgba(255,255,255,0.5)";
