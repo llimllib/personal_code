@@ -1,3 +1,21 @@
 Image Programming in JavaScript: Desaturate
 #time 02-26-09 01:14
 #keywords image, javascript, programming
+
+<p>In <a href="the_histogram.html">part 1</a> of this series, we looked at how
+each pixel of an image is composed of three parts; red, green and blue, and
+showed how to make histograms to give a summary of each. Towards the end, we
+mentioned that they can be averaged in different ways to create a single
+histogram; in this article we're going to look at that in more depth here and
+show how it applies.
+
+<h2>But First! Some Terminology</h2>
+
+<p>In the last article, I danced around defining this word because I didn't
+want to overwhelm you. We talked about how each pixel is composed of a red,
+a green, and a blue component, and how each of those has a value between 0 and
+255.
+
+<p>What I didn't tell you then was that it's often useful to consider just the
+red components of pixels in an image, just the green components, or just the
+blue components.
