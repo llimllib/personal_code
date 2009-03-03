@@ -1,5 +1,5 @@
 Image Programming in JavaScript: Desaturate
-#time 02-26-09 01:14
+#time 03-03-09 01:14
 #keywords image, javascript, programming
 
 <p>In <a href="the_histogram.html">part 1</a> of this series, we looked at how
@@ -25,8 +25,47 @@ I<sub>2</sub> composed entirely of one component of I<sub>1</sub></blockquote>
 
 <p>So when we talk about the <em>red channel</em> of an image, we're talking
 about the image that results from simply zeroing out the green and blue
-components for each of its pixels. It's best to see it in action:
+components of each of its pixels. It's best to see it in action:
 
-<p><img src="rgb_jump.jpg">
+<p><img src="static/images/jump_r_g_b.jpg">
 
-<p>
+<p>In fact, the first image is simply the sum of the last three.
+
+<h2>Show Me The Goods</h2>
+
+<p>Perhaps the best way to understand the concept of channels is to see how I
+generated the image above. I've put up a <a
+href="/static/pixastic_demos/mono_demo.html">demo</a> where you can see these
+images generated with javascript; here's the important bits of the code, with
+the fiddly bits stripped out:
+
+<p><code lang="javascript">
+function desaturate(rweight, gweight, bweight) {
+  //normalize the color weights
+  var scale = 1 / (rweight + gweight + bweight);
+  rweight *= scale;
+  gweight *= scale;
+  bweight *= scale;
+
+  each_pixel(image_data, function(r, g, b) {
+    var brightness = r * rweight + g * gweight + b * bweight;
+
+    //replace the r, g, and b values of the pixel with "brightness"
+    return [brightness, brightness, brightness];
+  });
+}
+
+//red channel only:
+desaturate(1, 0, 0);
+
+//green channel only:
+desaturate(0, 1, 0);
+
+//blue channel only:
+desaturate(0, 0, 1);</code>
+
+<p>First we convert the color weights into percentages, then we multiply
+each component of each pixel times its weight to arrive at a new value for the
+pixel to take. Since any pixel with the same value for each color channel 
+will be gray, white, or black, the result is the three black and white images
+we see above.
