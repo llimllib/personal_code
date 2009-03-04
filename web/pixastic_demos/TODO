@@ -1,2 +1,4 @@
 * warn when user doesn't have capable browser
 * fix mystery windows bug? histogram.values is null for tofocsend?
+* My article doesn't define *desaturate*!
+* better explanation of how/why [x,x,x] == grey

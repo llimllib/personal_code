@@ -1,4 +1,4 @@
-Image Programming in JavaScript: Desaturate
+Image Programming in JavaScript: Converting to Monochrome
 #time 03-03-09 01:14
 #keywords image, javascript, programming
 
@@ -29,7 +29,41 @@ components of each of its pixels. It's best to see it in action:
 
 <p><img src="static/images/jump_r_g_b.jpg">
 
-<p>In fact, the first image is simply the sum of the last three.
+<p>The first image above can be entirely reconstructed from the last three 
+monochrome images, using the first for the red channel, the second for the 
+green channel, and the third for the blue. To see what I mean by this, let's 
+step back and examine monochrome images a bit.
+
+<h2>Monochrome in Black and White</h2>
+
+<p>Conceptually, we can consider each pixel of a monochrome image to consist of 
+just one byte of information, instead of three bytes for red, green and blue as 
+in a color image. This byte represents the brightness of a pixel, where 0 is 
+black (no brightness) and 255 is white (no brightness). The values in between 
+represent the grays, from the dark low numbers to the light high colors.
+
+<p>Since we know now that a digital image can be composed of values other than 
+(r, g, b), let's update our working definition of a digital image:
+
+<p><blockquote>A <em>Digital Image</em> is a sequence of pixels, each of which 
+is composed of one or more <em>channels</em>. The value of each channel 
+represents the strength of that channel in that pixel.</blockquote>
+
+<p>So a monochrome image consists of only one channel, that representing the 
+brightness of each pixel.
+
+<h2>The Real World Intrudes</h2>
+
+<p>We've got a nice new mental model of a monochrome image, but the real world, 
+as it tends to do, will complicate matters. We're working with color images on 
+the javascript canvas, which means that each pixel needs to be composed of red, 
+green, and blue. In order to display a monochrome image on a javascript canvas, 
+we'll need to convert each pixel from one channel, brightness to three.
+
+<p>A convenient property of RGB images makes this transformation easy: any 
+pixel made up of equal parts red, green, and blue will be gray. Therefore, to 
+convert an image from monochrome to RGB, we simply use the brightness channel 
+of each pixel in the monochrome image as all three channels in the RGB image.
 
 <h2>Show Me The Goods</h2>
 
@@ -66,6 +100,7 @@ desaturate(0, 0, 1);</code>
 
 <p>First we convert the color weights into percentages, then we multiply
 each component of each pixel times its weight to arrive at a new value for the
-pixel to take. Since any pixel with the same value for each color channel 
-will be gray, white, or black, the result is the three black and white images
-we see above.
+pixel to take. Since any pixel with the same value for each color channel will 
+be gray, white, or black, the result is the three monochrome images we see
+above.
+
