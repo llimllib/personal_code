@@ -5,10 +5,9 @@ rounds = {1: 32, 2: 16, 3:8, 4:4, 5:2, 6:1};
 
 function handleClick(that) {
   var atts = that.attr("class");
-  var game = atts.match(/game-(\d+)/)[1];
+  var game = parseFloat(atts.match(/game-(\d+)/)[1]);
   var round = parseFloat(atts.match(/round-(\d+)/)[1]);
   var nextround = (round + 1).toString();
-  game = parseFloat(game);
   var game_parity = game % 2 == 0 ? 1 : 0;
   var nextgame = (game - game_parity + rounds[round]).toString();
   var firstorlast = game_parity ? ":last" : ":first";
@@ -17,6 +16,7 @@ function handleClick(that) {
     $(".game-" + nextgame + firstorlast).html(that.html());
   });
 }
+
 $(document).ready(function() {
   $(".round-1").each(function(i) { handleClick($(this)); });
   $(".round-2").each(function(i) { handleClick($(this)); });
@@ -36,4 +36,10 @@ tr { padding-bottom: 10px; }
 <tr><td class="top"><a href="#" class="round-1 game-2">team 3</a></td>      <td class="middle">&nbsp;</td>                                                  <td class="top">&nbsp;<a href="#" class="round-3 game-49"></a></td>                            </tr>
 <tr><td class="middle">&nbsp;</td>                                          <td class="bottom">&nbsp;<a href="#" class="round-2 game-33"></a></td> <td class="middle">&nbsp;</td>                       </tr>
 <tr><td class="bottom"><a href="#" class="round-1 game-2">team 4</a></td>   <td class="none"></td>                                                          <td class="middle">&nbsp;</td>                  </tr>
+<tr><td class="top"><a href="#" class="round-1 game-3">team 5</a></td>      <td class="none"></td>                                                          <td class="middle"></td>      </tr>
+<tr><td class="middle">&nbsp;</td>                                          <td class="top">&nbsp;<a href="#" class="round-2 game-34"></a></td>    <td class="middle"></td>                       </tr>
+<tr><td class="bottom"><a href="#" class="round-1 game-3">team 6</a></td>   <td class="middle">&nbsp;</td>                                                  <td class="middle"></td>                       </tr>
+<tr><td class="top"><a href="#" class="round-1 game-4">team 7</a></td>      <td class="middle">&nbsp;</td>                                                  <td class="bottom">&nbsp;<a href="#" class="round-3 game-50"></a></td>                            </tr>
+<tr><td class="middle">&nbsp;</td>                                          <td class="bottom">&nbsp;<a href="#" class="round-2 game-34"></a></td> <td class="none">&nbsp;</td>                       </tr>
+<tr><td class="bottom"><a href="#" class="round-1 game-4">team 8</a></td>   <td class="none"></td>                                                          <td class="none">&nbsp;</td>                  </tr>
 </body>
