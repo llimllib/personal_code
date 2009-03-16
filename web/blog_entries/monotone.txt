@@ -1,40 +1,43 @@
 Image Programming in JavaScript: Converting to Monochrome
-#time 03-03-09 01:14
+#time 03-05-09 12:18
 #keywords image, javascript, programming
 
 <p>In <a href="the_histogram.html">part 1</a> of this series, we looked at how
 each pixel of an image is composed of three parts; red, green and blue, and
-showed how to make histograms to give a summary of each. Towards the end, we
-mentioned that they can be averaged in different ways to create a single
-histogram; in this article we're going to look at that in more depth here and
-show how it applies.
+showed how to make histograms to give a summary of each. Towards the end, I 
+showed that they can be averaged in different ways to create a single
+histogram. In this article, we're going to look at the idea of mixing colors
+in more depth and show how we can use it to turn color images into monochrome 
+in a variety of ways.
 
-<h2>But First! Some Terminology</h2>
+<h2>Some Terminology</h2>
 
-<p>In the last article, I danced around defining this word because I didn't
-want to overwhelm you. We talked about how each pixel is composed of a red,
+<p>In the last article, we talked about how each pixel is composed of a red,
 a green, and a blue component, and how each of those has a value between 0 and
-255.
-
-<p>What I didn't tell you then was that it's often useful to consider just the
-red components of pixels in an image, just the green components, or just the
-blue components.
+255. What I didn't tell you then was that it's often useful to consider just 
+the red components of pixels in an image, just the green components, or just
+the blue components.
 
 <p><blockquote>A <em>channel</em> of an image I<sub>1</sub> is an image
 I<sub>2</sub> composed entirely of one component of I<sub>1</sub></blockquote>
 
 <p>So when we talk about the <em>red channel</em> of an image, we're talking
-about the image that results from simply zeroing out the green and blue
+about the image that results from simply dropping the green and blue
 components of each of its pixels. It's best to see it in action:
 
 <p><img src="static/images/jump_r_g_b.jpg">
 
 <p>The first image above can be entirely reconstructed from the last three 
 monochrome images, using the first for the red channel, the second for the 
-green channel, and the third for the blue. To see what I mean by this, let's 
-step back and examine monochrome images a bit.
+green channel, and the third for the blue. By the end of the article, we'll 
+show the code for the <a href="/static/pixastic/demos/mono_demo.html">demo</a> 
+that was used to convert the color image above into each of the monochrome 
+ones.
 
 <h2>Monochrome in Black and White</h2>
+
+<p>Before we discuss converting a color image into monochrome, it will help to 
+understand a bit more about what we mean by monochrome.
 
 <p>Conceptually, we can consider each pixel of a monochrome image to consist of 
 just one byte of information, instead of three bytes for red, green and blue as 
@@ -42,8 +45,8 @@ in a color image. This byte represents the brightness of a pixel, where 0 is
 black (no brightness) and 255 is white (no brightness). The values in between 
 represent the grays, from the dark low numbers to the light high colors.
 
-<p>Since we know now that a digital image can be composed of values other than 
-(r, g, b), let's update our working definition of a digital image:
+<p>Since monochrome images are composed of values other than (r, g, b), let's 
+update the working definition of a digital image that we used last time:
 
 <p><blockquote>A <em>Digital Image</em> is a sequence of pixels, each of which 
 is composed of one or more <em>channels</em>. The value of each channel 
@@ -70,27 +73,29 @@ of each pixel in the monochrome image as all three channels in the RGB image.
 
 <p>Reversing the process, to create monochrome images from color ones, offers 
 us a few more options. For every pixel, our task is to take three channels and 
-condense them into one.
-
-<p>The obvious thing to do is to simply average them; and indeed, this is 
-exactly what happens by default in most photo editing programs when you convert 
-an image to monochrome.
+condense them into one. The obvious thing to do is to simply average them; and 
+indeed, this is exactly what happens by default in most photo editing programs 
+when you convert an image to monochrome.
 
 <p>There's no reason that we need to limit ourselves to that transformation, 
-though, and indeed it often produces flat, uninteresting pictures. Instead, we 
-can mix the channels any way we want to produce the most interesting result 
-possible.
+though. We should consider other options because the average often produces 
+flat, uninteresting pictures. Instead, we can mix the channels any way we want 
+to produce the most interesting result possible.
 
-<p>I've put up a <a href="/static/pixastic_demos/mono_demo.html">demo</a> where 
+<p>I've put up a <a href="/static/pixastic/demos/mono_demo.html">demo</a> where 
 you can play with the mixture of colors. Simply put numbers into each of the 
 three inputs at the bottom of the page and hit "desaturate" to create a 
 monochrome image where the channels have been weighted proportionally to the 
 numbers you've entered. The histogram below the desaturate button will show you 
 the effects of your mix.
 
+<p>Play with the values to find the result you find most pleasing, and notice
+how different the images that result from each mix can be.
+
 <h2>Show Me The Goods</h2>
 
-<p>Here's the important parts of the code in the demo, with the fiddly bits 
+<p>Here's the important parts of the code in the <a 
+href="/static/pixastic/demos/mono_demo.html">demo</a>, with the fiddly bits 
 stripped out:
 
 <p><code lang="javascript">
@@ -130,15 +135,16 @@ value for all three channels to render the image in grayscale.
 
 <p>In this article, we've extended our definition of an image to include images 
 with channels other than just red, green, and blue. We learned how to convert 
-monochrome images into RGB, and looked at a couple different ways to convert 
-back from RGB to monochrome. Finally, we looked at code to do the conversions 
-we'd spent the whole article talking about.
+monochrome images for display in RGB, and looked at a couple different ways to 
+convert back from RGB to monochrome. Finally, we looked at code to do the 
+conversions we'd spent the whole article talking about.
 
 <p>Hopefully you have a pretty good grasp on what an image on a &lt;canvas&gt; 
-is by now. If you want to download the code and play with it, go <a 
+is by now. If you want to download the code for the demos I've shown so far and 
+play with it, go ahead and <a 
 href="http://github.com/llimllib/pixastic/tree/master">check it out</a> at 
 github.
 
-<p>Any comments, criticims, or thoughts on what you'd like to see me write 
+<p>Any comments, criticisms, or thoughts on what you'd like to see me write 
 about, you can let me know by sending me an <a 
 href="mailto:bill.mill@gmail.com">email</a>.
