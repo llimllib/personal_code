@@ -1,4 +1,3 @@
-from BeautifulSoup import BeautifulSoup
 import re
 
 bracket = eval(file("teams.dat").read())
