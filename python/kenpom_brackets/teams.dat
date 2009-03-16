@@ -53,12 +53,12 @@
 15: "Binghamton"},
 
 "South":
-1: "North Carolina",
+{1: "North Carolina",
 16: "Radford",
 8: "LSU",
 9: "Butler",
 5: "Illinois",
-12: "West. Kentucky"
+12: "West. Kentucky",
 4: "Gonzaga",
 13: "Akron",
 6: "Arizona St.",
@@ -69,3 +69,4 @@
 10: "Michigan",
 2: "Oklahoma",
 15: "Morgan St"}
+}
