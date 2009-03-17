@@ -168,6 +168,7 @@ for round in (2,3,4,5):
 out = file("out.html", "w")
 #TODO: if you change a team in an early game, update later games
 #TODO: stop the damn file from jumping around
+#TODO: why does the table try to fit on the screen? Stop that!
 out.write("""
 <html><head>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
