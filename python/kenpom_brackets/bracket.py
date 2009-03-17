@@ -1,4 +1,5 @@
 import re
+from math import ceil
 
 bracket = eval(file("teams.dat").read())
 
@@ -44,9 +45,6 @@ class Game(object):
     self.child = None
     self.rows = [None, None]
 
-  def addchild(self, game):
-    self.child = game
-
   def __repr__(self):
     return "%s vs %s round %s game %s region %s rows %s" % (self.team1[0],
       self.team2[0], self.round, self.gameno, self.region, self.rows)
@@ -61,30 +59,33 @@ for region in merged:
     games.append(Game(region, 1, game, seed, t1, oppseed, t2))
     game += 1
 
-round = 2
-i = iter(games)
-roundg = []
-for g in i:
-  g2 = i.next()
-  gg = Game(g.region, 2, game)
-  roundg.append(gg)
-  g.child = g2.child = gg
-  game += 1
-games.extend(roundg)
+for round in (2,3,4,5,6):
+  i = iter(g for g in games if g.round==round-1)
+  roundg = []
+  for g in i:
+    g2 = i.next()
+    gg = Game(g.region, round, game)
+    roundg.append(gg)
+    g.child = g2.child = gg
+    game += 1
+  games.extend(roundg)
 
 class Table(object):
   def __init__(self):
     self.data = [[]]
 
   def __getitem__(self, (x,y)):
-    return self.data[x][y]
+    return self.data[y][x]
 
   def __setitem__(self, (x,y), val):
     try:
-      self.data[x][y] = val
+      self.data[y][x] = val
     except IndexError:
       self.resize(x, y)
       self.data[y][x] = val
+    except:
+      print y, x
+      raise
 
   #we're fine with *horrible* efficiency in this particular app
   def resize(self, x, y):
@@ -112,7 +113,7 @@ class Table(object):
               elt.team1[2], elt.team1[3]))
           else:
             o.append('''<td class="top">&nbsp;<a href="#"
-                            class="round=%s game-%s"></a>''' % (
+                            class="round-%s game-%s"></a>''' % (
               elt.round, elt.gameno))
         elif elt.rows[1] == y:
           if x in (0,1):
@@ -123,7 +124,7 @@ class Table(object):
               elt.team2[2], elt.team2[3]))
           else:
             o.append('''<td class="bottom">&nbsp;<a href="#"
-                            class="round=%s game-%s"></a>''' % (
+                            class="round-%s game-%s"></a>''' % (
               elt.round, elt.gameno))
         else:
           o.append('<td class="middle">&nbsp;</td>')
@@ -141,11 +142,15 @@ for g in [x for x in games if x.round==1 and x.region=="Midwest"]:
   g.child.rows[1 if g.child.rows[0] else 0] = row+1
   row += 3
 
-for g in [x for x in games if x.round==2 and x.region=="Midwest"]:
-  for i in range(0, g.rows[1] - g.rows[0] + 1):
-    t[2, g.rows[0] + i] = g
+for round in (2,3,4,5):
+  for g in [x for x in games if x.round==round and x.region=="Midwest"]:
+    miny, maxy = g.rows
+    for i in range(0, maxy - miny + 1):
+      t[round, miny + i] = g
+      g.child.rows[1 if g.child.rows[0] else 0] = miny + int(ceil(float(maxy-miny)/2))
 
 out = file("out.html", "w")
+#TODO: if you change a team in an early game, update later games
 out.write("""
 <html><head>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
@@ -166,8 +171,9 @@ function handleClick(that) {
 }
 
 $(document).ready(function() {
-  $(".round-1").each(function(i) { handleClick($(this)); });
-  $(".round-2").each(function(i) { handleClick($(this)); });
+  for (i=0; i < 6; i++) {
+    $(".round-" + i).each(function(i) { handleClick($(this)); });
+  }
 });
 </script>
 <style>
