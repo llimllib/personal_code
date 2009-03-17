@@ -83,6 +83,10 @@ c = Game("final four", 6, game+2)
 games.append(c)
 ff1.child = ff2.child = c
 
+winner = Game("final four", 7, game+3)
+games.append(winner)
+c.child = winner
+
 class Table(object):
   def __init__(self):
     self.data = [[]]
@@ -127,7 +131,7 @@ class Table(object):
               elt.seed1, elt.round, elt.gameno, elt.team1[0], elt.team1[1],
               elt.team1[2], elt.team1[3]))
           else:
-            o.append('''<td class="top" width="200">&nbsp;<span
+            o.append('''<td class="top" width="180">&nbsp;<span
                             class="round-%s game-%s"></span>''' % (
               elt.round, elt.gameno))
         elif elt.rows[1] == y:
@@ -167,6 +171,10 @@ ff1.rows = [12, 36]
 for i in range(12,37): t[5, i] = ff1
 ff2.rows = [60, 84]
 for i in range(60,85): t[5, i] = ff2
+c.rows = [25, 72]
+for i in range(25,73): t[6, i] = c
+winner.rows = [50, 51]
+t[7, 50] = winner
 
 out = file("out.html", "w")
 #TODO: if you change a team in an early game, update later games
@@ -192,51 +200,69 @@ function handleClick(that) {
       var nextgame = 61;
       var firstorlast = game == 59 ? ":first" : ":last";
     }
-    else {
+    else if (game==58 || game==60) {
       var nextgame = 62;
       var firstorlast = game == 58 ? ":first" : ":last";
     }
+    else if (game == 61 || game == 62) {
+      var nextgame = 63;
+      var firstorlast = game == 61 ? ":first" : ":last";
+    }
+    else if (game == 63) {
+      var nextgame = 64;
+      var firstorlast = ":first";
+    }
   }
   that.click(function() {
-    console.log("game, round, nextgame, (g-r[r-1]) ", game, round, nextgame, game - rounds[round-1], firstorlast);
+    //console.log("game, round, nextgame, (g-r[r-1]) ", game, round, nextgame, game - rounds[round-1], firstorlast);
     $(".game-" + nextgame + firstorlast).html(that.html());
   });
 }
 
 function randomize() {
-  for (i=0; i < 6; i++) {
-    $("td.top > span.round-" + i).each(function(i) {
+  for (i=0; i < 7; i++) {
+    $("td.top > span.round-" + i).each(function(_) {
       var that = $(this);
       var atts = that.attr("class");
       var game = atts.match(/game-\d+/)[0];
       var opp = $("." + game + ":last");
       function parsepoints(obj) {
-        p = obj.html().match(/\((.\d+), (\d+\.\d+), (\d+\.\d+)/);
-        return [parseFloat(p[1]), parseFloat(p[2]), parseFloat(p[3])]
+        p = obj.html().match(/(.*?) \((.\d+), (\d+\.\d+), (\d+\.\d+)/);
+        return [p[1], parseFloat(p[2]), parseFloat(p[3]), parseFloat(p[4])]
       }
       var topp = parsepoints(that);
       var oppp = parsepoints(opp);
-      var s = (topp[0] * 10000) - (oppp[0] * 10000);
-      if (s > 500) that.click();
-      else if (s < -500) opp.click();
-      else {
-        var d = Math.abs(s) / 500;
-        //if d is less than random, the underdog wins
-        if (d < Math.random())
-          oppp[0] < topp[0] ? opp.click() : that.click();
-        //otherwise, the favorite wins
-        else
-          oppp[0] > topp[0] ? opp.click() : that.click();
+      var a = topp[1];
+      var b = oppp[1];
+      if (i > 1) {
+        //favor the favorites a bit more
+        if (a > b) a = Math.sqrt(a);
+        else       b = Math.sqrt(b);
       }
+      //use the log5 formula
+      var log5 = (a - a * b) / (a + b - 2 * a * b);
+
+      if (log5 > .5) {
+        that.css("color", "#00" + parseInt(255 * log5).toString(16) + "00");
+        opp.css("color", "#" + parseInt(255 * log5).toString(16) + "0000");
+      } else {
+        opp.css("color", "#00" + parseInt(255 * log5).toString(16) + "00");
+        that.css("color", "#" + parseInt(255 * log5).toString(16) + "0000");
+      }
+
+      console.log(topp[0] + " vs " + oppp[0] + " %: ", log5);
+
+      log5 > Math.random() ? that.click() : opp.click();
     });
   }
 }
 
 $(document).ready(function() {
-  for (i=0; i < 6; i++) {
+  for (i=0; i < 8; i++) {
     $(".round-" + i).each(function(i) { handleClick($(this)); });
   }
   $("td.top > span.round-1").each(function(i) { $(this).parent().css("height", "30px").css("vertical-align", "bottom"); })
+  $("#randomize").click(function() { randomize(); });
 });
 </script>
 <style>
@@ -247,7 +273,7 @@ tr { padding-bottom: 10px; font-size: 12px; }
 span { cursor: pointer; }
 </style>
 </head>
-<body><table cellspacing=0 width=1200 style='table-layout:fixed'>
+<body><input type="submit" id="randomize" value="randomize"><table cellspacing=0 width=1200 style='table-layout:fixed'>
 """)
 out.write(t.tableize())
 out.write("</table></body></html>")
