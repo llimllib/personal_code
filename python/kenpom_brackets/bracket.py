@@ -59,7 +59,7 @@ for region in merged:
     games.append(Game(region, 1, game, seed, t1, oppseed, t2))
     game += 1
 
-for round in (2,3,4,5,6):
+for round in (2,3,4):
   i = iter(g for g in games if g.round==round-1)
   roundg = []
   for g in i:
@@ -69,6 +69,19 @@ for round in (2,3,4,5,6):
     g.child = g2.child = gg
     game += 1
   games.extend(roundg)
+
+rf1, rf2 = [g for g in games if g.round==4 and g.region in ("Midwest", "West")]
+rf3, rf4 = [g for g in games if g.round==4 and g.region in ("East", "South")]
+ff1 = Game("final four", 5, game)
+ff2 = Game("final four", 5, game+1)
+games.append(ff1)
+games.append(ff2)
+rf1.child = rf2.child = ff1
+rf3.child = rf4.child = ff2
+
+c = Game("final four", 6, game+2)
+games.append(c)
+ff1.child = ff2.child = c
 
 class Table(object):
   def __init__(self):
@@ -143,17 +156,22 @@ for region in ("Midwest", "West", "East", "South"):
     g.child.rows[1 if g.child.rows[0] else 0] = row+1
     row += 3
 
-  for round in (2,3,4,5):
+  for round in (2,3,4):
     for g in [x for x in games if x.round==round and x.region==region]:
       miny, maxy = g.rows
       for i in range(0, maxy - miny + 1):
         t[round, miny + i] = g
         g.child.rows[1 if g.child.rows[0] else 0] = miny + int(ceil(float(maxy-miny)/2))
 
+ff1.rows = [12, 36]
+for i in range(12,37): t[5, i] = ff1
+ff2.rows = [60, 84]
+for i in range(60,85): t[5, i] = ff2
+
 out = file("out.html", "w")
 #TODO: if you change a team in an early game, update later games
 #TODO: color teams based on pythagorean diff
-#TODO: write a randomizer
+#TODO: better randomizer
 out.write("""
 <html><head>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
@@ -165,19 +183,60 @@ function handleClick(that) {
   var game = parseFloat(atts.match(/game-(\d+)/)[1]);
   var round = parseFloat(atts.match(/round-(\d+)/)[1]);
   var game_parity = (game - rounds[round-1]) % 2 == 0 ? 1 : 0;
-  var nextgame = (Math.ceil((game-rounds[round-1])/2) + rounds[round]).toString();
-  var firstorlast = game_parity ? ":last" : ":first";
+  if (round < 4) {
+    var nextgame = (Math.ceil((game-rounds[round-1])/2) + rounds[round]).toString();
+    var firstorlast = game_parity ? ":last" : ":first";
+  }
+  else {
+    if (game == 59 || game==57) {
+      var nextgame = 61;
+      var firstorlast = game == 59 ? ":first" : ":last";
+    }
+    else {
+      var nextgame = 62;
+      var firstorlast = game == 58 ? ":first" : ":last";
+    }
+  }
   that.click(function() {
-    //console.log("game, round, nextgame, (g-r[r-1]) ", game, round, nextgame, game - rounds[round-1], firstorlast);
+    console.log("game, round, nextgame, (g-r[r-1]) ", game, round, nextgame, game - rounds[round-1], firstorlast);
     $(".game-" + nextgame + firstorlast).html(that.html());
   });
+}
+
+function randomize() {
+  for (i=0; i < 6; i++) {
+    $("td.top > span.round-" + i).each(function(i) {
+      var that = $(this);
+      var atts = that.attr("class");
+      var game = atts.match(/game-\d+/)[0];
+      var opp = $("." + game + ":last");
+      function parsepoints(obj) {
+        p = obj.html().match(/\((.\d+), (\d+\.\d+), (\d+\.\d+)/);
+        return [parseFloat(p[1]), parseFloat(p[2]), parseFloat(p[3])]
+      }
+      var topp = parsepoints(that);
+      var oppp = parsepoints(opp);
+      var s = (topp[0] * 10000) - (oppp[0] * 10000);
+      if (s > 500) that.click();
+      else if (s < -500) opp.click();
+      else {
+        var d = Math.abs(s) / 500;
+        //if d is less than random, the underdog wins
+        if (d < Math.random())
+          oppp[0] < topp[0] ? opp.click() : that.click();
+        //otherwise, the favorite wins
+        else
+          oppp[0] > topp[0] ? opp.click() : that.click();
+      }
+    });
+  }
 }
 
 $(document).ready(function() {
   for (i=0; i < 6; i++) {
     $(".round-" + i).each(function(i) { handleClick($(this)); });
   }
-  jQuery("td.top > span.round-1").each(function(i) { jQuery(this).parent().css("height", "30px").css("vertical-align", "bottom"); })
+  $("td.top > span.round-1").each(function(i) { $(this).parent().css("height", "30px").css("vertical-align", "bottom"); })
 });
 </script>
 <style>
