@@ -152,6 +152,8 @@ for region in ("Midwest", "West", "East", "South"):
 
 out = file("out.html", "w")
 #TODO: if you change a team in an early game, update later games
+#TODO: color teams based on pythagorean diff
+#TODO: write a randomizer
 out.write("""
 <html><head>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
