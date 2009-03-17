@@ -106,13 +106,13 @@ class Table(object):
         if not elt: o.append('<td class="none"></td>')
         elif elt.rows[0] == y: 
           if x in (0,1):
-            o.append('''<td class="top">%s. <a href="#"
+            o.append('''<td class="top" width="270px">%s. <a href="#"
                             class="round-%s game-%s"
                             >%s (%s, %s, %s)</a></td>''' % (
               elt.seed1, elt.round, elt.gameno, elt.team1[0], elt.team1[1],
               elt.team1[2], elt.team1[3]))
           else:
-            o.append('''<td class="top">&nbsp;<a href="#"
+            o.append('''<td class="top" width="270px">&nbsp;<a href="#"
                             class="round-%s game-%s"></a>''' % (
               elt.round, elt.gameno))
         elif elt.rows[1] == y:
@@ -131,9 +131,9 @@ class Table(object):
     return '\n'.join(o)
     
 t = Table()
+
+#insert the games into the table in the proper spot
 row = 0
-MIDDLE = "middle"
-BOTTOM = "bottom"
 for g in [x for x in games if x.round==1 and x.region=="Midwest"]:
   g.rows = [row, row+2]
   t[1, row] = g
@@ -149,8 +149,25 @@ for round in (2,3,4,5):
       t[round, miny + i] = g
       g.child.rows[1 if g.child.rows[0] else 0] = miny + int(ceil(float(maxy-miny)/2))
 
+
+for g in [x for x in games if x.round==1 and x.region=="West"]:
+  g.rows = [row, row+2]
+  t[1, row] = g
+  t[1, row+1] = g
+  t[1, row+2] = g
+  g.child.rows[1 if g.child.rows[0] else 0] = row+1
+  row += 3
+
+for round in (2,3,4,5):
+  for g in [x for x in games if x.round==round and x.region=="West"]:
+    miny, maxy = g.rows
+    for i in range(0, maxy - miny + 1):
+      t[round, miny + i] = g
+      g.child.rows[1 if g.child.rows[0] else 0] = miny + int(ceil(float(maxy-miny)/2))
+
 out = file("out.html", "w")
 #TODO: if you change a team in an early game, update later games
+#TODO: stop the damn file from jumping around
 out.write("""
 <html><head>
 <script src="jquery-1.3.2.min.js" type="text/javascript"></script>
@@ -174,6 +191,7 @@ $(document).ready(function() {
   for (i=0; i < 6; i++) {
     $(".round-" + i).each(function(i) { handleClick($(this)); });
   }
+  jQuery("td.top > a.round-1").each(function(i) { jQuery(this).parent().css("height", "40px").css("vertical-align", "bottom"); })
 });
 </script>
 <style>
@@ -181,6 +199,7 @@ $(document).ready(function() {
 .bottom { border-style: none solid solid none; padding: 0px 5px 0px 5px; }
 .middle { border-style: none solid none none; padding: 0px 5px 0px 5px; }
 tr { padding-bottom: 10px; }
+body { font-size: 10px; }
 </style>
 </head>
 <body><table cellspacing=0>
