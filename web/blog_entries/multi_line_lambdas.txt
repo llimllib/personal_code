@@ -3,15 +3,14 @@ Multi-Line Lambdas in Python Using the With Statement
 #keywords python, lambda, programming
 <p>Python <a 
 href="http://www.artima.com/weblogs/viewpost.jsp?thread=147358">does not have 
-multiline lambdas</a> because Guido doesn't like them aesthetically. However, 
-with just a bit of introspection, code like this is possible:
+multi-line lambdas</a> because Guido dislikes them aesthetically. However, with 
+just a bit of introspection, code like this is possible:
 
-<code lang="python">>>> with each(["12", "14", "16"]):
+<code lang="python">>>> with each([12, 14, 16]):
 ...   def _(x):
 ...     print x
-...     x = str(int(x) + 1)
-...     print x
-... 
+...     print x+1
+...  
 12
 13
 14
@@ -19,9 +18,9 @@ with just a bit of introspection, code like this is possible:
 16
 17</code>
 
-<p>I'll say a bit about my motivation, show how easy it is to write code like 
-this, and then I'd like to argue that code like this is both pythonic and 
-aesthetically appealing in some circumstances.
+<p>I'll say a bit about my motivation for creating code like this, show how 
+easy it is to write, and then I'll argue that code like this is both pythonic 
+and aesthetically appealing in some circumstances.
 
 <p><h2>A Mystery Solved (By Holmes Himself!)</h2>
 
@@ -49,9 +48,10 @@ href="http://en.wikipedia.org/wiki/Alex_Martelli">Alex Martelli</a> himself
 chimed in with a wonderful solution. The gist of the answer is that you can use 
 the <code>inspect</code> module to access the <a 
 href="http://www.python.org/doc/2.5.2/lib/typecontextmanager.html">context 
-manager</a>'s calling scope, which I didn't know was possible. I'm glad I asked 
-aloud, because even if I had stumbled close to the solution, I surely wouldn't 
-have come up with one as complete as his.
+manager</a>'s calling scope, and figure out what variables have been defined 
+between its <code>__enter__</code> and <code>__exit__</code> functions. I'm 
+glad I asked aloud, because even if I had stumbled close to the solution, I 
+surely wouldn't have come up with one as complete as his.
 
 <p><h2>The How</h2>
 
@@ -80,8 +80,10 @@ with bmap([1,2,3]) as foo:
 print foo # [1.0, 1.5, 2.0]</code>
 
 <p>What you see above are two functions which use a decorator giving them 
-access to the function defined within the <code>with</code> block. The decorator 
-just passes the block to the function as its last argument, exactly as in Ruby.
+access to the function defined within the <code>with</code> block. The 
+decorator passes the block to the function as its last argument just <a 
+href="http://eli.thegreenplace.net/2006/04/18/understanding-ruby-blocks-procs-and-methods/">like 
+in Ruby</a>.
 
 <p>To understand how this happens, you need to know how context managers work.  
 Context managers consist of a class with <code>__enter__</code> and 
@@ -123,7 +125,7 @@ functions that reuse old names.
 redefined in the <code>with</code> block.
 
 <p>Because we have to use the <code>id</code> check to determine if a name has 
-been redefined, and python sometimes caches objects in memory, our function can 
+been redefined, and Python sometimes caches objects in memory, our function can 
 be fooled. In this case, <code>interesting</code> will not detect 
 <code>x</code> because it's being redefined and cpython caches the low 
 integers, so <code>id(x)</code> will be the same for both <code>x</code>s.
@@ -232,6 +234,69 @@ over to github</a> and check it out.
 
 <p><h2>Aesthetics</h2>
 
-<p>I believe that this is pythonic and should be supported by the language for 
-the same exact reason as decorators are pythonic and have language support. The 
-reasoning for including decorators in 
+<p>It should be clear from all of the disclaimers I've had to put into this 
+article that this technique is of limited use in Python as it stands today.  
+I'd like to make an argument that it suggests some nice syntactic sugar for 
+python to support someday, while remaining totally ignorant of the actual 
+difficulties of putting it into the language.
+
+<p>To do so, I'll start by posting the motivating example for decorators from 
+<a href="http://www.python.org/dev/peps/pep-0318/">the relevant PEP</a>. It 
+argues that this code:
+
+<p><code lang="python">def foo(cls):
+  pass
+foo = synchronized(lock)(foo)
+foo = classmethod(foo)</code>
+
+is not nearly as readable as this code:
+
+<p><code lang="python">@classmethod
+@synchronized(lock)
+def foo(cls):
+  pass</code>
+
+<p>The main problem with the readability of the first snippet is not that it 
+requires 2 redefinitions and 4 repetitions of <code>foo</code>. Rather, the 
+main problem is that it places the cart before the horse by putting the 
+function body ahead of the declarations that are required to understand it.
+
+<p>Similarly, when we define callback functions before we use them, we're 
+required to define the function body before the place where it will be actually 
+used. Often, we see:
+
+<code lang="python">def handle_click(self):
+  foo = self.flim()
+  if foo:
+    self.flam(foo)
+
+onClick(handle_click)</code>
+
+<p>When it would be clearer to write:
+
+<code lang="python">with onClick():
+  def _(self):
+    foo = self.flim()
+    if foo:
+      self.flam()</code>
+
+<p>Which I find much more appealing.
+
+<p><h2>Conclusion</h2>
+
+<p>I expect that there's no way that syntax like this could be officially 
+supported by Python, both because of syntactic constraints and the 
+<acronym="Benevolent Dictator For Life">BDFL</a>'s aesthetic concerns. I do 
+think it is a neat exercise in pushing the Python interpreter and syntax past 
+where they want to go, and I hope that it gives some food for thought on an 
+interesting Python syntax.
+
+<p>I'm excited to see where Richard Jones goes with his <a 
+href="http://www.mechanicalcat.net/richard/log/Python/Something_I_m_working_on.7">project</a>, 
+and the design choices that he makes in it, since he's pushing the boundaries 
+of Python design. Many thanks to him and Alex Martelli for sending me down 
+quite an enjoyable path.
+
+<p>Finally, in case you missed it above, go ahead and <a 
+href="http://github.com/llimllib/Python-Multiline-Lambdas/tree/master">take a 
+look at the code</a> on github.
