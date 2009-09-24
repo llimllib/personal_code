@@ -1,5 +1,5 @@
 Multi-Line Lambdas in Python Using the With Statement
-#time 08-11-09 23:14
+#time 08-20-09 22:55
 #keywords python, lambda, programming
 <p>Python <a 
 href="http://www.artima.com/weblogs/viewpost.jsp?thread=147358">does not have 
@@ -24,7 +24,7 @@ and aesthetically appealing in some circumstances.
 
 <p><h2>A Mystery Solved (By Holmes Himself!)</h2>
 
-<p>When I first saw code using the <code>with</code> statement, my first hope was 
+<p>When I first saw code using the <code>with</code> statement, my hope was 
 that it would be able to be used somewhat like Haskell's <a 
 href="http://en.wikipedia.org/wiki/Haskell_%28programming_language%29#More_complex_examples">Where 
 clause</a> or Ruby's <a 
@@ -170,8 +170,8 @@ and all its arguments, grabbing the definitions from the with block, making
 sure there's only one definition and it's a function, then tacking it onto the 
 end of the arguments list for the function and calling it. Phew.
 
-<p>This code handles the case where you don't need to store the result of the 
-function being decorated:
+<p>The code above handles the case where you don't need to store the result of
+the function being decorated:
 
 <code lang="python">@accepts_block
 def each(iterable, block):
@@ -300,3 +300,5 @@ quite an enjoyable path.
 <p>Finally, in case you missed it above, go ahead and <a 
 href="http://github.com/llimllib/Python-Multiline-Lambdas/tree/master">take a 
 look at the code</a> on github.
+
+<p>If you want to leave a comment, I suggest leaving it on <a href="http://www.reddit.com/r/Python/comments/9cnaw/multiline_lambdas_in_python_using_the_with/">reddit</a>.
