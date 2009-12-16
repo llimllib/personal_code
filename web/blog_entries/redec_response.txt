@@ -10,6 +10,7 @@ While I agree with your point, Phillip, I still feel that there's a greater
 issue at hand. I don't think that Ian's use of a decorator to create a testing
 function is simpler than the alternative he prevents. Thus, I don't think that
 he should use a decorator in that circumstance.<p>
+
 <blockquote>With properly named and documented decorators, it shouldn't be 
 necessary to understand their implementation</blockquote><p>
 I've always had problems with this theory. Know the interface, and assume that

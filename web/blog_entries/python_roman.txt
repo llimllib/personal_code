@@ -1,10 +1,11 @@
 Functional Roman Numerals in Python
 #time 01-12-08 17:52
 #keywords python, code, programming
-Just as a quck note, I thought I'd post the cleanest python I could come up 
+<p>Just as a quck note, I thought I'd post the cleanest python I could come up 
 with to solve the <a href="http://billmill.org/roman.html">roman numerals</a> 
 problem I discussed earlier. It tries to use a functional style while actually 
 avoiding recursion. To do so, I wrote an iterative python unfold:
+
 <p><code lang="python">def unfold(f, x):
     res = []                       
     while 1:

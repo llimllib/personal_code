@@ -5,6 +5,7 @@ Inspired by Justus' comments on my
 <a href="http://billmill.org/templating.html">templating</a>
 article, I made a couple of updates to my keywords plugin which I had been
 meaning to make for a while.<p>
+
 First off, you'll see that the keyword 
 list on the left only contains the top 20 most common keywords, sorted by 
 frequency. Second, 

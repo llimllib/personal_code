@@ -1,7 +1,8 @@
 Why I Like My Macbook Pro
 #time 05-13-07 13:12
 #keywords python, mac, computer, hardware, programming
-Summed up very succinctly:<br>
+<p>Summed up very succinctly:<br>
+
 <textarea rows=2 cols=65>09:38 AM ~/code/personal_code/python$ uptime
 9:50  up 49 days, 22 hrs, 2 users, load averages: 2.28 2.33 2.28</textarea><p> 
 This means that my Macbook Pro, which I received on December 26, 2006, has been 

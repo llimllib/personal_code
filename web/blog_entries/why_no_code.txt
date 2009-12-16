@@ -6,6 +6,7 @@ you went to the bookstore to look for a copy, only to find that there were
 none. Confused, you checked the library - nothing. Finally, you went online to 
 shakespeare.com, only to find a note saying that "Hamlet" was still being 
 edited and would be released Any Day Now.</p>
+
 <p>Unfortunately, an analogous situation is the norm in the world of academic 
 computer science. Graduate students and professors produce code by the 
 truckload, and a majority of them produce only papers about their work. While 

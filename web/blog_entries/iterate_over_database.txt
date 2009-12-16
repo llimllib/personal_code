@@ -3,6 +3,7 @@ Iterating Over Database Results in C#
 #keywords database, c#, programming, computer, python, iterator
 <p>At my job, we use what is essentially a custom C# ORM. Soon after I arrived, 
 we adopted this idiom to pull a DB connection from the pool and run a query:
+
 <code lang="csharp"> class Something
 {
     public int ourIdiom(long identifier)

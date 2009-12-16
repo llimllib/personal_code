@@ -1,7 +1,7 @@
 Poe on Programming
 #time 12-28-07 01:14
 #keywords poe, literature, programming, python, poetry
-One of the strongest influences on my programming has always been an essay I 
+<p>One of the strongest influences on my programming has always been an essay I 
 read in my sophomore year of high school, around about the same time I began to 
 feel the magic of programming. Mr. Carino was a young man just out of college, 
 a <a href="http://en.wikipedia.org/wiki/Slayer">Slayer</a> fan and ardent Twain 
@@ -10,6 +10,7 @@ though, he gave the most electric class I've ever taken, and one of the  works
 we read in American Literature was Edgar Allan Poe's <em><a 
 href="http://xroads.virginia.edu/~HYPER/poe/composition.html">The Philosophy of 
 Composition</a></em>.
+
 <p><h2>Code As Poetry</h2>
 <p>In <em>The Philosophy of Composition</em>, Poe attempts to describe exactly 
 how he composed <a href="http://www.eapoe.org/works/poems/ravent.htm">The 

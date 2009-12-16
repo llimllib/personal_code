@@ -1,11 +1,12 @@
 Why Applications Suck (Part 1)
 #keywords applications, computer, programming, internet, storage
 #time 08-24-07 01:50
-Why do people outside of corporations overwhelmingly use webmail instead of 
+<p>Why do people outside of corporations overwhelmingly use webmail instead of 
 email clients? Long before rich email clients like gmail were available, people 
 have flocked to the internet email client - messaging has been the killer 
-feature of the web for a long time now.<p>
-But why?<p>
+feature of the web for a long time now.
+
+<p>But why?<p>
 The answer is simple: Overwhelmingly, users do not want to install programs, 
 and users do not want their data stored on their computer. In that order of 
 importance.<p>

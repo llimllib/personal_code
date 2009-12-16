@@ -5,10 +5,12 @@ After completing the redecorator (as much as it's ever gonna be done), I
 basically dropped off the face of the internet. The week after Christmas, I
 was busy playing with my new toys (Metal Gear Solid 3 is addictive) and
 planning to go visit my college friends for a New Year party.<p>
+
 To make a long story short, New Year's day, Saturday, my friend and I ended up 
 in Atlantic City gambling. I didn't leave until Monday morning.<p>
 Anyway, since I haven't been coding, I've had a while to think about some
 things. Much randomness follows.<p>
+
 <h2>Python</h2><p>
 There has been all kinds of commotion about optional static types. If you could
 guess from how I felt about <a 

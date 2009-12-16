@@ -10,6 +10,7 @@ code, I only like them more and more. I'm inclined to agree with
 they
 <a href="http://dirtsimple.org/2005/01/like-acid-for-frameworks.html">"capture 
 something really fundamental"</a> about programming.<p>
+
 (disclaimer: I am new to this style of programming.
 I'm just thinking out loud. People have probably already had this
 discussion in more detail.)<p>

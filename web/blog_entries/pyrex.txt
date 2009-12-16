@@ -8,6 +8,7 @@ most of the documentation assumes that you're on Linux. If you're not (say, for
 example, your f&%$ing wireless card won't work on Ubuntu, grrr...) then these
 instructions will help you get up to speed and running the prime number example
 from their webpage:<p>
+
 <ol><li>Complete the instructions from <a
 href="/compile_python_on_cygwin">yesterday's
 article</a> on how to compile windows extensions with cygwin.

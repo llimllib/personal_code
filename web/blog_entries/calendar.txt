@@ -7,7 +7,9 @@ href="http://docs.python.org/lib/module-calendar.html">calendar moduule</a>
 and the <a href="http://www.reportlab.org/rl_toolkit.html">ReportLab PDF
 library</a>, it took me about 10 minutes to learn enough of the API to get
 started, and another couple of hours to finish the script - you can find it
-<a href="http://billmill.org/static/files/pdf_calendar.py">here</a>.<p>
+<a href="http://billmill.org/static/files/pdf_calendar.py">here</a>.
+
+<p>
 Usage is pretty simple:<p>
 <textarea rows="6" cols="60">from pdf_calendar import createCalendar
 #create a December, 2005 PDF

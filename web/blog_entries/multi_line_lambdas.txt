@@ -302,3 +302,7 @@ href="http://github.com/llimllib/Python-Multiline-Lambdas/tree/master">take a
 look at the code</a> on github.
 
 <p>If you want to leave a comment, I suggest leaving it on <a href="http://www.reddit.com/r/Python/comments/9cnaw/multiline_lambdas_in_python_using_the_with/">reddit</a>.
+
+<p><h2>Update:</h2> Someone <a
+href="http://code.google.com/p/ouspg/wiki/AnonymousBlocksInPython?ts=1253546882&updated=AnonymousBlocksInPython">has</a> taken this technique a bit farther,
+using some bytecode hackery.

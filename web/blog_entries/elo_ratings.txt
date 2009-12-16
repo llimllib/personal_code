@@ -7,6 +7,7 @@ which is one of the
 reasons I've been very light on blogging this summer. As well as playing for my
 club <a href="http://www2.upa.org/scores/scores.cgi?div=127&page=3&team=3448">team</a>,
 I play in the Connecticut <a href="http://ctultimate.com">summer league</a>.<p>
+
 This is fun, but as a stats nerd, I have to do something beyond just play. As
 such, last summer I began 
 <a href="http://llimllib.f2o.org/elo/elo.html">ranking</a> the teams in my

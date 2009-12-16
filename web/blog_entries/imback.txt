@@ -1,11 +1,12 @@
 I'm Back
 #time 05-01-06 22:36
 #keywords pyblosxom, cherrypy, return, pictures
-And hopefully, there'll be some things to write about on billmill.org soon.
+<p>And hopefully, there'll be some things to write about on billmill.org soon.
 I've written a port of <a href="http://pyblosxom.sourceforge.net/">pyblosxom</a>
 to the <a href="http://cherrypy.org">cherrypy</a> platform, which I'll release
 as soon as I figure out how to release it with all the setuptools goodness it
 deserves.<p>
+
 For now, you'll have to content yourself with a bunch of broken links and some
 <a href="http://billmill.org/static/galleries/">pictures</a>. There's more to
 come, and soon.

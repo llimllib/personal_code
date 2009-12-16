@@ -7,6 +7,7 @@ with it. However, I've always had one problem with it - it doesn't save a copy
 of the webpage I link to. I've always thought this would be handy, so I could
 search through my bookmarked pages; sometimes I can't remember what tags I gave
 to an article.<p>
+
 Since they have a publicly available <a
 href="http://del.icio.us/doc/api">API</a>, I thought I would write a simple
 script to scrape all the pages and dump the backup on my hard drive. However,

@@ -1,13 +1,14 @@
 Open Letter to Mozilla: Put up or Shut up
 #keywords rant, mozilla, internet, firefox
 #time 05-21-07 21:14
-I have been using Firefox since it was <a 
+<p>I have been using Firefox since it was <a 
 href="http://www.flexbeta.net/main/printarticle.php?id=89">Phoenix 0.1</a>. It 
 was the best browser then, and it is the best browser now. The first computer 
 language that I ever <a 
 href="http://vzone.virgin.net/sizzling.jalfrezi/iniframe.htm">learned</a> was 
 HTML, and I learned it largely by hitting "View Source". Without it, who knows 
 if I would be a programmer today?<p>
+
 Today, though, the world is a different one than it was back in 1998 when I was 
 plunking around with HTML. Broadband has (finally!) gotten widespread adoption, 
 and with it the web has gotten past animated rollover effects. <a 

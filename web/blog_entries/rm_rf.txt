@@ -3,6 +3,7 @@ My &quot;rm&quot; story
 #keywords rm, backup, story
 <p>Reading <A HREF="http://www.veen.com/jeff/archives/000899.html">this</A>
 article reminded me of my worst &quot;rm&quot; story.</p>
+
 <P>During my senior year of college, I had an independent research
 course where I was trying to devise a method of approximating the
 <a href="http://en.wikipedia.org/wiki/Latent_Semantic_Indexing">LSI</a> values

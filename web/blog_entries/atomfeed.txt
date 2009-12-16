@@ -1,13 +1,14 @@
 New at billmill.org: Atom Feeds!
 #time 05-29-07 23:59
 #keywords atom, rss, feeds, python, programming
-So, another day off yesterday meant another morning project: replacing the 
+<p>So, another day off yesterday meant another morning project: replacing the 
 default Rss feed with an <a 
 href="http://www.atomenabled.org/developers/syndication/">Atom</a> feed, fixing 
 the appearance of source code in both feeds, and making them both validate.  
 Perhaps I was prompt enough to avoid <a 
 href="http://diveintomark.org/archives/2007/05/29/unlucky-in-feeds#comments">Mark 
 Pilgrim's wrath</a>.<p>
+
 For the time being, I will support both feeds, but only give links to the Atom 
 feed. Hopefully both will work better in the future, now that they have been 
 vetted by the official authority of <a 

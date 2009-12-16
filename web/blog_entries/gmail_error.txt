@@ -1,8 +1,11 @@
 Weird Gmail Address Handling Errors
 #time 7-11-06 9:52
 #keywords gmail, email, address, google
-Something is seriously wrong with gmail's address handling:<p> <img
+Something is seriously wrong with gmail's address handling:<p>
+
+<img
 src="/static/wrong_email_addy.jpg"><p>
+
 And this is not the first time such a thing has happened to me. At one point,
 I had a conversation with a guy whose email got mistakenly sent to me when I
 emailed him to see if he was real.

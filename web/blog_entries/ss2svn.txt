@@ -1,11 +1,12 @@
 Converting Sourcesafe to Subversion
 #time 11-01-06 14:27
 #keywords python, sourcesafe, subversion
-One of my first tasks at my new job was to convince them that they needed to
+<p>One of my first tasks at my new job was to convince them that they needed to
 switch away from sourcesafe and onto something better. We talked about
 <a href="http://www.sourcegear.com/vault/index.html">SourceGear Vault</a>, but
 we decided it was too expensive and didn't have the community support that
 subversion had.<p>
+
 Because my team had already switched off of subversion and onto sourcesafe
 before I and another developer started working, it was a bit of an uphill
 struggle to get them to agree to the change. Fortunately, after filling up

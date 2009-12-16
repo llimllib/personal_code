@@ -1,11 +1,12 @@
 Answer To The Star Problem
 #time 05-27-07 16:03
 #keywords python, programming, problem, star, permutation, puzzle
-A reddit user <a 
+<p>A reddit user <a 
 href="http://programming.reddit.com/info/1tzdm/comments">posted</a> a link to <a  
 href="http://savvysolver.com/index.php?title=Six_Pointed_Star_Problem">a 
 puzzle</a> with the title "Can You Solve This Problem". Not one to refuse a 
 challenge, I took it up.<p>
+
 20 minutes later, I found a whole bunch of solutions. The code follows:<p>
 <code lang="python">#Problem: arrange the numbers range(1, 13) on a six-point 
 #star so that every line adds up to 26. ASCII:

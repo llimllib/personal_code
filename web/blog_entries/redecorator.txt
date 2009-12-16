@@ -6,6 +6,7 @@ always the wrong design choice. In fact, on Friday, after reading
 <a href="http://blog.ianbicking.org/explaining-decorators.html">Ian Bicking's</a>
 blog entry about them, I began writing a long
 rant about why they were usually a poor choice.<p>
+
 It was at this point that I realized that I'm not good at writing rants. It's
 just not what I like to do.<p>
 However, I do like to write Python - so I thought of a way to register my 

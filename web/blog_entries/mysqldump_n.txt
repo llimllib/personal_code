@@ -1,10 +1,11 @@
 MySQL Partial Dump
 #time 08-17-07 00:05
 #keywords c, python, programming, mysql, computer
-At work, I'm trying to bring our testing from its current ad-hoc state into 
+<p>At work, I'm trying to bring our testing from its current ad-hoc state into 
 something more useful. Priority #1 at the moment is making what limited 
 test suite we have into a practical, repeatable test of our main code 
 library.<p>
+
 To do so, however, I need to create script to import a useful subset of the 
 data from our nine gigabyte MySQL production database into a local 
 database.  Unfortunately, mysqldump seems not to support the export of only 

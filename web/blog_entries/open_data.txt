@@ -1,10 +1,11 @@
 Sketch of an Open Source Data Repository
 #time 02-02-05 23:18
 #keywords data_mining, open_source, programming, computer
-One of the largest obstacles to creating effective data-mining software is the
+<p>One of the largest obstacles to creating effective data-mining software is the
 scarcity of good data sets. If good data sets were easily available to people
 on the web, I think it's likely that more people would come up with innovative
 data mining applications. Some data sets that I would like to see:<p>
+
 <ul><li><b>Stock Data</b>: I've been looking for a good repository of stock
 data (on and off) for quite a while, and I've yet to find one.
 <li><b>Del.icio.us Data</b>: How cool are the possibilities with a big

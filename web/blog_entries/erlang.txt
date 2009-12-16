@@ -7,6 +7,7 @@ First off, I have heard that the concurrency support in it is excellent.
 Secondly, A quick glance gave me the impression that it was, at least, not
 brain-dead. Third, it's been a long time since I learned a new language, so I'm
 planning to do it for kicks.<p>
+
 As such, for the last few days, I've been playing around with the language, and
 I have begun to form my opinions on it. Since I've been pretty busy, I haven't
 had too much time to play with it, and as such my opinions are half-baked.

@@ -2,18 +2,33 @@ DNA on Programming
 #time 01-22-08 22:25
 #keywords computer, programming, dna
 <blockquote><p>"Well, what we called a computer in 1977 was really a kind of electric abacus, but..."<p>
+
 "Oh, now, don't underestimate the abacus," said Reg. "In skilled hands it's a very sophisticated calculating device. Furthermore it requires no power, can be made with any materials you have to hand, and never goes bing in the middle of an important piece of work."<p>
+
 "So an electric one would be particularly pointless," said Richard.<p>
+
 "True enough," conceded Reg.<p>
+
 "There really wasn't a lot this machine could do that you couldn't do yourself in half the time with a lot less trouble," said Richard, "but it was, on the other hand, very good at being a slow and dim-witted pupil."<p>
+
 Reg looked at him quizzically.<p>
+
 "I had no idea they were in such short supply," he said. "I could hit a dozen of them with a bread roll from where I'm sitting."<p>
+
 "I'm sure. But look at it this way. What really is the point of trying to teach anything to anybody?"<p>
+
 This question seemed to provoke a murmur of sympathetic approval from up and down the table. <p>
+
     Richard continued, "What I mean is that if you really want to understand something, the best way is to try and explain it to someone else. That forces you to sort it out in your own mind. And the more slow and dim-witted your pupil, the more you have to break things down into more and more simple ideas. And that's really the essence of programming. By the time you've sorted out a complicated idea into little steps that even a stupid machine can deal with, you've certainly learned something about it yourself. The teacher usually learns more than the pupil. Isn't that true?"<p>
+
     "It would be hard to learn much less than my pupils," came a low growl from somewhere on the table, "without undergoing a pre-frontal lobotomy."<p>
+
     "So I used to spend days struggling to write essays on this 16K machine that would have taken a couple of hours on a typewriter, but what was fascinating to me was the process of trying to explain to the machine what it was I wanted it to do. I virtually wrote my own word processor in BASIC. A simple search and replace routine would take about three hours."<p>
+
     "I forget, did you ever get any essays done at all?"<p>
+
     "Well, not as such. No actual essays, but the reasons why not were absolutely fascinating. For instance, I discovered that..."<p>
+
     He broke off, laughing at himself.</blockquote>
+
 -<a href="http://www.amazon.com/Dirk-Gentlys-Holistic-Detective-Agency/dp/0671746723">DNA</a>

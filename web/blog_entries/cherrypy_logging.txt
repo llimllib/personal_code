@@ -1,13 +1,14 @@
 Do Not Leave Logging on In Production Cherrypy Installations!
 #time 05-05-07 15:19
 #keywords cherrypy, python
-On March 10, I tried to roll out a new version of my <a 
+<p>On March 10, I tried to roll out a new version of my <a 
 href="http://billmill.org:9561/cherry_blossom"> web site software</a>. However, 
 after about 20 minutes of normal operation, the website would suddenly start 
 throwing <a 
 href="http://groups.google.com/group/cherrypy-users/msg/33fe863cd647ce21">strange 
 tracebacks</a>, and returning them with x-php-fastcgi mime types, which is 
 weird.<p>
+
 For the past 2 months, I've been trying to figure out the cause of this error 
 in the little time I have to work on my website, but it proved extremely 
 frustrating. In the course of this work, I rewrote all of my templates from <a 

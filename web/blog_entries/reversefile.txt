@@ -1,12 +1,13 @@
 Reverse File Iterator and Premature Optimization
 #time 10-03-07 00:30
 #keywords python, file, iterator, optimization, openbsd
-This afternoon, I had a need for a reverse file iterator in a script I was 
+<p>This afternoon, I had a need for a reverse file iterator in a script I was 
 writing to process a quite large log file. After some unsuccessful googling 
 followed by some quick hacking, I was left with a frustratingly close, but 
 nonfunctional, iterator. Instead of fixing it while I was at work, I hacked up 
-a solution calling "tail" and left it for a while.<p>
-When I came back to finish the job this evening, I figured that I ought to go 
+a solution calling "tail" and left it for a while.
+
+<p>When I came back to finish the job this evening, I figured that I ought to go 
 look at the <a 
 href="http://ftp.bg.openbsd.org/OpenBSD/src/usr.bin/tail/">source</a> of tail 
 for some inspiration. Surely the unix hackers had figured this problem out long 
