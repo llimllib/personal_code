@@ -1,5 +1,31 @@
 * The setup: Godwin vs. Malthus
+    * Malthus was an author, economist and reverend
+    * Godwin was the inventor of Anarchy, an iconoclast
+    * Godwin believed that Man was infintely perfectible
+    * Malthus thought this was silly, and he had a simple argument for why
 * The Big Idea
+    * Malthus' two principles: 1) people gonna fuck and 2) people need to eat
+    * Food Growth is linear
+    * Human Growth is exponential
+    * Therefore, human growth cannot outstrip food growth and humanity will grow
+      until it reaches its food limit
 * Why The Big Idea Failed
+    * evidence it failed (graph of population slightly before, and since Malthus)
+    * It hasn't *fundamentally* failed, but technology took such huge leaps
+      that food has been plentiful
+        * mention green revolution?
 * Relate it to Today
+    * we're now (or soon) going to be constrained by energy, not food
+        * energy as a more basic attribute than food
+    * Malthus' two principles still apply
+        * and apply with a vengeance. Humanity will not go backwards willingly!
+            *expand further on this point?
+    * We're at a dangerous point, where we may have become dependant on technology growth
+        * can we reach an equilibrium from here?
+    * maybe show graph with a line showing the equilibrium without mass energy, and a question mark above our
+      current population asking where it is with free energy?
 * What we can do about it
+    * Work on more efficient energy
+    * Colonize a planet
+    * Thought: those selling doom from global warming are similar to those selling doom via Malthus?
+        * would have to set up earlier with a mention that people have sold doom via Malthus. Maybe an example
