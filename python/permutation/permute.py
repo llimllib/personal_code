@@ -1,5 +1,6 @@
 import time
 from clp_perm import NPermutation
+from pprint import pprint as pp
 
 def perm1(lst):
     """implementation of algo L, page 2, fascicle 2b, TAOCP
@@ -30,6 +31,83 @@ def perm1(lst):
             k += 1
             l -= 1
         yield lst
+
+def perm1b(lst):
+    """A modification of perm1 to support cycling. Permutes until the list has reached
+    a cycle instead of until it's reverse sorted
+    """
+    initial = lst[:]
+    yield lst 
+
+    if len(lst) == 1: return
+
+    n = len(lst) - 1
+    while 1:
+        j = n - 1
+        while lst[j] >= lst[j+1]:
+            j -= 1
+            #because this algorithm iterates in lexicographic order,
+            #we know that lst is reverse sorted right now
+            #if j == -1: return #terminate
+            if j == -1:
+                lst.reverse()
+                if lst == initial: #if lst was sorted to begin with
+                    return
+                yield lst
+                j = n-1
+                break
+        l = n
+        while lst[j] >= lst[l]:
+            l -= 1
+        lst[j], lst[l] = lst[l], lst[j]
+        k = j + 1
+        l = n
+        while k < l:
+            lst[k], lst[l] = lst[l], lst[k]
+            k += 1
+            l -= 1
+        if lst == initial:
+            return
+        yield lst
+
+def perm1c(lst):
+    """A modification of perm1b to return a copied list instead of modified in place"""
+    initial = lst[:]
+    yield lst 
+    lst = lst[:]
+
+    if len(lst) == 1: return
+
+    n = len(lst) - 1
+    while 1:
+        j = n - 1
+        while lst[j] >= lst[j+1]:
+            j -= 1
+            #because this algorithm iterates in lexicographic order,
+            #we know that lst is reverse sorted right now
+            #if j == -1: return #terminate
+            if j == -1:
+                lst.reverse()
+                if lst == initial: #if lst was sorted to begin with
+                    return
+                yield lst
+                lst = lst[:]
+                j = n-1
+                break
+        l = n
+        while lst[j] >= lst[l]:
+            l -= 1
+        lst[j], lst[l] = lst[l], lst[j]
+        k = j + 1
+        l = n
+        while k < l:
+            lst[k], lst[l] = lst[l], lst[k]
+            k += 1
+            l -= 1
+        if lst == initial:
+            return
+        yield lst
+        lst = lst[:]
 
 def perm2(lst):
     """implementation of variation of algo L, exercise 1, fascicle 2b, TAOCP
@@ -153,8 +231,8 @@ def perm5(lst):
     for perm in p: yield perm
 
 def clp_perm(l):
-"""yanked and modified from: 
-http://mail.python.org/pipermail/python-list/2002-November/171907.html"""
+    """yanked and modified from: 
+    http://mail.python.org/pipermail/python-list/2002-November/171907.html"""
     if len(l) == 1: yield l; return
 
     pop, insert, append = l.pop, l.insert, l.append
@@ -179,6 +257,30 @@ http://mail.python.org/pipermail/python-list/2002-November/171907.html"""
         h.reverse()
         yield h
         h.reverse()
+
+def pyorg_perm(iterable):
+    """The pseudocode given for Python's C implementation of permutation
+    from: http://svn.python.org/view/python/branches/py3k/Modules/itertoolsmodule.c?view=markup
+    but it only works in python 2k :)"""
+    pool = tuple(iterable)
+    n = len(pool)
+    r = n
+    indices = range(n)
+    cycles = range(n-r+1, n+1)[::-1]
+    yield list(pool[i] for i in indices[:r])
+    while n:
+        for i in reversed(range(r)):
+            cycles[i] -= 1
+            if cycles[i] == 0:
+                indices[i:] = indices[i+1:] + indices[i:i+1]
+                cycles[i] = n - i
+            else:
+                j = cycles[i]
+                indices[i], indices[-j] = indices[-j], indices[i]
+                yield list(pool[i] for i in indices[:r])
+                break
+        else:
+            return
 
 def xcombinations(items, n):
     if n==0: yield []
@@ -215,9 +317,13 @@ def test(f):
             if [expected.count(p) for p in actual] != [1] * len(expected) or \
                 [actual.count(p) for p in expected] != [1] * len(expected):
                 print "%s failed on %s (%s)" % (f.__name__, example, actual)
+                pp(expected)
+                pp(actual)
                 failure = True
         except Exception, msg:
             print "Error in %s on input %s" % (f.__name__, example)
+            pp(expected)
+            pp(actual)
             failure = True
 
     if not failure:
@@ -245,8 +351,10 @@ except:
         return True
 
 if __name__ == '__main__':
-    from permute_c import Permute2
-    funcs = [perm1, perm2, perm3, perm4, clp_perm, Permute2]
+    #TODO: remember how to compile this shit :) wasn't that fast anyway
+    #from permute_c import Permute2
+    funcs = [perm1, perm1b, perm1c]
+    #funcs = [perm1, perm2, perm3, perm4, clp_perm, pyorg_perm]
     #funcs = [xpermutations, perm5] #the graveyard of the too-slow
     try:
         import probstat

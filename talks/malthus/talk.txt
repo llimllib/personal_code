@@ -1,19 +1,44 @@
 * The setup: Godwin vs. Malthus
-    * Malthus was an author, economist and reverend
-    * Godwin was the inventor of Anarchy, an iconoclast
-    * Godwin believed that Man was infintely perfectible
-    * Malthus thought this was silly, and he had a simple argument for why
+    * The year was 1798
+        The French Revolution was coming to a close, and the American
+        Revolution had ended just 15 years ago. John Locke, David Hume, and Adam
+        Smith had just rewritten the whole of political philosophy. To some, it
+        seemed that
+        humanity was on the verge of a breakthrough. One of those was William
+        Godwin.
+    * on Godwin
+        An iconoclast, one of the founders of anarchism, and a
+        believer in the infinite perfectability of mankind, Godwin believed
+        that each generation was improving upon the last, and
+        he saw no reason why this trend would not continue indefinitely.
+    * Malthus (:30)
+        Opposing this view was the reverent Thomas Robert Malthus.
+        One of the greatest economists
+        of all time, his name suffered the worst fate that history has to offer:
+        it was turned into an adjective. Before I explain what it means,
+        let's talk about what he wrote in 1798
 * The Big Idea
-    * Malthus' two principles: 1) people gonna fuck and 2) people need to eat
-    * Food Growth is linear
-    * Human Growth is exponential
-    * Therefore, human growth cannot outstrip food growth and humanity will grow
-      until it reaches its food limit
-* Why The Big Idea Failed
-    * evidence it failed (graph of population slightly before, and since Malthus)
-    * It hasn't *fundamentally* failed, but technology took such huge leaps
-      that food has been plentiful
-        * mention green revolution?
+    * The two principles
+        Malthus starts with two simple principles: People need food, and people
+        are going to keep having sex (and babies).
+
+        But there's a problem: each person can have 2 babies, but every square
+        acre of farm can only produce a given quantity of food. That means that
+        people can grow exponentially, while food can only grow linearly.
+    * linear vs. exponential. Doom! (1:00)
+        Here's the graph that everybody thinks Malthus was talking about.
+        Population grows out of control, while food grows slowly. The inevitable
+        result is *doom*!!?!
+
+        But that's not what Malthus actually claimed. Instead, he argued that
+        population is *limited* by the availability of food.
+    * But he really meant...
+        Therefore, population grows in proportion to the available food, and
+        usually to the limit of the available food. Because we are usually at
+        the limit of the available food, he argues that Godwin was wrong,
+        humanity is not perfectible, and there will always be misery in the
+        world because *somebody* will be at the margin without food.
+* What does that say about population now
 * Relate it to Today
     * we're now (or soon) going to be constrained by energy, not food
         * energy as a more basic attribute than food
