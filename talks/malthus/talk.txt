@@ -10,20 +10,21 @@
         An iconoclast, one of the founders of anarchism, and a
         believer in the infinite perfectability of mankind, Godwin believed
         that each generation was improving upon the last, and
-        he saw no reason why this trend would not continue indefinitely.
+        he saw no reason why this trend would not continue indefinitely; up to
+        and including the perfection of human society.
     * Malthus (:30)
-        Opposing this view was the reverent Thomas Robert Malthus.
+        Opposing this view was the reverend Thomas Robert Malthus.
         One of the greatest economists
         of all time, his name suffered the worst fate that history has to offer:
-        it was turned into an adjective. Before I explain what it means,
+        it was turned into an adjective. To explain what "malthusian" means,
         let's talk about what he wrote in 1798
 * The Big Idea
     * The two principles
         Malthus starts with two simple principles: People need food, and people
         are going to keep having sex (and babies).
 
-        But there's a problem: each person can have 2 babies, but every square
-        acre of farm can only produce a given quantity of food. That means that
+        But there's a problem: each person can have 2 babies, but a given area of 
+        farm can only produce a given quantity of food. That means that
         people can grow exponentially, while food can only grow linearly.
     * linear vs. exponential. Doom! (1:00)
         Here's the graph that everybody thinks Malthus was talking about.
@@ -38,7 +39,60 @@
         the limit of the available food, he argues that Godwin was wrong,
         humanity is not perfectible, and there will always be misery in the
         world because *somebody* will be at the margin without food.
+    * How does that happen? and positive checks (1:30)
+        But how does that work? how does humanity manage to stay at the limit
+        of its available food? Malthus proposes two mechanisms: Positive checks
+        are anything that limit population due to "vice or misery". Anybody who
+        dies due to poverty, starvation, or disease is a victim of these positive
+        checks.
+    * Preventive checks
+        Preventive checks are unique to human experience: only humans have the
+        awareness and ability to cease having babies because we believe
+        we will not be able to bring them up properly. Refusing to have babies
+        is not a fitness maximizing behavior.
 * What does that say about population now
+    * Population graph (2:00)
+        When we look at the graph of world population, we see an obvious
+        increase in the human growth rate since about 1950. What does that
+        mean? Following Malthus' logic, it means that humanity has vastly
+        increased its means of subsistence, and population has been growing
+        rapidly to try and catch up.
+    * the "Population Bomb"
+        Some people have tried to use this population graph as evidence
+        that humanity is headed for a massive collapse as population rapidly
+        overwhelms our ability to feed them. These predictions were especially
+        popular in the 1970s... TODO. So why haven't "the population bomb" killed
+        us all yet?
+    * Technology (2:30)
+        Norman Borlaug, Green revolution
+    * Japan population
+        However, in the countries of the first world, that growth has begun to level
+        off and even to decline. In Japan, Germany, and Italy, the birth rate has
+        dipped below the death rate, meaning that populations in those countries are
+        beginning to decline. What we're seeing is the population checking itself
+        naturally as it arrives near its limit, just as Malthus predicted.
+* The problem's not Food anymore
+    * (3:00)
+        So everything's fine, right? If Malthus' theory is correct, humanity should
+        just continue on in the world, and our population will automatically correct
+        itself to remain near the level the world can sustain.
+
+        Not entirely. Especially as the world grows more interconected and
+        interdependent, we run the risk of population collapse.
+    * Population collapse
+    * Energy (3:30)
+        Malthus referred to the "means of subsistence" of a people. As the world
+        population graph showed, the world has increased its means of subsistence
+        substantially, in order to support many more people. To do so, however,
+        we've needed to utilize a tremendous amount of energy, almost all of which
+        has been mined from a finite source in the ground.
+    * So?
+* Relates to Global Warming
+    * Al Gore
+        * explain gobal warming
+    * What won't work
+        * trying to go backwards and eliminate our emissions is doomed to failure.
+          
 * Relate it to Today
     * we're now (or soon) going to be constrained by energy, not food
         * energy as a more basic attribute than food
