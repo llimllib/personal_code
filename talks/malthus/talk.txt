@@ -71,7 +71,7 @@
         dipped below the death rate, meaning that populations in those countries are
         beginning to decline. What we're seeing is the population checking itself
         naturally as it arrives near its limit, just as Malthus predicted.
-* The problem's not Food anymore
+* The possibility of social collapse.
     * (3:00)
         So everything's fine, right? If Malthus' theory is correct, humanity should
         just continue on in the world, and our population will automatically correct
@@ -79,32 +79,41 @@
 
         Not entirely. Especially as the world grows more interconected and
         interdependent, we run the risk of population collapse.
-    * Population collapse
-    * Energy (3:30)
-        Malthus referred to the "means of subsistence" of a people. As the world
-        population graph showed, the world has increased its means of subsistence
-        substantially, in order to support many more people. To do so, however,
-        we've needed to utilize a tremendous amount of energy, almost all of which
-        has been mined from a finite source in the ground.
+    * Population collapse (2 slides, 3:15 - 3:45)
+        As humanity's ability to produce increased, so has our specialization.
+        Modern civilization depends not only on agriculture for food, but 
+        extensive systems for carrying and cleaning water, a huge infrastructure
+        for generating and carrying electricity, vast transportation networks
+        for carrying people and products, networks of wires for carrying
+        information between people and computers, huge armies for defending
+        ourselves from others, huge political organizations for preventing
+        them from attacking each other, vast networks of sewers for
+        carrying our waste safely, and many more technologies both social and 
+        technical that sustain our life.
     * So?
-* Relates to Global Warming
-    * Al Gore
-        * explain gobal warming
-    * What won't work
-        * trying to go backwards and eliminate our emissions is doomed to failure.
-          
-* Relate it to Today
-    * we're now (or soon) going to be constrained by energy, not food
-        * energy as a more basic attribute than food
-    * Malthus' two principles still apply
-        * and apply with a vengeance. Humanity will not go backwards willingly!
-            *expand further on this point?
-    * We're at a dangerous point, where we may have become dependant on technology growth
-        * can we reach an equilibrium from here?
-    * maybe show graph with a line showing the equilibrium without mass energy, and a question mark above our
-      current population asking where it is with free energy?
-* What we can do about it
-    * Work on more efficient energy
-    * Colonize a planet
-    * Thought: those selling doom from global warming are similar to those selling doom via Malthus?
-        * would have to set up earlier with a mention that people have sold doom via Malthus. Maybe an example
+        Humans, as we've seen, have developed mechanisms for limiting population
+        in small amounts. Positive checks and preventive checks have proven 
+        sufficient to limit society to living within its means for the last 10,000
+        years. But if some large-scale event manages to kick the supports out
+        from underneath our system, we have no idea what would happen to
+        our modern day society.
+* What can we do about social collapse?
+    * Short term (4:00)
+        Malthus two principles will continue to hold as far as we can imagine;
+        people will continue to mate and have babies, and society will still
+        be limited by the means of subsistence.
+
+        So what we can do in the short term is increase research funding for
+        new technologies for clean water, clean energy, and clean cities.
+        Just as importantly, we can continue to increase our social technology.
+    * Social Technology
+        What do I mean by "social technology"? I've used that term twice now, but
+        when I say "technology" you're probably thinking of breathing tubes or
+        computers. What I mean is that social technologies enable us to continue
+        producing more with the resources we have, just as the technologies
+        given to us by science do.
+    * Long term (4:30)
+        colonize other planets, create refuges from large disasters. Mainly
+        just allow ourselves to think about what could happen; don't be
+        scared of by its "weirdness"
+    * Thanks
