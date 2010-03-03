@@ -25,51 +25,49 @@
         First, that people need food. And since the amount of farms we have
         are limited by the available land, Malthus reasoned that the food
         supply must only be able to grow linearly.
-    * Babies
+    * Babies (1:00)
         Second, that people are going to continue having sex (and with it, babies).
 
         Now, the problem with sex, and babies, at least as far as Malthus is concerned,
         is that each baby can have two babies, each of them can have two more, and so on and so
         forth until you have a world full of babies.
-    * linear vs. exponential. Doom! (1:00)
+    * linear vs. exponential. Doom!
         Here's a graph of what everybody thinks Malthus was describing.
         Population grows out of control, while food grows slowly. The inevitable
         result is *doom*!!?!
 
         But that's not what Malthus actually claimed. Instead, he argued that
         population is *limited* by the availability of food.
-    * But he really meant...
-        Therefore, population grows in proportion to the available food, and
-        usually to the limit of the available food. Because we are usually at
-        the limit of the available food, he argues that Godwin was wrong,
-        humanity is not perfectible, and there will always be misery in the
-        world because *somebody* will be at the margin without food.
-    * How does that happen? and positive checks (1:30)
-        But how does that work? how does humanity manage to stay at the limit
-        of its available food? Malthus proposes two mechanisms: Positive checks
-        are anything that limit population due to "vice or misery". Anybody who
-        dies due to poverty, starvation, or disease is a victim of these positive
-        checks.
-    * Preventive checks
-        Preventive checks are unique to human experience: only humans have the
-        awareness and ability to cease having babies because we believe
-        we will not be able to bring them up properly. Refusing to have babies
-        is not a fitness maximizing behavior.
-* What does that say about population now
-    * Population graph (2:00)
+    * Population graph (1:30)
         When we look at the graph of world population, we see an obvious
         increase in the human growth rate since about 1950. What does that
-        mean? Following Malthus' logic, it means that humanity has vastly
-        increased its means of subsistence, and population has been growing
-        rapidly to try and catch up.
+        mean? Is that the Malthusian bomb that people had been expecting since
+        1798?
     * the "Population Bomb"
-        Some people have tried to use this population graph as evidence
-        that humanity is headed for a massive collapse as population rapidly
-        overwhelms our ability to feed them. These predictions were especially
-        popular in the 1970s... TODO. So why haven't "the population bomb" killed
-        us all yet?
-    * Technology (2:30)
-        Norman Borlaug, Green revolution
+        That's exactly what Paul Ehrlich claimed in his popular 1968 book
+        "The population bomb". In it, he claimed that humanity was quickly outgrowing
+        its ability to provide food to its people, and that mass suffering and starvation
+        was sure to follow.
+    * But Malthus really meant... (2:00)
+        But that didn't happen, and Malthus wasn't saying that it would.
+
+        What Malthus was *actually* saying was that humanity grows exponentially
+        up to its means of subsistence, and then grows proportionally to it.
+
+        He proposed two mechanisms with which humanity can check its growth.
+    * Positive checks 
+        Positive checks are deats that limit population due to vice or misery.
+        Anybody who dieds due to poverty, starvation, or disease is a victim 
+        of a positive check.
+    * Technology
+        One reason that society has suffered less from starvation and famine
+        than we used to is technology. This man,
+        Norman Borlaug, was able to spread more productive crops throughout the
+        world and is credited with staving off starvation for large parts of the world.
+    * Preventive checks (2:30)
+        Preventive checks are unique to human experience: only humans have the
+        awareness and ability to cease having babies because we believe
+        we will not be able to bring them up properly. 
     * Japan population
         However, in the countries of the first world, that growth has begun to level
         off and even to decline. In Japan, Germany, and Italy, the birth rate has
@@ -77,14 +75,14 @@
         beginning to decline. What we're seeing is the population checking itself
         naturally as it arrives near its limit, just as Malthus predicted.
 * The possibility of social collapse.
-    * (3:00)
+    * 
         So everything's fine, right? If Malthus' theory is correct, humanity should
         just continue on in the world, and our population will automatically correct
         itself to remain near the level the world can sustain.
 
         Not entirely. Especially as the world grows more interconected and
         interdependent, we run the risk of population collapse.
-    * Population collapse (2 slides, 3:15 - 3:45)
+    * Population collapse (2 slides, 3:30 - 4:00)
         As humanity's ability to produce increased, so has our specialization.
         Modern civilization depends not only on agriculture for food, but 
         extensive systems for carrying and cleaning water, a huge infrastructure
@@ -92,10 +90,9 @@
         for carrying people and products, networks of wires for carrying
         information between people and computers, huge armies for defending
         ourselves from others, huge political organizations for preventing
-        them from attacking each other, vast networks of sewers for
-        carrying our waste safely, and many more technologies both social and 
+        them from attacking each other, and many more technologies both social and 
         technical that sustain our life.
-    * So?
+    * So? (4:00)
         Humans, as we've seen, have developed mechanisms for limiting population
         in small amounts. Positive checks and preventive checks have proven 
         sufficient to limit society to living within its means for the last 10,000
@@ -103,7 +100,7 @@
         from underneath our system, we have no idea what would happen to
         our modern day society.
 * What can we do about social collapse?
-    * Short term (4:00)
+    * Short term
         Malthus two principles will continue to hold as far as we can imagine;
         people will continue to mate and have babies, and society will still
         be limited by the means of subsistence.
@@ -111,14 +108,16 @@
         So what we can do in the short term is increase research funding for
         new technologies for clean water, clean energy, and clean cities.
         Just as importantly, we can continue to increase our social technology.
-    * Social Technology
+    * Social Technology  (4:30)
         What do I mean by "social technology"? I've used that term twice now, but
         when I say "technology" you're probably thinking of breathing tubes or
         computers. What I mean is that social technologies enable us to continue
         producing more with the resources we have, just as the technologies
         given to us by science do.
-    * Long term (4:30)
+    * Long term
         colonize other planets, create refuges from large disasters. Mainly
         just allow ourselves to think about what could happen; don't be
         scared of by its "weirdness"
     * Thanks
+
+deleted:
