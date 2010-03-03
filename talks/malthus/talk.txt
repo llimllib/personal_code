@@ -14,20 +14,25 @@
         and including the perfection of human society.
     * Malthus (:30)
         Opposing this view was the reverend Thomas Robert Malthus.
-        One of the greatest economists
-        of all time, his name suffered the worst fate that history has to offer:
-        it was turned into an adjective. To explain what "malthusian" means,
+        A great economist,
+        his name suffered the worst fate that history has to offer:
+        it was turned into an adjective. To understand what "malthusian" means,
         let's talk about what he wrote in 1798
 * The Big Idea
-    * The two principles
-        Malthus starts with two simple principles: People need food, and people
-        are going to keep having sex (and babies).
+    * Food
+        Malthus set out to disprove Godwin, starting with two simple principles:
+        
+        First, that people need food. And since the amount of farms we have
+        are limited by the available land, Malthus reasoned that the food
+        supply must only be able to grow linearly.
+    * Babies
+        Second, that people are going to continue having sex (and with it, babies).
 
-        But there's a problem: each person can have 2 babies, but a given area of 
-        farm can only produce a given quantity of food. That means that
-        people can grow exponentially, while food can only grow linearly.
+        Now, the problem with sex, and babies, at least as far as Malthus is concerned,
+        is that each baby can have two babies, each of them can have two more, and so on and so
+        forth until you have a world full of babies.
     * linear vs. exponential. Doom! (1:00)
-        Here's the graph that everybody thinks Malthus was talking about.
+        Here's a graph of what everybody thinks Malthus was describing.
         Population grows out of control, while food grows slowly. The inevitable
         result is *doom*!!?!
 
