@@ -1,0 +1,49 @@
+<style>
+body {
+  overflow: hidden;
+  margin: 0px;
+  padding: 0px;
+  background: white;
+}
+div {
+  cursor: pointer;
+  text-align: center;
+  padding: 2px;
+  font-size: 0.9em;
+  width: 120px;
+  margin: 2px;
+  background: #cccccc;
+}
+div:hover {
+  background: #aaaaaa;
+}
+#hbnaclhngkhpmpgmfakaghgjbblokeeh {
+  position: absolute;
+  top: -9999px;
+}
+</style>
+<script>
+function copyToClipboard(str) {
+  var obj=document.getElementById("hbnaclhngkhpmpgmfakaghgjbblokeeh");
+  if( obj ){
+    obj.value = str;
+    obj.select();
+    document.execCommand("copy", false, null);
+  }
+}
+function copyallwindows() {
+  win = chrome.windows.getCurrent(function(win) {
+    chrome.tabs.getAllInWindow(win.id, function(tabs) {
+      var s = "<ul>\n";
+      for (var i=0; i < tabs.length; i++) {
+        s += '<li>'+tabs[i].title+' <a href="'+tabs[i].url+'">(Source)</a></li>\n';
+      }
+      copyToClipboard(s);
+      window.close();
+    })
+  });
+  //chrome-extension://knjcakomgdkfclbkoapiobdonobblkab/popup.html
+}
+copyallwindows();
+</script>
+<input id="hbnaclhngkhpmpgmfakaghgjbblokeeh" value="">

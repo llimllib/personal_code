@@ -1,0 +1,13 @@
+{
+  "name": "tabcopy",
+  "version": "1.0",
+  "description": "Copy the open tabs into a buffer",
+  "browser_action": {
+    "default_icon": "tabs.png",
+    "default_title": "copy all tab names",
+    "popup": "popup.html"
+  },
+  "permissions": [
+    "tabs", "http://*/*", "https://*/*"
+  ]
+}
