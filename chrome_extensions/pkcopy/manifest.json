@@ -1,6 +1,6 @@
 {
   "name": "tabcopy",
-  "version": "1.0",
+  "version": "1.1",
   "description": "Copy the open tabs into a buffer",
   "browser_action": {
     "default_icon": "tabs.png",

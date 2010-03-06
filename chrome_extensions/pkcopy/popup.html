@@ -36,8 +36,9 @@ function copyallwindows() {
     chrome.tabs.getAllInWindow(win.id, function(tabs) {
       var s = "<ul>\n";
       for (var i=0; i < tabs.length; i++) {
-        s += '<li>'+tabs[i].title+' <a href="'+tabs[i].url+'">(Source)</a></li>\n';
+        s += '<li>'+tabs[i].title+' (<a href="'+tabs[i].url+'">Source</a>)</li>\n';
       }
+      s += "</ul>";
       copyToClipboard(s);
       window.close();
     })
