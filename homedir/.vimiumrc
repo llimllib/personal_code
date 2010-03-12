@@ -1,0 +1,4 @@
+map q activateLinkHintsMode
+unmap f
+map gn nextTab
+map gN previousTab
