@@ -4,3 +4,4 @@ map gn nextTab
 map gN previousTab
 exclude http://billmill.org
 exclude http*://mail.google.com
+exclude http://espn.go.com/broadband/*
