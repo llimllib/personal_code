@@ -2,6 +2,10 @@ map q activateLinkHintsMode
 unmap f
 map gn nextTab
 map gN previousTab
+#move readability mapping from pb to b
+unmap pb
+map b runReadability
 exclude http://billmill.org
 exclude http*://mail.google.com
 exclude http://espn.go.com/broadband/*
+exclude http://www.google.com/reader/*
