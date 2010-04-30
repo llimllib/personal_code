@@ -1,5 +1,4 @@
 from permute import perm1, perm4, clp_perm, pyorg_perm, xpermutations
-from gray_code import GrayCodeIterator
 from itertools import permutations
 from libpermvis import graph
 
@@ -14,7 +13,9 @@ def transpose(l):
 #perms 1*, 2, 3, pyorg_perm and python's permutation are all
 #lexical permutations
 for algo in [perm1, perm4, clp_perm, pyorg_perm, xpermutations]:
-  perm = transpose(list(i[:] for i in algo(range(4))))
+  l = range(4)
+  perms = list(i[:] for i in algo(l[:]))
+  perm = [[p.index(i) for p in perms] for i in l]
   ldrawer.draw(
     perm,
     "perm", #title
