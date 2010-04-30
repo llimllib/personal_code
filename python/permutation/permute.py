@@ -232,7 +232,7 @@ def perm5(lst):
 
 def clp_perm(l):
     """yanked and modified from: 
-    http://mail.python.org/pipermail/python-list/2002-November/171907.html"""
+    http://mail.python.org/pipermail/python-list/2002-November/170393.html"""
     if len(l) == 1: yield l; return
 
     pop, insert, append = l.pop, l.insert, l.append
