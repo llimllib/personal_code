@@ -5,3 +5,6 @@ map gN previousTab
 exclude http://billmill.org
 exclude http*://mail.google.com
 exclude http://espn.go.com/broadband/*
+exclude http://spreadsheets.google.com/*
+exclude http://spreadsheets0.google.com/*
+exclude http://docs.google.com/*
