@@ -49,13 +49,6 @@ set nohls
 "insert one character
 noremap <C-i> i<space><esc>r
 
-"Load nemerle files as utf-8 by default
-augroup nemerle
-	au!
-	autocmd BufNewfile,BufReadPre *.n
-		\ set fencs=ucs-bom,utf-8,iso-8859-2 fenc=utf-8
-augroup END
-
 "Gui tabs only show the filename
 set guitablabel=%t
 
