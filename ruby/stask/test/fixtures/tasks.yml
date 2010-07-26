@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  expected_time: 1.5
+  complete: false
+  actual_time: 1.5
+
+two:
+  name: MyString
+  expected_time: 1.5
+  complete: false
+  actual_time: 1.5

@@ -1,0 +1,15 @@
+<h1>Tasks</h1>
+<!-- TODO:  
+* integrate a user plugin 
+* do AJAX with prototype
+-->
+Add a task: 
+<form id="taskform">
+<input type="text" id="task">
+<input type="submit">
+</form>
+<p> <hr>
+<% Task.all.each do |t| %>
+  <%= t.name %>
+  <hr>
+<% end %>

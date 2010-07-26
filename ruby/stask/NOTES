@@ -1,0 +1,8 @@
+* validation goes in model:
+
+class Post < ActiveRecord::Base
+  validates_presence_of :name, :title
+  validates_length_of :title, :minimum => 5
+end
+
+* scaffold generates :resource which has a default add/delete model form
