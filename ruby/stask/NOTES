@@ -6,3 +6,6 @@ class Post < ActiveRecord::Base
 end
 
 * scaffold generates :resource which has a default add/delete model form
+* <%=h post.name %> means "sanitize post.name for HTML output"
+* edit_<model>_path links to rails' :resource edit for that model
+* form_for block to create a form

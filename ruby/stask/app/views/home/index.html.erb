@@ -4,12 +4,17 @@
 * do AJAX with prototype
 -->
 Add a task: 
-<form id="taskform">
-<input type="text" id="task">
-<input type="submit">
-</form>
+<% form_for(@task) do |t| %>
+  <%= t.error_messages %>
+
+  <p>
+    <%= t.label :name %>:
+    <%= t.text_field :name %>
+    <%= t.submit "add" %>
+<% end %>
 <p> <hr>
-<% Task.all.each do |t| %>
+<% @tasks.each do |t| %>
   <%= t.name %>
+  <%= link_to 'edit', edit_task_path(t) %>
   <hr>
 <% end %>
