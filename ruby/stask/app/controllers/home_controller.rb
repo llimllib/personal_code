@@ -15,7 +15,7 @@ class HomeController < ApplicationController
     respond_to do |format|
       if @task.save
         flash[:notice] = 'Task was successfully created.'
-        format.html { redirect_to(index) }
+        format.html { redirect_to("home#index") }
         format.xml  { render :xml => @task, :status => :created,
                     :location => @task }
       else

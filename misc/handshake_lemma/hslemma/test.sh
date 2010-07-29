@@ -1,0 +1,1 @@
+DJANGO_SETTINGS_MODULE=settings python print_all.py
