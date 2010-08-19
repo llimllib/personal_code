@@ -3,8 +3,29 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 
+"this group is recommended by http://items.sjbach.com/319/configuring-vim-right
+set ignorecase 
+set smartcase
+set title
+set scrolloff=3
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set hidden
+nnoremap ' `
+nnoremap ` '
+let mapleader = ","
+set history=1000
+runtime macros/matchit.vim
+
+" Stolen from http://github.com/ask/ask-vimrc/blob/master/vimrc
+set completeopt=menuone,longest,preview
+set hidden
+set complete+=k
+
 if has("gui_running")
-    colorscheme breeze 
+    " colorscheme breeze 
+    colorscheme idleFingers
+    set antialias
 else
     colorscheme delek
 endif
@@ -23,7 +44,6 @@ set foldlevel=999
 " Syntax Highlighting
 if &t_Co > 2 || has("gui_running")
   syntax on
-  set hlsearch
 endif
 
 map <C-J> <C-W>j
@@ -33,6 +53,14 @@ map <C-H> <C-W>h
 map <C-_> <C-W>_
 imap <C-D> require 'ruby-debug'; debugger
 nmap <C-D> orequire 'ruby-debug'; debugger
+
+"insert one character
+noremap <C-i> i<space><esc>r
+
+",t opens fuzzy file, ,vt and ,ht open with vertical or horiz split
+map <silent> <leader>t :FufFile **/<CR>
+map <silent> <leader>vt :vnew<CR>:FufFile **/<CR>
+map <silent> <leader>ht :new<CR>:FufFile **/<CR>
 
 "try this again
 set autoindent
@@ -45,9 +73,6 @@ set ruler
 
 "don't highlight searches
 set nohls
-
-"insert one character
-noremap <C-i> i<space><esc>r
 
 "Gui tabs only show the filename
 set guitablabel=%t
@@ -81,8 +106,6 @@ map gN gT
 " rotate windows down or right
 
 set vb t_vb=
-
-let g:dbext_default_profile_PG = 'type=PGSQL:user=fuse_fuse:dbname=fusebox'
 
 function! MyLabel(n)
   if exists('t:name')
@@ -125,3 +148,9 @@ if has("spell")
   set sps=best,10                    
 endif
 
+"source *.as as flash files
+autocmd BufRead *.as set filetype=actionscript
+autocmd BufRead *.mxml set filetype=mxml
+
+" http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html ?
+set backupskip=/tmp/*,/private/tmp/*" 
