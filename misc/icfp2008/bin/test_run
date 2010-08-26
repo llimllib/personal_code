@@ -1,0 +1,66 @@
+#!/usr/bin/ruby
+require 'rubygems'
+require "socket"  
+require 'thread'
+require 'open3'
+
+results = {"success" => 0,
+           "martians" => 0,
+           "crater" => 0,
+           "timeout" => 0,
+           "total score" => 0}
+n_tests = 0
+
+def d(x)
+    nil
+    #puts x if true
+end
+
+for i in Dir.glob("../maps/*.wrld").reverse
+    d "../server/server -p 9999 ../maps/#{i}"
+    argle = Thread.new do
+      `../server/server -v -p 9999 ../maps/#{i} &> /dev/null`
+    end
+    sleep 1
+    d "server started"
+    out = ""
+    bargle = Thread.new do
+        Dir.chdir ".."
+        out = `bin/run localhost 9999 --test`
+        Dir.chdir "bin"
+    end
+    bargle.join
+    d out
+    runs = []
+    out.split("\n").each {|x| eval(x[1...-1])}
+    d runs
+
+    totals = {"success" => 0,
+              "martians" => 0,
+              "crater" => 0,
+              "timeout" => 0,
+              "total score" => 0}
+    runs.each do |ult, t|
+        totals[ult] += 1
+        totals["total score"] += t
+        results[ult] += 1
+        results["total score"] += t
+        n_tests += 1
+    end
+    puts "Successfully ran #{i}"
+    totals.each do |(k,v)|
+        puts "#{k}: #{v}"
+    end
+    
+    d "test run over"
+    `pkill -f wrld`
+    d "server killed"
+end
+
+puts "**************Complete!****************"
+puts "successes: #{results["success"]}"
+puts "martians: #{results["martians"]}"
+puts "craters: #{results["crater"]}"
+puts "timeouts: #{results["timeout"]}"
+puts "ran #{n_tests} tests with a total score of #{results["total score"]}"
+puts "for an average of: #{results["total score"] / n_tests}"

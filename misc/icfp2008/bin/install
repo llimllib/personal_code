@@ -1,0 +1,3 @@
+#!/bin/sh
+cd src/robot2
+./build.sh

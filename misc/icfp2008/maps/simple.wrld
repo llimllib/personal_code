@@ -1,0 +1,68 @@
+{
+    "size" : 200,
+    "timeLimit" : 10000,
+    "vehicleParams" : {
+        "maxSpeed" : 20,
+        "accel" : 2,
+        "brake" : 3,
+        "turn" : 20,
+        "hardTurn" : 60,
+        "frontView" : 60,
+	"rotAccel" : 120,
+        "rearView" : 30
+      },
+    "martianParams" : {
+        "maxSpeed" : 20,
+        "accel" : 2,
+        "brake" : 3,
+        "turn" : 20,
+        "hardTurn" : 60,
+	"rotAccel" : 120,
+        "frontView" : 60,
+        "rearView" : 30
+      },
+    "craters" : [
+
+      ],
+    "boulders" : [
+     {
+            "x" : 0,
+            "y" : 30,
+            "r" : 2
+          }
+      ],
+    "runs" : [
+        {
+            "vehicle" : {
+                "x" : 0,
+                "y" : 50,
+                "dir" : 270
+              },
+            "enemies" : [
+             {
+                    "x" : -5,
+                    "y" : 5,
+                    "dir" : 135,
+                    "speed" : 0.25,
+                    "view" : 60
+                  }
+              ]
+          },
+        {
+            "vehicle" : {
+                "x" : -25,
+                "y" : 25,
+                "dir" : -45
+              },
+            "enemies" : [
+            {
+                "x" : -5,
+                "y" : 5,
+                "dir" : 135,
+                "speed" : 0.25,
+                "view" : 60
+              }
+              ]
+          }
+      ]
+  }

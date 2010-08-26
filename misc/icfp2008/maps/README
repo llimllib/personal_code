@@ -1,0 +1,8 @@
+Here are some sample maps that you can use to test your rover. The difficulty level in these
+maps increases from the top of the list to the bottom.
+
+       map			boulders	craters		# of enemies	# of runs
+       simple-small.wrld	sparse		none		0		3
+       small-scatter.wrld	dense		dense		5		5
+       spiral.wrld		dense spiral	sparse		4		5
+

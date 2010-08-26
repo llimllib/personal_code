@@ -1,0 +1,82 @@
+#!/usr/bin/ruby
+require "socket"  
+require 'thread'
+require 'open3'
+
+DEBUG = false
+TEST = ARGV.index "--test"
+
+def d(s)
+  p s if DEBUG and !TEST
+end
+
+Thread.abort_on_exception = true
+class TCPSocket
+ def readable?(deb=false)
+   r,w,e = IO.select([self],nil,nil,2)
+   return r != nil
+ end
+end
+class IO
+  def readable?(which)
+    r,w,e = IO.select([self],nil,nil,2)
+    return r != nil
+  end
+end
+
+host,port= ARGV.empty? ? ['localhost',17676] : ARGV.select {|x| !x.index "--"}
+d "connecting to #{host}:#{port}"
+rover = TCPSocket.new(host,port)
+d "connected."
+rr_in,rr_out,rr_err = Open3.popen3('bin/robot2',"w+")
+d "started router"
+runs = 1
+
+b = Thread.new do
+  while !rover.closed? and rr_out.readable?('b1')
+    k = rr_out.gets.chomp
+    d "Getting: #{k}"
+    rover.write(k)
+  end
+end
+c = Thread.new do
+  while !rover.closed? and rr_err.readable?('c')
+    d "Finder seyz: #{rr_err.gets.chomp}"
+  end
+end
+
+prev_code = ""
+a = Thread.new do
+  while rover.readable? and runs < 6
+    str = ''
+    loop do
+      runs += 1 if str.length==1 and str[0]=='E'[0] 
+      str += rover.getc.chr
+
+      break if str[-1] == ';'[0]
+    end
+
+    if TEST
+       if str[0] == 'E'[0]
+         if prev_code == 'S'[0]
+           p "runs << ['success', #{str.split[-2]}]"
+         elsif prev_code == 'K'[0]
+           p "runs << ['martians', #{str.split[-2]}]"
+         elsif prev_code == 'C'[0]
+           p "runs << ['crater', #{str.split[-2]}]"
+         else
+           p "runs << ['timeout', #{str.split[-2]}]"
+         end
+       else
+         prev_code = str[0]
+       end
+    end
+
+    d "Giving: #{str}"
+    rr_in.write(str+"\n")
+  end
+end
+a.join
+
+d "closing connection"
+rover.close

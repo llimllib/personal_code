@@ -1,0 +1,3 @@
+bin/run handles communication with the rover, and pipes telemetry and such to a specified program. 
+The program then spits back the command, and bin/run relays it back to the rover.
+

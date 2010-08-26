@@ -1,0 +1,137 @@
+{
+    "size" : 100,
+    "timeLimit" : 30000,
+      "vehicleParams" : {
+        "maxSpeed" : 20,
+        "accel" : 2,
+        "brake" : 3,
+        "turn" : 20,
+        "hardTurn" : 60,
+        "frontView" : 60,
+        "rotAccel" : 120,
+        "rearView" : 30
+      },
+      "martianParams" : {
+        "maxSpeed" : 20,
+        "accel" : 2,
+        "brake" : 3,
+        "turn" : 20,
+        "hardTurn" : 60,
+        "frontView" : 60,
+        "rotAccel" : 120,
+        "rearView" : 30
+      },
+      "craters" : [
+     {
+            "x" : 5,
+            "y" : 5,
+            "r" : 2
+     },
+     {
+            "x" : -5,
+            "y" : -5,
+            "r" : 2
+     },
+     {
+            "x" : 5,
+            "y" : -5,
+            "r" : 2
+     },
+     {
+            "x" : -5,
+            "y" : 5,
+            "r" : 2
+     },
+     {
+            "x" : -2,
+            "y" : 6.5,
+            "r" : 0.5
+     },
+     {
+            "x" : 2,
+            "y" : 6.5,
+            "r" : 0.5
+     },
+     {
+            "x" : 6.5,
+            "y" : -2,
+            "r" : 0.5
+     },
+     {
+            "x" : 6.5,
+            "y" : 2,
+            "r" : 0.5
+     },
+     {
+            "x" : 2,
+            "y" : -6.5,
+            "r" : 0.5
+     },
+     {
+            "x" : -2,
+            "y" : -6.5,
+            "r" : 0.5
+     },
+     {
+            "x" : -6.5,
+            "y" : 2,
+            "r" : 0.5
+     },
+     {
+            "x" : -6.5,
+            "y" : -2,
+            "r" : 0.5
+     }
+      ],
+      "boulders" : [
+      ],
+      "runs" : [
+     {
+            "vehicle" : {
+                    "x" : 0,
+                    "y" : 90,
+                    "dir" : 270
+            },
+            "enemies" : [
+             ]
+     },
+     {
+            "vehicle" : {
+                    "x" : 90,
+                    "y" : 90,
+                    "dir" : -80
+            },
+            "enemies" : [
+             ]
+     },
+     {
+            "vehicle" : {
+                    "x" : -90,
+                    "y" : 90,
+                    "dir" : 0
+            },
+            "enemies" : [
+             ]
+     },
+     {
+            "vehicle" : {
+                    "x" : 20,
+                    "y" : 20,
+                    "dir" : 180
+            },
+            "enemies" : [
+             ]
+     },
+     {
+            "vehicle" : {
+                    "x" : 90,
+                    "y" : 10,
+                    "dir" : 10
+            },
+            "enemies" : [
+             ]
+     }
+
+    ]
+}
+
