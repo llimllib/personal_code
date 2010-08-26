@@ -1,0 +1,10 @@
+* gravity
+  * If you add the *= .999 that he suggests in gravity, very little effect
+    * If you make it .99, the +GRAVITY factor means
+      that the ball never stops bouncing up and down
+  * default ball *gains* energy
+*TODO
+  * spell check
+  * formatting
+    * commas without spaces in front of them
+    * blank lines in source code
