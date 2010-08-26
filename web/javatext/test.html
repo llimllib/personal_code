@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>yo</title>
+<script type="text/javascript" src="jquery-1.2.6.js"></script>
+
+<!-- uncomment to enable firebug lite
+<script type='text/javascript' 
+        src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'>
+        </script>
+-->
+
+<script type="text/javascript" src="javatext.js"></script>
+<script type="text/javascript">
+theta = 0;
+
+function drawString() {
+  var ctx = $("#canvas")[0].getContext("2d");
+
+  //DELETEME: this is just for debugging
+  c = ctx;
+
+  ctx.restore();
+  ctx.clearRect(0,0,1500,1500);
+  ctx.save();
+
+  ctx.translate(300,300);
+  theta -= .01;
+  ctx.font = "300px Helvetica";
+  ctx.rotate(theta);
+  ctx.fillStyle="rgba(0,200,0,.5)"
+  ctx.fillRect(0,0,400,1);
+  ctx.fillStyle="rgb(0,0,0)"
+  ctx.translate(10,150);
+  ctx.strokeText(document.inputPlace.words.value, 0,0,0);
+}
+
+$(document).ready(function(){
+});
+</script>
+</head>
+<body>
+<applet code="Text.class" width=0 height=0 name="texter" MAYSCRIPT></applet>
+<form name="inputPlace">
+<INPUT TYPE="text" SIZE=30 NAME="words" value="abcdefghijklmnopqrstuvwxyz"><BR>
+<INPUT TYPE="button" VALUE="SetString" onClick= "setInterval('drawString()', 10); return false;"> 
+</form>
+<canvas width="1500" height="1500" id="canvas" style="border: 1px solid black;">canvas fail</canvas>
+
+</body>
+</html>

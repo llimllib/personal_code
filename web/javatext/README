@@ -1,0 +1,15 @@
+all code released under the WTFPL http://sam.zoy.org/wtfpl/
+
+TODO: 
+* load a font file from an URL
+* include a font file in an applet jar
+* better compatibility with the canvas spec
+  ( http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#dom-context-2d-font )
+  * real font string parsing (sigh...)
+  * maxWidth param in fillText and StrokeText
+  * textAlign field
+  * textBaseline field
+  * test what their defaults are and copy them
+* tests!
+  * how, exactly?
+* can this go any faster in firefox? it's a dog.
