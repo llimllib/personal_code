@@ -47,7 +47,6 @@ alias s="sl"
 alias l="sl"
 
 alias ls='ls -FG'
-PS1="\[\033[1;34m\]\@ \[\033[1;32m\]\w\[\033[0m\]\$ "
 
 export PAGER=less
 export CVS_RSH=ssh
