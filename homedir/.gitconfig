@@ -1,0 +1,13 @@
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[user]
+	name = bill
+	email = bill.mill@gmail.com
+[core]
+  # search for core.pager in
+  # <http://www.kernel.org/pub/software/scm/git/docs/git-config.html>
+  # to see why we use this convoluted syntax
+  pager = less -$LESS -SFRX -R +'/^---'
