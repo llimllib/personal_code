@@ -20,7 +20,7 @@ class CWRvertex:
     # 3: left, down (TEN)
     def __init__(self, parent=None):
         self.father = parent 
-        self.CWR = parent.CWR if parent else []
+        self.CWR = parent.CWR[:] if parent else []
         self.depth = parent.depth+1 if parent else 0 
         self.children = []
         if self.father:
