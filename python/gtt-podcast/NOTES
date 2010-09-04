@@ -1,0 +1,3 @@
+the gtt rss feed is available at: http://gdata.youtube.com/feeds/base/users/GoogleTechTalks/uploads?alt=rss&v=2&orderby=published&client=ytapi-youtube-profile
+
+just do ffmpeg -i <input file name> <output file name>
