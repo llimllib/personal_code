@@ -27,9 +27,9 @@ class CWRvertex:
             self.father.children.append(self)
 
     def __str__(self):
-        word1 = self.CWR[1] or "   "
-        word2 = self.CWR[2] or "   "
-        word3 = self.CWR[3] or "   "
+        word1 = self.CWR[1] if len(self.CWR) > 1 else "   "
+        word2 = self.CWR[2] if len(self.CWR) > 2 else "   "
+        word3 = self.CWR[3] if len(self.CWR) > 3 else "   "
         return """{0}
 {1}#{2}
 {3}
