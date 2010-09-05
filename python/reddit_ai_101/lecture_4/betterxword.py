@@ -29,16 +29,19 @@ class Node:
 {3}
 ----""".format(self.words[0], word3[1], word1[1], word2)
 
-def makegraph(words, root=None):
+def makegraph(words):
     for word in words:
-        if not root:
-            root = Node(word)
+        root = Node(word)
+        _makegraph(words, root)
+
+def _makegraph(words, root):
+    for word in words:
         if root.fits(word):
             n = Node(word, root)
             if n.complete():
                 print(n)
             else:
-                makegraph(words, n)
+                _makegraph(words, n)
 
 if __name__ == "__main__":
     makegraph(getwords("words.txt"))
