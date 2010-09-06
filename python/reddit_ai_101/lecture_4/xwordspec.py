@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-from copy import copy
+from copy import copy, deepcopy
 import re
 
 def getwords(dictionary_filename):
@@ -65,16 +65,13 @@ class Xword:
     def insert(self, word, s):
         (x1, y1), (x2, y2) = word
         letters = list(s)
-        print("inserting letters {0}".format(s))
         if x1 == x2:
             for i in range(y1, y2+1):
                 letter = letters[i-y1]
-                print ("inserting {letter} into {i},{x1}. {y1}".format(**locals()))
                 self.mtx[i][x1] = letters[i-y1]
         else:
             for i in range(x1, x2+1):
                 letter = letters[i-x1]
-                print ("inserting {letter} into {y1},{i}. {x1}".format(**locals()))
                 self.mtx[y1][i] = letters[i-x1]
 
     def getnextword(self):
@@ -85,8 +82,8 @@ class Xword:
     def copy(self):
         x = Xword()
         x.spec = self.spec
-        x.mtx = copy(self.mtx)
-        x.words = copy(self.words)
+        x.mtx = deepcopy(self.mtx)
+        x.words = self.words
         x.nextword = self.nextword
         return x
 
@@ -101,7 +98,6 @@ class Node:
         self.xword = xword
         self.word = word
         self.xword.insert(self.xword.getnextword(), word)
-        print(self.xword)
 
     def complete(self): return self.xword.complete()
 
@@ -110,6 +106,8 @@ class Node:
             return True
         return False
 
+    def __str__(self):
+        return self.word + ":\n\n" + str(self.xword)
 
 def makegraph(words, spec):
     for word in words:
