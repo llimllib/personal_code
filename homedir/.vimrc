@@ -1,7 +1,32 @@
+"don't be compatible with old vi
+set nocompatible
+
 set shiftwidth=4
 set tabstop=4
 set expandtab
 set softtabstop=4
+
+" Disable the F1 help key
+map <F1> <Esc>
+imap <F1> <Esc>
+
+" http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+vnoremap <silent> j gj
+vnoremap <silent> k gk
+
+" Automatically read files which have been changed outside of Vim, if we
+" haven't changed it already.
+set autoread
+
+"keep the cursor in the middle of the screen
+set scrolloff=999
+
+"turn off swap files
+set nobackup
+set nowritebackup
+set noswapfile
 
 "this group is recommended by http://items.sjbach.com/319/configuring-vim-right
 set ignorecase 
@@ -106,21 +131,21 @@ map gN gT
 " rotate windows down or right
 
 set vb t_vb=
+"
+"load better yaml syntax
+au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/syntax/yaml.vim
 
-function! MyLabel(n)
-  if exists('t:name')
-    return t:name
-  else
-    return ''
-  endif
-endfunction
+"load better ChuCK syntax
+au BufNewFile,BufRead *.ck         setf ck 
 
-function! MyGuiTabLine()
- let s = '%{MyLabel(' . tabpagenr() . ')}'
- return s
-endfunction
-
-set guitablabel=%!MyGuiTabLine()
+function! MyLabel() 
+  if exists('t:name') 
+    return t:name 
+  else 
+    return '' 
+  endif 
+endfunction 
+set guitablabel=%{MyLabel()} 
 
 " vim -b : edit binary using xxd-format!
 augroup Binary
@@ -133,6 +158,18 @@ augroup Binary
   au BufWritePost *.ttf,*.dfont if &bin | %!xxd
   au BufWritePost *.ttf,*.dfont set nomod | endif
 augroup END
+
+augroup myfiletypes
+  "clear old autocmds in group
+  autocmd!
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml set sw=2 sts=2 et
+  autocmd FileType python set sw=4 sts=4 et
+  autocmd FileType javascript set sw=2 sts=2 et
+augroup END
+
+" http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html ?
+set backupskip=/tmp/*,/private/tmp/*" 
 
 if has("spell")
   " turn spelling off by default
@@ -154,3 +191,8 @@ autocmd BufRead *.mxml set filetype=mxml
 
 " http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html ?
 set backupskip=/tmp/*,/private/tmp/*" 
+
+"If set to 1 then you can leave the Conque buffer using the <C-w> commands while you're still in insert mode. If set to 0 then the <C-w> character will be sent to the terminal. If both this option and ConqueTerm_InsertOnEnter are set you can go in and out of the terminal buffer while never leaving insert mode.
+let g:ConqueTerm_CWInsert = 1
+
+command PythonShell :set nolist | ConqueTermSplit ipython
