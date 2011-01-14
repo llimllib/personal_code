@@ -1,0 +1,205 @@
+<html><head><title>collision test</title>
+<style type="text/css">
+body, html {margin:0;
+            padding:0;
+            background:white;
+            color:#000;
+}
+body { font-size: 62.5%; }
+#main { font-size: 1.8em; margin:0 auto; width:900px; }
+#codebox {border: 1px solid LightGray;
+            /* TODO: good width? */
+          width:500px;
+          margin-top: 10px;
+}
+
+.canvas { border: 1px solid DarkGray; }
+a:link { color: #333; }
+a:visited { color: #999; }
+h1 { font: Strong 18px Cambria, Georgia, Times New Roman, Calibri, serif;
+     margin-left: 10px;
+}
+    </style>
+<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="sylvester/lib/sylvester.js"></script>
+<script type="text/javascript" src="codemirror/codemirror.js"></script>
+<script type="text/javascript">
+function Api(canvas) {
+    if ( !(this instanceof arguments.callee) ) 
+        return new Api(canvas); 
+
+    this.ctx = canvas.getContext("2d");
+
+    this.line = function(x1, y1, x2, y2) {
+        this.ctx.beginPath();
+        this.ctx.moveTo(x1, y1);
+        this.ctx.lineTo(x2, y2);
+        this.ctx.stroke()
+        this.ctx.closePath();
+    }
+    
+    this.circle = function(x, y, r) {
+        this.ctx.beginPath();
+        this.ctx.arc(x, y, 10, 0, Math.PI*2, true); 
+        this.ctx.closePath();
+        this.ctx.fill();
+    }
+
+    this.clear = function(x, y, w, h) {
+        this.ctx.clearRect(x, y, w, h);
+    }
+
+    //EVENT FUNCTIONS
+    var mousemove_receivers = [];
+    this.mousemove = function(f) {
+        mousemove_receivers.push(f);
+    }
+
+    var canvasMinX = $(canvas).offset().left;
+    var canvasMaxX = canvasMinX + canvas.width;
+    var canvasMinY = $(canvas).offset().top;
+    var canvasMaxY = canvasMinY + canvas.height;
+
+    $(canvas).mousemove(function (evt) {
+        if (evt.pageX > canvasMinX &&
+            evt.pageX < canvasMaxX &&
+            evt.pageY > canvasMinY &&
+            evt.pageY < canvasMaxY) {
+            //translate coordinates into canvas terms
+            mousex = evt.pageX - canvasMinX;
+            mousey = evt.pageY - canvasMinY;
+            $.each(mousemove_receivers, function (i, f) {
+                f(mousex, mousey);
+            });
+        }
+    });
+
+    var mouseup_receivers = [];
+    this.mouseup = function(f) { mouseup_receivers.push(f); }
+    $(canvas).mouseup(function (evt) {
+        $.each(mouseup_receivers, function(i, f) { f(); });
+    });
+
+    var mousedown_receivers = [];
+    this.mousedown = function(f) { mousedown_receivers.push(f); }
+    $(canvas).mousedown(function (evt) {
+        $.each(mousedown_receivers, function(i, f) { f(); });
+    });
+}
+
+intervals = {}
+function runCode() {
+    var idn = this.id.match(/(\d+)/)[0];
+
+    if (intervals[idn] != undefined)
+        clearInterval(intervalID);
+
+    var canvas = $("#canvas" + idn)[0];
+    $(canvas).unbind();
+
+    api = Api(canvas);
+
+    var ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //TODO: handle exceptions somehow
+    intervals[idn] = eval(editors[idn-1].getCode());
+}
+
+//XXX: right now we save a reference to all editors and just grab the one we want
+//     can we do it by dynamically grabbing it instead?
+editors = [];
+$(document).ready(function(){ 
+    $("textarea.code").each(function() {
+        editors.push(CodeMirror.fromTextArea(this.id, {
+          parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
+          path: "codemirror/",
+          stylesheet: "codemirror/jscolors.css",
+          width: "700px",
+          //TODO: make this variable based on # of lines in the textarea
+          height: $(this).css("height"),
+        }));
+    });
+	$(".runButton").click(runCode).removeAttr("disabled");
+});
+</script>
+
+</head><body>
+<div id="main">
+<a name="chap1"></a>
+    <div class="desc">
+        A line:
+    </div>
+    <div id="codebox">
+        <textarea class="code" id="code" style="width:700px; height:131px">ctx.beginPath();
+ctx.moveTo(10, 10);
+ctx.lineTo(100, 100);
+ctx.stroke()
+ctx.closePath();
+api.mousemove(function(x,y) {
+    console.log(x,y);
+});</textarea>
+    </div>
+    <input type="submit" value="run code" class="runButton" id="run1" disabled/><br>
+    <canvas class="canvas" id="canvas1" width="300" height="300"></canvas>
+<a name="chap2"></a>
+    <div class="desc">
+        A draggable ball:
+    </div>
+    <div id="codebox">
+        <textarea class="code" id="code2" style="width:700px; height: 431px;">function DragBall(x,y) {
+    if ( !(this instanceof arguments.callee) ) 
+        return new DragBall(x, y); 
+
+    var x = 0;
+    var y = 0;
+    var mousedown = false;
+    var rad = 10;
+    var that = this;
+
+    this.draw = function() {
+        api.circle(x, y, rad);
+    }
+
+    api.mousemove(function(xx, yy) {
+        if (mousedown) {
+            console.log("moving to ", xx, yy);
+            x = xx;
+            y = yy;
+            that.draw();
+        }
+    });
+
+    api.mousedown(function() {
+        mousedown = true;
+    });
+
+    api.mouseup(function() {
+        mousedown = false;
+    });
+
+    this.draw();
+}
+
+d = new DragBall(30, 30);
+
+$(canvas).mousedown(function(evt) {
+  mousedown = true;
+});
+
+$(canvas).mouseup(function(evt) {
+  mousedown = false;
+});
+
+function drawball(x, y) {
+  ctx.beginPath();
+  ctx.arc(x, y, 10, 0, Math.PI*2, true); 
+  ctx.closePath();
+  ctx.fill();
+}
+</textarea>
+    </div>
+    <input type="submit" value="run code" class="runButton" id="run2" disabled/><br>
+    <canvas class="canvas" id="canvas2" width="300" height="300"></canvas>
+</div>
+</body></html>
