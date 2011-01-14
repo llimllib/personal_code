@@ -1,0 +1,16 @@
+I would like to study problems at the border of computer science, game theory, and economics. I've wanted to continue to do computer science research since I left college, but I didn't find my research topic until I was working for a bookseller writing pricing robots that arbitraged the different prices between books on online markets.
+
+As a junior in college, I won a summer fellowship to study the application of neural network problems to the game of go, having neither played the game nor worked with neural networks before, under an advisor who did not know how to program. I spent the summer reading, learning to play go, and discovering just how much I didn't know. I learned a lot, became a terrible go player, and wrote a survey paper.
+
+As a senior I returned to research, this time with more direction, working to extend the doctoral research of my department's new professor. This time I researched and wrote a paper examining the relationship between term coocurrences and their corresponding values under singular value decomposition.  Although the paper was not accepted anywhere, Google Scholar shows that it's since been cited 5 times.  
+
+After school, I worked a boring job for a year before I found a position with a company whose main revenue stream was selling used books on several markets online. I worked with them to improve that system's pricing of books that we had on hand, and helped develop a system to arbitrage book prices on different markets. It was here that I developed my fascination with markets, pricing, and the interaction of computer agents with the human world.
+
+Outside of work, coding has been an important practice for me. At
+http://billmill.org there are links to and articles about projects that I've
+hacked on in my spare time. At the book company, one project required me to
+draw trees representing flow charts of which books would be kept and which
+would be recycled. That project led me to some interesting reading, so I dug
+back into the literature and wrote a history of several graph-drawing algorithms, implementing each of the algorithms I found from Knuth in 1971 up to Buchheim in 2002. The resulting article was published in Python magazine.
+
+I've been out of college and experienced a bit of the Real World now, but the desire to do research has never left me, and I think that the Center for Complex Network Research would be a perfect fit for my interests. Social networks provide us with a new and nearly limitless source for data and experiments, and Dr. Barabási and his colleagues are leading the way in exploring it. I'd love to work exploring it with them.

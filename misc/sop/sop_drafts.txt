@@ -1,0 +1,33 @@
+---------------------
+-- First para drafts
+----------------------
+What I want to do is study the application of computer science techniques to
+economic and other human problems.
+
+What I want to do is to study the thory of computer science at the border
+between human and machine interaction.
+
+I would like to study the theory of computer science at the point where it
+meets human endevour. I am fascinated by theoretical results like Braess'
+paradox which have something to say about how we organize ourselves.
+
+(Question: should I not mention the applicability of algorithms to human
+endeavor? Many think that the theory should be studied for its own sake.)
+
+We live in a world full of markets populated by both human and robot
+participants. The algorithmic complexities of this world are just beginning to
+be mapped out, and are developing along with the markets.
+
+The market as an emergent phenomenon 
+
+At the border of computer science, game theory, and economics, a whole range of
+questions are just beginning to be asked for which there is no clear answer.
+There are many areas where the questions haven't even been asked yet. 
+
+I would like to study problems at the border of computer science, game theory,
+and economics. I've wanted to continue to do computer science research since I
+left college, but I didn't find my research topic until I was working for a
+bookseller writing pricing robots that arbitraged the different prices between
+books on several different online markets.
+
+-----
