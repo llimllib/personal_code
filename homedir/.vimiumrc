@@ -1,4 +1,4 @@
-map q activateLinkHintsMode
+map q linkHints.activateMode
 unmap f
 map gn nextTab
 map gN previousTab
