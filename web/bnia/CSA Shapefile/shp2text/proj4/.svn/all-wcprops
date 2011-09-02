@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/metacrs/!svn/ver/1674/proj/trunk/proj
+END
+mkinstalldirs
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/metacrs/!svn/ver/791/proj/trunk/proj/mkinstalldirs
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/1632/proj/trunk/proj/configure
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/metacrs/!svn/ver/1593/proj/trunk/proj/Makefile.in
+END
+makefile.vc
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/metacrs/!svn/ver/1459/proj/trunk/proj/makefile.vc
+END
+AUTHORS
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/1609/proj/trunk/proj/AUTHORS
+END
+configure.in
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/metacrs/!svn/ver/1631/proj/trunk/proj/configure.in
+END
+depcomp
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/1071/proj/trunk/proj/depcomp
+END
+ChangeLog
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/1674/proj/trunk/proj/ChangeLog
+END
+config.guess
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/metacrs/!svn/ver/1553/proj/trunk/proj/config.guess
+END
+nmake.opt
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/1656/proj/trunk/proj/nmake.opt
+END
+config.sub
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/metacrs/!svn/ver/1548/proj/trunk/proj/config.sub
+END
+ltmain.sh
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/1419/proj/trunk/proj/ltmain.sh
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/metacrs/!svn/ver/1592/proj/trunk/proj/README
+END
+fixtimes.sh
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/metacrs/!svn/ver/1243/proj/trunk/proj/fixtimes.sh
+END
+proj.spec
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/1456/proj/trunk/proj/proj.spec
+END
+libtool
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/1514/proj/trunk/proj/libtool
+END
+ltconfig
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/791/proj/trunk/proj/ltconfig
+END
+INSTALL
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/1457/proj/trunk/proj/INSTALL
+END
+COPYING
+K 25
+svn:wc:ra_dav:version-url
+V 45
+/metacrs/!svn/ver/814/proj/trunk/proj/COPYING
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/metacrs/!svn/ver/1474/proj/trunk/proj/Makefile.am
+END
+missing
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/metacrs/!svn/ver/1085/proj/trunk/proj/missing
+END
+autogen.sh
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/metacrs/!svn/ver/1544/proj/trunk/proj/autogen.sh
+END
+NEWS
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/metacrs/!svn/ver/1631/proj/trunk/proj/NEWS
+END
+aclocal.m4
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/metacrs/!svn/ver/1419/proj/trunk/proj/aclocal.m4
+END
+HOWTO-RELEASE
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/metacrs/!svn/ver/1644/proj/trunk/proj/HOWTO-RELEASE
+END
+install-sh
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/metacrs/!svn/ver/792/proj/trunk/proj/install-sh
+END

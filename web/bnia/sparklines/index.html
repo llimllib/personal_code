@@ -1,0 +1,285 @@
+<html>
+<head>
+
+     <!--#include virtual="header.html" -->
+    <script type="text/javascript" src="spark.js"></script>
+
+    <title>Joe Gregorio | BitWorking | Projects | Sparklines </title>
+</head>
+<body class='main' id="top" name="top" >
+    <div class="body">
+        <!--#include virtual="titlebar.html" -->
+        <div class='content'>
+            <p>Welcome to the sparkline generator. You can start right away by dynamically
+            creating a sparkline using the <a href="#generator">Sparkline Generator Web Application</a>, or you can read more
+            <a href="#about">about sparklines</a> and decide if you want to use the sparkline 
+            <a href="#service">web service</a> or if you would be better off downloading the <a href="#source">code</a>
+            and running the sparkline service on your own server.
+            </p>
+
+            <!--  ------------ Generator ------------    -->
+            <h3 id="generator" name="generator">Generator</h3>
+            <form method="post" action="">
+                <dl>
+                    <dt>Type of Sparkline</dt>
+                    <dd>
+                        <input type="radio" id="type_s" name="type" value="smooth" checked="checked" /><img src="/spark.cgi?type=smooth&d=88,84,82,92,82,86,66,82,44,64,66,88,96,80,24,26,14,0,0,26,8,6,6,24,52,66,36,6,10,14,30&height=15&step=2"/> 
+                    </dd>
+                    <dd>
+                        <input type="radio" id="type_d" name="type" value="discrete"/><img src="/spark.cgi?type=discrete&d=88,84,82,92,82,86,66,82,44,64,66,88,96,80,24,26,14,0,0,26,8,6,6,24,52,66,36,6,10,14,30&height=15&step=2"/>  
+                    </dd>
+                     <dd>
+                        <input type="radio" id="type_i" name="type" value="impulse"/><img src="/spark.cgi?type=impulse&d=88,84,82,92,82,86,66,82,44,64,66,88,96,80,24,26,14,0,0,26,8,6,6,24,52,66,36,6,10,14,30&height=15&step=2"/>  
+                    </dd>
+                        
+                    <dt>Raw Data</dt>
+                    <dd style="font-size:70%;font-weight:bold">A comma separated list of values to plot.</dd>
+                    <dd>
+                         <input size="50" id="d" value="88,84,82,92,82,86,66,82,44,64,66,88,96,80,24,26,14,0,0,26,8,6,6,24,52,66,36,6,10,14,30"/>
+                    </dd>
+                    <dt>Height of Image</dt>
+                    <dd>
+                        <input style="text-align:right"size="4" id="height" value="20"/> pixels
+                    </dd>
+                    <dt>Limits of Data</dt>
+                    <dd>
+                        <input style="text-align:right"size="12" id="limits" value="0,100"/> (min,max) 
+                    </dd>
+
+                </dl>
+
+                <div id="smooth_specific" style="margin-bottom:1em;">
+                    <dl>
+                        <dt>Special Markers</dt>
+                        <dd>
+                        <input type="checkbox" id="min-m" value="min-m"/> Minimum <input id="min-color" size="6" value="red"/>
+                        </dd>
+                        <dd>
+                            <input type="checkbox" id="max-m" value="max-m"/> Maximum <input id="max-color" size="6" value="blue"/>
+                        </dd>
+                        <dd>
+                            <input type="checkbox" id="last-m" value="last-m"/> Last <input id="last-color" size="6" value="green"/>
+                        </dd>
+                        <dt>Spacing</dt>    
+                        <dd>
+                            <input style="text-align:right" size="3"  id="step" value="2"/> pixels between points.
+                        </dd>
+                    </dl>
+                </div>
+
+                <div id="discrete_specific" style="display:none;margin-bottom:1em;">
+                    <dl>
+                        <dt>Threshhold</dt>
+                        <dd style="font-size:70%;font-weight:bold">Data values &ge; threshhold will be displayed with the Upper color.</dd>
+                        <dd>
+                            <input style="text-align:right" size="3" id="upper" value="90"/> 
+                        </dd>
+                        <dt>Upper Color</dt>
+                        <dd>
+                            <input style="text-align:right" size="6" id="above-color" value="red"/> 
+                        </dd>
+                        <dt>Lower Color</dt>
+                        <dd>
+                            <input style="text-align:right" size="6" id="below-color" value="gray"/> 
+                        </dd>
+                        <dt>Width</dt>    
+                        <dd>
+                            <input style="text-align:right" size="3"  id="width" value="2"/> width in pixels.
+                        </dd>
+
+                    </dl>
+                </div>
+
+
+                <dl style="background-color:rgb(230,230,230);padding: 0.5em 0">
+                    <dt>Your Sparkline</dt>
+                    <dd>
+                        <img style="border: solid rgb(192,192,192) 0.3em" id="output_img" src=""/>
+                    </dd>
+                    <dt>The URI of your sparkline</dt>
+                    <dd>
+                        <input size="50" id="output_uri" value=""/>
+                    </dd>
+                </dl>
+
+                
+            </form>
+
+
+
+
+            <!--  ------------ Web Service ------------    -->
+            <h3 id="service" name="service">Web Service</h3>
+            <p>The service that generates these sparklines is available 
+            for you to use on your own site. The service is just a simple 
+            Python CGI program. If you have the skills you should consider 
+            installing the script on your own server. If you don't, then feel free
+            to use this service.</p>
+
+            <p>The service consists of a single CGI program that takes query parameters
+               that describe the sparkline.</p>
+
+            <pre>
+            <code>http://bitworking.org/projects/sparklines/spark.cgi</code>
+            </pre>
+            <table>
+                <caption>Common Parameters</caption>
+                <tr> <th>Parameter</th>    <th>Description</th> </tr>
+                <tr> <td>d</td>            <td>The data for the plot. All data values must be between 0 and 100, or within the range of 'limits' if that parameter is set. </td></tr>
+                <tr> <td>height</td>       <td>The height of the image in pixels.</td></tr>
+                <tr> <td>limits</td>       <td>The valid range of input data as a comma separated list of min, max.</td></tr>
+                <tr> <td>type</td>         <td>"discrete" - One vertical bar per data point. <br />
+                        "smooth" - all the points plotted as a continuous line. <br/>
+                        "impulse" - Like discrete, but all the lines start at zero.
+                </td></tr>
+            </table>
+
+            <p>If the <tt>type</tt> is "smooth" then the following parameters apply:</p>
+
+            <table>
+                <caption>"Smooth" Parameters</caption>
+                <tr> <th>Parameter</th>    <th>Description</th> </tr>
+                <tr> <td>min-m</td>            <td>If set to 'true', then place a special market at the smallest value in the data set. </td></tr>
+                <tr> <td>max-m</td>            <td>If set to 'true', then place a special market at the largest value in the data set. </td></tr>
+                <tr> <td>last-m</td>            <td>If set to 'true', then place a special market at the last value in the data set. </td></tr>
+                <tr> <td>min-color</td>            <td>The color of the marker placed at the smallest value in the data set. </td></tr>
+                <tr> <td>max-color</td>            <td>The color of the marker placed at the largest value in the data set. </td></tr>
+                <tr> <td>last-color</td>            <td>The color of the marker placed at the last value in the data set. </td></tr>
+                <tr> <td>step</td>       <td>The points are to be plotted every n'th pixel.</td></tr>
+            </table>
+
+            <p>If the <tt>type</tt> is discrete then the following parameters apply:</p>
+
+            <table>
+                <caption>"Discrete" Parameters</caption>
+                <tr> <th>Parameter</th>    <th>Description</th> </tr>
+                <tr> <td>upper</td>        <td>Data values &ge; upper will be plotted in the <code>above-color</code>, otherwise data points will 
+                        be plotted in the <code>below-color</code>. </td>
+                </tr>
+                <tr> <td>above-color</td>        <td>The color for data points &ge; <code>upper</code>. </td></tr>
+                <tr> <td>below-color</td>        <td>The color for data points &lt; <code>upper</code>. </td></tr>
+                <tr> <td>width</td>        <td>The width, in pixels, of each bar.</td></tr>
+            </table>
+
+            <p>Here are some example sparklines and their URIs to get you started.</p>
+
+            <table>
+                <caption><b><i>Examples</i></b></caption>
+                <tr> <th>Sparkline</th>  <th>URI</th> </tr>
+                <tr>
+                    <td><img src="/spark.cgi?type=smooth&amp;d=10,20,30,90,80,70&amp;step=4"/> </td>
+                    <td> <pre><code>http://bitworking.org/projects/sparklines/spark.cgi?
+  type=smooth&amp;d=10,20,30,90,80,70&amp;step=4</code></pre>
+                </td></tr>
+
+                <tr>
+                    <td><img src="/spark.cgi?type=smooth&amp;d=10,20,30,90,80,70&amp;step=4&amp;min-m=true&amp;max-m=true"/> </td><td><pre><code>http://bitworking.org/projects/sparklines/spark.cgi?
+  type=smooth&amp;d=10,20,30,90,80,70&amp;step=4
+  &amp;min-m=true&amp;max-m=true</code></pre>
+                </td>
+            </tr>
+
+            <tr>
+                <td><img src="http://bitworking.org/projects/sparklines/spark.cgi?type=discrete&amp;d=10,20,30,90,80,70"/> </td><td> <pre><code>http://bitworking.org/projects/sparklines/spark.cgi?
+  type=discrete&amp;d=10,20,30,90,80,70</code></pre>
+            </td>
+
+            <tr>
+                <td><img src="http://bitworking.org/projects/sparklines/spark.cgi?type=impulse&amp;d=2,-1,1,3,-2&amp;width=4&amp;limits=-2,3"/> </td><td> <pre><code>http://bitworking.org/projects/sparklines/spark.cgi?
+   type=impulse&amp;d=2,-1,1,3,-2&amp;width=4&amp;limits=-2,3
+            </code></pre>
+            </td>
+ 
+
+        </tr>
+    </table>
+
+
+            <p><a href="#top">[top]</a></p>
+
+            
+            <!--  ------------ Source Code ------------    -->
+            <h3 id="source" name="about">Source Code</h3>
+            <p>The full source code for this web service is freely available. 
+            It is a single Python CGI <a href="spark.py">spark.cgi</a>
+            <dl>
+                <dt>Requirements</dt>
+                <dd><a href="http://www.pythonware.com/products/pil/">Python Imaging Library</a><dd>
+                <dt>License</dt>
+                <dd>The sparkline web service is licensed under the MIT License.<dd>
+            </dl>
+            Copyright 2006 Joe Gregorio.
+            </p>
+            <p><a href="#top">[top]</a></p>
+
+            <!--  ------------ About ------------    -->
+            
+            <h3 id="about" name="about">About</h3>
+            <p><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1&amp;topic=">Sparklines</a>, 
+            as defined by <a href="http://www.edwardtufte.com">Tufte</a>, are intense, simple, word-sized graphics.
+            Kind of like this: <img src="data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%3C%00%00%00%0F%08%02%00%00%007p%3B%26%00%00%01%1BIDATx%9Cb%FC%FF%FF%3F%C3P%03%00%00%00%00%FF%FFb%1Ah%07%90%03%00%00%00%00%FF%FF%22%E4hFF%04I-%80%DF4%22%EC%02%00%00%00%FF%FF%227%A4%A9%EB%0D%E2mddd%60%60%00%00%00%00%FF%FF%A2e%F2%20%DEc%24%06%01%00%00%00%FF%FF%829%1AY%1B%C5%D1G%94.%0A%E2%0A%00%00%00%FF%FF%22%14%D2%90%B2%85%D4%12%06%7F%10%E07%8D%08%BB%00%00%00%00%FF%FFbjll%84sp%B1%897%9A%80.J%00R%F0%01%00%00%00%FF%FF%A2B%9A%868%14%8Bs1%3C%86%A9%06%2ABbL%02%00%00%00%FF%FF%829%1AY%1B%FEP%24%AF2%C2%D4%85%D7%1C%FC1%06%00%00%00%FF%FF%A2%28%A4q%1AMD%10%90%60%1A%06%00%00%00%00%FF%FFb%AA%AF%AF%87sp%B1%89%07%E4%E9%C2%05p%25%3C%00%00%00%00%FF%FF%A2B%9A%868%94%18%E7b%AA%21%CF%93%00%00%00%00%FF%FF%22%C1%D1%D4%0DEJ%EC%02%00%00%00%FF%FF%A2%28%A4%A9%EB%0D%E2M%03%00%00%00%FF%FF%03%00%1B%19J%21uT%D5%80%00%00%00%00IEND%AEB%60%82"> .
+            I found them fascinating and useful and needed a way to generate them.
+            At first I published some simple Python scripts to produce Sparklines, but 
+            since then I have added this page for interactively designing them, 
+            a web service you can use to add them to your own site, and finally
+            the source code to the web service.
+            </p>
+
+            <p>A longer and more detailed description of this web service
+            and application can be found in my article on XML.com, 
+            <a href="http://www.xml.com/pub/a/2005/06/22/sparklines.html">A Bright, Shiny Service: Sparklines</a>.
+            </p>
+
+            <p><b>Feedback:</b> This site and service is by no means complete. If you have 
+            suggestions on how it can be improved please contact me.</p>
+
+            <p><b>Embeddeding:</b> Since sparklines are in general small images, you
+            can embed them directly in HTML with a data: URI. A detailed explaination
+            of how do that, along with Python code, is available
+            in <a href="http://bitworking.org/news/Sparklines_in_data_URIs_in_Python">Sparklines in data: URIs in Python</a>.
+            </p>
+
+            <p>All of the scripts are written in Python. If Python isn't your language
+            then checkout the sparkline code available in other languages:</p>
+
+            <dl>
+                <dt>PHP</dt>
+                <dd> <a href="http://sparkline.org/">http://sparkline.org</a> </dd>
+                <dt>Ruby</dt>
+                <dd><a href="http://redhanded.hobix.com/inspect/sparklinesForMinimalists.html">RedHanded: Sparklines for Minimalists</a></dd>
+                <dt>.NET</dt>
+                <dd><a href="http://ewbi.blogs.com/develops/2005/07/sparklines.html">A direct port of this service to .NET.</a></dd>
+            </dl>
+
+            <h3>To Do</h3>
+            <p>This service is constantly evolving and the following are 
+               the enchancements I want to make:
+               </p>
+            <dl>
+                <dt>Up-Down Threshhold</dt>
+                <dd>Add a type of graph like <a href="http://www.hardballtimes.com/thtstats/main/sparklines/custom.php?view=&teamAbbrLimit%255B%255D=LAA&teamAbbrLimit%255B%255D=OAK&teamAbbrLimit%255B%255D=SEA&teamAbbrLimit%255B%255D=TEX&minDate=2006-04-02&maxDate=2006-08-04&sparklineHeight=20&barWidth=3&barSpacing=1&diffType=runDiff&runDiff=2&diffColor=red&Submit=Submit">these</a>.</dd>
+                
+                <dt>Second Range</dt>
+                <dd>Add a second threshhold and a new color for points below that threshhold.</dd>
+
+                <dt></dt>
+                <dd></dd>
+                <dt></dt>
+                <dd></dd>
+            </dl>
+
+            <p><a href="#top">[top]</a></p>
+
+        </div>
+     <!--#include virtual="footer.html" -->
+
+    </div>
+</body>
+
+
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+#convert from ESRI coords to latlon
+1. /Library/Frameworks/GDAL.framework/Versions/1.6/Programs/ogr2ogr -t_srs EPSG:4326 csa_latlon.shp csa.shp
+2. shp2text --spreadsheet csa_latlon.shp
+3. run encode_data.py from this directory

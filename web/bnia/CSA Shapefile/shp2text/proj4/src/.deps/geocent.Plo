@@ -1,0 +1,11 @@
+geocent.lo geocent.o: geocent.c /usr/include/math.h \
+  /usr/include/architecture/i386/math.h /usr/include/sys/cdefs.h \
+  geocent.h
+
+/usr/include/math.h:
+
+/usr/include/architecture/i386/math.h:
+
+/usr/include/sys/cdefs.h:
+
+geocent.h:

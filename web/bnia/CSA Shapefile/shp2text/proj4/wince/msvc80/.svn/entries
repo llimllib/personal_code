@@ -1,0 +1,60 @@
+8
+
+dir
+1685
+http://svn.osgeo.org/metacrs/proj/trunk/proj/wince/msvc80
+http://svn.osgeo.org/metacrs
+
+
+
+2007-01-08T14:33:05.000000Z
+1386
+mloskot
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+4e78687f-474d-0410-85f9-8d5e500ac6b2
+
+projce_common.vsprops
+file
+
+
+
+
+2009-11-13T17:52:02.000000Z
+1efba4dc440d182d95fbaa7ed5125e6c
+2007-01-08T14:29:22.000000Z
+1385
+mloskot
+has-props
+
+projce_lib
+dir
+
+README.txt
+file
+
+
+
+
+2009-11-13T17:52:02.000000Z
+1343c0a7a979f8da304263568e166609
+2007-01-08T14:33:05.000000Z
+1386
+mloskot
+has-props
+
+projce_dll
+dir
+

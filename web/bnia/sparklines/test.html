@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>JavaScript Test Page</title>
+        <script type="text/javascript" src="test.js"></script>
+    </head>
+    <body>
+        <form method="post" action="">
+            <p>
+                <input type="radio" name="type" id="type_s" value="smooth" checked="checked" />Smooth <br/>
+                <input type="radio" name="type" id="type_d" value="discrete"/>Discrete <br/>
+            </p>
+            <p>
+                Data: <input size="50" name="value" id="d" value="0,1,2,3,49,50,51, 98,99,100"/>
+            </p>
+            <p>
+                Height: <input size="4" name="height" id="height" value="20"/>
+            </p>
+
+            <div id="smooth_specific">
+                <input type="checkbox" name="min" id="min" value="min"/> Min<br/>
+                <input type="checkbox" name="max" id="max" value="max"/> Max<br/>
+                <input type="checkbox" name="last" id="last" value="last"/> Last<br/>
+                Step: <input size="3" name="step" id="step" value="2"/><br/>
+            </div>
+
+            <div id="discrete_specific">
+                Upper: <input size="3" name="upper" id="upper" value="90"/>
+            </div>
+            
+            <hr/>
+
+            <p>
+            Debug <input size="50" name="debug" id="debug" value=""/>
+            </p>
+
+           
+        <script type="text/javascript">setup();</script>
+
+    </body>
+</html>

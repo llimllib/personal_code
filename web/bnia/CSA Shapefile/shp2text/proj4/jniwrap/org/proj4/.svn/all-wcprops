@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/metacrs/!svn/ver/1593/proj/trunk/proj/jniwrap/org/proj4
+END
+Projections.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/metacrs/!svn/ver/1280/proj/trunk/proj/jniwrap/org/proj4/Projections.java
+END
+LatLong.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/metacrs/!svn/ver/1234/proj/trunk/proj/jniwrap/org/proj4/LatLong.java
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/metacrs/!svn/ver/1593/proj/trunk/proj/jniwrap/org/proj4/Makefile.in
+END
+Others.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/metacrs/!svn/ver/1234/proj/trunk/proj/jniwrap/org/proj4/Others.java
+END
+Proj4Factory.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/metacrs/!svn/ver/1234/proj/trunk/proj/jniwrap/org/proj4/Proj4Factory.java
+END
+ProjectionData.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/metacrs/!svn/ver/1234/proj/trunk/proj/jniwrap/org/proj4/ProjectionData.java
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/metacrs/!svn/ver/1251/proj/trunk/proj/jniwrap/org/proj4/Makefile.am
+END
+Proj4.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/metacrs/!svn/ver/1234/proj/trunk/proj/jniwrap/org/proj4/Proj4.java
+END
