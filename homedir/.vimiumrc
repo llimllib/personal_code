@@ -1,3 +1,4 @@
+unmap p
 map q linkHints.activateMode
 unmap f
 map gn nextTab
