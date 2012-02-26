@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+	<link rel="icon" href="{Favicon}"/>
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="{RSS}"/>
+    <title>{Title}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
+<style>
+a:link {color: #000;}
+a:visited {color: #000;}
+
+body {
+    margin-left: 0px;
+    margin-top: 0px;
+    font-family:palatino,georgia,verdana,arial,sans-serif;
+    line-height: 1.4em;
+    /*background-color: #f6f6f6;*/
+    background-color: white;
+    width: 1000px;
+}
+
+#main {
+    margin-left: 15px;
+    width: 550px;
+}
+
+h1 {
+    font-size: 26px;
+    padding-left: 0px;
+    margin-left: -1px;
+    line-height: 1.1em;
+}
+
+h1 > a, h1 > a:visited {
+    color: #000;
+    text-decoration:none;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 18px;
+    color: #888;
+}
+
+h4 {
+  font-size: 12px;
+  color: #ccc;
+}
+
+blockquote {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 2px solid #ccc;
+    background-color: white;
+}
+
+.quote {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-left: 2px solid #ccc;
+    background-color: white;
+}
+
+.source {
+    margin-top: 5px;
+}
+
+pre {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    border-left: 2px solid black;
+    background-color: white;
+    line-height: 110%;
+}
+
+div {
+    margin-bottom:1.4em;
+}
+
+#entry {
+    margin-bottom:3.2em;
+}
+
+#nav {
+    background-color:#white;
+    padding-left:15px;
+    margin-top:10px;
+    margin-bottom: 2em;
+    color: #444;
+}
+
+a img {
+border: 0;
+}
+
+.bull {
+  color: #aaa;
+  font-size: .6em;
+}
+
+#nav > a, #nav > a:visited, #nav > a:hover, #nav > p {
+    color: #888;
+}
+
+#photos {
+    float:right;
+    width:400px;
+    text-align: center;
+    margin-top: -30px;
+}
+
+#photext {
+    color: #888;
+}
+
+div.post img.permalink {
+            border-width: 0px;
+            width: 23px;
+            height: 9px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: none;
+            text-decoration: none;
+        }
+
+.invisible {
+    display: none;
+}
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script>
+url="http://journal.billmill.org/api/read?type=photo&num=6";
+$(document).ready(function(){
+    //hide the image posts
+    $("div[class=post]:has(div[class=invisible])").each(function() { $(this).hide() })
+
+    page = window.location.href.match(/\/(\d+)$/);
+    if (page) { url += "&start=" + (parseInt(page[1])-1)*6; }
+
+    $.ajax({
+        url: url,
+        success: function(data) {
+            $(data).find("post").each(function() {
+                var photo = $(this);
+                var src = $(photo.find("photo-url[max-width=250]")[0]).text();
+                photolink = photo.find("photo-link-url")[0];
+                if (photolink) {
+                    var href = $(photolink).text();
+                    $("#photos").append('<a href="' + href + '"><img src="' + src + '"></a><p>');
+                } else {
+                    $("#photos").append('<img src="' + src + '"><p>');
+                }
+            });
+        },
+        error: function(req, status, error) {
+            $("#photos").append("<em>Sorry, tumblr's API seems to be busted at the moment.<em>");
+        },
+        dataType: "xml"
+    });
+
+});
+</script>
+
+
+</head>
+<body>
+<div id="nav">
+    Bill Mill &nbsp; &nbsp;
+
+
+    <a href="http://billmill.org">home</a>
+		<span class="bull">&bull;</span>
+    <a href="http://journal.billmill.org">journal</a>
+		<span class="bull">&bull;</span>
+	<a href="http://twitter.com/llimllib">twitter</a>
+
+		<span class="bull">&bull;</span>
+	<a href="mailto:bill.mill@gmail.com">email</a>
+</div>
+<div id="photos">
+    <div id="photext">
+        &darr; Images I like
+    </div>
+</div>
+<div id="main">
+        {block:Posts}
+            <div class="post">
+                <a href="{Permalink}"><img src="/themes/4/link.gif" 
+                class="permalink" alt="Permalink"/></a>
+
+                {block:Regular}
+                    <div class="regular">
+                        {block:Title}<h2><a href="{Permalink}">{Title}</a></h2>{/block:Title}
+                        {Body}
+                    </div>
+                {/block:Regular}
+                
+                {block:Quote}
+                    <div class="quote">
+                        <span class="thequote">
+                            {Quote}
+                        </span>
+                    </div>
+                        <div class="source">{block:Source}&mdash; {Source}{/block:Source}</div>
+
+                {/block:Quote}
+
+                {block:Photo}
+                <div class="invisible"></div>
+                {/block:Photo}
+
+                
+                {block:Link}
+                    <div class="link">
+                        &#187; <a href="{URL}" class="link" {Target}>{Name}</a>
+                        {block:Description}
+                            <div class="description">{Description}</div>
+                        {/block:Description}
+                    </div>
+                {/block:Link}
+                
+                {block:Conversation}
+                    <div class="conversation">
+                        {block:Title}<h2><a href="{Permalink}">{Title}</a></h2>{/block:Title}
+                        <ul>
+                            {block:Lines}
+                                <li class="{Alt}">
+                                    {block:Label}<span class="label">{Label}</span>{/block:Label}
+                                    {Line}
+                                </li>
+                            {/block:Lines}
+                        </ul>
+                    </div>
+                {/block:Conversation}
+                
+                {block:Audio}
+                    <div class="audio">
+                        {AudioPlayerBlack}
+                        {block:Caption}
+                            <div class="caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Audio}
+                
+                {block:Video}
+                    <div class="video">
+                        {Video-500}
+                        {block:Caption}
+                            <div class="caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Video}
+
+<div style="font-size: 10px; text-align: right; margin-top: -30px; padding-bottom: 10px;"><a href="{Permalink}#disqus_thread" style="color: #aaa;">Comments</a></div>
+            </div>
+        {/block:Posts}
+{block:Permalink}
+{PostNotesURL}
+<script type="text/javascript">var disqus_url = "{Permalink}"; var disqus_title ="{block:PostTitle}{PostTitle}{/block:PostTitle}";</script>
+<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/billmill/embed.js"></script>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a> 
+{/block:Permalink}
+<script type="text/javascript">
+//<[CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script type="text/javascript" src="http://disqus.com/forums/billmill/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
+        <div id="navigation">
+            {block:PreviousPage}
+                <a href="{PreviousPage}">previous</a> &nbsp;&nbsp;
+            {/block:PreviousPage}
+        
+            {block:NextPage}
+                <a href="{NextPage}">next &#187;</a>
+            {/block:NextPage}
+        </div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-4514581-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body></html>
+
