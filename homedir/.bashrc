@@ -21,27 +21,31 @@ export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS 
 
 alias sqlite='sqlite3'
-PS1='\[\e[36m\]\@\[\e[0m\] \[\e[1;32m\]\w\[\e[0m\]\[\e[0;31m\]$(__git_ps1 " %s")\[\e[0m\]\n\$ '
-alias g="git"
-alias gs="git status"
+PS1='\[\e[36m\]\@\[\e[0m\] \[\e[1;32m\]\w\[\e[0m\] \[\033[01;34m\]$(~/.rvm/bin/rvm-prompt)\[\033[01;32m\]\[\e[0;31m\]$(__git_ps1 " %s")\[\e[0m\] \H\n\$ '
+
+alias gs='ls && echo "---------------------------------------" && git status'
 alias gd="git diff"
 alias gm="git co master"
 alias gb="git branch"
 alias gc="git checkout"
-alias gm="git merge --squash"
+alias gm="git ci -m"
+alias gma="git ci -a -m"
+alias ga="git add"
+alias gp="git push"
+alias gph="git push heroku"
 
-alias fc="cd ~/clean-git/FuseController/src/api"
-alias scout="cd ~/clean-git/Scout/src/scout/"
-alias sc="scout"
+alias hs='ls && echo "---------------------------------------" && hg status'
+alias hd='hg diff'
+alias hm='hg ci -m'
 
 alias rack="ack --ruby --follow"
 alias fack="ack --actionscript --follow"
 alias jack="ack --js --html"
 alias pack="ack --python"
 alias cack="ack --cc --cpp"
-alias aack="ack --all"
+alias aack="ack --all -i"
 
-alias t="tree"
+alias t="tree | less"
 
 alias s="sl"
 alias l="sl"
@@ -53,8 +57,7 @@ export CVS_RSH=ssh
 
 export MANPATH=$MANPATH:/opt/local/man
 
-export PATH=$PATH:/usr/local/bin
-export SITE_PACKAGES="/Library/Frameworks/Python.framework/Versions/2.5/lib/python2.5/site-packages/"
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/Cellar/python/2.7/bin:/usr/local/sbin:$PATH
 
 shopt -s nocaseglob
 
@@ -65,6 +68,6 @@ if [ -f /opt/local/etc/bash_completion ]; then
 fi
 
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+source /usr/local/share/python/virtualenvwrapper.sh
 
 if [[ -s /Users/bill/.rvm/scripts/rvm ]] ; then source /Users/bill/.rvm/scripts/rvm ; fi
