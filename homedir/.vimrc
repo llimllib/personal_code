@@ -64,7 +64,7 @@ set foldmethod=indent
 set foldlevel=999
 
 " turn plugins on
-:filetype plugin on
+filetype plugin on
 
 " Syntax Highlighting
 if &t_Co > 2 || has("gui_running")
