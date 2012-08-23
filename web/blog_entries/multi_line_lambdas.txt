@@ -286,10 +286,10 @@ onClick(handle_click)</code>
 
 <p>I expect that there's no way that syntax like this could be officially 
 supported by Python, both because of syntactic constraints and the 
-<acronym="Benevolent Dictator For Life">BDFL</a>'s aesthetic concerns. I do 
-think it is a neat exercise in pushing the Python interpreter and syntax past 
-where they want to go, and I hope that it gives some food for thought on an 
-interesting Python syntax.
+<acronym title="Benevolent Dictator For Life">BDFL</acronym>'s aesthetic
+concerns. I do think it is a neat exercise in pushing the Python interpreter
+and syntax past where they want to go, and I hope that it gives some food for
+thought on an interesting Python syntax.
 
 <p>I'm excited to see where Richard Jones goes with his <a 
 href="http://www.mechanicalcat.net/richard/log/Python/Something_I_m_working_on.7">project</a>, 
