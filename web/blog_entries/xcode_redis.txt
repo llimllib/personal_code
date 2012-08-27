@@ -78,3 +78,7 @@ screenshot of me debugging src/redis.c, showing off some of xcode's debugging
 features:
 
 <p><img src="http://i.imgur.com/9KFTy.jpg">
+
+<p>Special thanks to Paul Smith, whose blog post <a
+href="http://pauladamsmith.com/blog/2011/03/redis_get_set.html">taught</a> me
+how to build redis so that it can be debugged.
