@@ -66,7 +66,7 @@ Succeeded</code>.
 <p><img src="images/xcode_redis/5.jpg">
 
 <p>In the pane that drops down, click on the <code>Executable</code> drop down
-and click on <code>other<code>, then select <code>src/redis-server</code> from
+and click on <code>other</code>, then select <code>src/redis-server</code> from
 your redis directory. When you're done, the pane should look like this:
 
 <p><img src="images/xcode_redis/6.jpg">
@@ -74,9 +74,9 @@ your redis directory. When you're done, the pane should look like this:
 <p>This tells Xcode to start the redis-server executable after it builds redis,
 so you can then connect to it via redis-cli, send commands, and debug them.
 
-<p>To see if it works, click on the "run" button at the top left; redis should
+<p>To see if it works, click on the <code>run</code> button at the top left; redis should
 build and Xcode should start redis-server for you. If you go to a console and
-run "redis-cli", it should connect to your localhost. At this point, you can
+run <code>redis-cli</code>, it should connect to your localhost. At this point, you can
 start adding breakpoints to dig in and see what redis is doing. Here's a
 screenshot of me debugging src/redis.c, showing off some of xcode's debugging
 features:
