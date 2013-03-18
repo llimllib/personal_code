@@ -14,7 +14,7 @@ stand a better chance of having <em>one</em> decent bracket instead of the
 assortment of crappy ones I normally end up with.
 
 <p>So the last two nights, I <a
-href="http://billmill.org/static/ncaa-bracket-randomizer/out.html">wrote
+href="http://billmill.org/ncaa-bracket-randomizer">wrote
 myself a bracket randomizer</a>; just push the "randomize" button at the top and
 watch it go.
 

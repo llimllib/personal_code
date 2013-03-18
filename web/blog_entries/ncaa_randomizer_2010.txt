@@ -1,8 +1,8 @@
 The Bill Mill NCAA Bracket Randomizer, 2010 edition
 #time 03-14-10 20:15
 #keywords ncaa, basketball, bracket, kenpom
-<p>I've updated my <a href="http://billmill.org/ncaa_randomizer.html">NCAA bracket
+<p>I've updated my <a href="http://billmill.org/ncaa-bracket-randomizer/">NCAA bracket
 randomizer</a> for the 2010 field; check it out
-<a href="http://billmill.org/static/ncaa-bracket-randomizer/out.html">here</a>.
+<a href="http://billmill.org/ncaa-bracket-randomizer/">here</a>.
 As of now, there are no improvements, but those may
 come in the next few days; feel free to suggest ideas.
