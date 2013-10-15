@@ -1,10 +1,30 @@
-"don't be compatible with old vi
-set nocompatible
+set nocompatible               " be iMproved
+filetype off                   " required!
 
+" Colorscheme
+if has("gui_running")
+    " colorscheme breeze
+    colorscheme idleFingers
+    set antialias
+else
+    colorscheme llimllib
+    " torte highlights the bottom, I love that! but I want a diff between a #
+    " and a string
+endif
+
+" default space and tab handling
 set shiftwidth=4
 set tabstop=4
 set expandtab
 set softtabstop=4
+
+" Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+highlight ExtraWhitespace ctermbg=darkred guibg=#382424
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+" the above flashes annoyingly while typing, be calmer in insert mode
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Disable the F1 help key
 map <F1> <Esc>
@@ -20,16 +40,16 @@ vnoremap <silent> k gk
 " haven't changed it already.
 set autoread
 
-"keep the cursor in the middle of the screen
+" keep the cursor in the middle of the screen
 set scrolloff=999
 
-"turn off swap files
+" turn off swap files
 set nobackup
 set nowritebackup
 set noswapfile
 
-"this group is recommended by http://items.sjbach.com/319/configuring-vim-right
-set ignorecase 
+" this group is recommended by http://items.sjbach.com/319/configuring-vim-right
+set ignorecase
 set smartcase
 set title
 set scrolloff=3
@@ -47,48 +67,20 @@ set completeopt=menuone,longest,preview
 set hidden
 set complete+=k
 
-if has("gui_running")
-    " colorscheme breeze 
-    colorscheme idleFingers
-    set antialias
-else
-    colorscheme delek
-endif
-
-" this doesn't work on windaz
-" set backspace=indent,eol,start
-set backspace=indent,eol,start whichwrap+=<,>,[,]
-" backspace in Visual mode deletes selection
-vnoremap <BS> d
-set foldmethod=indent
-set foldlevel=999
-
-" turn plugins on
-filetype plugin on
-
 " Syntax Highlighting
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
+" C-j replaces <C-w>j and so on (split navigation)
 map <C-J> <C-W>j
 map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
 map <C-_> <C-W>_
-imap <C-D> require 'ruby-debug'; debugger
-nmap <C-D> orequire 'ruby-debug'; debugger
 
 "insert one character
 noremap <C-i> i<space><esc>r
-
-",t opens fuzzy file, ,vt and ,ht open with vertical or horiz split
-map <silent> <leader>t :FufFile **/<CR>
-map <silent> <leader>vt :vnew<CR>:FufFile **/<CR>
-map <silent> <leader>ht :new<CR>:FufFile **/<CR>
-
-"try this again
-set autoindent
 
 "no toolbar
 set guioptions-=T
@@ -111,88 +103,114 @@ function! InsertTabWrapper()
           return "\<c-p>"
       endif
 endfunction 
-
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 
-":set formatoptions=aw2tq to get reformatted paragraphs
-set guifont=Inconsolata:h14.00
-
-map <F8> iimport pdb; pdb.set_trace()
-inoremap <F8> import pdb; pdb.set_trace()
-
+" better tab navigation mappings
 map gn gt
 map gN gT
 
-"J deletes EOLs - very useful on mac keyboard!
-"
-"z10<CR> will set the current split to 10 lines. Ah ha!
-
-"CTRL-W r				*CTRL-W_r* *CTRL-W_CTRL-R* *E443*
-" rotate windows down or right
-
-set vb t_vb=
-"
-"load better yaml syntax
-au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/syntax/yaml.vim
-
-"load better ChuCK syntax
-au BufNewFile,BufRead *.ck         setf ck 
-
-function! MyLabel() 
-  if exists('t:name') 
-    return t:name 
-  else 
-    return '' 
-  endif 
-endfunction 
-set guitablabel=%{MyLabel()} 
-
-" vim -b : edit binary using xxd-format!
-augroup Binary
-  au!
-  au BufReadPre   *.ttf,*.dfont let &bin=1
-  au BufReadPost  *.ttf,*.dfont if &bin | %!xxd
-  au BufReadPost  *.ttf,*.dfont set ft=xxd | endif
-  au BufWritePre  *.ttf,*.dfont if &bin | %!xxd -r
-  au BufWritePre  *.ttf,*.dfont endif
-  au BufWritePost *.ttf,*.dfont if &bin | %!xxd
-  au BufWritePost *.ttf,*.dfont set nomod | endif
-augroup END
-
+"Specific commands for filetypes
 augroup myfiletypes
   "clear old autocmds in group
   autocmd!
   "for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml set sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
+  autocmd FileType html set sw=2 sts=2 et
+  autocmd FileType python,c set sw=4 sts=4 et
   autocmd FileType javascript set sw=2 sts=2 et
+  autocmd FileType go set ts=4 sw=4 sts=4 noet
 augroup END
 
-" http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html ?
-set backupskip=/tmp/*,/private/tmp/*" 
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-if has("spell")
-  " turn spelling off by default
-  set nospell
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
 
-  " toggle spelling with F4 key
-  map <F4> :set spell!<CR><Bar>:echo "Spell Check: " . strpart("OffOn", 3 * &spell, 3)<CR>
+" github repos
 
-  " they were using white on white
-  highlight PmenuSel ctermfg=black ctermbg=lightgray
+" Git bindings
+Bundle 'tpope/vim-fugitive'
 
-  " limit it to just the top 10 items
-  set sps=best,10                    
-endif
+" easier HTML typing
+Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-"source *.as as flash files
-autocmd BufRead *.as set filetype=actionscript
-autocmd BufRead *.mxml set filetype=mxml
+" NERDtree
+Bundle 'scrooloose/nerdtree'
 
-" http://tim.theenchanter.com/2008/07/crontab-temp-file-must-be-edited-in.html ?
-set backupskip=/tmp/*,/private/tmp/*" 
+" disable slow features on large files
+Bundle 'vim-scripts/LargeFile'
 
-"If set to 1 then you can leave the Conque buffer using the <C-w> commands while you're still in insert mode. If set to 0 then the <C-w> character will be sent to the terminal. If both this option and ConqueTerm_InsertOnEnter are set you can go in and out of the terminal buffer while never leaving insert mode.
-let g:ConqueTerm_CWInsert = 1
+" database access
+Bundle 'vim-scripts/dbext.vim'
 
-command PythonShell :set nolist | ConqueTermSplit ipython
+" Surround things with other things
+Bundle 'tpope/vim-surround'
+
+" Buf explore things
+Bundle 'corntrace/bufexplorer'
+
+" Git gutter marks
+Bundle 'airblade/vim-gitgutter'
+
+"" vim-scripts repos
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
+
+"" non github repos
+Bundle 'git://git.wincent.com/command-t.git'
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+"disable all bells
+set visualbell t_vb=
+
+"install go syntax and tools
+" Some Linux distributions set filetype in /etc/vimrc.
+" Clear filetype flags before changing runtimepath to force Vim to reload them.
+filetype off
+filetype plugin indent off
+set runtimepath+=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on
+
+" http://statico.github.io/vim.html
+" emacs-style command-line controls
+cnoremap <C-a>  <Home>
+cnoremap <C-b>  <Left>
+cnoremap <C-f>  <Right>
+cnoremap <C-d>  <Delete>
+cnoremap <M-b>  <S-Left>
+cnoremap <M-f>  <S-Right>
+cnoremap <M-d>  <S-right><Delete>
+cnoremap <Esc>b <S-Left>
+cnoremap <Esc>f <S-Right>
+cnoremap <Esc>d <S-right><Delete>
+cnoremap <C-g>  <C-c>
+
+" ATM, only accept golang-formatted errors for quickfix. If I start using this
+" more, I should set it to accept error types only for specific files
+set errorformat=%f:%l:%c:\ %m
+
+" Only run Classification tests right now. Is there a way to have it figure
+" out what test file I'm currently in?
+nnoremap <leader>m :copen<CR>:cex system('make test')<CR>
+nnoremap <leader>n :cex system('make')<CR>
+nnoremap <leader>l :cex system('make lint')<CR>
+
+" plugin helpers
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :CommandT<CR>
+
+" Format json
+nnoremap <leader>pp :%!jsonpp<CR>
