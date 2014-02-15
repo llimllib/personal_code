@@ -32,9 +32,10 @@ hi ErrorMsg             guifg=#D8D8D8 guibg=#ff0000
 hi VertSplit            guifg=#323232 guibg=#f0e68c
 hi Folded               guifg=#999999 guibg=#444444
 hi FoldColumn           guifg=#000000 guibg=#bdb76b
-hi SignColumn           guifg=#bdb76b guibg=#20b2aa
 hi IncSearch            guifg=#000000 guibg=#D8D8D8
 hi LineNr               guifg=#888888
+"SignColumn used to have: guibg=#20b2aa
+hi SignColumn           guifg=#888888 guibg=NONE
 hi MatchParen           guifg=#FFFFFF guibg=#666666
 hi ModeMsg              gui=NONE
 hi MoreMsg              guifg=#20b2aa

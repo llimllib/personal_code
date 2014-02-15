@@ -214,3 +214,6 @@ nnoremap <leader>f :CommandT<CR>
 
 " Format json
 nnoremap <leader>pp :%!jsonpp<CR>
+
+" Ack search
+nnoremap <leader>s :Ack -k -i
