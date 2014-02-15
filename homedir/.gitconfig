@@ -1,13 +1,35 @@
 [alias]
-	st = status
-	ci = commit
-	co = checkout
-	br = branch
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
 [user]
-	name = bill
-	email = bill.mill@gmail.com
-[core]
-  # search for core.pager in
-  # <http://www.kernel.org/pub/software/scm/git/docs/git-config.html>
-  # to see why we use this convoluted syntax
-  pager = less -$LESS -SFRX -R +'/^---'
+	name = Bill Mill
+	email = "bill.mill@gmail.com"
+[color]
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[push]
+    default = upstream
+[credential]
+	helper = osxkeychain
+[diff]
+	algorithm = patience
