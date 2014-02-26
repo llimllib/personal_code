@@ -18,6 +18,9 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 
+" backspace over auto-indents, eols, start of lines
+set backspace=indent,eol,start
+
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 highlight ExtraWhitespace ctermbg=darkred guibg=#382424
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
