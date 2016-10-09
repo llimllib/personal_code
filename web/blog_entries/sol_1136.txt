@@ -1,0 +1,156 @@
+Imitating Sol LeWitt's Wall Drawing #1136 in Javascript
+
+<p><em>See the finished product <a
+href="http://billmill.org/solving-sol/1136/llimllib/">here</a></em>
+
+<p>Each of Sol LeWitt's "wall drawings" consists of a short set of
+instructions, sometimes with an accompanying diagram, that instructs the
+"owner" on  how to implement the work; Sol usually did not execute his own
+work, but rather the "art" consisted in the concept. Here is an example
+instruction:
+
+<p><a href="images/sol/lewitt_49_instructions.jpg"><img
+src="images/sol/lewitt_49_instructions.jpg" width="700"></a>
+
+<p>A few years ago, I found Brad Bouse's excellent <a
+href="http://solvingsol.com/">Solving Sol</a> website, which asks users to
+implement some of these wall drawings in the browser. I tried a few, and got
+hooked because iplmenting a wall drawing was a pleasing, easy way to kill a few
+hours.
+
+<p>Here are my interpretations of wall drawing <a
+href="http://billmill.org/solving-sol/011/llimllib/index.html">11</a>, <a
+href="http://billmill.org/solving-sol/016/llimllib/index.html">16</a>, <a
+href="http://billmill.org/solving-sol/046/llimllib/index.html">46</a>, <a
+href="http://billmill.org/solving-sol/049/llimllib/index.html">49</a> and <a
+href="http://billmill.org/solving-sol/130/llimllib/index.html">130</a>.
+
+<p>Almost exactly one year ago today, I saw Wall Drawing 1136 and decided to
+take it on. Here it is, as installed at the Tate Modern:
+
+<p><a href="images/sol/lewitt_1136_tate.jpg"><img
+src="images/sol/lewitt_1136_tate.jpg" width="700"></a>
+
+<p>I thought that perhaps it would be a bit more difficult than the others I
+had done, since I had to deal with an irregular curve instead of lines and
+arcs, but I was unprepared for just how much of a pain it would prove to
+be.
+
+<h2>The Instructions</h2>
+
+<p>There are several pictures of 1136 available on the web, but it's much
+easier to work with the full instructions, as I had with the other LeWitts I
+had done.
+
+<p>Here is what the Tate <a
+href="http://www.tate.org.uk/art/artworks/lewitt-wall-drawing-1136-ar00165/text-summary">has
+to say</a> about the work:
+
+<blockquote>A letter of instruction, an installation diagram and a certificate
+pertaining to Wall Drawing #1136 can be found in Tate Gallery Records (PC10.1
+LeWitt, Sol)... The diagram is a small colour inkjet print that lays out the
+pattern of the wall drawing in one continuous elongated horizontal
+band.</blockquote>
+
+<p>I contacted the librarians at the Tate to ask if I could see the installation
+diagram, but they declined and responded by emphasizing this portion of the
+summary:
+
+<p><blockquote>Please be advised that the documents are the signature for the Wall
+Drawing and must accompany the Wall Drawing if it is sold or otherwise
+transferred. They represent the transfer of ownership from the artist to you …
+Under no circumstances will we issue a new certificate!</blockquote>
+
+<p>To me, this suggests that the documents must accompany the sale of the
+artwork, but not that showing me a copy would constitute a transfer of the
+work. I am disappointed with the unwillingness of a public (albeit funded by a
+government different than my own) institution to share information about the
+artwork and skeptical that it would be actually damaging to anyone.
+
+<p>It seemed that I would not be able to work with the official instructions, but
+I carried on as best I could.
+
+<p><em>(If anyone cares to go to the Tate Library and ask about seeing the
+instructions, I would be forever grateful! Please <a
+href="mailto:bill@billmill.org">drop me a line if you do</a>.)</em>
+
+<h2>The Drawing</h2>
+
+<p>The first step was simple but tedious: transcribe the color sequence of
+equal width lines that make up the background of the work. In case anybody else
+ever needs it, here is the sequence, where G is green, Y yellow, B blue, O
+orange, R red, P purple, and E grey:
+
+<p><pre>GYBOPERBYGERPGYBOERBGYPOBGRPEYBGOPYBERPOGBYPREOGYBOERPBYOPGEBRY
+BEOPRGBEYRGPOBRGOYEBRGOPYBERGORBEYBOPGRBPEYBRPGOGBYEPORGEBPYRGO
+PEYGPOREBYPGBROGYBR</pre>
+
+<p>To generate this sequence and ensure it was correct, I simply opened an
+image of the work in photoshop and annotated it with the text tool so that I
+could check to avoid mistranslations.
+
+<p>Next, however came the curve. Or, as I would find out, the 9 curves.
+
+<p>I took the best image of 1136, which I've embedded above, cropped it and
+fixed the perspective as best I could, creating a base image for tracing the
+curve.
+
+<p>I had hoped that I would be able to "cheat" by doing something clever like
+tracing the curve once, then drawing it 9 times in different widths. I was
+unfortunately never able to come up with a clever way to have different colors
+on a curve in the way that this curve goes.
+
+<p>Once I realized that I needed 9 curves, my naïve first guess was to just try
+and trace one curve, then subtract a fixed amount from it to make the curve
+above it. The <a
+href="http://bl.ocks.org/llimllib/b7fce04e7d63427b5b3f91fae547223d">total
+failure</a> of this method led me to the understanding that each of the 9
+curves was in fact a different curve, and that perhaps I needed to understand a
+bit more about bezier curve offsetting than I did.
+
+<p><img src="images/sol/offset_fail.png"><br><em class="caption">fail.</em>
+
+<p>I looked into bezier offsetting, and found a rich literature which I will
+sum up by saying that it's <a
+href="https://pomax.github.io/bezierinfo/#offsetting">impossible in the general
+case</a>, and possible but difficult to estimate in practice.
+
+<p>After I implemented <a
+href="http://bl.ocks.org/llimllib/8d7d571c3233e5cf711f6a6c1e28b5fb">a lousy
+version</a> of the <a
+href="http://math.stackexchange.com/a/467038/109164">Tiller-Hanson</a>
+approximation algorithm, I was fortunate enough to find the <a
+href="https://github.com/Pomax/bezierjs">bezier.js</a> library which was
+capable of handling all the tricky bits for me.
+
+<p>Finally I had the tools to set up <a
+href="http://bl.ocks.org/llimllib/a436acd66740f978d73ce4261b4c3aa8">a shim for
+tracing the curve</a>; go there and play around with the very slow control
+point editor to get a feel for the slow, painful process of editing the curve
+to match LeWitt.
+
+<p>Once I got that looking as close as I felt like getting it, even though
+there are still some srerious warts with the curve, I copied the paths out of
+the SVG using the Chrome inspector, and used those as the magic paths <a
+href="https://github.com/llimllib/solving-sol/blob/d822e18809731e6673cc2de796f32446712631b0/1136/llimllib/index.html#L113">you
+can see in the source</a>.
+
+<p><img src="images/sol/bug.png"><br><em class="caption">I cannot unsee this
+bad join but I'm also not willing to fix it.</em>
+
+<h2>Conclusion</h2>
+
+<p>This project took me much, much longer than I expected. I'm glad I got it
+out eventually, even if all I can see are the ways it could be improved.
+
+<p>I'm sure that some person would find an easy way to solve it! Like tracing
+it in Illustractor or Inkscape and just using those curves; but I was unwilling
+to use a drawing tool, and that unwillingness got me to learn some new
+algorithms.
+
+<p>I hope you like <a
+href="http://billmill.org/solving-sol/1136/llimllib/">the piece</a>, and if
+you're interested in doing a Sol, I highly recommend it. Go <a
+href="https://github.com/wholepixel/solving-sol">check out the repo</a> and
+have at it. Many of them can be completed in just an hour or two, but others
+might lead you on a a bit of a journey.
