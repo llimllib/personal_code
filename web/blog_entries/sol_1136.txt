@@ -130,7 +130,7 @@ point editor to get a feel for the slow, painful process of editing the curve
 to match LeWitt.
 
 <p>Once I got that looking as close as I felt like getting it, even though
-there are still some srerious warts with the curve, I copied the paths out of
+there are still some serious warts with the curve, I copied the paths out of
 the SVG using the Chrome inspector, and used those as the magic paths <a
 href="https://github.com/llimllib/solving-sol/blob/d822e18809731e6673cc2de796f32446712631b0/1136/llimllib/index.html#L113">you
 can see in the source</a>.
