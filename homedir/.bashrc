@@ -1,31 +1,34 @@
-# Sample .bashrc for SuSE Linux
-# Copyright (c) SuSE GmbH Nuernberg
-
-# Some applications read the EDITOR variable to determine your favourite text
-# editor. So uncomment the line below and enter the editor of your choice :-)
 export EDITOR=/usr/local/bin/vim
-export TERM=xterm
+export TERM='screen-256color'
 
-#set go root dir
-export GOPATH=~/go/
+# If we're running tmux, change the TERM and open vim with reattach-to-user-namespace so that cnp works
+[ -n "$TMUX" ] && export TERM=screen-256color
+function vim {
+  if [ -n "$TMUX" ]
+  then
+     reattach-to-user-namespace vim $@
+  else
+     /usr/local/bin/vim $@
+  fi
+}
 
-#get git completion script
-source ~/.git-completion.bash
+#get git completion script and branch prompt
+source /usr/local/etc/bash_completion.d/git-completion.bash
+source /usr/local/etc/bash_completion.d/git-prompt.sh
 
 #export PROMPT_COMMAND='echo -ne "\033]0;\007"'
 function title {
     echo -ne "\033]0;$1\007"
 }
 
-function cheflog {
-    vagrant ssh $1 -c "tail -f /var/log/chef/client.log"
+# I generally put little tmux scripts in my folders with the name ".start.sh";
+# I don't want to run them automatically, so this command just sources them
+# to set up my env
+function mux {
+    . .start.sh
 }
 
-alias tailengine='cheflog engine'
-
-alias status='svn status | egrep -v "^Performing status|^$|^X"'
 alias ls='ls -FG'
-#LS_COLORS='di=36:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90'
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS
 
@@ -34,7 +37,7 @@ export PAGER="less"
 export LESS="-r -S"
 
 alias sqlite='sqlite3'
-PS1='\[\e[36m\]\@\[\e[0m\] \[\e[1;32m\]\H:\w\[\e[0m\] \[\033[01;34m\]$(~/.rvm/bin/rvm-prompt)\[\033[01;32m\]\[\e[0;31m\]$(__git_ps1 " %s")\[\e[0m\] \n\$ '
+PS1='\[\e[36m\]\@\[\e[0m\] \[\e[32m\]\H:\w\[\e[0m\] \[\e[0;31m\]$(__git_ps1 " %s")\[\e[0m\] \n\$ '
 
 alias gs='ls && echo "---------------------------------------" && git status'
 alias gd="git diff"
@@ -47,21 +50,35 @@ alias gma="git ci -a -m"
 alias ga="git add"
 alias gp="git push"
 alias gph="git push heroku"
-alias gls='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'
-alias gll='git log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'
+alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias prune='git remote prune origin'
+
+alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
+
+# do `author <branch_name>` to get the most recent committer on a branch
+alias author="git --no-pager log -1 --pretty=format:'%aN <%aE>'"
+
+# do `squash <branch_name>` to squash and stage the branch, then put you in
+# an editor to amend the commit message
+function squash {
+    git merge --squash $1 && git commit --author "`author $1`"
+}
+
+alias be='bundle exec'
+alias br='bundle exec rspec'
+alias bi='bundle install'
 
 alias hs='ls && echo "---------------------------------------" && hg status'
 alias hd='hg diff'
 alias hm='hg ci -m'
 
-alias rack="ack --ruby --follow"
-alias fack="ack --actionscript --follow"
-alias jack="ack --js --html"
-alias pack="ack --python"
-alias cack="ack --cc --cpp"
-alias gack="ack --go"
-alias aack="ack -k -i"
+# blog.burntsushi.net/ripgrep/
+alias rack="rg --type ruby"
+alias jack="rg --type js --type html"
+alias pack="rg --type py"
+alias cack="rg --type c --type cpp"
+alias gack="rg --type go"
+alias aack="rg -i"
 
 alias t="tree | less"
 
@@ -70,35 +87,70 @@ alias l="sl"
 
 alias ls='ls -FG'
 
+alias py="ipython"
+
+alias hubvan="ssh hubvan.com"
+alias ci="ssh bill@107.170.81.161"
+
+alias be="bundle exec"
+
+# makes tmux colors closer to correct. But still bizarre.
+alias tmux="tmux -2"
+
+# find, case insensivitely, in the current dir
+function f {
+    find . -iname "*$1*"
+}
+
 export CVS_RSH=ssh
 
 export MANPATH=$MANPATH:/opt/local/man
 
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/Cellar/python/2.7/bin:/usr/local/sbin:/usr/local/share/npm/bin/:$PATH
+export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/Cellar/python/2.7/bin:/usr/local/sbin:/usr/local/share/npm/bin/:/usr/texbin:$PATH
 
+# http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
+# Get this value with $(/usr/libexec/java_home)
+# that command is too slow to run on every bash invocation, so set it here
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
+
+# case insensitive matching
 shopt -s nocaseglob
+# ** matching
+shopt -s globstar
+# cd to a dir without need to type cd
+shopt -s autocd
+# extended globbing
+shopt -s extglob
+# append to history instead of overwriting
+shopt -s histappend
+# Save multi-line commands as one command
+shopt -s cmdhist
 
-[ -f ~/.git-bash-completion.sh ] && . ~/.git-bash-completion.sh
+# several ideas from: https://github.com/mrzool/bash-sensible/blob/master/sensible.bash
 
-if [ -f /opt/local/etc/bash_completion ]; then
-    . /opt/local/etc/bash_completion
-fi
+# Record each line as it gets issued
+PROMPT_COMMAND='history -a'
+
+# Huge history. Doesn't appear to slow things down, so why not?
+HISTSIZE=500000
+HISTFILESIZE=100000
+
+# Avoid duplicate entries
+HISTCONTROL="erasedups:ignoreboth"
+
+# Don't record some commands
+export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+
+# Use standard ISO 8601 timestamp
+# %F equivalent to %Y-%m-%d
+# %T equivalent to %H:%M:%S (24-hours format)
+HISTTIMEFORMAT='%F %T '
 
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/share/python/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 
-if [[ -s /usr/local/opt/autoenv/activate.sh ]] ; then source /usr/local/opt/autoenv/activate.sh ; fi
-if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
-if [[ ! -s ~/.rvm/hooks/after_cd ]] || ! grep -q autoenv_init ~/.rvm/hooks/after_cd
-then
-  echo "#!/usr/bin/env bash
-# https://github.com/kennethreitz/autoenv/issues/45
-autoenv_init" >> ~/.rvm/hooks/after_cd
-fi
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-. `brew --prefix`/etc/bash_completion
-fi
+# run autoenv
+if [[ -s /usr/local/bin/activate.sh ]] ; then source /usr/local/bin/activate.sh ; fi
 
 #don't write pyc or pyo files
 export PYTHONDONTWRITEBYTECODE=1
@@ -107,4 +159,47 @@ export PYTHONDONTWRITEBYTECODE=1
 export LEX_DATA=/usr/local/share/lex/data
 export LEX_DB=/usr/local/share/lex/db
 
-export GOROOT=/usr/local/Cellar/go/1.1/
+#set golang root dir
+export GOPATH=~/go
+export GOROOT=/usr/local/Cellar/go/1.6.2/libexec/
+
+# add golang binaries to path
+export PATH=$PATH:$GOPATH/bin
+
+# add haskell binaries to path
+export PATH=$PATH:~/.cabal/bin:
+
+# add ruby binaries to path
+export PATH=$PATH:/usr/local/opt/ruby/bin:
+
+# rebenv
+eval "$(rbenv init -)"
+
+#pyenv
+eval "$(pyenv init -)"
+
+# Start gpg-agent
+#
+# from https://github.com/ErinCall/Dotfiles/blob/master/.bashrc#L32-L40
+# via
+# https://blog.erincall.com/p/signing-your-git-commits-with-gpg
+#
+# kill -0 checks to see if the pid exists
+if test -f $HOME/.gpg-agent-info && kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+    GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
+else
+# No, gpg-agent not available; start gpg-agent
+    eval `gpg-agent --daemon --no-grab --write-env-file $HOME/.gpg-agent-info`
+fi
+export GPG_TTY=`tty`
+export GPG_AGENT_INFO
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+PATH="/Users/llimllib/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/llimllib/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/llimllib/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/llimllib/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/llimllib/perl5"; export PERL_MM_OPT;
+
+export PATH="~/.yarn/bin:$PATH"

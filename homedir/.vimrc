@@ -1,5 +1,5 @@
 set nocompatible               " be iMproved
-filetype off                   " required!
+filetype off                   " required for vundle... we turn it back on later
 
 " Colorscheme
 if has("gui_running")
@@ -7,10 +7,14 @@ if has("gui_running")
     colorscheme idleFingers
     set antialias
 else
-    colorscheme llimllib
-    " torte highlights the bottom, I love that! but I want a diff between a #
-    " and a string
+    " colorscheme llimllib
+    " colorscheme solarized
+    colorscheme base16-twilight
 endif
+
+" turn on persistent undo, and store it in the vim dir
+set undofile
+set undodir=~/.vim/undodir
 
 " default space and tab handling
 set shiftwidth=4
@@ -18,16 +22,22 @@ set tabstop=4
 set expandtab
 set softtabstop=4
 
+" use dark themes
+set background=dark
+
+" use the mouse in terminal mode
+set mouse=a
+
 " backspace over auto-indents, eols, start of lines
 set backspace=indent,eol,start
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-highlight ExtraWhitespace ctermbg=darkred guibg=#382424
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+set list listchars=tab:→\ ,trail:·
+" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 " the above flashes annoyingly while typing, be calmer in insert mode
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Disable the F1 help key
 map <F1> <Esc>
@@ -38,6 +48,9 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 vnoremap <silent> j gj
 vnoremap <silent> k gk
+
+" Ex mode is stupid
+nnoremap Q <nop>
 
 " Automatically read files which have been changed outside of Vim, if we
 " haven't changed it already.
@@ -50,6 +63,11 @@ set scrolloff=999
 set nobackup
 set nowritebackup
 set noswapfile
+
+" http://vim.wikia.com/wiki/Example_vimrc
+set wildmenu
+set showcmd
+set confirm
 
 " this group is recommended by http://items.sjbach.com/319/configuring-vim-right
 set ignorecase
@@ -121,59 +139,94 @@ augroup myfiletypes
   autocmd FileType html set sw=2 sts=2 et
   autocmd FileType python,c set sw=4 sts=4 et
   autocmd FileType javascript set sw=2 sts=2 et
-  autocmd FileType go set ts=4 sw=4 sts=4 noet
+  autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
 augroup END
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"
+" BEGIN VUNDLE SETUP
+"
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" github repos
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
 " Git bindings
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 " easier HTML typing
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " NERDtree
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 " disable slow features on large files
-Bundle 'vim-scripts/LargeFile'
+Plugin 'vim-scripts/LargeFile'
 
 " database access
-Bundle 'vim-scripts/dbext.vim'
+Plugin 'vim-scripts/dbext.vim'
 
 " Surround things with other things
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " Buf explore things
-Bundle 'corntrace/bufexplorer'
+Plugin 'corntrace/bufexplorer'
 
 " Git gutter marks
-Bundle 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
+
+" Match HTML tags
+Plugin 'gregsexton/MatchTag'
+
+" CoffeeScript support
+Plugin 'kchmck/vim-coffee-script'
+
+" Markdown support
+Plugin 'hallison/vim-markdown'
+
+" Rust support
+Plugin 'wting/rust.vim'
+
+" base 16 vim themes
+Plugin 'chriskempson/base16-vim'
+
+" XML support
+Plugin 'othree/xml.vim'
+
+" Handle ANSI escape codes
+Plugin 'ponzellus/AnsiEsc'
+
+" Golang
+Plugin 'fatih/vim-go'
+
+" NERD commenter
+Plugin 'scrooloose/nerdcommenter'
+
+" fzf fuzzy finder
+Plugin 'junegunn/fzf'
 
 "" vim-scripts repos
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
+"Plugin 'L9'
+"Plugin 'FuzzyFinder'
 
-"" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-
-filetype plugin indent on     " required!
+call vundle#end()            " required
+filetype plugin indent on     " required for vundle
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
 "
 " see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+" NOTE: comments after Plugin commands are not allowed.
+" Put your stuff after this line
+
+"
+" END VUNDLE SETUP
+"
 
 "disable all bells
 set visualbell t_vb=
@@ -205,18 +258,70 @@ cnoremap <C-g>  <C-c>
 " more, I should set it to accept error types only for specific files
 set errorformat=%f:%l:%c:\ %m
 
-" Only run Classification tests right now. Is there a way to have it figure
-" out what test file I'm currently in?
-nnoremap <leader>m :copen<CR>:cex system('make test')<CR>
-nnoremap <leader>n :cex system('make')<CR>
-nnoremap <leader>l :cex system('make lint')<CR>
+nnoremap <leader>l :!clear && rake<CR>
+
+" run 'make'
+nnoremap <leader>g :!clear && make<CR>
 
 " plugin helpers
 nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>f :CommandT<CR>
+
+" default fzf looks like:
+" nnoremap <leader>f :FZF<CR>
+"
+" but instead, we'll call it with the "exact" option. This means that, for ex,
+" 'servi aptc' matches 'services/aptc.js' but not
+" 'app/settings/controllers/services.js'
+" nnoremap <leader>f :call fzf#run({'options': '-e', 'sink': 'e', 'down': '40%'})<CR>
+"
+" ^^^ this doesn't handle c-x and c-v for split, so:
+
+" I basically have no idea how this works. CnP from
+" https://github.com/junegunn/fzf/issues/239#issuecomment-103081772
+function! s:my_fzf_handler(lines) abort
+  if empty(a:lines)
+    return
+  endif
+  let cmd = get({ 'ctrl-x': 'split',
+                \ 'ctrl-v': 'vsplit' }, remove(a:lines, 0), 'e')
+  for item in a:lines
+    execute cmd escape(item, ' %#\')
+  endfor
+endfunction
+
+nnoremap <silent> <leader>f :call fzf#run({
+  \ 'options': '-e --expect=ctrl-t,ctrl-x,ctrl-v',
+  \ 'down':    '40%',
+  \ 'sink*':   function('<sid>my_fzf_handler')})<cr>
 
 " Format json
-nnoremap <leader>pp :%!jsonpp<CR>
+"nnoremap <leader>j :%!jsonpp<CR>
+nnoremap <leader>j :%!jq ''<CR>
+
+" Format xml
+nnoremap <leader>x :%!xmllint --format --encode UTF-8 -<CR>
+
+" Format html
+nnoremap <leader>h :%!xmllint --format --encode UTF-8 --html -<CR>
 
 " Ack search
 nnoremap <leader>s :Ack -k -i
+
+" ruby debugger
+nnoremap <leader>d orequire 'byebug'; byebug<esc>
+nnoremap <leader>D Orequire 'byebug'; byebug<esc>
+
+" system paste and yank
+nnoremap <leader>p :pu +<CR>
+vnoremap <leader>y "*y
+
+" edit vimrc and source vimrc, respectively
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>es :source $MYVIMRC<cr>
+
+" Don't autocomplete html except with leader-a
+let xml_tag_completion_map = "<leader>a"
+
+let g:dbext_default_profile_VEC_HEROKU = 'type=pgsql:user=ubfp6mtntfbebm:dbname=d232n0hp1n58mk:host=ec2-54-83-62-176.compute-1.amazonaws.com:port=6002'
+let g:dbext_default_profile_VEC_LOCAL = 'type=pgsql:user=llimllib:dbname=vec'
+let g:dbext_default_profile_VEC_PROD_DUMP = 'type=pgsql:user=llimllib:dbname=prodvec'
