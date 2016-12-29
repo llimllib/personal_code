@@ -1,15 +1,16 @@
 set nocompatible               " be iMproved
 filetype off                   " required for vundle... we turn it back on later
 
-" Colorscheme
-if has("gui_running")
-    " colorscheme breeze
-    colorscheme idleFingers
-    set antialias
+" https://github.com/chriskempson/base16-shell
+" If there is a base16 theme file, load it and set the colorspace to 256
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 else
-    " colorscheme llimllib
-    " colorscheme solarized
-    colorscheme base16-twilight
+    colorscheme breeze
+    if has("gui_running")
+        set antialias
+    endif
 endif
 
 " turn on persistent undo, and store it in the vim dir
@@ -206,10 +207,10 @@ Plugin 'scrooloose/nerdcommenter'
 
 " fzf fuzzy finder
 Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
 
-"" vim-scripts repos
-"Plugin 'L9'
-"Plugin 'FuzzyFinder'
+" Elixir support
+Plugin 'elixir-lang/vim-elixir'
 
 call vundle#end()            " required
 filetype plugin indent on     " required for vundle
@@ -261,7 +262,7 @@ set errorformat=%f:%l:%c:\ %m
 nnoremap <leader>l :!clear && rake<CR>
 
 " run 'make'
-nnoremap <leader>g :!clear && make<CR>
+" nnoremap <leader>g :!clear && make<CR>
 
 " plugin helpers
 nnoremap <leader>t :NERDTreeToggle<CR>
@@ -294,6 +295,53 @@ nnoremap <silent> <leader>f :call fzf#run({
   \ 'down':    '40%',
   \ 'sink*':   function('<sid>my_fzf_handler')})<cr>
 
+function! s:ag_to_qf(line)
+  let parts = split(a:line, ':')
+  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
+        \ 'text': join(parts[3:], ':')}
+endfunction
+
+function! s:ag_handler(lines)
+  if len(a:lines) < 2 | return | endif
+
+  let cmd = get({'ctrl-x': 'split',
+               \ 'ctrl-v': 'vertical split',
+               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
+  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
+
+  let first = list[0]
+  execute cmd escape(first.filename, ' %#\')
+  execute first.lnum
+  execute 'normal!' first.col.'|zz'
+
+  if len(list) > 1
+    call setqflist(list)
+    copen
+    wincmd p
+  endif
+endfunction
+
+" Modified from
+" https://github.com/junegunn/fzf/wiki/Examples-(vim)#narrow-ag-results-within-vim
+command! -nargs=* Rg call fzf#run({
+            \ 'source':  printf('rg -n --column "%s"', <q-args>),
+            \ 'options': '--ansi -e --expect=ctrl-t,ctrl-x,ctrl-v --delimiter : --nth 4.. '.
+            \            '--color hl:68,hl+:110',
+            \ 'sink*':   function('<sid>ag_handler'),
+            \ 'down':    '40%'
+            \ })
+
+nnoremap <silent> <leader>g :Rg<CR>
+
+" command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+" nnoremap <silent> <leader>s :Find 
+
+" Ack search
+" nnoremap <leader>s :Ack! -i 
+" if executable('rg')
+"   let g:ackprg = 'rg --vimgrep'
+" endif
+
 " Format json
 "nnoremap <leader>j :%!jsonpp<CR>
 nnoremap <leader>j :%!jq ''<CR>
@@ -303,9 +351,6 @@ nnoremap <leader>x :%!xmllint --format --encode UTF-8 -<CR>
 
 " Format html
 nnoremap <leader>h :%!xmllint --format --encode UTF-8 --html -<CR>
-
-" Ack search
-nnoremap <leader>s :Ack -k -i
 
 " ruby debugger
 nnoremap <leader>d orequire 'byebug'; byebug<esc>
@@ -319,9 +364,20 @@ vnoremap <leader>y "*y
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>es :source $MYVIMRC<cr>
 
+" add or remove focus:true to the current line
+" I actually wrote this!
+function! Add_or_remove_focus()
+  let line=getline('.')
+  echom 'yo'
+
+  if line =~ 'focus'
+    execute ':.s/,\s*focus\s*:\s*true//'
+  else
+    execute ':.s/ do$/, focus:true do/'
+  endif
+endfunction
+" add or remove focus:true to the current line
+nnoremap <leader>o :call Add_or_remove_focus()<cr>
+
 " Don't autocomplete html except with leader-a
 let xml_tag_completion_map = "<leader>a"
-
-let g:dbext_default_profile_VEC_HEROKU = 'type=pgsql:user=ubfp6mtntfbebm:dbname=d232n0hp1n58mk:host=ec2-54-83-62-176.compute-1.amazonaws.com:port=6002'
-let g:dbext_default_profile_VEC_LOCAL = 'type=pgsql:user=llimllib:dbname=vec'
-let g:dbext_default_profile_VEC_PROD_DUMP = 'type=pgsql:user=llimllib:dbname=prodvec'
