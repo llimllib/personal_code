@@ -1,5 +1,4 @@
 export EDITOR=/usr/local/bin/vim
-export TERM='screen-256color'
 
 # If we're running tmux, change the TERM and open vim with reattach-to-user-namespace so that cnp works
 [ -n "$TMUX" ] && export TERM=screen-256color
@@ -52,6 +51,7 @@ alias gp="git push"
 alias gph="git push heroku"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias prune='git remote prune origin'
+alias pr="hub pull-request -o"
 
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 
@@ -90,7 +90,6 @@ alias ls='ls -FG'
 alias py="ipython"
 
 alias hubvan="ssh hubvan.com"
-alias ci="ssh bill@107.170.81.161"
 
 alias be="bundle exec"
 
@@ -105,8 +104,6 @@ function f {
 export CVS_RSH=ssh
 
 export MANPATH=$MANPATH:/opt/local/man
-
-export PATH=/usr/local/share/python:/usr/local/bin:/usr/local/Cellar/python/2.7/bin:/usr/local/sbin:/usr/local/share/npm/bin/:/usr/texbin:$PATH
 
 # http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
 # Get this value with $(/usr/libexec/java_home)
@@ -161,21 +158,37 @@ export LEX_DB=/usr/local/share/lex/db
 
 #set golang root dir
 export GOPATH=~/go
-export GOROOT=/usr/local/Cellar/go/1.6.2/libexec/
+export GOROOT=/usr/local/Cellar/go/1.7.1/libexec/
 
-# add golang binaries to path
+#
+# PATH CONFIGURATION SECTION
+#
+
+# prefer local/bin and local/sbin to bin
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# golang binaries
 export PATH=$PATH:$GOPATH/bin
 
-# add haskell binaries to path
-export PATH=$PATH:~/.cabal/bin:
+# haskell binaries
+export PATH=$PATH:$HOME/.cabal/bin
 
-# add ruby binaries to path
-export PATH=$PATH:/usr/local/opt/ruby/bin:
+# ruby binaries to path
+export PATH=$PATH:/usr/local/opt/ruby/bin
 
-# rebenv
+# rust binaries
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# perl binaries
+export PATH="$PATH:$HOME/perl4/bin"
+
+# yarn (javascript) binaries
+export PATH="$PATH:$HOME/.yarn/bin"
+
+# rbenv
 eval "$(rbenv init -)"
 
-#pyenv
+# pyenv
 eval "$(pyenv init -)"
 
 # Start gpg-agent
@@ -196,10 +209,11 @@ export GPG_AGENT_INFO
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-PATH="/Users/llimllib/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/Users/llimllib/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/Users/llimllib/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/Users/llimllib/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/llimllib/perl5"; export PERL_MM_OPT;
 
-export PATH="~/.yarn/bin:$PATH"
+# install base16 colorscheme
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
