@@ -3,9 +3,11 @@
     ci = commit
     co = checkout
     br = branch
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
 [user]
-	name = Bill Mill
-	email = "bill.mill@gmail.com"
+    name = Bill Mill
+    email = "bill@billmill.org"
+    signingkey = BE83661E
 [color]
     branch = auto
     diff = auto
@@ -17,10 +19,10 @@
     remote = green
 
 [color "diff"]
-    meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
 
 [color "status"]
     added = yellow
@@ -30,6 +32,29 @@
 [push]
     default = upstream
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [diff]
-	algorithm = patience
+    algorithm = patience
+    compactionHeuristic = true
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
+
+# Git doesn't check the validity of commit hashes by default
+# https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+#
+# ... I turned this off a few months later because several of the git repos
+# I depend on for vim plugins have fsck errors. Even python requests does.
+# I wish they didn't.
+#
+#[transfer]
+#    fsckobjects = true 
+#[fetch]
+#    fsckobjects = true 
+#[receive]
+#    fsckObjects = true 
+#
+
+[commit]
+	gpgsign = true
