@@ -1,4 +1,5 @@
 export EDITOR=/usr/local/bin/vim
+#export TERM='screen-256color'
 
 # If we're running tmux, change the TERM and open vim with reattach-to-user-namespace so that cnp works
 [ -n "$TMUX" ] && export TERM=screen-256color
@@ -158,7 +159,6 @@ export LEX_DB=/usr/local/share/lex/db
 
 #set golang root dir
 export GOPATH=~/go
-export GOROOT=/usr/local/Cellar/go/1.7.1/libexec/
 
 #
 # PATH CONFIGURATION SECTION
