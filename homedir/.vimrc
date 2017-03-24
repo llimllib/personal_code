@@ -141,7 +141,13 @@ augroup myfiletypes
   autocmd FileType python,c set sw=4 sts=4 et
   autocmd FileType javascript set sw=2 sts=2 et
   autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
+  autocmd FileType js set nofixeol
 augroup END
+
+" Run prettier on save... this is kind of gross.
+" autocmd FileType javascript set formatprg=prettier\ --stdin
+" autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+autocmd BufWritePre *.js call js#fmt#Format()
 
 "
 " BEGIN VUNDLE SETUP
@@ -150,6 +156,9 @@ augroup END
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+" autoformat with prettier
+Plugin 'llimllib/js-prettier'
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
