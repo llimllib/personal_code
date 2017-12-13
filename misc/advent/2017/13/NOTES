@@ -1,0 +1,55 @@
+* a level with 2 slots is invalid on 0,2,4,6,..
+* a level with 3 slots is invalid on 0,4,8,12,...
+* a level with 4 slots is invalid on 0,6,12,...
+* a level with 5 slots is invalid on 0,8,16,...
+*              6                     0,10,20
+
+So let's say we had a machine that was: 0:2, 1:3, 2:4, 3:5
+
+on 0 it would look like: [x,x,x,x]
+on 1 in would look like: [0,0,0,0]
+on 2 it would look like: [x,0,0,0]
+it's never invalid on an odd number.
+
+We could look at it like: does [0,1,2,3] intersect with [(0,2,...), (0,4,...), (0,6,...), (0,8,...)]?
+
+clearly it does at spot 0
+
+Does [1,2,3,4]?
+
+[0,0,0,0]
+
+What's the best way to ask "is this number in this infinite sequence"?
+    * in this case there's a closed form answer definitely
+    * at index i, which has value v, number n is in the set if n % 2*(v-1) == 0
+        * that is, at index 0, with value 2, 2,4,6... % 2 == 0
+
+Another question is, how do I generate the state of the firewall at a given step?
+
+each cell has number n
+
+cell 0 at step s is closed if s % 2 == 0
+cell 1 at step s+1 is closed if (s+1) % 4 == 0
+
+actually we can do it even cooler and define the whole thing in terms of the start state:
+
+Starting at delay `d`, the item at index `i` is closed IIF:
+
+OK, we got an answer but it's wrong :( and no clues as to whether it's too high or too low.
+
+It does have to be even, right?
+    * if we start at delay 1, then we'll be at cell 0 at step 1 (pass)
+        * cell 1 at step 2 (fail)
+
+* Running the example gives the wrong result
+    * ex: 0: 3, 1: 2, 4: 4, 6: 6
+    * it says 6, but the answer is 10. OK!
+    * at step 6, n 3:  6 % 4 != 0
+              7, n 2: != 0
+              8
+              9
+              10, n 4: != 0
+              11
+              12, n 6: != 0
+    * so my mental math has it wrong too
+
