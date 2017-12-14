@@ -41,6 +41,7 @@ def go(inp):
     print(penalty)
 
 
+# Works but too slow!
 def go2(inp):
     firewall = defaultdict(list)
     for line in inp:
@@ -81,11 +82,9 @@ def go3(inp):
         firewall[int(n1)] = int(n2)
     maxlev = max(firewall.keys())
 
-    delay = 6
+    delay = 0
     while 1:
         ts = range(delay, delay + maxlev + 1)
-        if delay % 1000000 == 0:
-            print(delay)
         try:
             for i, val in enumerate(ts):
                 if firewall[i] and isclosed(firewall[i], val):
