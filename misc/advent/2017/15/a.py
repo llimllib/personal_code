@@ -55,8 +55,8 @@ def go3(basea, baseb, iters):
 
 
 if __name__ == "__main__":
-    print(go(783, 325, 40000000))
+    #print(go(783, 325, 40000000))
     # generator style runs in pypy in .74s. python is ~16s
-    print(go2(783, 325, 5000000))
+    #print(go2(783, 325, 5000000))
     # straight iterative runs in .42s
-    #print(go3(783, 325, 5000000))
+    print(go3(783, 325, 5000000))
