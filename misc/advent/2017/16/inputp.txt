@@ -1,0 +1,10000 @@
+x 14 11
+p h p
+x 4 5
+s 10
+x 12 14
+s 6
+x 8 6
+s 6
+x 13 10
+p k f
+s 15
+x 7 4
+s 15
+p n b
+x 0 11
+p j k
+x 1 8
+s 8
+x 6 9
+p o c
+x 8 14
+p f l
+x 6 0
+p j o
+x 15 5
+p b h
+x 12 8
+p g p
+s 9
+x 5 3
+p e c
+x 8 15
+p g n
+x 6 12
+s 5
+x 9 15
+p f e
+x 0 12
+p m c
+x 7 9
+p o k
+x 8 12
+s 2
+x 2 0
+p b l
+x 13 7
+s 13
+p k n
+x 3 12
+p l b
+s 5
+x 13 10
+p m c
+s 4
+x 4 3
+s 11
+x 9 6
+p o h
+x 8 7
+p m g
+s 7
+x 14 1
+p h p
+x 8 5
+s 1
+p c j
+x 7 15
+s 7
+p i o
+x 6 1
+s 2
+x 3 12
+p l b
+x 5 15
+s 10
+x 4 2
+s 4
+x 8 15
+p o p
+x 2 3
+p c i
+x 7 13
+p p l
+x 11 5
+p k h
+s 15
+x 2 6
+s 4
+p l g
+s 12
+x 9 15
+s 8
+x 8 1
+p b a
+x 13 4
+p o h
+x 6 12
+s 7
+p l b
+x 7 13
+p a j
+x 5 4
+p p k
+x 15 12
+p i j
+x 8 6
+p m n
+x 2 4
+s 2
+x 5 11
+p h k
+x 14 2
+s 1
+x 11 0
+p e o
+x 9 7
+p l a
+x 5 1
+s 4
+x 0 12
+s 15
+x 8 7
+p e d
+x 14 1
+p j f
+x 10 6
+p k a
+x 4 8
+p p i
+x 15 2
+s 8
+p d a
+s 15
+x 11 8
+p c b
+x 10 6
+s 11
+x 3 5
+p j p
+x 13 4
+p e n
+x 0 14
+p j p
+x 7 9
+s 1
+x 13 10
+p g l
+x 6 12
+s 11
+x 10 2
+p h n
+s 12
+x 14 11
+p i j
+s 9
+x 5 10
+p h n
+x 14 3
+s 14
+p c e
+x 13 6
+p l f
+x 15 12
+s 12
+x 9 6
+s 11
+x 5 12
+s 8
+x 11 14
+p o k
+x 10 3
+s 10
+x 12 9
+s 9
+x 7 5
+s 12
+p i m
+s 3
+x 4 15
+p a h
+x 12 13
+s 4
+x 1 7
+s 5
+x 0 3
+s 9
+x 14 11
+s 13
+x 15 7
+s 6
+x 14 6
+p e k
+x 5 10
+p d m
+x 13 8
+p g n
+x 10 14
+s 1
+x 2 11
+s 13
+x 14 10
+s 13
+x 15 1
+s 1
+x 6 4
+s 11
+p o h
+x 7 5
+s 6
+x 11 9
+p p a
+x 3 14
+p m g
+x 2 8
+p a d
+x 6 15
+s 2
+p l p
+x 13 14
+s 6
+x 4 0
+s 7
+x 13 1
+s 13
+x 3 12
+s 12
+x 0 8
+s 12
+x 5 9
+s 8
+x 12 2
+p j o
+s 13
+x 7 3
+p i b
+x 6 14
+s 6
+x 1 11
+s 7
+x 2 4
+s 9
+x 9 11
+p g h
+s 6
+x 13 1
+s 5
+x 8 15
+s 2
+x 0 12
+s 10
+x 15 11
+s 1
+x 1 0
+p e k
+x 11 4
+s 2
+x 8 6
+s 15
+x 1 13
+p h j
+x 10 6
+p p d
+x 15 1
+p j k
+x 8 11
+s 2
+x 14 5
+s 14
+x 6 9
+s 12
+x 14 13
+p d a
+x 1 11
+s 15
+x 6 8
+s 9
+x 15 4
+s 5
+x 13 3
+p e h
+x 14 11
+s 12
+x 8 15
+p a d
+s 15
+x 0 4
+p g f
+x 15 11
+s 5
+x 14 13
+p l k
+x 10 0
+s 3
+x 14 5
+p a o
+x 13 11
+s 2
+x 0 6
+s 12
+x 1 2
+p c f
+x 15 6
+p b g
+x 2 7
+p a o
+x 14 11
+s 14
+x 2 0
+p d l
+s 7
+p a j
+x 6 14
+p h k
+s 13
+x 4 10
+s 4
+x 11 0
+s 7
+x 6 2
+p l e
+x 5 9
+s 14
+x 13 2
+s 9
+x 14 15
+s 10
+x 8 9
+p n f
+x 4 2
+s 10
+x 13 10
+p m c
+x 7 11
+s 7
+x 1 10
+p g d
+x 13 3
+s 9
+x 9 7
+p j o
+x 10 12
+s 1
+x 9 7
+p c n
+x 15 13
+p a p
+x 2 14
+s 13
+x 1 4
+p m b
+x 11 2
+s 4
+x 8 10
+s 11
+x 5 4
+s 8
+x 6 13
+s 4
+p e h
+x 5 7
+p f d
+x 12 13
+s 13
+x 9 5
+p a p
+x 8 1
+p m n
+x 11 9
+s 15
+x 7 13
+s 12
+x 9 5
+p k c
+x 2 4
+p g d
+x 7 10
+p n p
+x 6 5
+s 14
+x 11 13
+s 14
+x 7 6
+s 12
+x 5 4
+s 8
+x 14 11
+s 6
+x 13 8
+s 11
+x 9 15
+s 10
+x 6 0
+p m e
+x 3 9
+s 12
+x 2 6
+p c p
+x 4 10
+s 15
+x 8 12
+p l n
+x 1 13
+s 6
+x 11 6
+p d p
+x 8 14
+p a k
+x 12 1
+p c m
+x 11 9
+s 1
+x 0 13
+s 2
+x 3 12
+s 4
+x 9 7
+p k f
+x 6 14
+s 4
+x 0 11
+p e h
+x 3 1
+s 11
+x 7 4
+s 6
+x 15 1
+s 6
+x 5 12
+s 9
+x 6 14
+s 12
+p d k
+x 1 7
+s 5
+x 6 3
+p h a
+x 10 15
+s 10
+x 0 9
+p n f
+x 7 11
+s 14
+x 8 5
+s 12
+x 6 4
+p l h
+x 1 3
+s 9
+x 9 7
+s 1
+x 0 11
+s 2
+x 9 6
+s 1
+x 1 2
+s 10
+x 15 0
+p o p
+x 8 14
+s 3
+x 11 4
+s 8
+x 2 12
+s 3
+x 5 13
+p a h
+x 14 0
+p b k
+s 5
+x 5 7
+s 10
+x 8 2
+s 7
+p a o
+x 4 6
+s 3
+x 13 2
+s 14
+x 5 9
+s 12
+x 0 1
+p j k
+s 1
+x 9 12
+s 8
+x 13 5
+p f n
+x 0 6
+s 5
+x 12 5
+s 10
+p k i
+s 8
+x 1 0
+p a o
+x 6 13
+s 4
+x 0 4
+s 6
+x 2 3
+s 1
+p g d
+x 12 1
+s 15
+x 15 11
+p i l
+x 4 5
+p d p
+x 12 10
+p l i
+x 15 6
+s 15
+x 0 10
+s 14
+x 13 3
+p a h
+x 10 5
+s 12
+p j e
+x 6 14
+s 9
+x 2 15
+s 11
+x 14 9
+p n c
+x 7 6
+p e a
+x 13 8
+s 11
+p o k
+x 10 0
+s 13
+x 15 14
+p h l
+x 12 5
+p i p
+s 14
+x 4 3
+s 7
+x 15 11
+p c k
+s 12
+x 4 0
+s 2
+x 2 7
+s 3
+p f a
+x 9 5
+s 6
+p i n
+x 7 15
+p l f
+x 9 4
+p c k
+x 12 5
+p l i
+x 11 9
+p n c
+x 8 1
+s 11
+p l a
+x 7 2
+s 12
+x 6 11
+s 14
+x 15 5
+p k g
+x 3 8
+p a l
+x 11 10
+p j c
+x 0 15
+s 13
+p b f
+x 9 3
+p m o
+x 14 7
+s 4
+x 15 13
+s 10
+x 7 9
+s 11
+x 5 0
+s 13
+x 3 13
+p b a
+x 15 10
+p d g
+x 13 6
+p c k
+x 3 10
+s 11
+x 6 2
+p j l
+x 10 4
+p n g
+x 1 11
+s 5
+x 10 3
+s 13
+x 8 11
+s 6
+x 5 12
+s 11
+x 7 9
+p p j
+x 13 14
+p i f
+x 3 15
+s 9
+x 7 14
+s 1
+x 1 9
+s 3
+p a j
+x 14 0
+s 14
+x 8 2
+s 14
+x 4 0
+p l d
+x 7 10
+p o n
+x 5 0
+s 11
+x 4 14
+s 15
+x 1 5
+p g b
+s 10
+x 10 0
+p m c
+x 12 7
+p k i
+x 9 5
+s 1
+x 1 3
+s 11
+x 6 0
+s 9
+x 4 2
+p f l
+x 3 9
+s 2
+x 13 15
+s 13
+p m a
+x 12 7
+s 3
+x 5 3
+p f n
+s 9
+x 15 2
+p c a
+x 3 4
+p h f
+x 1 12
+p g j
+x 3 14
+s 4
+x 10 7
+s 4
+x 11 13
+p o c
+x 14 0
+p a b
+s 4
+x 2 12
+p i k
+x 3 13
+s 15
+x 7 4
+s 4
+x 9 1
+s 13
+p h j
+x 14 2
+s 5
+x 5 15
+p l g
+s 10
+x 12 6
+s 13
+x 5 0
+p o m
+x 14 7
+p i j
+x 1 9
+s 6
+x 4 10
+p o b
+s 3
+x 12 11
+s 6
+x 2 1
+s 7
+x 0 5
+s 9
+x 4 7
+s 13
+x 2 13
+p f a
+x 11 7
+s 1
+x 6 4
+s 10
+x 7 11
+s 6
+x 8 0
+p c n
+x 10 6
+s 15
+p b d
+x 13 1
+s 11
+x 2 11
+s 6
+x 0 4
+p p l
+x 2 8
+s 9
+x 7 13
+p h k
+x 9 12
+p b c
+x 4 5
+s 9
+x 0 10
+p h l
+x 8 5
+p c e
+x 15 12
+p b g
+x 11 5
+p n f
+x 2 7
+s 4
+x 14 8
+s 13
+x 3 11
+s 4
+x 5 6
+p l h
+x 4 14
+p b k
+x 12 0
+p l d
+s 13
+x 3 5
+s 8
+x 1 2
+s 11
+p e c
+x 5 0
+s 5
+x 1 8
+p i d
+x 5 3
+p k c
+x 13 6
+s 8
+x 1 5
+s 15
+x 4 8
+p h o
+x 1 15
+s 10
+p k j
+x 7 13
+s 11
+x 14 10
+s 12
+p c f
+s 6
+x 3 1
+p k p
+x 5 7
+s 4
+x 10 3
+s 4
+x 1 7
+s 2
+x 0 3
+s 6
+x 15 9
+s 13
+x 4 7
+p n f
+s 11
+x 12 14
+s 12
+x 11 5
+p p j
+x 3 4
+s 10
+x 7 14
+p g b
+x 4 9
+s 3
+x 8 13
+p j p
+x 11 4
+s 15
+x 1 2
+s 9
+p b i
+s 6
+x 6 14
+p j k
+x 11 10
+p o g
+x 7 1
+s 10
+x 13 3
+p h p
+x 1 12
+p n i
+x 2 6
+s 5
+x 14 7
+p b g
+x 6 1
+p c o
+x 15 2
+p f a
+x 9 6
+p o n
+x 10 14
+p h f
+s 12
+x 1 8
+s 9
+x 3 0
+s 8
+x 5 7
+p a e
+x 8 10
+p n i
+x 15 4
+p l d
+x 8 13
+p g j
+x 11 2
+p b m
+x 14 13
+s 12
+x 8 3
+s 1
+p a d
+x 7 2
+s 1
+x 5 10
+s 15
+x 1 8
+s 2
+x 0 10
+s 13
+x 1 5
+s 9
+p g o
+x 4 14
+s 11
+x 3 0
+s 2
+p p d
+x 4 10
+s 14
+x 1 2
+p c m
+x 7 15
+s 15
+x 6 13
+p p k
+x 11 2
+s 4
+x 15 8
+s 12
+x 11 3
+s 14
+x 4 5
+p g h
+x 12 13
+p b f
+x 9 10
+s 6
+p j c
+x 6 12
+s 14
+x 13 2
+s 14
+x 7 0
+s 9
+x 12 14
+p h g
+x 1 6
+s 15
+x 4 2
+p a e
+x 3 8
+p d o
+x 6 12
+p j e
+x 4 8
+s 4
+x 3 5
+p d f
+x 9 12
+s 8
+x 11 6
+s 1
+x 15 10
+s 7
+x 1 6
+s 2
+x 9 2
+s 13
+p h k
+x 1 3
+s 8
+x 11 7
+s 7
+x 5 3
+p m p
+x 13 7
+s 11
+x 0 10
+p l c
+x 4 3
+s 6
+x 13 10
+p k g
+x 7 2
+s 15
+x 3 15
+p n i
+x 8 14
+s 10
+x 7 12
+p e m
+x 9 15
+p b a
+x 6 7
+p p k
+x 8 1
+p l i
+x 2 3
+s 8
+p k d
+x 15 14
+p m g
+x 3 5
+s 3
+x 4 7
+s 9
+x 15 14
+p d a
+x 8 11
+p n h
+x 15 14
+s 1
+x 13 9
+s 1
+x 2 0
+s 4
+x 6 9
+s 13
+x 4 13
+s 7
+x 10 9
+p j k
+s 1
+x 2 15
+p p l
+x 6 3
+s 13
+x 7 0
+s 8
+x 15 9
+s 1
+x 0 10
+p g j
+x 3 7
+s 13
+x 6 12
+s 8
+x 2 15
+p i d
+x 1 3
+p h g
+x 9 5
+s 4
+p e c
+x 4 7
+s 9
+x 2 1
+p o i
+x 11 0
+s 12
+x 7 4
+s 14
+x 15 2
+s 9
+x 3 8
+s 8
+x 5 6
+p h p
+x 4 8
+s 13
+x 14 12
+p j o
+x 15 7
+s 12
+p i m
+x 6 12
+s 4
+x 11 15
+p f n
+x 6 12
+p l c
+x 1 10
+s 7
+x 3 13
+p e k
+s 13
+x 15 8
+s 11
+x 3 7
+p p b
+x 13 0
+p g h
+x 3 11
+p k m
+x 12 9
+p p f
+x 10 7
+s 2
+x 3 6
+s 13
+x 12 8
+s 6
+x 10 15
+s 9
+x 1 4
+s 7
+x 5 10
+s 3
+p j e
+x 6 11
+s 14
+x 10 4
+s 7
+x 0 2
+s 13
+x 4 6
+s 2
+p i g
+x 11 7
+s 3
+x 3 13
+p n p
+x 14 7
+s 5
+x 2 4
+s 7
+x 8 5
+s 13
+x 9 3
+s 14
+p f i
+x 14 0
+s 6
+x 2 6
+s 6
+x 0 4
+s 11
+p a m
+x 8 9
+p f i
+x 2 3
+p c o
+x 12 8
+s 7
+x 10 15
+s 15
+x 2 3
+p f j
+x 10 1
+p g c
+x 3 9
+s 4
+x 0 8
+s 6
+x 4 2
+s 7
+x 10 12
+s 1
+x 13 8
+p k d
+x 3 14
+p i n
+x 7 12
+s 11
+p g b
+x 8 11
+s 4
+p m e
+x 13 0
+p d p
+x 15 14
+s 5
+x 13 7
+s 4
+x 4 0
+s 13
+x 2 8
+s 7
+x 10 13
+s 13
+x 12 11
+p l o
+x 13 5
+p j k
+s 4
+x 14 10
+p b g
+s 11
+x 6 8
+s 15
+x 0 4
+s 1
+x 9 1
+s 15
+p l a
+x 2 5
+p m j
+s 12
+x 4 6
+p h a
+s 6
+x 13 2
+p n o
+x 5 0
+p l e
+x 6 13
+p i k
+x 8 3
+s 3
+x 6 0
+s 2
+x 4 10
+p g a
+x 6 8
+p d n
+x 12 13
+s 11
+x 3 4
+p j p
+x 9 8
+p c k
+x 3 5
+p m a
+x 6 12
+p o n
+x 0 15
+s 14
+p m b
+x 2 14
+s 2
+x 11 3
+s 3
+x 0 14
+p k c
+x 5 10
+p f l
+x 7 2
+s 14
+x 15 11
+p d g
+x 13 5
+p k b
+x 11 12
+s 2
+x 14 7
+p h c
+x 3 2
+s 10
+x 9 4
+s 3
+p n p
+x 15 5
+s 10
+x 12 7
+p i c
+x 3 13
+s 9
+x 15 0
+p l k
+x 7 10
+p i m
+x 15 6
+s 15
+x 11 10
+p c d
+x 15 2
+p p m
+x 0 10
+p j h
+x 2 14
+s 12
+x 7 0
+p f o
+x 5 14
+p j k
+x 8 6
+s 9
+x 14 7
+s 14
+x 6 11
+p h i
+x 4 9
+s 6
+x 15 13
+p g p
+x 0 3
+p d b
+x 7 10
+s 2
+x 13 0
+s 9
+x 14 9
+p c i
+s 13
+x 3 11
+s 6
+p o k
+s 6
+x 7 1
+s 7
+x 15 12
+s 1
+x 3 7
+p f i
+x 13 14
+p o k
+x 6 4
+s 11
+x 15 8
+s 2
+x 10 9
+s 12
+x 3 7
+p b l
+x 10 5
+s 11
+x 6 7
+s 8
+x 10 0
+s 6
+x 3 6
+s 5
+p h c
+x 11 1
+p e g
+x 7 5
+s 1
+x 9 12
+s 4
+p k i
+x 15 0
+s 9
+x 3 4
+p b o
+x 2 15
+s 7
+x 12 9
+s 11
+x 4 11
+s 15
+p d f
+x 2 13
+p j m
+x 1 8
+s 9
+x 12 7
+s 1
+x 3 13
+s 6
+x 12 4
+p p k
+x 9 10
+s 4
+x 12 3
+p h a
+x 13 14
+p n b
+x 8 0
+p e h
+x 11 7
+s 2
+x 13 14
+s 4
+x 0 10
+p f i
+x 4 7
+p e g
+s 5
+p a h
+x 8 5
+p o c
+x 0 13
+s 3
+x 10 12
+s 7
+x 3 11
+s 12
+x 9 15
+p d a
+x 13 1
+s 6
+x 2 11
+p m n
+x 15 6
+s 9
+x 7 0
+s 13
+x 13 4
+s 1
+x 9 6
+s 10
+x 1 3
+s 12
+x 8 0
+s 6
+x 2 4
+p f b
+x 15 14
+p a k
+x 5 4
+p e l
+x 9 2
+s 8
+x 8 4
+s 11
+x 10 13
+s 11
+x 6 4
+p o b
+x 14 10
+p c n
+x 13 11
+s 3
+x 3 7
+s 9
+x 10 11
+p j l
+x 1 6
+p a h
+x 13 0
+s 12
+x 12 8
+p c l
+x 11 5
+p m n
+x 15 4
+s 9
+x 9 14
+s 11
+x 1 12
+p p h
+s 8
+x 5 14
+p c m
+x 3 13
+p h i
+x 7 4
+s 5
+x 3 6
+p k e
+s 9
+x 9 8
+s 10
+x 15 7
+p a n
+x 1 11
+p p i
+x 9 12
+s 15
+x 3 10
+s 7
+x 11 6
+p g b
+x 5 2
+s 2
+x 9 0
+s 4
+x 2 11
+s 13
+x 1 4
+s 5
+x 8 0
+s 15
+x 12 15
+p e h
+x 6 0
+p m j
+x 1 11
+s 5
+x 14 8
+s 5
+x 13 0
+p o d
+x 5 7
+s 14
+x 3 2
+s 9
+x 5 7
+p b j
+x 10 0
+s 13
+x 14 6
+p l e
+x 1 11
+s 13
+x 5 12
+p g a
+x 7 10
+p b p
+x 5 14
+s 7
+x 1 2
+p c d
+x 12 10
+p e k
+x 0 3
+s 9
+x 8 9
+p c p
+s 6
+x 2 6
+p f e
+x 5 1
+s 8
+x 4 11
+p k a
+x 6 9
+p j n
+x 15 0
+s 13
+x 8 3
+s 12
+x 14 10
+s 14
+x 2 7
+s 8
+x 10 3
+s 14
+x 14 1
+p d c
+x 2 0
+p o b
+x 1 9
+p e i
+x 2 5
+p b m
+x 6 4
+p c g
+x 5 12
+p o h
+x 15 11
+s 7
+x 3 14
+p n i
+x 12 9
+p o h
+x 13 7
+p j c
+x 15 1
+p m o
+x 9 0
+s 6
+x 5 8
+p b p
+x 0 3
+s 13
+p a m
+x 13 6
+s 9
+x 0 7
+s 15
+x 13 15
+s 3
+x 7 3
+p p e
+x 11 10
+s 5
+x 7 13
+s 15
+p h f
+x 1 15
+s 3
+x 4 9
+s 8
+x 8 3
+p g c
+x 6 7
+p a h
+x 11 0
+s 12
+p g f
+x 6 8
+p b m
+s 1
+x 2 7
+s 11
+x 10 1
+s 13
+x 9 15
+p e h
+x 7 3
+p n p
+x 12 9
+s 9
+p i c
+x 4 6
+p o f
+x 5 14
+p a b
+x 10 8
+p c f
+x 4 7
+s 11
+x 8 10
+s 15
+x 5 14
+s 12
+x 10 0
+p h p
+x 9 3
+s 13
+x 13 12
+p l f
+x 0 10
+p k n
+x 6 12
+s 13
+x 0 13
+p p g
+s 8
+x 1 6
+s 9
+x 7 8
+s 2
+x 1 3
+p l c
+x 0 9
+p j b
+x 12 7
+s 2
+x 1 0
+p f k
+x 3 10
+s 13
+x 2 15
+s 15
+x 8 14
+p e b
+x 0 9
+p i l
+x 7 15
+s 12
+x 3 5
+p c p
+x 6 2
+p g m
+x 15 5
+s 3
+x 14 4
+p n l
+x 9 2
+s 12
+x 0 13
+s 7
+x 2 9
+p e a
+x 5 15
+p o j
+x 10 11
+s 6
+x 2 8
+s 5
+x 13 1
+p n m
+x 8 0
+s 7
+x 3 10
+s 1
+x 13 2
+s 15
+x 10 6
+s 11
+p a b
+x 5 1
+p p c
+x 0 9
+s 6
+x 11 3
+s 12
+x 15 0
+p m a
+x 2 14
+s 6
+x 1 10
+s 3
+p f d
+x 3 6
+s 14
+p c o
+s 12
+x 10 4
+p d i
+s 2
+x 3 2
+s 12
+x 10 8
+p n m
+x 1 4
+p d k
+x 7 10
+s 9
+x 9 15
+s 15
+x 13 0
+s 13
+x 10 1
+s 10
+x 0 3
+p i c
+x 12 4
+s 13
+x 6 9
+s 2
+x 13 3
+p a e
+x 8 12
+p o l
+x 15 3
+s 6
+x 10 6
+s 8
+x 3 9
+p k m
+x 14 12
+s 5
+x 15 1
+s 14
+x 0 2
+p j c
+x 9 12
+p f k
+x 7 5
+s 11
+p e l
+x 4 1
+p b f
+x 8 6
+p m c
+x 14 1
+s 11
+p k f
+x 0 10
+s 9
+x 11 5
+s 5
+x 2 10
+s 1
+x 4 11
+s 12
+p o a
+x 13 9
+p p b
+x 5 15
+s 11
+x 14 7
+p h f
+x 6 0
+s 13
+x 12 13
+p d j
+x 1 11
+p f a
+x 6 9
+p m c
+s 6
+x 14 4
+s 9
+x 8 1
+p e k
+x 4 6
+s 7
+x 7 10
+s 13
+x 14 5
+s 1
+x 7 10
+p d i
+x 11 9
+p n h
+x 7 4
+s 12
+x 3 2
+s 8
+x 0 1
+p m k
+s 10
+x 3 12
+p c o
+x 10 5
+s 9
+x 15 11
+s 11
+p a g
+x 14 12
+p i o
+x 9 1
+s 1
+x 3 0
+s 14
+x 9 13
+p p d
+x 7 6
+p e n
+x 1 15
+p h a
+x 12 7
+s 11
+x 14 13
+s 1
+x 6 8
+s 10
+x 15 2
+p m o
+x 1 7
+p l a
+x 4 6
+s 6
+x 0 7
+p h b
+x 2 8
+p n g
+x 9 14
+p o m
+x 0 4
+p l j
+x 14 13
+p n d
+x 7 4
+s 12
+x 3 14
+s 5
+x 0 15
+s 14
+x 6 3
+p b j
+x 2 15
+s 8
+x 6 13
+s 12
+x 7 12
+p l c
+x 5 6
+s 3
+x 3 0
+s 11
+x 11 7
+s 15
+p a j
+s 7
+x 14 12
+p i h
+x 1 10
+p f g
+x 7 6
+s 1
+x 2 14
+s 1
+x 6 11
+s 9
+x 13 4
+s 2
+x 5 15
+s 2
+x 10 2
+s 5
+p a p
+x 12 1
+s 15
+x 8 0
+s 14
+x 9 11
+s 10
+x 4 7
+s 3
+x 9 5
+p b g
+x 14 10
+p m e
+x 4 11
+p b l
+x 12 2
+p e n
+x 7 6
+s 12
+p d a
+x 2 10
+s 11
+x 13 15
+s 7
+x 10 8
+p h l
+x 0 12
+p d m
+x 13 6
+s 4
+x 2 9
+p o f
+x 11 10
+s 12
+x 8 4
+p j i
+x 5 2
+s 13
+x 11 14
+s 14
+x 13 1
+s 13
+x 3 10
+s 6
+x 7 12
+s 3
+x 2 10
+p k p
+x 5 8
+s 3
+x 12 11
+p m a
+x 3 5
+s 15
+x 11 15
+s 14
+x 7 8
+s 15
+x 3 2
+s 2
+p p b
+x 6 0
+s 4
+x 14 15
+s 2
+x 0 2
+s 8
+x 6 7
+s 1
+x 2 3
+s 9
+x 7 9
+p j h
+x 13 12
+s 4
+x 7 6
+s 9
+x 14 4
+s 5
+x 13 6
+s 15
+x 4 5
+s 4
+x 7 2
+s 9
+x 6 14
+s 14
+x 15 11
+s 1
+x 6 1
+s 12
+x 10 15
+p k o
+x 0 7
+p l i
+x 15 1
+s 11
+x 11 3
+s 13
+x 7 14
+s 15
+x 5 8
+p e o
+x 6 13
+p f j
+x 15 4
+s 7
+x 13 6
+s 2
+x 10 15
+p a k
+x 5 12
+s 15
+x 8 14
+s 2
+x 9 7
+s 11
+x 13 14
+s 7
+x 6 3
+p d l
+x 9 11
+s 14
+x 14 1
+p n o
+s 1
+x 3 7
+s 10
+x 0 15
+s 7
+x 9 2
+s 7
+x 11 12
+p k i
+s 1
+x 2 3
+p b g
+x 7 14
+s 2
+x 2 5
+s 9
+x 12 7
+s 11
+p o c
+x 1 10
+s 14
+x 7 3
+s 7
+x 10 14
+p l p
+x 1 0
+s 3
+x 13 3
+p k h
+x 2 14
+s 14
+p a p
+x 7 5
+s 13
+x 14 10
+p l d
+x 0 15
+s 10
+x 8 9
+p p b
+x 12 13
+s 2
+x 3 5
+s 3
+x 15 7
+p n c
+s 15
+x 6 14
+p h o
+x 15 8
+s 12
+x 6 4
+s 7
+x 1 11
+p k g
+x 15 8
+s 7
+p i d
+x 2 7
+s 14
+p h c
+x 15 5
+s 10
+x 6 0
+s 11
+x 15 7
+s 13
+x 3 9
+s 11
+x 2 0
+s 3
+x 1 4
+s 6
+x 5 8
+s 9
+x 12 13
+s 1
+x 8 2
+p p m
+s 6
+x 15 6
+s 2
+x 1 12
+s 7
+x 9 13
+p j b
+x 0 14
+s 13
+x 7 2
+p p h
+x 6 1
+s 12
+p n o
+x 12 13
+p p e
+s 13
+x 2 0
+s 2
+x 4 9
+p o d
+x 6 14
+s 1
+x 8 13
+s 4
+x 3 0
+s 9
+x 12 1
+p e k
+x 2 3
+s 3
+x 5 1
+s 1
+x 0 11
+s 5
+x 10 2
+s 15
+x 11 7
+s 11
+x 8 14
+p g c
+x 6 10
+s 6
+x 14 9
+p d k
+x 6 13
+s 3
+x 10 4
+s 14
+x 6 1
+p n e
+x 15 4
+s 6
+x 1 2
+s 9
+x 11 0
+s 9
+x 3 13
+p o f
+x 7 8
+s 9
+x 6 1
+p j m
+x 10 5
+p g l
+x 9 4
+s 9
+x 10 11
+p d f
+x 14 5
+p j i
+x 1 4
+s 8
+x 15 3
+s 9
+x 7 14
+s 13
+x 0 10
+p p d
+x 7 13
+s 2
+p c m
+x 10 2
+p d f
+x 6 11
+s 5
+x 14 2
+s 5
+x 4 5
+s 8
+x 8 15
+s 4
+x 2 0
+p n e
+x 8 5
+p a h
+x 13 10
+p p g
+x 9 6
+p h n
+x 4 15
+s 4
+x 5 3
+p l b
+x 12 7
+s 8
+x 2 6
+p m g
+x 4 9
+p e n
+x 15 6
+p g l
+s 8
+x 12 3
+s 11
+x 14 6
+s 3
+x 0 12
+s 3
+x 11 14
+p m a
+x 10 3
+s 13
+x 1 9
+p p j
+x 11 3
+p n c
+x 15 13
+s 11
+x 4 10
+s 6
+x 0 13
+s 11
+x 2 4
+s 8
+x 14 12
+s 1
+x 15 1
+p g d
+x 12 7
+s 2
+x 0 3
+p j k
+s 2
+x 9 7
+p g p
+s 10
+x 8 5
+p h l
+x 15 4
+s 8
+x 8 7
+s 1
+x 0 4
+s 7
+x 9 3
+s 4
+x 2 7
+p f i
+x 11 1
+s 15
+x 0 10
+p n c
+x 3 1
+s 6
+x 13 6
+s 11
+x 10 1
+s 11
+x 6 15
+p l j
+x 14 1
+p e f
+x 6 7
+s 14
+x 5 2
+p l g
+x 11 7
+s 14
+x 4 1
+s 1
+x 0 14
+s 3
+x 8 7
+s 4
+p h d
+x 2 6
+s 12
+x 13 15
+s 11
+x 7 1
+p o n
+x 4 9
+s 14
+p j e
+x 3 15
+s 13
+x 9 7
+s 2
+x 4 0
+s 8
+x 12 10
+s 4
+x 7 11
+s 10
+x 15 3
+s 15
+x 7 13
+p h m
+x 2 1
+p n l
+x 13 3
+s 13
+x 9 4
+s 1
+x 10 7
+s 10
+x 13 4
+s 2
+x 8 12
+s 9
+x 13 4
+s 13
+x 3 10
+p p j
+s 1
+x 14 4
+s 12
+x 5 1
+s 8
+x 2 14
+s 5
+x 1 7
+s 10
+x 10 9
+p n d
+x 1 2
+p o k
+s 6
+p d p
+x 0 6
+s 13
+x 3 5
+s 14
+x 2 14
+s 13
+x 6 0
+s 15
+x 4 5
+s 1
+x 10 14
+p e g
+x 5 1
+p a b
+x 2 12
+s 11
+x 9 4
+s 14
+x 13 7
+p p n
+x 1 0
+s 13
+x 6 8
+s 3
+x 11 1
+s 2
+x 6 9
+p c m
+x 13 12
+p h i
+x 1 7
+s 6
+x 3 10
+p g a
+s 5
+x 4 0
+s 15
+x 8 9
+s 7
+x 12 10
+p p j
+x 3 0
+p f n
+x 1 7
+p d b
+x 2 0
+s 5
+x 15 11
+s 13
+x 1 9
+s 12
+x 0 12
+p e i
+x 8 1
+s 7
+x 0 9
+p m g
+x 14 15
+s 9
+x 3 10
+s 7
+x 14 15
+s 14
+x 0 5
+s 13
+x 11 2
+s 1
+p a o
+x 1 3
+p n h
+x 4 9
+p k j
+s 1
+x 14 6
+p e l
+x 2 0
+s 3
+x 10 1
+s 7
+p m p
+x 2 5
+s 7
+x 8 4
+s 2
+x 3 0
+p d f
+x 5 14
+s 15
+x 8 1
+p k b
+x 0 6
+s 3
+x 13 4
+p g f
+x 0 12
+s 12
+x 10 8
+s 3
+x 13 0
+p m a
+x 1 8
+s 3
+x 14 2
+s 14
+x 8 15
+s 7
+x 13 9
+p n e
+x 6 10
+s 8
+x 7 2
+s 5
+p a i
+x 11 12
+s 10
+x 13 9
+p o m
+x 12 1
+p l p
+x 6 8
+p m b
+x 3 1
+p a i
+s 5
+x 15 5
+p k f
+x 7 6
+p n b
+x 0 11
+s 13
+x 2 4
+s 8
+x 1 6
+p l p
+x 0 11
+s 7
+x 12 9
+s 15
+x 6 13
+s 4
+x 15 0
+p g c
+x 9 5
+s 7
+x 10 3
+s 1
+x 15 9
+p j l
+x 12 4
+p o m
+s 5
+x 14 11
+s 11
+x 1 7
+p p a
+x 9 12
+p k f
+x 11 7
+p a l
+x 3 9
+s 11
+x 1 14
+p k p
+x 2 7
+p h a
+s 15
+p d i
+x 4 14
+p a n
+s 11
+x 7 5
+p e f
+s 6
+x 10 14
+p o k
+x 2 4
+s 4
+x 3 13
+p c n
+x 0 14
+p i o
+x 3 2
+p d c
+s 1
+x 15 5
+p g l
+x 14 12
+p b h
+x 3 6
+p l p
+x 13 8
+s 11
+x 5 1
+s 7
+x 2 15
+p a b
+x 1 9
+p p d
+x 13 8
+s 14
+x 5 15
+s 12
+x 10 13
+s 2
+x 5 8
+p g f
+x 11 15
+p a i
+x 10 4
+p k m
+x 5 1
+p d e
+x 11 0
+s 8
+x 3 5
+p j g
+s 1
+x 2 10
+s 6
+x 15 0
+p a k
+x 11 1
+s 13
+p m c
+s 11
+p p i
+x 10 6
+s 3
+x 7 12
+p b a
+x 8 10
+p e h
+x 15 1
+p a n
+x 7 6
+p j k
+x 1 13
+p p n
+x 5 14
+p f i
+x 0 6
+s 10
+x 10 9
+s 12
+x 14 7
+s 2
+x 3 8
+s 5
+x 11 2
+p d p
+x 8 6
+s 5
+x 1 2
+p m o
+x 5 11
+s 3
+x 8 9
+s 4
+x 6 1
+s 13
+x 15 3
+s 4
+x 12 9
+s 4
+x 5 14
+s 14
+x 0 6
+s 4
+p l p
+x 10 14
+s 10
+x 5 2
+p b d
+x 10 0
+s 13
+x 1 4
+p m j
+x 8 9
+p f k
+x 6 1
+s 6
+x 9 12
+s 13
+x 14 11
+s 7
+x 6 0
+p e a
+x 2 12
+s 4
+x 9 7
+s 9
+x 6 10
+p j c
+s 3
+x 2 13
+p k e
+x 1 15
+s 7
+x 11 8
+s 12
+x 15 0
+p p d
+x 4 12
+p b f
+s 4
+x 0 2
+s 2
+x 3 8
+s 8
+x 13 6
+s 9
+x 0 12
+s 12
+x 15 14
+p a p
+x 1 7
+s 3
+x 11 15
+p c f
+x 1 0
+s 1
+x 15 13
+p j e
+x 5 6
+s 14
+x 3 8
+p m p
+x 13 0
+p o i
+x 12 14
+p e h
+x 3 9
+p j k
+x 13 8
+s 14
+x 11 1
+p o f
+x 8 12
+p k j
+x 14 13
+s 3
+x 10 8
+s 4
+x 0 1
+p e m
+x 15 4
+p f b
+x 0 14
+s 9
+p i d
+x 5 6
+s 4
+x 14 0
+s 1
+p g o
+x 1 10
+s 8
+x 9 7
+s 14
+x 5 12
+s 6
+x 9 7
+p b c
+s 8
+x 0 11
+p f k
+x 13 5
+p d b
+x 9 15
+s 7
+x 11 3
+s 11
+p o l
+x 15 5
+p i n
+x 12 4
+s 12
+x 13 6
+p l j
+x 5 12
+s 14
+x 9 15
+s 5
+x 11 13
+p m k
+x 5 9
+p f n
+x 1 8
+p j h
+x 9 13
+s 3
+x 4 12
+s 8
+p p d
+x 11 1
+s 1
+x 5 4
+s 3
+x 2 13
+p m g
+x 11 8
+p k e
+x 1 4
+s 12
+x 0 14
+p m d
+x 13 7
+p n c
+x 12 3
+p p o
+x 11 10
+p m c
+x 14 13
+s 15
+x 8 6
+s 10
+x 2 10
+s 9
+x 7 11
+s 2
+x 2 5
+s 10
+x 13 12
+p a p
+x 0 7
+p c e
+x 5 6
+s 11
+x 12 10
+p m n
+s 1
+x 5 6
+p o a
+x 2 11
+p h g
+x 9 7
+p j n
+x 6 3
+p o i
+x 12 5
+p h b
+x 13 0
+p m n
+s 10
+x 6 9
+p h j
+s 4
+x 2 15
+p c p
+x 10 3
+s 12
+p b h
+x 14 5
+p e g
+x 11 12
+p h c
+x 0 5
+p k p
+x 12 8
+p o m
+x 3 0
+p k d
+x 4 9
+p f m
+s 13
+x 6 3
+p g h
+x 4 0
+s 8
+x 14 13
+p c b
+x 0 9
+p h j
+x 12 6
+s 5
+x 8 7
+s 8
+x 0 1
+s 10
+x 12 11
+s 8
+x 14 0
+p p e
+x 1 8
+s 15
+x 0 2
+s 4
+x 13 8
+s 12
+x 9 6
+p o g
+x 11 1
+s 10
+x 5 12
+p b e
+s 7
+x 3 7
+s 7
+x 1 2
+s 12
+x 15 8
+s 15
+x 14 11
+p f p
+x 10 8
+p b c
+x 12 3
+s 5
+x 4 0
+s 5
+x 6 5
+s 1
+x 10 8
+s 2
+x 15 12
+p e l
+x 11 14
+p c f
+x 4 2
+s 7
+x 0 1
+s 4
+x 3 8
+s 14
+x 2 11
+s 9
+x 1 14
+s 7
+p g h
+x 0 4
+p d c
+x 12 11
+p f g
+x 8 1
+p a h
+s 5
+x 12 10
+s 15
+x 9 8
+s 13
+x 12 5
+p o e
+x 13 9
+s 11
+x 1 12
+p g d
+x 8 3
+p n k
+x 11 5
+s 3
+x 0 9
+s 10
+p h i
+s 6
+x 10 12
+s 8
+x 15 6
+s 10
+x 10 11
+s 11
+p n m
+s 2
+x 9 5
+s 12
+x 1 4
+s 3
+x 12 3
+p h e
+x 13 0
+p n l
+s 10
+x 6 10
+p f b
+x 2 5
+s 1
+x 12 13
+s 14
+x 6 7
+p o n
+x 15 1
+p d h
+x 4 2
+s 15
+x 14 3
+p f k
+x 6 4
+s 13
+x 15 5
+p d e
+x 3 2
+s 7
+x 14 15
+p i g
+x 8 0
+p h l
+s 3
+x 12 13
+p c e
+x 14 8
+s 6
+x 7 11
+p i g
+x 10 6
+p k h
+x 11 5
+s 12
+x 13 4
+p b e
+x 11 8
+p j f
+s 6
+x 2 6
+s 5
+x 10 4
+s 7
+x 0 9
+p m p
+x 6 1
+s 7
+x 5 8
+s 12
+x 2 9
+p o i
+x 0 8
+s 6
+x 2 10
+s 13
+x 14 6
+s 4
+p h f
+x 11 9
+s 10
+x 5 7
+p i p
+x 11 6
+s 11
+x 1 0
+s 2
+x 13 5
+s 15
+x 7 9
+p l k
+x 13 11
+p b o
+x 5 9
+p p j
+x 14 0
+s 6
+x 8 1
+s 9
+x 14 4
+s 14
+x 6 0
+p m b
+x 14 10
+s 3
+x 3 11
+p g k
+s 5
+x 6 5
+p b n
+x 4 10
+p o l
+x 5 6
+p p i
+x 8 3
+p g j
+x 0 9
+s 2
+p e n
+x 3 15
+s 12
+x 10 14
+p a g
+x 13 5
+p b o
+x 6 14
+p j i
+x 8 5
+s 5
+x 0 7
+p m o
+s 10
+x 1 10
+p g a
+x 9 13
+s 8
+x 4 0
+s 6
+x 3 8
+s 4
+x 15 11
+p l i
+x 9 1
+p g a
+s 13
+x 11 7
+s 12
+x 15 1
+p o p
+x 0 11
+p j k
+x 2 3
+s 7
+p b a
+x 13 11
+p i p
+x 6 4
+s 1
+x 9 2
+p m k
+x 6 4
+p d i
+x 1 13
+p e h
+x 14 15
+s 6
+x 6 7
+s 5
+x 4 3
+p f b
+s 14
+x 9 6
+s 11
+x 1 13
+p h c
+x 7 12
+p p b
+x 8 5
+p g j
+x 10 0
+p c o
+x 11 14
+s 14
+x 1 8
+s 4
+x 11 14
+s 12
+x 1 10
+s 13
+x 0 6
+s 1
+x 5 9
+p b j
+x 13 8
+p l f
+x 2 15
+s 12
+x 8 14
+s 5
+x 13 4
+p o k
+s 3
+x 10 12
+p b j
+x 1 9
+p n m
+x 6 3
+s 3
+x 5 8
+p j e
+x 15 11
+s 1
+x 12 2
+p f l
+x 15 3
+p d o
+x 7 10
+s 1
+p l n
+x 15 14
+s 11
+x 0 1
+s 12
+x 6 10
+s 5
+x 1 7
+s 7
+x 5 8
+p j i
+x 13 15
+p k g
+x 6 3
+p e l
+x 14 0
+p g n
+x 6 4
+p i f
+x 13 8
+p a p
+x 0 12
+p d g
+x 15 10
+s 6
+x 0 4
+s 13
+x 2 1
+s 4
+x 5 10
+p k l
+x 13 15
+s 12
+x 4 14
+p m c
+x 9 3
+s 3
+x 10 8
+p k b
+x 6 9
+s 10
+x 15 5
+s 2
+x 14 7
+p e p
+x 5 6
+s 7
+x 3 13
+s 3
+x 15 8
+s 11
+x 1 7
+p g i
+x 14 11
+p p k
+x 0 5
+p c b
+x 10 14
+s 3
+x 1 2
+p i f
+s 6
+x 9 4
+s 14
+x 10 11
+s 3
+x 14 15
+s 5
+x 12 13
+p g h
+x 2 10
+s 13
+x 0 3
+s 9
+x 2 12
+s 6
+x 10 9
+s 12
+x 7 3
+p o i
+s 14
+x 14 4
+p c g
+s 1
+x 8 11
+p a o
+x 1 6
+p e n
+x 13 8
+s 13
+p b c
+x 0 5
+s 13
+x 10 7
+p p n
+x 11 2
+p d b
+x 15 6
+s 7
+x 14 1
+s 11
+x 6 5
+p p g
+x 9 0
+s 4
+x 5 10
+p n b
+x 6 15
+s 4
+x 14 11
+p f p
+x 8 4
+p b j
+x 3 5
+p i a
+x 12 7
+s 7
+x 4 1
+s 4
+p n k
+x 12 10
+p c b
+x 8 14
+p p h
+x 2 11
+p m g
+x 5 10
+s 3
+x 12 14
+s 11
+x 0 8
+s 10
+x 3 11
+p a h
+x 0 15
+s 14
+x 8 11
+p p j
+x 14 6
+s 13
+x 7 10
+p h n
+x 5 11
+p a c
+x 10 6
+p p d
+x 8 7
+p b h
+x 14 5
+p f i
+x 1 8
+p d p
+x 0 12
+s 7
+x 3 13
+p j f
+x 9 7
+s 1
+x 15 10
+s 6
+x 14 1
+p b l
+x 3 8
+s 13
+x 12 5
+s 10
+p c k
+x 0 1
+p j h
+x 8 15
+p d l
+x 3 4
+s 12
+x 11 6
+p g o
+x 0 9
+p c e
+s 5
+p m k
+x 5 12
+s 13
+x 2 14
+p f a
+x 4 5
+s 8
+x 8 14
+s 10
+x 11 0
+p i d
+x 13 7
+s 12
+x 12 9
+p n f
+x 4 14
+p o k
+x 2 12
+p c g
+s 15
+x 13 6
+s 10
+x 7 10
+p d p
+x 14 0
+s 7
+x 8 5
+p g c
+s 2
+x 3 15
+p k e
+x 0 12
+s 11
+x 9 1
+p g n
+s 12
+x 10 2
+s 13
+x 13 11
+s 5
+x 2 3
+s 9
+p a b
+x 14 11
+p p o
+x 6 15
+s 4
+x 10 11
+p m c
+x 13 5
+s 4
+x 7 14
+s 4
+x 9 11
+s 14
+x 0 6
+s 13
+x 1 5
+s 14
+x 10 11
+s 13
+x 12 7
+s 1
+x 13 2
+p d f
+x 12 0
+p p a
+s 14
+x 1 6
+s 6
+x 5 7
+p g i
+x 1 10
+s 10
+x 8 6
+p b a
+x 4 1
+s 1
+x 2 9
+s 3
+x 0 14
+s 11
+x 15 5
+s 6
+x 0 9
+p j c
+s 3
+x 3 11
+p l d
+x 1 7
+s 3
+x 3 15
+p b g
+x 1 2
+s 15
+x 9 0
+p o e
+x 3 6
+p j d
+x 11 12
+s 9
+x 8 4
+p m f
+x 6 12
+p p e
+x 11 8
+s 15
+x 15 1
+s 15
+p m h
+x 2 8
+p c p
+x 10 6
+p d o
+x 9 4
+s 10
+p h l
+x 6 1
+s 12
+x 7 8
+p o e
+x 11 12
+p m a
+x 4 8
+p j l
+x 11 6
+p g h
+x 9 8
+s 9
+p d a
+x 10 11
+p b m
+x 3 9
+s 3
+x 1 15
+p c l
+s 4
+x 3 4
+p g k
+x 9 12
+s 7
+x 11 0
+p f o
+x 1 13
+p l a
+x 8 11
+p o d
+s 3
+x 12 3
+p j c
+s 9
+x 0 4
+s 2
+x 3 9
+s 8
+x 4 10
+p n m
+x 9 14
+p l d
+x 0 12
+p i g
+x 7 11
+s 2
+x 10 15
+s 3
+x 14 6
+s 4
+x 7 4
+p j d
+x 14 0
+s 3
+x 13 9
+p m h
+x 7 11
+s 12
+x 10 8
+p i k
+x 11 7
+p m g
+x 3 1
+p f c
+s 5
+p d i
+s 12
+x 2 9
+p b h
+x 8 1
+s 15
+x 6 11
+s 10
+x 3 7
+p d o
+s 3
+x 9 0
+s 14
+x 11 12
+s 3
+x 7 14
+s 13
+x 6 4
+s 10
+x 14 12
+p l j
+x 5 15
+p f c
+x 4 12
+s 12
+x 10 14
+p h a
+x 3 5
+s 14
+p c g
+x 12 2
+s 12
+x 11 14
+s 2
+x 5 4
+s 5
+p e h
+x 15 7
+p i b
+s 10
+x 2 9
+p m f
+x 11 10
+s 15
+x 5 3
+p b p
+x 14 10
+s 5
+x 15 11
+s 9
+x 14 3
+p j h
+s 4
+x 12 0
+s 10
+x 10 9
+s 6
+x 15 1
+s 5
+p i m
+x 0 7
+s 11
+x 1 10
+s 5
+x 9 11
+p g k
+x 15 0
+s 12
+x 10 3
+s 14
+x 9 15
+s 5
+x 0 12
+s 3
+x 15 1
+p o m
+x 12 4
+p a c
+x 8 13
+s 8
+x 2 11
+s 9
+x 15 0
+s 15
+p l f
+x 11 2
+s 8
+x 13 4
+s 15
+x 7 5
+s 14
+x 13 14
+s 12
+x 11 4
+s 6
+x 14 6
+p p d
+x 4 2
+p h f
+x 5 8
+p p j
+s 4
+x 14 4
+s 1
+x 11 2
+s 6
+x 1 12
+p b c
+x 6 7
+p i g
+x 5 12
+s 1
+x 11 8
+p b h
+x 3 2
+p i a
+s 3
+x 6 12
+p n p
+x 13 1
+p g c
+x 12 0
+s 5
+x 14 2
+p d a
+x 15 5
+s 3
+x 3 10
+s 3
+x 1 11
+s 8
+x 15 0
+p c n
+x 12 5
+s 14
+p g p
+x 8 11
+s 12
+x 2 5
+s 10
+x 7 15
+s 5
+x 8 12
+s 2
+x 3 1
+s 6
+x 5 8
+p a j
+x 7 10
+p d h
+x 0 14
+s 11
+x 11 12
+s 4
+x 10 5
+s 8
+x 2 7
+p f a
+x 4 3
+s 14
+x 9 7
+s 3
+x 6 1
+s 1
+x 2 15
+s 13
+x 11 6
+p l o
+x 12 3
+s 4
+x 0 10
+s 4
+x 15 8
+s 11
+x 0 14
+p j d
+x 11 5
+s 11
+x 14 12
+s 5
+x 13 11
+p k b
+x 2 14
+s 3
+p m o
+x 15 12
+p e f
+x 11 6
+s 10
+x 4 15
+p d c
+x 10 3
+p h g
+x 9 13
+s 11
+p c p
+x 10 14
+p i k
+x 3 8
+p m e
+x 7 5
+p n a
+x 1 4
+s 7
+x 0 9
+s 4
+x 2 8
+p c d
+x 14 9
+s 5
+p o g
+s 4
+x 7 6
+p b e
+s 3
+x 8 10
+p a d
+x 15 13
+s 1
+x 5 7
+p h g
+x 4 8
+p f l
+x 9 7
+s 12
+x 14 12
+s 12
+x 10 13
+s 13
+x 2 8
+s 7
+p p b
+x 6 15
+s 1
+x 10 5
+s 10
+p i c
+x 14 12
+s 9
+x 7 4
+p d m
+x 1 15
+s 3
+p o b
+x 11 12
+p f d
+x 13 4
+p b e
+x 2 3
+s 15
+x 8 13
+s 3
+x 2 6
+s 7
+x 10 3
+p j o
+x 12 7
+s 4
+x 4 8
+s 10
+x 9 0
+p m i
+x 5 7
+p d a
+s 3
+x 12 11
+s 14
+p f h
+x 3 0
+s 13
+x 1 8
+s 6
+x 14 7
+s 15
+p a k
+x 5 13
+p d g
+x 1 8
+p e o
+s 13
+x 11 12
+s 13
+x 4 13
+p c l
+x 6 5
+p p j
+x 1 0
+s 5
+p c g
+x 5 14
+s 7
+x 10 3
+s 11
+x 12 15
+s 6
+x 14 1
+p h k
+x 9 4
+s 5
+x 15 12
+s 2
+x 13 2
+p l p
+x 3 6
+s 1
+x 9 11
+s 3
+x 12 4
+p f o
+x 13 9
+s 7
+x 6 1
+p d j
+x 8 7
+s 8
+x 13 4
+p n e
+x 8 0
+s 3
+x 14 10
+s 4
+x 7 9
+p a o
+x 14 10
+s 9
+x 3 0
+p c i
+x 14 5
+p l n
+x 11 0
+s 15
+x 3 4
+s 4
+p d h
+x 12 14
+s 6
+x 9 8
+p e p
+s 14
+x 0 6
+p h d
+x 8 11
+s 11
+x 2 4
+s 10
+p f i
+x 3 7
+s 6
+x 9 13
+s 10
+x 3 14
+p b c
+s 10
+p l i
+x 5 6
+p h c
+s 6
+x 12 2
+s 4
+x 6 1
+p j a
+x 2 13
+s 14
+x 7 9
+s 2
+x 10 13
+p d c
+x 1 11
+s 9
+x 15 13
+p a g
+x 12 3
+p l m
+x 15 6
+s 8
+p e d
+x 8 2
+s 10
+x 0 7
+p f i
+x 12 6
+s 2
+x 2 4
+p j b
+x 10 3
+s 12
+x 6 7
+s 3
+x 4 11
+s 12
+p p n
+x 15 0
+p m d
+x 6 9
+p l i
+s 9
+x 12 13
+s 13
+x 10 6
+p c b
+x 3 1
+s 7
+p o n
+x 6 10
+p h f
+x 4 5
+p c b
+x 8 14
+p m e
+x 6 9
+s 15
+x 2 12
+p p j
+x 6 0
+p f g
+x 3 1
+p d o
+x 7 4
+s 9
+x 11 10
+s 2
+x 0 13
+p m c
+s 2
+x 1 14
+s 10
+x 9 2
+s 10
+x 3 8
+p j k
+x 15 12
+s 15
+x 5 8
+p n m
+x 11 2
+s 4
+x 9 5
+p h a
+x 0 4
+p m e
+x 1 13
+p c k
+x 10 6
+s 15
+p p l
+x 15 7
+p m i
+x 13 3
+s 8
+x 11 10
+s 12
+x 1 0
+p o c
+x 7 9
+s 7
+x 14 13
+p g p
+x 6 12
+s 13
+x 0 5
+s 11
+p c n
+x 4 11
+s 7
+x 13 2
+s 12
+x 0 5
+p g o
+x 12 13
+s 5
+x 15 7
+s 11
+x 10 6
+p d l
+x 3 14
+p m a
+x 10 7
+s 3
+x 9 15
+s 11
+x 6 14
+p o b
+x 15 12
+s 2
+x 1 7
+p e h
+x 0 10
+s 11
+x 3 14
+p d o
+x 5 15
+s 14
+x 3 9
+p l f
+x 1 0
+s 8
+x 6 2
+s 5
+x 8 7
+p d e
+x 1 0
+p k f
+x 15 13
+s 8
+x 10 6
+p c j
+x 15 3
+p d e
+x 7 13
+s 3
+x 1 0
+p i a
+x 11 14
+s 4
+x 7 13
+s 3
+x 9 10
+p j e
+x 15 1
+s 4
+x 3 2
+s 2
+x 11 14
+s 2
+x 10 9
+s 5
+x 0 8
+p a p
+x 7 6
+s 14
+x 12 3
+p j n
+s 3
+x 10 14
+p b f
+x 2 12
+s 11
+x 8 9
+s 8
+x 0 6
+s 14
+x 13 8
+p a d
+x 11 5
+s 11
+p p l
+x 7 2
+s 15
+x 9 4
+p o k
+x 0 2
+s 2
+p l m
+x 10 6
+p b j
+x 15 2
+p l g
+x 9 8
+p j n
+x 10 11
+s 9
+x 0 3
+p g a
+x 4 7
+p l b
+x 9 2
+p c d
+s 15
+x 11 1
+p l o
+s 14
+x 6 3
+s 11
+x 14 1
+p n k
+x 13 10
+s 7
+x 14 1
+p c d
+x 3 11
+s 1
+x 15 10
+p g n
+x 8 13
+p e b
+x 1 2
+s 7
+x 15 0
+s 1
+x 12 10
+p n i
+s 10
+x 7 3
+s 3
+p k o
+x 9 5
+p h d
+s 12
+x 13 0
+s 12
+x 9 5
+p j a
+x 12 0
+p l d
+x 3 9
+s 7
+x 15 2
+p i g
+x 3 6
+s 15
+x 7 9
+s 14
+x 6 1
+s 2
+x 7 13
+s 2
+x 0 14
+s 1
+x 5 15
+s 9
+x 12 0
+s 3
+x 9 4
+s 11
+p o c
+x 8 1
+p h i
+x 15 13
+s 13
+p p m
+x 6 4
+p k d
+x 13 0
+s 7
+x 7 11
+s 9
+x 8 14
+s 9
+x 15 4
+s 4
+p f i
+x 7 9
+s 4
+p k j
+x 8 0
+s 10
+x 12 11
+p f d
+x 2 8
+p o p
+x 13 10
+p g j
+x 14 2
+p l o
+x 15 7
+s 15
+x 0 13
+s 9
+x 15 7
+s 10
+p a h
+x 10 12
+s 13
+x 7 0
+p d j
+x 13 1
+p b g
+x 7 10
+s 12
+x 6 2
+p e i
+x 10 5
+s 9
+x 13 3
+p f k
+x 5 15
+s 9
+x 1 4
+p h p
+x 9 0
+s 15
+x 12 6
+p m i
+x 4 13
+p j a
+x 7 0
+s 15
+x 4 1
+s 11
+x 2 0
+p i g
+x 7 3
+p b f
+x 11 9
+s 9
+x 15 5
+s 8
+x 3 10
+p n l
+x 6 2
+s 1
+x 1 12
+p k c
+x 10 3
+s 8
+x 9 12
+s 6
+x 0 13
+s 14
+x 5 1
+s 15
+x 2 7
+s 4
+x 1 10
+p a d
+x 9 12
+p l f
+x 6 13
+p a o
+x 15 7
+s 8
+x 3 12
+s 15
+x 7 5
+p e k
+x 14 11
+s 13
+x 5 4
+s 4
+x 13 3
+s 6
+x 0 14
+s 13
+x 2 12
+p p c
+x 15 10
+s 1
+x 11 9
+p e l
+x 1 14
+s 1
+x 3 10
+s 9
+x 1 0
+p j h
+x 7 11
+p i b
+x 1 8
+p c a
+x 3 11
+s 5
+x 14 6
+s 1
+x 1 5
+s 2
+p j n
+x 6 13
+s 3
+x 9 12
+s 3
+x 4 10
+p l p
+x 0 8
+p c e
+x 12 5
+s 7
+x 7 15
+s 9
+x 9 5
+p g m
+s 6
+p p b
+x 2 10
+s 3
+x 9 5
+s 7
+p l m
+x 3 11
+s 13
+x 5 7
+s 11
+x 0 13
+s 5
+p g h
+x 11 1
+s 4
+x 15 2
+p l a
+x 14 5
+s 15
+x 3 10
+p c n
+x 7 12
+p e g
+s 9
+x 13 10
+s 8
+x 12 0
+s 9
+x 7 2
+p f c
+x 0 3
+p i j
+x 4 5
+p b d
+x 6 10
+s 8
+x 1 15
+p c n
+x 6 5
+p h l
+x 7 10
+p c p
+x 8 13
+p j o
+x 3 0
+s 12
+x 8 10
+s 7
+x 4 7
+s 5
+x 13 5
+s 4
+x 0 3
+p a c
+x 10 12
+s 1
+x 0 9
+s 15
+x 14 5
+p e d
+x 10 1
+s 5
+x 8 5
+p i j
+s 10
+p c d
+s 1
+x 3 14
+p h e
+x 9 10
+p j i
+x 11 1
+s 15
+x 10 4
+s 1
+x 2 6
+s 13
+x 9 14
+s 15
+x 6 12
+p a p
+x 1 8
+p f n
+x 0 7
+s 4
+x 9 14
+s 11
+x 12 0
+s 1
+p c g
+x 3 10
+p d n
+x 7 8
+s 2
+x 9 4
+p f g
+s 3
+x 14 2
+p p k
+x 6 7
+s 6
+x 14 8
+p m h
+s 5
+x 3 12
+s 5
+x 1 11
+s 5
+x 2 7
+s 13
+x 4 12
+p b e
+x 9 15
+p f c
+s 4
+x 1 10
+p h k
+x 8 15
+s 11
+x 10 12
+p a i
+x 13 4
+p k j
+x 7 8
+p e c
+x 15 1
+s 2
+x 13 14
+s 1
+x 5 7
+s 12
+p o n
+x 13 1
+p i a
+x 9 14
+s 10
+x 5 11
+p n h
+x 1 0
+p g a
+x 8 15
+s 5
+x 5 2
+s 13
+x 0 4
+s 8
+x 10 1
+s 14
+x 4 12
+s 13
+x 5 7
+s 9
+x 6 15
+s 14
+x 2 7
+p k o
+x 13 3
+p l h
+x 5 11
+p a f
+x 7 13
+s 2
+x 5 14
+s 9
+x 1 10
+p m l
+x 0 13
+s 8
+x 12 9
+s 15
+p i f
+x 2 4
+s 8
+p a p
+x 9 3
+p b k
+x 7 10
+s 15
+x 13 5
+s 14
+x 3 14
+s 7
+x 8 1
+p c l
+s 10
+x 9 7
+s 1
+x 8 14
+s 14
+x 0 13
+p p i
+x 2 8
+s 15
+p n l
+x 3 15
+p o k
+x 6 14
+s 13
+x 12 3
+s 9
+x 2 9
+p g f
+x 10 8
+s 6
+x 11 2
+s 11
+x 7 9
+p i l
+x 8 11
+p p m
+x 1 5
+s 9
+x 15 0
+p g a
+s 10
+x 11 13
+s 10
+x 14 2
+s 9
+x 7 4
+s 6
+x 1 12
+s 1
+x 9 4
+p f j
+x 7 6
+s 13
+x 15 14
+s 4
+x 7 11
+p d l
+x 1 5
+s 7
+x 7 3
+p o j
+x 5 15
+s 11
+x 0 13
+p f e
+x 11 8
+s 7
+x 10 6
+p d i
+x 2 0
+s 8
+x 8 3
+s 15
+x 7 11
+p g m
+x 12 0
+p f n
+x 8 10
+s 14
+x 2 11
+p b m
+x 14 0
+p p a
+x 9 6
+s 5
+x 10 15
+s 1
+x 4 9
+p l c
+x 10 8
+s 5
+x 4 0
+p p i
+x 5 8
+p g j
+x 9 2
+s 10
+x 10 12
+s 14
+x 13 9
+s 3
+x 6 10
+s 3
+x 12 13
+s 10
+x 6 11
+s 12
+x 12 2
+p o f
+x 0 5
+p n a
+x 11 8
+p b i
+x 12 3
+s 4
+x 10 7
+s 7
+x 14 5
+s 3
+x 2 4
+p d k
+x 7 11
+s 12
+x 4 1
+s 3
+p p m
+x 8 15
+s 11
+x 6 10
+s 2
+x 13 9
+p f g
+x 14 8
+s 2
+x 3 10
+s 9
+x 12 2
+s 6
+x 13 8
+p n l
+x 14 1
+s 3
+x 12 4
+p g h
+s 8
+x 7 1
+s 10
+x 3 0
+p e k
+x 13 14
+p i l
+x 12 0
+s 15
+x 14 4
+s 14
+p o f
+x 9 5
+s 7
+x 3 6
+p l a
+s 6
+x 2 15
+p d c
+x 13 5
+p k a
+s 5
+x 10 15
+s 8
+x 9 14
+s 2
+x 6 5
+s 5
+x 14 4
+s 11
+x 2 5
+s 1
+x 7 1
+p i l
+x 2 6
+p d c
+x 4 7
+s 8
+x 6 11
+p o a
+s 6
+x 10 2
+p j m
+x 1 0
+p g i
+x 13 14
+p a m
+x 15 2
+s 11
+p j e
+x 5 8
+s 6
+x 1 6
+p a k
+x 15 14
+p b d
+x 11 7
+s 14
+p e n
+x 4 3
+p b o
+x 10 1
+s 5
+x 6 7
+p h g
+x 9 8
+s 12
+x 11 15
+s 3
+x 5 10
+s 10
+x 12 4
+s 14
+x 10 14
+s 2
+x 4 1
+p d j
+x 14 6
+p h f
+x 10 13
+p j m
+x 2 12
+s 4
+x 1 14
+s 10
+p i k
+x 12 13
+s 9
+x 14 10
+s 4
+x 8 3
+s 15
+x 9 6
+s 2
+x 2 1
+p p g
+x 4 8
+p n e
+x 13 1
+p g p
+x 3 5
+s 10
+x 0 7
+p b m
+x 6 5
+s 14
+x 11 4
+p l n
+x 15 2
+s 10
+x 9 3
+p e b
+x 10 5
+p l m
+x 0 6
+p c e
+s 12
+x 9 2
+s 15
+x 0 15
+s 6
+x 8 14
+p l k
+x 11 9
+s 1
+x 0 7
+p j f
+x 8 6
+s 14
+x 5 9
+s 3
+x 0 6
+p a h
+x 8 4
+s 1
+x 6 5
+p m j
+x 2 8
+s 7
+x 7 15
+s 14
+x 2 12
+s 8
+x 13 4
+s 12
+x 1 5
+p d c
+x 7 14
+p f a
+x 2 6
+p g e
+x 15 12
+s 5
+x 9 0
+p j n
+x 10 1
+s 15
+x 0 7
+p g a
+x 1 8
+s 4
+x 6 11
+s 12
+x 5 9
+s 7
+x 8 4
+s 4
+x 11 7
+s 1
+x 8 6
+p h p
+s 14
+x 4 2
+p g c
+x 15 9
+s 4
+x 11 3
+p f n
+x 12 13
+p b h
+x 8 9
+s 12
+x 13 15
+p d o
+s 10
+x 7 5
+p p k
+x 1 14
+s 5
+x 12 8
+p n f
+x 10 13
+s 9
+x 0 14
+p o e
+x 6 8
+p d f
+x 1 3
+p a k
+x 5 4
+s 9
+x 12 0
+p j c
+x 11 13
+s 4
+x 1 3
+s 5
+x 0 10
+s 5
+x 9 15
+s 9
+x 6 7
+s 12
+x 9 5
+s 5
+x 14 15
+s 9
+x 11 5
+s 9
+x 4 0
+s 11
+x 9 2
+s 10
+x 13 14
+s 15
+x 4 8
+p l b
+x 7 10
+p a n
+x 11 6
+p f o
+x 7 8
+p g d
+x 3 13
+s 14
+x 7 12
+s 5
+x 10 2
+s 10
+x 4 5
+s 15
+x 10 15
+s 7
+x 9 4
+s 9
+x 13 14
+s 14
+x 0 1
+s 7
+x 7 3
+s 9
+x 8 1
+p i e
+x 5 11
+p h j
+s 2
+p k p
+x 6 12
+s 3
+x 1 10
+p f g
+s 3
+x 9 13
+p m e
+s 7
+x 0 5
+s 9
+x 14 10
+s 11
+x 15 7
+s 1
+x 12 9
+s 11
+x 11 10
+s 9
+x 15 12
+s 7
+x 11 2
+p f i
+x 3 1
+s 1
+x 10 5
+s 4
+x 9 11
+p c o
+x 3 8
+s 1
+p b e
+x 6 15
+p f l
+x 10 5
+s 5
+x 4 14
+s 12
+x 8 13
+p g a
+x 4 10
+s 10
+x 9 15
+p h c
+x 10 14
+s 2
+x 6 0
+s 3
+x 14 8
+s 9
+x 4 6
+s 3
+x 13 5
+p n i
+x 4 11
+s 4
+x 12 10
+s 10
+x 0 15
+s 8
+x 2 3
+s 15
+x 9 4
+s 12
+x 11 7
+s 2
+x 14 5
+p c l
+x 9 0
+p g i
+s 5
+x 15 10
+p j d
+x 4 1
+p n m
+x 11 5
+p k b
+x 7 4
+p i m
+x 8 3
+s 5
+x 11 5
+s 9
+x 12 10
+p n e
+x 5 13
+p d c
+x 9 12
+s 2
+x 11 13
+p h l
+s 13
+p j g
+x 15 7
+s 2
+x 12 4
+s 9
+x 3 10
+s 8
+p c l
+x 0 7
+p a e
+s 7
+x 3 11
+s 12
+x 13 2
+p m i
+x 12 6
+s 1
+x 5 3
+s 5
+x 12 4
+s 6
+x 15 8
+p h e
+x 5 11
+p c b
+x 4 13
+s 3
+x 3 1
+s 14
+x 15 11
+s 5
+x 2 3
+s 15
+x 6 11
+p f e
+x 12 8
+s 6
+x 4 10
+p i l
+x 9 0
+p c e
+x 4 5
+p h a
+x 3 12
+s 9
+x 2 4
+s 12
+x 7 10
+s 12
+x 11 14
+s 5
+x 2 6
+p o l
+x 8 1
+p n i
+x 9 13
+s 14
+x 7 2
+p o k
+x 1 4
+s 6
+x 3 14
+s 5
+x 9 12
+p m i
+s 8
+x 11 3
+s 9
+x 7 5
+s 5
+x 2 8
+p h f
+x 15 3
+p a e
+x 4 9
+p b d
+x 13 7
+s 7
+x 3 4
+s 6
+x 10 13
+s 14
+x 4 5
+p l j
+s 2
+x 2 0
+s 8
+x 14 13
+p o e
+x 1 4
+s 11
+x 0 15
+p n i
+s 3
+x 14 9
+p f p
+x 8 0
+p b k
+x 2 13
+s 10
+p p n
+x 5 0
+p i a
+x 14 6
+s 8
+x 0 3
+s 8
+x 7 8
+s 11
+x 14 4
+s 11
+x 13 12
+p e m
+s 11
+x 11 5
+s 10
+x 2 15
+s 7
+x 6 0
+p d a
+x 13 15
+p o e
+x 3 9
+s 12
+x 7 11
+p f l
+x 10 14
+s 7
+p o e
+x 7 13
+p j m
+x 8 0
+s 4
+x 14 1
+s 4
+x 8 15
+s 11
+x 14 3
+s 15
+x 5 4
+p d f
+x 2 13
+p e k
+s 9
+x 3 14
+s 14
+x 6 5
+s 8
+x 11 14
+s 13
+x 9 2
+s 1
+x 15 10
+s 2
+x 2 1
+s 9
+x 4 3
+p c g
+s 11
+x 5 7
+s 2
+x 1 2
+s 15
+x 5 8
+s 11
+p d l
+x 7 10
+s 6
+x 15 1
+s 13
+x 9 11
+s 12
+x 12 7
+s 8
+x 13 14
+s 10
+x 15 9
+s 5
+x 4 11
+p p e
+x 3 9
+s 2
+x 5 2
+p j h
+x 6 10
+s 3
+x 4 13
+p n m
+x 14 8
+s 15
+x 9 7
+s 5
+x 11 13
+s 8
+x 9 6
+s 3
+x 8 5
+s 10
+x 11 7
+s 6
+p h d
+x 1 0
+s 5
+x 3 14
+p p l
+x 11 13
+p d o
+x 9 12
+s 4
+x 0 14
+s 2
+x 15 8
+s 7
+x 7 0
+s 5
+x 13 2
+s 8
+x 10 15
+s 11
+x 6 9
+s 12
+p f j
+x 0 3
+p c m
+x 2 8
+s 11
+x 0 1
+s 6
+x 8 3
+p h n
+x 7 9
+p o b
+x 11 14
+s 14
+x 4 12
+s 11
+x 10 6
+s 7
+x 2 9
+p i k
+x 14 4
+s 9
+x 1 11
+p f l
+x 8 14
+p h i
+x 6 5
+s 15
+x 15 8
+s 10
+p m g
+x 11 0
+p b o
+x 5 13
+s 11
+x 14 1
+s 5
+p m a
+s 15
+x 7 12
+s 9
+x 9 1
+p h j
+x 3 14
+p n a
+x 13 2
+s 14
+x 11 1
+s 4
+x 4 14
+s 11
+x 2 5
+p o g
+x 7 14
+s 8
+x 1 5
+s 8
+x 4 7
+s 11
+x 12 11
+s 14
+x 3 13
+s 10
+x 9 1
+s 4
+x 15 4
+p n e
+x 9 5
+s 1
+x 8 3
+s 7
+x 14 2
+p a k
+x 8 7
+p c l
+x 0 1
+s 6
+x 12 13
+p k d
+x 15 7
+p c e
+x 11 13
+s 10
+x 2 9
+p h o
+s 6
+x 5 7
+s 10
+p l f
+s 8
+x 8 0
+s 6
+x 14 12
+s 11
+x 1 9
+s 4
+x 4 10
+s 14
+x 11 0
+s 2
+x 9 6
+s 4
+x 2 15
+p d e
+x 7 11
+p f a
+x 13 0
+p b o
+s 2
+x 9 6
+p c h
+x 3 2
+p m l
+x 10 6
+s 2
+x 13 3
+p f k
+x 7 5
+s 1
+x 14 4
+s 9
+x 3 0
+p o a
+x 4 12
+s 10
+x 9 5
+p f g
+x 10 11
+s 6
+x 7 4
+p e h
+x 13 14
+s 3
+x 4 11
+s 10
+x 2 1
+p g i
+x 11 9
+p p c
+x 14 2
+p b m
+x 9 1
+s 14
+x 10 3
+p i k
+s 8
+x 2 4
+s 5
+p h l
+s 5
+x 12 3
+p d f
+x 0 14
+s 13
+x 3 4
+s 14
+x 10 11
+p h o
+x 5 7
+p l i
+x 14 1
+p k o
+s 9
+x 11 13
+s 12
+x 6 4
+s 7
+x 9 5
+p i g
+x 10 3
+p k p
+x 6 9
+p f b
+x 13 3
+s 5
+x 8 7
+s 3
+x 15 6
+s 7
+x 1 2
+s 15
+x 15 12
+s 13
+p n m
+x 5 13
+p p h
+x 2 6
+s 8
+x 1 13
+s 14
+p o m
+x 9 7
+s 6
+x 13 11
+s 6
+x 12 3
+p d b
+x 5 2
+s 1
+x 13 4
+s 3
+x 1 15
+p j l
+x 9 11
+s 3
+p a e
+x 5 2
+s 3
+x 0 11
+p k c
+x 4 13
+s 2
+x 2 7
+s 3
+x 0 13
+s 11
+x 11 1
+s 15
+x 14 10
+p a i
+x 7 1
+p g m
+x 0 5
+p b d
+x 8 3
+s 14
+x 10 4
+s 11
+x 13 12
+p m f
+s 5
+x 6 5
+s 8
+x 14 9
+s 14
+x 8 5
+p a b
+s 1
+x 0 4
+p d p
+s 4
+x 15 1
+s 8
+x 4 2
+p b e
+x 11 13
+s 12
+x 2 8
+s 2
+x 15 4
+p f a
+x 5 1
+s 2
+x 3 14
+s 11
+x 5 1
+p l m
+x 13 6
+p g n
+x 7 12
+s 9
+x 4 9
+s 7
+x 11 5
+s 13
+x 14 2
+s 10
+x 10 1
+s 6
+p f m
+x 14 3
+s 8
+x 4 15
+p p a
+x 14 0
+s 9
+x 3 7
+p n l
+x 10 9
+s 8
+p e f
+x 4 12
+p h c
+x 15 10
+s 5
+x 13 8
+s 2
+p e j
+x 2 4
+p n b
+x 12 13
+p i l
+x 5 15
+s 13
+x 13 11
+p b p
+x 10 7
+s 9
+x 13 3
+p i a
+x 0 6
+p h m
+x 9 10
+p d c
+x 1 3
+s 4
+x 8 5
+s 8
+x 4 7
+s 13
+x 11 6
+p o p
+x 7 8
+s 15
+x 10 12
+s 10
+x 2 4
+s 14
+x 5 7
+s 7
+x 8 1
+p c h
+x 15 4
+p e o
+x 0 8
+s 1
+x 9 12
+s 9
+x 1 4
+s 3
+x 13 11
+s 1
+x 8 14
+s 5
+x 11 7
+p n f
+x 15 14
+p g a
+x 8 10
+p n d
+x 7 14
+s 5
+x 13 0
+s 4
+x 1 11
+p a i
+x 8 7
+s 11
+x 5 10
+p f n
+x 14 15
+s 8
+x 7 0
+s 10
+x 1 9
+s 11
+x 12 0
+p c h
+x 1 13
+s 15
+x 5 14
+p f j
+x 1 8
+p k g
+x 4 9
+p c e
+x 2 5
+s 9
+x 9 11
+p n g
+x 12 2
+p j k
+s 4
+x 14 8
+p f c
+s 14
+x 13 2
+s 6
+x 15 5
+p o n
+x 2 14
+p b h
+x 12 5
+s 9
+x 9 7
+s 4
+x 12 2
+s 2
+x 7 13
+s 11
+x 14 11
+s 13
+x 15 9
+s 6
+x 0 10
+s 10
+x 11 15
+p i d
+x 10 7
+s 4
+x 9 14
+s 6
+x 0 4
+p b h
+x 11 6
+s 9
+x 14 1
+p e m
+x 0 6
+s 9
+x 15 5
+p p g
+x 13 3
+s 3
+p e d
+x 9 6
+s 5
+x 5 13
+s 12
+p h o
+x 6 4
+s 9
+x 11 10
+s 2
+p i g
+x 12 15
+s 12
+p j l
+x 10 5
+p c m
+x 12 15
+p h n
+x 0 5
+s 5
+x 12 6
+p o f
+x 0 3
+p k j
+x 1 13
+s 2
+x 9 4
+s 8
+x 2 15
+s 5
+x 5 1
+p m g
+x 3 14
+s 2
+x 5 4
+p i d
+x 12 10
+s 5
+x 13 5
+s 14
+x 7 3
+s 2
+x 11 2
+s 7
+p l p
+x 13 1
+s 4
+x 2 10
+s 2
+x 3 5
+s 7
+x 11 7
+s 4
+x 10 2
+p j d
+x 12 11
+s 8
+x 9 0
+s 10
+x 3 8
+s 12
+x 11 5
+p n f
+x 14 2
+s 15
+x 3 7
+p g l
+x 8 13
+p b e
+s 2
+x 2 6
+s 8
+x 13 15
+p p a
+x 8 1
+p f m
+x 9 0
+s 12
+p h i
+x 2 3
+s 4
+x 13 10
+p f m
+x 5 14
+s 5
+x 15 2
+s 8
+x 5 10
+s 1
+x 4 7
+s 10
+x 13 11
+p e i
+x 3 5
+s 15
+x 13 8
+p c j
+x 7 9
+p h i
+x 1 6
+p g e
+x 3 4
+s 6
+x 6 0
+p h k
+x 10 12
+s 2
+p d n
+x 11 9
+p h l
+x 2 1
+s 11
+x 10 0
+s 6
+x 14 13
+p c f
+x 3 9
+p p h
+x 12 2
+p m f
+x 0 14
+p k b
+s 13
+x 4 11
+p l g
+s 6
+x 9 12
+s 7
+x 8 6
+s 6
+x 2 14
+s 7
+x 10 8
+s 12
+x 9 2
+p e f
+x 1 3
+s 9
+x 11 2
+s 10
+x 5 8
+s 8
+x 9 14
+p h b
+x 1 11
+s 15
+x 2 7
+p d n
+x 0 15
+p p o
+x 10 8
+p n l
+x 1 9
+s 7
+x 15 13
+s 12
+x 10 8
+p k d
+x 14 7
+s 7
+x 3 2
+s 10
+p a i
+x 5 4
+s 10
+x 7 8
+s 9
+x 11 3
+p m n
+x 5 8
+s 3
+x 3 2
+s 9
+x 12 4
+p i f
+x 0 8
+p e h
+x 5 4
+p k p
+x 8 0
+p m g
+x 5 6
+p p c
+x 10 4
+s 2
+x 12 14
+s 12
+x 13 4
+p b o
+x 9 11
+p f j
+x 3 0
+s 10
+x 1 6
+s 9
+x 14 3
+p g c
+x 0 11
+p p f
+s 8
+x 1 5
+p a j
+x 12 13
+s 3
+x 10 5
+p n p
+x 14 11
+p o a
+x 13 15
+s 3
+x 11 0
+p m h
+x 13 2
+s 14
+x 9 14
+s 14
+x 13 8
+s 1
+p d i
+x 15 12
+s 7
+x 5 2
+p e b
+x 12 0
+s 7
+x 4 13
+s 6
+x 14 8
+s 12
+x 6 9
+p l k
+s 8
+x 10 7
+p i j
+x 1 4
+s 4
+x 5 6
+p b p
+x 11 0
+p d j
+x 2 12
+s 7
+x 3 11
+s 6
+x 1 13
+p g o
+x 7 12
+s 12
+x 14 10
+p a i
+x 4 0
+s 10
+x 8 11
+s 3
+x 6 7
+s 2
+x 15 8
+p e c
+x 12 0
+s 12
+x 4 8
+s 9
+x 9 10
+p p b
+x 5 12
+p e n
+x 15 9
+p f d
+x 7 4
+p b o
+x 14 8
+s 14
+x 10 5
+s 14
+p c k
+s 4
+x 14 4
+s 10
+x 11 6
+p j b
+x 7 0
+p n e
+x 13 3
+s 14
+x 5 12
+s 5
+x 14 1
+p g a
+x 10 8
+s 4
+x 7 2
+p c l
+x 15 14
+s 10
+x 9 11
+p j d
+x 0 7
+s 8
+x 12 11
+s 4
+x 2 9
+s 12
+x 8 13
+s 10
+x 12 15
+s 4
+x 2 1
+s 2
+x 4 14
+p k h
+x 12 5
+s 10
+x 1 13
+s 6
+x 9 14
+s 15
+p e a
+s 11
+x 0 12
+s 15
+x 14 11
+p f b
+x 8 3
+p a e
+x 2 9
+p c n
+x 12 0
+s 7
+x 3 6
+s 5
+x 11 12
+s 2
+x 9 10
+p f l
+x 1 7
+p d n
+x 12 9
+p m j
+x 4 0
+s 10
+x 7 13
+s 4
+x 2 3
+s 3
+x 4 14
+s 1
+x 0 5
+p l b
+s 5
+x 11 15
+s 9
+x 9 4
+s 13
+x 12 15
+p n a
+x 6 4
+s 15
+x 1 13
+p k i
+x 14 15
+s 3
+x 6 2
+s 7
+x 1 13
+s 10
+x 15 3
+s 11
+x 5 13
+s 2
+x 4 6
+s 5
+x 14 0
+p c a
+x 10 4
+s 3
+x 1 3
+s 4
+x 11 10
+p e m
+x 3 8
+s 2
+x 7 4
+p p f
+x 11 0
+s 6
+x 5 1
+p n g
+x 9 2
+s 11
+x 0 11
+s 11
+x 2 5
+p e c
+x 13 8
+s 4
+x 0 2
+s 5
+x 5 6
+p m f
+x 0 3
+s 9
+x 7 13
+p a g
+s 1
+x 3 2
+s 15
+p l b
+x 4 1
+p e n
+x 2 13
+p a k
+x 8 1
+s 5
+x 7 4
+p b g
+x 6 3
+s 15
+x 14 2
+p e j
+x 5 13
+s 13
+p b f
+x 3 9
+p k l
+x 7 10
+s 12
+p o p
+x 2 13
+s 3
+x 6 10
+s 5
+x 0 5
+s 14
+p g f
+x 10 9
+s 9
+x 5 13
+p n j
+s 12
+x 1 14
+s 6
+x 10 6
+s 5
+x 1 3
+p g c
+s 1
+x 8 15
+s 7
+x 2 12
+s 3
+x 5 1
+p b n
+x 15 3
+s 6
+x 10 9
+s 13
+x 4 8
+p a g
+x 7 1
+p c b
+x 2 0
+s 1
+x 14 5
+p a g
+x 1 8
+s 12
+x 12 3
+s 7
+x 14 7
+p h d
+x 13 2
+s 14
+x 4 7
+s 1
+x 5 13
+s 8
+x 3 12
+p e i
+x 10 8
+s 13
+x 0 14
+p j o
+x 1 8
+p n k
+x 0 11
+p b c
+x 7 4
+p j m
+s 7
+x 9 0
+p i h
+x 14 8
+s 5
+x 4 5
+s 12
+x 3 0
+s 6
+x 7 15
+p f j
+x 4 2
+s 15
+x 13 12
+s 2
+x 8 4
+p c d
+s 8
+x 10 6
+s 2
+x 8 11
+s 6
+x 10 7
+p m h
+x 5 13
+s 8
+x 6 9
+s 4
+x 2 3
+p p i
+x 15 9
+s 11
+x 2 11
+p j k
+s 5
+x 13 8
+p d e
+x 15 9
+s 4
+x 6 8
+s 5
+x 11 3
+s 11
+p j c
+x 4 1
+s 6
+x 0 13
+s 4
+x 3 1
+p o d
+x 8 12
+p g p
+s 10
+x 4 10
+p f d
+s 7
+x 9 12
+s 14
+x 13 8
+p a c
+s 4
+p p j
+x 12 14
+s 6
+p i e
+x 0 10
+s 14
+p j f
+x 1 4
+p l n
+s 3
+p g m
+x 7 10
+p o i
+x 0 14
+p c p
+x 9 10
+p m j
+x 12 14
+s 5
+x 9 11
+s 9
+x 15 13
+p a p
+x 6 9
+p i d
+x 2 4
+s 3
+x 6 15
+s 3
+x 10 0
+p b o
+x 11 13
+s 5
+p m c
+x 2 0
+s 6
+x 13 7
+s 15
+x 5 14
+s 12
+x 8 10
+s 11
+x 4 14
+p l h
+x 10 2
+p b g
+x 9 12
+p p e
+s 11
+p g d
+x 1 13
+s 6
+p p i
+x 6 8
+s 15
+x 13 14
+p n a
+x 3 5
+s 1
+x 2 6
+p b m
+x 1 5
+p k n
+x 4 2
+s 1
+x 13 5
+s 1
+x 12 10
+s 11
+x 7 2
+p d a
+x 15 1
+s 4
+x 12 14
+p p k
+x 0 4
+s 12
+x 11 15
+p l c
+x 10 3
+s 4
+x 13 5
+s 13
+x 4 2
+s 9
+p p b
+x 13 10
+s 13
+x 12 9
+p a i
+x 10 3
+p l k
+s 13
+x 5 14
+s 14
+x 8 2
+s 11
+x 15 0
+s 9
+x 14 11
+p f b
+x 2 6
+s 6
+x 1 0
+s 12
+x 6 11
+s 5
+x 12 10
+s 10
+x 5 1
+p h k
+x 2 14
+s 12
+x 10 9
+p a p
+x 3 4
+s 12
+x 11 1
+s 14
+x 2 5
+s 2
+p c d
+x 7 10
+p b k
+x 3 2
+s 14
+x 5 4
+p g h
+x 11 12
+p f k
+x 3 0
+s 4
+x 14 13
+s 14
+x 11 15
+s 13
+x 7 3
+s 5
+x 0 2
+p j b
+x 8 14
+s 3
+x 9 10
+p o g
+x 5 8
+p d l
+x 3 4
+p f c
+x 15 1
+s 4
+x 5 12
+s 4
+x 6 11
+p o b
+x 2 9
+p g j
+x 3 8
+p h k
+x 5 13
+s 6
+x 3 8
+s 6
+x 6 12
+p g c
+x 4 1
+s 12
+x 15 8
+s 7
+x 12 1
+p f i
+x 0 5
+p k g
+s 15
+x 12 14
+s 1
+p p h
+x 1 4
+s 9
+x 12 14
+p n f
+x 1 11
+s 10
+p k j
+x 10 5
+p o i
+x 12 14
+s 12
+x 6 5
+p f e
+x 15 9
+s 5
+x 1 0
+p l i
+x 15 9
+s 4
+p g e
+x 7 1
+p f l
+x 13 11
+p o n
+s 2
+x 0 12
+p l m
+x 2 13
+s 13
+x 14 10
+s 5
+x 11 5
+s 1
+x 10 7
+s 11
+p k c
+x 5 12
+p i o
+s 10
+x 4 11
+s 13
+x 15 1
+p m h
+x 12 6
+s 3
+x 0 10
+s 10
+x 5 14
+p g k
+s 6
+x 7 3
+p d f
+x 6 14
+s 10
+x 4 15
+p a j
+x 11 5
+s 6
+x 8 3
+p c b
+x 1 5
+s 7
+x 12 15
+s 9
+p d m
+x 2 10
+p e i
+x 4 1
+p f n
+x 7 6
+p c e
+x 15 9
+p a g
+x 13 14
+p p k
+s 12
+x 8 3
+s 14
+x 10 4
+s 10
+x 8 7
+s 10
+x 15 10
+s 1
+x 1 3
+s 9
+x 9 2
+s 11
+x 12 6
+s 14
+x 5 10
+p l i
+x 7 9
+s 10
+x 11 2
+s 3
+x 3 1
+s 15
+x 4 8
+p n m
+x 6 0
+p h i
+x 5 7
+s 7
+x 6 9
+p n l
+x 11 3
+p b m
+x 5 4
+s 1
+x 2 3
+p o l
+s 10
+x 0 6
+p b p
+x 14 10
+s 13
+x 8 6
+p j h
+x 0 9
+p d l
+x 8 10
+s 15
+x 5 12
+s 12
+x 4 1
+s 7
+x 2 3
+s 7
+x 15 9
+s 15
+x 13 2
+s 12
+x 0 4
+s 8
+x 5 11
+s 11
+x 2 3
+s 8
+x 0 15
+p h b
+x 13 5
+p j c
+x 15 7
+p f e
+x 13 0
+s 4
+x 3 14
+s 15
+x 10 2
+s 9
+x 1 0
+s 6
+x 5 10
+p k l
+x 9 15
+p f g
+x 3 13
+s 4
+x 2 10
+s 7
+x 9 11
+s 14
+x 5 14
+s 3
+x 13 7
+s 3
+p b o
+x 4 11
+s 9
+x 3 15
+s 15
+x 1 11
+s 11
+p g i
+x 9 14
+p p l
+x 3 7
+s 15
+x 8 11
+p f m
+x 9 4
+s 7
+x 5 15
+s 4
+p d k
+s 13
+x 8 12
+s 10
+x 13 2
+s 3
+x 4 15
+p f b
+x 1 3
+s 13
+x 10 9
+s 14
+x 14 12
+s 7
+x 6 15
+s 5
+p l c
+x 2 5
+s 12
+p n p
+x 8 11
+p e l
+x 0 4
+s 3
+x 15 3
+s 13
+x 7 13
+s 3
+x 10 8
+s 14
+x 5 12
+p k p
+x 13 6
+s 14
+x 5 0
+s 14
+x 13 1
+p i e
+x 10 11
+s 3
+x 9 0
+s 2
+x 4 2
+s 12
+p l d
+x 0 13
+p j o
+x 11 4
+p i a
+x 14 12
+s 13
+x 3 10
+p k m
+x 7 11
+s 9
+x 5 9
+s 13
+x 13 14
+s 15
+x 1 8
+p n p
+x 9 14
+p c f
+x 3 7
+s 3
+x 2 14
+s 6
+p l n
+s 6
+x 9 4
+s 15
+x 3 12
+s 5
+x 10 2
+s 14
+x 0 6
+p j g
+x 2 3
+p e b
+x 11 7
+p c o
+x 15 2
+s 2
+x 1 4
+p e m
+s 10
+x 15 13
+s 13
+x 9 7
+s 3
+x 14 5
+s 12
+x 4 13
+p g p
+x 10 0
+s 5
+x 15 13
+p b c
+x 0 12
+s 11
+x 8 13
+p a g
+x 10 15
+p l j
+x 1 3
+s 11
+x 7 2
+s 4
+x 1 0
+s 4
+x 7 9
+s 2
+x 12 8
+p b p
+x 4 0
+p n d
+x 11 9
+s 3
+x 7 12
+s 10
+x 13 10
+p j g
+x 2 3
+p p h
+x 4 10
+s 9
+x 9 7
+s 3
+x 14 0
+s 11
+x 4 3
+p g m
+x 11 0
+s 3
+x 3 14
+p e f
+x 7 12
+p j k
+x 11 13
+p c g
+x 8 10
+s 7
+x 9 15
+s 7
+x 0 13
+s 2
+x 3 14
+s 14
+p p b
+s 6
+x 10 12
+s 5
+x 6 3
+s 9
+x 8 0
+s 2
+x 10 12
+s 10
+x 13 5
+s 6
+x 4 0
+s 2
+x 7 13
+s 10
+x 4 15
+s 11
+x 11 5
+s 4
+x 14 4
+p d c
+x 0 15
+p f o
+s 12
+x 4 10
+p n m
+x 8 9
+s 11
+x 0 4
+s 2
+x 13 5
+s 3
+x 3 15
+s 10
+x 14 4
+s 10
+x 0 2
+p p d
+s 12
+x 10 12
+s 3
+x 9 1
+s 13
+x 0 15
+s 11
+p b e
+x 4 2
+s 11
+x 5 13
+s 10
+x 4 10
+p c i
+x 7 14
+s 3
+x 4 2
+s 3
+x 14 0
+s 11
+x 13 11
+p f n
+x 4 15
+s 9
+x 11 3
+s 1
+x 8 10
+p b g
+x 9 12
+p k i
+x 11 6
+s 8
+x 0 8
+s 11
+p h b
+x 3 12
+p p k
+x 7 11
+p l i
+x 6 5
+s 8
+x 7 13
+s 14
+x 3 5
+s 9
+x 1 13
+p k d
+x 7 4
+p h i
+x 0 1
+p n e
+x 8 4
+p k b
+x 5 2
+s 7
+x 0 6
+s 12
+x 13 8
+p f d
+x 5 0
+s 15
+p m j
+x 11 2
+p k f
+x 12 15
+p d p
+x 7 3
+s 3
+x 6 8
+s 4
+p e a
+x 14 11
+p d o
+s 5
+x 13 9
+p n f
+s 10
+x 3 4
+s 7
+x 15 12
+s 14
+x 2 6
+s 13
+x 3 8
+s 3
+x 2 9
+p m h
+x 13 3
+s 9
+x 2 5
+p c f
+x 6 4
+s 6
+x 15 14
+p h d
+x 4 13
+p c p
+x 11 8
+p k a
+x 5 0
+p n c
+x 8 1
+p b m
+x 3 12
+p o p
+x 15 10
+s 3
+x 8 3
+s 10
+x 9 14
+s 3
+x 1 15
+p d g
+x 8 10
+s 8
+x 9 13
+p p m
+x 8 12
+p n i
+x 14 0
+s 11
+x 3 13
+s 15
+x 4 11
+s 12
+x 6 15
+s 13
+x 0 8
+s 15
+x 9 10
+s 4
+x 15 1
+s 12
+x 12 9
+p o a
+x 8 15
+p d f
+x 9 2
+p g m
+x 7 11
+s 12
+x 12 9
+s 7
+x 15 7
+p c f
+x 0 12
+p i k
+x 15 11
+p d o
+x 6 1
+p i g
+x 9 2
+p f e
+s 12
+x 13 0
+p m d
+x 11 4
+p k a
+x 8 5
+p b l
+x 15 12
+s 7
+x 6 2
+s 4
+x 15 4
+p h p
+x 1 6
+s 5
+x 2 14
+s 10
+x 11 3
+p a g
+x 13 12
+p b k
+x 14 11
+s 4
+x 5 9
+s 11
+x 1 7
+p a o
+s 12
+x 13 14
+p e d
+x 6 4
+s 5
+x 12 8
+s 10
+x 5 15
+s 11
+x 14 9
+s 9
+x 8 4
+p p g
+x 5 2
+s 14
+x 13 12
+p i a
+x 2 6
+s 3
+x 5 15
+s 7
+x 12 14
+p k l
+s 12
+x 5 10
+s 9
+x 14 4
+s 14
+x 3 15
+p d j
+x 9 13
+s 11
+p o c
+x 10 2
+s 5
+x 11 8
+s 11
+p m j
+x 12 10
+s 7
+x 0 14
+p i n
+s 1
+x 2 12
+s 6
+x 1 15
+s 5
+x 14 10
+s 2
+x 15 1
+p a f
+x 8 9
+s 14
+x 13 7
+p d e
+x 14 0
+s 12
+x 5 6
+s 14
+x 11 4
+s 11
+x 15 9
+s 13
+x 5 3
+s 2
+x 0 12
+p o j
+x 2 3
+s 11
+x 1 5
+s 14
+x 6 10
+p h f
+x 5 13
+s 15
+x 7 14
+p m c
+x 6 10
+s 12
+x 0 12
+s 2
+x 10 14
+s 14
+x 12 7
+s 12
+x 13 10
+s 9
+x 15 4
+p p o
+x 1 9
+p n e
+x 10 6
+p j c
+x 0 12
+s 13
+x 1 15
+s 14
+x 14 8
+s 4
+x 1 12
+s 4
+x 3 13
+s 6
+x 2 15
+p i a
+x 12 11
+s 8
+x 1 9
+p h j
+x 6 13
+p k g
+x 11 5
+p l j
+x 10 2
+s 2
+x 5 8
+s 3
+x 14 11
+s 3
+x 8 4
+s 15
+x 7 14
+p h p
+x 2 15
+s 6
+x 4 0
+p b f
+x 14 1
+s 4
+x 15 9
+s 15
+x 3 7
+p k p
+x 4 14
+s 4
+p l n
+x 11 8
+p j o
+x 10 0
+s 10
+p p c
+s 13
+x 6 14
+p m k
+x 8 9
+p h d
+x 0 12
+s 9
+x 7 3
+s 11
+x 4 11
+s 3
+x 7 9
+p f k
+x 3 1
+s 11
+x 6 7
+s 8
+x 10 9
+s 4
+x 8 3
+s 1
+x 4 14
+s 11
+x 9 15
+s 9
+x 11 6
+p j c
+x 4 14
+s 7
+p o d
+x 8 5
+s 10
+x 15 13
+s 10
+x 7 6
+s 3
+x 4 12
+p k g
+x 6 2
+s 4
+x 4 5
+s 2
+x 12 3
+s 8
+p c e
+s 3
+x 4 6
+s 8
+x 9 1
+s 3
+p m a
+x 12 6
+s 2
+x 1 10
+s 8
+x 12 3
+s 14
+x 2 13
+s 12
+x 8 6
+p f j
+x 3 11
+s 15
+x 2 5
+s 8
+x 10 6
+p b c
+x 2 4
+s 9
+x 6 3
+s 5
+x 12 2
+p d a
+s 7
+x 11 10
+p e m
+x 5 1
+p b o
+x 13 3
+s 5
+x 10 12
+s 3
+x 11 7
+p m c
+x 10 8
+p o b
+x 15 11
+p d n
+x 8 13
+s 7
+x 15 10
+s 11
+x 5 4
+s 10
+x 7 11
+p l e
+x 13 4
+s 7
+x 2 0
+s 13
+x 6 3
+s 8
+x 4 1
+p j a
+s 14
+x 5 6
+p c d
+x 11 8
+s 2
+x 14 12
+s 6
+x 13 11
+s 7
+x 8 15
+p n b
+x 2 13
+p f i
+x 5 4
+s 11
+p g l
+x 14 7
+p e b
+x 15 11
+p a n
+x 3 4
+s 10
+x 8 0
+s 3
+x 9 2
+p l e
+x 1 13
+p a b
+s 15
+x 7 0
+s 11
+x 2 1
+p f d
+x 3 10
+s 6
+x 9 15
+p g n
+x 11 6
+s 4
+x 5 15
+p o k
+s 1
+x 8 2
+s 4
+x 10 15
+s 15
+p p a
+x 6 12
+p m i
+x 0 9
+p b g
+s 7
+x 7 11
+s 13
+x 4 5
+p l h
+x 0 3
+p j p
+x 8 6
+s 7
+x 0 2
+s 7
+x 15 1
+s 14
+p g m
+x 12 11
+s 15
+x 0 9
+p k n
+x 13 5
+p i m
+x 0 11
+s 13
+x 3 13
+s 2
+x 1 12
+s 4
+x 2 0
+s 6
+x 12 11
+p k n
+x 8 0
+p h m
+x 2 14
+p k o
+s 9
+x 12 15
+p m i
+x 9 11
+p b l
+x 8 0
+s 12
+x 1 9
+s 4
+x 2 7
+p c g
+x 5 14
+p o p
+x 11 6
+s 15
+x 4 8
+p i h
+x 12 14
+s 12
+x 10 8
+s 4
+x 14 13
+s 14
+x 3 9
+p n j
+s 12
+x 4 6
+s 3
+x 2 9
+p i h
+x 1 8
+s 1
+x 3 0
+p o l
+s 9
+x 7 15
+p f k
+x 13 10
+s 15
+x 6 9
+p a h
+x 7 12
+p i f
+s 4
+x 9 10
+p l c
+x 5 13
+s 12
+x 4 15
+p h p
+x 1 14
+p d a
+x 12 13
+s 12
+x 2 9
+s 7
+x 15 6
+p m o
+s 14
+x 1 7
+s 7
+x 3 10
+p j i
+x 11 6
+p m k
+s 8
+x 1 9
+s 1
+x 0 7
+s 9
+x 3 6
+s 1
+p c n
+x 9 1
+s 11
+x 7 14
+s 9
+x 0 11
+p l i
+x 15 13
+s 3
+x 3 4
+p e d
+x 12 9
+p p g
+x 6 4
+p l h
+x 15 2
+s 11
+x 14 8
+s 3
+x 5 9
+p p m
+x 4 15
+p f h
+s 3
+x 11 3
+p m p
+x 5 0
+p o i
+s 4
+x 13 4
+s 6
+x 11 6
+s 8
+x 5 12
+s 12
+x 4 7
+s 12
+x 3 6
+s 6
+x 14 4
+s 4
+x 5 7
+p f k
+x 9 11
+s 12
+x 5 1
+s 1
+x 10 4
+p o n
+x 12 11
+p g b
+x 10 5
+p e n
+s 4
+x 15 2
+p k b
+x 9 14
+s 12
+x 8 4
+s 10
+x 5 15
+s 12
+x 9 2
+p n i
+x 1 3
+p c j
+x 4 2
+p a p
+x 8 15
+p b l
+x 13 10
+s 6
+x 6 11
+s 1
+x 10 2
+s 9
+p i p
+x 13 14
+s 2
+x 2 9
+p o l
+x 12 5
+s 4
+x 6 10
+s 15
+x 7 14
+p m c
+s 2
+x 2 13
+p n a
+x 9 1
+p f j
+x 7 6
+s 11
+x 15 9
+p i c
+x 14 3
+s 15
+x 1 12
+s 14
+x 3 13
+s 1
+p a e
+x 5 14
+p l p
+s 5
+x 4 7
+s 8
+x 10 11
+s 5
+p k i
+s 5
+x 12 1
+s 14
+x 15 7
+s 5
+x 9 8
+p g p
+x 1 5
+p j l
+x 6 8
+s 10
+x 0 14
+s 12
+x 2 15
+s 13
+p n o
+x 3 10
+p m b
+x 11 4
+s 11
+x 14 9
+s 10
+x 11 2
+s 12
+x 15 5
+p g d
+x 0 13
+p c f
+x 1 14
+s 12
+x 3 0
+s 7
+p m l
+s 1
+x 13 8
+p e p
+x 1 5
+s 10
+x 7 0
+p l b
+x 10 13
+p e p
+x 4 2
+p c f
+x 8 10
+p j o
+x 1 13
+s 4
+x 4 8
+s 1
+x 12 6
+s 10
+x 14 1
+p n p
+x 5 12
+p k o
+x 7 4
+s 4
+x 11 0
+s 10
+x 1 12
+s 2
+x 4 14
+s 13
+x 10 3
+s 12
+x 9 0
+p n e
+s 5
+x 15 1
+p o a
+x 8 3
+s 14
+x 11 9
+p c b
+x 10 5
+s 11
+x 14 1
+p g f
+x 5 12
+p d i
+x 11 4
+p p g
+x 8 9
+s 8
+x 3 0
+p d k
+x 6 1
+s 1
+x 12 0
+s 10
+x 2 9
+s 14
+x 11 7
+p n p
+x 13 2
+p m h
+x 11 5
+s 13
+x 1 13
+s 11
+x 6 11
+s 10
+x 8 10
+p l d
+x 12 4
+p m k
+x 3 7
+p l c
+x 4 5
+s 9
+x 1 12
+s 4
+x 4 5
+p p j
+x 13 0
+p a e
+x 3 11
+s 12
+x 15 14
+p l i
+x 7 1
+s 1
+x 12 10
+s 1
+x 15 9
+s 13
+x 1 13
+p f m
+x 9 6
+p k e
+x 8 4
+p b o
+x 11 1
+s 9
+p h c
+x 2 8
+p e g
+s 13
+x 14 6
+s 5
+x 13 15
+s 13
+x 6 2
+s 14
+x 10 8
+s 8
+x 2 13
+p k f
+x 9 12
+s 14
+x 4 8
+s 2
+p e g
+x 14 2
+s 4
+x 3 9
+p n i
+x 8 1
+s 1
+x 14 15
+s 2
+x 1 10
+p a m
+x 7 2
+p i e
+x 11 12
+s 7
+p h g
+x 7 5
+p c i
+x 2 14
+p e b
+x 12 5
+s 7
+p i o
+x 7 11
+s 7
+x 0 6
+p n h
+s 2
+x 13 2
+p l k
+x 3 10
+p m p
+x 12 5
+s 11
+x 0 3
+s 9
+x 11 12
+s 4
+x 5 14
+s 6
+x 6 10
+s 4
+x 5 12
+p k e
+x 10 7
+s 5
+x 15 5
+p p n
+s 7
+x 10 4
+p a g
+x 11 2
+p i m
+s 9
+x 0 14
+s 9
+x 2 12
+s 13
+x 4 0
+s 13
+x 14 6
+p f o
+s 6
+x 3 15
+s 11
+x 8 11
+s 8
+x 0 9
+s 5
+x 6 5
+s 11
+x 2 10
+p i m
+x 8 14
+s 6
+x 15 12
+p e p
+x 2 11
+s 3
+x 13 3
+s 4
+x 12 15
+p b c
+x 2 0
+s 11
+x 4 9
+s 4
+x 7 11
+s 2
+x 6 2
+s 6
+x 9 10
+s 9
+x 6 5
+p l d
+x 13 14
+p p h
+x 3 2
+p a c
+s 9
+x 0 1
+p e g
+s 10
+x 15 5
+s 12
+x 6 13
+s 11
+x 15 0
+s 15
+x 11 5
+s 14
+x 0 13
+s 8
+x 15 12
+s 5
+x 11 2
+s 11
+x 1 7
+p l m
+x 13 3
+p b d
+s 10
+x 15 6
+s 13
+x 14 13
+s 7
+x 8 12
+p c a
+x 5 2
+s 3
+p e g
+x 8 0
+s 11
+p j k
+x 11 4
+p i b
+x 9 8
+s 15
+x 12 0
+s 1
+x 8 5
+s 13
+x 1 11
+s 12
+x 13 5
+p l h
+x 7 12
+s 15
+p f p
+x 9 8
+p n k
+x 1 12
+p p f
+x 4 6
+s 14
+x 7 12
+p i e
+x 6 15
+s 14
+x 2 3
+s 9
+x 1 14
+p a k
+x 7 3
+p o j
+x 15 0
+s 7
+x 12 10
+p c a
+x 7 13
+p n h
+x 4 8
+s 5
+x 11 5
+s 1
+p p f
+x 14 6
+p l g
+x 9 3
+p j e
+s 11
+x 7 4
+p h l
+x 8 13
+p e o
+x 5 6
+p f d
+s 5
+x 14 7
+s 2
+x 11 8
+s 2
+x 13 4
+s 5
+x 3 9
+p h p
+x 12 11
+p c b
+x 0 10
+p d f
+s 3
+x 12 2
+s 2
+p m i
+x 13 7
+s 5
+x 2 11
+p e f
+x 1 14
+s 6
+x 2 5
+p b n
+x 10 11
+s 9
+x 8 12
+p i k
+x 5 2
+s 15
+p c h
+x 8 13
+s 1
+x 0 14
+p n p
+x 5 4
+p i f
+x 12 0
+s 6
+x 4 9
+s 5
+x 5 3
+s 14
+p p b
+x 6 13
+p h i
+x 4 5
+s 4
+x 8 9
+s 11
+x 7 13
+p a c
+x 1 8
+p m l
+x 11 10
+p i a
+x 13 6
+p b c
+x 7 4
+s 3
+x 1 10
+p l h
+x 15 7
+s 12
+x 10 14
+p p g
+s 7
+x 0 8
+p o b
+x 10 3
+s 4
+x 2 6
+p k e
+x 13 11
+s 6
+x 12 3
+p h a
+x 2 1
+p m b
+x 14 13
+s 2
+x 10 9
+s 14
+x 7 15
+s 5
+x 6 14
+s 11
+x 15 11
+p g h
+x 1 5
+p n a
+x 6 12
+s 7
+x 9 13
+s 12
+x 5 3
+s 12
+x 10 12
+p k d
+x 2 13
+p l e
+s 2
+x 1 0
+s 8
+x 11 7
+p i m
+s 7
+x 6 1
+s 11
+x 8 5
+s 10
+x 2 0
+s 13
+x 11 7
+p h a
+x 12 2
+p b n
+x 15 8
+s 3
+x 12 1
+p o d
+x 6 3
+s 5
+x 0 15
+s 11
+x 13 4
+p e h
+x 11 10
+s 9
+x 4 7
+s 2
+x 12 10
+p l o
+x 8 2
+s 8
+p k p
+x 6 3
+s 3
+x 0 8
+p e f
+x 6 1
+s 13
+x 3 8
+p o i
+x 4 10
+s 5
+x 9 0
+p n j
+x 13 6
+p c e
+s 5
+x 5 3
+p d n
+x 4 9
+s 15
+x 3 0
+s 13
+x 9 12
+s 12
+p m k
+x 14 2
+p b p
+x 8 10
+s 5
+x 0 6
+s 9
+x 13 4
+p m i
+x 7 1
+s 13
+x 12 5
+p a k
+x 8 7
+p g p
+x 11 10
+s 3
+x 4 2
+p c o
+x 3 11
+p l m
+x 14 5
+s 6
+x 11 9
+s 5
+p e d
+x 12 5
+s 4
+x 0 4
+s 5
+x 12 7
+p c p
+x 9 4
+s 11
+p l j
+x 15 11
+p a n
+x 7 5
+p o m
+x 0 12
+s 3
+x 14 4
+p d e
+s 15
+x 10 6
+s 13
+p k i
+x 12 3
+p m p
+x 2 13
+p f d
+x 11 3
+s 9
+x 9 10
+s 13
+x 3 2
+s 2
+x 15 6
+p l n
+x 0 9
+p m p
+s 6
+x 14 5
+s 4
+x 7 15
+p a e
+x 12 14
+s 6
+x 9 7
+s 5
+x 11 3
+p p m
+x 5 7
+p g o
+x 12 13
+p l c
+s 13
+x 10 3
+s 4
+x 8 11
+p k m
+s 10
+x 6 2
+s 10
+x 7 15
+s 15
+x 9 14
+s 7
+x 11 0
+p e i
+x 13 8
+s 15
+x 11 6
+s 12
+x 1 5
+s 14
+x 7 9
+p b f
+x 8 10
+s 5
+x 5 6
+s 2
+x 1 13
+s 1
+x 6 3
+s 10
+x 1 10
+s 4
+x 5 4
+p e o
+x 3 15
+s 10
+x 13 4
+p m l
+x 10 11
+s 11
+x 2 3
+s 1
+p e j
+s 14
+x 4 12
+s 10
+p c k
+x 11 15
+p g h
+x 6 14
+s 9
+x 7 9
+s 6
+x 13 12
+p d a
+s 2
+x 11 7
+s 1
+x 13 3
+p n p
+x 15 0
+s 5
+x 7 2
+s 6
+x 14 6
+p f i
+x 15 7
+s 2
+x 2 12
+p m n
+x 3 11
+s 3
+x 12 10
+p i f
+x 2 14
+s 1
+x 4 11
+p o d
+x 14 15
+s 11
+x 7 0
+s 5
+x 12 10
+p c h
+x 2 6
+p k n
+x 9 7
+s 4
+x 13 8
+p c g
+x 6 5
+p o k
+x 0 13
+s 12
+x 2 11
+p e m
+x 10 8
+s 4
+x 9 13
+s 12
+x 12 10
+s 9
+x 8 13
+s 11
+x 5 2
+p o c
+x 8 9
+s 10
+x 15 12
+s 10
+x 10 9
+s 6
+x 0 1
+s 7
+x 4 12
+p h i
+s 13
+x 8 10
+p g m
+x 2 1
+s 4
+x 8 7
+s 5
+x 9 15
+s 8
+x 7 4
+p k o
+x 0 11
+s 14
+x 7 14
+s 7
+x 4 2
+s 12
+x 14 13
+s 15
+x 7 2
+p j f
+x 3 1
+s 2
+x 5 9
+p d m
+x 7 6
+p o b
+s 15
+x 8 12
+s 4
+x 3 4
+p g h
+x 7 8
+s 14
+x 10 2
+p i c
+x 3 14
+p n a
+x 8 15
+s 8
+p p k
+x 5 0
+p l e
+x 13 8
+s 13
+x 7 4
+p a p
+x 9 3
+s 3
+x 14 10
+p k n
+x 1 12
+s 4
+x 6 4
+s 11
+x 0 2
+p p g
+x 6 7
+s 9
+x 0 11
+p l h
+x 14 8
+p d m
+x 12 6
+s 15
+x 15 11
+p a k
+x 9 2
+s 5
+x 8 0
+p e l
+s 9
+x 11 15
+p m n
+x 0 8
+s 12
+x 14 11
+p j g
+x 13 12
+p h m
+x 2 0
+s 11
+x 11 15
+s 1
+x 5 9
+s 10
+x 0 4
+s 11
+x 10 1
+p e l
+x 15 8
+s 10
+x 5 4
+p b d
+s 2
+x 11 12
+s 11
+x 5 9
+s 9
+x 2 11
+s 14
+x 14 13
+p p j
+s 13
+x 1 7
+p i l
+s 5
+x 9 8
+p k o
+x 0 12
+s 12
+x 14 1
+p h i
+x 13 0
+s 14
+x 11 14
+p b f
+x 7 2
+s 10
+x 13 10
+s 5
+x 3 4
+s 5
+x 13 2
+s 10
+p p l
+x 9 1
+s 15
+x 5 0
+s 15
+x 14 4
+s 9
+x 7 10
+p m a
+x 6 11
+p d f
+x 8 3
+s 14
+x 11 12
+s 7
+x 2 1
+p o a
+x 3 9
+s 2
+x 8 7
+s 2
+x 12 0
+s 7
+x 9 8
+p b p
+x 13 6
+p e o
+x 12 15
+p c p
+x 3 9
+s 11
+x 15 5
+s 10
+x 11 3
+s 15
+x 12 1
+s 2
+x 5 14
+p k o
+x 7 13
+s 2
+p n f
+x 2 9
+s 6
+x 3 0
+p p b
+x 9 2
+p e n
+x 8 4
+p d f
+x 7 10
+p b o
+x 14 8
+s 12
+x 2 11
+s 11
+x 7 0
+s 11
+x 14 13
+s 3
+x 2 7
+s 8
+x 9 1
+p a i
+s 9
+x 10 13
+s 6
+x 7 14
+s 11
+x 8 11
+p p l
+s 8
+x 6 0
+p h g
+x 9 14
+p e n
+s 2
+p c f
+x 13 7
+p m l
+x 14 1
+s 5
+x 13 4
+s 6
+x 8 0
+p p j
+x 11 5
+s 2
+x 2 8
+p e o
+x 4 7
+s 13
+x 0 10
+s 14
+x 4 15
+s 4
+x 10 12
+s 2
+x 9 7
+p k d
+x 3 12
+p i c
+x 10 11
+s 13
+x 12 5
+p k g
+x 1 11
+s 4
+p c d
+s 11
+x 5 6
+s 10
+x 3 8
+s 14
+x 2 10
+p m l
+x 5 13
+s 1
+x 7 11
+s 2
+x 9 13
+s 2
+x 10 5
+s 3
+x 6 9
+s 4
+x 10 3
+p k o
+x 14 1
+p e n
+s 9
+x 13 3
+p a d
+x 12 10
+p b n
+x 1 3
+p g e
+x 8 13
+p i l
+x 6 3
+s 4
+p f d
+x 11 7
+p b m
+x 3 15
+s 12
+x 13 11
+s 11
+p k a
+x 6 15
+p m j
+x 12 3
+p n e
+x 15 4
+s 5
+x 8 13
+p l d
+x 6 12
+s 11
+x 11 1
+p j f
+x 3 10
+p l i
+x 1 7
+s 9
+p p g
+x 4 9
+s 6
+x 13 7
+s 8
+x 3 8
+p o e
+x 9 10
+s 13
+p c n
+x 1 4
+p i j
+x 11 5
+p m f
+x 10 13
+s 1
+x 6 2
+p l b
+x 8 14
+s 4
+x 7 12
+s 7
+x 13 3
+s 11
+x 5 7
+s 4
+x 8 9
+s 11
+p c g
+x 11 3
+s 7
+x 14 6
+s 8
+x 2 8
+s 8
+x 9 1
+p e i
+x 2 10
+s 6
+x 4 12
+p a m
+s 13
+x 0 13
+s 8
+x 7 14
+p e l
+x 4 11
+p c k
+x 3 14
+s 5
+x 4 5
+s 13
+x 15 3
+s 6
+x 5 10
+p b i
+x 3 8
+p c o
+x 12 1
+p k i
+x 14 2
+s 4
+x 11 15
+p e j
+s 10
+x 9 1
+s 11
+x 3 7
+p b m
+x 8 14
+s 11
+x 3 12
+p o d
+s 3
+x 1 0
+s 7
+x 3 13
+s 8
+x 6 9
+s 9
+x 7 13
+p a f
+s 3
+x 5 2
+s 10
+x 6 3
+s 15
+x 13 15
+s 11
+x 3 0
+s 7
+x 5 12
+s 3
+x 11 1
+p i c
+x 0 13
+s 3
+x 15 4
+p k o
+x 0 14
+s 11
+x 10 6
+s 13
+x 13 14
+p l p
+x 12 10
+p g n
+x 0 9
+p i b
+x 5 13
+s 11
+x 12 8
+s 13
+x 7 11
+s 3
+x 4 1
+s 2
+x 9 0
+s 13
+x 1 3
+p d e
+x 7 15
+p f l
+s 4
+x 2 8
+s 10
+x 5 12
+s 8
+x 14 8
+s 5
+x 15 3
+s 12
+x 13 8
+p h g
+x 4 2
+s 5
+x 14 5
+s 12
+x 6 9
+p c b
+x 8 10
+p g a
+x 4 9
+p o f
+x 15 12
+s 5
+x 13 10
+p k d
+s 7
+x 8 4
+s 13
+x 13 5
+s 10
+x 10 12
+s 14
+x 0 15
+p n l
+s 15
+x 9 13
+p e i
+x 12 2
+p d n
+x 13 4
+s 15
+x 1 6
+p c o
+x 11 10
+p f k
+s 12
+x 6 0
+s 8
+p b n
+x 8 14
+s 2
+x 2 3
+p j m
+s 10
+x 15 6
+p b n
+x 7 3
+p o g
+x 11 2
+s 10
+x 12 4
+p e f
+x 9 0
+s 3
+x 7 4
+s 15
+x 8 9
+s 2
+x 5 11
+s 6
+x 9 3
+s 6
+x 2 5
+p m o
+x 0 12
+s 12
+p f c
+s 2
+x 1 14
+s 1
+p l p
+x 7 13
+s 7
+x 5 2
+p b e
+s 13
+x 6 9
+s 3
+x 4 15
+s 12
+x 0 2
+s 5
+x 10 7
+p p h
+x 13 15
+s 4
+x 14 10
+p k o
+x 11 4
+s 4
+x 2 12
+p h l
+x 0 8
+p g j
+s 13
+x 12 2
+s 15
+x 0 13
+p o h
+x 11 8
+s 10
+x 2 14
+s 8
+x 5 15
+s 7
+p m k
+x 10 4
+p c n
+x 9 0
+p h m
+x 2 12
+p i f
+x 0 8
+s 15
+x 2 7
+p p m
+x 14 13
+p l i
+x 9 8
+s 12
+x 10 12
+s 11
+x 1 15
+p b d
+s 2
+x 6 3
+p e l
+x 0 1
+p h o
+x 15 2
+p f p
+x 1 6
+s 7
+x 2 13
+p l o
+x 14 3
+p f g
+x 5 8
+p h k
+x 7 4
+s 9
+x 10 12
+s 7
+x 3 5
+s 6
+p g i
+x 9 15
+s 14
+x 1 7
+s 11
+x 14 6
+p h p
+x 8 5
+s 7
+x 4 2
+s 3
+x 12 1
+p e b
+x 6 4
+p i a
+x 12 8
+s 14
+x 1 0
+s 2
+p j d
+x 6 5
+s 1
+x 15 0
+s 14
+x 8 1
+s 2
+x 15 14
+s 11
+x 3 8
+p i o
+s 6
+x 14 12
+s 1
+x 10 0
+s 7
+p b p
+x 15 1
+s 9
+p j g
+x 13 7
+p k c
+x 15 1
+p h j
+x 8 11
+s 12
+p o k
+x 9 1
+s 10
+x 8 15
+s 7
+x 9 2
+s 3
+x 4 10
+s 7
+x 0 9
+p i a
+x 14 13
+s 8
+x 5 1
+s 7
+x 0 3
+p c f
+x 15 10
+s 15
+p k d
+x 14 1
+s 8
+x 7 13
+s 9
+x 15 5
+p o j
+x 0 6
+p p k
+x 13 12
+s 13
+x 8 2
+s 2
+x 13 5
+s 7
+p m f
+x 3 6
+s 7
+p e d
+x 13 8
+p b l
+x 11 9
+p j f
+x 1 3
+s 15
+x 12 10
+s 11
+x 3 0
+s 13
+x 10 14
+s 2
+x 5 7
+s 14
+x 1 2
+p k p
+x 11 10
+p h b
+x 7 4
+s 7
+x 3 12
+s 5
+x 6 9
+s 13
+x 11 0
+s 13
+x 15 1
+p c k
+x 12 9
+s 14
+x 6 11
+p n g
+s 5
+x 13 0
+s 13
+x 2 3
+s 11
+p e k
+x 6 0
+s 13
+x 12 5
+s 10
+p d o
+x 11 14
+p m a
+x 0 2
+s 3
+x 11 13
+s 7
+x 14 8
+s 7
+x 9 3
+s 4
+p e h
+x 4 8
+p b k
+x 7 14
+s 9
+x 0 15
+s 13
+x 6 14
+s 2
+x 3 4
+s 12
+x 6 13
+p p d
+x 9 10
+p g c
+x 8 13
+s 2
+x 14 11
+p l f
+x 2 5
+s 4
+x 12 15
+p m p
+s 9
+x 4 1
+s 8
+x 2 15
+s 9
+p f g
+x 11 1
+p o i
+x 14 6
+p c a
+x 15 0
+s 9
+x 4 1
+s 14
+x 3 5
+s 6
+x 13 2
+s 4
+x 8 9
+p p d
+s 9
+x 4 7
+p b m
+x 3 0
+s 1
+x 12 1
+s 15
+x 11 4
+s 12
+x 0 3
+s 13
+p h n
+x 6 13
+s 14
+x 0 2
+p m f
+x 10 6
+p n p
+s 1
+x 0 3
+s 10
+x 4 7
+s 3
+x 1 9
+s 3
+x 0 15
+s 7
+x 12 13
+s 2
+x 11 3
+s 8
+x 2 6
+s 11
+x 4 12
+p c f
+x 5 1
+s 2
+x 10 0
+p g e
+x 3 14
+s 13
+x 4 13
+s 5
+p o d
+x 15 11
+s 1
+x 2 6
+s 11
+x 8 13
+s 12
+x 7 0
+s 5
+x 2 5
+s 6
+x 10 7
+p k b
+x 6 9
+p a h
+s 11
+p l p
+x 1 14
+s 11
+x 10 3
+s 5
+x 0 12
+s 2
+p n f
+x 11 5
+p e k
+x 15 4
+s 14
+x 3 2
+s 12
+x 1 12
+s 12
+x 4 8
+s 10
+p n b
+x 6 15
+s 12
+x 2 9
+s 1
+x 15 7
+s 2
+x 0 8
+s 6
+x 1 13
+s 13
+x 8 0
+s 8
+x 14 13
+s 10
+p c d
+x 15 7
+s 6
+x 10 14
+s 10
+x 13 12
+s 14
+x 5 8
+s 4
+x 3 0
+s 5
+x 11 5
+s 7
+x 3 8
+s 13
+x 1 14
+s 7
+x 7 9
+s 11
+x 14 4
+s 9
+x 11 6
+s 11
+x 0 12
+s 6
+x 9 6
+s 15
+x 0 11
+s 1
+x 6 13
+p i j
+x 8 1
+s 10
+x 15 2
+s 3
+x 14 5
+s 15
+x 11 15
+s 14
+x 0 12
+p k e
+x 15 2
+s 1
+x 8 14
+s 12
+x 12 6
+s 13
+p a o
+x 13 1
+s 13
+x 9 6
+s 4
+x 7 15
+s 2
+x 0 5
+p h n
+x 11 7
+p m c
+s 13
+x 12 10
+s 7
+x 1 7
+s 4
+x 5 11
+s 8
+x 3 1
+s 11
+x 9 14
+p j b
+x 12 5
+s 3
+x 8 1
+p o l
+x 2 5
+p n k
+x 7 1
+s 10
+x 12 10
+s 15
+x 8 2
+p l g
+x 7 13
+s 1
+x 15 0
+s 4
+x 4 10
+p n h
+x 9 14
+s 4
+x 4 6
+s 6
+x 10 9
+p o p
+x 14 13
+p f b
+s 14
+x 12 2
+s 3
+x 4 3
+p p e
+x 11 2
+s 7
+x 8 13
+s 13
+p g i
+x 7 1
+s 10
+x 11 9
+p l e
+x 10 4
+p h m
+x 3 2
+s 6
+x 12 0
+s 4
+x 10 3
+s 6
+p f o
+x 14 5
+p a g
+x 12 3
+p d k
+x 5 11
+p p h
+s 12
+x 9 2
+p c a
+x 5 1
+p p e
+x 15 14
+p h c
+x 9 11
+s 13
+p g f
+x 14 3
+p o m
+x 2 9
+p b j
+x 7 13
+s 2
+x 12 1
+p h d
+x 9 11
+s 4
+x 5 4
+s 8
+x 3 1
+s 5
+x 6 7
+p k f
+x 12 13
+s 7
+x 8 1
+p n p
+x 5 10
+p l m
+x 0 8
+p j d
+x 2 4
+s 1
+x 10 5
+p l i
+x 4 13
+s 14
+x 8 2
+s 1
+x 11 14
+s 1
+x 15 2
+s 2
+x 11 0
+s 4
+x 13 10
+s 9
+p b n
+x 7 14
+s 9
+x 2 1
+p d l
+x 13 9
+p m h
+x 10 11
+s 10
+x 14 2
+s 10
+x 13 15
+s 4
+x 3 6
+p c k
+x 5 15
+s 7
+x 9 4
+p l j
+x 14 7
+s 6
+x 6 3
+p c k
+x 2 5
+p l e
+s 6
+x 0 3
+s 6
+x 7 12
+s 9
+x 9 6
+s 11
+x 14 4
+s 8
+x 7 5
+p d m
+s 4
+x 6 14
+p b e
+x 7 10
+s 4
+p k m
+x 6 8
+p n i
+x 12 15
+p h m
+x 6 4
+s 10
+x 9 8
+p b f
+s 11
+p j k
+x 4 10
+s 4
+x 7 12
+s 1
+x 6 4
+s 3
+x 10 3
+s 4
+x 0 8
+p b o
+s 3
+x 12 14
+p n f
+x 8 15
+p c l
+x 10 9
+p i k
+s 10
+x 4 12
+p o h
+x 6 2
+s 5
+x 8 5
+s 1
+x 11 4
+p n c
+s 8
+x 1 6
+s 13
+x 12 10
+s 15
+p m h
+s 11
+x 2 9
+p a j
+x 11 0
+s 5
+x 6 1
+s 13
+x 14 7
+p b k
+x 6 0
+p e j
+x 10 5
+p h p
+x 7 12
+s 7
+x 15 13
+s 4
+x 5 0
+s 5
+x 2 3
+p k d
+s 9
+x 5 15
+s 6
+x 0 2
+p l n
+x 8 4
+p c b
+x 11 5
+s 8
+x 3 6
+s 12
+x 8 10
+s 5
+x 0 1
+s 11
+x 2 4
+s 11
+x 5 14
+s 4
+x 11 13
+s 6
+x 3 4
+p d a
+x 7 5
+s 7
+x 15 11
+s 14
+p c p
+s 9
+x 14 2
+s 1
+x 6 3
+s 12
+x 4 2
+s 4
+x 1 13
+s 12
+x 4 7
+p j e
+s 2
+p d k
+x 12 5
+s 8
+x 9 15
+s 15
+x 3 4
+s 11
+x 6 11
+s 4
+x 3 0
+s 9
+x 1 4
+s 12
+x 13 8
+s 5
+x 0 4
+s 8
+x 2 14
+s 12
+x 12 11
+p h i
+x 1 10
+s 10
+x 12 0
+s 6
+x 9 3
+s 11
+x 11 13
+p p g
+x 8 9
+s 11
+x 0 5
+s 13
+x 9 12
+s 11
+x 3 6
+s 10
+x 5 0
+p f b
+x 13 10
+s 5
+x 12 8
+s 9
+x 6 9
+p j h
+x 13 3
+p p n
+x 11 15
+p j c
+x 3 13
+p h b
+x 10 2
+s 9
+x 3 12
+s 5
+x 14 10
+s 2
+x 12 9
+s 1
+x 1 11
+p n p
+s 9
+x 15 13
+s 11
+x 9 6
+s 9
+x 15 12
+s 6
+x 3 1
+s 1
+x 10 5
+s 4
+x 13 3
+p k m
+x 11 12
+p l c
+x 5 1
+s 15
+x 2 13
+s 14
+x 14 10
+s 6
+x 6 7
+p j d
+x 1 8
+p c g
+x 13 11
+p n p
+x 3 5
+s 9
+x 14 15
+p c e
+x 5 8
+p o p
+x 9 2
+s 3
+x 7 11
+s 8
+x 3 0
+s 5
+x 5 11
+s 15
+x 2 12
+p b n
+x 5 7
+s 14
+x 9 3
+s 5
+x 6 5
+p c d
+x 11 1
+s 3
+x 5 4
+s 12
+x 8 7
+s 13
+x 1 6
+p m p
+x 13 8
+p c e
+x 0 7
+s 9
+x 6 4
+s 12
+x 11 12
+p p j
+x 14 3
+s 6
+x 15 1
+s 12
+x 5 12
+s 12
+x 2 8
+s 6
+x 14 15
+p f o
+x 2 11
+p j c
+s 14
+x 10 8
+p l f
+x 1 11
+p a d
+x 12 8
+p b n
+x 0 14
+s 4
+x 5 9
+s 7
+x 1 8
+p p f
+x 10 0
+s 12
+x 6 12
+s 11
+x 3 10
+s 8
+x 12 5
+s 7
+p h m
+x 2 10
+s 2
+x 4 8
+s 2
+x 5 3
+p p k
+x 0 14
+p d i
+s 7
+x 10 2
+p g k
+x 4 8
+s 9
+x 0 2
+p c e
+x 14 4
+s 5
+x 2 1
+s 3
+p k i
+x 0 14
+s 11
+p g p
+x 2 13
+p f e
+x 15 10
+s 7
+p d l
+x 12 9
+s 4
+p e n
+x 1 14
+p h c
+x 6 2
+s 8
+x 5 14
+s 15
+x 8 10
+p i k
+x 0 1
+p a j
+x 13 11
+p l b
+x 4 7
+s 3
+x 6 9
+s 2
+x 7 5
+s 1
+p c j
+x 13 6
+s 10
+x 1 10
+p d l
+x 13 2
+p k h
+x 5 3
+s 13
+x 7 11
+s 5
+x 9 8
+p e o
+x 5 11
+s 12
+x 2 1
+s 11
+x 4 6
+p g m
+x 3 9
+p h d
+x 12 4
+p a k
+s 5
+x 0 10
+s 9
+x 8 11
+p p f
+s 7
+x 10 15
+s 3
+x 8 4
+p h l
+x 13 12
+p j f
+x 15 4
+s 9
+x 9 1
+p e k
+x 8 13
+p g a
+x 9 11
+s 14
+x 15 13
+s 11
+x 4 12
+s 10
+p k p
+x 1 3
+p l i
+x 11 12
+s 10
+x 3 8
+s 12
+x 5 7
+p k g
+x 2 4
+p m b
+x 14 1
+p l p
+x 6 7
+p b n
+x 2 4
+s 2
+x 6 1
+s 8
+x 0 14
+s 8
+x 3 6
+s 14
+x 1 5
+p l o
+x 11 14
+p g f
+x 2 4
+s 14
+x 1 12
+s 1
+x 9 2
+s 15
+p m k
+x 7 15
+p o n
+s 4
+x 13 6
+p e b
+x 8 15
+s 12
+p j n
+x 5 9
+p g l
+x 8 1
+p p d
+x 12 2
+p j a
+x 14 8
+s 15
+x 4 0
+s 12
+x 12 15
+s 14
+x 13 8
+s 13
+x 6 1
+s 4
+x 2 14
+p g e
+x 10 4
+s 4
+x 15 11
+p d o
+x 2 9
+s 14
+x 15 7
+s 12
+x 13 0
+s 8
+x 1 2
+p i m
+x 10 11
+s 7
+x 9 15
+p a f
+x 4 2
+s 13
+x 10 12
+s 12
+x 6 9
+s 10
+x 10 2
+p n b
+s 12
+x 5 12
+s 7
+x 3 7
+s 12
+x 1 6
+p f o
+x 5 12
+s 12
+x 1 11
+p i e
+x 4 13
+s 9
+x 12 6
+s 11
+x 4 13
+p d h
+x 8 11
+p f i
+x 2 15
+s 2
+x 9 5
+s 2
+x 10 11
+s 14
+x 0 13
+s 10
+x 10 11
+p h m
+x 3 2
+p j p
+s 10
+x 14 9
+p n o
+x 4 2
+s 8
+x 14 10
+s 5
+x 9 15
+s 15
+x 7 6
+p k e
+x 2 14
+s 1
+x 3 1
+p f j
+x 10 5
+s 13
+x 2 13
+p g c
+x 1 10
+s 3
+x 3 9
+p l o
+x 10 1
+p b n
+s 15
+x 12 5
+s 11
+x 2 4
+s 7
+x 10 9
+p i m
+x 13 2
+p n f
+x 15 3
+p d e
+x 7 12
+s 11
+x 11 2
+s 1
+x 8 13
+s 13
+x 4 2
+p l b
+x 10 15
+s 10
+x 13 11
+s 15
+x 14 1
+p i d
+s 11
+x 0 5
+s 10
+x 3 6
+s 4
+x 14 1
+s 9
+x 0 9
+p f a
+x 15 2
+s 6
+x 3 9
+p o n
+x 13 2
+p e a
+s 2
+x 14 5
+p n m
+x 6 15
+p i g
+x 8 14
+s 6
+x 6 15
+s 6
+x 2 3
+s 13
+p b m
+x 9 15
+s 14
+x 8 13
+s 8
+p f g
+x 0 1
+s 2
+x 15 9
+p e a
+x 4 8
+s 12
+x 5 1
+s 5
+x 6 8
+s 4
+x 1 14
+s 12
+x 8 4
+s 5
+x 13 10
+s 12
+x 9 3
+s 8
+x 5 2
+p p j
+x 1 8
+p i b
+x 11 3
+p g f
+x 8 15
+s 5
+x 5 10
+s 12
+x 3 2
+p h n
+x 15 13
+s 3
+x 11 8
+s 2
+x 14 1
+p f m
+x 3 4
+s 9
+x 5 2
+s 6
+x 0 12
+s 4
+x 5 11
+s 12
+x 4 15
+s 10
+x 5 7
+s 5
+x 3 15
+p h o
+x 0 12
+s 9
+x 14 15
+p i l
+s 3
+x 4 11
+s 14
+x 7 12
+p m p
+x 15 4
+p b c
+x 11 14
+s 12
+x 9 3
+s 10
+x 10 6
+s 8
+x 5 13
+p d e
+x 12 14
+s 13
+x 7 2
+s 1
+x 6 9
+p a f
+x 7 2
+p g p
+x 11 1
+s 9
+x 2 5
+p e j
+x 6 7
+s 1
+p c m
+x 15 5
+s 4
+x 6 14
+p h o
+x 1 15
+p l m
+x 12 7
+s 15
+x 13 14
+s 6
+x 9 1
+s 8
+x 14 3
+s 15
+x 11 6
+s 12
+x 13 7
+p h o
+x 2 5
+p j p
+x 9 3
+s 1
+x 1 0
+p i m
+x 6 7
+s 10
+x 0 11
+s 13
+x 13 3
+s 2
+x 10 5
+s 5
+x 13 0
+p n g
+x 14 11
+s 4
+x 8 9
+s 14
+x 0 7
+p o m
+x 10 15
+s 7
+x 9 0
+p p h
+x 2 6
+p d o
+x 9 10
+s 12
+x 15 5
+s 5
+x 11 0
+s 6
+x 6 14
+p l p
+s 7
+x 7 5
+s 9
+x 13 10
+s 15
+x 11 2
+s 2
+x 6 15
+p m b
+s 5
+x 5 2
+p h f
+x 3 15
+s 15
+x 10 13
+s 11
+x 6 0
+p g j
+x 4 15
+s 11
+x 0 2
+s 6
+x 6 7
+p e d
+x 14 5
+p m j
+s 5
+x 0 8
+s 14
+x 4 7
+s 6
+p e l
+x 8 9
+s 4
+x 5 14
+s 13
+x 15 4
+p d b
+x 12 11
+s 5
+x 13 8
+p e o
+x 10 7
+p c a
+x 5 4
+p o d
+x 12 9
+s 13
+x 8 2
+s 2
+x 6 14
+p m e
+x 5 8
+s 15
+x 0 6
+s 5
+x 7 5
+s 10
+x 10 3
+s 3
+x 5 9
+p c n
+x 1 6
+p m k
+s 15
+x 13 0
+p g f
+x 1 9
+p c h
+x 2 13
+s 4
+x 15 8
+s 11
+x 2 1
+s 9
+x 0 13
+s 15
+x 12 15
+p g m
+x 1 10
+s 4
+x 9 4
+p k n
+x 7 15
+s 6
+x 6 1
+p o d
+x 0 13
+p a e
+x 6 10
+s 6
+x 9 15
+p l d
+x 1 12
+p o g
+x 15 11
+p n m
+x 4 8
+p i d
+s 15
+x 0 2
+p g e
+s 15
+x 11 8
+s 14
+x 15 12
+s 4
+x 13 0
+p m h
+x 1 5
+p j a
+s 6
+x 12 9
+p h o
+x 14 11
+s 14
+x 6 10
+s 12
+x 1 11
+s 3
+x 9 14
+s 8
+x 3 13
+p k j
+x 10 12
+p m a
+x 4 13
+p e f
+x 9 12
+s 12
+p c k
+x 11 15
+s 9
+x 7 8
+p e g
+x 6 4
+p l h
+x 5 14
+s 5
+x 0 10
+s 5
+x 6 3
+p e j
+s 3
+x 14 10
+s 1
+x 7 2
+p h b
+x 13 3
+s 13
+x 4 9
+s 1
+p k i
+x 2 13
+s 15
+x 7 6
+p c l
+s 14
+x 3 10
+p f m
+x 11 4
+p p b
+x 10 6
+s 13
+x 9 11
+s 9
+x 12 5
+s 11
+x 10 9
+s 1
+x 8 14
+s 5
+x 2 13
+s 15
+x 15 1
+p g j
+x 7 9
+s 7
+x 0 6
+s 7
+x 8 3
+s 13
+x 9 5
+p d m
+s 9
+x 15 14
+p g b
+s 2
+x 12 2
+s 5
+x 7 9
+s 9
+x 10 14
+p c l
+x 5 13
+p a k
+x 10 7
+s 8
+x 2 13
+p e m
+x 11 5
+p j g
+x 6 9
+s 8
+x 7 8
+p n m
+x 14 15
+s 3
+x 1 11
+s 2
+x 7 0
+p a l
+x 2 3
+p g b
+x 0 11
+s 8
+x 12 13
+s 1
+p e j
+s 5
+p h c
+s 6
+x 4 5
+s 10
+p m o
+x 6 3
+p k c
+x 0 7
+p b l
+x 14 11
+s 14
+x 15 2
+p i g
+x 4 12
+p e o
+x 6 0
+p g d
+x 11 8
+s 13
+x 14 10
+s 3
+x 12 3
+s 7
+x 7 8
+s 11
+p a m
+x 11 13
+s 10
+p f n
+x 6 8
+p g j
+x 1 12
+s 14
+x 4 9
+p l a
+x 15 1
+s 3
+x 2 13
+p h c
+x 10 7
+p i k
+x 5 8
+p p a
+x 3 12
+s 3
+x 15 9
+s 3
+x 3 0
+s 7
+x 6 13
+s 4
+x 7 9
+s 1
+x 4 5
+p h j
+s 13
+x 15 7
+s 10
+x 9 3
+s 15
+x 14 0
+s 3
+x 3 5
+s 11
+x 6 14
+p b a
+x 1 4
+s 9
+x 10 9
+s 11
+x 1 14
+s 4
+x 3 6
+p i p
+x 1 10
+p o a
+x 9 2
+s 7
+x 12 15
+s 4
+x 13 11
+s 7
+p m f
+x 9 12
+s 6
+x 6 15
+p c e
+x 12 13
+s 13
+x 8 9
+s 8
+x 2 4
+p i o
+x 12 6
+p k f
+s 4
+x 14 10
+s 4
+x 5 2
+p d j
+x 11 3
+p e n
+x 1 0
+s 5
+x 6 13
+s 15
+x 0 11
+p d p
+x 2 7
+p b g
+s 5
+x 12 0
