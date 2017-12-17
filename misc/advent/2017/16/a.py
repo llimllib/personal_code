@@ -1,6 +1,7 @@
 def go(inp, n=16, cycles=1):
     progs = list(range(n))
     n = n
+    seen = set()
     for i in range(cycles):
         for instruction in inp.strip().split(","):
             if instruction[0] == "s":
@@ -14,6 +15,12 @@ def go(inp, n=16, cycles=1):
                 n1, n2 = map(lambda x: ord(x) - 97, instruction[1:].split('/'))
                 i1, i2 = map(lambda x: progs.index(x), (n1, n2))
                 progs[i1], progs[i2] = progs[i2], progs[i1]
+        progss = ''.join(chr(p + 97) for p in progs)
+        if progss in seen:
+            print(f'repetition on cycle {i}')
+            break
+        seen.add(progss)
+
     return ''.join(chr(p + 97) for p in progs)
 
 
