@@ -31,7 +31,6 @@ void run(int mod, int iters) {
     Node ptr = BUF->next;
     Node tmp;
     for (int i=2; i < iters+1; i++) {
-    //for (int i=2; i < 10; i++) {
         for (int j=0; j < mod; j++) {
             ptr = ptr->next;
         }
@@ -40,7 +39,6 @@ void run(int mod, int iters) {
         ptr->next->data = i;
         ptr->next->next = tmp;
         ptr = ptr->next;
-        //printlist();
     }
     tmp = BUF;
     do {
@@ -56,7 +54,7 @@ void run(int mod, int iters) {
 int main() {
     run(3, 2017);
     run(312, 2017);
+    /* takes about 8 minutes */
     run(312, 50000000);
-    //run(312, 5000000);
     exit(0);
 }
