@@ -1,0 +1,12 @@
+A 0 1 R B
+A 1 0 L C
+B 0 1 L A
+B 1 1 R C
+C 0 1 R A
+C 1 0 L D
+D 0 1 L E
+D 1 1 L C
+E 0 1 R F
+E 1 1 R A
+F 0 1 R A
+F 1 1 R E
