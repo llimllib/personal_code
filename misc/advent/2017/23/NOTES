@@ -1,0 +1,92 @@
+The loop we seem to be in has:
+a: 1 b: 108400 c: 125400 f: 0
+d: 35 and slowly incrementing
+e: incrementing more rapidly, but resetting when d increments
+g: bouncing around crazily
+
+a = 1
+b = 108400
+c = 125400   # b + 17,000
+
+SET_F: f = 1
+
+d = 2
+
+e = 2
+
+DO_LOOP: do:
+    if d * e == b:
+        f = 0
+    e += 1
+while e != b
+
+d += 1
+
+# if d == b, proceed to exit test. Otherwise, loop
+if (g = d - b) != 0:
+    goto DO_LOOP
+
+if f == 0:
+    h += 1
+
+if (g = b - c) != 0:
+    b += 17
+    goto SET_F
+
+exit
+
+---------------------------
+
+if b - c == 0 at SET_G_B, then we'll exit
+    * but b doesn't seem to be changing?
+    * it gets 17 added to it if we pass the f != 0 gate and b != c
+        * even after running it for a half hour, B never got incremented and
+          h never got touched
+
+* d increments about every million loops
+    * once d == b, we'll check if f == 0
+        * which, so far, it always is
+        * so we'll increment h.
+            * b won't be equal to c, so we'll increment b by 17 and return to set_f
+            * at which point, we'll repeat the process
+            * so h is basically a counter of 17s added to b
+            * I guessed 1000 and 999, but neither of those were correct
+
+* increment d until it's equal to b
+    * if f == 0: increment h
+    * if b == c: exit
+    * else increment b by 17 and return to f = 1
+
+* how is it that the answer is not 1000?
+    * how does f act?
+        * if d * e == b, it gets set to zero
+
+* I ran a program that replaced d += 1 with d = b
+    * it came up with 1001 as the answer; but AoC tells me that's too high, just like 999 and 1000
+    * except that I actually added it in after, which messes with the jump instructions
+    * re-trying without the increment; this time I got 501. But I've used up my guesses, so all
+      I get is that the answer is wrong
+    * it's possible that by skipping all of the SET_E loops I'm missing setting f to zero some of the times that it should be set
+
+* the only way that f != 0 is:
+    * we increment b
+    * then d * e == b
+        * this happens if d evenly divides b anywhere from 2 to b
+        * so it doesn't happen if b is prime
+            * which is also why we got 500; we found 500 numbers that were odd
+            * there are 98 primes in b
+
+In [4]: def is_prime(n):
+   ...:     if n % 2 == 0 and n > 2: 
+   ...:         return False
+   ...:     return all(n % i for i in range(3, int(math.sqrt(n)) + 1, 2))
+   ...: 
+
+In [6]: primes = list(x for x in b if is_prime(x))
+
+In [7]: len(primes)
+Out[7]: 98
+
+So our answer (I think) is going to be 1001-98
+
+ HA HA HA HA HO HO HO MERRRRY CHRISTMAS

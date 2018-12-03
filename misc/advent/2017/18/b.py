@@ -58,8 +58,7 @@ def go(inp):
     while a != False or b != False or sends > 150000:
         a, _ = next(proc1)
         b, sends = next(proc2)
-    else:
-        print("sends: ", sends)
+    print("sends: ", sends)
 
 
 if __name__ == "__main__":
