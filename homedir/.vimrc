@@ -4,14 +4,14 @@ filetype off                   " required for vundle... we turn it back on later
 " https://github.com/chriskempson/base16-shell
 " If there is a base16 theme file, load it and set the colorspace to 256
 if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
+  colorscheme Base2Tone_SpaceDark
 else
   colorscheme breeze
   if has("gui_running")
     set antialias
   endif
 endif
+set termguicolors
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -168,27 +168,19 @@ set nohls
 set guitablabel=%t
 
 " http://vim.wikia.com/wiki/VimTip102
-function! Smart_TabComplete()
-  let line = getline('.')                         " current line
-
-  let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-                                                  " line to one character right
-                                                  " of the cursor
-  let substr = matchstr(substr, "[^ \t]*$")       " word till cursor
-  if (strlen(substr)==0)                          " nothing to match on empty string
-    return "\<tab>"
+function! CleverTab()
+  if pumvisible()
+    return "\<C-N>"
   endif
-  let has_period = match(substr, '\.') != -1      " position of period, if any
-  let has_slash = match(substr, '\/') != -1       " position of slash, if any
-  if (!has_period && !has_slash)
-    return "\<C-X>\<C-P>"                         " existing text matching
-  elseif ( has_slash )
-    return "\<C-X>\<C-F>"                         " file matching
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  elseif exists('&omnifunc') && &omnifunc != ''
+    return "\<C-X>\<C-O>"
   else
-    return "\<C-X>\<C-O>"                         " plugin matching
+    return "\<C-N>"
   endif
 endfunction
-inoremap <tab> <c-r>=Smart_TabComplete()<CR>
+inoremap <Tab> <C-R>=CleverTab()<CR>
 
 " better tab navigation mappings
 map gn gt
@@ -205,6 +197,7 @@ augroup myfiletypes
   autocmd FileType javascript set sw=2 sts=2 et
   autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
   autocmd FileType js set nofixeol
+  autocmd FileType proto set ts=2 sts=2 sw=2
 augroup END
 
 
@@ -240,9 +233,6 @@ Plugin 'corntrace/bufexplorer'
 " Git gutter marks
 Plugin 'airblade/vim-gitgutter'
 
-" Match HTML tags
-Plugin 'gregsexton/MatchTag'
-
 " CoffeeScript support
 Plugin 'kchmck/vim-coffee-script'
 
@@ -263,6 +253,7 @@ Plugin 'ponzellus/AnsiEsc'
 
 " Golang
 Plugin 'fatih/vim-go'
+Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
 
 " NERD commenter
 Plugin 'scrooloose/nerdcommenter'
@@ -291,6 +282,9 @@ Plugin 'junegunn/goyo.vim'
 
 " ReasonML
 Plugin 'reasonml-editor/vim-reason-plus'
+
+" Typescript
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()            " required
 filetype plugin indent on     " required for vundle
@@ -352,11 +346,24 @@ nnoremap <leader>m :ALENextWrap<CR>
 " enable prettier on save
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['python'] = ['yapf']
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['c'] = ['clang-format']
-" to dsiable on a particular buffer:
+" to disable on a particular buffer:
 " :let b:ale_fix_on_save=0
 let g:ale_fix_on_save = 1
+
+" There's no way to only disable typescript, and ale was doing tsserver on all
+" javascript files which is super annoying
+let g:ale_linters = {}
+let g:ale_linters['javascript'] = ['eslint', 'flow', 'prettier', 'prettier-eslint']
+let g:ale_linters['typescript'] = ['tslint']
+
+let g:ale_sign_error = '🔥'
+
+
+" to disable ale linting on a particular buffer:
+" let b:ale_linters = []
 
 nnoremap <leader>l :!clear && rake<CR>
 
@@ -476,7 +483,6 @@ nnoremap <leader>es :source $MYVIMRC<cr>
 " I actually wrote this!
 function! Add_or_remove_focus()
   let line=getline('.')
-  echom 'yo'
 
   if line =~ 'focus'
     execute ':.s/,\s*focus\s*:\s*true//'
