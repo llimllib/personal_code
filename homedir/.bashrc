@@ -1,31 +1,21 @@
-export EDITOR=/usr/local/bin/vim
-#export TERM='screen-256color'
+EDITOR=$(which vim)
+export EDITOR
 
 # If we're running tmux, change the TERM and open vim with reattach-to-user-namespace so that cnp works
 [ -n "$TMUX" ] && export TERM=screen-256color
-function vim {
-  if [ -n "$TMUX" ]
-  then
-     reattach-to-user-namespace vim $@
-  else
-     /usr/local/bin/vim $@
-  fi
-}
 
 #get git completion script and branch prompt
-source /usr/local/etc/bash_completion.d/git-completion.bash
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+[ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
+[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
-#export PROMPT_COMMAND='echo -ne "\033]0;\007"'
+[ -f ~/.bash.local.sh ] && source ~/.bash.local.sh
+
 function title {
-    echo -ne "\033]0;$1\007"
-}
-
-# I generally put little tmux scripts in my folders with the name ".start.sh";
-# I don't want to run them automatically, so this command just sources them
-# to set up my env
-function mux {
-    . .start.sh
+  if [ -z "$TMUX" ] ; then
+    printf "\\e]1;%s\\a" "$@"
+  else
+   tmux rename-window "$@"
+  fi
 }
 
 alias ls='ls -FG'
@@ -34,7 +24,7 @@ export LSCOLORS
 
 # Fix colors in ipython paging
 export PAGER="less"
-export LESS="-r -S"
+export LESS="-SRXF"
 
 alias sqlite='sqlite3'
 PS1='\[\e[36m\]\@\[\e[0m\] \[\e[32m\]\H:\w\[\e[0m\] \[\e[0;31m\]$(__git_ps1 " %s")\[\e[0m\] \n\$ '
@@ -49,10 +39,17 @@ alias gm="git ci -m"
 alias gma="git ci -a -m"
 alias ga="git add"
 alias gp="git push"
+alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gph="git push heroku"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias prune='git remote prune origin'
 alias pr="hub pull-request -o"
+alias dc="docker-compose"
+alias c="clear"
+alias da="direnv allow"
+alias de="direnv edit"
+alias tf="terraform"
+alias jless="jq -C '.' | less"
 
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 
@@ -62,7 +59,7 @@ alias author="git --no-pager log -1 --pretty=format:'%aN <%aE>'"
 # do `squash <branch_name>` to squash and stage the branch, then put you in
 # an editor to amend the commit message
 function squash {
-    git merge --squash $1 && git commit --author "`author $1`"
+    git merge --squash "$1" && git commit --author "$(author "$1")"
 }
 
 alias be='bundle exec'
@@ -97,6 +94,18 @@ alias be="bundle exec"
 # makes tmux colors closer to correct. But still bizarre.
 alias tmux="tmux -2"
 
+# Add the `--wrap never` arg to all `bat` invocations
+alias bat="bat --wrap never"
+
+# fd - use fzf to cd to selected directory
+# https://github.com/junegunn/fzf/wiki/examples#changing-directory
+fd() {
+  local dir
+  dir=$(find "${1:-.}" -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir" || exit
+}
+
 # find, case insensivitely, in the current dir
 function f {
     find . -iname "*$1*"
@@ -105,11 +114,6 @@ function f {
 export CVS_RSH=ssh
 
 export MANPATH=$MANPATH:/opt/local/man
-
-# http://www.mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/
-# Get this value with $(/usr/libexec/java_home)
-# that command is too slow to run on every bash invocation, so set it here
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home
 
 # case insensitive matching
 shopt -s nocaseglob
@@ -124,10 +128,9 @@ shopt -s histappend
 # Save multi-line commands as one command
 shopt -s cmdhist
 
-# several ideas from: https://github.com/mrzool/bash-sensible/blob/master/sensible.bash
-
-# Record each line as it gets issued
-PROMPT_COMMAND='history -a'
+# Before each bash prompt, write to history and read from it. This
+# makes multiple terminals sync to history
+PROMPT_COMMAND='history -a; history -n'
 
 # Huge history. Doesn't appear to slow things down, so why not?
 HISTSIZE=500000
@@ -144,21 +147,13 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
 
-export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
-
-# run autoenv
-if [[ -s /usr/local/bin/activate.sh ]] ; then source /usr/local/bin/activate.sh ; fi
-
-#don't write pyc or pyo files
-export PYTHONDONTWRITEBYTECODE=1
-
 #lex
 export LEX_DATA=/usr/local/share/lex/data
 export LEX_DB=/usr/local/share/lex/db
 
 #set golang root dir
 export GOPATH=~/go
+export GOBIN=~/go/bin
 
 #
 # PATH CONFIGURATION SECTION
@@ -179,17 +174,17 @@ export PATH=$PATH:/usr/local/opt/ruby/bin
 # rust binaries
 export PATH="$PATH:$HOME/.cargo/bin"
 
-# perl binaries
-export PATH="$PATH:$HOME/perl4/bin"
-
 # yarn (javascript) binaries
 export PATH="$PATH:$HOME/.yarn/bin"
 
+# prefer n's version of node to /usr/local/bin/node
+export PATH="$HOME/bin:$PATH"
+
 # rbenv
-eval "$(rbenv init -)"
+if command -v rbenv 1>/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 # pyenv
-eval "$(pyenv init -)"
+if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
 # Start gpg-agent
 #
@@ -198,22 +193,18 @@ eval "$(pyenv init -)"
 # https://blog.erincall.com/p/signing-your-git-commits-with-gpg
 #
 # kill -0 checks to see if the pid exists
-if test -f $HOME/.gpg-agent-info && kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
-    GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info | cut -c 16-`
-else
-# No, gpg-agent not available; start gpg-agent
-    eval `gpg-agent --daemon --no-grab --write-env-file $HOME/.gpg-agent-info`
+if [ "$(uname)" == "Darwin" ] && ! pgrep -fq gpg-agent ; then
+    eval "$(gpg-agent --daemon --no-grab)"
 fi
-export GPG_TTY=`tty`
-export GPG_AGENT_INFO
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# --files: List files that would be searched but do not search
+# --hidden: Search hidden files and folders
+# --follow: Follow symlinks
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-PERL5LIB="/Users/llimllib/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/llimllib/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/llimllib/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/llimllib/perl5"; export PERL_MM_OPT;
-
-# install base16 colorscheme
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# run direnv https://direnv.net/
+if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
