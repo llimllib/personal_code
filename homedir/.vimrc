@@ -1,16 +1,7 @@
 set nocompatible               " be iMproved
 filetype off                   " required for vundle... we turn it back on later
 
-" https://github.com/chriskempson/base16-shell
-" If there is a base16 theme file, load it and set the colorspace to 256
-if filereadable(expand("~/.vimrc_background"))
-  colorscheme Base2Tone_SpaceDark
-else
-  colorscheme breeze
-  if has("gui_running")
-    set antialias
-  endif
-endif
+colorscheme Base2Tone_SpaceDark
 set termguicolors
 
 set encoding=utf-8
@@ -195,11 +186,10 @@ augroup myfiletypes
   autocmd FileType html set sw=2 sts=2 et
   autocmd FileType python,c set sw=4 sts=4 et
   autocmd FileType javascript set sw=2 sts=2 et
+  autocmd FileType typescript set sw=2 sts=2 et
   autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
-  autocmd FileType js set nofixeol
   autocmd FileType proto set ts=2 sts=2 sw=2
 augroup END
-
 
 "
 " BEGIN VUNDLE SETUP
@@ -286,6 +276,9 @@ Plugin 'reasonml-editor/vim-reason-plus'
 " Typescript
 Plugin 'leafgarland/typescript-vim'
 
+" Pony
+Plugin 'jakwings/vim-pony'
+
 call vundle#end()            " required
 filetype plugin indent on     " required for vundle
 "
@@ -315,6 +308,20 @@ set runtimepath+=$GOROOT/misc/vim
 filetype plugin indent on
 syntax on
 
+" Tell vim-go to use godef instead of guru, since guru doesn't seem to be
+" module-aware. Some useful docs on `gd`:
+"
+" By default there is the Vim shortcut ctrl-o that jumps to the previous
+" cursor location. It works great when it does, but not good enough if you're
+" navigating between Go declarations. If, for example, you jump to a file with
+" :GoDef and then scroll down to the bottom, and then maybe to the top, ctrl-o
+" will remember these locations as well...
+
+" And because this is also used so many times we have the shortcut ctrl-t
+
+" https://github.com/fatih/vim-go-tutorial#go-to-definition
+let g:go_def_mode='gopls'
+
 " http://statico.github.io/vim.html
 " emacs-style command-line controls
 cnoremap <C-a>  <Home>
@@ -342,6 +349,9 @@ let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
 let g:ale_lint_on_text_changed = 'never'
 nnoremap <leader>m :ALENextWrap<CR>
 
+" run :GoImports on <leader>i
+nnoremap <leader>i :GoImports<CR>
+
 " https://github.com/prettier/prettier/tree/master/editors/vim#ale
 " enable prettier on save
 let g:ale_fixers = {}
@@ -361,30 +371,17 @@ let g:ale_linters['typescript'] = ['tslint']
 
 let g:ale_sign_error = '🔥'
 
+" gopls seems to be already better than the other completion options. to
+" install, do: go get -u golang.org/x/tools/cmd/gopls
+" https://github.com/golang/go/wiki/gopls
+" https://github.com/w0rp/ale/issues/2179
+let g:ale_go_langserver_executable = 'gopls'
 
 " to disable ale linting on a particular buffer:
 " let b:ale_linters = []
 
-nnoremap <leader>l :!clear && rake<CR>
-
-" run 'make'
-" nnoremap <leader>g :!clear && make<CR>
-
 " plugin helpers
 nnoremap <leader>t :NERDTreeToggle<CR>
-
-function! DebugHere()
-    silent !clear
-    " TODO: right now I hardcode the binary name "test" in there.
-    "       maybe the best thing to do would be to:
-    "       * check if some g:executable_name (b:?) has been set
-    "       * if not, prompt the user and save it to that var
-    "
-    "       How else could I grab that? think on it.
-    execute "!lldb -f test -o 'breakpoint set -f " . bufname("%") . " -l " . line(".") . "' -o run"
-endfunction
-
-au FileType c nnoremap <leader>d :call DebugHere()<cr>
 
 " default fzf looks like:
 " nnoremap <leader>f :FZF<CR>
@@ -459,8 +456,6 @@ nnoremap <silent> <leader>g :Rg
 "nnoremap <leader>j :%!jsonpp<CR>
 nnoremap <leader>j :%!jq ''<CR>
 
-au FileType rust nnoremap <leader>a :RustFmt<CR>
-
 " Format xml
 nnoremap <leader>x :%!xmllint --format --encode UTF-8 -<CR>
 
@@ -478,6 +473,10 @@ vnoremap <leader>y "+y
 " edit vimrc and source vimrc, respectively
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>es :source $MYVIMRC<cr>
+
+" vim-go likes to open up the "location list" for errors, so bind ,l to close
+" it
+nnoremap <leader>l :lcl<cr>
 
 " add or remove focus:true to the current line
 " I actually wrote this!
