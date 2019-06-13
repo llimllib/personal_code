@@ -2,6 +2,7 @@ set nocompatible               " be iMproved
 filetype off                   " required for vundle... we turn it back on later
 
 colorscheme Base2Tone_SpaceDark
+" colorscheme Base2Tone_DesertDark
 set termguicolors
 
 set encoding=utf-8
@@ -241,12 +242,13 @@ Plugin 'othree/xml.vim'
 " Handle ANSI escape codes
 Plugin 'ponzellus/AnsiEsc'
 
-" Golang
-Plugin 'fatih/vim-go'
-Plugin 'mdempsky/gocode', {'rtp': 'vim/'}
-
 " NERD commenter
 Plugin 'scrooloose/nerdcommenter'
+
+" Go completion/formatting/hover
+Plugin 'myitcv/govim'
+
+Plugin 'w0rp/ale'
 
 " fzf fuzzy finder
 Plugin 'junegunn/fzf'
@@ -263,9 +265,6 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 " es6 highlighting
 Plugin 'isRuslan/vim-es6'
-
-" linting
-Plugin 'w0rp/ale'
 
 " writing mode :Goyo
 Plugin 'junegunn/goyo.vim'
@@ -359,6 +358,8 @@ let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['c'] = ['clang-format']
+" disable ale fixing for go, leave that to vimgo
+let g:ale_fixers['go'] = []
 " to disable on a particular buffer:
 " :let b:ale_fix_on_save=0
 let g:ale_fix_on_save = 1
@@ -375,7 +376,7 @@ let g:ale_sign_error = '🔥'
 " install, do: go get -u golang.org/x/tools/cmd/gopls
 " https://github.com/golang/go/wiki/gopls
 " https://github.com/w0rp/ale/issues/2179
-let g:ale_go_langserver_executable = 'gopls'
+" let g:ale_go_langserver_executable = 'gopls'
 
 " to disable ale linting on a particular buffer:
 " let b:ale_linters = []
@@ -494,3 +495,20 @@ nnoremap <leader>o :call Add_or_remove_focus()<cr>
 
 " Don't autocomplete html except with leader-a
 let xml_tag_completion_map = "<leader>a"
+
+""""""""""""""""""""""""""""""""""""
+" begin govim recommended settings
+" https://github.com/myitcv/govim/blob/master/cmd/govim/config/minimal.vimrc
+"
+" Suggestion: By default, govim populates the quickfix window with diagnostics
+" reported by gopls after a period of inactivity, the time period being
+" defined by updatetime (help updatetime). Here we suggest a short updatetime
+" time in order that govim/Vim are more responsive/IDE-like
+set updatetime=500
+
+" Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
+" balloondelay
+set balloondelay=250
+"
+" End govim
+""""""""""""""""""""""""""""""""""""
