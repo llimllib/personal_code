@@ -99,8 +99,12 @@ let mapleader = ","
 set history=1000
 runtime macros/matchit.vim
 
-" Stolen from http://github.com/ask/ask-vimrc/blob/master/vimrc
-set completeopt=menuone,longest,preview
+" ALE Automatic completion implementation replaces |completeopt| before
+" opening the omnicomplete menu with <C-x><C-o>. In some versions of Vim, the
+" value set for the option will not be respected. If you experience issues
+" with Vim automatically inserting text while you type, set the following
+" option in vimrc, and your issues should go away. >
+set completeopt=menu,menuone,preview,noselect,noinsert
 set hidden
 set complete+=k
 
@@ -188,9 +192,16 @@ augroup myfiletypes
   autocmd FileType python,c set sw=4 sts=4 et
   autocmd FileType javascript set sw=2 sts=2 et
   autocmd FileType typescript set sw=2 sts=2 et
-  autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
+  autocmd FileType go 
+				\ set ts=4 sw=4 sts=4 noet nolist  |
+				\ nnoremap <leader>i :GoImports<CR>
   autocmd FileType proto set ts=2 sts=2 sw=2
 augroup END
+
+" This is required to be setup before ale loads
+let g:ale_completion_enabled = 1
+let g:ale_set_balloons = 1
+
 
 "
 " BEGIN VUNDLE SETUP
@@ -246,7 +257,8 @@ Plugin 'ponzellus/AnsiEsc'
 Plugin 'scrooloose/nerdcommenter'
 
 " Go completion/formatting/hover
-Plugin 'myitcv/govim'
+" Plugin 'myitcv/govim'
+Plugin 'fatih/vim-go'
 
 Plugin 'w0rp/ale'
 
@@ -277,6 +289,9 @@ Plugin 'leafgarland/typescript-vim'
 
 " Pony
 Plugin 'jakwings/vim-pony'
+
+" nginx highlighting
+Plugin 'chr4/nginx.vim'
 
 call vundle#end()            " required
 filetype plugin indent on     " required for vundle
@@ -320,6 +335,11 @@ syntax on
 
 " https://github.com/fatih/vim-go-tutorial#go-to-definition
 let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+" Turn off go-vim completion, let's try out ALE first. RN they're fighting
+" with each other.
+let g:go_code_completion_enabled=0
 
 " http://statico.github.io/vim.html
 " emacs-style command-line controls
@@ -358,8 +378,11 @@ let g:ale_fixers['javascript'] = ['prettier']
 let g:ale_fixers['typescript'] = ['prettier']
 let g:ale_fixers['python'] = ['black']
 let g:ale_fixers['c'] = ['clang-format']
-" disable ale fixing for go, leave that to vimgo
+
+" Currently using vim-go for this
 let g:ale_fixers['go'] = []
+" let g:ale_fixers['go'] = ['gofmt']
+
 " to disable on a particular buffer:
 " :let b:ale_fix_on_save=0
 let g:ale_fix_on_save = 1
@@ -369,6 +392,10 @@ let g:ale_fix_on_save = 1
 let g:ale_linters = {}
 let g:ale_linters['javascript'] = ['eslint', 'flow', 'prettier', 'prettier-eslint']
 let g:ale_linters['typescript'] = ['tslint']
+" currently using vim-go for this
+"let g:ale_linters['go'] = []
+let g:ale_linters['go'] = ['gopls', 'golint']
+let g:ale_linters['python'] = ['pylint']
 
 let g:ale_sign_error = '🔥'
 
@@ -376,7 +403,7 @@ let g:ale_sign_error = '🔥'
 " install, do: go get -u golang.org/x/tools/cmd/gopls
 " https://github.com/golang/go/wiki/gopls
 " https://github.com/w0rp/ale/issues/2179
-" let g:ale_go_langserver_executable = 'gopls'
+let g:ale_go_langserver_executable = 'gopls'
 
 " to disable ale linting on a particular buffer:
 " let b:ale_linters = []
@@ -445,7 +472,7 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-nnoremap <silent> <leader>g :Rg 
+nnoremap <silent> <leader>g :Rg<space>
 
 " Ack search
 " nnoremap <leader>s :Ack! -i 
