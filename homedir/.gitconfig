@@ -4,10 +4,18 @@
     co = checkout
     br = branch
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+    re = restore
+    sw = switch
+    wt = worktree
+
+    # Show branches, verbosely, sorted by last touch, with commit messages.
+    brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
+
+
 [user]
     name = Bill Mill
     email = "bill@billmill.org"
-    signingkey = BE83661E
+	signingkey = 3E263E34F789E054
 [color]
     branch = auto
     diff = auto
@@ -32,10 +40,11 @@
 [push]
     default = upstream
 [credential]
-    helper = osxkeychain
+	helper = osxkeychain
 [diff]
     algorithm = patience
     compactionHeuristic = true
+	noprefix = true
 [filter "lfs"]
     clean = git-lfs clean %f
     smudge = git-lfs smudge %f
@@ -57,4 +66,8 @@
 #
 
 [commit]
-	gpgsign = true
+    gpgsign = true
+[gpg]
+	program = gpg
+[hub]
+	host = github.cms.gov
