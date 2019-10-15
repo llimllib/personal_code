@@ -8,6 +8,11 @@ export EDITOR
 [ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
 [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
 
+# brew install bash-completion2
+# gets you autocompletions in make, and in many many other programs:
+# https://github.com/scop/bash-completion/tree/master/completions
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
 [ -f ~/.bash.local.sh ] && source ~/.bash.local.sh
 
 function title {
@@ -50,6 +55,7 @@ alias da="direnv allow"
 alias de="direnv edit"
 alias tf="terraform"
 alias jless="jq -C '.' | less"
+alias rg="rg --max-columns=250 --max-columns-preview --smart-case"
 
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 
@@ -87,7 +93,7 @@ alias ls='ls -FG'
 
 alias py="ipython"
 
-alias hubvan="ssh hubvan.com"
+alias hubvan="ssh llimllib@159.203.101.116"
 
 alias be="bundle exec"
 
@@ -130,7 +136,8 @@ shopt -s cmdhist
 
 # Before each bash prompt, write to history and read from it. This
 # makes multiple terminals sync to history
-PROMPT_COMMAND='history -a; history -n'
+# removed because it's too slow
+# PROMPT_COMMAND='history -a; history -n'
 
 # Huge history. Doesn't appear to slow things down, so why not?
 HISTSIZE=500000
@@ -186,16 +193,9 @@ if command -v rbenv 1>/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 # pyenv
 if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
 
-# Start gpg-agent
-#
-# from https://github.com/ErinCall/Dotfiles/blob/master/.bashrc#L32-L40
-# via
-# https://blog.erincall.com/p/signing-your-git-commits-with-gpg
-#
-# kill -0 checks to see if the pid exists
-if [ "$(uname)" == "Darwin" ] && ! pgrep -fq gpg-agent ; then
-    eval "$(gpg-agent --daemon --no-grab)"
-fi
+# nodenv
+if command -v nodenv 1>/dev/null 2>&1; then eval "$(nodenv init -)"; fi
+
 GPG_TTY=$(tty)
 export GPG_TTY
 
