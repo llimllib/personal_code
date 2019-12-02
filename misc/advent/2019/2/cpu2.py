@@ -6,8 +6,6 @@ QUIT = 99
 def cpu(mem, i, j):
     mem = mem[:]
 
-    # before running the program, replace position 1 with the value 12 and replace
-    # position 2 with the value 2.
     mem[1] = i
     mem[2] = j
 
@@ -34,8 +32,6 @@ def cpu(mem, i, j):
 
 
 if __name__ == "__main__":
-    # mem = [int(n) for n in "1,1,1,4,99,5,6,0,99".split(",")]
-    # mem = [int(n) for n in "2,4,4,5,99,0".split(",")]
     mem = [int(n) for n in open("a.txt").read().strip().split(",")]
 
     for i in range(100):
