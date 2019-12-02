@@ -23,8 +23,6 @@ def cpu(mem, i, j):
         elif op == MUL:
             mem[out] = mem[a] * mem[b]
             # print("MUL", a, b, out)
-        elif op == QUIT:
-            break
         else:
             raise Exception(f"Invalid op: {op}")
 
