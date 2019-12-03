@@ -33,7 +33,7 @@ for i, instruction_set in enumerate(instruction_sets):
             start = cur[0] + 1
             field[start : start + size, cur[1]] |= wire
             cur[0] += size
-        # good for debugging the small array
+        # good for debugging the small array (reduce FIELD_SIZE to 20)
         # print(field, cmd, size)
         # input()
 
