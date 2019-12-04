@@ -5,7 +5,7 @@ def valid(pw: str):
     for i, c in enumerate(pw):
         if i > 0 and c < pw[i - 1]:
             return False
-    return 2 in set(Counter(pw).values())
+    return 2 in Counter(pw).values()
 
 
 print(valid("111111"))
