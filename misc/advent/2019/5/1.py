@@ -1,3 +1,5 @@
+import sys
+
 ADD = 1
 MUL = 2
 INPUT = 3
@@ -19,7 +21,7 @@ def debug(*args):
         print(*args)
 
 
-def cpu(mem):
+def cpu(mem, input_buf):
     ip = 0
     while 1:
         params_and_op = str(mem[ip])
@@ -54,7 +56,7 @@ def cpu(mem):
             ip += 2
             if params[0] == MODE_IMM:
                 raise Exception(f"Unexpected immediate mode input {params_and_op}")
-            mem[loc] = int(input("> "))
+            mem[loc] = int(input_buf.pop(0))
             debug(params_and_op, "INPUT", loc, mem[loc])
         elif op == OUTPUT:
             loc = mem[ip + 1]
@@ -105,11 +107,8 @@ def cpu(mem):
 
 
 if __name__ == "__main__":
-    mem = [3, 0, 4, 0, 99]
-    mem = [1002, 4, 3, 4, 33]
-    mem = [3, 9, 8, 9, 10, 9, 4, 9, 99, -1, 8]
-    mem = [3, 3, 1108, -1, 8, 3, 4, 3, 99]
-    mem = [3, 12, 6, 12, 15, 1, 13, 14, 13, 4, 13, 99, -1, 0, 1, 9]
     mem = [int(n) for n in open("in").read().strip().split(",")]
 
-    cpu(mem)
+    input_buf = sys.argv[1:]
+
+    cpu(mem, input_buf)
