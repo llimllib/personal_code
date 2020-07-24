@@ -14,8 +14,7 @@
 
 [user]
     name = Bill Mill
-    email = "bill@billmill.org"
-	signingkey = 3E263E34F789E054
+    email = bill@billmill.org
 [color]
     branch = auto
     diff = auto
@@ -65,9 +64,5 @@
 #    fsckObjects = true 
 #
 
-[commit]
-    gpgsign = true
-[gpg]
-	program = gpg
 [hub]
 	host = github.cms.gov
