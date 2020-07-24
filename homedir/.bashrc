@@ -49,13 +49,16 @@ alias gph="git push heroku"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias prune='git remote prune origin'
 alias pr="hub pull-request -o"
+alias draft="hub pull-request -d -o"
 alias dc="docker-compose"
 alias c="clear"
 alias da="direnv allow"
 alias de="direnv edit"
 alias tf="terraform"
 alias jless="jq -C '.' | less"
+alias dmc="docker-compose run --rm mctapi"
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case"
+alias govim="vim -u ~/.govimrc"
 
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 
@@ -136,7 +139,6 @@ shopt -s cmdhist
 
 # Before each bash prompt, write to history and read from it. This
 # makes multiple terminals sync to history
-# removed because it's too slow
 # PROMPT_COMMAND='history -a; history -n'
 
 # Huge history. Doesn't appear to slow things down, so why not?
@@ -208,3 +210,87 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 
 # run direnv https://direnv.net/
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
+
+# Create a worktree from a given branchname, in exactly the way I like it.
+# oct 18, 2019
+function worktree {
+    set -x
+    branchname="$1"
+
+    # Replace slashes with underscores. If there's no slash, dirname will equal
+    # branchname. So "alu/something-other" becomes "alu_omething-other", but
+    # "quick-fix" stays unchanged
+    # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
+    dirname=${branchname//\//_}
+
+    # pull the most recent version of the remote
+    git pull
+
+    # if the branch name already exists, we want to check it out. Otherwise,
+    # create a new branch. I'm sure there's probably a way to do that in one
+    # command, but I'm done fiddling with git at this point
+    if git branch -a | grep -E "\/$branchname" > /dev/null 2>&1; then
+        git worktree add "../$dirname" "$branchname" || return
+    else
+        # otherwise, create a new branch
+        git worktree add -b "$branchname" "../$dirname" || return
+    fi
+
+    cp .envrc "../$dirname"
+    cd "../$dirname" || return
+    direnv allow
+    set +x
+}
+
+# rmtree <dir> will remove a worktree's directory, then prune the worktree list
+# and delete the branch
+# Jul 8 2020
+function rmtree {
+    set -x
+    if [ ! -d "master" ] && [ ! -d "main" ]; then
+        echo "you must be in a directory with a master or main branch"
+    fi
+    if [ -z "$1" ] || [ ! -d "$1" ]; then
+        echo "You must provide a directory name that is a worktree to remove"
+        exit 1
+    fi
+
+    if [ -d "master" ]; then
+        main_branch="master"
+    else
+        main_branch="main"
+    fi
+
+    branch_name=$(cd "$1" && git rev-parse --abbrev-ref HEAD)
+    rm -rf "$1"
+    (cd $main_branch && git worktree prune && git branch -D "$branch_name")
+    set +x
+}
+
+# Why /usr/libexec/java_home?
+# This java_home can return the Java version specified in Java Preferences for the current user. For examples,
+# 
+# /usr/libexec/java_home -V
+# Matching Java Virtual Machines (3):
+#     1.7.0_05, x86_64:	"Java SE 7"	/Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+#     1.6.0_41-b02-445, x86_64:	"Java SE 6"	/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+#     1.6.0_41-b02-445, i386:	"Java SE 6"	/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+# 
+# This Mac OSX has three JDK installed.
+# 
+# ##return top Java version
+# $ /usr/libexec/java_home
+# /Library/Java/JavaVirtualMachines/1.7.0.jdk/Contents/Home
+# 
+# ## I want Java version 1.6
+# $ /usr/libexec/java_home -v 1.6
+# /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
+if [[ -f /usr/libexec/java_home ]]; then
+    # separate from the assignment to make shellcheck happy
+    jh=$(/usr/libexec/java_home)
+    export JAVA_HOME=$jh
+    export PATH="$PATH:$JAVA_HOME/bin"
+fi
+
+# https://dystroy.org/broot/documentation/installation/
+source /Users/llimllib/Library/Preferences/org.dystroy.broot/launcher/bash/br

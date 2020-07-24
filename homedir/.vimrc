@@ -1,9 +1,9 @@
 set nocompatible               " be iMproved
-filetype off                   " required for vundle... we turn it back on later
 
 colorscheme Base2Tone_SpaceDark
-" colorscheme Base2Tone_DesertDark
-set termguicolors
+if (has("termguicolors"))
+  set termguicolors
+endif
 
 set encoding=utf-8
 set fileencoding=utf-8
@@ -17,7 +17,7 @@ set ttyfast
 set synmaxcol=400
 set ttyscroll=3
 set lazyredraw " to avoid scrolling problems
-set re=1
+set redrawtime=10000 " typescript sucks
 
 " default space and tab handling
 set shiftwidth=4
@@ -49,15 +49,6 @@ set backspace=indent,eol,start
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 set list listchars=tab:→\ ,trail:·
-" autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-" autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-" the above flashes annoyingly while typing, be calmer in insert mode
-" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-" autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"
-" Disable the F1 help key
-map <F1> <Esc>
-imap <F1> <Esc>
 
 " http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
 nnoremap <silent> j gj
@@ -99,43 +90,17 @@ let mapleader = ","
 set history=1000
 runtime macros/matchit.vim
 
-" ALE Automatic completion implementation replaces |completeopt| before
-" opening the omnicomplete menu with <C-x><C-o>. In some versions of Vim, the
-" value set for the option will not be respected. If you experience issues
-" with Vim automatically inserting text while you type, set the following
-" option in vimrc, and your issues should go away. >
-set completeopt=menu,menuone,preview,noselect,noinsert
-set hidden
-set complete+=k
-
 " Syntax Highlighting
-if &t_Co > 2 || has("gui_running")
-  syntax on
-endif
+syntax on
 
-" C-j replaces <C-w>j and so on (split navigation)
-"map <C-J> <C-W>j
-"map <C-K> <C-W>k
-"map <C-L> <C-W>l
-"map <C-H> <C-W>h
+" Easier split moving
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
 map <C-_> <C-W>_
 
-
-" Allow those keys to move around tmux too
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
-
-" terminal mode shortcuts. The tmux ones kind of work but leave you in normal
-" mode instead of insert mode, which is irritating, so leave them dead for now
-"tnoremap <silent> <C-h> <C-W>N:TmuxNavigateLeft<cr>
-"tnoremap <silent> <C-j> <C-W>N:TmuxNavigateDown<cr>
-"tnoremap <silent> <C-k> <C-W>N:TmuxNavigateUp<cr>
-"tnoremap <silent> <C-l> <C-W>N:TmuxNavigateRight<cr>
+" terminal mode shortcuts.
 tnoremap <silent> <C-h> <C-W>h
 tnoremap <silent> <C-j> <C-W>j
 tnoremap <silent> <C-k> <C-W>k
@@ -143,6 +108,9 @@ tnoremap <silent> <C-l> <C-W>l
 " This seems to mess up the up key :(
 "tnoremap <Esc> <C-w>N
 tnoremap <leader><Esc> <C-w>N
+
+" toggle the quickfix list
+inoremap <leader>l :cw<CR>
 
 " Open splits to the right and below by default. Feels more natural
 set splitbelow
@@ -156,12 +124,30 @@ set guioptions-=T
 
 "show line
 set ruler
+set statusline=%f%m%r%h\ [%L]\ [%{&ff}]\ %y%=[%p%%]\ [line:%05l,col:%02v]
+set laststatus=2
+
 
 "don't highlight searches
 set nohls
 
 "Gui tabs only show the filename
 set guitablabel=%t
+
+"disable all bells
+set visualbell t_vb=
+
+set autoindent
+set smartindent
+filetype indent on
+
+" system paste and yank
+nnoremap <leader>p :pu +<CR>
+vnoremap <leader>y "+y
+
+" edit vimrc and source vimrc, respectively
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>es :source $MYVIMRC<cr>
 
 " http://vim.wikia.com/wiki/VimTip102
 function! CleverTab()
@@ -182,165 +168,6 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 map gn gt
 map gN gT
 
-"Specific commands for filetypes
-augroup myfiletypes
-  "clear old autocmds in group
-  autocmd!
-  "for ruby, autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,haml,eruby,yaml set sw=2 sts=2 et
-  autocmd FileType html set sw=2 sts=2 et
-  autocmd FileType python,c set sw=4 sts=4 et
-  autocmd FileType javascript set sw=2 sts=2 et
-  autocmd FileType typescript set sw=2 sts=2 et
-  autocmd FileType go 
-				\ set ts=4 sw=4 sts=4 noet nolist  |
-				\ nnoremap <leader>i :GoImports<CR>
-  autocmd FileType proto set ts=2 sts=2 sw=2
-augroup END
-
-" This is required to be setup before ale loads
-let g:ale_completion_enabled = 1
-let g:ale_set_balloons = 1
-
-
-"
-" BEGIN VUNDLE SETUP
-"
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Git bindings
-Plugin 'tpope/vim-fugitive'
-
-" easier HTML typing
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" NERDtree
-Plugin 'scrooloose/nerdtree'
-
-" database access
-Plugin 'vim-scripts/dbext.vim'
-
-" Surround things with other things
-Plugin 'tpope/vim-surround'
-
-" Buf explore things
-Plugin 'corntrace/bufexplorer'
-
-" Git gutter marks
-Plugin 'airblade/vim-gitgutter'
-
-" CoffeeScript support
-Plugin 'kchmck/vim-coffee-script'
-
-" Markdown support
-Plugin 'hallison/vim-markdown'
-
-" Rust support
-Plugin 'rust-lang/rust.vim'
-
-" base 16 vim themes
-Plugin 'chriskempson/base16-vim'
-
-" XML support
-Plugin 'othree/xml.vim'
-
-" Handle ANSI escape codes
-Plugin 'ponzellus/AnsiEsc'
-
-" NERD commenter
-Plugin 'scrooloose/nerdcommenter'
-
-" Go completion/formatting/hover
-" Plugin 'myitcv/govim'
-Plugin 'fatih/vim-go'
-
-Plugin 'w0rp/ale'
-
-" fzf fuzzy finder
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-
-" Elixir support
-Plugin 'elixir-lang/vim-elixir'
-
-" Crystal support
-Plugin 'rhysd/vim-crystal'
-
-" Treat C-hjkl the same in tmux as in vim
-Plugin 'christoomey/vim-tmux-navigator'
-
-" es6 highlighting
-Plugin 'isRuslan/vim-es6'
-
-" writing mode :Goyo
-Plugin 'junegunn/goyo.vim'
-
-" ReasonML
-Plugin 'reasonml-editor/vim-reason-plus'
-
-" Typescript
-Plugin 'leafgarland/typescript-vim'
-
-" Pony
-Plugin 'jakwings/vim-pony'
-
-" nginx highlighting
-Plugin 'chr4/nginx.vim'
-
-call vundle#end()            " required
-filetype plugin indent on     " required for vundle
-"
-" Brief help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Plugin commands are not allowed.
-" Put your stuff after this line
-
-"
-" END VUNDLE SETUP
-"
-
-"disable all bells
-set visualbell t_vb=
-
-"install go syntax and tools
-" Some Linux distributions set filetype in /etc/vimrc.
-" Clear filetype flags before changing runtimepath to force Vim to reload them.
-filetype off
-filetype plugin indent off
-set runtimepath+=$GOROOT/misc/vim
-filetype plugin indent on
-syntax on
-
-" Tell vim-go to use godef instead of guru, since guru doesn't seem to be
-" module-aware. Some useful docs on `gd`:
-"
-" By default there is the Vim shortcut ctrl-o that jumps to the previous
-" cursor location. It works great when it does, but not good enough if you're
-" navigating between Go declarations. If, for example, you jump to a file with
-" :GoDef and then scroll down to the bottom, and then maybe to the top, ctrl-o
-" will remember these locations as well...
-
-" And because this is also used so many times we have the shortcut ctrl-t
-
-" https://github.com/fatih/vim-go-tutorial#go-to-definition
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-" Turn off go-vim completion, let's try out ALE first. RN they're fighting
-" with each other.
-let g:go_code_completion_enabled=0
-
 " http://statico.github.io/vim.html
 " emacs-style command-line controls
 cnoremap <C-a>  <Home>
@@ -355,173 +182,149 @@ cnoremap <Esc>f <S-Right>
 cnoremap <Esc>d <S-right><Delete>
 cnoremap <C-g>  <C-c>
 
-" ATM, only accept golang-formatted errors for quickfix. If I start using this
-" more, I should set it to accept error types only for specific files
-set errorformat=%f:%l:%c:\ %m
+"Specific commands for filetypes
+augroup myfiletypes
+  "clear old autocmds in group
+  autocmd!
+  "for ruby, autoindent with two spaces, always expand tabs
+  autocmd FileType ruby,haml,eruby,yaml set sw=2 sts=2 et
+  autocmd FileType html set sw=2 sts=2 et
+  autocmd FileType python,c set sw=4 sts=4 et
+  autocmd FileType javascript set sw=2 sts=2 et
+  autocmd FileType typescript set sw=2 sts=2 et
+  autocmd FileType go 
+                \ set ts=4 sw=4 sts=4 noet nolist  " |
+                \ nnoremap <leader>r :GOVIMRename<CR>
+  autocmd FileType smarty set syntax=gotexttmpl
+  autocmd FileType proto set ts=2 sts=2 sw=2
+augroup END
 
-" ALE config
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
+" ALE Automatic completion implementation replaces |completeopt| before opening
+" the omnicomplete menu with <C-x><C-o>. In some versions of Vim, the value set
+" for the option will not be respected. If you experience issues with Vim
+" automatically inserting text while you type, set the following option in
+" vimrc, and your issues should go away. >
+set completeopt=menu,menuone,popup,noselect,noinsert
 
-" don't run ale on every text change, just on every save
-let g:ale_lint_on_text_changed = 'never'
-nnoremap <leader>m :ALENextWrap<CR>
+" ,t to open up a terminal in a vertical split
+nnoremap <leader>t :vert term<CR>
 
-" run :GoImports on <leader>i
-nnoremap <leader>i :GoImports<CR>
+call plug#begin('~/.vim/plugged')
 
-" https://github.com/prettier/prettier/tree/master/editors/vim#ale
-" enable prettier on save
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['typescript'] = ['prettier']
-let g:ale_fixers['python'] = ['black']
-let g:ale_fixers['c'] = ['clang-format']
+" NERDtree
+Plug 'scrooloose/nerdtree'
 
-" Currently using vim-go for this
-let g:ale_fixers['go'] = []
-" let g:ale_fixers['go'] = ['gofmt']
+" database access
+Plug 'tpope/vim-dadbod'
 
-" to disable on a particular buffer:
-" :let b:ale_fix_on_save=0
-let g:ale_fix_on_save = 1
+" Git gutter marks
+Plug 'airblade/vim-gitgutter'
 
-" There's no way to only disable typescript, and ale was doing tsserver on all
-" javascript files which is super annoying
-let g:ale_linters = {}
-let g:ale_linters['javascript'] = ['eslint', 'flow', 'prettier', 'prettier-eslint']
-let g:ale_linters['typescript'] = ['tslint']
-" currently using vim-go for this
-"let g:ale_linters['go'] = []
-let g:ale_linters['go'] = ['gopls', 'golint']
-let g:ale_linters['python'] = ['pylint']
+" Markdown support
+Plug 'hallison/vim-markdown'
 
-let g:ale_sign_error = '🔥'
+" Rust support
+Plug 'rust-lang/rust.vim'
 
-" gopls seems to be already better than the other completion options. to
-" install, do: go get -u golang.org/x/tools/cmd/gopls
-" https://github.com/golang/go/wiki/gopls
-" https://github.com/w0rp/ale/issues/2179
-let g:ale_go_langserver_executable = 'gopls'
+" Handle ANSI escape codes
+Plug 'ponzellus/AnsiEsc'
 
-" to disable ale linting on a particular buffer:
-" let b:ale_linters = []
+" linting and completion for many languages
+Plug 'dense-analysis/ale'
 
-" plugin helpers
-nnoremap <leader>t :NERDTreeToggle<CR>
+" fzf fuzzy finder
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
-" default fzf looks like:
-" nnoremap <leader>f :FZF<CR>
-"
-" but instead, we'll call it with the "exact" option. This means that, for ex,
-" 'servi aptc' matches 'services/aptc.js' but not
-" 'app/settings/controllers/services.js'
-" nnoremap <leader>f :call fzf#run({'options': '-e', 'sink': 'e', 'down': '40%'})<CR>
-"
-" ^^^ this doesn't handle c-x and c-v for split, so:
+" writing mode :Goyo
+Plug 'junegunn/goyo.vim'
 
-" I basically have no idea how this works. CnP from
-" https://github.com/junegunn/fzf/issues/239#issuecomment-103081772
-function! s:my_fzf_handler(lines) abort
-  if empty(a:lines)
-    return
-  endif
-  let cmd = get({ 'ctrl-x': 'split',
-                \ 'ctrl-v': 'vsplit' }, remove(a:lines, 0), 'e')
-  for item in a:lines
-    execute cmd escape(item, ' %#\')
-  endfor
-endfunction
+" Go
+" Plug 'govim/govim'
 
-nnoremap <silent> <leader>f :call fzf#run({
-  \ 'options': '-e --expect=ctrl-t,ctrl-x,ctrl-v',
-  \ 'down':    '40%',
-  \ 'sink*':   function('<sid>my_fzf_handler')})<cr>
+Plug 'liuchengxu/vim-clap'
 
-function! s:ag_to_qf(line)
-  let parts = split(a:line, ':')
-  return {'filename': parts[0], 'lnum': parts[1], 'col': parts[2],
-        \ 'text': join(parts[3:], ':')}
-endfunction
+" Initialize plugin system
+call plug#end()
 
-function! s:ag_handler(lines)
-  if len(a:lines) < 2 | return | endif
-
-  let cmd = get({'ctrl-x': 'split',
-               \ 'ctrl-v': 'vertical split',
-               \ 'ctrl-t': 'tabe'}, a:lines[0], 'e')
-  let list = map(a:lines[1:], 's:ag_to_qf(v:val)')
-
-  let first = list[0]
-  execute cmd escape(first.filename, ' %#\')
-  execute first.lnum
-  execute 'normal!' first.col.'|zz'
-
-  if len(list) > 1
-    call setqflist(list)
-    copen
-    wincmd p
-  endif
-endfunction
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-nnoremap <silent> <leader>g :Rg<space>
-
-" Ack search
-" nnoremap <leader>s :Ack! -i 
-" if executable('rg')
-"   let g:ackprg = 'rg --vimgrep'
-" endif
+" ,g to bring up the Clap popup
+nnoremap <silent> <leader>g :Clap grep<CR>
 
 " Format json
-"nnoremap <leader>j :%!jsonpp<CR>
 nnoremap <leader>j :%!jq ''<CR>
-
 " Format xml
 nnoremap <leader>x :%!xmllint --format --encode UTF-8 -<CR>
-
 " Format html
 nnoremap <leader>h :%!xmllint --format --encode UTF-8 --html -<CR>
+nnoremap <leader>h :%!tidy -utf8 -m -i %<CR>
 
-" ruby debugger
-au FileType ruby nnoremap <leader>d orequire 'byebug'; byebug<esc>
-au FileType ruby nnoremap <leader>D Orequire 'byebug'; byebug<esc>
+nnoremap <leader>f :Clap files<CR>
 
-" system paste and yank
-nnoremap <leader>p :pu +<CR>
-vnoremap <leader>y "+y
+""""""""""""""""""""""""""""""""""
+" vim-ale
+" 
+" If ale is loaded, I want to bind <leader>m to :ALENextWrap. If govim is
+" loaded, I'd rather bind it to my own Cnext function (see below)
+if &rtp =~ '/ale'
+    nnoremap <leader>m :ALENextWrap<cr>
+    nnoremap gd :ALEGoToDefinition<cr>
 
-" edit vimrc and source vimrc, respectively
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>es :source $MYVIMRC<cr>
+    let g:ale_echo_msg_error_str = 'E'
+    let g:ale_echo_msg_warning_str = 'W'
+    let g:ale_echo_msg_format = '[%linter%] %code: %%s [%severity%]'
 
-" vim-go likes to open up the "location list" for errors, so bind ,l to close
-" it
-nnoremap <leader>l :lcl<cr>
+    " don't run ale on every text change, just on every save
+    let g:ale_lint_on_text_changed = 'never'
 
-" add or remove focus:true to the current line
-" I actually wrote this!
-function! Add_or_remove_focus()
-  let line=getline('.')
+    " https://github.com/prettier/prettier/tree/master/editors/vim#ale
+    " enable prettier on save
+    let g:ale_fixers = {}
+    let g:ale_fixers['javascript'] = ['prettier']
+    let g:ale_fixers['typescript'] = ['prettier']
+    let g:ale_fixers['typescriptreact'] = ['prettier']
+    let g:ale_fixers['python'] = ['black']
+    let g:ale_fixers['c'] = ['clang-format']
+    let g:ale_fixers['go'] = ['goimports']
 
-  if line =~ 'focus'
-    execute ':.s/,\s*focus\s*:\s*true//'
-  else
-    execute ':.s/ do$/, focus:true do/'
-  endif
-endfunction
-" add or remove focus:true to the current line
-nnoremap <leader>o :call Add_or_remove_focus()<cr>
+    " I think these might be messing the LSP client up?
+    let g:ale_fixers['java'] = []
 
-" Don't autocomplete html except with leader-a
-let xml_tag_completion_map = "<leader>a"
+    " to disable on a particular buffer:
+    " :let b:ale_fix_on_save=0
+    let g:ale_fix_on_save = 1
+
+    " There's no way to only disable typescript, and ale was doing tsserver on all
+    " javascript files which is super annoying
+    let g:ale_linters = {}
+    let g:ale_linters['javascript'] = ['eslint', 'flow', 'prettier', 'prettier-eslint']
+    let g:ale_linters['typescript'] = []
+    let g:ale_linters['go'] = ['gopls']
+    let g:ale_linters['python'] = ['pylint', 'pyls']
+
+    " https://github.com/dense-analysis/ale/blob/d6d2a0c77010db6a75a8942e2af9606971738c23/doc/ale-typescript.txt#L57
+    let g:ale_linters_ignore = {'typescript': ['tslint']}
+
+    let g:ale_python_pyls_config = {'pyls': 
+            \ {'plugins': 
+            \   {'pycodestyle': {'enabled': v:false},
+            \    'pydocstyle':  {'enabled': v:false},
+            \    'pyflakes':    {'enabled': v:false},
+            \    'pylint':      {'enabled': v:false},
+            \    'mccabe':      {'enabled': v:false}
+            \ }}}
+
+    let g:ale_sign_error = '🔥'
+
+    " Enable completion where available.
+    " This setting must be set before ALE is loaded.
+    "
+    " You should not turn this setting on if you wish to use ALE as a completion
+    " source for other completion plugins, like Deoplete.
+    " To get ALE to do completion, enable these:
+    let g:ale_completion_enabled = 1
+    set omnifunc=ale#completion#OmniFunc
+endif
+"""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""
 " begin govim recommended settings
@@ -536,6 +339,93 @@ set updatetime=500
 " Suggestion: To make govim/Vim more responsive/IDE-like, we suggest a short
 " balloondelay
 set balloondelay=250
+
+" Suggestion: Turn on the sign column so you can see error marks on lines
+" where there are quickfix errors. Some users who already show line number
+" might prefer to instead have the signs shown in the number column; in which
+" case set signcolumn=number
 "
+" Problem: this causes an extra column to pup up when you enter terninal
+" normal mode (leader-esc here). Instead of figuring out how to disable it,
+" I'm just commenting this out for now
+" set signcolumn=yes
+
+" Suggestion: show info for completion candidates in a popup menu
+if has("patch-8.1.1904")
+  set completepopup=align:menu,highlight:Pmenu
+endif
+
+
+if &rtp =~ 'govim'
+    let g:ale_pattern_options = {
+    \   '.*\.go$': {
+    \       'ale_enabled': 0,
+    \        'ale_completion_enabled': 0,
+    \   },
+    \}
+
+    let g:ale_fixers['go'] = []
+    let g:ale_linters['go'] = []
+
+    nnoremap gd :GOVIMGoToDef<cr>
+
+    call govim#config#Set("Staticcheck", 0)
+    call govim#config#Set("CompleteUnimported", 1)
+    call govim#config#Set("HighlightReferences", 0)
+
+    " Cnext is a modification of:
+    " https://vi.stackexchange.com/questions/8534/make-cnext-and-cprevious-loop-back-to-the-begining
+    " which is like :cbelow (go to the next error from the quickfix window in the
+    " current file) but wraps around to the top of the file when complete
+    command! Cnext try | cbelow | catch | cabove 9999 | catch | endtry
+    nnoremap <leader>m :Cnext<CR>
+
+    " https://github.com/govim/govim/pull/643
+    call sign_define("GOVIMSignErr",{"text":"🔥","texthl":"GOVIMSignErr"})
+    call sign_define("GOVIMSignWarn",{"text":"⚠️","texthl":"GOVIMSignWarn"})
+    call sign_define("GOVIMSignInfo",{"text":"⁉️","texthl":"GOVIMSignInfo"})
+    call sign_define("GOVIMSignHint",{"text":"⁉️","texthl":"GOVIMSignHint"})
+endif
 " End govim
+""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""
+" vim-dadbod
+"
+" To set a default database, the best way is to set the DATABASE_URL
+" environment variable. Next best is to set b:db (for a buffer) or g:db
+" (globally).
+"
+" ,se to run a query in visual mode. This command is not documented, but I got
+" it from https://github.com/tpope/vim-dadbod/issues/33
+vnoremap <expr> <leader>se db#op_exec()
+
+" I don't use this directly, but rather through <leader>se in normal mode. I'm
+" not particularly happy with its performance, especially because it does not
+" correctly find postgres slash commands correctly, but I wasn't smart enough
+" to fix it.
+"
+" from: https://github.com/tpope/vim-dadbod/issues/33
+"
+" How it works:
+"
+" The first search finds the next semicolon. The second marks the spot and
+" moves backwards to the previous semicolon or the start of the buffer. The
+" third moves forward to the next select|with|insert|update|delete|create.
+" Finally, it changes to visual mode and selects to the previous mark.
+"
+" \v: very magic
+" \c: ignore case
+" c: include current char in search
+" s: set the ' mark at the previous location of the cursor
+" W: do not wrap
+" z: start search at the cursor column instead of zero
+vnoremap <leader>aq <esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`'
+
+" use ,se in normal mode to try to attempt to guess the current sql statement
+" and run it. May not quite select the proper area. I would like to figure out
+" how to replace :DB with db#op_exec() but I don't know how
+nnoremap <leader>se :normal v<leader>aq<cr>:DB<cr>
+"
+" end vim-dadbod
 """"""""""""""""""""""""""""""""""""
