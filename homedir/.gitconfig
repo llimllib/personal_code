@@ -64,5 +64,5 @@
 #    fsckObjects = true 
 #
 
-[hub]
-	host = github.cms.gov
+[init]
+	defaultBranch = main
