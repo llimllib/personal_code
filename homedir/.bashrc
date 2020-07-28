@@ -291,6 +291,3 @@ if [[ -f /usr/libexec/java_home ]]; then
     export JAVA_HOME=$jh
     export PATH="$PATH:$JAVA_HOME/bin"
 fi
-
-# https://dystroy.org/broot/documentation/installation/
-source /Users/llimllib/Library/Preferences/org.dystroy.broot/launcher/bash/br
