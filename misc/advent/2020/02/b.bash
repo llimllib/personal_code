@@ -11,7 +11,6 @@ while read -r -a line; do
 
     min=${line[0]//-*/}
     max=${line[0]//*-/}
-    # echo "$ltr $min $max $ltrcount"
     if [[ $min -le $ltrcount ]] && [[ $max -ge $ltrcount ]]; then
         i=$((i+1))
     fi
