@@ -37,5 +37,6 @@ pub fn main() !void {
             valid2 += 1;
         }
     }
+
     std.debug.print("part 1: {}\npart 2: {}\n", .{ valid, valid2 });
 }
