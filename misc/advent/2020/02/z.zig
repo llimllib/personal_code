@@ -33,7 +33,7 @@ pub fn main() !void {
         const a = pw[minidx] == ltr;
         const maxidx = @intCast(usize, max - 1);
         const b = pw[maxidx] == ltr;
-        if ((a and !b) or (!a and b)) {
+        if (a != b) {
             valid2 += 1;
         }
     }
