@@ -19,7 +19,7 @@ fn valid1(passports: PassportList) usize {
     return valid;
 }
 
-fn find(haystack: *const [7][]const u8, needle: []const u8) bool {
+fn find(haystack: []const []const u8, needle: []const u8) bool {
     for (haystack) |elt| {
         if (std.mem.eql(u8, elt, needle)) {
             return true;
