@@ -63,14 +63,17 @@ fn valid2(passports: PassportList) !usize {
             continue :invalid;
         }
 
-        var parts = std.mem.tokenize(passport.get("hgt").?, "ci");
-        var h = try std.fmt.parseInt(usize, parts.next().?, 10);
-        var unit = parts.next();
-        if (unit == null) {
-            std.debug.print("invalid unit {}\n", .{passport.get("pid")});
+        var hgh = passport.get("hgt").?;
+        var h = std.fmt.parseInt(usize, hgh[0 .. hgh.len - 2], 10) catch |err| {
+            std.debug.print("invalid hgh {} {}\n", .{ hgh, passport.get("pid") });
+            continue :invalid;
+        };
+        var unit = hgh[hgh.len - 2 ..];
+        if (!std.mem.eql(u8, unit, "in") and !std.mem.eql(u8, unit, "cm")) {
+            std.debug.print("invalid unit {} {}\n", .{ unit, passport.get("pid") });
             continue :invalid;
         }
-        if ((std.mem.eql(u8, unit.?, "in") and (h < 59 or h > 76)) or (std.mem.eql(u8, unit.?, "cm") and (h < 150 or h > 193))) {
+        if ((std.mem.eql(u8, unit, "in") and (h < 59 or h > 76)) or (std.mem.eql(u8, unit, "cm") and (h < 150 or h > 193))) {
             std.debug.print("invalid measurement {}\n", .{passport.get("pid")});
             continue :invalid;
         }
