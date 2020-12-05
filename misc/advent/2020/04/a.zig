@@ -1,14 +1,6 @@
 const std = @import("std");
 const fs = std.fs;
 
-// byr (Birth Year)
-// iyr (Issue Year)
-// eyr (Expiration Year)
-// hgt (Height)
-// hcl (Hair Color)
-// ecl (Eye Color)
-// pid (Passport ID)
-// cid (Country ID)
 const PassportMap = std.StringHashMap([]const u8);
 const PassportList = std.ArrayList(PassportMap);
 
@@ -141,9 +133,4 @@ pub fn main() !void {
     std.debug.print("total: {}\n", .{passports.items.len});
     std.debug.print("valid part 1: {}\n", .{valid1(passports)});
     std.debug.print("valid part 2: {}\n", .{valid2(passports)});
-    // XXX: function to print hash entry nicely
-    // var it = passports.items[0].iterator();
-    // while (it.next()) |key| {
-    //     std.debug.print("{}\n", .{key});
-    // }
 }
