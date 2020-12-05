@@ -43,19 +43,23 @@ fn valid2(passports: PassportList) !usize {
     invalid: for (passports.items) |passport| {
         for (required) |key| {
             if (passport.get(key) == null) {
+                std.debug.print("missing key {} {}\n", .{ key, passport.get("pid") });
                 continue :invalid;
             }
         }
         var byr = try std.fmt.parseInt(usize, passport.get("byr").?, 10);
         if (byr < 1920 or byr > 2002) {
+            std.debug.print("invalid byr {} {}\n", .{ byr, passport.get("pid") });
             continue :invalid;
         }
         var iyr = try std.fmt.parseInt(usize, passport.get("iyr").?, 10);
         if (iyr < 2010 or iyr > 2020) {
+            std.debug.print("invalid iyr {} {}\n", .{ iyr, passport.get("pid") });
             continue :invalid;
         }
         var eyr = try std.fmt.parseInt(usize, passport.get("eyr").?, 10);
         if (eyr < 2020 or eyr > 2030) {
+            std.debug.print("invalid eyr {} {}\n", .{ eyr, passport.get("pid") });
             continue :invalid;
         }
 
@@ -63,30 +67,48 @@ fn valid2(passports: PassportList) !usize {
         var h = try std.fmt.parseInt(usize, parts.next().?, 10);
         var unit = parts.next();
         if (unit == null) {
+            std.debug.print("invalid unit {}\n", .{passport.get("pid")});
             continue :invalid;
         }
         if ((std.mem.eql(u8, unit.?, "in") and (h < 59 or h > 76)) or (std.mem.eql(u8, unit.?, "cm") and (h < 150 or h > 193))) {
+            std.debug.print("invalid measurement {}\n", .{passport.get("pid")});
             continue :invalid;
         }
 
         var hcl = passport.get("hcl").?;
         if (hcl.len != 7 or hcl[0] != '#') {
+            std.debug.print("invalid hcl {}\n", .{passport.get("pid")});
             continue :invalid;
         }
         var i: usize = 6;
         while (i > 0) : (i -= 1) {
             if (!std.ascii.isDigit(hcl[i]) and (hcl[i] < 'a' or hcl[i] > 'f')) {
-                std.debug.print("{} {}\n", .{ hcl[i], hcl });
+                std.debug.print("invalid hcl {}\n", .{passport.get("pid")});
                 continue :invalid;
             }
         }
 
         if (!find(validEcl, passport.get("ecl").?)) {
+            std.debug.print("invalid ecl {}\n", .{passport.get("pid")});
             continue :invalid;
         }
 
+        var pid = passport.get("pid").?;
+        if (pid.len != 9) {
+            std.debug.print("invalid pid {}\n", .{passport.get("pid")});
+            continue :invalid;
+        }
+        for (pid) |c| {
+            if (!std.ascii.isDigit(c)) {
+                std.debug.print("invalid pid {}\n", .{passport.get("pid")});
+                continue :invalid;
+            }
+        }
+
+        std.debug.print("valid {}\n", .{passport.get("pid")});
         valid += 1;
     }
+
     return valid;
 }
 
