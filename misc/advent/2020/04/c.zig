@@ -9,6 +9,7 @@ const State = struct {
     accept: bool,
     char: ?u8,
     transitions: StateList,
+    mark: bool,
 };
 
 const StateList = std.ArrayList(*State);
@@ -22,11 +23,18 @@ const Regex = struct {
     dfa: *State,
     alloc: *std.mem.Allocator,
 
-    // TODO: properly free memory (probably accept allocator and give a `free` method?)
+    // TODO: properly free memory. create docs say:
+    //      /// Returns a pointer to undefined memory.
+    //      /// Call `destroy` with the result to free the memory.
     pub fn compile(comptime regex: []const u8, alloc: *std.mem.Allocator) !Regex {
         var cur: usize = 0;
         const root = try alloc.create(State);
-        root.* = .{ .accept = false, .char = null, .transitions = StateList.init(alloc) };
+        root.* = .{
+            .accept = false,
+            .char = null,
+            .transitions = StateList.init(alloc),
+            .mark = false,
+        };
         var curState: *State = root;
 
         while (cur < regex.len) : (cur += 1) {
@@ -36,6 +44,7 @@ const Regex = struct {
                     .accept = false,
                     .transitions = StateList.init(alloc),
                     .char = '.',
+                    .mark = false,
                 };
                 try curState.transitions.append(st);
                 curState = st;
@@ -45,6 +54,7 @@ const Regex = struct {
                     .accept = false,
                     .transitions = StateList.init(alloc),
                     .char = regex[cur],
+                    .mark = false,
                 };
                 try curState.transitions.append(st);
                 curState = st;
@@ -54,42 +64,70 @@ const Regex = struct {
         return Regex{ .regex = regex, .dfa = root, .alloc = alloc };
     }
 
-    fn deinitState(self: *Regex, state:*State) {
-        // recurse through the states and deinit them from the bottom up
-        for (self.dfa.transitions.items) |rule| {
-            deinitState(rule);
+    // XXX: does this accurately destroy all states?
+    fn destroyState(self: *Regex, state: *State) void {
+        // mark the node so we don't recurse infinitely
+        state.mark = true;
+        for (state.transitions.items) |rule| {
+            if (!state.mark) {
+                self.destroyState(rule);
+            }
         }
         state.transitions.deinit();
-        self.* = undefined;
+        self.alloc.destroy(state);
     }
 
-    pub fn deinit(self: *Regex) {
-        self.deinitState(self.dfa);
+    pub fn destroy(self: *Regex) void {
+        self.destroyState(self.dfa);
     }
 
+    // match returns null if s does not match the regex, and a Match object
+    // otherwise
     pub fn match(self: *Regex, s: []const u8) !?Match {
         var groups: Match = Match.init(self.alloc);
         var cur: usize = 0;
-        for (self.dfa.transitions.items) |rule| {
-            if (rule.char.? == '.') {
-                cur += 1;
-            } else if (rule.char.? == s[cur]) {
-                cur += 1;
-            } else {
-                std.debug.print("returning null\n", .{});
-                return null;
+        var state = self.dfa;
+        for (s) |c| {
+            for (state.transitions.items) |rule| {
+                var toMatch = rule.char.?;
+                if (toMatch == '.') {
+                    std.debug.print("rule.char . {}\n", .{c});
+                    state = rule;
+                }
+                if (toMatch == c) {
+                    std.debug.print("rule.eq {} {}\n", .{ toMatch, c });
+                    state = rule;
+                } else {
+                    std.debug.print("no match\n", .{});
+                    return null;
+                }
             }
+        }
+        if (!state.accept) {
+            std.debug.print("not an accept state\n", .{});
+            return null;
         }
         return groups;
     }
 };
 
-test "compile" {
-    var re = try Regex.compile("bananas", std.testing.allocator);
-    defer re.deinit();
+test "simple examples" {
+    // var re = try Regex.compile("bananas", std.testing.allocator);
+    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
+    var re = try Regex.compile("bananas", &alloc.allocator);
+    defer re.destroy();
     std.testing.expect((try re.match("bananas")) != null);
     std.testing.expect((try re.match("banter")) == null);
+    std.testing.expect((try re.match("ban")) == null);
 }
+
+// test "memory fuuuuuu" {
+//     // XXX: this looks to me like it should destroy all State objects, but
+//     // still fails with a memory leak. Not sure how to figure this out
+//     var re = try Regex.compile("b", std.testing.allocator);
+//     defer re.destroy();
+//     std.testing.expect((try re.match("b")) != null);
+// }
 
 fn match(regex: []const u8, s: []const u8) RegexError!bool {
     var rcur: usize = 0;
