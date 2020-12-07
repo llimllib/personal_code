@@ -54,6 +54,19 @@ const Regex = struct {
         return Regex{ .regex = regex, .dfa = root, .alloc = alloc };
     }
 
+    fn deinitState(self: *Regex, state:*State) {
+        // recurse through the states and deinit them from the bottom up
+        for (self.dfa.transitions.items) |rule| {
+            deinitState(rule);
+        }
+        state.transitions.deinit();
+        self.* = undefined;
+    }
+
+    pub fn deinit(self: *Regex) {
+        self.deinitState(self.dfa);
+    }
+
     pub fn match(self: *Regex, s: []const u8) !?Match {
         var groups: Match = Match.init(self.alloc);
         var cur: usize = 0;
@@ -73,8 +86,9 @@ const Regex = struct {
 
 test "compile" {
     var re = try Regex.compile("bananas", std.testing.allocator);
+    defer re.deinit();
     std.testing.expect((try re.match("bananas")) != null);
-    std.testing.expect((try re.match("stardust")) == null);
+    std.testing.expect((try re.match("banter")) == null);
 }
 
 fn match(regex: []const u8, s: []const u8) RegexError!bool {
