@@ -91,14 +91,13 @@ const Regex = struct {
             for (state.transitions.items) |rule| {
                 var toMatch = rule.char.?;
                 if (toMatch == '.') {
-                    std.debug.print("rule.char . {}\n", .{c});
+                    std.debug.print("rule.char . {u}\n", .{c});
                     state = rule;
-                }
-                if (toMatch == c) {
-                    std.debug.print("rule.eq {} {}\n", .{ toMatch, c });
+                } else if (toMatch == c) {
+                    std.debug.print("rule.eq {u} {u}\n", .{ toMatch, c });
                     state = rule;
                 } else {
-                    std.debug.print("no match\n", .{});
+                    std.debug.print("no match {u} {u}\n", .{ toMatch, c });
                     return null;
                 }
             }
@@ -121,8 +120,17 @@ test "simple examples" {
     std.testing.expect((try re.match("ban")) == null);
 }
 
+test "dot character" {
+    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
+    var re = try Regex.compile("ba..nas", &alloc.allocator);
+    defer re.destroy();
+    std.testing.expect((try re.match("bananas")) != null);
+    std.testing.expect((try re.match("banter")) == null);
+    std.testing.expect((try re.match("ban")) == null);
+}
+
 // test "memory fuuuuuu" {
-//     // XXX: this looks to me like it should destroy all State objects, but
+//     // XXX: destroy looks to me like it should destroy all State objects, but
 //     // still fails with a memory leak. Not sure how to figure this out
 //     var re = try Regex.compile("b", std.testing.allocator);
 //     defer re.destroy();
