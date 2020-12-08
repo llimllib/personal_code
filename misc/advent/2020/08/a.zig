@@ -80,7 +80,7 @@ test "runToDupe" {
     std.testing.expect(a == 5);
 }
 
-pub fn runToEnd(instructions: InstructionList, alloc: *std.mem.Allocator) ?isize {
+pub fn runToEnd(instructions: InstructionList) ?isize {
     var accum: isize = 0;
     var iptr: isize = 0;
     var counter: usize = 0;
@@ -118,7 +118,7 @@ pub fn flip(instruction: *Instruction) void {
     }
 }
 
-pub fn findFix(instructions: InstructionList, alloc: *std.mem.Allocator) isize {
+pub fn findFix(instructions: InstructionList) isize {
     var i: usize = 0;
 
     done: while (i < instructions.items.len) : (i += 1) {
@@ -128,7 +128,7 @@ pub fn findFix(instructions: InstructionList, alloc: *std.mem.Allocator) isize {
             continue;
         }
         flip(instructions.items[i]);
-        var accum = runToEnd(instructions, alloc);
+        var accum = runToEnd(instructions);
         if (accum != null) {
             std.debug.print("successfully flipped {}\n", .{i});
             return accum.?;
@@ -147,6 +147,6 @@ pub fn main() !void {
     var instructions = parse(input, &alloc.allocator);
     var accum = runToDupe(instructions, &alloc.allocator);
     std.debug.print("accumulator {}\n", .{accum});
-    accum = findFix(instructions, &alloc.allocator);
+    accum = findFix(instructions);
     std.debug.print("accumulator {}\n", .{accum});
 }
