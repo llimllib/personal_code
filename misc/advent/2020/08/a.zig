@@ -121,7 +121,7 @@ pub fn flip(instruction: *Instruction) void {
 pub fn findFix(instructions: InstructionList) isize {
     var i: usize = 0;
 
-    done: while (i < instructions.items.len) : (i += 1) {
+    while (i < instructions.items.len) : (i += 1) {
         if (instructions.items[i].op != Op.jmp and
             instructions.items[i].op != Op.nop)
         {
