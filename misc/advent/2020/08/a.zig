@@ -1,8 +1,6 @@
 const std = @import("std");
 const fs = std.fs;
 
-const InstructionList = std.ArrayList(*Instruction);
-
 const Op = enum {
     nop,
     jmp,
@@ -10,9 +8,11 @@ const Op = enum {
 };
 
 const Instruction = struct {
-    instr: Op,
+    op: Op,
     val: isize,
 };
+
+const InstructionList = std.ArrayList(*Instruction);
 
 pub fn parse(input: []const u8, alloc: *std.mem.Allocator) InstructionList {
     var instructions = InstructionList.init(alloc);
@@ -27,7 +27,7 @@ pub fn parse(input: []const u8, alloc: *std.mem.Allocator) InstructionList {
         }
         var val = std.fmt.parseInt(isize, data.next().?, 10) catch unreachable;
         instr.* = .{
-            .instr = op,
+            .op = op,
             .val = val,
         };
         instructions.append(instr) catch unreachable;
@@ -39,9 +39,9 @@ test "parse" {
     var alloc = std.heap.GeneralPurposeAllocator(.{}){};
     var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", &alloc.allocator);
     std.debug.print("{}\n", .{instr});
-    std.testing.expect(instr.items[0].instr == Op.nop);
+    std.testing.expect(instr.items[0].op == Op.nop);
     std.testing.expect(instr.items[0].val == 0);
-    std.testing.expect(instr.items[4].instr == Op.jmp);
+    std.testing.expect(instr.items[4].op == Op.jmp);
     std.testing.expect(instr.items[4].val == -3);
 }
 
@@ -61,7 +61,7 @@ pub fn runToDupe(instructions: InstructionList, alloc: *std.mem.Allocator) isize
         }
 
         var instr = instructions.items[@intCast(usize, iptr)];
-        switch (instr.instr) {
+        switch (instr.op) {
             Op.nop => iptr += 1,
             Op.acc => {
                 accum += instr.val;
@@ -77,7 +77,7 @@ test "runToDupe" {
     var alloc = std.heap.GeneralPurposeAllocator(.{}){};
     var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", &alloc.allocator);
     var a = runToDupe(instr, &alloc.allocator);
-    std.debug.print("{}\n", .{a});
+    std.testing.expect(a == 5);
 }
 
 pub fn runToEnd(instructions: InstructionList, alloc: *std.mem.Allocator) ?isize {
@@ -97,7 +97,7 @@ pub fn runToEnd(instructions: InstructionList, alloc: *std.mem.Allocator) ?isize
         }
 
         var instr = instructions.items[@intCast(usize, iptr)];
-        switch (instr.instr) {
+        switch (instr.op) {
             Op.nop => iptr += 1,
             Op.acc => {
                 accum += instr.val;
@@ -111,10 +111,10 @@ pub fn runToEnd(instructions: InstructionList, alloc: *std.mem.Allocator) ?isize
 }
 
 pub fn flip(instruction: *Instruction) void {
-    if (instruction.instr == Op.jmp) {
-        instruction.instr = Op.nop;
+    if (instruction.op == Op.jmp) {
+        instruction.op = Op.nop;
     } else {
-        instruction.instr = Op.jmp;
+        instruction.op = Op.jmp;
     }
 }
 
@@ -122,8 +122,8 @@ pub fn findFix(instructions: InstructionList, alloc: *std.mem.Allocator) isize {
     var i: usize = 0;
 
     done: while (i < instructions.items.len) : (i += 1) {
-        if (instructions.items[i].instr != Op.jmp and
-            instructions.items[i].instr != Op.nop)
+        if (instructions.items[i].op != Op.jmp and
+            instructions.items[i].op != Op.nop)
         {
             continue;
         }
