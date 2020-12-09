@@ -1,4 +1,3 @@
-from itertools import combinations
 import sys
 
 target = 32321523
