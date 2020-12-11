@@ -42,7 +42,7 @@ def adj_unoccupied(m, x, y):
     return all(not occupied_visible(m, x, y, dx, dy) for dx, dy in coords)
 
 
-# If a seat is occupied (#) and four or more seats adjacent to it are also
+# If a seat is occupied (#) and five or more seats adjacent to it are also
 # occupied, the seat becomes empty.
 def becomes_empty(m, x, y):
     return sum(occupied_visible(m, x, y, dx, dy) for dx, dy in coords) > 4
