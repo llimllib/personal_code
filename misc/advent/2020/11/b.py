@@ -39,7 +39,6 @@ def occupied_visible(m, x, y, dx, dy):
 # return true if an empty seat will be taken - if there are no occupied seats
 # visible in any direction from that seat
 def adj_unoccupied(m, x, y):
-    # print(list(get(m, x + dx, y + dy) in [EMPTY, NONSEAT, None] for dx, dy in coords))
     return all(not occupied_visible(m, x, y, dx, dy) for dx, dy in coords)
 
 
