@@ -1,6 +1,4 @@
 import ipdb
-from pprint import pprint as pp
-from copy import deepcopy
 
 m = [list(l.strip()) for l in open("small.txt")]
 m = [list(l.strip()) for l in open("input.txt")]
