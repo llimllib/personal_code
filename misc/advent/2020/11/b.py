@@ -7,10 +7,13 @@ OCCUPIED = "#"
 EMPTY = "L"
 NONSEAT = "."
 
+h = len(m)
+w = len(m[0])
+
 
 def get(m, x, y):
-    if 0 <= y < len(m):
-        if 0 <= x < len(m[0]):
+    if 0 <= y < h:
+        if 0 <= x < w:
             return m[y][x]
     return None
 
@@ -22,7 +25,7 @@ coords = [(x, y) for x in (0, 1, -1) for y in (0, 1, -1) if (x, y) != (0, 0)]
 def occupied_visible(m, x, y, dx, dy):
     x += dx
     y += dy
-    while 0 <= y < len(m) and 0 <= x < len(m[0]):
+    while 0 <= y < h and 0 <= x < w:
         if m[y][x] == OCCUPIED:
             return True
         # do we need to distinguish between empty seats and non-seats or
@@ -52,8 +55,8 @@ def pmap(m):
     print("--------")
 
 
-rows = range(len(m))
-cols = range(len(m[0]))
+rows = range(h)
+cols = range(w)
 
 while 1:
     # pmap(m)
