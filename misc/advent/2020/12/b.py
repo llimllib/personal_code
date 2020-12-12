@@ -7,17 +7,9 @@ lines = [l for l in open(f)]
 
 x = 0
 y = 0
-dx = 1
-dy = 0
 # The waypoint starts 10 units east and 1 unit north relative to the ship.
 wx = 10
 wy = 1
-
-rotations = {
-    90: {(0, 1): (1, 0), (1, 0): (0, -1), (0, -1): (-1, 0), (-1, 0): (0, 1),},
-    180: {(0, 1): (0, -1), (1, 0): (-1, 0), (0, -1): (0, 1), (-1, 0): (1, 0),},
-    270: {(0, 1): (-1, 0), (1, 0): (0, 1), (0, -1): (1, 0), (-1, 0): (0, -1),},
-}
 
 for line in lines:
     cmd, n = line[0], int(line[1:])
