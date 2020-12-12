@@ -1,5 +1,3 @@
-import ipdb
-
 m = [list(l.strip()) for l in open("small.txt")]
 m = [list(l.strip()) for l in open("input.txt")]
 
@@ -9,14 +7,6 @@ NONSEAT = "."
 
 h = len(m)
 w = len(m[0])
-
-
-def get(m, x, y):
-    if 0 <= y < h:
-        if 0 <= x < w:
-            return m[y][x]
-    return None
-
 
 coords = [(x, y) for x in (0, 1, -1) for y in (0, 1, -1) if (x, y) != (0, 0)]
 
