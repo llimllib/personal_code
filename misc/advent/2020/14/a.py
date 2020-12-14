@@ -4,6 +4,18 @@ import ipdb
 from math import *
 
 
+def parse(lines):
+    instructions = []
+    for line in lines:
+        if line.startswith("mask"):
+            instructions.append(("mask", line.split("=")[1].strip()))
+            continue
+        _, addr, _, val = re.split(r"[\[=\]]", line)
+        instructions.append(("set", int(addr), int(val)))
+
+    return instructions
+
+
 def readmask(mask):
     positive_mask = 0x000000000
     positive_mask = positive_mask | int(mask.replace("X", "0"), 2)
@@ -17,12 +29,11 @@ def readmask(mask):
 def p1(lines, verbose=False):
     memory = {}
     positive_mask, negative_mask = None, None
-    for line in lines:
-        if line.startswith("mask"):
-            positive_mask, negative_mask = readmask(line.split("=")[1].strip())
+    for instr, *args in instructions:
+        if instr == "mask":
+            positive_mask, negative_mask = readmask(args[0])
             continue
-        _, addr, _, val = re.split(r"[\[=\]]", line)
-        memory[int(addr)] = (int(val) | positive_mask) & negative_mask
+        memory[args[0]] = (args[1] | positive_mask) & negative_mask
 
     return sum(v for v in memory.values())
 
@@ -48,14 +59,13 @@ def nth_bit(val: int, n: int, bit: int):
 def p2(lines):
     memory = {}
     mask = None
-    for line in lines:
-        if line.startswith("mask"):
-            mask = line.split("=")[1].strip()
+    for instr, *args in instructions:
+        if instr == "mask":
+            mask = args[0]
             continue
-        _, addr, _, val = re.split(r"[\[=\]]", line)
-        addr = int(addr) | int(mask.replace("X", "1"), 2)
 
-        val = int(val)
+        addr = args[0] | int(mask.replace("X", "1"), 2)
+
         xs = findall(mask)
         xl = len(xs)
         for i in range(2 ** xl):
@@ -64,12 +74,13 @@ def p2(lines):
             rep = [int(c) for c in bin(i)[2:].rjust(xl, "0")]
             for xi, x in enumerate(xs):
                 addr = nth_bit(addr, 35 - x, rep[xi])
-            memory[addr] = val
+            memory[addr] = args[1]
     return sum(v for v in memory.values())
 
 
 f = sys.argv[1] if len(sys.argv) > 1 else "input.txt"
 lines = [l for l in open(f)]
+instructions = parse(lines)
 
-print(p1(lines))
-print(p2(lines))
+print(p1(instructions))
+print(p2(instructions))
