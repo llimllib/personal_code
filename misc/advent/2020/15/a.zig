@@ -19,8 +19,7 @@ pub fn solve(inp: []usize, stop: usize, alloc: *std.mem.Allocator) usize {
     while (true) {
         var res = said.getOrPut(current) catch unreachable;
         if (res.found_existing) {
-            var c: usize = (turn - 1) - res.entry.value;
-            current = c;
+            current = (turn - 1) - res.entry.value;
         } else {
             current = 0;
         }
