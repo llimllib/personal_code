@@ -1,6 +1,3 @@
-from collections import defaultdict
-
-
 def run(inp, stop=2020, verbose=False):
     said = {j: i + 1 for i, j in enumerate(inp[:-1])}
 
