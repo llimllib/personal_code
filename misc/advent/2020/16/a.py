@@ -23,6 +23,7 @@ def valid_validations(column, validations):
     return valid
 
 
+# return a map of key: string => 2-tuple((low, high), (low, high))
 def parse_validations(rawvalidations):
     validations = {}
     for validation in rawvalidations.split("\n"):
@@ -56,7 +57,7 @@ for ticket in tickets.strip().split("\n")[1:]:
     if is_valid_ticket:
         valid_tickets.append(ns)
 
-print(invalid)
+print(f"part 1: {invalid}")
 
 columns = {}
 for col in range(len(valid_tickets[0])):
@@ -80,8 +81,6 @@ while 1:
                 except ValueError:
                     continue
 
-print(known)
-
 departure_indexes = [k for k, v in known.items() if v.startswith("departure")]
 myticket = [int(x) for x in myticket.split("\n")[1].split(",")]
-print(reduce(operator.mul, [myticket[i] for i in departure_indexes]))
+print("part 2:", reduce(operator.mul, [myticket[i] for i in departure_indexes]))
