@@ -4,7 +4,7 @@ from functools import reduce
 
 
 def valid(n, validations):
-    for _, (range1, range2) in validations.items():
+    for range1, range2 in validations.values():
         if inrange(n, range1) or inrange(n, range2):
             return True
     return False
@@ -12,13 +12,6 @@ def valid(n, validations):
 
 def inrange(n, range_):
     return range_[0] <= n <= range_[1]
-
-
-def validationmatches(column, ranges):
-    for n in column:
-        if not (inrange(n, ranges[0]) or inrange(n, ranges[1])):
-            return False
-    return True
 
 
 # return a list of all validations that match every number in column
