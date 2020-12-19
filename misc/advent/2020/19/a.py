@@ -1,16 +1,10 @@
 import re
 from math import ceil
 import string
-from lark import Lark, Transformer, v_args
 
-# grammar = """
-# a: e b f
-# b: c d | d b
-# c: f f | f f
-# d: e f | f e
-# e: "a"
-# f: "b"
-# """
+# pip install lark
+from lark import Lark
+
 rawgrammar = """
 0: 4 1 5
 1: 2 3 | 3 2

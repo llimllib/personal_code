@@ -1,7 +1,9 @@
 import re
 from math import ceil
 import string
-from lark import Lark, Transformer, v_args
+
+# pip install lark
+from lark import Lark
 
 rawgrammar = """
 0: 4 1 5
