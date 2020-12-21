@@ -23,8 +23,8 @@ you'd like to know.<p>
 <!--mention file extensions?-->
 
 These files also tend to be bunched up together. If you run Windows, they're
-likely to be in your <code>my documents</code> folder, and if you run *nix,
-they're likely to be buried somewhere in your <code>/home</code> directory. 
+likely to be in your <code class="inline">my documents</code> folder, and if you run *nix,
+they're likely to be buried somewhere in your <code class="inline">/home</code> directory. 
 If you run both,
 they're probably scattered in various places on your hard drive. Even if
 you keep them hidden in some weird place, files with meta-data tend to cluster

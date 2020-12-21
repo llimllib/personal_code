@@ -24,7 +24,7 @@ and aesthetically appealing in some circumstances.
 
 <p><h2>A Mystery Solved (By Holmes Himself!)</h2>
 
-<p>When I first saw code using the <code>with</code> statement, my hope was 
+<p>When I first saw code using the <code class="inline">with</code> statement, my hope was 
 that it would be able to be used somewhat like Haskell's <a 
 href="http://en.wikipedia.org/wiki/Haskell_%28programming_language%29#More_complex_examples">Where 
 clause</a> or Ruby's <a 
@@ -37,7 +37,7 @@ aside.
 <p>That was a couple years ago, and I didn't give it a moment's thought until I 
 saw <a 
 href="http://www.mechanicalcat.net/richard/log/Python/Something_I_m_working_on.3">a 
-blog post</a> by Richard Jones that uses a <code>with</code> statement in exactly 
+blog post</a> by Richard Jones that uses a <code class="inline">with</code> statement in exactly 
 the way I had considered impossible up to now. I spent a few hours trying to 
 figure it out, but I was stumped, so I put up <a 
 href="http://stackoverflow.com/questions/1255914/finding-functions-defined-in-a-with-block">a 
@@ -46,10 +46,10 @@ question</a> on Stack Overflow to see if somebody could show me how he did it.
 <p>Within a few hours, <a 
 href="http://en.wikipedia.org/wiki/Alex_Martelli">Alex Martelli</a> himself 
 chimed in with a wonderful solution. The gist of the answer is that you can use 
-the <code>inspect</code> module to access the <a 
+the <code class="inline">inspect</code> module to access the <a 
 href="http://www.python.org/doc/2.5.2/lib/typecontextmanager.html">context 
 manager</a>'s calling scope, and figure out what variables have been defined 
-between its <code>__enter__</code> and <code>__exit__</code> functions. I'm 
+between its <code class="inline">__enter__</code> and <code class="inline">__exit__</code> functions. I'm 
 glad I asked aloud, because even if I had stumbled close to the solution, I 
 surely wouldn't have come up with one as complete as his.
 
@@ -80,20 +80,20 @@ with bmap([1,2,3]) as foo:
 print foo # [1.0, 1.5, 2.0]</code>
 
 <p>What you see above are two functions which use a decorator giving them 
-access to the function defined within the <code>with</code> block. The 
+access to the function defined within the <code class="inline">with</code> block. The 
 decorator passes the block to the function as its last argument just <a 
 href="http://eli.thegreenplace.net/2006/04/18/understanding-ruby-blocks-procs-and-methods/">like 
 in Ruby</a>.
 
 <p>To understand how this happens, you need to know how context managers work.  
-Context managers consist of a class with <code>__enter__</code> and 
-<code>__exit__</code> methods which are called upon entering the with block and 
+Context managers consist of a class with <code class="inline">__enter__</code> and 
+<code class="inline">__exit__</code> methods which are called upon entering the with block and 
 upon exiting, just as you'd expect.
 
 <p>Alex's solution involves scanning the scope of the calling function from the 
-<code>__enter__</code> and <code>__exit__</code> methods, and pulling out the 
+<code class="inline">__enter__</code> and <code class="inline">__exit__</code> methods, and pulling out the 
 differences between them. These differences will be all the variables that were 
-defined in the <code>with</code> block. A sketch:
+defined in the <code class="inline">with</code> block. A sketch:
 
 <code lang="python">class FindInteresting(object):
   def __enter__(self):
@@ -120,15 +120,15 @@ functions that reuse old names.
     if id(newf) != id(anf):
       interesting[n] = newf</code>
 
-<p>After this function has run, <code>interesting</code> is a dictionary which 
+<p>After this function has run, <code class="inline">interesting</code> is a dictionary which 
 (probably) contains all the names and values of the variables that have been 
-redefined in the <code>with</code> block.
+redefined in the <code class="inline">with</code> block.
 
-<p>Because we have to use the <code>id</code> check to determine if a name has 
+<p>Because we have to use the <code class="inline">id</code> check to determine if a name has 
 been redefined, and Python sometimes caches objects in memory, our function can 
-be fooled. In this case, <code>interesting</code> will not detect 
-<code>x</code> because it's being redefined and cpython caches the low 
-integers, so <code>id(x)</code> will be the same for both <code>x</code>s.
+be fooled. In this case, <code class="inline">interesting</code> will not detect 
+<code class="inline">x</code> because it's being redefined and cpython caches the low 
+integers, so <code class="inline">id(x)</code> will be the same for both <code class="inline">x</code>s.
 
 <code lang="python">x = 1
 with FindInteresting:
@@ -142,8 +142,8 @@ there's no way to be sure if you missed any redefined names.
 <p>To make the teaser code at the top of the article work, I just wrapped 
 Alex's code into a decorator that returned a context manager, then called the 
 function being decorated with the definitions that we found in the 
-<code>interesting</code> dictionary. The context manager's 
-<code>__call__</code> function gets overridden to allow you to pass in 
+<code class="inline">interesting</code> dictionary. The context manager's 
+<code class="inline">__call__</code> function gets overridden to allow you to pass in 
 arguments for the function being decorated.
 
 <code lang="python">def accepts_block(f):
@@ -179,8 +179,8 @@ def each(iterable, block):
     block(i)</code>
 
 <p>But what if we want to store the result? Turns out, we can further abuse the 
-<code>with</code> block by hijacking its <code>as</code> clause. Because a 
-variable defined in the <code>as</code> clause gets detected by Alex's code, we 
+<code class="inline">with</code> block by hijacking its <code class="inline">as</code> clause. Because a 
+variable defined in the <code class="inline">as</code> clause gets detected by Alex's code, we 
 can use the inspect module to change that variable so that after the with block 
 it reflects the result of our computation.
 
@@ -257,7 +257,7 @@ def foo(cls):
   pass</code>
 
 <p>The main problem with the readability of the first snippet is not that it 
-requires 2 redefinitions and 4 repetitions of <code>foo</code>. Rather, the 
+requires 2 redefinitions and 4 repetitions of <code class="inline">foo</code>. Rather, the 
 main problem is that it places the cart before the horse by putting the 
 function body ahead of the declarations that are required to understand it.
 

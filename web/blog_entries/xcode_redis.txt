@@ -6,67 +6,67 @@ any time soon, I've found Xcode to be a handy debugger.
 It's not difficult to set up, but it is <em>extremely</em> unintuitive, so
 I thought I'd write up a short visual guide.
 
-<p>In this article, I'll assume that <code>~/code/</code> is your directory for
+<p>In this article, I'll assume that <code class="inline">~/code/</code> is your directory for
 storing code; substitute your own directory where required.
 
 <p>The first thing you'll want to do is check out a copy of redis. In your
-<code>~/code</code> directory, clone the official redis repository:
-<code>git clone https://github.com/antirez/redis.git</code>
+<code class="inline">~/code</code> directory, clone the official redis repository:
+<code class="inline">git clone https://github.com/antirez/redis.git</code>
 
-<p>Next, open up Xcode and go to <code>File->New->Project</code> or click
-<code>Create a New
-Xcode Project</code>. On the left-hand pane select <code>Other</code>, and on
-the right, <code>Empty</code>.
+<p>Next, open up Xcode and go to <code class="inline">File->New->Project</code> or click
+<code class="inline">Create a New
+Xcode Project</code>. On the left-hand pane select <code class="inline">Other</code>, and on
+the right, <code class="inline">Empty</code>.
 
 <p><img src="images/xcode_redis/1.jpg">
 
-<p>Enter <code>redis</code> as the product name (or anything else if you so desire) in the
+<p>Enter <code class="inline">redis</code> as the product name (or anything else if you so desire) in the
 next panel, and
 then choose a directory in which to store the xcode project. I recommend
 storing it in a directory separate from your redis git directory, so that you
 don't accidentally commit anything you don't intend.
 
-<p>On the file picker, make sure the <code>Create local git repository for this
+<p>On the file picker, make sure the <code class="inline">Create local git repository for this
 project</code> box is unchecked, as we won't be needing it.
 
 <p>At this point, you should be looking at an empty project:
 
 <p><img src="images/xcode_redis/2.jpg">
 
-<p>Click on <code>File->Add Files to "redis"</code>, and choose the directory into which you
+<p>Click on <code class="inline">File->Add Files to "redis"</code>, and choose the directory into which you
 cloned redis. If you're following along, that should be
-<code>~/code/redis</code>. After you do so, you should see the directory in
+<code class="inline">~/code/redis</code>. After you do so, you should see the directory in
 xcode's Project Navigator.
 
 <p>Now we'll set up a build target, which tells Xcode how to build redis. Click
-on <code>Add Target</code> towards the bottom of the Xcode window, and you should see
+on <code class="inline">Add Target</code> towards the bottom of the Xcode window, and you should see
 something like this:
 
 <p><img src="images/xcode_redis/3.jpg">
 
-<p>Choose <code>Other</code> under the OS X target types and
-<code>External Build System</code> as
-the type of target. On the next pane, enter <code>redis</code> as the product
+<p>Choose <code class="inline">Other</code> under the OS X target types and
+<code class="inline">External Build System</code> as
+the type of target. On the next pane, enter <code class="inline">redis</code> as the product
 name and
-leave the rest of the values at their defaults, and click <code>finish</code>.
+leave the rest of the values at their defaults, and click <code class="inline">finish</code>.
 
-<p>Now, replace <code>$(ARGS)</code> in the <code>Arguments</code> input box
-with <code>clean noopt</code> and enter the directory where you cloned redis in
-the <code>Directory</code> input box. Mine looks like this:
+<p>Now, replace <code class="inline">$(ARGS)</code> in the <code class="inline">Arguments</code> input box
+with <code class="inline">clean noopt</code> and enter the directory where you cloned redis in
+the <code class="inline">Directory</code> input box. Mine looks like this:
 
 <p><img src="images/xcode_redis/4.jpg">
 
-<p>And now... you're almost there. Click the <code>Run</code> button at the
-top left of the screen, and you should see a message saying <code>Build
+<p>And now... you're almost there. Click the <code class="inline">Run</code> button at the
+top left of the screen, and you should see a message saying <code class="inline">Build
 Succeeded</code>.
 
 <p>Finally, at the top left of the window, click on
-<code>"redis"->Edit Scheme</code>.
+<code class="inline">"redis"->Edit Scheme</code>.
 
 <p><img src="images/xcode_redis/5.jpg">
 
-<p>In the pane that drops down, click on the <code>Executable</code> drop down
-and click on <code>other</code>, then select <code>src/redis-server</code> from
+<p>In the pane that drops down, click on the <code class="inline">Executable</code> drop down
+and click on <code class="inline">other</code>, then select <code class="inline">src/redis-server</code> from
 your redis directory. When you're done, the pane should look like this:
 
 <p><img src="images/xcode_redis/6.jpg">
@@ -74,9 +74,9 @@ your redis directory. When you're done, the pane should look like this:
 <p>This tells Xcode to start the redis-server executable after it builds redis,
 so you can then connect to it via redis-cli, send commands, and debug them.
 
-<p>To see if it works, click on the <code>run</code> button at the top left; redis should
+<p>To see if it works, click on the <code class="inline">run</code> button at the top left; redis should
 build and Xcode should start redis-server for you. If you go to a console and
-run <code>redis-cli</code>, it should connect to your localhost. At this point, you can
+run <code class="inline">redis-cli</code>, it should connect to your localhost. At this point, you can
 start adding breakpoints to dig in and see what redis is doing. Here's a
 screenshot of me debugging src/redis.c, showing off some of xcode's debugging
 features:

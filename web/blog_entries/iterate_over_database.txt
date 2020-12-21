@@ -28,7 +28,7 @@ we adopted this idiom to pull a DB connection from the pool and run a query:
 <p>Which is nice because it disposes of both the connection and the dataReader 
 properly on failure, but ugly because it uses a whole bunch of boilerplate.  
 Unfortunately, because doSomething() needs to execute inside both 
-<code>using</code> statements, and we weren't using C# 2.0 until a few months 
+<code class="inline">using</code> statements, and we weren't using C# 2.0 until a few months 
 ago, the only way to avoid the boilerplate would have been to pass in 
 delegates.
 <p>This would have been just as ugly as keeping the boilerplate in the code, so 

@@ -26,8 +26,8 @@ for l in data["entry_list"]:
     log("pyblox day: %s" % l['da'])</textarea><p>
 Can you guess which part of this simple statement is the crucial one which 
 causes everything to work all of a sudden? I couldn't either, so I tested it -
-it's the <code>l['da']</code>. <code>l['mo']</code> has the same effect, 
-but not just <code>l</code>. Something in __getitem__ must be causing the entry
+it's the <code class="inline">l['da']</code>. <code class="inline">l['mo']</code> has the same effect, 
+but not just <code class="inline">l</code>. Something in __getitem__ must be causing the entry
 to do... something. I haven't quite figured that out yet.<p>
 <h2>Yet more on meta-data</h2><p>
 So, as Will points out, pyblosxom needs some sort of meta-data database. I felt

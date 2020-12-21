@@ -17,7 +17,7 @@ discussion in more detail.)<p>
 As you know if you have been keeping up with Python blogs, 
 Phillip has been working hard on adding the aforementioned features to Python by
 abusing decorators (hey, he admitted it). Here's what a generic factorial 
-function can look like with his <code>dispatch</code> module:<p>
+function can look like with his <code class="inline">dispatch</code> module:<p>
 <textarea rows="11" cols="50">@dispatch.generic()
 def fact(n):
     """Factorial"""
@@ -31,7 +31,7 @@ def do_fact(n):
     return n * fact(n-1)</textarea><p>
 While it's very cool that it works, I find it hard to imagine a less Pythonic
 syntax than this. Defining a new function name for each version of 
-<code>fact</code> really hurts
+<code class="inline">fact</code> really hurts
 readability, and the guards become more prominent than the
 actual function definition. Compare it with the Erlang version, and its
 deficiencies become clearer:<p>
@@ -47,8 +47,8 @@ this out:<p>
 def fact(n):
     return n * fact(n-1)</textarea><p>
 Isn't that pretty? In my imaginary world,
-<code>fact(0)</code> is automatically translated into a guard that only allows 
-the first function to be called when <code>n</code> is 0. What are guards, and 
+<code class="inline">fact(0)</code> is automatically translated into a guard that only allows 
+the first function to be called when <code class="inline">n</code> is 0. What are guards, and 
 what do they look like in Bill-Mill-land?
 Some code should make it clear:<p>
 <textarea rows="4" cols="50">def move_pointer(x, y) when x > 0 and y > 0:
@@ -57,8 +57,8 @@ def move_pointer(x, y):
     raise CoordsError, "Negative coord"</textarea><p>
 I don't think I even need to explain that code; if x and y are positive, the 
 first function is called. Else, the second one is called. It <b>just makes sense</b>.
-If you guessed that the function <code>fact(0)</code> above would expand to
-<code>fact(n) when n == 0:</code> , then you're following along. More
+If you guessed that the function <code class="inline">fact(0)</code> above would expand to
+<code class="inline">fact(n) when n == 0:</code> , then you're following along. More
 generally, any constant in the parameter list could be expanded by the
 interpreter into a guard.<p>
 This next example demonstrates both overloading, and the use of guards for
@@ -71,10 +71,10 @@ def move_pointer(*args):
     #an error if no function match is found
     #and no default match is provided</textarea><p>
 The first function accepts one argument, a 2-tuple, and unpacks it 
-to the variables <code>x</code> and <code>y</code>. If <code>y</code>
-can be adapted to an <code>int</code>, then the function is called. If none
-of the more specific <code>move_pointer</code> functions can be found, then 
-the default, <code>move_pointer(*args)</code> would be called. If no default
+to the variables <code class="inline">x</code> and <code class="inline">y</code>. If <code class="inline">y</code>
+can be adapted to an <code class="inline">int</code>, then the function is called. If none
+of the more specific <code class="inline">move_pointer</code> functions can be found, then 
+the default, <code class="inline">move_pointer(*args)</code> would be called. If no default
 were found, an exception would be raised.<p>
 Basically, what I'm dreaming of in this post is stealing some elegant
 syntax for Phillip's work from Erlang and porting it to Python. I think 

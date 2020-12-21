@@ -8,7 +8,7 @@ runninig this site)
 <a href="http://billmill.org/static/files/meta_plugins.tar.gz">here</a>.<p>
 With the time plugin, to alter the time of a blog entry, you simply include
 a comment in the body of the blog entry of the form:<br>
-<code>&lt;!--time: mm/dd/yy HH:MM--&gt;</code><br>You can see an example of
+<code class="inline">&lt;!--time: mm/dd/yy HH:MM--&gt;</code><br>You can see an example of
 this if you do a view source on this entry.<p>
 My next plan is to set up static rendering, and then hopefully set it up so
 that it uploads all new blog entries to my ftp server. If that works, then I'll

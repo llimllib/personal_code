@@ -113,7 +113,7 @@ each_pixel(image_data, function(r, g, b) {
   bvals[b]++;
 });</code>
 
-<p>Where <code>each_pixel</code> is simply a function that loops through the 
+<p>Where <code class="inline">each_pixel</code> is simply a function that loops through the 
 image and passes the red, green, and blue value of each pixel of its first 
 argument to the function passed as its second argument. What we have at the end 
 of this code is three arrays, each containing the count of each possible value 
