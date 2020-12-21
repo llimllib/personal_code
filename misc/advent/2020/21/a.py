@@ -1,5 +1,4 @@
 from collections import Counter
-from ipdb import set_trace as debug
 
 recipes = open("input.txt").read().strip().split("\n")
 
