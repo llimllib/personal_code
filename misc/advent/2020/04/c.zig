@@ -1,26 +1,25 @@
 const std = @import("std");
 const fs = std.fs;
 
-const PassportMap = std.StringHashMap([]const u8);
-const PassportList = std.ArrayList(PassportMap);
 const RegexError = error{InvalidEscape};
 
 const State = struct {
     accept: bool,
     char: ?u8,
+    // https://swtch.com/~rsc/regexp/regexp1.html
+    // can we reduce this to just two out pointers? do we ever want our states
+    // to have more than two ouptuts / can they?
     transitions: StateList,
     mark: bool,
 };
 
 const StateList = std.ArrayList(*State);
 
-const DFA = std.StringHashMap(*State);
-
 const Match = std.ArrayList([]const u8);
 
 const Regex = struct {
     regex: []const u8,
-    dfa: *State,
+    nfa: *State,
     alloc: *std.mem.Allocator,
 
     // TODO: properly free memory. create docs say:
@@ -48,6 +47,8 @@ const Regex = struct {
                 };
                 try curState.transitions.append(st);
                 curState = st;
+            } else if (regex[cur] == '*') {
+                try curState.transitions.append(curState);
             } else {
                 const st = try alloc.create(State);
                 st.* = .{
@@ -61,7 +62,7 @@ const Regex = struct {
             }
         }
         curState.accept = true;
-        return Regex{ .regex = regex, .dfa = root, .alloc = alloc };
+        return Regex{ .regex = regex, .nfa = root, .alloc = alloc };
     }
 
     // XXX: does this accurately destroy all states?
@@ -78,7 +79,7 @@ const Regex = struct {
     }
 
     pub fn destroy(self: *Regex) void {
-        self.destroyState(self.dfa);
+        self.destroyState(self.nfa);
     }
 
     // match returns null if s does not match the regex, and a Match object
@@ -86,7 +87,7 @@ const Regex = struct {
     pub fn match(self: *Regex, s: []const u8) !?Match {
         var groups: Match = Match.init(self.alloc);
         var cur: usize = 0;
-        var state = self.dfa;
+        var state = self.nfa;
         for (s) |c| {
             for (state.transitions.items) |rule| {
                 var toMatch = rule.char.?;
@@ -127,6 +128,18 @@ test "dot character" {
     std.testing.expect((try re.match("bananas")) != null);
     std.testing.expect((try re.match("banter")) == null);
     std.testing.expect((try re.match("ban")) == null);
+}
+
+test "repetition" {
+    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
+    var re = try Regex.compile("ab*d", &alloc.allocator);
+    defer re.destroy();
+    std.testing.expect((try re.match("ad")) != null);
+    std.testing.expect((try re.match("abd")) != null);
+    std.testing.expect((try re.match("abbbbbd")) != null);
+    std.testing.expect((try re.match("acd")) == null);
+    std.testing.expect((try re.match("cd")) == null);
+    std.testing.expect((try re.match("ab")) == null);
 }
 
 // test "memory fuuuuuu" {

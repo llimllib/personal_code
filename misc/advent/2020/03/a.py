@@ -1,4 +1,6 @@
-map_ = [list(l) for l in open("input.txt").read().split("\n") if l]
+import sys
+
+map_ = [list(l) for l in open(sys.argv[1]).read().split("\n") if l]
 w = len(map_[0])
 
 

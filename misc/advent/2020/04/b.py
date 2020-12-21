@@ -79,6 +79,7 @@ for passport in passports:
         valid += 1
         print("valid", passport)
     else:
+        print("invalid", passport)
         invalid += 1
 
 print(valid, invalid)
