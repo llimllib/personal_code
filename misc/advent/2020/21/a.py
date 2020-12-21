@@ -28,4 +28,4 @@ while any(len(v) > 1 for v in allergen_idx.values()):
     for k in [k for k, v in allergen_idx.items() if len(v) > 1]:
         allergen_idx[k] -= known
 
-print("part 2", ",".join(allergen_idx[k].pop() for k in sorted(allergen_idx.keys())))
+print("part 2:", ",".join(allergen_idx[k].pop() for k in sorted(allergen_idx.keys())))
