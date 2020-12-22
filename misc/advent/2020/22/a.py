@@ -20,7 +20,6 @@ def rc(p1, p2):
 
     while p1 and p2:
         key = (tuple(p1), tuple(p2))
-        key = "".join(p1) + "|" + "".join(p2)
         if key in history:
             return 1
         history.add(key)
