@@ -1,6 +1,3 @@
-from operator import mul
-from functools import reduce
-
 p1, p2 = open("input.txt").read().split("\n\n")
 p1 = [int(l) for l in p1.strip().split("\n")[1:]]
 p2 = [int(l) for l in p2.strip().split("\n")[1:]]
