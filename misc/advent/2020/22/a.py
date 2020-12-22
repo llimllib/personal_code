@@ -1,7 +1,6 @@
 from operator import mul
 from functools import reduce
 
-p1, p2 = open("small.txt").read().split("\n\n")
 p1, p2 = open("input.txt").read().split("\n\n")
 p1 = [int(l) for l in p1.strip().split("\n")[1:]]
 p2 = [int(l) for l in p2.strip().split("\n")[1:]]
@@ -33,7 +32,6 @@ def rc(p1, p2):
     return 1 if p1 else 2
 
 
-p1, p2 = open("small.txt").read().split("\n\n")
 p1, p2 = open("input.txt").read().split("\n\n")
 p1 = [int(l) for l in p1.strip().split("\n")[1:]]
 p2 = [int(l) for l in p2.strip().split("\n")[1:]]
