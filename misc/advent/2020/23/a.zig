@@ -119,6 +119,7 @@ pub fn main() !void {
         biginp[i] = i;
     }
     s = loop(biginp[0..], 10_000_000);
+    // gives the wrong answer :shrug:
     print("part 2: ", .{});
     for (s) |j, n| {
         if (n == 1) {
