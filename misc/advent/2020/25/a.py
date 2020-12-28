@@ -1,9 +1,10 @@
 def trans(subj, loops):
     n = 1
-    for i in range(0, stop=loops):
+    for i in range(0, loops):
         n *= subj
         n %= 20201227
     return n
+
 
 def t2(target):
     n = 1
@@ -16,11 +17,13 @@ def t2(target):
         i += 1
     return i
 
+
 def enc_key(card_pub_key, door_pub_key):
     card_priv_key = t2(card_pub_key)
     door_priv_key = t2(door_pub_key)
     assert trans(card_pub_key, door_priv_key) == trans(door_pub_key, card_priv_key)
     return trans(card_pub_key, door_priv_key)
+
 
 # example
 assert t2(5764801) == 8
