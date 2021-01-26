@@ -135,10 +135,6 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'nvim-lua/completion-nvim'
 
-" This allows better customization of the "virtual text" that nvim wants to
-" display on LSP warnings and errors
-Plug 'nvim-lua/diagnostic-nvim'
-
 " Initialize plugin system
 call plug#end()
 
@@ -147,7 +143,6 @@ call plug#end()
 """"
 " https://github.com/neovim/nvim-lspconfig
 " https://github.com/nvim-lua/completion-nvim
-" https://github.com/nvim-lua/diagnostic-nvim
 "
 " Configure nvim's native LSP client. Choose which languages are enabled, and
 " configure them
@@ -162,32 +157,19 @@ set updatetime=100
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Create a shortcut to run the formatter
 nnoremap <leader>f :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
 
-nnoremap <leader>m :NextDiagnosticCycle<CR>
-nnoremap <leader>M :PrevDiagnosticCycle<CR>
+nnoremap <leader>m <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+nnoremap <leader>M <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
 
-" TODO: figure out sign configuration without diagnostic-nvim (:help
-" vim.lsp.diagnostic.set_signs()
-"
-" Some options that are available from diagnostic-nvim:
-let g:diagnostic_enable_virtual_text = 1
-let g:diagnostic_virtual_text_prefix = '•' " default: '■'
-let g:diagnostic_trimmed_virtual_text = '30'
-
-" don't update diagnostics while in insert mode
-let g:diagnostic_insert_delay = 1
-
-" call sign_define("LspDiagnosticsErrorSign", {"text" : "🔥", "texthl" : "LspDiagnosticsError"})
-call sign_define("LspDiagnosticsErrorSign", {"text" : "‡", "texthl" : "LspDiagnosticsError"})
-" call sign_define("LspDiagnosticsWarningSign", {"text" : "⚠️", "texthl" : "LspDiagnosticsWarning"})
-call sign_define("LspDiagnosticsWarningSign", {"text" : "†", "texthl" : "LspDiagnosticsWarning"})
-" call sign_define("LspDiagnosticsInformationSign", {"text" : "📍", "texthl" : "LspDiagnosticsInformation"})
-call sign_define("LspDiagnosticsInformationSign", {"text" : "※", "texthl" : "LspDiagnosticsInformation"})
-" call sign_define("LspDiagnosticsHintSign", {"text" : "✏️", "texthl" : "LspDiagnosticsHint"})
-
+" from :help set_signs
+sign define LspDiagnosticsSignError text=‡ texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text=† texthl=LspDiagnosticsSignWarning linehl= numhl=
+sign define LspDiagnosticsSignInformation text=※ texthl=LspDiagnosticsSignInformation linehl= numhl=
+sign define LspDiagnosticsSignHint text=⁂ texthl=LspDiagnosticsSignHint linehl= numhl=
 
 " From the vim-lsp docs:
 " - Q: How to force-reload LSP?

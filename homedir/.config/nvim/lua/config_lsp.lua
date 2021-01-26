@@ -1,6 +1,5 @@
 local completion = require('completion')
-local diagnostic = require('diagnostic')
-local lsp = require('nvim_lsp')
+local lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
   completion.on_attach(client, bufnr)
@@ -8,7 +7,7 @@ local on_attach = function(client, bufnr)
   -- remove once diagnostic is deprecated
   -- https://github.com/neovim/neovim/pull/12655 (seems like it will go in
   -- soon)
-  diagnostic.on_attach(client, bufnr)
+  -- diagnostic.on_attach(client, bufnr)
 
   -- https://github.com/nvim-lua/diagnostic-nvim/issues/29#issuecomment-638040064
   -- If you want to have the diagnostic information come up on hover, uncomment this:
@@ -21,6 +20,7 @@ local on_attach = function(client, bufnr)
   -- that
 end
 
+-- npm install -g typescript typescript-language-server
 lsp.tsserver.setup{ on_attach=on_attach }
 lsp.gopls.setup{ on_attach=on_attach }
 lsp.solargraph.setup{ on_attach=on_attach }
@@ -55,18 +55,20 @@ lsp.pyls.setup {
 -- https://github.com/nvim-lua/diagnostic-nvim/issues/73
 --
 -- so let's configure diagnostics here
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
---   vim.lsp.diagnostic.on_publish_diagnostics, {
---     -- set to false to disable virtual text displays
---     virtual_text = true,
--- 
---     -- show diagnostic signs
---     -- To configure sign display,
---     --  see: ":help vim.lsp.diagnostic.set_signs()"
---     signs = true,
--- 
---     -- don't update diagnostics while we're in insert mode
---     -- (Not sure if I'd rather wait until save, or if that's possible)
---     update_in_insert = false,
---   }
--- )
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    -- set to false to disable virtual text displays
+    virtual_text = {
+        -- the default is '■' but I find that too distracting
+        prefix = '•',
+    },
+
+    -- configured with the `sign` command in init.vim, as suggested in :help
+    -- set_signs
+    signs = true,
+
+    -- don't update diagnostics while we're in insert mode
+    -- (Not sure if I'd rather wait until save, or if that's possible)
+    update_in_insert = false,
+  }
+)
