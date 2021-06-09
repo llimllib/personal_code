@@ -50,7 +50,7 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 alias prune='git remote prune origin'
 alias pr="hub pull-request -o"
 alias draft="hub pull-request -d -o"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias c="clear"
 alias da="direnv allow"
 alias de="direnv edit"
@@ -59,6 +59,7 @@ alias jless="jq -C '.' | less"
 alias dmc="docker-compose run --rm mctapi"
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case"
 alias govim="vim -u ~/.govimrc"
+alias vim="nvim"
 
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 
@@ -193,7 +194,12 @@ export PATH="$HOME/bin:$PATH"
 if command -v rbenv 1>/dev/null 2>&1; then eval "$(rbenv init -)"; fi
 
 # pyenv
-if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)"; fi
+if command -v pyenv 1>/dev/null 2>&1; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
 
 # nodenv
 if command -v nodenv 1>/dev/null 2>&1; then eval "$(nodenv init -)"; fi
@@ -237,6 +243,12 @@ function worktree {
     fi
 
     cp .envrc "../$dirname"
+    if [ -d node_modules ]; then
+        ln -sf "$(pwd)/node_modules" "../$dirname/node_modules"
+    fi
+    if [ -f .env ]; then
+        cp .env "../$dirname/"
+    fi
     cd "../$dirname" || return
     direnv allow
     set +x
@@ -291,3 +303,22 @@ if [[ -f /usr/libexec/java_home ]]; then
     export JAVA_HOME=$jh
     export PATH="$PATH:$JAVA_HOME/bin"
 fi
+
+# brew install google-cloud-sdk
+# we'll use the presence of this file to decide whether this is applicable or
+# not
+if [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ]]; then
+    # source [] in your profile to enable shell command completion for gcloud.
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
+    # Source [] in your profile to add the Google Cloud SDK command line tools to your $PATH.
+    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+fi
+
+# https://asdf-vm.com/#/core-manage-asdf?id=add-to-your-shell
+# brew --prefix is _way_ too slow, so I'm just going to hardcode the value it
+# is on this system
+if [[ -f /usr/local/opt/asdf/asdf.sh ]]; then
+    source /usr/local/opt/asdf/asdf.sh
+    source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+fi
+[ -f "/Users/llimllib/.ghcup/env" ] && source "/Users/llimllib/.ghcup/env" # ghcup-env
