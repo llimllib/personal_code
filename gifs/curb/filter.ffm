@@ -1,0 +1,25 @@
+[0:v]
+fps=12,
+scale=640:-1,
+split [a][b];[a] palettegen [p];[b][p] paletteuse,
+colorlevels=rimax=0.702:gimax=0.702:bimax=0.702,
+drawtext='
+    fontfile=/Users/llimllib/Library/Fonts/ProximaNova-Bold.ttf:
+    borderw=2:
+    bordercolor=white:
+    fontcolor=#118762:
+    fontsize=50:
+    enable=lt(t,8)*gt(t,4):
+    x=(main_w/2-text_w/2):
+    y=420:
+    text=yes you’ve got it larry',
+drawtext='
+    fontfile=/Users/llimllib/Library/Fonts/ProximaNova-Bold.ttf:
+    borderw=2:
+    bordercolor=white:
+    fontcolor=#118762:
+    fontsize=50:
+    enable=gt(t,10.5):
+    x=(main_w/2-text_w/2):
+    y=420:
+    text=what the fuck'
