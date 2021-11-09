@@ -1,14 +1,6 @@
-local completion = require('completion')
 local lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
-  completion.on_attach(client, bufnr)
-
-  -- remove once diagnostic is deprecated
-  -- https://github.com/neovim/neovim/pull/12655 (seems like it will go in
-  -- soon)
-  -- diagnostic.on_attach(client, bufnr)
-
   -- https://github.com/nvim-lua/diagnostic-nvim/issues/29#issuecomment-638040064
   -- If you want to have the diagnostic information come up on hover, uncomment this:
   -- vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()')
@@ -22,32 +14,28 @@ end
 
 -- npm install -g typescript typescript-language-server
 lsp.tsserver.setup{ on_attach=on_attach }
+
+-- (cd /tmp && GO111MODULE=on go get golang.org/x/tools/gopls@latest)
 lsp.gopls.setup{ on_attach=on_attach }
+
+-- gem install solargraph
 lsp.solargraph.setup{ on_attach=on_attach }
 
--- installing pyls, and you need a specific plugin for black. Docs:
--- https://github.com/palantir/python-language-server/tree/7a98c2c5f9de193a02c2a53405fb951ff7b3ae6b#3rd-party-plugins
--- 
--- pip install 'python-language-server[all]'
--- pip install pyls-black
-lsp.pyls.setup {
-  on_attach = on_attach,
-  settings = {
-    pyls = {
-      configurationSources = {'flake8'},
-      plugins = {
-          autopep8 = {enabled = false},
-          black = {enabled = true},
-          flake8 = {enabled = true},
-          mccabe = {enabled = false},
-          pycodestyle = {enabled = false},
-          pyflakes = {enabled = false},
-          yapf = {enabled = false}
-      }
-    }
-  }
+-- npm i -g bash-language-server
+-- This doesn't seem to be working rn
+lsp.bashls.setup{ on_attach=on_attach }
+
+-- now I don't have formatting set up
+-- TODO install https://github.com/mattn/efm-langserver
+-- pip install pyright
+lsp.pyright.setup {
+   on_attach = on_attach,
 }
 
+lsp.elixirls.setup{
+    on_attach = on_attach,
+    cmd = { "/opt/elixir-ls/language_server.sh" };
+}
 
 -- uncomment this once https://github.com/neovim/neovim/pull/12655 gets merged
 --

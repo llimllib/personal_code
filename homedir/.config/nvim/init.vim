@@ -128,12 +128,35 @@ au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+"
+" ~/.local/share/nvim/plugged
+call plug#begin(stdpath('data') . '/plugged')
 
-" requires nvim 0.5.0 (unreleased as of Nov 4 2020)
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'nvim-lua/completion-nvim'
+
+Plug 'junegunn/goyo.vim'
+
+" format code https://github.com/sbdchd/neoformat
+" for now I'm going to try and leave this to the language servers?
+" Plug 'sbdchd/neoformat'
+
+" fancy icons
+Plug 'kyazdani42/nvim-web-devicons'
+
+" handy lua functions for nvim;
+" required for telescope.vim
+Plug 'nvim-lua/plenary.nvim'
+
+" fancy fuzzy finder
+Plug 'nvim-telescope/telescope.nvim'
+
+" terraform syntax highlighting. Includes :Terraform command I don't use
+Plug 'hashivim/vim-terraform'
+
+" Elixir highlighting
+Plug 'elixir-editors/vim-elixir'
 
 " Initialize plugin system
 call plug#end()
@@ -141,26 +164,39 @@ call plug#end()
 """"
 """" Configure LSP
 """"
-" https://github.com/neovim/nvim-lspconfig
-" https://github.com/nvim-lua/completion-nvim
-"
-" Configure nvim's native LSP client. Choose which languages are enabled, and
-" configure them
-" Pretty good docs on using lua in neovim:
-" https://github.com/nanotee/nvim-lua-guide#where-to-put-lua-files
+
+" this seems not to be necessary any more? not sure why
 lua require('config_lsp')
 
 " Wait 100ms before running cursorhold (shows diagnostic messages)
 set updatetime=100
 
-" Auto-format *.py files prior to saving them
+" Auto-format files prior to saving them
+" TODO: these should probably be in an augroup, for reasons that I do not
+" remember?
+" TODO: set up a command shortcut to disable auto-formatting on write
+" TODO: possibly set up a shortcut in the lua config that just always calls
+" lsp.buf.formatting_sync if it's enabled? cf:
+" https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/
+" , which does it in the on_complete function with:
+" map("n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
 
 " Create a shortcut to run the formatter
-nnoremap <leader>f :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
+nnoremap <leader>fa :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
+" let's try using Neoformat instead
+" nnoremap <leader>f :Neoformat<CR>
+
+" To enable auto-formatting, uncomment this, but I'm going to run with manual
+" formatting for now:
+" augroup fmt
+"   autocmd!
+"   autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 
 nnoremap <leader>m <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
 nnoremap <leader>M <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
@@ -237,4 +273,19 @@ nnoremap <leader>j :%!jq ''<CR>
 " Format xml
 nnoremap <leader>x :%!xmllint --format --encode UTF-8 -<CR>
 " Format html
-nnoremap <leader>h :%!tidy -utf8 -m -i %<CR>
+nnoremap <leader>h :%!tidy -utf8 -q --show-body-only true -f /tmp/tidyerrors -i %<CR>
+" format code generally
+
+autocmd! User GoyoEnter nested set linebreak
+autocmd! User GoyoLeave nested set nolinebreak
+
+" configure telescope
+" https://github.com/nvim-telescope/telescope.nvim#usage
+" Find files using Telescope command-line sugar.
+"
+" <c-x> opens in a split
+" <c-v> opens in a vsplit
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
