@@ -162,10 +162,6 @@ export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
 # %T equivalent to %H:%M:%S (24-hours format)
 HISTTIMEFORMAT='%F %T '
 
-#lex
-export LEX_DATA=/usr/local/share/lex/data
-export LEX_DB=/usr/local/share/lex/db
-
 #set golang root dir
 export GOPATH=~/go
 export GOBIN=~/go/bin
@@ -177,20 +173,8 @@ export GOBIN=~/go/bin
 # golang binaries
 export PATH=$PATH:$GOPATH/bin
 
-# haskell binaries
-export PATH=$PATH:$HOME/.cabal/bin
-
-# ruby binaries to path
-export PATH=$PATH:/usr/local/opt/ruby/bin
-
-# rust binaries
-export PATH="$PATH:$HOME/.cargo/bin"
-
 # yarn (javascript) binaries
 export PATH="$PATH:$HOME/.yarn/bin"
-
-# prefer n's version of node to /usr/local/bin/node
-export PATH="$HOME/bin:$PATH"
 
 #asdf
 if [[ -f $HOME/.asdf/asdf.sh ]]; then
