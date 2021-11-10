@@ -1,17 +1,21 @@
-EDITOR=$(which vim)
+# add homebrew bin, and prefer local/bin and local/sbin to bin. git-prompt
+# depends on being able to find brew, so this must come before that.
+export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH
+
+EDITOR=$(which nvim)
 export EDITOR
 
 # If we're running tmux, change the TERM and open vim with reattach-to-user-namespace so that cnp works
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 #get git completion script and branch prompt
-[ -f /usr/local/etc/bash_completion.d/git-completion.bash ] && source /usr/local/etc/bash_completion.d/git-completion.bash
-[ -f /usr/local/etc/bash_completion.d/git-prompt.sh ] && source /usr/local/etc/bash_completion.d/git-prompt.sh
+[ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ] && source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+[ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ] && source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
 
-# brew install bash-completion2
+# brew install bash-completion@2
 # gets you autocompletions in make, and in many many other programs:
 # https://github.com/scop/bash-completion/tree/master/completions
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 [ -f ~/.bash.local.sh ] && source ~/.bash.local.sh
 
@@ -46,9 +50,10 @@ alias ga="git add"
 alias gp="git push"
 alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
 alias gph="git push heroku"
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit | head"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias prune='git remote prune origin'
-alias pr="hub pull-request -o"
+alias pr="gh pr create"
 alias draft="hub pull-request -d -o"
 alias dc="docker compose"
 alias c="clear"
@@ -169,9 +174,6 @@ export GOBIN=~/go/bin
 # PATH CONFIGURATION SECTION
 #
 
-# prefer local/bin and local/sbin to bin
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
 # golang binaries
 export PATH=$PATH:$GOPATH/bin
 
@@ -190,19 +192,11 @@ export PATH="$PATH:$HOME/.yarn/bin"
 # prefer n's version of node to /usr/local/bin/node
 export PATH="$HOME/bin:$PATH"
 
-# rbenv
-if command -v rbenv 1>/dev/null 2>&1; then eval "$(rbenv init -)"; fi
-
-# pyenv
-if command -v pyenv 1>/dev/null 2>&1; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init --path)"
-    eval "$(pyenv init -)"
+#asdf
+if [[ -f $HOME/.asdf/asdf.sh ]]; then
+    . $HOME/.asdf/asdf.sh
+    . $HOME/.asdf/completions/asdf.bash
 fi
-
-# nodenv
-if command -v nodenv 1>/dev/null 2>&1; then eval "$(nodenv init -)"; fi
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -248,6 +242,9 @@ function worktree {
     fi
     if [ -f .env ]; then
         cp .env "../$dirname/"
+    fi
+    if [ -f .tool-versions ]; then
+        cp .tool-versions "../$dirname/"
     fi
     cd "../$dirname" || return
     direnv allow
@@ -299,26 +296,19 @@ function rmtree {
 # /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 if [[ -f /usr/libexec/java_home ]]; then
     # separate from the assignment to make shellcheck happy
-    jh=$(/usr/libexec/java_home)
-    export JAVA_HOME=$jh
-    export PATH="$PATH:$JAVA_HOME/bin"
+    jh=$(/usr/libexec/java_home 1>/dev/null 2>&1)
+    # if there are no javas installed, java_home will exit with a nonzero
+    # status code. in that case, do nothing
+    if [[ $? -eq 0 ]]; then
+        export JAVA_HOME=$jh
+        export PATH="$PATH:$JAVA_HOME/bin"
+    fi
 fi
 
 # brew install google-cloud-sdk
 # we'll use the presence of this file to decide whether this is applicable or
 # not
-if [[ -f /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc ]]; then
-    # source [] in your profile to enable shell command completion for gcloud.
-    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc
-    # Source [] in your profile to add the Google Cloud SDK command line tools to your $PATH.
-    source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc
+if [[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc" ]]; then
+    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
+    source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 fi
-
-# https://asdf-vm.com/#/core-manage-asdf?id=add-to-your-shell
-# brew --prefix is _way_ too slow, so I'm just going to hardcode the value it
-# is on this system
-if [[ -f /usr/local/opt/asdf/asdf.sh ]]; then
-    source /usr/local/opt/asdf/asdf.sh
-    source /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-fi
-[ -f "/Users/llimllib/.ghcup/env" ] && source "/Users/llimllib/.ghcup/env" # ghcup-env
