@@ -49,9 +49,10 @@ set laststatus=2
 nnoremap <leader>p :pu +<CR>
 vnoremap <leader>y "+y
 
-" edit vimrc and source vimrc, respectively
+" edit vimrc, source vimrc and edit lua config
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>es :source $MYVIMRC<cr>
+nnoremap <leader>el :vsplit ~/.config/nvim/lua/config_lsp.lua<cr>
 
 " turn on persistent undo, and store it in the vim dir
 set undofile
@@ -134,8 +135,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'neovim/nvim-lspconfig'
 
-Plug 'nvim-lua/completion-nvim'
-
 Plug 'junegunn/goyo.vim'
 
 " format code https://github.com/sbdchd/neoformat
@@ -157,6 +156,22 @@ Plug 'hashivim/vim-terraform'
 
 " Elixir highlighting
 Plug 'elixir-editors/vim-elixir'
+
+" General purpose Language Server - for things that can be done with programs
+" rather than LSPs, but as an LSP. `brew install efm-langserver`
+Plug 'mattn/efm-langserver'
+
+" install nvim-cmp, for code completion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" I don't use snippets or know what they are, but nvim-cmp requires this, so
+" whatever I guess
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 " Initialize plugin system
 call plug#end()
@@ -183,8 +198,9 @@ set updatetime=100
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
+autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+" for javascript, try to use prettier instead of tsserver's built-in formatter
 
 " Create a shortcut to run the formatter
 nnoremap <leader>fa :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
@@ -229,29 +245,9 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 """"" End LSP Config
 
-""""
-"""" completion-nvim config
-"""" https://github.com/nvim-lua/completion-nvim#configuration
-""""
-" Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
-
-" Avoid showing message extra message when using completion
-set shortmess+=c
-
-" disable auto popup
-let g:completion_enable_auto_popup = 0
-
-" use <tab> to trigger popup
-nmap <tab> <Plug>(completion_smart_tab)
-nmap <s-tab> <Plug>(completion_smart_s_tab)
-imap <tab> <Plug>(completion_smart_tab)
-imap <s-tab> <Plug>(completion_smart_s_tab)
-"""" end completion-nvim config
+""""" configure nvim-cmp (code completion)
+set completeopt=menu,menuone,noselect
+""""" end nvim-cmp
 
 "Specific commands for filetypes
 augroup myfiletypes
