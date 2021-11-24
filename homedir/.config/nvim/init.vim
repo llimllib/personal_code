@@ -200,7 +200,6 @@ autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
-" for javascript, try to use prettier instead of tsserver's built-in formatter
 
 " Create a shortcut to run the formatter
 nnoremap <leader>fa :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
