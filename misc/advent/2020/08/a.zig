@@ -1,3 +1,5 @@
+// Test with: zig test a.zig
+// Run with: zig run a.zig -- input.txt
 const std = @import("std");
 const fs = std.fs;
 
@@ -14,9 +16,9 @@ const Instruction = struct {
 
 const InstructionList = std.ArrayList(*Instruction);
 
-pub fn parse(input: []const u8, alloc: *std.mem.Allocator) InstructionList {
+pub fn parse(input: []const u8, alloc: std.mem.Allocator) InstructionList {
     var instructions = InstructionList.init(alloc);
-    var data = std.mem.tokenize(input, " \n");
+    var data = std.mem.tokenize(u8, input, " \n");
     while (data.next()) |instruction| {
         const instr = alloc.create(Instruction) catch unreachable;
         var op = Op.nop;
@@ -36,18 +38,19 @@ pub fn parse(input: []const u8, alloc: *std.mem.Allocator) InstructionList {
 }
 
 test "parse" {
-    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
-    var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", &alloc.allocator);
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var allocator = gpa.allocator();
+    var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", allocator);
     std.debug.print("{}\n", .{instr});
-    std.testing.expect(instr.items[0].op == Op.nop);
-    std.testing.expect(instr.items[0].val == 0);
-    std.testing.expect(instr.items[4].op == Op.jmp);
-    std.testing.expect(instr.items[4].val == -3);
+    try std.testing.expect(instr.items[0].op == Op.nop);
+    try std.testing.expect(instr.items[0].val == 0);
+    try std.testing.expect(instr.items[4].op == Op.jmp);
+    try std.testing.expect(instr.items[4].val == -3);
 }
 
 const DupeMap = std.AutoHashMap(isize, bool);
 
-pub fn runToDupe(instructions: InstructionList, alloc: *std.mem.Allocator) isize {
+pub fn runToDupe(instructions: InstructionList, alloc: std.mem.Allocator) isize {
     var accum: isize = 0;
     var iptr: isize = 0;
     var dupes: DupeMap = DupeMap.init(alloc);
@@ -74,10 +77,11 @@ pub fn runToDupe(instructions: InstructionList, alloc: *std.mem.Allocator) isize
 }
 
 test "runToDupe" {
-    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
-    var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", &alloc.allocator);
-    var a = runToDupe(instr, &alloc.allocator);
-    std.testing.expect(a == 5);
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var allocator = gpa.allocator();
+    var instr = parse("nop +0\nacc +1\njmp +4\nacc +3\njmp -3\nacc -99\nacc +1\njmp -4\nacc +6", allocator);
+    var a = runToDupe(instr, allocator);
+    try std.testing.expect(a == 5);
 }
 
 pub fn runToEnd(instructions: InstructionList) ?isize {
@@ -140,12 +144,13 @@ pub fn findFix(instructions: InstructionList) isize {
 }
 
 pub fn main() !void {
-    var alloc = std.heap.GeneralPurposeAllocator(.{}){};
-    var args = try std.process.argsAlloc(&alloc.allocator);
-    const input = try std.fs.cwd().readFileAlloc(&alloc.allocator, args[1], std.math.maxInt(usize));
+    var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+    var allocator = gpa.allocator();
+    var args = try std.process.argsAlloc(allocator);
+    const input = try std.fs.cwd().readFileAlloc(allocator, args[1], std.math.maxInt(usize));
 
-    var instructions = parse(input, &alloc.allocator);
-    var accum = runToDupe(instructions, &alloc.allocator);
+    var instructions = parse(input, allocator);
+    var accum = runToDupe(instructions, allocator);
     std.debug.print("accumulator {}\n", .{accum});
     accum = findFix(instructions);
     std.debug.print("accumulator {}\n", .{accum});
