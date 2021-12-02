@@ -1,37 +1,27 @@
-import io
-from itertools import tee, takewhile
-import functools
+from itertools import tee
+from typing import Iterator, Tuple, TypeVar, Callable
+
+T = TypeVar("T")
 
 
-def compose(*functions):
-    return functools.reduce(lambda f, g: lambda x: f(g(x)), functions, lambda x: x)
+# attempting to type this properly is for the insane
+def compose(f: Callable, g: Callable) -> Callable:
+    return lambda *args: f(g(*args))
 
 
-def skip(it):
+def skip(it: Iterator[T]) -> Iterator[T]:
     next(it)
     return it
 
 
-def iterpair(it):
+def iterpair(it: Iterator) -> Iterator[Tuple[Iterator, Iterator]]:
     it1, it2 = tee(it)
     return zip(it1, skip(it2))
 
 
-def itertrip(it):
+def itertrip(it) -> Iterator[Tuple[Iterator, Iterator, Iterator]]:
     it1, it2, it3 = tee(it, 3)
     return zip(it1, skip(it2), skip(skip(it3)))
-
-
-def openints(fname: io.TextIOBase):
-    """
-    openints taks the filename of a file containing
-    integers separated by newlines and returns an iterator
-    of integers
-
-    >>> list(openints("small.txt"))
-    [100, 101, 102]
-    """
-    return map(int, fname)
 
 
 def strip(x: str) -> str:
@@ -42,7 +32,19 @@ def split(x: str) -> list[str]:
     return x.split()
 
 
-def openchars(fname: str):
+def openints(fname: str) -> Iterator[int]:
+    """
+    openints taks the filename of a file containing
+    integers separated by newlines and returns an iterator
+    of integers
+
+    >>> list(openints("small.txt"))
+    [100, 101, 102]
+    """
+    return map(int, open(fname))
+
+
+def openchars(fname: str) -> Iterator[list[str]]:
     """
     openchars returns an iterator over a list of lists of
     characters, with the newlines stripped
@@ -55,7 +57,7 @@ def openchars(fname: str):
     return map(compose(list, strip), open(fname))
 
 
-def opensplit(fname: str):
+def opensplit(fname: str) -> Iterator[list[str]]:
     """
     opensplit returns an iterator over lines split on spaces
 
@@ -67,20 +69,21 @@ def opensplit(fname: str):
     return map(compose(list, split), open(fname))
 
 
-def openlines(fname: str):
+def openlines(fname: str) -> Iterator[str]:
     """
     openlines returns an iterator over a list of lines of
     characters, with the newlines stripped
 
     assuming "small.txt" is a file containing "##...###\n..###..."
     >>> list(openlines("small.txt"))
-    [['##...###'],
-     ['..###...']]
+    ['##...###',
+     '..###...']
     """
     return map(strip, open(fname))
 
 
-def opengroups(fname: str):
+# https://pypi.org/project/more-itertools/ is helpful
+def opengroups(fname: str) -> Iterator[list[str]]:
     """
     openlines returns an iterator over a list of groups of
     lines of characters separated by pairs of newlines,
