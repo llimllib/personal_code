@@ -92,7 +92,12 @@ def opengroups(fname: str):
      ['cd', 'e', 'f'],
      ['g']]
     """
-    raise Exception("not implemented yet")
+    buf = []
     it = open(fname)
-
-    yield takewhile(lambda x: x != "", it)
+    for line in it:
+        if line == "\n":
+            yield buf
+            buf = []
+        else:
+            buf.append(line.strip())
+    yield buf
