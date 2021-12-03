@@ -57,6 +57,19 @@ def openchars(fname: str) -> Iterator[list[str]]:
     return map(compose(list, strip), open(fname))
 
 
+def openbits(fname: str) -> Iterator[list[str]]:
+    """
+    openbits returns an iterator over a list of lists of
+    numbers
+
+    assuming "small.txt" is a file containing "1011\n0110"
+    >>> list(map(list, openchars("small.txt")))
+    [[1, 0, 1, 1],
+     [0, 1, 1, 0]]
+    """
+    return map(compose(lambda x: map(int, x), compose(list, strip)), open(fname))
+
+
 def opensplit(fname: str) -> Iterator[list[str]]:
     """
     opensplit returns an iterator over lines split on spaces
