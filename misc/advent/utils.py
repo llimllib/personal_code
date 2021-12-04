@@ -1,4 +1,4 @@
-from itertools import tee
+from itertools import tee, chain
 from typing import Iterator, Tuple, TypeVar, Callable
 
 T = TypeVar("T")
@@ -117,3 +117,13 @@ def opengroups(fname: str) -> Iterator[list[str]]:
         else:
             buf.append(line.strip())
     yield buf
+
+
+def flatten(list_of_lists):
+    "Flatten one level of nesting"
+    return chain.from_iterable(list_of_lists)
+
+
+def printmat(list_of_lists, sep=" ", width=0):
+    for row in list_of_lists:
+        print(sep.join([str(x).ljust(width) for x in row]))
