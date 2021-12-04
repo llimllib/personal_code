@@ -14,27 +14,21 @@ def parse(f):
     return ns, boards[:-1]
 
 
-def negz(n):
-    """return true if n < 0 or n == -0.0"""
-    # is there an easier way to check for -0.0? there's no math.sign
-    return n < 0 or math.copysign(1.0, n) < 0
-
-
 def markboards(n, boards):
     for board in boards:
         for row in board:
             for i in range(len(board)):
                 if row[i] == n:
-                    row[i] = -row[i]
+                    row[i] = -1
 
 
 def winner(board):
     l = len(board)
     for r in range(l):
-        if all(negz(board[r][i]) for i in range(l)):
+        if all(board[r][i] < 0 for i in range(l)):
             return True
     for c in range(l):
-        if all(negz(board[i][c]) for i in range(l)):
+        if all(board[i][c] < 0 for i in range(l)):
             return True
 
 
