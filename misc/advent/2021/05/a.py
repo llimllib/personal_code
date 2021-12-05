@@ -13,22 +13,19 @@ class Line:
     def xrange(self):
         if self.x2 > self.x1:
             return range(self.x1, self.x2 + 1)
-        else:
-            return range(self.x1, self.x2 - 1, -1)
+        return range(self.x1, self.x2 - 1, -1)
 
     def yrange(self):
         if self.y2 > self.y1:
             return range(self.y1, self.y2 + 1)
-        else:
-            return range(self.y1, self.y2 - 1, -1)
+        return range(self.y1, self.y2 - 1, -1)
 
     def points(self):
         if self.x1 == self.x2:
             return [(self.x1, y) for y in self.yrange()]
         if self.y1 == self.y2:
             return [(x, self.y1) for x in self.xrange()]
-        else:
-            return zip(self.xrange(), self.yrange())
+        return zip(self.xrange(), self.yrange())
 
 
 def domain(ls):
