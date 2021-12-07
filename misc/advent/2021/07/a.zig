@@ -93,6 +93,7 @@ pub fn main() !void {
     defer allocator.free(input);
 
     var ns = try parse(input, allocator);
+    defer ns.deinit();
     try minfuel(ns);
     try minfuel2(ns);
 }
