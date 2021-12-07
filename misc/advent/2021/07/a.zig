@@ -1,3 +1,9 @@
+// To run:
+// zig run a.zig -- input.txt
+//
+// To compile and run:
+// zig build-exe ./a.zig -O ReleaseSmall
+// ./a input.txt
 const std = @import("std");
 
 const stdout = std.io.getStdOut().writer();
@@ -47,12 +53,7 @@ fn minfuel(ns: std.ArrayList(i32)) !void {
 }
 
 fn cost(n: i32) i32 {
-    var sum: i32 = 0;
-    var start: i32 = 1;
-    while (start <= n) : (start += 1) {
-        sum += start;
-    }
-    return sum;
+    return @divFloor(n * (n + 1), 2);
 }
 
 fn minfuel2(ns: std.ArrayList(i32)) !void {
