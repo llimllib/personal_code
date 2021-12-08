@@ -20,10 +20,6 @@ const InstructionError = error{
     InvalidInstruction,
 };
 
-const BoundsError = error{
-    OutOfBounds,
-};
-
 fn parse(input: []const u8, alloc: std.mem.Allocator) !InstructionList {
     var ns = InstructionList.init(alloc);
 
@@ -159,8 +155,6 @@ pub fn main() !void {
             if (ns.items[0] == 19690720) {
                 try stdout.print("-> 100 * {} + {} = {}\n", .{ noun, verb, 100 * noun + verb });
                 break;
-            } else {
-                //try stdout.print("-> {}, {} = {}\n", .{ noun, verb, ns.items[0] });
             }
         }
         verb = 0;
