@@ -30,11 +30,11 @@ def basin(matrix, r, c):
     maxcol = len(matrix[0]) - 1
 
     frontier = set([(r, c)])
-    seen = []
+    seen = set()
     size = 0
     while len(frontier):
         r, c = frontier.pop()
-        seen.append((r, c))
+        seen.add((r, c))
         if matrix[r][c] != 9:
             size += 1
             if r > 0 and (r - 1, c) not in seen:
