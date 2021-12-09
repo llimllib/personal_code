@@ -55,7 +55,6 @@ def mins(matrix):
     basins = []
     for r in range(len(matrix)):
         for c in range(len(matrix[0])):
-
             if all(
                 matrix[r][c] < x
                 for x in (
