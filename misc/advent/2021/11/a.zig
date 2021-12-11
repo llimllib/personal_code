@@ -53,39 +53,18 @@ fn coredump() void {
 }
 
 fn flash(row: usize, col: usize) void {
-    if (board[row][col] == FLASH) {
-        board[row][col] = FLASHED;
-        if (row > 0 and col > 0) {
-            board[row - 1][col - 1] += 1;
-            flash(row - 1, col - 1);
-        }
-        if (row > 0) {
-            board[row - 1][col] += 1;
-            flash(row - 1, col);
-        }
-        if (row > 0 and col + 1 < width) {
-            board[row - 1][col + 1] += 1;
-            flash(row - 1, col + 1);
-        }
-        if (col + 1 < width) {
-            board[row][col + 1] += 1;
-            flash(row, col + 1);
-        }
-        if (row + 1 < width and col + 1 < width) {
-            board[row + 1][col + 1] += 1;
-            flash(row + 1, col + 1);
-        }
-        if (row + 1 < width) {
-            board[row + 1][col] += 1;
-            flash(row + 1, col);
-        }
-        if (row + 1 < width and col > 0) {
-            board[row + 1][col - 1] += 1;
-            flash(row + 1, col - 1);
-        }
-        if (col > 0) {
-            board[row][col - 1] += 1;
-            flash(row, col - 1);
+    if (!board[row][col] > FLASH)
+        return;
+
+    var rowm: isize = -1;
+    while (rowm < 2) : (rowm += 1) {
+        var colm: isize = -1;
+        while (colm < 2) : (colm += 1) {
+            if (rowm == 0 and colm == 0) continue;
+            if (row + rowm > 0 and row + rowm < width and col + colm > 0 and col + colm < width) {
+                board[row + rowm][col + colm] += 1;
+                flash(row + rowm, col + colm);
+            }
         }
     }
 }
