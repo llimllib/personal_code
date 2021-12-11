@@ -42,7 +42,7 @@ fn coredump() void {
     while (row < width) : (row += 1) {
         var col: usize = 0;
         while (col < width) : (col += 1) {
-            if (board[row][col] <= FLASH) {
+            if (board[row][col] != 0 and !(board[row][col] > FLASH)) {
                 stdout.print("{}", .{board[row][col]}) catch unreachable;
             } else {
                 stdout.print("\u{001b}[31m0\u{001b}[0m", .{}) catch unreachable;
@@ -52,21 +52,58 @@ fn coredump() void {
     }
 }
 
+var flashes: usize = 0;
+
 fn flash(row: usize, col: usize) void {
-    if (!board[row][col] > FLASH)
+    if (board[row][col] <= FLASH or board[row][col] >= FLASHED)
         return;
 
-    var rowm: isize = -1;
-    while (rowm < 2) : (rowm += 1) {
-        var colm: isize = -1;
-        while (colm < 2) : (colm += 1) {
-            if (rowm == 0 and colm == 0) continue;
-            if (row + rowm > 0 and row + rowm < width and col + colm > 0 and col + colm < width) {
-                board[row + rowm][col + colm] += 1;
-                flash(row + rowm, col + colm);
-            }
+    board[row][col] = FLASHED;
+    flashes += 1;
+
+    if (row > 0 and col > 0) {
+        board[row - 1][col - 1] += 1;
+        flash(row - 1, col - 1);
+    }
+    if (row > 0) {
+        board[row - 1][col] += 1;
+        flash(row - 1, col);
+    }
+    if (row > 0 and col + 1 < width) {
+        board[row - 1][col + 1] += 1;
+        flash(row - 1, col + 1);
+    }
+    if (col + 1 < width) {
+        board[row][col + 1] += 1;
+        flash(row, col + 1);
+    }
+    if (row + 1 < width and col + 1 < width) {
+        board[row + 1][col + 1] += 1;
+        flash(row + 1, col + 1);
+    }
+    if (row + 1 < width) {
+        board[row + 1][col] += 1;
+        flash(row + 1, col);
+    }
+    if (row + 1 < width and col > 0) {
+        board[row + 1][col - 1] += 1;
+        flash(row + 1, col - 1);
+    }
+    if (col > 0) {
+        board[row][col - 1] += 1;
+        flash(row, col - 1);
+    }
+}
+
+fn allflash() bool {
+    var row: usize = 0;
+    while (row < width) : (row += 1) {
+        var col: usize = 0;
+        while (col < width) : (col += 1) {
+            if (board[row][col] < FLASHED) return false;
         }
     }
+    return true;
 }
 
 fn run(steps: usize) void {
@@ -96,10 +133,13 @@ fn run(steps: usize) void {
         while (row < width) : (row += 1) {
             var col: usize = 0;
             while (col < width) : (col += 1) {
-                if (board[row][col] > FLASH) {
-                    flash(row, col);
-                }
+                if (board[row][col] > FLASH) flash(row, col);
             }
+        }
+
+        if (allflash()) {
+            stdout.print("{}\n", .{i + 1}) catch unreachable;
+            break;
         }
     }
 }
@@ -110,17 +150,15 @@ pub fn main() !void {
 
     const allocator = arena.allocator();
 
-    // const args = try std.process.argsAlloc(allocator);
-    const input = try std.fs.cwd().readFileAlloc(allocator, "small.txt", std.math.maxInt(usize));
+    const args = try std.process.argsAlloc(allocator);
+    var input = try std.fs.cwd().readFileAlloc(allocator, args[1], std.math.maxInt(usize));
     defer allocator.free(input);
 
     parse(input);
-    coredump();
-    stdout.print("------------\n", .{}) catch unreachable;
-    run(1);
-    coredump();
-    stdout.print("------------\n", .{}) catch unreachable;
-    run(1);
-    coredump();
-    stdout.print("------------\n", .{}) catch unreachable;
+    run(100);
+    stdout.print("{}\n", .{flashes}) catch unreachable;
+
+    input = try std.fs.cwd().readFileAlloc(allocator, args[1], std.math.maxInt(usize));
+    parse(input);
+    run(2000);
 }
