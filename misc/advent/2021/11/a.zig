@@ -5,15 +5,11 @@
 // zig build-exe ./a.zig -O ReleaseSmall
 // ./a input.txt [input vars...]
 //
-// I tried debugging with:
+// to debug with lldb:
 // zig run a.zig --test-cmd lldb --test-cmd-bin -- small.txt
-//
-// and was able to set a breakpoint:
-//
-// (lldb) break set -f a.zig -l 45
+// (lldb) break set -name flash
 // Breakpoint 1: where = a`flash + 24 at a.zig:46:15, address = 0x0000000100009a88
-//
-// but then the process segfaulted when I did "run"
+// (lldb) run
 const std = @import("std");
 
 const stdout = std.io.getStdOut().writer();
