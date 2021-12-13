@@ -50,26 +50,18 @@ for f in folds:
 rowmax = max([p[1] for p in pts])
 colmax = max([p[0] for p in pts])
 
-for row in range(rowmax + 1):
-    for col in range(colmax + 1):
-        if (col, row) in pts:
-            sys.stdout.write("█")
-        else:
-            sys.stdout.write("░")
-    sys.stdout.write("\n")
-
 sz = 10
-with Image.new("RGBA", (800, 500), (255, 255, 255)) as im:
+with Image.new("RGBA", (450, 100), (255, 255, 255)) as im:
     draw = ImageDraw.Draw(im)
     for row in range(rowmax + 1):
         for col in range(colmax + 1):
             if (col, row) in pts:
                 draw.rectangle(
                     (
-                        200 + col * sz,
-                        200 + row * sz,
-                        200 + col * sz + sz,
-                        200 + row * sz + sz,
+                        20 + col * sz,
+                        20 + row * sz,
+                        20 + col * sz + sz,
+                        20 + row * sz + sz,
                     ),
                     fill=(0, 0, 0, 255),
                 )
@@ -77,7 +69,14 @@ with Image.new("RGBA", (800, 500), (255, 255, 255)) as im:
     # blur gets it a bit closer, but it still finds the "Z" as a "2"
     im = im.filter(ImageFilter.GaussianBlur(2))
 
-    # Sadly this gets it wrong - it interprets "K" as "OR" and "Z" as "2"
-    print("OCR unfortunately gets it a bit wrong:")
-    print(pytesseract.image_to_string(im))
+    # If we don't tell pytesseract that it only contains letters, it wants to
+    # call the Z a 2
+    print(
+        "OCR answer: \u001b[31m%s\u001b[0m"
+        % (
+            pytesseract.image_to_string(
+                im, config="-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            )
+        )
+    )
     im.save("out.png")
