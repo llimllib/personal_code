@@ -23,7 +23,6 @@ def fold(pts, fold):
     if fold[0] == "x":
         for pt in pts:
             if pt[0] > f:
-                # print(f, pt, (f - (pt[0] - f), pt[1]))
                 newpts.add((f - (pt[0] - f), pt[1]))
             else:
                 newpts.add(pt)
