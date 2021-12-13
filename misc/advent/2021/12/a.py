@@ -27,9 +27,6 @@ def paths(graph):
     paths = [("start",)]
     complete = set()
     while paths:
-        # print(paths)
-        # print(complete)
-        # print("-----")
         newpaths = []
         for path in paths:
             for node in graph[path[-1]]:
@@ -53,9 +50,6 @@ def dubbpaths(graph):
     paths = [("start",)]
     complete = set()
     while paths:
-        # print(paths)
-        # print(complete)
-        # print("-----")
         newpaths = []
         for path in paths:
             for node in graph[path[-1]]:
@@ -66,8 +60,6 @@ def dubbpaths(graph):
                 elif node.isupper():
                     newpaths.append(path + (node,))
         paths = newpaths
-    # for path in sorted(complete, key=len):
-    #     print(",".join(path))
     return len(complete)
 
 
