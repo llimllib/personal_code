@@ -55,9 +55,10 @@ def dubbpaths(graph):
             for node in graph[path[-1]]:
                 if node == "end":
                     complete.add(path + ("end",))
-                elif node.islower() and (node not in path or nodupe(path)):
-                    newpaths.append(path + (node,))
-                elif node.isupper():
+                elif node.islower():
+                    if node not in path or nodupe(path):
+                        newpaths.append(path + (node,))
+                else:
                     newpaths.append(path + (node,))
         paths = newpaths
     return len(complete)
