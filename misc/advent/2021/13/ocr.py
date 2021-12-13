@@ -2,7 +2,7 @@ import re
 import sys
 
 # pip install pillow pytesseract
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 import pytesseract
 
 
@@ -73,6 +73,9 @@ with Image.new("RGBA", (800, 500), (255, 255, 255)) as im:
                     ),
                     fill=(0, 0, 0, 255),
                 )
+
+    # blur gets it a bit closer, but it still finds the "Z" as a "2"
+    im = im.filter(ImageFilter.GaussianBlur(2))
 
     # Sadly this gets it wrong - it interprets "K" as "OR" and "Z" as "2"
     print("OCR unfortunately gets it a bit wrong:")
