@@ -74,7 +74,6 @@ def search(grid, goal):
     frontier = [(0, start)]
     steps = {start: None}
     costs = {start: 0}
-    mx = sum(goal)
     visited = 0
     while frontier:
         visited += 1
