@@ -83,9 +83,6 @@ def search(grid, goal):
                 # poor man's priority queue
                 frontier.sort(reverse=True)
                 steps[neighbor] = (row, col)
-
-        # print(frontier, steps, costs)
-        # input("enter to continue")
     return steps
 
 
@@ -110,6 +107,8 @@ goal = (len(grid) - 1, len(grid[0]) - 1)
 steps = search(grid, goal)
 showpath(grid, path(goal, steps))
 print(sum(grid[row][col] for (row, col) in path(goal, steps)) - grid[0][0])
+
+print("-----------")
 
 grid = expand(parse(open("input.txt")))
 goal = (len(grid) - 1, len(grid[0]) - 1)

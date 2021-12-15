@@ -91,9 +91,6 @@ def search(grid, goal):
                 # poor man's priority queue
                 frontier.sort(reverse=True)
                 steps[neighbor] = (row, col)
-
-        # print(frontier, steps, costs)
-        # input("enter to continue")
     print(f"Visited {visited} nodes")
     return steps
 
