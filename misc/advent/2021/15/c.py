@@ -66,7 +66,15 @@ def path(loc, steps):
 
 
 def heur(goal, node):
-    return (abs(goal[0] - node[0]) + abs(goal[1] - node[1])) * 10
+    # this heuristic is inadmissible, but it works on my example and makes it
+    # much faster. Got a report from somebody else that it doesn't work on
+    # theirs, so probably only works on mine by chance. Would be interesting to
+    # think about a heuristic that is admissable and also much better
+    #
+    # An admissable heuristic is one that's non-negative, and never greater
+    # than the actual cost of the path from node to goal
+    # return abs(goal[0] - node[0]) + abs(goal[1] - node[1]) * 10
+    return abs(goal[0] - node[0]) + abs(goal[1] - node[1])
 
 
 def search(grid, goal):
