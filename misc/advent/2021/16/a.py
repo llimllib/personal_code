@@ -96,11 +96,7 @@ def decode(bs: str, n: int = 0) -> Tuple[List[Packet], int]:
 
 
 def sum_version(packets):
-    version = 0
-    for p in packets:
-        version += p.version
-        version += sum_version(p.children)
-    return version
+    return sum(p.version + sum_version(p.children) for p in packets)
 
 
 hexes = {
