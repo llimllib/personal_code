@@ -68,7 +68,7 @@ def decode(bs: str, n: int = 0) -> Tuple[List[Packet], int]:
         if n and n == i:
             break
 
-        version = int(bs[:3], 2)  # might need to figure out packet size first?
+        version = int(bs[:3], 2)
         ptype = int(bs[3:6], 2)
         if ptype == PacketType.VALUE:
             val, nbytes = decode_value(bs)
