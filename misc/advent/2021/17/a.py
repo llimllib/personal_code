@@ -21,19 +21,12 @@ def run(xtarget, ytarget, xvel, yvel, debug=False) -> Tuple[bool, int]:
 
 
 def maxh(xtarget, ytarget):
-    # first find an x that works:
-    for i in range(xtarget[0]):
-        x = (i * (i + 1)) / 2
-        if xtarget[0] <= x <= xtarget[1]:
-            xvel = i
-            break
-    else:
-        raise Exception("unable to find x that works")
-
     return max(
         h
         for hit, h in [
-            run(xtarget, ytarget, xvel, yvel) for yvel in range(abs(min(ytarget)))
+            run(xtarget, ytarget, xvel, yvel)
+            for yvel in range(abs(min(ytarget)))
+            for xvel in range(max(xtarget) // 4)
         ]
         if hit
     )
