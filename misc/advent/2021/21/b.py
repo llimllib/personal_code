@@ -53,7 +53,7 @@ while 1:
                 newstates[(newp1, newp2)][(p1score + newp1, p2score + newp2)] += count
 
     # if there are non-empty states left, carry on
-    for state, scores in states.items():
+    for state, scores in newstates.items():
         if any(scores[k] for k in scores):
             break
     else:
