@@ -9,6 +9,11 @@ def rolldie(cur, roll):
     return ((cur + roll - 1) % 10) + 1
 
 
+# states is a map of:
+# {(p1 position, p2 position): {(p1 score, p2 score): count}}
+#
+# the idea being, there's a small state space to the game so we can just track
+# how many games are in each state
 states = {
     (i, j): {(k, l): 0 for k in range(21) for l in range(21)}
     for i in range(1, 11)
