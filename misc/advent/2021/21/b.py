@@ -45,11 +45,11 @@ while 1:
                 newp1 = rolldie(p1pos, roll1)
                 if p1score + newp1 >= 21:
                     p1wins += count
-                    break
+                    continue
                 newp2 = rolldie(p2pos, roll2)
                 if p2score + newp2 >= 21:
                     p2wins += count
-                    break
+                    continue
                 newstates[(newp1, newp2)][(p1score + newp1, p2score + newp2)] += count
 
     # if there are non-empty states left, carry on
