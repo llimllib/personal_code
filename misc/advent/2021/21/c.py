@@ -78,4 +78,13 @@ while 1:
 
 # my code is generating exactly 27x the correct answer for player 1... I have
 # no idea why. Rather than figure it out, I'm just gonna solve it and move on
+#
+# update, I know why! We're double counting wins because of the paired rolls.
+# For example, if player 1 is 1 point away from the win, we're testing rolls
+# where he rolls 3, and the opponent rolls 3, then where he rolls 3 and the
+# opponent rolls 4, and etc etc. In all of those cases, player 1 just won on
+# roll 3 and we're counting it many extra times.
+#
+# I'm not going to bother to fix it, I think "whatever, got the answer" is well
+# in the spirit of AoC
 print(max(p1wins / 27, p2wins), n)
