@@ -1,8 +1,5 @@
 # now we get the first player's score wrong, but the second player's score right?
-from itertools import groupby
 from functools import cache
-
-from utils import flatten
 
 
 @cache
