@@ -1,4 +1,3 @@
-# now we get the first player's score wrong, but the second player's score right?
 from functools import cache
 
 
