@@ -123,36 +123,37 @@ def to_bs(hexstr):
     return "".join(hexes[c] for c in hexstr)
 
 
-assert to_bs("D2FE28") == "110100101111111000101000"
-pkts, _ = decode(to_bs("D2FE28"))
-assert len(pkts) == 1
-pkt = pkts[0]
-assert pkt.value == 2021
-assert pkt.type == PacketType.VALUE
-assert pkt.version == 6
+if __name__ == "__main__":
+    assert to_bs("D2FE28") == "110100101111111000101000"
+    pkts, _ = decode(to_bs("D2FE28"))
+    assert len(pkts) == 1
+    pkt = pkts[0]
+    assert pkt.value == 2021
+    assert pkt.type == PacketType.VALUE
+    assert pkt.version == 6
 
-pkts, _ = decode(to_bs("38006F45291200"))
-assert len(pkts) == 1
-assert pkts[0].value == 1  # 10 < 20, so this is true
-assert pkts[0].children[0].value == 10
-assert pkts[0].children[1].value == 20
+    pkts, _ = decode(to_bs("38006F45291200"))
+    assert len(pkts) == 1
+    assert pkts[0].value == 1  # 10 < 20, so this is true
+    assert pkts[0].children[0].value == 10
+    assert pkts[0].children[1].value == 20
 
-pkts, _ = decode(to_bs("EE00D40C823060"))
-assert len(pkts) == 1
-assert pkts[0].value == 3  # max(1,2,3) == 3
-assert pkts[0].children[0].value == 1
-assert pkts[0].children[1].value == 2
-assert pkts[0].children[2].value == 3
+    pkts, _ = decode(to_bs("EE00D40C823060"))
+    assert len(pkts) == 1
+    assert pkts[0].value == 3  # max(1,2,3) == 3
+    assert pkts[0].children[0].value == 1
+    assert pkts[0].children[1].value == 2
+    assert pkts[0].children[2].value == 3
 
-assert decode(to_bs("C200B40A82"))[0][0].value == 3
-assert decode(to_bs("04005AC33890"))[0][0].value == 54
-assert decode(to_bs("880086C3E88112"))[0][0].value == 7
-assert decode(to_bs("CE00C43D881120"))[0][0].value == 9
-assert decode(to_bs("D8005AC2A8F0"))[0][0].value == 1
-assert decode(to_bs("F600BC2D8F"))[0][0].value == 0
-assert decode(to_bs("9C005AC2F8F0"))[0][0].value == 0
-assert decode(to_bs("9C0141080250320F1802104A08"))[0][0].value == 1
+    assert decode(to_bs("C200B40A82"))[0][0].value == 3
+    assert decode(to_bs("04005AC33890"))[0][0].value == 54
+    assert decode(to_bs("880086C3E88112"))[0][0].value == 7
+    assert decode(to_bs("CE00C43D881120"))[0][0].value == 9
+    assert decode(to_bs("D8005AC2A8F0"))[0][0].value == 1
+    assert decode(to_bs("F600BC2D8F"))[0][0].value == 0
+    assert decode(to_bs("9C005AC2F8F0"))[0][0].value == 0
+    assert decode(to_bs("9C0141080250320F1802104A08"))[0][0].value == 1
 
-pkts, _ = decode(to_bs(open("input.txt").read().strip()))
-print(sum_version(pkts))
-print(pkts[0].value)
+    pkts, _ = decode(to_bs(open("input.txt").read().strip()))
+    print(sum_version(pkts))
+    print(pkts[0].value)

@@ -54,8 +54,7 @@ def tobin(ns):
 def convolve(repl, im, iterations=1, name="default"):
     imp = None
     default = 0
-    gif = []
-    for _ in range(iterations):
+    for i in range(iterations):
         imp = deepcopy(im)
         for row in range(len(im)):
             for col in range(len(im[0])):
@@ -64,15 +63,9 @@ def convolve(repl, im, iterations=1, name="default"):
 
         im = imp
         default = repl[-1] if default else repl[0]
-        gif.append(makeimage(im))
-    gif[0].save(
-        f"{name}_{iterations}.gif",
-        save_all=True,
-        append_images=gif[1:],
-        optimize=True,
-        duration=100,
-        loop=0,
-    )
+        # skip frames with black backgrounds to avoid eye death
+        if not default:
+            makeimage(im, f"images/{name}_{i:02}.png")
     return imp
 
 
@@ -85,7 +78,7 @@ def count(im):
     return n
 
 
-def makeimage(imdata):
+def makeimage(imdata, fname):
     sz = 10
     padding = 20
     w = len(imdata[0])
@@ -106,7 +99,7 @@ def makeimage(imdata):
                         ),
                         fill=(0, 0, 0, 255),
                     )
-    return im
+        im.save(fname)
 
 
 def do(f, iterations):
