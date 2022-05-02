@@ -41,7 +41,7 @@ function map(mapdata) {
 
   // Create an svg element to hold our map, and set it to the proper width and
   // height. The viewBox is set to a constant value becase the projection we're
-  // using is designed for that viewPort size:
+  // using is designed for that viewBox size:
   // https://github.com/topojson/us-atlas#us-atlas-topojson
   const svg = d3.select("#map").append("svg")
       .attr("width", width)
