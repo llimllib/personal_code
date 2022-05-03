@@ -1,0 +1,229 @@
+Making a US State Choropleth
+# time 05-03-22 12:00
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson@3"></script>
+
+<p>Following on from <a href="https://billmill.org/making_a_us_map.html">yesterday's post</a>, I wanted to discuss how to make a simple <a href="https://en.wikipedia.org/wiki/Choropleth_map">choropleth map</a>.
+
+<h2>Download and extract data</h2>
+
+<p>To find some data to use, I googled "US state population" and found <a
+href="https://www.census.gov/data/datasets/time-series/demo/popest/2010s-state-total.html#par_textimage_1873399417">this
+census page</a> with some data for each state's population and the change in
+population over several years.
+
+<p>To get the CSV data into shape, I downloaded it, converted it to json with <a href="https://csvkit.readthedocs.io/en/latest/tutorial/4_going_elsewhere.html#csvjson-going-online">csvkit</a> (use <span class="highlight inline">pip install csvkit</span> to install it) and filtered it with <a href="https://stedolan.github.io/jq/manual/">jq</a>.
+
+<code lang="console">
+$ wget https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/national/totals/nst-est2019-popchg2010_2019.csv
+# convert to json, filter out a few data points, and shape the data
+$ cat nst-est2019-popchg2010_2019.csv | csvjson | \
+    jq 'map(select(.NAME | test("United|Region") | not)) |
+    map({(.NAME): .POPESTIMATE2019}) | add' > population.json
+$ head population.json
+{
+  "Alabama": 4903185,
+  "Alaska": 731545,
+  "Arizona": 7278717,
+  "Arkansas": 3017804,
+  "California": 39512223,
+  "Colorado": 5758736,
+  "Connecticut": 3565287,
+  "Delaware": 973764,
+  "District of Columbia": 705749,
+</code>
+
+<p>I enjoy crafting those arcane-looking <span class="highlight
+  inline">jq</span> commands, but you could just as easily, and more readably,
+filter and shape your data within your javascript or with a short python
+script.
+
+<p>Anyway, that gave me a file with a list of objects with a state name and
+that state's population, which we can go ahead and use to make a choropleth.
+
+<h2>Using the data</h2>
+
+<script>
+function map(mapData, populationData) {
+  // fire an event so we don't re-download the data
+  const event = new CustomEvent('dataDownloaded', {
+      bubbles: true,
+      detail: {
+        mapData: mapData,
+        populationData: populationData
+      },
+  })
+  document.dispatchEvent(event);
+
+  const width = 975,
+    height = 610,
+    extent = d3.extent(Object.values(populationData)),
+    scale = d3.scaleLog().domain(extent),
+    colorScale = d => d3.interpolateGreys(scale(d));
+    window.populationDAta = populationData;
+
+  const svg = d3
+    .select("#map")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, 975, 610])
+    .attr("style", "width: 100%; height: auto; height: intrinsic;");
+
+  const usa = svg
+    .append("g")
+    .append("path")
+    .datum(topojson.feature(mapData, mapData.objects.nation))
+    .attr("d", d3.geoPath());
+
+  const state = svg
+    .append("g")
+    .attr("stroke", "#444")
+    .selectAll("path")
+    .data(topojson.feature(mapData, mapData.objects.states).features)
+    .join("path")
+    .attr("fill", (d) => colorScale(populationData[d.properties.name]))
+    .attr("vector-effect", "non-scaling-stroke")
+    .attr("d", d3.geoPath());
+}
+
+window.addEventListener("DOMContentLoaded", async (event) => {
+  map(
+    await d3.json(`https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json`),
+    await d3.json(`https://cdn.billmill.org/static/blog/us_choro/population.json`)
+  )
+});
+</script>
+<div id="map" style="margin-bottom: 40px"></div>
+
+<p>Starting from the map code in the <a href="https://billmill.org/making_a_us_map.html">previous post</a>, I'll highlight the differences.
+
+<code lang="js">
+// mapData is a topojson object
+// populationData is an object of {state name: population}
+function map(mapData, populationData) {
+  const width = 975,
+    height = 610,
+
+    // d3.extent returns an array of the largest and smallest values in our
+    // data:
+    //
+    // > d3.extent(Object.values(populationData))
+    // Array [ 578759, 39512223 ]
+    extent = d3.extent(Object.values(populationData)),
+
+    // scale is a logarithmic scale that maps values in our extent into the
+    // range [0,1], which is what `interpolateGreys` expects
+    //
+    // > scale = d3.scaleLog().domain(extent)
+    // > scale(700_000)
+    // 0.04503258343433408
+    // > scale(20_000_000)
+    // 0.8387874633947101
+    scale = d3.scaleLog().domain(extent),
+
+    // colorScale is a function that takes a value and maps it to a color,
+    // using the scale we just defined
+    //
+    // > colorScale = d => d3.interpolateGreys(scale(d))
+    // > colorScale(700_000)
+    // "rgb(250, 250, 250)"
+    // > colorScale(20_000_000)
+    // "rgb(50, 50, 50)"
+    colorScale = d => d3.interpolateGreys(scale(d));
+
+    // d3 has many color scales available:
+    // https://github.com/d3/d3-scale-chromatic
+
+  // Snip: create map and nation boundaries as before
+
+  // Instead of filling each state path with a constant color, this time
+  // we vary the color based on how many people live in the state
+  const state = svg
+    .append("g")
+    .attr("stroke", "#444")
+    .selectAll("path")
+    // map each state object to a path in the SVG
+    .data(topojson.feature(mapData, mapData.objects.states).features)
+    .join("path")
+    // fill the path with a color based on the color scale above
+    .attr("fill", (d) => colorScale(populationData[d.properties.name]))
+    .attr("vector-effect", "non-scaling-stroke")
+    .attr("d", d3.geoPath());
+}
+
+window.addEventListener("DOMContentLoaded", async (event) => {
+  map(
+    await d3.json(`https://cdn.jsdelivr.net/npm/us-atlas@3/states-albers-10m.json`),
+    await d3.json(`https://cdn.billmill.org/static/blog/us_choro/population.json`)
+  )
+});
+</code>
+
+<h2>A bit on colors</h2>
+
+<p>Our data is continuous, so it makes sense to use a single color scheme. d3 <a href="https://github.com/d3/d3-scale-chromatic">provides plenty of single color schemes</a>, so for example we could change it to blue by using <span class="highlight inline">interpolateBlues</span> instead of <span class="highlight inline">interpolateGreys</span>:
+
+<script>
+function colormap(mapData, populationData, interpolateColor, target) {
+  const width = 975,
+    height = 610,
+    extent = d3.extent(Object.values(populationData)),
+    scale = d3.scaleLog().domain(extent),
+    colorScale = d => interpolateColor(scale(d));
+    window.populationDAta = populationData;
+
+  const svg = d3
+    .select(target)
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("viewBox", [0, 0, 975, 610])
+    .attr("style", "width: 100%; height: auto; height: intrinsic;");
+
+  const usa = svg
+    .append("g")
+    .append("path")
+    .datum(topojson.feature(mapData, mapData.objects.nation))
+    .attr("d", d3.geoPath());
+
+  const state = svg
+    .append("g")
+    .attr("stroke", "#444")
+    .selectAll("path")
+    .data(topojson.feature(mapData, mapData.objects.states).features)
+    .join("path")
+    .attr("fill", (d) => colorScale(populationData[d.properties.name]))
+    .attr("vector-effect", "non-scaling-stroke")
+    .attr("d", d3.geoPath());
+}
+
+window.addEventListener("dataDownloaded", (evt) => {
+    colormap(
+        evt.detail.mapData,
+        evt.detail.populationData,
+        d3.interpolateBlues,
+        "#mapblue");
+    colormap(
+        evt.detail.mapData,
+        evt.detail.populationData,
+        d3.interpolateReds,
+        "#mapred");
+    colormap(
+        evt.detail.mapData,
+        evt.detail.populationData,
+        d3.interpolateRainbow,
+        "#maprainbow");
+});
+</script>
+<div id="mapblue" style="margin-bottom: 40px"></div>
+
+<p>Or reds with <span class="highlight inline">interpolateReds</span>:
+
+<div id="mapred" style="margin-bottom: 40px"></div>
+
+<p>And it's inadvisable, but we could make a rainbow map with <span class="highlight inline">d3.interpolateSinebow</span>:
+
+<div id="maprainbow" style="margin-bottom: 40px"></div>
+
+<p>In general, your map should have as many colors as there are classes in the data, so try not to use more colors than necessary even if the result looks a little more fun; it will hinder people's ability to understand the map you've made.
