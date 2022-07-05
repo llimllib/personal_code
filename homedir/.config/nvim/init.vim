@@ -1,8 +1,3 @@
-colorscheme Base2Tone_SpaceDark
-if (has("termguicolors"))
-  set termguicolors
-endif
-
 let mapleader = ","
 
 " Easier split moving
@@ -75,7 +70,7 @@ set mouse=a
 set backspace=indent,eol,start
 
 " Highlight EOL whitespace, http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-set list listchars=tab:→\ ,trail:·
+set list listchars=tab:→\ ,trail:·,nbsp:⎵
 
 " http://vim.wikia.com/wiki/Move_cursor_by_display_lines_when_wrapping
 nnoremap <silent> j gj
@@ -148,6 +143,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 " required for telescope.vim
 Plug 'nvim-lua/plenary.nvim'
 
+" better file name matching for telescope
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 " fancy fuzzy finder
 Plug 'nvim-telescope/telescope.nvim'
 
@@ -173,8 +171,24 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
+" zig language syntax
+Plug 'ziglang/zig.vim'
+
+" https://github.com/sainnhe/everforest/blob/master/doc/everforest.txt
+Plug 'sainnhe/everforest'
+
 " Initialize plugin system
 call plug#end()
+
+""""
+"""" Configure colors. Must come after vim-plug since that installs the color
+""""                   scheme
+""""
+if (has("termguicolors"))
+  set termguicolors
+endif
+colorscheme everforest
+
 
 """"
 """" Configure LSP
@@ -195,11 +209,15 @@ set updatetime=100
 " https://www.mitchellhanberg.com/how-to-set-up-neovim-for-elixir-development/
 " , which does it in the on_complete function with:
 " map("n", "df", "<cmd>lua vim.lsp.buf.formatting()<cr>", map_opts)
+"
+" to write a file without running the formatter, do:
+" :noautocmd w
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+" for javascript, try to use prettier instead of tsserver's built-in formatter
 
 " Create a shortcut to run the formatter
 nnoremap <leader>fa :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
@@ -213,8 +231,8 @@ nnoremap <leader>fa :lua vim.lsp.buf.formatting_sync(nil, 1000)<CR>
 "   autocmd BufWritePre * undojoin | Neoformat
 " augroup END
 
-nnoremap <leader>m <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-nnoremap <leader>M <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+nnoremap <leader>m <cmd>lua vim.diagnostic.goto_next()<CR>
+nnoremap <leader>M <cmd>lua vim.diagnostic.goto_prev()<CR>
 
 " from :help set_signs
 sign define LspDiagnosticsSignError text=‡ texthl=LspDiagnosticsSignError linehl= numhl=
@@ -235,7 +253,10 @@ sign define LspDiagnosticsSignHint text=⁂ texthl=LspDiagnosticsSignHint linehl
 nnoremap <leader>r <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>
 
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
+" c-t means "up the tag stack" and is the opposite of gd, so map it to
+" something more convenient
+nnoremap <silent> gh    <c-t>
+nnoremap <silent> gt    <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gs    <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
@@ -247,6 +268,11 @@ nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 """"" configure nvim-cmp (code completion)
 set completeopt=menu,menuone,noselect
 """"" end nvim-cmp
+
+" use neovim's lua file type detection, which should improve startup time
+" https://gpanders.com/blog/whats-new-in-neovim-0-7/#filetypelua
+let g:do_filetype_lua = 1 
+let g:did_load_filetypes = 0
 
 "Specific commands for filetypes
 augroup myfiletypes
@@ -284,3 +310,21 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua << EOF
+require('telescope').setup {
+  extensions = {
+    fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+    }
+  }
+}
+
+-- To get fzf loaded and working with telescope, you need to call
+-- load_extension, somewhere after setup function:
+require('telescope').load_extension('fzf')
+EOF
