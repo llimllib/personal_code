@@ -213,7 +213,6 @@ set updatetime=100
 " to write a file without running the formatter, do:
 " :noautocmd w
 autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
