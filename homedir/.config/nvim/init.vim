@@ -132,10 +132,6 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'junegunn/goyo.vim'
 
-" format code https://github.com/sbdchd/neoformat
-" for now I'm going to try and leave this to the language servers?
-" Plug 'sbdchd/neoformat'
-
 " fancy icons
 Plug 'kyazdani42/nvim-web-devicons'
 
@@ -155,10 +151,6 @@ Plug 'hashivim/vim-terraform'
 " Elixir highlighting
 Plug 'elixir-editors/vim-elixir'
 
-" General purpose Language Server - for things that can be done with programs
-" rather than LSPs, but as an LSP. `brew install efm-langserver`
-Plug 'mattn/efm-langserver'
-
 " install nvim-cmp, for code completion
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -177,6 +169,12 @@ Plug 'ziglang/zig.vim'
 " https://github.com/sainnhe/everforest/blob/master/doc/everforest.txt
 Plug 'sainnhe/everforest'
 
+" null-ls is an attempt to bridge that gap and simplify the process of
+" creating, sharing, and setting up LSP sources using pure Lua.
+"
+" depends on plenary
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -194,7 +192,7 @@ colorscheme everforest
 """" Configure LSP
 """"
 
-" this seems not to be necessary any more? not sure why
+" load my lua lsp config
 lua require('config_lsp')
 
 " Wait 100ms before running cursorhold (shows diagnostic messages)
@@ -212,10 +210,10 @@ set updatetime=100
 "
 " to write a file without running the formatter, do:
 " :noautocmd w
-autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
+" autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 1000)
+" autocmd BufWritePre *.ts lua vim.lsp.buf.formatting_sync(nil, 1000)
 autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync(nil, 1000)
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 1000)
+" autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
 " for javascript, try to use prettier instead of tsserver's built-in formatter
 
 " Create a shortcut to run the formatter
@@ -234,6 +232,10 @@ nnoremap <leader>m <cmd>lua vim.diagnostic.goto_next()<CR>
 nnoremap <leader>M <cmd>lua vim.diagnostic.goto_prev()<CR>
 
 " from :help set_signs
+"
+" The following are deprecated without replacement. These functions are moved
+" internally and are no longer exposed as part of the API. Instead, use
+" |vim.diagnostic.config()| and |vim.diagnostic.show()|.
 sign define LspDiagnosticsSignError text=‡ texthl=LspDiagnosticsSignError linehl= numhl=
 sign define LspDiagnosticsSignWarning text=† texthl=LspDiagnosticsSignWarning linehl= numhl=
 sign define LspDiagnosticsSignInformation text=※ texthl=LspDiagnosticsSignInformation linehl= numhl=
@@ -249,6 +251,8 @@ sign define LspDiagnosticsSignHint text=⁂ texthl=LspDiagnosticsSignHint linehl
 " Unfortunately, this does not work when you have a dirty buffer, so you have
 " to save or undo to reload the LSP server. I'm not quite sure what's the best
 " way to handle this - it works better in vim
+"
+" TODO: move this into lua?
 nnoremap <leader>r <cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>
 
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
@@ -260,6 +264,7 @@ nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gs    <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 """"" End LSP Config
