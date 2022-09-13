@@ -112,6 +112,9 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
                                                                      .protocol
                                                                      .make_client_capabilities())
 
+-- I might want to use vim.lsp.buf.formatting_seq_sync() ? read about that
+-- here:
+-- https://www.reddit.com/r/neovim/comments/vvtltr/remove_the_message_select_a_language_server/iflxdv8/
 local on_attach = function(client, bufnr)
     -- https://github.com/nvim-lua/diagnostic-nvim/issues/29#issuecomment-638040064
     -- If you want to have the diagnostic information come up on hover, uncomment this:
@@ -214,6 +217,8 @@ vim.diagnostic.config({
     update_in_insert = false
 })
 
+-- you can skip formatting on a single write by using :noautocmd w (abbreviated
+-- :noa w)
 null_ls = require("null-ls")
 null_ls.setup({
     -- this on_attach function sets null-ls to do document formatting on save

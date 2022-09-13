@@ -175,6 +175,8 @@ Plug 'sainnhe/everforest'
 " depends on plenary
 Plug 'jose-elias-alvarez/null-ls.nvim'
 
+Plug 'simrat39/symbols-outline.nvim'
+
 " Initialize plugin system
 call plug#end()
 
