@@ -177,6 +177,9 @@ Plug 'jose-elias-alvarez/null-ls.nvim'
 
 Plug 'simrat39/symbols-outline.nvim'
 
+" read editorconfig files
+Plug 'gpanders/editorconfig.nvim'
+
 " Initialize plugin system
 call plug#end()
 

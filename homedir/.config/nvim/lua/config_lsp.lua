@@ -1,8 +1,8 @@
 -- To install all prerequisite language servers and formatters:
 -- brew install efm-langserver shellcheck
--- (cd /tmp && GO111MODULE=on go get golang.org/x/tools/gopls@latest)
+-- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
--- npm install -g typescript typescript-language-server prettier
+-- npm install -g typescript typescript-language-server prettier bash-language-server
 -- gem install solargraph
 -- pip install pyright black
 -- luarocks install --server=https://luarocks.org/dev luaformatter
@@ -152,7 +152,7 @@ lsp.tsserver.setup {
 }
 -- lsp.flow.setup{ on_attach=on_attach }
 
--- (cd /tmp && go install golang.org/x/tools/gopls@latest)
+-- go install golang.org/x/tools/gopls@latest
 lsp.gopls.setup {
     on_attach = function(client, bufnr)
         -- don't format files, I prefer using null-ls for this
@@ -199,6 +199,8 @@ lsp.terraformls.setup {
 }
 
 lsp.tflint.setup {}
+
+lsp.bashls.setup {}
 
 -- configure diagnostics
 vim.diagnostic.config({
