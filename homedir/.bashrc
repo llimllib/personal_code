@@ -1,3 +1,6 @@
+# shellcheck disable=SC1090
+# shellcheck shell=bash
+
 # add homebrew bin, and prefer local/bin and local/sbin to bin. git-prompt
 # depends on being able to find brew, so this must come before that.
 export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH
@@ -24,9 +27,7 @@ function title {
     printf "\\e]1;%s\\a" "$@"
   else
    tmux rename-window "$@"
-  fi
-}
-
+  fi }
 alias ls='ls -FG'
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS
@@ -60,9 +61,9 @@ alias c="clear"
 alias da="direnv allow"
 alias de="direnv edit"
 alias tf="terraform"
-alias jless="jq -C '.' | less"
+alias jjless="jq -C '.' | less"
 alias dmc="docker-compose run --rm mctapi"
-alias rg="rg --max-columns=250 --max-columns-preview --smart-case"
+alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
 alias govim="vim -u ~/.govimrc"
 alias vim="nvim"
 
@@ -111,15 +112,6 @@ alias tmux="tmux -2"
 
 # Add the `--wrap never` arg to all `bat` invocations
 alias bat="bat --wrap never"
-
-# fd - use fzf to cd to selected directory
-# https://github.com/junegunn/fzf/wiki/examples#changing-directory
-fd() {
-  local dir
-  dir=$(find "${1:-.}" -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir" || exit
-}
 
 # find, case insensivitely, in the current dir
 function f {
@@ -178,8 +170,8 @@ export PATH="$PATH:$HOME/.yarn/bin"
 
 #asdf
 if [[ -f $HOME/.asdf/asdf.sh ]]; then
-    . $HOME/.asdf/asdf.sh
-    . $HOME/.asdf/completions/asdf.bash
+    . "$HOME/.asdf/asdf.sh"
+    . "$HOME/.asdf/completions/asdf.bash"
 fi
 
 GPG_TTY=$(tty)
@@ -195,14 +187,29 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 # run direnv https://direnv.net/
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
+# show the virtual env we're in if we're in one. We need this because direnv
+# isn't able to modify the PS1 from a subshell
+show_virtual_env() {
+  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
+    echo "($(basename "$VIRTUAL_ENV"))"
+  fi
+}
+export -f show_virtual_env
+PS1='$(show_virtual_env)'$PS1
+
 # Create a worktree from a given branchname, in exactly the way I like it.
 # oct 18, 2019
 function worktree {
+    if [ -z "$1" ]; then
+        echo "usage: worktree <branch name>"
+        return 1
+    fi
+
     set -x
     branchname="$1"
 
     # Replace slashes with underscores. If there's no slash, dirname will equal
-    # branchname. So "alu/something-other" becomes "alu_omething-other", but
+    # branchname. So "alu/something-other" becomes "alu_something-other", but
     # "quick-fix" stays unchanged
     # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
     dirname=${branchname//\//_}
@@ -220,18 +227,24 @@ function worktree {
         git worktree add -b "$branchname" "../$dirname" || return
     fi
 
-    cp .envrc "../$dirname"
+    # copy some useful untracked files into the new worktree
+    find . -name .envrc -exec cp {} ../"$dirname"/{} \;
+    find . -name .env -exec cp {} ../"$dirname"/{} \;
+    find . -name .tool-versions -exec cp {} ../"$dirname"/{} \;
+
     if [ -d node_modules ]; then
-        ln -sf "$(pwd)/node_modules" "../$dirname/node_modules"
+        # link node_modules dirs instead of copying them
+        ln -sf node_modules ../"$dirname"/node_modules
     fi
-    if [ -f .env ]; then
-        cp .env "../$dirname/"
-    fi
-    if [ -f .tool-versions ]; then
-        cp .tool-versions "../$dirname/"
-    fi
+
+    # now change to the new tree and enable the root envrc if present
     cd "../$dirname" || return
-    direnv allow
+
+    if [ -f .envrc ]; then
+        direnv allow
+    fi
+
+    # finally, turn off command echoing
     set +x
 }
 
@@ -279,11 +292,9 @@ function rmtree {
 # $ /usr/libexec/java_home -v 1.6
 # /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home
 if [[ -f /usr/libexec/java_home ]]; then
-    # separate from the assignment to make shellcheck happy
-    jh=$(/usr/libexec/java_home 1>/dev/null 2>&1)
     # if there are no javas installed, java_home will exit with a nonzero
     # status code. in that case, do nothing
-    if [[ $? -eq 0 ]]; then
+    if jh=$(/usr/libexec/java_home 1>/dev/null 2>&1); then
         export JAVA_HOME=$jh
         export PATH="$PATH:$JAVA_HOME/bin"
     fi
@@ -296,3 +307,13 @@ if [[ -f "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.b
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
     source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 fi
+
+# mac sets an absurdly low file handle limit of 256, and apparently you
+# need to set it to this value? I haven't tested, but whateves this
+# should get the job done.
+# https://discussions.apple.com/thread/251000125
+ulimit -n 10240
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
+. "$HOME/.cargo/env"
