@@ -1,3 +1,23 @@
+#
+# base config
+#
+[core]
+    pager=delta
+
+[user]
+    name = Bill Mill
+    email = bill@billmill.org
+
+[http]
+    # I was getting hangs when pushing to github, and this resolved it 🤷
+    postBuffer = 524288000
+
+[init]
+    defaultBranch = main
+
+#
+# aliases
+#
 [alias]
     st = status
     ci = commit
@@ -11,10 +31,35 @@
     # Show branches, verbosely, sorted by last touch, with commit messages.
     brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
 
+[push]
+    default = upstream
+	autoSetupRemote = true
 
-[user]
-    name = Bill Mill
-    email = bill@billmill.org
+[credential]
+    helper = osxkeychain
+
+#
+# Delta config
+# https://github.com/dandavison/delta
+#
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[interactive]
+    diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+    algorithm = patience
+    compactionHeuristic = true
+    noprefix = true
+
+#
+# color config
+#
 [color]
     branch = auto
     diff = auto
@@ -36,18 +81,15 @@
     changed = green
     untracked = cyan
 
-[push]
-    default = upstream
-[credential]
-	helper = osxkeychain
-[diff]
-    algorithm = patience
-    compactionHeuristic = true
-	noprefix = true
+#
+# LFS config
+# not sure where I got this from or if it's a good idea, honestly
+#
 [filter "lfs"]
-    clean = git-lfs clean %f
-    smudge = git-lfs smudge %f
-    required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge --skip -- %f
+	required = true
+	process = git-lfs filter-process --skip
 
 # Git doesn't check the validity of commit hashes by default
 # https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
@@ -63,6 +105,3 @@
 #[receive]
 #    fsckObjects = true 
 #
-
-[init]
-	defaultBranch = main
