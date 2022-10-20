@@ -108,9 +108,9 @@ cmp.setup({
     },
     preselect = {cmp.PreselectMode.None}
 })
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp
-                                                                     .protocol
-                                                                     .make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
+                                                                      .protocol
+                                                                      .make_client_capabilities())
 
 -- I might want to use vim.lsp.buf.formatting_seq_sync() ? read about that
 -- here:
