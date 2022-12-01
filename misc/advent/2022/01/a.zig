@@ -1,8 +1,6 @@
 // run with: zig run a.zig
 const std = @import("std");
 
-// embed the input data into the binary
-// const data = @embedFile("sample.txt");
 const data = @embedFile("input.txt");
 
 fn gt(_: void, lhs: usize, rhs: usize) bool {
