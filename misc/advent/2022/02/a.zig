@@ -27,7 +27,7 @@ pub fn score(data: []const u8) !i32 {
         var playerB = decode(parts.next().?[0]);
         totalScore += playerB;
 
-        // 3 points for a win, 1 for a draw
+        // 6 points for a win, 3 for a draw
         if (playerB == playerA + 1 or playerB == playerA - 2) {
             totalScore += 6;
         } else if (playerB == playerA) {
@@ -72,7 +72,7 @@ pub fn score2(data: []const u8) !i32 {
         var playerB = choosePlay(playerA, parts.next().?[0]);
         totalScore += playerB;
 
-        // 3 points for a win, 1 for a draw
+        // 6 points for a win, 3 for a draw
         if (playerB == playerA + 1 or playerB == playerA - 2) {
             totalScore += 6;
         } else if (playerB == playerA) {
