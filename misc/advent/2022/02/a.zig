@@ -9,16 +9,12 @@ const PAPER: i32 = 2;
 const SCISSORS: i32 = 3;
 
 pub fn decode(play: u8) i32 {
-    if (play == 'A' or play == 'X') {
-        return ROCK;
-    }
-    if (play == 'B' or play == 'Y') {
-        return PAPER;
-    }
-    if (play == 'C' or play == 'Z') {
-        return SCISSORS;
-    }
-    unreachable;
+    return switch (play) {
+        'A', 'X' => ROCK,
+        'B', 'Y' => PAPER,
+        'C', 'Z' => SCISSORS,
+        else => unreachable,
+    };
 }
 
 pub fn score(data: []const u8) !i32 {
