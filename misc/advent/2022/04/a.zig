@@ -42,7 +42,6 @@ pub fn between(v: VectorPair) bool {
 pub fn score2(vectors: VectorList) !usize {
     var overlaps: usize = 0;
     for (vectors.items) |v| {
-        // assumes they're sorted least to greatest
         if (between(v) or overlap(v)) {
             overlaps += 1;
         }
