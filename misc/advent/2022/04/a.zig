@@ -20,29 +20,33 @@ const VectorPair = struct {
 const VectorList = std.ArrayList(VectorPair);
 
 // returns true if one vector completely overlaps the other
-pub fn overlap(v: VectorPair) bool {
+pub fn contain(v: VectorPair) bool {
     return (v.a.a <= v.b.a and v.a.b >= v.b.b) or (v.b.a <= v.a.a and v.b.b >= v.a.b);
 }
 
 pub fn score(vectors: VectorList) !usize {
-    var overlaps: usize = 0;
+    var contains: usize = 0;
     for (vectors.items) |v| {
-        if (overlap(v)) {
-            overlaps += 1;
+        if (contain(v)) {
+            contains += 1;
         }
     }
-    return overlaps;
+    return contains;
 }
 
-// returns true if either vector partially intersects the other
-pub fn between(v: VectorPair) bool {
-    return (v.b.a <= v.a.a and v.a.a <= v.b.b) or (v.b.a <= v.a.b and v.a.b <= v.b.b);
+// You can test whether two vectors overlap in two compares! neat
+// https://nedbatchelder.com/blog/201310/range_overlap_in_two_compares.html
+//
+// overlap returns true if v0 overlaps v1 at all
+pub fn overlap(v: VectorPair) bool {
+    return v.a.b >= v.b.a and v.b.b >= v.a.a;
 }
 
 pub fn score2(vectors: VectorList) !usize {
     var overlaps: usize = 0;
     for (vectors.items) |v| {
-        if (between(v) or overlap(v)) {
+        // if (between(v) or overlap(v)) {
+        if (overlap(v)) {
             overlaps += 1;
         }
     }
