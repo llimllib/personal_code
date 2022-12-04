@@ -45,7 +45,6 @@ pub fn overlap(v: VectorPair) bool {
 pub fn score2(vectors: VectorList) !usize {
     var overlaps: usize = 0;
     for (vectors.items) |v| {
-        // if (between(v) or overlap(v)) {
         if (overlap(v)) {
             overlaps += 1;
         }
