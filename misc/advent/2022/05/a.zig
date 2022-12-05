@@ -53,36 +53,28 @@ pub fn parse(data: []const u8) *Input {
     return parsedInput;
 }
 
-pub fn score(inp: *Input) []const u8 {
-    // std.debug.print("{s} {s} {s}\n", .{ inp.stacks[0].items, inp.stacks[1].items, inp.stacks[2].items });
+pub fn crateMover9000(inp: *Input) []const u8 {
     for (inp.commands.items) |command| {
-        // std.debug.print("{} {} {}\n", .{ command[0], command[1], command[2] });
-        // std.debug.print("moving {} off {s} onto {s}\n", .{ command[0], inp.stacks[command[1]].items, inp.stacks[command[2]].items });
         var i: usize = 0;
         while (i < command[0]) : (i += 1) {
             var it = inp.stacks[command[1]].pop();
             inp.stacks[command[2]].append(it) catch unreachable;
         }
     }
-    // std.debug.print("{s} {s} {s}\n", .{ inp.stacks[0].items, inp.stacks[1].items, inp.stacks[2].items });
 
-    var result: [9]u8 = undefined;
+    var result: []u8 = gpa.alloc(u8, 9) catch unreachable;
     for (inp.stacks) |stack, i| {
         if (stack.items.len > 0) {
-            // std.debug.print("{c}\n", .{stack.items[stack.items.len - 1]});
             result[i] = stack.items[stack.items.len - 1];
         } else {
             result[i] = '_';
         }
     }
-    return &result;
+    return result[0..];
 }
 
 pub fn crateMover9001(inp: *Input) []const u8 {
     for (inp.commands.items) |command| {
-        // std.debug.print("{s} {s} {s}\n", .{ inp.stacks[0].items, inp.stacks[1].items, inp.stacks[2].items });
-        // std.debug.print("{} {} {}\n", .{ command[0], command[1], command[2] });
-        // std.debug.print("moving {} off {s} onto {s}\n", .{ command[0], inp.stacks[command[1]].items, inp.stacks[command[2]].items });
         var i: usize = 0;
         var tempStack = Stack.init(gpa);
         while (i < command[0]) : (i += 1) {
@@ -94,9 +86,8 @@ pub fn crateMover9001(inp: *Input) []const u8 {
             inp.stacks[command[2]].append(tempStack.items[j]) catch unreachable;
         }
     }
-    // std.debug.print("{s} {s} {s}\n", .{ inp.stacks[0].items, inp.stacks[1].items, inp.stacks[2].items });
 
-    var result: [9]u8 = undefined;
+    var result: []u8 = gpa.alloc(u8, 9) catch unreachable;
     for (inp.stacks) |stack, i| {
         if (stack.items.len > 0) {
             result[i] = stack.items[stack.items.len - 1];
@@ -109,7 +100,7 @@ pub fn crateMover9001(inp: *Input) []const u8 {
 
 pub fn main() !void {
     var pinput = parse(input);
-    std.debug.print("part 1: {s}\n", .{score(pinput)});
+    std.debug.print("part 1: {s}\n", .{crateMover9000(pinput)});
 
     var pinput2 = parse(input);
     std.debug.print("part 2: {s}\n", .{crateMover9001(pinput2)});
@@ -117,7 +108,7 @@ pub fn main() !void {
 
 // zig test a.zig
 test "part 1" {
-    var result = score(parse(
+    var result = crateMover9000(parse(
         \\    [D]    
         \\[N] [C]    
         \\[Z] [M] [P]
@@ -128,12 +119,7 @@ test "part 1" {
         \\move 2 from 2 to 1
         \\move 1 from 1 to 2
     ));
-    std.debug.print("{s}\n", .{result});
-    std.debug.print("{any} {any}\n", .{ result, "CMZ______" });
-    // I have no idea why trimming the string is failing here
-    // var result = std.mem.trimRight(u8, result, "_");
-    // std.debug.print("{s}\n", .{resultT});
-    // try testing.expect(std.mem.eql(u8, result, "CMZ______"));
+    try testing.expect(std.mem.eql(u8, result, "CMZ______"));
 }
 
 test "part 2" {
@@ -148,10 +134,6 @@ test "part 2" {
         \\move 2 from 2 to 1
         \\move 1 from 1 to 2
     ));
-    std.debug.print("{s}\n", .{result});
-    std.debug.print("{any} {any}\n", .{ result, "CMZ______" });
-    // I have no idea why trimming the string is failing here
-    // var result = std.mem.trimRight(u8, result, "_");
-    // std.debug.print("{s}\n", .{resultT});
-    // try testing.expect(std.mem.eql(u8, result, "CMZ______"));
+    std.debug.print("---- {s}\n", .{result});
+    try testing.expect(std.mem.eql(u8, result, "MCD______"));
 }
