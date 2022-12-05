@@ -119,6 +119,7 @@ test "part 1" {
         \\move 2 from 2 to 1
         \\move 1 from 1 to 2
     ));
+    std.debug.print("\n{s}\n", .{result});
     try testing.expect(std.mem.eql(u8, result, "CMZ______"));
 }
 
@@ -134,6 +135,6 @@ test "part 2" {
         \\move 2 from 2 to 1
         \\move 1 from 1 to 2
     ));
-    std.debug.print("---- {s}\n", .{result});
+    std.debug.print("\n{s}\n", .{result});
     try testing.expect(std.mem.eql(u8, result, "MCD______"));
 }
