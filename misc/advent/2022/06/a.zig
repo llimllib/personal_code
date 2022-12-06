@@ -7,9 +7,11 @@ pub const gpa = gpa_impl.allocator();
 
 const input = @embedFile("input.txt");
 
+const Charset = std.bit_set.IntegerBitSet(64);
+
 pub fn find4th(data: []const u8) usize {
     for (data) |_, i| {
-        var set = std.bit_set.IntegerBitSet(64).initEmpty();
+        var set = Charset.initEmpty();
         for (data[i .. i + 4]) |cc| {
             set.set(cc - 'a');
         }
@@ -22,7 +24,7 @@ pub fn find4th(data: []const u8) usize {
 
 pub fn find14th(data: []const u8) usize {
     for (data) |_, i| {
-        var set = std.bit_set.IntegerBitSet(64).initEmpty();
+        var set = Charset.initEmpty();
         for (data[i .. i + 14]) |cc| {
             set.set(cc - 'a');
         }
