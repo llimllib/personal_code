@@ -72,7 +72,6 @@ pub fn dirsize(root: *FS) usize {
         }
         size += node.size;
     }
-    std.debug.print("{s} {d}\n", .{ root.name, size });
     return size;
 }
 
@@ -93,9 +92,28 @@ pub fn score(root: *FS) usize {
     return size;
 }
 
+pub fn findRm(root: *FS) usize {
+    var size: usize = std.math.maxInt(usize);
+    var available: usize = 70000000;
+    var unused = available - dirsize(root);
+    var needed: usize = 30000000;
+    var stack = root.children.clone() catch unreachable;
+    while (stack.popOrNull()) |node| {
+        if (node.size != 0) continue;
+        for (node.children.items) |kid| {
+            if (kid.size == 0) stack.append(kid) catch unreachable;
+        }
+
+        var dsz = dirsize(node);
+        if (dsz < size and unused + dsz > needed) size = dsz;
+    }
+    return size;
+}
+
 pub fn main() !void {
     var fs = parse(input);
     std.debug.print("part 1: {d}\n", .{score(fs)});
+    std.debug.print("part 2: {d}\n", .{findRm(fs)});
 }
 
 // zig test a.zig
@@ -128,4 +146,35 @@ test "part 1" {
     var result = score(fs);
     std.debug.print("result: {d}\n", .{result});
     try testing.expect(result == 95437);
+}
+
+test "part 2" {
+    var fs = parse(
+        \\$ cd /
+        \\$ ls
+        \\dir a
+        \\14848514 b.txt
+        \\8504156 c.dat
+        \\dir d
+        \\$ cd a
+        \\$ ls
+        \\dir e
+        \\29116 f
+        \\2557 g
+        \\62596 h.lst
+        \\$ cd e
+        \\$ ls
+        \\584 i
+        \\$ cd ..
+        \\$ cd ..
+        \\$ cd d
+        \\$ ls
+        \\4060174 j
+        \\8033020 d.log
+        \\5626152 d.ext
+        \\7214296 k
+    );
+    var result = findRm(fs);
+    std.debug.print("result: {d}\n", .{result});
+    try testing.expect(result == 24933642);
 }
