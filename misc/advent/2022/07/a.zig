@@ -12,16 +12,27 @@ const FS = struct {
     parent: ?*FS,
     children: std.ArrayList(*FS),
     size: usize,
+    alloc: std.mem.Allocator,
+
+    pub fn init(allocator: std.mem.Allocator, name: []const u8, parent: ?*FS, size: usize) *FS {
+        var node = allocator.create(FS) catch unreachable;
+        node.* = FS{
+            .name = name,
+            .parent = parent,
+            .children = std.ArrayList(*FS).init(allocator),
+            .size = size,
+            .alloc = allocator,
+        };
+        return node;
+    }
+
+    pub fn appendChild(self: *FS, fs: *FS) void {
+        self.children.append(fs) catch unreachable;
+    }
 };
 
 pub fn parse(data: []const u8) *FS {
-    var root = gpa.create(FS) catch unreachable;
-    root.* = FS{
-        .name = "/",
-        .parent = null,
-        .children = std.ArrayList(*FS).init(gpa),
-        .size = 0,
-    };
+    var root = FS.init(gpa, "/", null, 0);
 
     var lines = std.mem.split(u8, data, "\n");
     var curdir = root;
@@ -37,27 +48,15 @@ pub fn parse(data: []const u8) *FS {
             curdir = curdir.parent.?;
         } else if (line.len >= 4 and std.mem.eql(u8, line[0..4], "$ cd")) {
             var name = line[5..];
-            var node = gpa.create(FS) catch unreachable;
-            node.* = FS{
-                .name = name,
-                .parent = curdir,
-                .children = std.ArrayList(*FS).init(gpa),
-                .size = 0,
-            };
-            curdir.children.append(node) catch unreachable;
+            var node = FS.init(gpa, name, curdir, 0);
+            curdir.appendChild(node);
             curdir = node;
         } else if (line[0] >= '0' and line[0] <= '9') {
             var parts = std.mem.split(u8, line, " ");
             var fsize = std.fmt.parseInt(usize, parts.next().?, 10) catch unreachable;
             var name = parts.next().?;
-            var node = gpa.create(FS) catch unreachable;
-            node.* = FS{
-                .name = name,
-                .parent = curdir,
-                .children = std.ArrayList(*FS).init(gpa),
-                .size = fsize,
-            };
-            curdir.children.append(node) catch unreachable;
+            var node = FS.init(gpa, name, curdir, fsize);
+            curdir.appendChild(node);
         }
     }
 
