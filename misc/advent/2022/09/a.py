@@ -19,21 +19,8 @@ moves = {
 }
 
 
-def sim(cmds):
-    h = (5, 5)
-    t = (5, 5)
-    visited = []
-    for cmd in cmds:
-        dir, n = cmd.split()
-        n = int(n)
-        for _ in range(n):
-            h, t = move(h, t, moves[dir])
-            visited.append(t)
-    print(f"tail visited: {len(set(visited))}")
-
-
-def sim10(cmds):
-    knots = [(5, 5) for _ in range(10)]
+def simn(cmds, n_knots):
+    knots = [(5, 5) for _ in range(n_knots)]
     visited = []
     for cmd in cmds:
         dir, n = cmd.split()
@@ -47,7 +34,7 @@ def sim10(cmds):
                 knots[i] = h
                 knots[i + 1] = t
             visited.append(knots[-1])
-    print(f"tail visited: {len(set(visited))}")
+    return len(set(visited))
 
 
 sample = """R 4
@@ -58,8 +45,8 @@ R 4
 D 1
 L 5
 R 2"""
-sim(sample.split("\n"))
-sim(open("input.txt").read().strip().split("\n"))
+assert simn(sample.split("\n"), 2) == 13
+print(simn(open("input.txt").read().strip().split("\n"), 2))
 
 sample2 = """R 5
 U 8
@@ -70,6 +57,6 @@ D 10
 L 25
 U 20"""
 
-sim10(sample.split("\n"))
-sim10(sample2.split("\n"))
-sim10(open("input.txt").read().strip().split("\n"))
+assert simn(sample.split("\n"), 10) == 1
+assert simn(sample2.split("\n"), 10) == 36
+print(simn(open("input.txt").read().strip().split("\n"), 10))
