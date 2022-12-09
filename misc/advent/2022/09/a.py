@@ -26,11 +26,8 @@ def simn(cmds, n_knots):
         dir, n = cmd.split()
         n = int(n)
         for _ in range(n):
-            h, t = move(knots[0], knots[1], moves[dir])
-            knots[0] = h
-            knots[1] = t
-            for i in range(1, len(knots) - 1):
-                h, t = move(knots[i], knots[i + 1], (0, 0))
+            for i in range(len(knots) - 1):
+                h, t = move(knots[i], knots[i + 1], moves[dir] if i == 0 else (0, 0))
                 knots[i] = h
                 knots[i + 1] = t
             visited.append(knots[-1])
