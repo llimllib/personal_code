@@ -21,7 +21,7 @@ moves = {
 
 def simn(cmds, n_knots):
     knots = [(5, 5) for _ in range(n_knots)]
-    visited = []
+    visited = set()
     for cmd in cmds:
         dir, n = cmd.split()
         n = int(n)
@@ -30,8 +30,8 @@ def simn(cmds, n_knots):
                 h, t = move(knots[i], knots[i + 1], moves[dir] if i == 0 else (0, 0))
                 knots[i] = h
                 knots[i + 1] = t
-            visited.append(knots[-1])
-    return len(set(visited))
+            visited.add(knots[-1])
+    return len(visited)
 
 
 sample = """R 4
