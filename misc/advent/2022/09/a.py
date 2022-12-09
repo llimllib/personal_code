@@ -1,3 +1,11 @@
+moves = {
+    "R": (1, 0),
+    "L": (-1, 0),
+    "U": (0, -1),
+    "D": (0, 1),
+}
+
+
 def move(h, t, d):
     dx, dy = d
     h = (h[0] + dx, h[1] + dy)
@@ -9,14 +17,6 @@ def move(h, t, d):
         t = (t[0] + (1 if t[0] < h[0] else -1), t[1] + (1 if t[1] < h[1] else -1))
 
     return h, t
-
-
-moves = {
-    "R": (1, 0),
-    "L": (-1, 0),
-    "U": (0, -1),
-    "D": (0, 1),
-}
 
 
 def simn(cmds, n_knots):
