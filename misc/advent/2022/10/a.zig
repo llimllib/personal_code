@@ -36,7 +36,7 @@ const CPU = struct {
         var width: u8 = 40;
         var height: u8 = 6;
         var crt = alloc.alloc(u8, width * height) catch unreachable;
-        for (crt) |_, i| crt[i] = '.';
+        for (crt) |_, i| crt[i] = ' ';
         return CPU{
             .registers = registers,
             .tick = 0,
@@ -62,7 +62,7 @@ const CPU = struct {
         if (dx < 2) {
             self.crt[row * self.width + col] = '#';
         } else {
-            self.crt[row * self.width + col] = '.';
+            self.crt[row * self.width + col] = ' ';
         }
     }
 
@@ -71,7 +71,7 @@ const CPU = struct {
         var lock = false;
         var iptr: usize = 0;
         var signalStrength: i64 = 0;
-        while (true) {
+        while (iptr < instrs.items.len) {
             var instr = instrs.items[iptr];
             self.tick += 1;
 
@@ -96,9 +96,6 @@ const CPU = struct {
             }
 
             iptr += 1;
-            if (iptr >= instrs.items.len) {
-                break;
-            }
         }
 
         self.printCRT();
