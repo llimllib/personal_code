@@ -27,8 +27,8 @@ const CPU = struct {
     height: u8,
     // I literally cannot figure out how to do a multidimensional array in zig,
     // so we'll just use an array and multiplication
-    // I also cannot figure out how to allocate a multidimensional array, so
-    // we'll use a 1d slice instead of an array
+    // I also cannot figure out how to allocate a multidimensional slice, so
+    // we'll use a 1d slice instead
     crt: []u8,
     alloc: std.mem.Allocator,
 
@@ -51,16 +51,10 @@ const CPU = struct {
 
     fn printCRT(self: *CPU) void {
         var row: usize = 0;
-        var col: usize = 0;
         std.debug.print("\n", .{});
         while (row < self.height) : (row += 1) {
-            while (col < self.width) : (col += 1) {
-                std.debug.print("{c}", .{self.crt[row * self.width + col]});
-            }
-            col = 0;
-            std.debug.print("\n", .{});
+            std.debug.print("{s}\n", .{self.crt[row * self.width .. row * self.width + self.width]});
         }
-        std.debug.print("-----------\n", .{});
     }
 
     fn updateCRT(self: *CPU) void {
