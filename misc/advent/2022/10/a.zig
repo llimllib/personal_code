@@ -5,6 +5,7 @@ const testing = std.testing;
 var gpa_impl = std.heap.GeneralPurposeAllocator(.{}){};
 pub const gpa = gpa_impl.allocator();
 
+const stdin = std.io.getStdIn().reader();
 const input = @embedFile("input.txt");
 
 const InstructionType = enum {
@@ -22,16 +23,55 @@ const InstructionList = std.ArrayList(*Instruction);
 const CPU = struct {
     registers: []i64,
     tick: u64,
+    width: u8,
+    height: u8,
+    // I literally cannot figure out how to do a multidimensional array in zig,
+    // so we'll just use an array and multiplication
+    // I also cannot figure out how to allocate an array, so we'll use a slice
+    // instead of an array
+    crt: []u8,
     alloc: std.mem.Allocator,
 
     pub fn init(alloc: std.mem.Allocator) CPU {
         var registers = alloc.alloc(i64, 1) catch unreachable;
         registers[0] = 1;
+        var width: u8 = 40;
+        var height: u8 = 6;
+        var crt = alloc.alloc(u8, width * height) catch unreachable;
+        for (crt) |_, i| crt[i] = '.';
         return CPU{
             .registers = registers,
             .tick = 0,
+            .width = width,
+            .height = height,
+            .crt = crt,
             .alloc = alloc,
         };
+    }
+
+    fn printCRT(self: *CPU) void {
+        var row: usize = 0;
+        var col: usize = 0;
+        std.debug.print("\n", .{});
+        while (row < self.height) : (row += 1) {
+            while (col < self.width) : (col += 1) {
+                std.debug.print("{c}", .{self.crt[row * self.width + col]});
+            }
+            col = 0;
+            std.debug.print("\n", .{});
+        }
+        std.debug.print("-----------\n", .{});
+    }
+
+    fn updateCRT(self: *CPU) void {
+        var row = ((self.tick - 1) / self.width) % self.height;
+        var col = (self.tick - 1) % self.width;
+        var dx = std.math.absInt(self.registers[0] - @intCast(i64, col)) catch unreachable;
+        if (dx < 2) {
+            self.crt[row * self.width + col] = '#';
+        } else {
+            self.crt[row * self.width + col] = '.';
+        }
     }
 
     pub fn run(self: *CPU, instrs: InstructionList) i64 {
@@ -42,6 +82,8 @@ const CPU = struct {
         while (true) {
             var instr = instrs.items[iptr];
             self.tick += 1;
+
+            self.updateCRT();
 
             if (self.tick == 20 or self.tick == 60 or self.tick == 100 or
                 self.tick == 140 or self.tick == 180 or self.tick == 220)
@@ -67,6 +109,7 @@ const CPU = struct {
             }
         }
 
+        self.printCRT();
         return signalStrength;
     }
 };
@@ -101,7 +144,6 @@ pub fn main() !void {
 test "part 1" {
     const sample = @embedFile("sample.txt");
     var result = parse(sample);
-    std.debug.print("{any}\n", .{result.items[0]});
     try testing.expect(result.items[0].arg1 == 15);
 
     var cpu = CPU.init(gpa);
