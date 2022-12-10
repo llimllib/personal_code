@@ -24,10 +24,10 @@ const CPU = struct {
     tick: u64,
     alloc: std.mem.Allocator,
 
-    pub fn init(alloc: std.mem.Allocator) *CPU {
+    pub fn init(alloc: std.mem.Allocator) CPU {
         var registers = alloc.alloc(i64, 1) catch unreachable;
         registers[0] = 1;
-        return &CPU{
+        return CPU{
             .registers = registers,
             .tick = 0,
             .alloc = alloc,
@@ -40,20 +40,15 @@ const CPU = struct {
         var iptr: usize = 0;
         var signalStrength: i64 = 0;
         while (true) {
+            var instr = instrs.items[iptr];
+            self.tick += 1;
+
             if (self.tick == 20 or self.tick == 60 or self.tick == 100 or
                 self.tick == 140 or self.tick == 180 or self.tick == 220)
             {
                 signalStrength += @intCast(i64, self.tick) * self.registers[0];
-
-                // uncommenting this print statement causes the result to be
-                // zero instead of 13360; it also never gets called
-                // std.debug.print("{d}: {d}\n", .{ self.tick, self.registers[0] });
-                //
-                // uncommenting this print statement causes the program to crash
-                std.debug.print("_\n", .{});
             }
-            var instr = instrs.items[iptr];
-            self.tick += 1;
+
             switch (instr.type) {
                 .NOOP => {},
                 .ADDX => {
@@ -95,14 +90,22 @@ pub fn parse(data: []const u8) InstructionList {
     return list;
 }
 
-pub fn main() !void {}
+pub fn main() !void {
+    var instructions = parse(input);
+    var cpu = CPU.init(gpa);
+    var signal = cpu.run(instructions);
+    std.debug.print("signal: {d}\n", .{signal});
+}
 
 // zig test a.zig
 test "part 1" {
     const sample = @embedFile("sample.txt");
     var result = parse(sample);
+    std.debug.print("{any}\n", .{result.items[0]});
+    try testing.expect(result.items[0].arg1 == 15);
+
     var cpu = CPU.init(gpa);
     var signal = cpu.run(result);
     std.debug.print("{d}\n", .{signal});
-    // try testing.expect(std.mem.eql(u8, result, "CMZ______"));
+    try testing.expect(signal == 13140);
 }
