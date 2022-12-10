@@ -6,14 +6,17 @@ moves = {
 }
 
 
-def adjust(h, t):
-    if t[0] == h[0] and abs(t[1] - h[1]) == 2:
-        t = (t[0], t[1] + (1 if t[1] < h[1] else -1))
-    elif t[1] == h[1] and abs(t[0] - h[0]) == 2:
-        t = (t[0] + (1 if t[0] < h[0] else -1), t[1])
-    elif abs(t[0] - h[0]) + abs(t[1] - h[1]) > 2:
-        t = (t[0] + (1 if t[0] < h[0] else -1), t[1] + (1 if t[1] < h[1] else -1))
+def clamp(x, min_, max_):
+    return min(max(min_, x), max_)
 
+
+def adjust(h, t):
+    dx, dy = h[0] - t[0], h[1] - t[1]
+    if abs(dx) >= 2 or abs(dy) >= 2:
+        return (
+            t[0] + clamp(dx, -1, 1),
+            t[1] + clamp(dy, -1, 1),
+        )
     return t
 
 
