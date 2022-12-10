@@ -26,9 +26,7 @@ const CPU = struct {
     width: u8,
     height: u8,
     // I literally cannot figure out how to do a multidimensional array in zig,
-    // so we'll just use an array and multiplication
-    // I also cannot figure out how to allocate a multidimensional slice, so
-    // we'll use a 1d slice instead
+    // so we'll just use a slice and multiplication
     crt: []u8,
     alloc: std.mem.Allocator,
 
