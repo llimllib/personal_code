@@ -27,8 +27,8 @@ const CPU = struct {
     height: u8,
     // I literally cannot figure out how to do a multidimensional array in zig,
     // so we'll just use an array and multiplication
-    // I also cannot figure out how to allocate an array, so we'll use a slice
-    // instead of an array
+    // I also cannot figure out how to allocate a multidimensional array, so
+    // we'll use a 1d slice instead of an array
     crt: []u8,
     alloc: std.mem.Allocator,
 
@@ -118,6 +118,8 @@ pub fn parse(data: []const u8) InstructionList {
     var list = InstructionList.init(gpa);
     var lines = std.mem.split(u8, data, "\n");
     while (lines.next()) |line| {
+        if (line.len == 0) continue;
+
         var instr = gpa.create(Instruction) catch unreachable;
         list.append(instr) catch unreachable;
 
