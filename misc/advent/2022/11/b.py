@@ -20,8 +20,7 @@ class Monkey:
         while self.items:
             self.inspections += 1
             it = self.items.pop(0)
-            it = self.operation(it)
-            it %= self.modn
+            it = self.operation(it) % self.modn
             if it % self.testn == 0:
                 self.monkeys[self.truemonkey].items.append(it)
             else:
