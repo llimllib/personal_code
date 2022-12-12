@@ -76,7 +76,7 @@ def findpath(steps, pos):
     return path
 
 
-def find_shortest_start(map_, start, goal):
+def find_shortest_start(map_, goal):
     min_ = 10000
     shortestpath = None
     for r in range(len(map_)):
@@ -114,20 +114,20 @@ print(len(path) - 1)
 
 print("\n---------\n")
 
-map_, start, goal = parse(
+map_, _, goal = parse(
     """Sabqponm
 abcryxxl
 accszExk
 acctuvwj
 abdefghi"""
 )
-l, path = find_shortest_start(map_, start, goal)
+l, path = find_shortest_start(map_, goal)
 showpath(map_, path)
 print(l - 1)
 
 print("\n---------\n")
 
-map_, start, goal = parse(open("input.txt").read().strip())
-l, path = find_shortest_start(map_, start, goal)
+map_, _, goal = parse(open("input.txt").read().strip())
+l, path = find_shortest_start(map_, goal)
 showpath(map_, path)
 print(l - 1)
