@@ -38,20 +38,6 @@ def moves(map_, pos):
             yield (row, col)
 
 
-def printcosts(map_, costs):
-    for row in range(len(map_)):
-        for col in range(len(map_[0])):
-            sys.stdout.write(f"{costs.get((row, col), -1):3}")
-        sys.stdout.write("\n")
-
-
-def printmap(map_):
-    for row in range(len(map_)):
-        for col in range(len(map_[0])):
-            sys.stdout.write(f"{map_[row][col]:4}")
-        sys.stdout.write("\n")
-
-
 def showpath(map_, path):
     for row in range(len(map_)):
         for col in range(len(map_[0])):
