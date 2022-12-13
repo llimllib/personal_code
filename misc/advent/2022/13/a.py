@@ -1,3 +1,4 @@
+from functools import cmp_to_key
 import json
 
 
@@ -47,8 +48,37 @@ assert not ordered(
     [1, [2, [3, [4, [5, 6, 7]]]], 8, 9], [1, [2, [3, [4, [5, 6, 0]]]], 8, 9]
 )
 
+print("part 1:")
+
+pairs = [
+    [json.loads(ll) for ll in l.split("\n")]
+    for l in open("sample.txt").read().strip().split("\n\n")
+]
+print(
+    "    sample: ",
+    sum(i + 1 for i in range(len(pairs)) if ordered(pairs[i][0], pairs[i][1])),
+)
+
 pairs = [
     [json.loads(ll) for ll in l.split("\n")]
     for l in open("input.txt").read().strip().split("\n\n")
 ]
-print(sum(i + 1 for i in range(len(pairs)) if ordered(pairs[i][0], pairs[i][1])))
+print(
+    "    input: ",
+    sum(i + 1 for i in range(len(pairs)) if ordered(pairs[i][0], pairs[i][1])),
+)
+
+print("part 2:")
+
+s1, s2 = [[[2]], [[6]]]
+lists = [
+    json.loads(l) for l in open("sample.txt").read().strip().split("\n") if l.strip()
+] + [s1, s2]
+lists.sort(key=cmp_to_key(cmp))
+print("    sample:", (lists.index(s1) + 1) * (lists.index(s2) + 1))
+
+lists = [
+    json.loads(l) for l in open("input.txt").read().strip().split("\n") if l.strip()
+] + [s1, s2]
+lists.sort(key=cmp_to_key(cmp))
+print("    input:", (lists.index(s1) + 1) * (lists.index(s2) + 1))
