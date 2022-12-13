@@ -37,7 +37,7 @@ def ordered(a, b) -> bool:
     return cmp(a, b) == -1
 
 
-# assert ordered([1, 1, 3, 1, 1], [1, 1, 5, 1, 1])
+assert ordered([1, 1, 3, 1, 1], [1, 1, 5, 1, 1])
 assert ordered([[1], [2, 3, 4]], [[1], 4])
 assert not ordered([9], [[8, 7, 6]])
 assert ordered([[4, 4], 4, 4], [[4, 4], 4, 4, 4])
