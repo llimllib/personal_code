@@ -1,5 +1,4 @@
 from collections import defaultdict
-import ipdb
 import itertools
 import sys
 
@@ -27,20 +26,10 @@ def gprint(grid, extent, grain=None):
         print()
 
 
-def debug(grid):
-    for col in grid:
-        if len(grid[col]) != 0:
-            print(f"{col}: {grid[col]}")
-
-
 def makegrid(text):
     lines = parse(text)
 
-    points = list(flatten(lines))
-    # minx = min(points)[0]
-    # maxx = max(points)[0]
-    # miny = min(points, key=lambda x: x[1])[1]
-    maxy = max(points, key=lambda x: x[1])[1]
+    maxy = max(flatten(lines), key=lambda x: x[1])[1]
 
     columns = defaultdict(dict)
 
@@ -92,8 +81,6 @@ def run2(grid, limit):
 
     grains = 0
     while True:
-        # gprint(grid, ((485, 0), (515, 13)), (col, row))
-        # input()
         if row == limit + 1:
             grid[col][row] = "*"
             row = 0
