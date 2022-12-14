@@ -98,15 +98,14 @@ def run2(grid, limit):
             row += 1
             col += 1
             continue
-        elif row == 0 and col == 500:
-            grid[col][row] = "*"
-            grains += 1
-            break
 
         grid[col][row] = "*"
+        grains += 1
+        if row == 0 and col == 500:
+            break
+
         row = 0
         col = 500
-        grains += 1
 
     return grains
 
