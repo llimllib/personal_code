@@ -115,19 +115,19 @@ grid, limit = makegrid(
 503,4 -> 502,4 -> 502,9 -> 494,9"""
 )
 grains = run(grid, limit)
-print(grains)
+assert grains == 24
 
 grid, limit = makegrid(open("input.txt").read())
 grains = run(grid, limit)
-print(grains)
+print("part 1:", grains)
 
 grid, limit = makegrid(
     """498,4 -> 498,6 -> 496,6
 503,4 -> 502,4 -> 502,9 -> 494,9"""
 )
 grains = run2(grid, limit)
-print(grains)
+assert grains == 93
 
 grid, limit = makegrid(open("input.txt").read())
 grains = run2(grid, limit)
-print(grains)
+print("part 2:", grains)
