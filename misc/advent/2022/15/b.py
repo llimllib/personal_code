@@ -2,11 +2,12 @@ import re
 
 
 def parse(text):
-    return [
+    pts = [
         list(map(int, re.findall(r"([\-\d]+)", line)))
         for line in text.split("\n")
         if line
     ]
+    return [[sx, sy, bx, by, abs(sx - bx) + abs(sy - by)] for sx, sy, bx, by in pts]
 
 
 # https://nedbatchelder.com/blog/201310/range_overlap_in_two_compares.html
@@ -16,13 +17,13 @@ def overlap(r1, r2):
 
 
 def merge(r1, r2):
-    return (min(r1[0], r2[0]), max(r1[1], r2[1]))
+    # we know these are sorted, so we can just take r1[0] without having to min
+    return (r1[0], max(r1[1], r2[1]))
 
 
 def points(items, row):
     ranges = []
-    for sx, sy, bx, by in items:
-        dist = abs(sx - bx) + abs(sy - by)
+    for sx, sy, _, _, dist in items:
         if not (sy - dist <= row <= sy + dist):
             continue
         delta = dist - abs(sy - row)
