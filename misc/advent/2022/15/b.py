@@ -10,6 +10,7 @@ def parse(text):
 
 
 # https://nedbatchelder.com/blog/201310/range_overlap_in_two_compares.html
+# modified to indicate that two samples that lie next to each other overlap
 def overlap(r1, r2):
     return r1[1] >= r2[0] - 1 and r2[1] >= r1[0] - 1
 
