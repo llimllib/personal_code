@@ -1,4 +1,3 @@
-import ipdb
 import re
 
 
@@ -41,16 +40,6 @@ def points(items, row):
     merged.append(r)
 
     return merged
-
-
-def search(items, extent):
-    mnx, mny, mxx, mxy = extent
-    for row in range(mny, mxy):
-        pts = points(items, row)
-        if len(pts) != mxx - mnx + 1:
-            for i in range(mnx, mxx + 1):
-                if i not in pts:
-                    return row + i * 4000000
 
 
 sample = parse(
