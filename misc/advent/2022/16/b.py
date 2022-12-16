@@ -23,9 +23,6 @@ def options(graph, flows, loc, path, opened):
 def find(graph, flows, start):
     frontier = [(0, ([start], [start]), set(), [])]
     for i in range(1, 27):
-        print(i)
-        # print(frontier)
-
         # extremely janky heuristic of just keeping the top-scoring 3000
         # entries
         if i > 5:
@@ -51,11 +48,10 @@ def find(graph, flows, start):
 
 graph, flows = parse(open("sample.txt").read())
 pressure, path, opened, debug = find(graph, flows, "AA")
-for a in debug:
-    print(a)
-print(pressure, path, opened)
+# for a in debug:
+#     print(a)
 assert pressure == 1707
 
 graph, flows = parse(open("input.txt").read())
 pressure, path, opened, debug = find(graph, flows, "AA")
-print(pressure, path, opened)
+print("part 2:", pressure)
