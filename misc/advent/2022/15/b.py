@@ -7,7 +7,7 @@ def parse(text):
         for line in text.split("\n")
         if line
     ]
-    return [[sx, sy, bx, by, abs(sx - bx) + abs(sy - by)] for sx, sy, bx, by in pts]
+    return [[sx, sy, abs(sx - bx) + abs(sy - by)] for sx, sy, bx, by in pts]
 
 
 # https://nedbatchelder.com/blog/201310/range_overlap_in_two_compares.html
@@ -23,7 +23,7 @@ def merge(r1, r2):
 
 def points(items, row):
     ranges = []
-    for sx, sy, _, _, dist in items:
+    for sx, sy, dist in items:
         if not (sy - dist <= row <= sy + dist):
             continue
         delta = dist - abs(sy - row)
