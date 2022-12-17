@@ -74,22 +74,6 @@ def run(jets, n):
         rockn += 1
         row = minrow - 3 - rockh
 
-        # # if we're on the first rock, and the first jet, check for a cycle
-        # if jetn % jetl == 0 or jetn == 10091:
-        #     ipdb.set_trace()
-        #     print(rock, jetn, jetl)
-        # if rock[0] == 15 and jetn % jetl == 0 and jetn > 0:
-        #     # if rockn % 50455 == 0:
-        #     ipdb.set_trace()
-        #     # print(rock, jetn)
-        #     rockp(board[row : row + 30], (0, col), rock, rockw)
-        #     val = input()
-        #     # TODO: if a 127 is in the board between 1 and 15, we can ignore
-        #     # the remainder
-        #     cyc = reduce(mul, [b + 1 for b in board[row + 1 : row + 15]])
-        #     if cyc in cyccheck:
-        #         ipdb.set_trace()
-        #         print("cycle maybe found!", rockn, cyc) cyccheck.add(cyc)
         while True:
             # rockp(board[height - 30 :], (row - (height - 30), col), rock, rockw)
             # val = input()
