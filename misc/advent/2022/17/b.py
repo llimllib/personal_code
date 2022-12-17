@@ -159,51 +159,8 @@ def cyccalc(goal, start, cyclesize):
 
 
 inp = list(open("input.txt").read().strip())
-# t1 = time.time()
-# print(run(inp, 1_000_000))
-# t2 = time.time()
-# print(f"{t2-t1} seconds")
 
-# running 1,000,000 times gives 1575829 rocks. Guessing 1575829000000
-# was too high
-# high:
-# 1575829000000
-# low:
-# 389380533993
-
-# after cycle 1266, the cycle repeats every 1695 blocks
-# so, our total after 1000000000000 = run(1266) +
-# goal = 1000000000000
-# a = run(inp, 1266)
-# goal -= 1266
-#
-# b = run(inp, 1695)
-# b -= a
-#
-# remain = goal - (goal // 1695) * 1695
-#
-# c = run(inp, 1695 + remain)
-# print(a, b, c)
-# print(a + (goal // 1695) * b + (c - (b + a)))
-#
-# print("----")
-#
-# goal = 1_000_000
-# # get to the start of our cycle
-# a = run(inp, 1266)
-# goal -= 1266
-#
-# # run the first cycle
-# b = run(inp, 1266 + 1695)
-# b -= a
-#
-# # get to the end of the desired number
-# remain = goal - (goal // 1695) * 1695
-#
-# c = run(inp, 1266 + 1695 + remain)
-# print(a, b, c, remain)
-# print(a, (b - a), c - (b + a))
-# print(a + (goal // 1695) * b + (c - (b + a)))
+# discovered that after cycle 1266, the cycle repeats every 1695 blocks
 
 assert cyccalc(1_000_000, 1266, 1695) == 1575829
 print(cyccalc(1000000000000, 1266, 1695))

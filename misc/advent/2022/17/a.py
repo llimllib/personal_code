@@ -1,7 +1,8 @@
 from itertools import cycle
 import sys
+import time
 
-import ipdb
+# import ipdb
 import numpy as np
 
 # rock rows in binary, followed by rock width
@@ -100,6 +101,8 @@ def run(jets, n):
         minrow = min(row, minrow)
         for i, r in enumerate(rock):
             board[row + i] |= r << (7 - rockw - col)
+            if board[row + i] == 127:
+                print("tetris!", n)
 
         n -= 1
 
@@ -111,8 +114,7 @@ height = run(sample, 2022)
 assert height == 3068, height
 
 inp = list(open("input.txt").read().strip())
+t1 = time.time()
 print(run(inp, 2022))
-
-# obviously this won't work; but there's a cycle at len(jets) * len(rock)
-cycle = len(inp) * len(ROCKS)
-print(cycle, divmod(1000000000000, cycle))
+t2 = time.time()
+print(f"{t2-t1} seconds")
