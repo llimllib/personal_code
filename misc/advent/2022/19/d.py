@@ -36,6 +36,20 @@ def search(bp):
 
         while frontier:
             state = frontier.pop()
+            if state[0] >= geode_ore_cost and state[4] >= geode_obs_cost:
+                newfrontier.add(
+                    (
+                        state[0] + state[1] - geode_ore_cost,
+                        state[1],
+                        state[2] + state[3],
+                        state[3],
+                        state[4] + state[5] - geode_obs_cost,
+                        state[5],
+                        state[6] + state[7],
+                        state[7] + 1,
+                    )
+                )
+                continue
             if state[0] >= ore_cost:
                 newfrontier.add(
                     (
@@ -73,19 +87,6 @@ def search(bp):
                         state[5] + 1,
                         state[6] + state[7],
                         state[7],
-                    )
-                )
-            if state[0] >= geode_ore_cost and state[4] >= geode_obs_cost:
-                newfrontier.add(
-                    (
-                        state[0] + state[1] - geode_ore_cost,
-                        state[1],
-                        state[2] + state[3],
-                        state[3],
-                        state[4] + state[5] - geode_obs_cost,
-                        state[5],
-                        state[6] + state[7],
-                        state[7] + 1,
                     )
                 )
 
