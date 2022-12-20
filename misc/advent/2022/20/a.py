@@ -1,20 +1,25 @@
+from ipdb import set_trace as t
+
+
 def mix(data, rounds=1, verbose=False):
     sl = len(data)
     for _ in range(rounds):
         # bit mask tracking what values have been popped
         ixs = [0 for _ in data]
-        for _ in range(sl):
+        for i in range(sl):
             if verbose:
                 print(data)
+                t()
             ix = ixs.index(0)
-            x = data.pop(ix)
+            x = data[ix]
             ixs.pop(ix)
-            print(x, x % sl)
-            newix = ((x % sl) + ix) % (sl - 1)
+            newix = (x + ix + 1) % sl
             data.insert(newix, x)
+            data.pop(ix if ix < newix else ix + 1)
             ixs.insert(newix, 1)
             ixs[newix] = 1
 
+    print(data)
     ix = data.index(0)
     return data[(ix + 1000) % sl] + data[(ix + 2000) % sl] + data[(ix + 3000) % sl]
 
