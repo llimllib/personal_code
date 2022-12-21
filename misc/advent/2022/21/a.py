@@ -1,4 +1,4 @@
-from operator import mul, floordiv, add, sub
+from operator import mul, floordiv, add, sub, eq
 
 ops = {
     "+": add,
@@ -23,13 +23,21 @@ def parse(text):
 
 
 def run(monkeys, name):
-    print(name, monkeys[name])
+    # print(name, monkeys[name])
     if isinstance(monkeys[name], int):
         return monkeys[name]
     else:
         return monkeys[name][0](
             run(monkeys, monkeys[name][1]), run(monkeys, monkeys[name][2])
         )
+
+
+def search(monkeys):
+    for i in range(10_000_000_000, 100_000_000_000):
+        monkeys["humn"] = i
+        if run(monkeys, monkeys["root"][1]) == run(monkeys, monkeys["root"][2]):
+            return i
+    raise AssertionError("Unable to find monkey")
 
 
 sample = """root: pppw + sjmn
@@ -52,3 +60,8 @@ assert res == 152, res
 
 res = run(parse(open("input.txt").read()), "root")
 print("part 1:", res)
+
+res = search(parse(sample))
+assert res == 301
+
+res = search(parse(open("input.txt").read()))
