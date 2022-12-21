@@ -1,4 +1,4 @@
-from ipdb import set_trace as t
+# from ipdb import set_trace as t
 
 
 def index_unset(data, n, ixs):
@@ -6,17 +6,15 @@ def index_unset(data, n, ixs):
     while 1:
         ix = data.index(n, ix + 1)
         if not ixs[ix]:
-            break
-    assert ix != -1
-    return ix
+            return ix
+
+    raise AssertionError("unreachable")
 
 
 def mix(data, rounds=1, verbose=False):
     sl = len(data)
     orig = data[:]
     for _ in range(rounds):
-        if verbose:
-            print(data)
         # bit mask tracking what values have been popped
         ixs = [0 for _ in data]
         for n in orig:
@@ -41,8 +39,8 @@ print("part 1:", res)
 assert res == 14526
 
 key = 811589153
-res = mix([s * key for s in sample], 10, False)
+res = mix([s * key for s in sample], 10, True)
 assert res == 1623178306
 
 # -5070809027944 is not the right answer
-print("part 2:", mix([d * key for d in data], 10))
+print("part 2:", mix([d * key for d in data], 10, True))
