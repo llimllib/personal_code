@@ -1,0 +1,4 @@
+- `a.py`: solution for part 1, start at a brute force solution to part 2. Then I went on a run and came up with the idea for:
+- `b.py`: prints an equation that represents the solution for part 2, suitable for entry into Sage or mathematica
+- `c.sage`: a script that prints the part 2 answer using sage
+- `d.py`: a script that prints the part 2 answer using sympy
