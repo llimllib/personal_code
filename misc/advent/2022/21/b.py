@@ -18,7 +18,6 @@ def run(monkeys, name):
         l, op, r = monkeys[name]
         eq = f"({run(monkeys, l)} {op} {run(monkeys, r)})"
         if "x" not in eq:
-            print(eq)
             return eval(eq)
         return eq
 
