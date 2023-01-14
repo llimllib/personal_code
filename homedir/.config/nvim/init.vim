@@ -180,6 +180,9 @@ Plug 'simrat39/symbols-outline.nvim'
 " read editorconfig files
 Plug 'gpanders/editorconfig.nvim'
 
+" query databases
+Plug 'tpope/vim-dadbod'
+
 " Initialize plugin system
 call plug#end()
 
@@ -319,6 +322,33 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" dadbod shortcuts
+vnoremap <leader>db <cmd>DB<cr>
+nnoremap <leader>q <cmd>DB<cr>
+" from: https://github.com/tpope/vim-dadbod/issues/33
+"
+" How it works:
+"
+" The first search finds the next semicolon. The second marks the spot and
+" moves backwards to the previous semicolon or the start of the buffer. The
+" third moves forward to the next select|with|insert|update|delete|create.
+" Finally, it changes to visual mode and selects to the previous mark.
+"
+" \v: very magic
+" \c: ignore case
+" c: include current char in search
+" s: set the ' mark at the previous location of the cursor
+" W: do not wrap
+" z: start search at the cursor column instead of zero
+vnoremap <leader>aq <esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`'
+
+" use ,se in normal mode to try to attempt to guess the current sql statement
+" and run it. May not quite select the proper area. I would like to figure out
+" how to replace :DB with db#op_exec() but I don't know how
+nnoremap <leader>se :normal v<leader>aq<cr>:DB<cr>
+
+" end vim-dadbod
 
 lua << EOF
 require('telescope').setup {
