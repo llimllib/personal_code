@@ -2,7 +2,7 @@
 -- brew install efm-langserver shellcheck
 -- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
--- npm install -g typescript typescript-language-server prettier bash-language-server
+-- npm install -g typescript typescript-language-server prettier bash-language-server vscode-langservers-extracted
 -- gem install solargraph
 -- pip install pyright black
 -- luarocks install --server=https://luarocks.org/dev luaformatter
@@ -142,7 +142,7 @@ end
 lsp.tsserver.setup {
     on_attach = function(client, bufnr)
         -- don't format files, I prefer using prettier
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
 
         on_attach(client, bufnr)
     end,
@@ -156,7 +156,7 @@ lsp.tsserver.setup {
 lsp.gopls.setup {
     on_attach = function(client, bufnr)
         -- don't format files, I prefer using null-ls for this
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
 
         on_attach(client, bufnr)
     end,
@@ -191,7 +191,7 @@ lsp.zls.setup {on_attach = on_attach, capabilities = capabilities}
 lsp.terraformls.setup {
     on_attach = function(client, bufnr)
         -- terraformls doesn't seem to do formatting? So use null_ls instead
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
 
         on_attach(client, bufnr)
     end,
@@ -201,6 +201,18 @@ lsp.terraformls.setup {
 lsp.tflint.setup {}
 
 lsp.bashls.setup {}
+
+lsp.cssls.setup {on_attach = on_attach, capabilities = capabilities}
+
+lsp.html.setup {
+    on_attach = function(client, bufnr)
+        -- don't format files, I prefer using prettier
+        client.server_capabilities.document_formatting = false
+
+        on_attach(client, bufnr)
+    end,
+    capabilities = capabilities
+}
 
 -- configure diagnostics
 vim.diagnostic.config({
@@ -236,7 +248,7 @@ null_ls.setup({
                 callback = function()
                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
                     -- (note: I'm currently on 0.7.2, 7/7/22)
-                    vim.lsp.buf.formatting_sync()
+                    vim.lsp.buf.format()
                 end
             })
         end
