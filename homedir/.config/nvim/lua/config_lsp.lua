@@ -144,6 +144,10 @@ lsp.tsserver.setup {
         -- don't format files, I prefer using prettier
         client.server_capabilities.document_formatting = false
 
+        -- null-ls messes with formatexpr for some reason, which messes up `gq`
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+
         on_attach(client, bufnr)
     end,
     -- don't format files, I prefer using prettier
@@ -157,6 +161,10 @@ lsp.gopls.setup {
     on_attach = function(client, bufnr)
         -- don't format files, I prefer using null-ls for this
         client.server_capabilities.document_formatting = false
+
+        -- null-ls messes with formatexpr for some reason, which messes up `gq`
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
 
         on_attach(client, bufnr)
     end,
