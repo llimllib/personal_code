@@ -144,10 +144,6 @@ lsp.tsserver.setup {
         -- don't format files, I prefer using prettier
         client.server_capabilities.document_formatting = false
 
-        -- null-ls messes with formatexpr for some reason, which messes up `gq`
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
-        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
-
         on_attach(client, bufnr)
     end,
     -- don't format files, I prefer using prettier
@@ -161,10 +157,6 @@ lsp.gopls.setup {
     on_attach = function(client, bufnr)
         -- don't format files, I prefer using null-ls for this
         client.server_capabilities.document_formatting = false
-
-        -- null-ls messes with formatexpr for some reason, which messes up `gq`
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
-        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
 
         on_attach(client, bufnr)
     end,
@@ -259,6 +251,11 @@ null_ls.setup({
                     vim.lsp.buf.format()
                 end
             })
+
+            -- null-ls messes with formatexpr for some reason, which messes up `gq`
+            -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+            vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+
         end
     end,
     sources = {
@@ -272,3 +269,8 @@ null_ls.setup({
     -- enable this and run :NullLsLog to see a detailed log
     -- debug = true,
 })
+
+-- There are many config options, let's roll with the default until it annoys
+-- us:
+-- https://github.com/lewis6991/gitsigns.nvim/tree/addd6e174a85fc1c4007ab0b65d77e6555b417bf#usage
+require('gitsigns').setup()

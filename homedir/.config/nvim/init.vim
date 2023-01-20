@@ -166,8 +166,13 @@ Plug 'hrsh7th/vim-vsnip'
 " zig language syntax
 Plug 'ziglang/zig.vim'
 
+" Color schemes
+"
 " https://github.com/sainnhe/everforest/blob/master/doc/everforest.txt
 Plug 'sainnhe/everforest'
+" https://github.com/ayu-theme/ayu-vim
+Plug 'Shatur/neovim-ayu'
+" /Color schemes
 
 " null-ls is an attempt to bridge that gap and simplify the process of
 " creating, sharing, and setting up LSP sources using pure Lua.
@@ -183,6 +188,8 @@ Plug 'gpanders/editorconfig.nvim'
 " query databases
 Plug 'tpope/vim-dadbod'
 
+Plug 'lewis6991/gitsigns.nvim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -192,8 +199,9 @@ call plug#end()
 """"
 if (has("termguicolors"))
   set termguicolors
+  " colorscheme everforest
+  colorscheme ayu-mirage
 endif
-colorscheme everforest
 
 
 """"
