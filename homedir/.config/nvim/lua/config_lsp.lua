@@ -88,7 +88,21 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({
             select = true,
             behavior = cmp.ConfirmBehavior.Insert
-        })
+        }),
+        ['<up>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            else
+                fallback()
+            end
+        end,
+        ['<down>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                fallback()
+            end
+        end
     },
     sources = {{name = 'nvim_lsp'}, {name = 'buffer'}, {name = 'path'}},
     formatting = {

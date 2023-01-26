@@ -1,0 +1,7 @@
+require('keymap')
+require('options')
+require('plugins')
+require('autocmds')
+require('config_lsp')
+require('colorscheme')
+require('telescope-cfg')
