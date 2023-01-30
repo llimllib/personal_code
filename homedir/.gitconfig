@@ -44,6 +44,10 @@
 #
 [delta]
     navigate = true  # use n and N to move between diff sections
+    light = false # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    # https://dandavison.github.io/delta/configuration.html
+    features = decorations
+    line-numbers = true
 
 [interactive]
     diffFilter = delta --color-only
@@ -53,7 +57,7 @@
 
 [diff]
     colorMoved = default
-    algorithm = patience
+    algorithm = histogram
     compactionHeuristic = true
     noprefix = true
 
