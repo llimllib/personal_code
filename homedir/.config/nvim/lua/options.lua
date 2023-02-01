@@ -27,7 +27,7 @@ vim.opt.listchars = {
 
 -- turn on persistent undo, and store it in the vim dir
 vim.opt.undofile = true
-vim.opt.undodir = "~/.config/nvim/undodir"
+vim.opt.undodir = vim.fn.stdpath('config') .. "/undodir"
 
 -- default space and tab handling
 vim.opt.shiftwidth = 4
