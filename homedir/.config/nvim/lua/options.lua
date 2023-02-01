@@ -4,6 +4,14 @@ vim.g.mapleader = ','
 -- https://gpanders.com/blog/whats-new-in-neovim-0-7/#filetypelua
 vim.g.do_filetype_lua = 1
 
+-- set is_bash by default.
+-- Vim will highlight a file as posix shell, unless it's named *.bash or has
+-- /bin/bash on the shebang line. However, I write my scripts with
+-- "/usr/bin/env bash" instead of "/bin/bash", so it doesn't pick up on the
+-- shebang properly. Just assume a shell script should be highlighted like
+-- bash.
+vim.g.is_bash = 1
+
 -- backspace over auto-indents, eols, start of lines
 vim.opt.backspace = {"indent", "eol", "start"}
 
