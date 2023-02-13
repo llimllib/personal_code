@@ -1,11 +1,10 @@
 -- To install all prerequisite language servers and formatters:
--- brew install efm-langserver shellcheck
+-- brew install efm-langserver shellcheck stylua
 -- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
 -- npm install -g typescript typescript-language-server prettier bash-language-server vscode-langservers-extracted
 -- gem install solargraph
 -- pip install pyright black
--- luarocks install --server=https://luarocks.org/dev luaformatter
 -- build zls manually: https://github.com/zigtools/zls/wiki/Downloading-and-Building-ZLS#cloning-with-git
 local lsp = require('lspconfig')
 local cmp = require('cmp')
@@ -276,7 +275,7 @@ null_ls.setup({
         null_ls.builtins.formatting.prettier, null_ls.builtins.formatting.black,
         null_ls.builtins.formatting.goimports,
         null_ls.builtins.formatting.gofumpt,
-        null_ls.builtins.formatting.lua_format,
+        null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.terraform_fmt
     },
     root_dir = lsp.util.root_pattern('yarn.lock', '.git')
