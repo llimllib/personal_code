@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- installs to ~/.local/share/nvim/lazy/
 require("lazy").setup({
 	spec = {
 		"neovim/nvim-lspconfig",
@@ -35,24 +36,38 @@ require("lazy").setup({
 		},
 
 		-- install nvim-cmp, for code completion
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/nvim-cmp",
-
-		-- I don't use snippets or know what they are, but nvim-cmp
-		-- requires this, so whatever I guess
-		"hrsh7th/cmp-vsnip",
-		"hrsh7th/vim-vsnip",
+		{
+			"hrsh7th/nvim-cmp",
+			dependencies = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+				-- I don't use snippets or know what they are, but nvim-cmp
+				-- requires this, so whatever I guess
+				"hrsh7th/cmp-vsnip",
+				"hrsh7th/vim-vsnip",
+			},
+		},
 
 		-- colorschemes
-		"sainnhe/everforest", -- https://github.com/Shatur/neovim-ayu
+		"sainnhe/everforest",
+		-- https://github.com/Shatur/neovim-ayu
 		-- is a neovim rewrite of
 		-- https://github.com/ayu-theme/ayu-vim
-		"Shatur/neovim-ayu", -- interesting looking one, nordic:
-		"AlexvZyl/nordic.nvim", --  https://github.com/AlexvZyl/nordic.nvim
+		"Shatur/neovim-ayu",
+
+		-- interesting looking one, nordic:
+		--  https://github.com/AlexvZyl/nordic.nvim
+		"AlexvZyl/nordic.nvim",
+
+		{ dir = "~/code/adhoc-nvim-colors" },
 		-- /colorschemes
+
+		-- includes a whole bunch of stuff, I'm using it for base16 experiments
+		-- at the moment. List of included modules:
+		-- https://github.com/echasnovski/mini.nvim/tree/main#modules
+		"echasnovski/mini.nvim",
 
 		-- null-ls is an attempt to simplify the process of creating,
 		-- sharing, and setting up LSP sources using pure Lua.
@@ -60,6 +75,13 @@ require("lazy").setup({
 			"jose-elias-alvarez/null-ls.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
 		},
+
+		-- hex colors
+        {"norcalli/nvim-colorizer.lua",
+            config = function()
+                require 'colorizer'.setup()
+            end
+        },
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom

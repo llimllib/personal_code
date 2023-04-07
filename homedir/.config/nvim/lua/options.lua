@@ -1,4 +1,4 @@
-vim.g.mapleader = ','
+vim.g.mapleader = ","
 
 -- use neovim's lua file type detection, which should improve startup time
 -- https://gpanders.com/blog/whats-new-in-neovim-0-7/#filetypelua
@@ -13,21 +13,21 @@ vim.g.do_filetype_lua = 1
 vim.g.is_bash = 1
 
 -- backspace over auto-indents, eols, start of lines
-vim.opt.backspace = {"indent", "eol", "start"}
+vim.opt.backspace = { "indent", "eol", "start" }
 
 -- show invisible characters
 vim.opt.list = true
 vim.opt.listchars = {
-    tab = "→ ",
-    eol = "¬",
-    trail = "⋅",
-    extends = "❯",
-    precedes = "❮"
+	tab = "→ ",
+	eol = "¬",
+	trail = "⋅",
+	extends = "❯",
+	precedes = "❮",
 }
 
 -- turn on persistent undo, and store it in the vim dir
 vim.opt.undofile = true
-vim.opt.undodir = vim.fn.stdpath('config') .. "/undodir"
+vim.opt.undodir = vim.fn.stdpath("config") .. "/undodir"
 
 -- default space and tab handling
 vim.opt.shiftwidth = 4
@@ -61,19 +61,23 @@ vim.opt.swapfile = false
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.title = true
-vim.opt.backupdir = {"~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp"}
-vim.opt.directory = {"~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp"}
+vim.opt.backupdir = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
+vim.opt.directory = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 
 -- Wait 100ms before running cursorhold (shows diagnostic messages)
 vim.opt.updatetime = 100
 
 -- recommended by nvim-cmp
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- show line
 vim.opt.ruler = true
-vim.opt.statusline = '%f%m%r%h [%L] [%{&ff}] %y%=[%p%%] [line:%05l,col:%02v]'
+vim.opt.statusline = "%f%m%r%h [%L] [%{&ff}] %y%=[%p%%] [line:%05l,col:%02v]"
 vim.opt.laststatus = 2
+
+if vim.fn.has("termguicolors") then
+	vim.opt.termguicolors = true
+end
