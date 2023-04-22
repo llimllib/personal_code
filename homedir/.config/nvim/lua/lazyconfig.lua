@@ -20,6 +20,7 @@ require("lazy").setup({
 		"hashivim/vim-terraform", -- terraform highlighting
 		"elixir-editors/vim-elixir", -- elixir highlighting
 		"ziglang/zig.vim", -- zig highlighting
+		"cappyzawa/starlark.vim", -- starlark highlighting
 		"gpanders/editorconfig.nvim", -- .editorconfig reading
 		"tpope/vim-dadbod", -- query databases
 		"lewis6991/gitsigns.nvim", -- git gutter signs
@@ -60,6 +61,7 @@ require("lazy").setup({
 		-- interesting looking one, nordic:
 		--  https://github.com/AlexvZyl/nordic.nvim
 		"AlexvZyl/nordic.nvim",
+		"folke/tokyonight.nvim",
 
 		{ dir = "~/code/adhoc-nvim-colors" },
 		-- /colorschemes
@@ -77,11 +79,12 @@ require("lazy").setup({
 		},
 
 		-- hex colors
-        {"norcalli/nvim-colorizer.lua",
-            config = function()
-                require 'colorizer'.setup()
-            end
-        },
+		{
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("colorizer").setup()
+			end,
+		},
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom

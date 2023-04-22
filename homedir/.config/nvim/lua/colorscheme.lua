@@ -16,4 +16,5 @@
 --     -- vim.cmd('colorscheme everforest')
 -- end
 
-vim.cmd("colorscheme adhoc")
+-- vim.cmd("colorscheme adhoc")
+vim.cmd("colorscheme tokyonight-moon")
