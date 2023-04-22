@@ -326,7 +326,7 @@ bind -x '"\C-r": __atuin_history'
 #
 ##### end atuin
 
-. "$HOME/.cargo/env"
+[[ -f ~/.cargo/env ]] && source ~/.cargo/env
 
 # You might want to set export PIPENV_VENV_IN_PROJECT=1 in your .bashrc/.zshrc
 # (or any shell configuration file) for creating the virtualenv inside your
@@ -338,4 +338,5 @@ export PNPM_HOME="/Users/llimllib/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
-source /Users/llimllib/.config/broot/launcher/bash/br
+# this gets installed the first time you run "broot"
+[[ -f ~/.config/broot/launcher/bash/br ]] && source ~/.config/broot/launcher/bash/br
