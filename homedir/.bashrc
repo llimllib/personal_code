@@ -3,7 +3,7 @@
 
 # add homebrew bin, and prefer local/bin and local/sbin to bin. git-prompt
 # depends on being able to find brew, so this must come before that.
-export PATH=/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$PATH
 
 EDITOR=$(which nvim)
 export EDITOR
@@ -22,12 +22,17 @@ export EDITOR
 
 [ -f ~/.bash.local.sh ] && source ~/.bash.local.sh
 
+function mkcd {
+    mkdir "$1" && cd "$1" || exit
+}
+
 function title {
   if [ -z "$TMUX" ] ; then
     printf "\\e]1;%s\\a" "$@"
   else
    tmux rename-window "$@"
-  fi }
+  fi
+}
 alias ls='ls -FG'
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS
@@ -61,7 +66,6 @@ alias c="clear"
 alias da="direnv allow"
 alias de="direnv edit"
 alias tf="terraform"
-alias jjless="jq -C '.' | less"
 alias dmc="docker-compose run --rm mctapi"
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
 alias govim="vim -u ~/.govimrc"
@@ -79,8 +83,6 @@ function squash {
 }
 
 alias be='bundle exec'
-alias br='bundle exec rspec'
-alias bi='bundle install'
 
 alias hs='ls && echo "---------------------------------------" && hg status'
 alias hd='hg diff'
@@ -187,16 +189,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
 # run direnv https://direnv.net/
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
 
-# show the virtual env we're in if we're in one. We need this because direnv
-# isn't able to modify the PS1 from a subshell
-show_virtual_env() {
-  if [[ -n "$VIRTUAL_ENV" && -n "$DIRENV_DIR" ]]; then
-    echo "($(basename "$VIRTUAL_ENV"))"
-  fi
-}
-export -f show_virtual_env
-PS1='$(show_virtual_env)'$PS1
-
 # Create a worktree from a given branchname, in exactly the way I like it.
 # oct 18, 2019
 function worktree {
@@ -220,6 +212,11 @@ function worktree {
     # if the branch name already exists, we want to check it out. Otherwise,
     # create a new branch. I'm sure there's probably a way to do that in one
     # command, but I'm done fiddling with git at this point
+    #
+    # note: this can fail if somebody names a branch "myname/something" and you
+    # run "worktree something" because it will regex match the /something. I'm
+    # not sure how to deal with this properly so I'm punting for now and
+    # saying: don't do that
     if git branch -a | grep -E "\/$branchname" > /dev/null 2>&1; then
         git worktree add "../$dirname" "$branchname" || return
     else
@@ -232,10 +229,11 @@ function worktree {
     find . -name .env -exec cp {} ../"$dirname"/{} \;
     find . -name .tool-versions -exec cp {} ../"$dirname"/{} \;
 
-    if [ -d node_modules ]; then
-        # link node_modules dirs instead of copying them
-        ln -sf node_modules ../"$dirname"/node_modules
-    fi
+    # revisit, this doesn't work properly
+    # if [ -d node_modules ]; then
+    #     # link node_modules dirs instead of copying them
+    #     ln -sf node_modules ../"$dirname"/node_modules
+    # fi
 
     # now change to the new tree and enable the root envrc if present
     cd "../$dirname" || return
@@ -314,6 +312,30 @@ fi
 # https://discussions.apple.com/thread/251000125
 ulimit -n 10240
 
+##### set up atuin
+# https://github.com/ellie/atuin
 [[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+# bind ctrl-r to atuin but not the up arrow. The next version will let you pass
+# --disable-up-arrow to handle this automatically, but for now we have to start
+# by disabling all bindings, then binding ctrl-r explicitly
+#
+# https://github.com/ellie/atuin/blob/main/docs/key-binding.md
+export ATUIN_NOBIND="true"
 eval "$(atuin init bash)"
+bind -x '"\C-r": __atuin_history'
+#
+##### end atuin
+
 . "$HOME/.cargo/env"
+
+# You might want to set export PIPENV_VENV_IN_PROJECT=1 in your .bashrc/.zshrc
+# (or any shell configuration file) for creating the virtualenv inside your
+# project’s directory, avoiding problems with subsequent path changes.
+export PIPENV_VENV_IN_PROJECT=1
+
+# pnpm
+export PNPM_HOME="/Users/llimllib/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
+source /Users/llimllib/.config/broot/launcher/bash/br
