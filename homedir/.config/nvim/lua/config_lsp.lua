@@ -153,11 +153,11 @@ lsp.tsserver.setup({
 		-- don't format files, I prefer using prettier
 		client.server_capabilities.document_formatting = false
 
-        -- lsp sets formatexpr here even though I tell it not to use prettier
-        -- for document formatting. Unset it so that `gq` works.
-        --
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
-        vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+		-- lsp sets formatexpr here even though I tell it not to use prettier
+		-- for document formatting. Unset it so that `gq` works.
+		--
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
 
 		on_attach(client, bufnr)
 	end,
@@ -199,7 +199,21 @@ lsp.elixirls.setup({
 	capabilities = capabilities,
 })
 
-lsp.clangd.setup({ on_attach = on_attach, capabilities = capabilities })
+lsp.clangd.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = {
+		"clangd",
+		"-log=verbose",
+		"-pretty",
+		"--header-insertion=iwyu",
+		"--suggest-missing-includes",
+		"-j=4",
+		"--all-scopes-completion",
+		"--background-index=0",
+		"--clang-tidy",
+	},
+})
 
 lsp.zls.setup({ on_attach = on_attach, capabilities = capabilities })
 
@@ -273,10 +287,11 @@ null_ls.setup({
 		end
 	end,
 	sources = {
-		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.clang_format,
 		null_ls.builtins.formatting.goimports,
 		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.prettier,
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
 	},
