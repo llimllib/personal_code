@@ -53,6 +53,8 @@ require("lazy").setup({
 
 		-- colorschemes
 		"sainnhe/everforest",
+		"llimllib/lilium",
+
 		-- https://github.com/Shatur/neovim-ayu
 		-- is a neovim rewrite of
 		-- https://github.com/ayu-theme/ayu-vim

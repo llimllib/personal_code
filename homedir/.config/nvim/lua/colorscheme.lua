@@ -17,4 +17,5 @@
 -- end
 
 -- vim.cmd("colorscheme adhoc")
-vim.cmd("colorscheme tokyonight-moon")
+-- vim.cmd("colorscheme tokyonight-moon")
+vim.cmd("colorscheme lilium")
