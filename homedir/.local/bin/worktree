@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+RED=$(tput setaf 1)
+CLEAR=$(tput sgr0)
+VERBOSE=
+
+function die {
+    # if verbose was set, and we're exiting early, make sure that we set +x to
+    # stop the shell echoing verbosely
+    if [ -n "$VERBOSE" ]; then
+        set +x
+    fi
+    printf '%s%s%s\n' "$RED" "$1" "$CLEAR"
+    exit 1
+}
+
+function usage {
+    cat <<EOF
+worktree [-v] <branch name>
+
+create a git worktree with <branch name>. Will create a worktree if one isn't
+found that matches the given name.
+
+Will copy over any .env, .envrc, or .tool-versions files to the new worktree
+EOF
+    exit 1
+}
+
+# Create a worktree from a given branchname, in exactly the way I like it.
+function worktree {
+    if [ -z "$1" ]; then
+        echo "usage: worktree <branch name>"
+        return 1
+    fi
+
+    if [ -n "$VERBOSE" ]; then
+        set -x
+    fi
+    branchname="$1"
+
+    # Replace slashes with underscores. If there's no slash, dirname will equal
+    # branchname. So "alu/something-other" becomes "alu_something-other", but
+    # "quick-fix" stays unchanged
+    # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
+    dirname=${branchname//\//_}
+
+    # pull the most recent version of the remote
+    git pull
+
+    # if the branch name already exists, we want to check it out. Otherwise,
+    # create a new branch. I'm sure there's probably a way to do that in one
+    # command, but I'm done fiddling with git at this point
+    #
+    # note: this can fail if somebody names a branch "myname/something" and you
+    # run "worktree something" because it will regex match the /something. I'm
+    # not sure how to deal with this properly so I'm punting for now and
+    # saying: don't do that
+    if git branch -a | grep -E "$branchname" > /dev/null 2>&1; then
+        if ! git worktree add "../$dirname" "$branchname"; then
+            die "failed to create git worktree $branchname"
+        fi
+    else
+        # otherwise, create a new branch
+        if ! git worktree add -b "$branchname" "../$dirname"; then
+            set +x
+            die "failed to create git worktree $branchname"
+        fi
+    fi
+
+    # copy some useful untracked files into the new worktree
+    find . \( -name .envrc \
+        -or -name .env \
+        -or -name .tool-versions \) \
+        -exec cp {} ../"$dirname"/{} \;
+
+    # revisit, this doesn't work properly. Is there any hope for not copying
+    # the node_modules?
+    # if [ -d node_modules ]; then
+    #     # link node_modules dirs instead of copying them
+    #     ln -sf node_modules ../"$dirname"/node_modules
+    # fi
+
+    # now change to the new tree and enable the root envrc if present
+    cd "../$dirname" || return
+
+    if [ -f .envrc ]; then
+        direnv allow
+    fi
+
+    # turn off command echoing
+    if [ -n "$VERBOSE" ]; then
+        set +x
+    fi
+}
+
+while true; do
+    case $1 in
+        help | -h | --help)
+            usage
+            ;;
+        -v | --verbose)
+            VERBOSE=true
+            shift
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+worktree "$@"
