@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# LICENSE: unlicense. This is free and unencumbered software released into the public domain.
+# see unlicense.org for full license
+
 RED=$(tput setaf 1)
 CLEAR=$(tput sgr0)
 VERBOSE=
