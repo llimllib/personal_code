@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# modified from
+# https://github.com/junegunn/fzf/blob/607eacf8c73f60d778c4a0bf303f1593704b17c3/ADVANCED.md#using-fzf-as-the-secondary-filter
+# - search for files matching the input using fd
+# - narrow down the list with fzf
+# - open the file in vim
+rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+  fzf --ansi \
+      --reverse \
+      --color "hl:-1:underline,hl+:-1:underline:reverse" \
+      --delimiter : \
+      --preview 'bat --color=always {1} --highlight-line {2}' \
+      --preview-window 'up,60%,border-bottom,+{2}+3/3,~3' \
+      --height ~60 \
+      --bind 'enter:become(nvim {1} +{2})'

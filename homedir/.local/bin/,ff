@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# modified from
+# https://github.com/junegunn/fzf/blob/607eacf8c73f60d778c4a0bf303f1593704b17c3/ADVANCED.md#using-fzf-as-the-secondary-filter
+# - search for files matching the input using fd
+# - narrow down the list with fzf
+# - open the file in vim
+fd --color=always --type file --full-path "${*:-}" |
+  fzf --ansi \
+      --height 40% \
+      --layout reverse \
+      --border bold \
+      --preview 'bat --color=always {1} --theme=base16' \
+      --preview-window 'right,60%,border,+3/3' \
+      --bind 'enter:become(nvim {1})'
