@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # LICENSE: unlicense. This is free and unencumbered software released into the public domain.
 # see unlicense.org for full license
+#
+# source this command if you want to have it change directories for you
 
 RED=$(tput setaf 1)
 CLEAR=$(tput sgr0)
@@ -19,11 +21,6 @@ EOF
 }
 
 function die {
-    # if verbose was set, and we're exiting early, make sure that we set +x to
-    # stop the shell echoing verbosely
-    if [ -n "$VERBOSE" ]; then
-        set +x
-    fi
     printf '%s%s%s\n' "$RED" "$1" "$CLEAR"
     exit 1
 }
@@ -64,7 +61,6 @@ function worktree {
     else
         # otherwise, create a new branch
         if ! git worktree add -b "$branchname" "../$dirname"; then
-            set +x
             die "failed to create git worktree $branchname"
         fi
     fi
@@ -84,14 +80,10 @@ function worktree {
 
     # now change to the new tree and enable the root envrc if present
     cd "../$dirname" || return
+    printf "%screated worktree %s%s\n" "$RED" "../$dirname" "$CLEAR"
 
     if [ -f .envrc ]; then
         direnv allow
-    fi
-
-    # turn off command echoing
-    if [ -n "$VERBOSE" ]; then
-        set +x
     fi
 }
 
