@@ -5,7 +5,7 @@
 # - search for files matching the input using fd
 # - narrow down the list with fzf
 # - open the file in vim
-fd --color=always --type file --full-path "${*:-}" |
+fd --hidden --color=always --type file --full-path "${*:-}" |
   fzf --ansi \
       --height 40% \
       --layout reverse \

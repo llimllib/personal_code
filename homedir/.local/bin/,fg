@@ -5,7 +5,7 @@
 # - search for files matching the input using fd
 # - narrow down the list with fzf
 # - open the file in vim
-rg --color=always --line-number --no-heading --smart-case "${*:-}" |
+rg --hidden --color=always --line-number --no-heading --smart-case "${*:-}" |
   fzf --ansi \
       --reverse \
       --color "hl:-1:underline,hl+:-1:underline:reverse" \
