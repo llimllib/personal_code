@@ -178,9 +178,25 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$PATH:$HOME/.yarn/bin"
 
 #asdf
-if [[ -f $HOME/.asdf/asdf.sh ]]; then
-    . "$HOME/.asdf/asdf.sh"
-    . "$HOME/.asdf/completions/asdf.bash"
+if [[ -d $HOME/.local/share/asdf ]]; then
+    # I really wish asdf supported XDG_CONFIG:
+    # https://github.com/asdf-vm/asdf/issues/687
+    #
+    # so let's set a bunch of variables that let us pretend it does
+    export ASDF_DIR="$HOME/.local/share/asdf"
+    export ASDF_DATA_DIR="$HOME/.local/share/asdf"
+
+    . "$ASDF_DIR/asdf.sh"
+    . "$ASDF_DIR/completions/asdf.bash"
+
+    # https://asdf-vm.com/manage/configuration.html#asdfrc
+    export ASDF_CONFIG_FILE="$HOME/.config/asdf/asdfrc"
+
+    # https://github.com/asdf-vm/asdf-nodejs#default-npm-packages
+    export ASDF_NPM_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-npm-packages"
+
+    # https://github.com/asdf-community/asdf-python#default-python-packages
+    export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
 fi
 
 GPG_TTY=$(tty)
