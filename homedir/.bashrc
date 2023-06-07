@@ -68,6 +68,7 @@ alias c="clear"
 alias da="direnv allow"
 alias de="direnv edit"
 alias tf="terraform"
+alias ts="npx ts-node"
 alias dmc="docker-compose run --rm mctapi"
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
 alias govim="vim -u ~/.govimrc"
@@ -117,6 +118,9 @@ alias tmux="tmux -2"
 # Add the `--wrap never` arg to all `bat` invocations
 alias bat="bat --wrap never"
 export BAT_THEME="base16"
+
+# give erd a better default sort
+alias erd="erd --inverted"
 
 # find, case insensivitely, in the current dir
 function f {
@@ -182,10 +186,46 @@ fi
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# --files: List files that would be searched but do not search
-# --hidden: Search hidden files and folders
-# --follow: Follow symlinks
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow'
+# use the presence of fd to signal the ability to set complex fzf settings.
+# Full prereqs: fd erd bat
+if command -v fd &> /dev/null ; then
+    export FZF_DEFAULT_COMMAND='fd --type f'
+
+    # https://github.com/junegunn/fzf#settings
+    #
+    # Use fd (https://github.com/sharkdp/fd) instead of the default find
+    # command for listing path candidates.
+    # - The first argument to the function ($1) is the base path to start traversal
+    # - See the source code (completion.{bash,zsh}) for the details.
+    _fzf_compgen_path() {
+      fd --hidden --follow --exclude ".git" . "$1"
+    }
+
+    # Use fd to generate the list for directory completion
+    _fzf_compgen_dir() {
+      fd --type d --hidden --follow --exclude ".git" . "$1"
+    }
+
+    # Advanced customization of fzf options via _fzf_comprun function
+    # - The first argument to the function is the name of the command.
+    # - You should make sure to pass the rest of the arguments to fzf.
+    _fzf_comprun() {
+      local command=$1
+      shift
+
+      # would love to use "imgcat" instead of "identify" for images, but fzf
+      # doesn't support it unfortunately:
+      # https://github.com/junegunn/fzf/issues/1102
+      # shellcheck disable=SC2016
+      case "$command" in
+        cd)           fzf --preview 'erd --inverted -H -C {} | head -200'   "$@" ;;
+        export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+        ssh)          fzf --preview 'dig {}'                   "$@" ;;
+        *)            fzf --preview 'ft=$(file --mime-type -b {}); if [[ $ft == image* ]]; then identify {}; elif [[ $ft = inode* ]]; then erd -H -C {} | head -n100; else bat -n --color=always {}; fi;'
+                                   # bat -n --color=always {} 2>/dev/null || imgcat {} 2>/dev/null || erd -H -C {} | head -200' "$@" ;;
+      esac
+    }
+fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
