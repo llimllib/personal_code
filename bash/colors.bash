@@ -99,3 +99,14 @@ printf "%bThis is %bblink text%b%b but this is not\n" "$c" "$blink" "$reset" "$c
 printf "%bThis is %binverse text%b%b but this is not\n" "$c" "$inverse" "$reset" "$c"
 printf "%bThis is %bhidden text%b%b but this is not\n" "$c" "$hidden" "$reset" "$c"
 printf "%bThis is %bstrikethrough text%b%b but this is not\n" "$c" "$strike" "$reset" "$c"
+
+# Here's how asdf's nodejs manager does it:
+# colored() {
+#   local color="$1" text="$2"
+#   printf "\033[%sm%s\033[39;49m\n" "$color" "$text"
+# }
+# 
+# export RED=31 GREEN=32 YELLOW=33 BLUE=34 MAGENTA=35 CYAN=36
+#
+# printf "$(colored $CYAN "Installing the following default packages globally: ")"
+
