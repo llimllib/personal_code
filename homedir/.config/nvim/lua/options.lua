@@ -19,7 +19,6 @@ vim.opt.backspace = { "indent", "eol", "start" }
 vim.opt.list = true
 vim.opt.listchars = {
 	tab = "→ ",
-	eol = "¬",
 	trail = "⋅",
 	extends = "❯",
 	precedes = "❮",
@@ -81,3 +80,6 @@ vim.opt.laststatus = 2
 if vim.fn.has("termguicolors") then
 	vim.opt.termguicolors = true
 end
+
+-- preview window size
+vim.opt.previewheight = 30

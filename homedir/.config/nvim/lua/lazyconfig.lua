@@ -24,6 +24,8 @@ require("lazy").setup({
 		"gpanders/editorconfig.nvim", -- .editorconfig reading
 		"tpope/vim-dadbod", -- query databases
 		"lewis6991/gitsigns.nvim", -- git gutter signs
+		"preservim/vim-markdown", -- markdown mode: fenced code blocks etc
+		"nvim-treesitter/nvim-treesitter", -- treesitter modules
 
 		-- handy lua functions for nvim; required for telescope.vim
 		"nvim-telescope/telescope-fzf-native.nvim", -- fancy fuzzy finder
@@ -53,8 +55,6 @@ require("lazy").setup({
 
 		-- colorschemes
 		"sainnhe/everforest",
-		"llimllib/lilium",
-
 		-- https://github.com/Shatur/neovim-ayu
 		-- is a neovim rewrite of
 		-- https://github.com/ayu-theme/ayu-vim
@@ -64,6 +64,9 @@ require("lazy").setup({
 		--  https://github.com/AlexvZyl/nordic.nvim
 		"AlexvZyl/nordic.nvim",
 		"folke/tokyonight.nvim",
+		"sainnhe/sonokai",
+		"projekt0n/github-nvim-theme",
+		"llimllib/lilium",
 
 		{ dir = "~/code/adhoc-nvim-colors" },
 		-- /colorschemes
