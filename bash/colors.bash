@@ -7,8 +7,11 @@
 # TODO: mess with 24-bit codes:
 # ESC[38;2;{r};{g};{b}m	Set foreground color as RGB.
 # ESC[48;2;{r};{g};{b}m	Set background color as RGB.
+#
+# this function may be a good starting point for that:
+# https://gist.github.com/mhulse/b11e568260fb8c3aa2a8
 
-# this switch resets all styles
+# reset all styles (incl. bold/etc)
 reset='\e[0m'
 
 # set a foreground color. Legal values for $1 are 0-255; terminals may
@@ -21,6 +24,7 @@ color() {
     esac
 }
 
+# print every foreground color (and a few extra)
 rows=16
 for ((i=0;i<rows;i++));
 do
@@ -54,6 +58,9 @@ color2() {
     fi
 }
 
+# TODO: use a dark text color on light bgs and vice-versa
+#
+# print every background color (and a few extra)
 rows=16
 for ((i=0;i<rows;i++));
 do
