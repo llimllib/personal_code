@@ -27,10 +27,12 @@ function mkcd {
 }
 
 function title {
-  if [ -z "$TMUX" ] ; then
-    printf "\\e]1;%s\\a" "$@"
-  else
+  if [ -n "$KITTY_PID" ]; then
+    kitty @ set-tab-title "$@"
+  elif [ -n "$TMUX" ] ; then
    tmux rename-window "$@"
+  else
+   printf "\\e]1;%s\\a" "$@"
   fi
 }
 alias ls='ls -FG'
