@@ -16,6 +16,7 @@ green="$(color 2)"
 blue="$(color 4)" 
 fg="$(color fg)"
 
+# find all files, except this file
 for f in $(fd --exclude "$(basename "$0")" --type file --unrestricted .); do
     src="$f"
     dest="$HOME/$f"
@@ -23,6 +24,8 @@ for f in $(fd --exclude "$(basename "$0")" --type file --unrestricted .); do
     #              is, it exits with 1 if there were differences and 0 means no
     #              differences.
     if ! git diff --exit-code --quiet "$src" "$dest" &> /dev/null; then
+        # if the destination file exists, show a diff and ask the user if they
+        # want to accept the change from either side, or ignore it
         if [ -e "$dest" ]; then
             git diff "$dest" "$src" 
             read -r -p "Take ${red}[h]${fg}omedir version, ${green}[r]${fg}emote version, or ${blue}[i]${fg}gnore: " action
@@ -32,6 +35,7 @@ for f in $(fd --exclude "$(basename "$0")" --type file --unrestricted .); do
                 r)
                     rsync "$src" "$dest";;
             esac
+        # if the destination file doesn't exist, ask if they want to add it
         else
             read -r -p "Do you want to ${red}[a]${fg}dd $src to $dest? " action
             case $action in
