@@ -13,6 +13,14 @@
 
 # reset all styles (incl. bold/etc)
 reset='\e[0m'
+bold='\e[1m'
+faint='\e[2m'
+italic='\e[3m'
+underline='\e[4m'
+blink='\e[5m'
+inverse='\e[7m'
+hidden='\e[8m'
+strike='\e[9m'
 
 # set a foreground color. Legal values for $1 are 0-255; terminals may
 # interpret the value mod 255
@@ -24,11 +32,12 @@ color() {
     esac
 }
 
-# print every foreground color (and a few extra)
+# print every foreground color
+printf "\n%b%bforeground colors%b\n\n" "$(color 1)" "$italic" "$reset"
 rows=16
 for ((i=0;i<rows;i++));
 do
-    for ((j=0;j<20;j++));
+    for ((j=0;j<17;j++));
     do
         c="$(color "$((i*rows+j))")"
         printf "%b%03d " "$c" "$((i*rows+j))"
@@ -60,11 +69,12 @@ color2() {
 
 # TODO: use a dark text color on light bgs and vice-versa
 #
-# print every background color (and a few extra)
+# print every background color
+printf "\n\n%b%bbackground colors%b\n\n" "$(color 1)" "$italic" "$reset"
 rows=16
 for ((i=0;i<rows;i++));
 do
-    for ((j=0;j<20;j++));
+    for ((j=0;j<17;j++));
     do
         c="$(color2 fg "$((i*rows+j))")"
         printf "%b%03d " "$c" "$((i*rows+j))"
@@ -73,21 +83,14 @@ do
     printf "%b\n" "$reset"
 done
 
-
 # all switches have resets, but I'd say just reset all with $reset and add your
 # style again. Bold's reset is '\e22m', for example
 #
 # see table here:
 # https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797#colors--graphics-mode
-bold='\e[1m'
-faint='\e[2m'
-italic='\e[3m'
-underline='\e[4m'
-blink='\e[5m'
-inverse='\e[7m'
-hidden='\e[8m'
-strike='\e[9m'
 c=$(color 2)
+
+printf "\n\n%b%btext styles%b\n\n" "$(color 1)" "$italic" "$reset"
 printf "%bThis is %bbold text%b%b but this is not\n" "$c" "$bold" "$reset" "$c"
 printf "%bThis is %bfaint text%b%b but this is not\n" "$c" "$faint" "$reset" "$c"
 printf "%bThis is %bitalic text%b%b but this is not\n" "$c" "$italic" "$reset" "$c"
