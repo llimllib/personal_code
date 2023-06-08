@@ -7,14 +7,10 @@ vim.keymap.set("", "<C-k>", "<C-w>k")
 vim.keymap.set("", "<C-l>", "<C-w>l")
 
 -- go up/down by visual lines
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'",
-               {expr = true, silent = true})
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'",
-               {expr = true, silent = true})
-vim.keymap.set("v", "j", "v:count == 0 ? 'gj' : 'j'",
-               {expr = true, silent = true})
-vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'",
-               {expr = true, silent = true})
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("v", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("v", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
 -- disable Q for ex mode
 vim.keymap.set("n", "Q", "<nop>")
@@ -47,8 +43,7 @@ vim.keymap.set("v", "<leader>y", '"+y')
 -- edit vimrc, source vimrc and edit lua config
 vim.keymap.set("n", "<leader>ev", ":vsplit $MYVIMRC<cr>")
 vim.keymap.set("n", "<leader>es", ":source $MYVIMRC<cr>")
-vim.keymap.set("n", "<leader>el",
-               ":vsplit ~/.config/nvim/lua/config_lsp.lua<cr>")
+vim.keymap.set("n", "<leader>el", ":vsplit ~/.config/nvim/lua/config_lsp.lua<cr>")
 
 -- http://statico.github.io/vim.html
 -- emacs-style command-line controls
@@ -78,52 +73,53 @@ vim.keymap.set("n", "<leader>M", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 -- Unfortunately, this does not work when you have a dirty buffer, so you have
 -- to save or undo to reload the LSP server. I'm not quite sure what's the best
 -- way to handle this - it works better in vim
-vim.keymap.set("n", "<leader>r",
-               "<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>")
+vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>")
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = {noremap = true, silent = true, buffer = bufnr}
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
 -- c-t means "up the tag stack" and is the opposite of gd, so map it to
 -- something more convenient
-vim.keymap.set('n', 'gh', '<c-t>', bufopts)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-vim.keymap.set('n', 'gD', vim.lsp.buf.implementation, bufopts)
-vim.keymap.set('n', 'gt', vim.lsp.buf.hover, bufopts)
-vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<leader>d', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-vim.keymap.set('n', '<leader>fa',
-               function() vim.lsp.buf.format {async = true} end, bufopts)
+vim.keymap.set("n", "gh", "<c-t>", bufopts)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+vim.keymap.set("n", "gD", vim.lsp.buf.implementation, bufopts)
+vim.keymap.set("n", "gt", vim.lsp.buf.hover, bufopts)
+vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
+vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)
+vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
+vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
+vim.keymap.set("n", "<leader>fa", function()
+	vim.lsp.buf.format({ async = true })
+end, bufopts)
 
 -- Format json
-vim.keymap.set('n', '<leader>j', ":%!jq ''<CR>", {noremap = true})
+vim.keymap.set("n", "<leader>j", ":%!jq ''<CR>", { noremap = true })
 -- Format xml
-vim.keymap.set('n', '<leader>x', ":%!xmllint --format --encode UTF-8 -<CR>",
-               {noremap = true})
+vim.keymap.set("n", "<leader>x", ":%!xmllint --format --encode UTF-8 -<CR>", { noremap = true })
 -- Format html
-vim.keymap.set('n', '<leader>h',
-               ':%!tidy -utf8 -q --show-body-only true -f /tmp/tidyerrors -i %<CR>',
-               {noremap = true})
+vim.keymap.set(
+	"n",
+	"<leader>h",
+	":%!tidy -utf8 -q --show-body-only true -f /tmp/tidyerrors -i %<CR>",
+	{ noremap = true }
+)
 
 -- configure telescope
 -- https://github.com/nvim-telescope/telescope.nvim#usage
 -- Find files using Telescope command-line sugar.
--- 
+--
 -- <c-x> opens in a split
 -- <c-v> opens in a vsplit
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>",
-               {noremap = true})
-vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>",
-               {noremap = true})
-vim.keymap
-    .set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", {noremap = true})
-vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>",
-               {noremap = true})
+vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
 
 -- dadbod shortcuts
-vim.keymap.set("v", "<leader>db", "<cmd>DB<cr>", {noremap = true})
-vim.keymap.set("n", "<leader>q", "<cmd>DB<cr>", {noremap = true})
+-- I can't figure out why this doesn't work?
+-- vim.keymap.set("v", "<leader>db", "<cmd>DB<cr>", {noremap = true})
+-- vim.keymap.set("x", "<leader>q", "db#op_exec()", { noremap = true })
+-- vim.keymap.set("n", "<leader>q", "<cmd>DB<cr>", { noremap = true })
+vim.keymap.set({ "n", "x" }, "<leader>db", "db#op_exec()", { expr = true })
 
 -- from: https://github.com/tpope/vim-dadbod/issues/33
 --
@@ -142,14 +138,16 @@ vim.keymap.set("n", "<leader>q", "<cmd>DB<cr>", {noremap = true})
 -- z: start search at the cursor column instead of zero
 --
 -- TODO: test this... not sure if the conversion to lua worked
-vim.keymap.set('v', '<leader>aq',
-               [[<esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`']],
-               {noremap = true})
+vim.keymap.set(
+	"v",
+	"<leader>aq",
+	[[<esc>:call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create)\>", "Wz")<cr>vg`']],
+	{ noremap = true }
+)
 
 -- use ,se in normal mode to try to attempt to guess the current sql statement
 -- and run it. May not quite select the proper area. I would like to figure out
 -- how to replace :DB with db#op_exec() but I don't know how
-vim.keymap.set('n', "<leader>se", ":normal v<leader>aq<cr>:DB<cr>",
-               {noremap = true})
+vim.keymap.set("n", "<leader>se", ":normal v<leader>aq<cr>:DB<cr>", { noremap = true })
 
 -- end vim-dadbod
