@@ -16,6 +16,13 @@ green="$(color 2)"
 blue="$(color 4)" 
 fg="$(color fg)"
 
+# if the directory for the file $1 doesn't exist, create it
+function ensuredir {
+    if [ ! -d "$(dirname "$1")" ]; then
+        mkdir -p "$1"
+    fi
+}
+
 # TODO: add some sort of ignore file for files I don't want to sync on this
 # machine for w/e reason
 #
@@ -34,8 +41,10 @@ for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
             read -r -p "Take ${red}[h]${fg}omedir version, ${green}[r]${fg}emote version, or ${blue}[i]${fg}gnore: " action
             case $action in
                 h)
+                    ensuredir "$dest"
                     rsync "$dest" "$src";;
                 r)
+                    ensuredir "$dest"
                     rsync "$src" "$dest";;
             esac
         # if the destination file doesn't exist, ask if they want to add it
@@ -43,9 +52,7 @@ for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
             read -r -p "Do you want to ${red}[a]${fg}dd $src to $dest? " action
             case $action in
                 a)
-                    if [ ! -d "$(dirname "$dest")" ]; then
-                        mkdir -p "$dest"
-                    fi
+                    ensuredir "$dest"
                     rsync "$src" "$dest";;
             esac
         fi
