@@ -243,7 +243,9 @@ if command -v fd &> /dev/null ; then
     }
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# install fzf with `/opt/homebrew/opt/fzf/install --xdg` to put it in the xdg
+# config dir instead of the home root
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 
 # run direnv https://direnv.net/
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook bash)"; fi
