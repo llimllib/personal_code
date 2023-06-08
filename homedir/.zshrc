@@ -1,12 +1,19 @@
 # shellcheck disable=SC1090
 # shellcheck shell=zsh
 
-# add homebrew bin, and prefer local/bin and local/sbin to bin. git-prompt
-# depends on being able to find brew, so this must come before that.
-export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$PATH
-
 EDITOR=$(which nvim)
 export EDITOR
+
+# case insensitive matching
+unsetopt case_glob
+unsetopt case_match
+# cd to a dir without need to type cd
+setopt autocd
+
+# set up prompt
+export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
+export RPROMPT='%F{blue}%t'
+
 
 # TODO: git completion
 
@@ -23,7 +30,8 @@ function title {
    printf "\\e]1;%s\\a" "$@"
   fi
 }
-alias ls='ls -FG'
+
+# fancy lscolors
 export LSCOLORS=dxfxcxdxbxegedabagacad
 export LSCOLORS
 
@@ -31,11 +39,8 @@ export LSCOLORS
 export PAGER="less"
 export LESS="-SRXF"
 
-alias sqlite='sqlite3'
 # TODO: git
-export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
-export RPROMPT='%F{blue}%t'
-
+# git aliases
 alias gs='ls && echo "---------------------------------------" && git status'
 alias gd="git diff"
 alias gdc="git diff --cached"
@@ -46,119 +51,45 @@ alias gm="git ci -m"
 alias gma="git ci -a -m"
 alias ga="git add"
 alias gp="git push"
-alias gpu='git push -u origin $(git rev-parse --abbrev-ref HEAD)'
-alias gph="git push heroku"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit | head"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
-alias prune='git remote prune origin'
 alias pr="gh pr create"
-alias draft="hub pull-request -d -o"
-alias dc="docker compose"
-alias c="clear"
-alias da="direnv allow"
-alias de="direnv edit"
-alias tf="terraform"
-alias ts="npx ts-node"
-alias dmc="docker-compose run --rm mctapi"
-alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
-alias govim="vim -u ~/.govimrc"
-alias vim="nvim"
+alias prune='git remote prune origin'
 
-alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
-
-# do `author <branch_name>` to get the most recent committer on a branch
-alias author="git --no-pager log -1 --pretty=format:'%aN <%aE>'"
-
-# do `squash <branch_name>` to squash and stage the branch, then put you in
-# an editor to amend the commit message
-function squash {
-    git merge --squash "$1" && git commit --author "$(author "$1")"
-}
-
+# other aliases
+alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
 alias be='bundle exec'
-
-alias hs='ls && echo "---------------------------------------" && hg status'
-alias hd='hg diff'
-alias hm='hg ci -m'
-
-# blog.burntsushi.net/ripgrep/
-alias rack="rg --type ruby"
-alias jack="rg --type js --type html"
-alias pack="rg --type py"
-alias cack="rg --type c --type cpp"
-alias gack="rg --type go"
-alias aack="rg -i"
-
-alias t="tree | less"
-
-alias s="sl"
-alias l="sl"
-
+alias dc='docker compose'
+alias c='clear'
+alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
+alias da='direnv allow'
+alias de='direnv edit'
+alias erd="erd --inverted" # give erd a better default sort
+alias icat='kitty +kitten icat'
 alias ls='ls -FG'
+alias py='ipython'
+alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
+alias sqlite='sqlite3'
+alias tf='terraform'
+alias tmux='tmux -2' # tmux into 256 color mode
+alias ts='npx ts-node'
+alias vim='nvim'
 
-alias py="ipython"
-
-alias hubvan="ssh llimllib@159.203.101.116"
-
-alias be="bundle exec"
-
-# makes tmux colors closer to correct. But still bizarre.
-alias tmux="tmux -2"
-
-# Add the `--wrap never` arg to all `bat` invocations
-alias bat="bat --wrap never"
+# this BAT_THEME makes it use the colors you've already got defined in your terminal
 export BAT_THEME="base16"
 
-# give erd a better default sort
-alias erd="erd --inverted"
-
-# find, case insensivitely, in the current dir
-function f {
-    find . -iname "*$1*"
-}
-
-export CVS_RSH=ssh
-
-export MANPATH=$MANPATH:/opt/local/man
-
-# case insensitive matching
-unsetopt case_glob
-unsetopt case_match
-# cd to a dir without need to type cd
-setopt autocd
-
-# Before each bash prompt, write to history and read from it. This
-# makes multiple terminals sync to history
-# PROMPT_COMMAND='history -a; history -n'
-
-# Huge history. Doesn't appear to slow things down, so why not?
-HISTSIZE=500000
-HISTFILESIZE=100000
-
-# Avoid duplicate entries
-HISTCONTROL="erasedups:ignoreboth"
-
 # Don't record some commands
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
-
-# Use standard ISO 8601 timestamp
-# %F equivalent to %Y-%m-%d
-# %T equivalent to %H:%M:%S (24-hours format)
-HISTTIMEFORMAT='%F %T '
+export HISTORY_IGNORE="(exit|ls|bg|fg|history|clear)"
 
 #set golang root dir
 export GOPATH=~/go
-export GOBIN=~/go/bin
+export GOBIN="$GOPATH/bin"
 
+# PATH CONFIGURATION
 #
-# PATH CONFIGURATION SECTION
-#
-
-# golang binaries
-export PATH=$PATH:$GOPATH/bin
-
-# yarn (javascript) binaries
-export PATH="$PATH:$HOME/.yarn/bin"
+# add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
+# git-prompt depends on being able to find brew, so this must come before that.
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$GOBIN:$PATH
 
 #asdf
 if [[ -d $HOME/.local/share/asdf ]]; then
@@ -186,9 +117,8 @@ if [[ -d $HOME/.local/share/asdf ]]; then
     export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
 fi
 
-GPG_TTY=$(tty)
-export GPG_TTY
-
+# fzf
+#
 # use the presence of fd to signal the ability to set complex fzf settings.
 # Full prereqs: fd erd bat
 if command -v fd &> /dev/null ; then
@@ -234,7 +164,7 @@ fi
 # config dir instead of the home root
 [ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 
-# run direnv https://direnv.net/
+# direnv https://direnv.net/
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 
 # mac sets an absurdly low file handle limit of 256, and apparently you
@@ -243,7 +173,7 @@ if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 # https://discussions.apple.com/thread/251000125
 ulimit -n 10240
 
-##### set up atuin
+# atuin
 # https://github.com/ellie/atuin
 #
 # https://atuin.sh/docs/config/key-binding
@@ -252,8 +182,6 @@ ulimit -n 10240
 export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 bindkey '^r' _atuin_search_widget
-#
-##### end atuin
 
 [[ -f ~/.cargo/env ]] && source ~/.cargo/env
 
@@ -265,5 +193,3 @@ export PIPENV_VENV_IN_PROJECT=1
 # pnpm
 export PNPM_HOME="/Users/llimllib/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
-# pnpm end
-
