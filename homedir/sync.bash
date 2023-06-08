@@ -16,8 +16,11 @@ green="$(color 2)"
 blue="$(color 4)" 
 fg="$(color fg)"
 
+# TODO: add some sort of ignore file for files I don't want to sync on this
+# machine for w/e reason
+#
 # find all files, except this file
-for f in $(fd --exclude "$(basename "$0")" --type file --unrestricted .); do
+for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
     src="$f"
     dest="$HOME/$f"
     # --exit-code: Make the program exit with codes similar to diff(1). That
