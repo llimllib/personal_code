@@ -43,6 +43,9 @@ for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
             read -r -p "Do you want to ${red}[a]${fg}dd $src to $dest? " action
             case $action in
                 a)
+                    if [ ! -d "$(dirname "$dest")" ]; then
+                        mkdir -p "$dest"
+                    fi
                     rsync "$src" "$dest";;
             esac
         fi
