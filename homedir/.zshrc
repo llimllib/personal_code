@@ -14,6 +14,9 @@ setopt autocd
 export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
 export RPROMPT='%F{blue}%t'
 
+# in vim terminal, ctrl-a doesn't work unless I set this. I'm a vim user who
+# uses emacs bindings at the prompt :shrug:
+bindkey -e
 
 # TODO: git completion
 
@@ -59,6 +62,8 @@ alias prune='git remote prune origin'
 # other aliases
 alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
 alias be='bundle exec'
+# use rsync for copying: experimental (and verbose, but progress!)
+alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'

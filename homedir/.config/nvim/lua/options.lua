@@ -83,3 +83,5 @@ end
 
 -- preview window size
 vim.opt.previewheight = 30
+
+vim.opt.shell = "zsh"
