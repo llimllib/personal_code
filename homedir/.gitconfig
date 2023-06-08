@@ -36,7 +36,7 @@
 	autoSetupRemote = true
 
 [credential]
-    helper = osxkeychain
+	helper = osxkeychain
 
 #
 # Delta config
@@ -59,7 +59,12 @@
     colorMoved = default
     algorithm = histogram
     compactionHeuristic = true
+    # don't show the annoying a/ and b/ prefixes in git diffs, though setting
+    # this option breaks patch/apply. Sigh.
+    # https://stackoverflow.com/a/57340649
     noprefix = true
+    # show the difference between branches in a submodule in a git diff
+	submodule = log
 
 #
 # color config
