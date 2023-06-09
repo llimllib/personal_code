@@ -1,6 +1,7 @@
 # https://atuin.sh/docs/config/
 db_path = "~/.local/share/atuin/history.db"
 inline_height = 20
+search_mode = "fuzzy"
 
 ## where to store your database, default is your system data directory
 ## mac: ~/Library/Application Support/com.elliehuxtable.atuin/history.db
