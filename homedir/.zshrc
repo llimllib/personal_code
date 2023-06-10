@@ -51,6 +51,14 @@ zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 # right version
 # zstyle ':vcs_info:git:*' formats '%F{yellow}%F{black}%K{yellow}  %b %F{yellow}'
 
+# fancy lscolors (needs to come before the menu option I think)
+export LSCOLORS=dxfxcxdxbxegedabagacad
+
+# better completion menu
+# https://thevaluable.dev/zsh-completion-guide-examples/
+zstyle ':completion:*' menu select    
+zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
+
 # fancy hand-made powerline-style prompt. The trick is to switch the foreground
 # color of the arrow to the background color of the preceding section, and the
 # background color of the arrow to the background of the following section
@@ -120,10 +128,6 @@ function title {
    printf "\\e]1;%s\\a" "$@"
   fi
 }
-
-# fancy lscolors
-export LSCOLORS=dxfxcxdxbxegedabagacad
-export LSCOLORS
 
 # Fix colors in ipython paging
 export PAGER="less"
