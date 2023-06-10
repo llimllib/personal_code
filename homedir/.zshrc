@@ -1,24 +1,111 @@
 # shellcheck disable=SC1090
 # shellcheck shell=zsh
 
-EDITOR=$(which nvim)
-export EDITOR
-
 # case insensitive matching
 unsetopt case_glob
 unsetopt case_match
+
 # cd to a dir without need to type cd
 setopt autocd
 
-# set up prompt
-export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
-export RPROMPT='%F{blue}%t'
+setopt extendedglob
+
+# keep common commands out of the shell history
+#
+# This is from some rando zshrc's on github + the manual (man 1 zshparam). I do
+# not know what I"m doing here. It is much simpler in bash
+setopt extended_history
+setopt hist_allow_clobber
+setopt hist_fcntl_lock
+setopt hist_find_no_dups 
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_no_functions
+setopt hist_no_store
+
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_verify
+setopt inc_append_history_time
+
+
+# after all that, this still doesn't keep commands out of my terminal
+export HISTORY_IGNORE="(ls|bg|fg)"
+function zshaddhistory() {
+	emulate -L zsh
+	[[ ${1} != ${~HISTORY_IGNORE} ]]
+}
+
+# start compinit for completions
+autoload -Uz compinit && compinit
+
+# set git up for prompt
+# https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+# left version
+zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
+# right version
+# zstyle ':vcs_info:git:*' formats '%F{yellow}%F{black}%K{yellow}  %b %F{yellow}'
+
+# fancy hand-made powerline-style prompt. The trick is to switch the foreground
+# color of the arrow to the background color of the preceding section, and the
+# background color of the arrow to the background of the following section
+#
+# Here's a printf that may help demonstrate the effect:
+# printf "%b%bhome\xee\x82\xb1some-branch%b\n" "\e[30m" "\e[44m" "\e[0m"
+# however, we can't use those same sorts of escapes in a PROMPT, so we use
+# zsh's instead
+#
+# The %(5~|...) thing shortens the path when you're deep in a tree to:
+# `first segment/.../last/three/segments`, otherwise displays four segments
+# https://unix.stackexchange.com/a/273567
+#
+# https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+#
+ function makeprompt() {
+     local prompt=''
+     # status of last command. Green check if success, Red code if failure
+     prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
+
+     # machine name in blue
+     prompt+="%K{blue}%F{black}  %m %F{blue}"
+
+     # current directory, limited to 4 segments, in green
+     prompt+="%K{green}%F{black}  %(5~|%-1~/…/%3~|%4~) %F{green}"
+
+     prompt+='${vcs_info_msg_0_}'
+ 
+     # reset colors
+     LF=$'\n'
+     prompt+="%k%f ${LF}$ "
+ 
+     echo "$PROMPT"
+ }
+ 
+# to debug:
+# echo "$(makeprompt)"
+export PS1="$(makeprompt)"
+
+# old, not fancy prompt:
+# export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
+
+# show the time on the right
+# export RPROMPT='%F{blue}%t'
+# with git branch (currently moved to left)
+# export RPROMPT='${vcs_info_msg_0_}%F{magenta}%F{black}%K{magenta} %t'
+export RPROMPT='%F{magenta}%F{black}%K{magenta}%t'
+
+# it's possible to get a good two-line prompt with a right side, but a bunch of
+# work. Example:
+# https://gist.github.com/romkatv/2a107ef9314f0d5f76563725b42f7cab
 
 # in vim terminal, ctrl-a doesn't work unless I set this. I'm a vim user who
 # uses emacs bindings at the prompt :shrug:
 bindkey -e
-
-# TODO: git completion
 
 function mkcd {
     mkdir "$1" && cd "$1" || exit
@@ -83,9 +170,6 @@ alias vim='nvim'
 # this BAT_THEME makes it use the colors you've already got defined in your terminal
 export BAT_THEME="base16"
 
-# Don't record some commands
-export HISTORY_IGNORE="(exit|ls|bg|fg|history|clear)"
-
 #set golang root dir
 export GOPATH=~/go
 export GOBIN="$GOPATH/bin"
@@ -95,6 +179,10 @@ export GOBIN="$GOPATH/bin"
 # add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
 # git-prompt depends on being able to find brew, so this must come before that.
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$GOBIN:$PATH
+
+# has to happen after the path gets modified, or else nvim may not be found
+EDITOR=$(which nvim)
+export EDITOR
 
 #asdf
 if [[ -d $HOME/.local/share/asdf ]]; then
