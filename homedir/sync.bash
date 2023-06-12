@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git pull
+
 # adapted from
 # https://github.com/dylanaraps/neofetch/blob/master/neofetch#L577
 reset='\e[0m'
