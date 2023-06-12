@@ -1,4 +1,4 @@
-# #!/usr/bin/env
+# #!/usr/bin/env bash
 # Download images from the planet.com gallery. requires modern versions of jq and curl
 
 # First, get the json file containing information about all the images. the
@@ -24,12 +24,8 @@ fi
 URLS=$(mktemp)
 
 # get all the images arrays, and select the objects within where there is a
-# "full" key and it is a URL, and save them in curl command format. jq
-# apparently can't output a newline? so output a pipe char and replace it with
-# a newline with `tr`. I verified manually that there were no pipe characters
-# in the URLs
-jq -r '.[].images[] | select(.full | startswith("https")) | "url = \(.full)|"' res.json |
-    tr '|' '\n' > "$URLS"
+# "full" key and it is a URL, and save them in curl config format.
+jq -r '.[].images[] | select(.full | startswith("https")) | "url = \(.full)\n"' res.json > "$URLS"
 
 # make the output dir if it doesn't exist
 mkdir -p images
