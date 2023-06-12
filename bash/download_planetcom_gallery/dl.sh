@@ -34,11 +34,20 @@ mkdir -p images
 # - with the remote file name in place
 # - to the `images` dir
 # - in parallel, with a max of 5 at a time
+# - only download if the file is incomplete
+# - output the URL and response code
 # - from the curl config file we created above
 #
-# note that you need "--remote-name-all" instead of just "--remote-name", which
-# I think would only apply for the first given URL
+# notes: 
+# - you need "--remote-name-all" instead of just "--remote-name", which
+#   I think would only apply for the first given URL
+# - curl has no way to say "if the filename exists, don't download" (which is
+#   annoying!) so instead we pass `--continue-at -`, which will check the
+#   server to see if we have the full file. This is more comprehensive - it
+#   protects against partial downloads - but it's robustness we don't really
+#   need here. I wish curl had an equivalent of wget's --no-clobber.
 curl --remote-name-all --output-dir images \
     --parallel --parallel-immediate --parallel-max 5 \
-    --no-clobber \
+    --continue-at - \
+    --write-out "%{response_code} -> %{filename_effective}\n" \
     --config "$URLS"
