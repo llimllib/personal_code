@@ -1,4 +1,4 @@
-# #!/usr/bin/env bash
+#!/usr/bin/env bash
 # Download images from the planet.com gallery. requires modern versions of jq and curl
 
 # First, get the json file containing information about all the images. the
