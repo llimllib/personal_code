@@ -218,8 +218,38 @@ lsp.gopls.setup({
 -- gem install solargraph
 lsp.solargraph.setup({ on_attach = on_attach, capabilities = capabilities })
 
+-- use the proper pyright version. From:
+-- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-851247107
+-- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-876700701
+-- https://github.com/ecly/dotfiles/blob/f2ad429f3ee2c75b4726ce803d8a7293b6aa29c5/.vim/lua/core/plugins/lsp/utils.lua#L13
+local util = require("lspconfig/util")
+
+local function get_python_path(workspace)
+	-- Use activated virtualenv.
+	if vim.env.VIRTUAL_ENV then
+		print(vim.env.VIRTUAL_ENV)
+		return util.path.join(vim.env.VIRTUAL_ENV, "bin", "python")
+	end
+
+	-- if a .venv exists in the dir, use that as the virtualenv even if it's
+	-- not activated
+	local match = vim.fn.glob(util.path.join(workspace, ".venv"))
+	if match ~= "" then
+		return util.path.join(match, "bin", "python")
+	end
+
+	-- Fallback to system Python.
+	return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+end
+
 -- pip install pyright
-lsp.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
+lsp.pyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	before_init = function(_, config)
+		config.settings.python.pythonPath = get_python_path(config.root_dir)
+	end,
+})
 
 lsp.elixirls.setup({
 	on_attach = on_attach,
