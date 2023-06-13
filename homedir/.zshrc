@@ -153,6 +153,8 @@ alias prune='git remote prune origin'
 # other aliases
 alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
 alias be='bundle exec'
+# https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md
+alias gg='batgrep'
 # use rsync for copying: experimental (and verbose, but progress!)
 alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
 alias dc='docker compose'
@@ -171,8 +173,9 @@ alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
 alias vim='nvim'
 
-# this BAT_THEME makes it use the colors you've already got defined in your terminal
-export BAT_THEME="base16"
+# this BAT_THEME makes it use the colors you've already got defined in your
+# terminal
+export BAT_THEME="ansi"
 
 #set golang root dir
 export GOPATH=~/go
