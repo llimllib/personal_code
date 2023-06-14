@@ -176,7 +176,28 @@ lsp.tsserver.setup({
 
 -- https://github.com/yioneko/vtsls
 -- npm install -g @vtsls/language-server
-lsp.vtsls.setup({
+-- lsp.vtsls.setup({
+-- 	on_attach = function(client, bufnr)
+-- 		-- don't format files, I prefer using prettier
+-- 		client.server_capabilities.document_formatting = false
+--
+-- 		-- lsp sets formatexpr here even though I tell it not to use prettier
+-- 		-- for document formatting. Unset it so that `gq` works.
+-- 		--
+-- 		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+-- 		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+--
+-- 		on_attach(client, bufnr)
+-- 	end,
+-- 	-- don't format files, I prefer using prettier (I'm not even sure that's a
+-- 	-- thing vtsls does?)
+-- 	settings = { documentFormatting = false },
+-- 	capabilities = capabilities,
+-- })
+
+-- npm install vscode-langservers-extracted
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
+lsp.eslint.setup({
 	on_attach = function(client, bufnr)
 		-- don't format files, I prefer using prettier
 		client.server_capabilities.document_formatting = false
@@ -186,11 +207,9 @@ lsp.vtsls.setup({
 		--
 		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
 		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
-
 		on_attach(client, bufnr)
 	end,
-	-- don't format files, I prefer using prettier (I'm not even sure that's a
-	-- thing vtsls does?)
+	-- don't format files, I prefer using prettier
 	settings = { documentFormatting = false },
 	capabilities = capabilities,
 })
@@ -344,12 +363,18 @@ null_ls.setup({
 			vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
 		end
 	end,
+	-- documentaton on using local executables:
+	-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/a138b14099e9623832027ea12b4631ddd2a49256/doc/BUILTIN_CONFIG.md?plain=1#L358-L392
 	sources = {
-		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.black.with({
+			prefer_local = ".venv/bin",
+		}),
 		null_ls.builtins.formatting.clang_format,
 		null_ls.builtins.formatting.goimports,
 		null_ls.builtins.formatting.gofumpt,
-		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.prettier.with({
+			prefer_local = "node_modules/.bin",
+		}),
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
 	},
