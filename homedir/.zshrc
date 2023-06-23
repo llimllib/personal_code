@@ -181,11 +181,17 @@ export BAT_THEME="ansi"
 export GOPATH=~/go
 export GOBIN="$GOPATH/bin"
 
+export LOCALBIN="$HOME/.local/bin"
+export DOTNETBIN="$HOME/.dotnet/tools"
+export HOMEBREWBIN="/opt/homebrew/bin"
+export HOMEBREWSBIN="/opt/homebrew/sbin"
+export PNPMBIN="$HOEM/Library/pnpm"
+
 # PATH CONFIGURATION
 #
 # add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
 # git-prompt depends on being able to find brew, so this must come before that.
-export PATH=$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/opt/homebrew/sbin:/usr/local/sbin:$GOBIN:$PATH
+export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:/usr/local/sbin:$PATH
 
 # has to happen after the path gets modified, or else nvim may not be found
 EDITOR=$(which nvim)
@@ -215,7 +221,17 @@ if [[ -d $HOME/.local/share/asdf ]]; then
 
     # https://github.com/asdf-community/asdf-python#default-python-packages
     export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
+
+    # set DOTNET_ROOT variable properly if the dotnet-core asdf plugin is installed
+    [[ -f $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh ]] && \
+        . $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh
 fi
+
+# dotnet has to come before asdf because microsoft sucks
+#
+# https://github.com/razzmatazz/csharp-language-server/issues/82
+# https://github.com/dotnet/roslyn/issues/67383
+export PATH=$DOTNETBIN:$PATH
 
 # fzf
 #
@@ -289,7 +305,3 @@ bindkey '^r' _atuin_search_widget
 # (or any shell configuration file) for creating the virtualenv inside your
 # project’s directory, avoiding problems with subsequent path changes.
 export PIPENV_VENV_IN_PROJECT=1
-
-# pnpm
-export PNPM_HOME="/Users/llimllib/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
