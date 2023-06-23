@@ -2,11 +2,11 @@
 --
 -- To install all prerequisite language servers and formatters:
 -- brew install efm-langserver shellcheck stylua
+-- dotnet tool install --global csharp-ls
+-- gem install solargraph
 -- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
---
 -- npm install -g typescript typescript-language-server prettier bash-language-server vscode-langservers-extracted
--- gem install solargraph
 -- pip install pyright black
 -- build zls manually: https://github.com/zigtools/zls/wiki/Downloading-and-Building-ZLS#cloning-with-git
 --
@@ -283,9 +283,9 @@ lsp.terraformls.setup({
 	cmd = { "terraform-ls", "serve" },
 })
 
-lsp.tflint.setup({})
+lsp.tflint.setup({ on_attach = on_attach, capabilities = capabilities })
 
-lsp.bashls.setup({})
+lsp.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
 
@@ -298,6 +298,8 @@ lsp.html.setup({
 	end,
 	capabilities = capabilities,
 })
+
+lsp.csharp_ls.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- configure diagnostics
 vim.diagnostic.config({
