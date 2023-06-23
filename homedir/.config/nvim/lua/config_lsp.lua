@@ -5,7 +5,7 @@
 -- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
 --
--- npm install -g typescript typescript-language-server @vtsls/language-server prettier bash-language-server vscode-langservers-extracted
+-- npm install -g typescript typescript-language-server prettier bash-language-server vscode-langservers-extracted
 -- gem install solargraph
 -- pip install pyright black
 -- build zls manually: https://github.com/zigtools/zls/wiki/Downloading-and-Building-ZLS#cloning-with-git
@@ -173,27 +173,6 @@ lsp.tsserver.setup({
 	settings = { documentFormatting = false },
 	capabilities = capabilities,
 })
-
--- https://github.com/yioneko/vtsls
--- npm install -g @vtsls/language-server
--- lsp.vtsls.setup({
--- 	on_attach = function(client, bufnr)
--- 		-- don't format files, I prefer using prettier
--- 		client.server_capabilities.document_formatting = false
---
--- 		-- lsp sets formatexpr here even though I tell it not to use prettier
--- 		-- for document formatting. Unset it so that `gq` works.
--- 		--
--- 		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
--- 		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
---
--- 		on_attach(client, bufnr)
--- 	end,
--- 	-- don't format files, I prefer using prettier (I'm not even sure that's a
--- 	-- thing vtsls does?)
--- 	settings = { documentFormatting = false },
--- 	capabilities = capabilities,
--- })
 
 -- npm install vscode-langservers-extracted
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
