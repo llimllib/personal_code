@@ -1,0 +1,8 @@
+:80 {
+  reverse_proxy httpbin:8080
+}
+
+:443 {
+  tls /keys/localhost.pem /keys/localhost-key.pem
+  reverse_proxy httpbin:8080
+}
