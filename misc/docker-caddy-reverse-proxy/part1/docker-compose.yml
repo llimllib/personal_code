@@ -1,0 +1,13 @@
+version: '3'
+services:
+  httpbin:
+    image: mccutchen/go-httpbin
+    command: ['/bin/go-httpbin', '-port', '8080']
+  reverse_proxy:
+    image: caddy
+    ports:
+      - "80:80"
+    depends_on:
+      - httpbin
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
