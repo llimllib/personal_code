@@ -162,7 +162,7 @@ alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 alias da='direnv allow'
 alias de='direnv edit'
-alias erd="erd --inverted" # give erd a better default sort
+alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
 alias ls='ls -FG'
 alias py='ipython'
