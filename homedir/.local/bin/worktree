@@ -17,12 +17,13 @@ found that matches the given name.
 
 Will copy over any .env, .envrc, or .tool-versions files to the new worktree
 EOF
-    exit 1
+    kill -INT $$
 }
 
 function die {
     printf '%s%s%s\n' "$RED" "$1" "$CLEAR"
-    exit 1
+    # exit the script, but if it was sourced, don't kill the shell
+    kill -INT $$
 }
 
 # Create a worktree from a given branchname, in exactly the way I like it.
@@ -50,11 +51,18 @@ function worktree {
     # create a new branch. I'm sure there's probably a way to do that in one
     # command, but I'm done fiddling with git at this point
     #
-    # note: this can fail if somebody names a branch "myname/something" and you
-    # run "worktree something" because it will regex match the /something. I'm
-    # not sure how to deal with this properly so I'm punting for now and
-    # saying: don't do that
-    if git branch -a | grep -E "$branchname" > /dev/null 2>&1; then
+    # As far as I can tell, we have to check locally and remotely separately if
+    # we want to be accurate. See https://stackoverflow.com/a/75040377 for the
+    # reasoning here. Also this has some caveats, but probably works well
+    # enough :shrug:
+    #
+    # if the branch exists locally:
+    if git for-each-ref --format='%(refname:lstrip=2)' refs/heads | grep -E "^$branchname$" > /dev/null 2>&1; then
+        if ! git worktree add "../$dirname" "$branchname"; then
+            die "failed to create git worktree $branchname"
+        fi
+    # if the branch exists on a remote:
+    elif git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin | grep -E "^$branchname$" > /dev/null 2>&1; then
         if ! git worktree add "../$dirname" "$branchname"; then
             die "failed to create git worktree $branchname"
         fi
