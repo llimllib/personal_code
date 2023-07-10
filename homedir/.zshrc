@@ -59,6 +59,10 @@ export LSCOLORS=dxfxcxdxbxegedabagacad
 zstyle ':completion:*' menu select    
 zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
+# case insensitive completion
+# https://superuser.com/a/1092328/55099
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 # fancy hand-made powerline-style prompt. The trick is to switch the foreground
 # color of the arrow to the background color of the preceding section, and the
 # background color of the arrow to the background of the following section
@@ -197,6 +201,10 @@ export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:
 EDITOR=$(which nvim)
 export EDITOR
 
+# on mac, I'm getting SHELL=bash inside my zsh sessions and the hell if I can
+# understand why. Anyway, set the default to zsh.
+export SHELL=zsh
+
 #asdf
 if [[ -d $HOME/.local/share/asdf ]]; then
     # I really wish asdf supported XDG_CONFIG:
@@ -223,15 +231,16 @@ if [[ -d $HOME/.local/share/asdf ]]; then
     export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
 
     # set DOTNET_ROOT variable properly if the dotnet-core asdf plugin is installed
-    [[ -f $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh ]] && \
+    if [[ -f $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh ]]; then
         . $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh
-fi
 
-# dotnet has to come before asdf because microsoft sucks
-#
-# https://github.com/razzmatazz/csharp-language-server/issues/82
-# https://github.com/dotnet/roslyn/issues/67383
-export PATH=$DOTNETBIN:$PATH
+        # dotnet has to come before asdf because microsoft sucks
+        #
+        # https://github.com/razzmatazz/csharp-language-server/issues/82
+        # https://github.com/dotnet/roslyn/issues/67383
+        export PATH=$DOTNETBIN:$PATH
+    fi
+fi
 
 # fzf
 #
@@ -305,3 +314,9 @@ bindkey '^r' _atuin_search_widget
 # (or any shell configuration file) for creating the virtualenv inside your
 # project’s directory, avoiding problems with subsequent path changes.
 export PIPENV_VENV_IN_PROJECT=1
+
+# pnpm
+if [[ -d "$HOME/Library/pnpm" ]]; then
+    export PNPM_HOME="/Users/llimllib/Library/pnpm"
+    export PATH="$PNPM_HOME:$PATH"
+fi
