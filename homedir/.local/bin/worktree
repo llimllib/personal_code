@@ -71,20 +71,14 @@ function worktree {
         -or -name .tool-versions \) \
         -exec cp {} ../"$dirname"/{} \;
 
-    # revisit, this doesn't work properly. Is there any hope for not copying
-    # the node_modules?
-    # if [ -d node_modules ]; then
-    #     # link node_modules dirs instead of copying them
-    #     ln -sf node_modules ../"$dirname"/node_modules
-    # fi
+    if [ -f "../$dirname/.envrc" ]; then
+        direnv allow "../$dirname"
+    fi
 
     # now change to the new tree and enable the root envrc if present
     cd "../$dirname" || return
     printf "%screated worktree %s%s\n" "$RED" "../$dirname" "$CLEAR"
 
-    if [ -f .envrc ]; then
-        direnv allow
-    fi
 }
 
 while true; do
