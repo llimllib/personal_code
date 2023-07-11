@@ -48,7 +48,9 @@
     # https://dandavison.github.io/delta/configuration.html
     features = decorations
     line-numbers = true
-    side-by-side = true
+    # enabled dynamically in zshrc instead; used for wide terminals but not for
+    # narrow ones. https://github.com/dandavison/delta/issues/359
+    # side-by-side = true
 
 [interactive]
     diffFilter = delta --color-only

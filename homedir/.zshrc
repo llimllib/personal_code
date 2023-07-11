@@ -328,3 +328,15 @@ if [[ -d "$HOME/Library/pnpm" ]]; then
     export PNPM_HOME="/Users/llimllib/Library/pnpm"
     export PATH="$PNPM_HOME:$PATH"
 fi
+
+# delta (https://github.com/dandavison/delta/issues/359)
+export DELTA_FEATURES
+function delta_sidebyside {
+    if [[ "${COLUMNS}" -ge 120 ]]; then
+        DELTA_FEATURES="side-by-side"
+    else
+        DELTA_FEATURES=""
+    fi
+}
+trap delta_sidebyside WINCH
+delta_sidebyside
