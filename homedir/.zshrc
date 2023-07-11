@@ -119,6 +119,11 @@ local RPROMPT_SUFFIX='%{'$'\e[1B''%}' # one line down
 # export RPROMPT='${vcs_info_msg_0_}%F{magenta}%F{black}%K{magenta} %t'
 export RPROMPT="${RPROMPT_PREFIX}%F{magenta}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}"
 
+# remove the useless space at the right of rprompt
+# https://superuser.com/a/726509/55099
+export ZLE_RPROMPT_INDENT=0
+
+
 # it's possible to get a good two-line prompt with a right side, but a bunch of
 # work. Example:
 # https://gist.github.com/romkatv/2a107ef9314f0d5f76563725b42f7cab
