@@ -48,6 +48,7 @@
     # https://dandavison.github.io/delta/configuration.html
     features = decorations
     line-numbers = true
+    side-by-side = true
 
 [interactive]
     diffFilter = delta --color-only
