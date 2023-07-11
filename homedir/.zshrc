@@ -105,11 +105,19 @@ export PS1="$(makeprompt)"
 # old, not fancy prompt:
 # export PROMPT='%(?.%F{green}√.%F{red}?%?)%f %F{blue}%m:%F{green}%~%f $ '
 
+# The right prompt should be on the same line as the first line of the left
+# prompt. To do so, there is just a quite ugly workaround: Before zsh draws
+# the RPROMPT, we advise it, to go one line up. At the end of RPROMPT, we
+# advise it to go one line down. See:
+# http://superuser.com/questions/357107/zsh-right-justify-in-ps1
+local RPROMPT_PREFIX='%{'$'\e[1A''%}' # one line up
+local RPROMPT_SUFFIX='%{'$'\e[1B''%}' # one line down
+
 # show the time on the right
 # export RPROMPT='%F{blue}%t'
 # with git branch (currently moved to left)
 # export RPROMPT='${vcs_info_msg_0_}%F{magenta}%F{black}%K{magenta} %t'
-export RPROMPT='%F{magenta}%F{black}%K{magenta}%t'
+export RPROMPT="${RPROMPT_PREFIX}%F{magenta}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}"
 
 # it's possible to get a good two-line prompt with a right side, but a bunch of
 # work. Example:
