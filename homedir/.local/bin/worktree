@@ -4,8 +4,9 @@
 #
 # source this command if you want to have it change directories for you
 
-RED=$(tput setaf 1)
-CLEAR=$(tput sgr0)
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+CLEAR="\033[0m"
 VERBOSE=
 
 function usage {
@@ -21,7 +22,7 @@ EOF
 }
 
 function die {
-    printf '%s%s%s\n' "$RED" "$1" "$CLEAR"
+    printf '%b%s%b\n' "$RED" "$1" "$CLEAR"
     # exit the script, but if it was sourced, don't kill the shell
     kill -INT $$
 }
@@ -85,8 +86,7 @@ function worktree {
 
     # now change to the new tree and enable the root envrc if present
     cd "../$dirname" || return
-    printf "%screated worktree %s%s\n" "$RED" "../$dirname" "$CLEAR"
-
+    printf "%bcreated worktree %s%b\n" "$GREEN" "../$dirname" "$CLEAR"
 }
 
 while true; do
