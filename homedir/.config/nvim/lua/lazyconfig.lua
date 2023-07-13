@@ -78,10 +78,13 @@ require("lazy").setup({
 
 		-- null-ls is an attempt to simplify the process of creating,
 		-- sharing, and setting up LSP sources using pure Lua.
-		{
-			"jose-elias-alvarez/null-ls.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
+		-- {
+		-- 	"jose-elias-alvarez/null-ls.nvim",
+		-- 	dependencies = { "nvim-lua/plenary.nvim" },
+		-- },
+		-- trying this out to replace the soon-to-be-departed null-ls :sad:
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1621
+		"mhartington/formatter.nvim",
 
 		-- hex colors
 		{
