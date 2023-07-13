@@ -80,6 +80,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 #
  function makeprompt() {
      local prompt=''
+
      # status of last command. Green check if success, Red code if failure
      prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
 
@@ -87,7 +88,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
      prompt+="%K{blue}%F{black}  %m %F{blue}"
 
      # current directory, limited to 4 segments, in green
-     prompt+="%K{green}%F{black}  %(5~|%-1~/…/%3~|%4~) %F{green}"
+     prompt+="%K{green}%F{black}   %(5~|%-1~/…/%3~|%4~) %F{green}"
 
      prompt+='${vcs_info_msg_0_}'
  
