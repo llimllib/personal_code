@@ -15,6 +15,8 @@ pods = [
         "https://rss.acast.com/super-great-kids-stories",
     ),
     ("wow in the world", "https://rss.art19.com/wow-in-the-world"),
+    ("flip and mozi", "https://rss.art19.com/guide-to-how-to-be-an-earthling-"),
+    ("who, when, wow", "https://rss.art19.com/who-when-wow"),
 ]
 
 
