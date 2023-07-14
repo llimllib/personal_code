@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import os
 import re
 import shlex
@@ -7,8 +8,13 @@ import unicodedata
 import feedparser
 
 pods = [
-    # ("circle round", "https://rss.wbur.org/CircleRound/podcast"),
+    ("circle round", "https://rss.wbur.org/CircleRound/podcast"),
     ("stories podcast", "https://rss.art19.com/stories-podcast"),
+    (
+        "super great kids stories",
+        "https://rss.acast.com/super-great-kids-stories",
+    ),
+    ("wow in the world", "https://rss.art19.com/wow-in-the-world"),
 ]
 
 
