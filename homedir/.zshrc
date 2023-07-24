@@ -124,6 +124,45 @@ export RPROMPT="${RPROMPT_PREFIX}%F{magenta}%F{black}%K{magenta}%t${RPROMPT_S
 # https://superuser.com/a/726509/55099
 export ZLE_RPROMPT_INDENT=0
 
+# on c-l, if we're using kitty, send the magical 22J escape that clears
+# scrollback but doesn't destroy it. Not sure why that's not the default
+# :shrug:
+#
+# https://github.com/kovidgoyal/kitty/blob/cf0d3080/kitty/options/definition.py#L4015
+if [ "$TERM" = "xterm-kitty" ]; then
+    # it is very frustrating that this does not already work properly in kitty
+    # and I cannot get it working exactly like I want.
+    #
+    # Discussion with the author:
+    # https://github.com/kovidgoyal/kitty/discussions/6460
+    clear-screen-saving-contents-in-scrollback() {
+        # this works if you run it at the command prompt, but inside a widget
+        # it leaves you without a prompt:
+        printf "\e[H\e[22J"
+
+        # these work to get your prompt back, but add an extra line to the
+        # scrollback:
+        zle .reset-prompt
+        # zle redisplay
+        # zle clear-screen
+        #
+        # this works, but leaves a blank line at the top:
+        # zle accept-line
+        #
+        # these don't work:
+        # zle kill-line
+        # zle end-of-line
+        # zle get-line
+        #
+        # this puts the printf call onto the prompt, which adds it to the
+        # history, which I don't want:
+        # zle -U $'printf "\\e[H\\e[22J"'
+        # zle accept-line
+    }
+
+    zle -N clear-screen-saving-contents-in-scrollback
+    bindkey '^l' clear-screen-saving-contents-in-scrollback
+fi
 
 # it's possible to get a good two-line prompt with a right side, but a bunch of
 # work. Example:
