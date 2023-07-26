@@ -76,7 +76,7 @@ vim.keymap.set("n", "<leader>M", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>")
 
 -- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap = true, silent = true, buffer = bufnr }
+local bufopts = { noremap = true, silent = true }
 -- c-t means "up the tag stack" and is the opposite of gd, so map it to
 -- something more convenient
 vim.keymap.set("n", "gh", "<c-t>", bufopts)

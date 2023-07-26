@@ -24,3 +24,14 @@ vim.opt.title = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+
+-- turn off swap files
+vim.opt.backup = false
+vim.opt.writebackup = false
+vim.opt.swapfile = false
+
+-- Automatically read files which have been changed outside of Vim, if we
+-- haven't changed it already.
+vim.opt.autoread = true
+
+vim.opt.wrap = true
