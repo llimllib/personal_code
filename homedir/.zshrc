@@ -1,14 +1,34 @@
 # shellcheck disable=SC1090
 # shellcheck shell=zsh
 
-# case insensitive matching
-unsetopt case_glob
-unsetopt case_match
-
 # cd to a dir without need to type cd
 setopt autocd
 
 setopt extendedglob
+
+# case insensitive matching
+unsetopt case_match
+# For some reason this causes spurious matches on my system. investigating it
+# in a clean zsh, I was able to reproduce only after I imported and ran
+# compinit:
+#
+# $ env -i HOME=$HOME PATH=$PATH USER=$USER TERM=$TERM TERMINFO=$TERMINFO zsh -d -f -i
+# adama% autoload -Uz compinit && compinit
+# adama% ls webpack*
+# webpack.config.js	webpack.directive.js
+# adama% ls webpack.config.js
+# webpack.config.js
+# adama% unsetopt case_glob
+# adama% ls webpack.D
+#
+# where is that webpack.D completion coming from? It happens when I type
+# webp<TAB> only after case_glob is unset.
+#
+# Then if you tab again, it will only autocomplete webpack.directive.js
+#
+# for now, I'm just going to disable this because I'm too lazy to file an issue
+# against zsh, I probably (?) am misunderstanding compinit?
+# unsetopt case_glob
 
 # keep common commands out of the shell history
 #
@@ -78,26 +98,26 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 #
 # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
 #
- function makeprompt() {
-     local prompt=''
+function makeprompt() {
+    local prompt=''
 
-     # status of last command. Green check if success, Red code if failure
-     prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
+    # status of last command. Green check if success, Red code if failure
+    prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
 
-     # machine name in blue
-     prompt+="%K{blue}%F{black}  %m %F{blue}"
+    # machine name in blue
+    prompt+="%K{blue}%F{black}  %m %F{blue}"
 
-     # current directory, limited to 4 segments, in green
-     prompt+="%K{green}%F{black}   %(5~|%-1~/…/%3~|%4~) %F{green}"
+    # current directory, limited to 4 segments, in green
+    prompt+="%K{green}%F{black}   %(5~|%-1~/…/%3~|%4~) %F{green}"
 
-     prompt+='${vcs_info_msg_0_}'
+    prompt+='${vcs_info_msg_0_}'
  
-     # reset colors
-     LF=$'\n'
-     prompt+="%k%f ${LF}$ "
+    # reset colors
+    LF=$'\n'
+    prompt+="%k%f ${LF}$ "
  
-     echo "$PROMPT"
- }
+    echo "$PROMPT"
+}
  
 # to debug:
 # echo "$(makeprompt)"
@@ -228,7 +248,7 @@ alias sqlite='sqlite3'
 alias tf='terraform'
 alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
-alias vim='nvim'
+alias vim='NVIM_APPNAME=LazyVim_starter nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 
 # this BAT_THEME makes it use the colors you've already got defined in your
