@@ -61,3 +61,13 @@ vim.keymap.set("c", "<C-g>", "<C-c>")
 -- to save or undo to reload the LSP server. I'm not quite sure what's the best
 -- way to handle this - it works better in vim
 vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.stop_client(vim.lsp.get_active_clients())<CR> :edit<CR>")
+
+-- unset these keymaps:
+--
+-- https://github.com/LazyVim/LazyVim/blob/142e6be/lua/lazyvim/config/keymaps.lua#L90-L92
+--
+-- which mess up indent repetition. See this discussion:
+--
+-- https://github.com/LazyVim/LazyVim/discussions/1239
+vim.keymap.set("v", "<", "<")
+vim.keymap.set("v", ">", ">")
