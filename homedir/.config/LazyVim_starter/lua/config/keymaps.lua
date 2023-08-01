@@ -71,3 +71,16 @@ vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.stop_client(vim.lsp.get_activ
 -- https://github.com/LazyVim/LazyVim/discussions/1239
 vim.keymap.set("v", "<", "<")
 vim.keymap.set("v", ">", ">")
+
+-- remove the lazyvim mapping for gw, which can be used to format while
+-- ignoring formatexpr
+-- https://github.com/LazyVim/LazyVim/discussions/534
+vim.keymap.del({ "n", "x" }, "gw")
+-- Then, reset formatexpr so that gq uses vim's default formatting instead of
+-- trying to use the LSP, which I always hate. idea stolen from here, but I
+-- don't care at all about keeping gq using formatters
+-- https://github.com/willnorris/dotfiles/blob/0e227cef/config/nvim/lua/config/keymaps.lua#L79C1-L89C5
+-- See: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+require("lazyvim.util").on_attach(function(_, buf)
+  vim.bo[buf].formatexpr = nil
+end)

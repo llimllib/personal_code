@@ -253,6 +253,16 @@ return {
   {
     "jose-elias-alvarez/null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    -- unclear to me why this doesn't work. See keymaps.lua for how I
+    -- eventually managed to unset this.
+    -- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+    -- config = function()
+    --   require("null-ls").setup({
+    --     on_attach = function(_, bufnr)
+    --       vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+    --     end,
+    --   })
+    -- end,
     opts = function()
       local null_ls = require("null-ls")
       return {
@@ -311,5 +321,15 @@ return {
       name = { "venv", ".venv" },
     },
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+  },
+  {
+    "folke/flash.nvim",
+    -- If you have search integration in flash.nvim installed and you're me,
+    -- you often end up jumping to a point in your file that you weren't
+    -- intending to go to and making edits to your file. I think I probably
+    -- should just wholly disable the plugin, but I'll give it a chance and
+    -- just disable the search integration.
+    -- https://github.com/LazyVim/LazyVim/issues/1109
+    opts = { modes = { search = { enabled = false } } },
   },
 }
