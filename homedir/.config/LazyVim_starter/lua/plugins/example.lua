@@ -86,25 +86,6 @@ return {
     },
   },
 
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        pyright = {},
-        bashls = {},
-        cssls = {},
-        html = {},
-        zls = {},
-        clangd = {},
-        elixirls = {},
-        gopls = {},
-      },
-    },
-  },
-
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -122,7 +103,16 @@ return {
     opts = {
       ---@type lspconfig.options
       servers = {
+        bashls = {},
+        clangd = {},
+        cssls = {},
+        denols = {},
+        elixirls = {},
+        gopls = {},
+        html = {},
+        pyright = {},
         tsserver = {},
+        zls = {},
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
