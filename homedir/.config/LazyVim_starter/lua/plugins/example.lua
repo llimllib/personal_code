@@ -27,11 +27,16 @@ return {
 
   -- disable plugins:
   { "echasnovski/mini.pairs", enabled = false }, -- automatically pair quotes/braces
-  { "williamboman/mason.nvim", enabled = false }, -- automatic lsp server installation
-  { "goolord/alpha-nvim", enabled = false }, -- the startup screen
   { "echasnovski/mini.starter", enabled = false }, -- the startup screen
   { "echasnovski/mini.indentscope", enabled = false }, -- weird indent stuff I don't want
+  { "folke/flash.nvim", enabled = false }, -- fancy searching
+  { "folke/noice.nvim", enabled = false }, -- fancy UI for vim
+  { "folke/which-key.nvim", enabled = false }, -- key bindings popup
+  { "goolord/alpha-nvim", enabled = false }, -- the startup screen
   { "rafamadriz/friendly-snippets", enabled = false }, -- community source of snippets
+  { "stevearc/dressing.nvim", enabled = false }, -- fancy input boxes
+  { "williamboman/mason.nvim", enabled = false }, -- automatic lsp server installation
+  { "RRethy/vim-illuminate", enabled = false }, -- fancy highlighting of search matches
 
   -- add symbols-outline
   {
@@ -232,6 +237,13 @@ return {
           end
         end,
       })
+      -- order of the sources shown in autocomplete - I don't want snippets so
+      -- cut them out
+      opts.sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "buffer" },
+          { name = "path" },
+      })
       opts.completion = {
         autocomplete = false,
         completeopt = "menu,menuone,noinsert,noselect",
@@ -312,14 +324,14 @@ return {
     },
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
   },
-  {
-    "folke/flash.nvim",
-    -- If you have search integration in flash.nvim installed and you're me,
-    -- you often end up jumping to a point in your file that you weren't
-    -- intending to go to and making edits to your file. I think I probably
-    -- should just wholly disable the plugin, but I'll give it a chance and
-    -- just disable the search integration.
-    -- https://github.com/LazyVim/LazyVim/issues/1109
-    opts = { modes = { search = { enabled = false } } },
-  },
+  -- {
+  --   "folke/flash.nvim",
+  --   -- If you have search integration in flash.nvim installed and you're me,
+  --   -- you often end up jumping to a point in your file that you weren't
+  --   -- intending to go to and making edits to your file. I think I probably
+  --   -- should just wholly disable the plugin, but I'll give it a chance and
+  --   -- just disable the search integration.
+  --   -- https://github.com/LazyVim/LazyVim/issues/1109
+  --   opts = { modes = { search = { enabled = false } } },
+  -- },
 }
