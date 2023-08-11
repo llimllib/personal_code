@@ -71,6 +71,13 @@ zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 # right version
 # zstyle ':vcs_info:git:*' formats '%F{yellow}%F{black}%K{yellow}  %b %F{yellow}'
 
+# ^x^e to edit the current command in $EDITOR... is there a less terrible
+# shortcut? ^E doesn't work, that's end. I'll probably never remember this
+# shortcut but it does work pretty well
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
 # fancy lscolors (needs to come before the menu option I think)
 export LSCOLORS=dxfxcxdxbxegedabagacad
 
