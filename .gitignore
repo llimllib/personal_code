@@ -2,3 +2,4 @@
 *.swp
 *.swo
 *.pyc
+node_modules
