@@ -1,0 +1,4 @@
+- copied the example I made yesterday
+- changed it to create bubbles from the center of the page
+- figured out how to get it spawning a whole bunch of bubbles from the center
+- still just learning wth is going on with ts generators and thing umbrella
