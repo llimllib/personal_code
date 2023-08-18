@@ -137,6 +137,7 @@ return {
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
   { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
 
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
   -- would overwrite `ensure_installed` with the new value.
@@ -240,9 +241,9 @@ return {
       -- order of the sources shown in autocomplete - I don't want snippets so
       -- cut them out
       opts.sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-          { name = "buffer" },
-          { name = "path" },
+        { name = "nvim_lsp" },
+        { name = "buffer" },
+        { name = "path" },
       })
       opts.completion = {
         autocomplete = false,
