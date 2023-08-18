@@ -3,3 +3,4 @@
   - making it into typed python
   - going to try implementing it in plain python, and maybe then in numpy to see what the performance difference is
     - want to compare it to the old version too. Hopefully will be faster! It's definitely shaping up to be clearer
+  - work in progress [here](https://github.com/llimllib/ckmeans/blob/aa1f44bde6d2c0ba9ca920dd626052719ad6f94a/ckmeans2.py)
