@@ -9,6 +9,7 @@
 -- * override the configuration of LazyVim plugins
 return {
   { "llimllib/lilium" },
+  { "digitaltoad/vim-pug" }, -- pug and jade syntax highlighting
 
   -- Configure LazyVim to load gruvbox
   {
