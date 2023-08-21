@@ -1,0 +1,8 @@
+- Looked into using copy-on-write for solving the problem of moving `node_modules` between git worktrees
+  - [updated my worktree script](https://github.com/llimllib/personal_code/commit/e641d5410e10469015d756f758d0ccea92025fb4) to use copy-on-write if at all possible
+  - Was a bit disappointed to find that copying a node_modules folder wasn't as performant as I'd hoped it would be. Using work's large node_modules folder:
+    - with copy-on-write: 75s
+    - without copy-on-write: 130s
+  - but I added it to the script anyway. 75s is better than the 3 minutes or so for a "npm install"
+  - idea came from [this post](https://spin.atomicobject.com/2021/02/23/git-worktrees-untracked-files/)
+  - I started writing up my "how I use git worktrees" article on the weekend, which is what spurred this investigation
