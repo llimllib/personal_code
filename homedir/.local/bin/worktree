@@ -47,7 +47,6 @@ function cp_cow {
             if ! /bin/cp -R "$1" "$2"; then
                 die "Unable to copy files"
             fi
-          fi
         fi
     fi
 }
