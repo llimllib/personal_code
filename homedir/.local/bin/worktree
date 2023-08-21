@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 # LICENSE: unlicense. This is free and unencumbered software released into the public domain.
 # see unlicense.org for full license
 #
@@ -26,6 +25,33 @@ function die {
     # exit the script, but if it was sourced, don't kill the shell
     kill -INT $$
 }
+
+# If at all possible, use copy-on-write to copy files. This is especially
+# important to allow us to copy node_modules directories efficiently
+#
+# On mac or bsd: try to use -c
+# see:
+# https://spin.atomicobject.com/2021/02/23/git-worktrees-untracked-files/
+#
+# On gnu: use --reflog
+#
+# Use /bin/cp directly to avoid any of the user's aliases - this script is
+# often eval'ed
+#
+# I tried to figure out how to actually determine the filesystem support for
+# copy-on-write, but did not find any good references, so I'm falling back on
+# "try and see if it fails"
+function cp_cow {
+    if ! /bin/cp -Rc "$1" "$2"; then
+        if ! /bin/cp -R --reflink "$1" "$2"; then
+            if ! /bin/cp -R "$1" "$2"; then
+                die "Unable to copy files"
+            fi
+          fi
+        fi
+    fi
+}
+
 
 # Create a worktree from a given branchname, in exactly the way I like it.
 function worktree {
@@ -74,11 +100,33 @@ function worktree {
         fi
     fi
 
-    # copy some useful untracked files into the new worktree
-    find . \( -name .envrc \
-        -or -name .env \
-        -or -name .tool-versions \) \
-        -exec cp {} ../"$dirname"/{} \;
+    # this will fail for any files with \n in their names. don't do that.
+    IFS=$'\n'
+
+    # Find untracked files that we want to copy to the new worktree
+    #
+    # (XXX: should I add some mechanism for users to spcify this list? perhaps
+    # ~/.config/worktree/untracked or something?)
+    #
+    # this is the best of a bunch of bad options for reading the files into an
+    # array. We're often executing in bash or zsh, so we're going to let them
+    # use their file splitting rules, with an explicit IFS. We can't use find's
+    # exec because we want to use cp_cow to copy files copy-on-write when
+    # possible.
+    #
+    # shellcheck disable=SC2207
+    files_to_copy=($(find . \( -name .envrc \
+          -or -name .env \
+          -or -name .tool-versions \
+          -or -name node_modules \
+              \)
+    ))
+    for f in "${files_to_copy[@]}"; do
+      cp_cow "$f" ../"$dirname"/"$f"
+    done
+
+    # return the shell to normal splitting mode
+    unset IFS
 
     if [ -f "../$dirname/.envrc" ]; then
         direnv allow "../$dirname"
