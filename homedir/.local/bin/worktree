@@ -5,6 +5,7 @@
 
 RED="\033[0;31m"
 GREEN="\033[0;32m"
+YELLOW="\033[0;33m"
 CLEAR="\033[0m"
 VERBOSE=
 
@@ -26,6 +27,10 @@ function die {
     kill -INT $$
 }
 
+function warn {
+    printf '%b%s%b\n' "$YELLOW" "$1" "$CLEAR"
+}
+
 # If at all possible, use copy-on-write to copy files. This is especially
 # important to allow us to copy node_modules directories efficiently
 #
@@ -45,7 +50,7 @@ function cp_cow {
     if ! /bin/cp -Rc "$1" "$2"; then
         if ! /bin/cp -R --reflink "$1" "$2"; then
             if ! /bin/cp -R "$1" "$2"; then
-                die "Unable to copy files"
+                warn "Unable to copy file $1 to $2 - folder may not exist"
             fi
         fi
     fi
@@ -53,7 +58,7 @@ function cp_cow {
 
 
 # Create a worktree from a given branchname, in exactly the way I like it.
-function worktree {
+function _worktree {
     if [ -z "$1" ]; then
         echo "usage: worktree <branch name>"
         return 1
@@ -99,6 +104,13 @@ function worktree {
         fi
     fi
 
+    # packages in node_modules packages can have sub-node-modules packages, and
+    # we don't want to copy them. I also don't feel like adding this as a
+    # special case to the find command above, but it certainly could be
+    if [ -d "node_modules" ]; then
+      cp_cow node_modules ../"$dirname"/node_modules
+    fi
+
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
 
@@ -113,19 +125,21 @@ function worktree {
     # exec because we want to use cp_cow to copy files copy-on-write when
     # possible.
     #
+    # Skip any of these files if they're found within node_modules.
+    #
     # shellcheck disable=SC2207
-    files_to_copy=($(find . \( -name .envrc \
-          -or -name .env \
-          -or -name .tool-versions \
-          -or -name node_modules \
-              \)
-    ))
+    files_to_copy=( $(find . \(
+            -name .envrc \
+            -or -name .env \
+            -or -name .tool-versions \) \
+        -and -not -path '*node_modules*') )
     for f in "${files_to_copy[@]}"; do
       cp_cow "$f" ../"$dirname"/"$f"
     done
 
     # return the shell to normal splitting mode
     unset IFS
+
 
     if [ -f "../$dirname/.envrc" ]; then
         direnv allow "../$dirname"
@@ -151,4 +165,4 @@ while true; do
     esac
 done
 
-worktree "$@"
+_worktree "$@"
