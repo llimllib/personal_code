@@ -111,11 +111,11 @@ function _worktree {
       cp_cow node_modules ../"$dirname"/node_modules
     fi
 
+    # Find untracked files that we want to copy to the new worktree
+
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
 
-    # Find untracked files that we want to copy to the new worktree
-    #
     # (XXX: should I add some mechanism for users to spcify this list? perhaps
     # ~/.config/worktree/untracked or something?)
     #
@@ -128,10 +128,11 @@ function _worktree {
     # Skip any of these files if they're found within node_modules.
     #
     # shellcheck disable=SC2207
-    files_to_copy=( $(find . \(
+    files_to_copy=( $(find . \( \
             -name .envrc \
             -or -name .env \
-            -or -name .tool-versions \) \
+            -or -name .tool-versions \
+            \) \
         -and -not -path '*node_modules*') )
     for f in "${files_to_copy[@]}"; do
       cp_cow "$f" ../"$dirname"/"$f"
