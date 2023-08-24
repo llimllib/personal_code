@@ -10,3 +10,4 @@
   - what if we automatically simplified relations of >n ways? (1000?)
   - what if we provided the user an option to drop specific objects? large objects?
 - I created a debug script that goes straight to \_create_gdf
+- looked up [some](https://www.openstreetmap.org/relation/9441240#map=6/59.707/-85.737) [similar](https://www.openstreetmap.org/node/305639190#map=7/24.762/-88.132) [bodies of water](https://www.openstreetmap.org/relation/9486906)
