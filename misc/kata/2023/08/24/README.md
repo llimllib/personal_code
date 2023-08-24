@@ -1,0 +1,12 @@
+- Investigated the Gulf of Maine's rendering in OpenStreetMap
+  - it's an incredibly intricate relation currently consisting of [5003 ways](https://www.openstreetmap.org/relation/13663366)
+  - it caused me [this issue](https://github.com/chrieke/prettymapp/issues/26), which I filed as [this issue](https://github.com/gboeing/osmnx/issues/1050) in osmnx
+  - there's a discussion about areas like this [here](https://community.openstreetmap.org/t/gulf-of-mexico-object-rendering-of-large-seas/7466/62), which led to [this proposal](https://wiki.openstreetmap.org/wiki/Proposal:High_seas) that seems to have gotten... no response at all
+    - I desire to rip out the OSM polygon for GoM and replace it with a node, like that person did, but I don't really want to get involved like that
+- Did some thinking about how to handle it from osmnx's perspective
+  - some thoughts:
+    - this polygon is marginally important to what I'm actually trying to get - it is a huge object with a tiny overlap with the area of interest, and we're spending a ton of time calculating a multipolygon the vast majority of which is not relevant to the area of interest
+  - what if we just dropped inner areas that were some distance away from our area of interest?
+  - what if we automatically simplified relations of >n ways? (1000?)
+  - what if we provided the user an option to drop specific objects? large objects?
+- I created a debug script that goes straight to \_create_gdf
