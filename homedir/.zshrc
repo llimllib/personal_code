@@ -255,7 +255,7 @@ alias sqlite='sqlite3'
 alias tf='terraform'
 alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
-alias vim='NVIM_APPNAME=LazyVim_starter nvim'
+alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 
 # this BAT_THEME makes it use the colors you've already got defined in your
