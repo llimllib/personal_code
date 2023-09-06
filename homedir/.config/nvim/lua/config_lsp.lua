@@ -28,30 +28,30 @@ end
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
 local kind_icons = {
 	Text = "",
-	Method = "",
-	Function = "",
+	Method = "󰆧",
+	Function = "󰊕",
 	Constructor = "",
-	Field = "",
-	Variable = "",
-	Class = "ﴯ",
+	Field = "󰇽",
+	Variable = "󰂡",
+	Class = "󰠱",
 	Interface = "",
 	Module = "",
-	Property = "ﰠ",
+	Property = "󰜢",
 	Unit = "",
-	Value = "",
+	Value = "󰎠",
 	Enum = "",
-	Keyword = "",
+	Keyword = "󰌋",
 	Snippet = "",
-	Color = "",
-	File = "",
+	Color = "󰏘",
+	File = "󰈙",
 	Reference = "",
-	Folder = "",
+	Folder = "󰉋",
 	EnumMember = "",
-	Constant = "",
+	Constant = "󰏿",
 	Struct = "",
 	Event = "",
-	Operator = "",
-	TypeParameter = "",
+	Operator = "󰆕",
+	TypeParameter = "󰅲",
 }
 
 -- setup code completion
@@ -273,6 +273,10 @@ lsp.tflint.setup({ on_attach = on_attach, capabilities = capabilities })
 lsp.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
+
+-- swift lsp. executes "sourcekit-lsp"
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+lsp.sourcekit.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.html.setup({
 	on_attach = function(client, bufnr)
