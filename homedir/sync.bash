@@ -60,3 +60,17 @@ for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
         fi
     fi
 done
+
+dirs_to_sync=(.local/bin)
+for dir in "${dirs_to_sync[@]}"; do
+    for f in $(cd "$HOME" && fd --type file --hidden . "$dir"); do
+        if [ ! -f "$f" ]; then
+            read -r -p "Do you want to ${red}[a]${fg}dd $f to repo? " action
+            case $action in
+                a)
+                    ensuredir "$dir"
+                    rsync "$HOME/$src" "./$src";;
+            esac
+        fi
+    done
+done

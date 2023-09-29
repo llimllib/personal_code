@@ -10,7 +10,7 @@ local local_prettier = function(parser)
 			args = {
 				"prettier",
 				"--stdin-filepath",
-				util.get_current_buffer_file_path(),
+				util.escape_path(util.get_current_buffer_file_path()),
 			},
 			stdin = true,
 			try_node_modules = true,
@@ -21,7 +21,7 @@ local local_prettier = function(parser)
 		args = {
 			"prettier",
 			"--stdin-filepath",
-			util.get_current_buffer_file_path(),
+			util.escape_path(util.get_current_buffer_file_path()),
 			"--parser",
 			parser,
 		},
@@ -60,12 +60,12 @@ vim.keymap.set("v", "<leader>aa", "<Cmd>Format<CR>", { desc = "Format visual sel
 
 -- format on save
 -- diabling for now, to see if I can live with manual formatting.
--- vim.api.nvim_exec(
--- 	[[
--- augroup FormatAutogroup
---   autocmd!
---   autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
--- augroup END
--- ]],
--- 	true
--- )
+vim.api.nvim_exec(
+	[[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.js,*.lua,*.py,*.json,*.ts,*.jsx,*.tsx,*.yaml,*.go,*.c FormatWrite
+augroup END
+]],
+	true
+)

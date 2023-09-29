@@ -131,6 +131,7 @@ function _worktree {
     files_to_copy=( $(find . \( \
             -name .envrc \
             -or -name .env \
+            -or -name .env.local \
             -or -name .tool-versions \
             \) \
         -and -not -path '*node_modules*') )

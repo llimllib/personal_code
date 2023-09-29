@@ -213,6 +213,13 @@ function title {
   fi
 }
 
+# set the default XDG directories; this shouldn't be necessary but some apps
+# use the presence of these variables to decide whether to follow XDG or not
+export XDG_DATA_HOME=~/.local/share
+export XDG_CONFIG_HOME=~/.config
+export XDG_STATE_HOME=~/.local/state
+export XDG_CACHE_HOME=~/.cache
+
 # Fix colors in ipython paging
 export PAGER="less"
 export LESS="-SRXF"
@@ -220,6 +227,7 @@ export LESS="-SRXF"
 # TODO: git
 # git aliases
 alias gs='ls && echo "---------------------------------------" && git status'
+# alias gs='ls && echo "---------------------------------------" && git diff --stat=80 --compact-summary'
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gm="git co master"
@@ -257,6 +265,11 @@ alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
+
+# "get-headers https://billmill.org" to do a GET request and print the headers
+# and total time of the response
+# https://github.com/carlmjohnson/get-headers/issues/4
+alias get-headers="curl -sD - -o /dev/null -w 'time:\t%{time_total}s\ndownload speed:\t%{speed_download} bytes/s'"
 
 # this BAT_THEME makes it use the colors you've already got defined in your
 # terminal
@@ -413,3 +426,10 @@ function delta_sidebyside {
 }
 trap delta_sidebyside WINCH
 delta_sidebyside
+
+# bun completions
+[ -s "/Users/llimllib/.bun/_bun" ] && source "/Users/llimllib/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

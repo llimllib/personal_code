@@ -7,6 +7,7 @@ require("lazyconfig")
 
 require("autocmds")
 require("config_lsp")
+require("treesitter")
 require("config_formatter")
 require("colorscheme")
 require("telescope-cfg")
