@@ -77,7 +77,9 @@ function _worktree {
     dirname=${branchname//\//_}
 
     # pull the most recent version of the remote
-    git pull
+    if ! git pull; then
+        warn "Unable to run git pull, there may not be an upstream"
+    fi
 
     # if the branch name already exists, we want to check it out. Otherwise,
     # create a new branch. I'm sure there's probably a way to do that in one
