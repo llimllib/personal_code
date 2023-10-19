@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+GREEN="\e[32m"
+RESET="\e[0m"
+
+# get diff stats, with a 10-char-wide +/- summary
+# use a pipe character to pick out lines that are file names
+diffstats=$(git diff --color --stat=80,70,10 --compact-summary | grep '|')
+
+# separate works by newlines not spaces
+IFS=$'\n'
+
+# create an associative array [filename]: diffstat
+declare -A stats
+for line in $diffstats; do
+    # get the filename, and strip non-printable characters so it matches later
+    filename="$(echo "${line// | */}" | sed 's/ *\([^ ]*\) */\1/g')"
+    # get the diffstat
+    diffstat=${line//*| /}
+
+    # save to the array
+    stats[$filename]=$diffstat
+done
+
+# debugging:
+# for x in "${!stats[@]}"; do printf "[%s]=%s\n" "$x" "${stats[$x]}" ; done
+
+# for every line in a git status command, with colors set to "on" and
+# repository-absolute paths (so they match diff properly)
+git -c color.status=always -c status.relativePaths=false status | while IFS= read -r line; do
+    # if the line contains a modified file, pull out the filename
+    # use the escape character in the git status otuput as a terminator
+    modified_file=$(echo "$line" | rg -o "modified:\s*(.+)\x1b" -r '$1')
+
+    # if a modified file was found, and we can match it to our array, print it
+    # out followed by the diffstat
+    if [[ -n $modified_file && -n ${stats[$modified_file]+isset} ]]; then
+        printf $'\t%bmodified: %s%b | %s\n' "$GREEN" "$modified_file" "$RESET" "${stats[$modified_file]}"
+    else
+        printf "%s\n" "$line"
+    fi
+done

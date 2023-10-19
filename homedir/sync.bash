@@ -79,7 +79,8 @@ function main {
                 case $action in
                     a)
                         ensuredir "$dir"
-                        rsync "$HOME/$src" "./$src";;
+                        rsync "$HOME/$f" "./$f"
+                        git add "./$f";;
                 esac
             fi
         done
