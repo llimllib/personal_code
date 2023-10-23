@@ -49,6 +49,7 @@ require("formatter").setup({
 		lua = { require("formatter.filetypes.lua").stylua },
 		markdown = { require("formatter.filetypes.markdown").prettier },
 		python = { require("formatter.filetypes.python").black },
+		rust = { require("formatter.filetypes.rust").rustfmt },
 		typescriptreact = { local_prettier },
 		typescript = { local_prettier },
 		yaml = { local_prettier },
@@ -64,7 +65,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.lua,*.py,*.json,*.ts,*.jsx,*.tsx,*.yaml,*.go,*.c FormatWrite
+  autocmd BufWritePost *.c,*.go,*.js,*.json,*.jsx,*.lua,*.py,*.rs,*.ts,*.tsx,*.yaml FormatWrite
 augroup END
 ]],
 	true
