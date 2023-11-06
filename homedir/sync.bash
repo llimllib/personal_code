@@ -35,13 +35,18 @@ function ensuredir {
 function main {
     git pull
 
-    # TODO: add some sort of ignore file for files I don't want to sync on this
-    # machine for w/e reason
-    #
     # find all files, except this file
-    for f in $(fd --exclude "$(basename "$0")" --type file --hidden .); do
+    for f in $(fd --exclude "$(basename "$0")" --exclude syncignore --type file --hidden .); do
         src="$f"
         dest="$HOME/$f"
+
+        # TOOD: we might want to do something smarter than exact name matching,
+        # for now its good enough though
+        basename_=$(basename "$f")
+        if grep -qE "^$basename_$" syncignore ; then
+            continue;
+        fi
+
         # --exit-code: Make the program exit with codes similar to diff(1). That
         #              is, it exits with 1 if there were differences and 0 means no
         #              differences.
@@ -74,7 +79,9 @@ function main {
     dirs_to_sync=(.local/bin)
     for dir in "${dirs_to_sync[@]}"; do
         for f in $(cd "$HOME" && fd --type file --hidden . "$dir"); do
-            if [ ! -f "$f" ]; then
+            basename_="$(basename "$f")"
+            # if the file exists and its basename isn't in syncignore
+            if [ ! -f "$f" ] && ! grep -qE "^$basename_$" syncignore ; then
                 read -r -p "Do you want to ${red}[a]${fg}dd $f to repo? " action
                 case $action in
                     a)
