@@ -92,7 +92,7 @@ vim.keymap.set("n", "<leader>fa", function()
 end, bufopts)
 
 -- Format json
-vim.keymap.set("n", "<leader>j", ":%!jq ''<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>j", ":%!jq '.'<CR>", { noremap = true })
 -- Format xml
 vim.keymap.set("n", "<leader>x", ":%!xmllint --format --encode UTF-8 -<CR>", { noremap = true })
 -- Format html
