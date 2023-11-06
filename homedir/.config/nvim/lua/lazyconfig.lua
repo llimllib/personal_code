@@ -27,6 +27,9 @@ require("lazy").setup({
 		"preservim/vim-markdown", -- markdown mode: fenced code blocks etc
 		"nvim-treesitter/nvim-treesitter", -- treesitter modules
 
+		-- scope highlighting
+		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+
 		-- handy lua functions for nvim; required for telescope.vim
 		"nvim-telescope/telescope-fzf-native.nvim", -- fancy fuzzy finder
 		{
