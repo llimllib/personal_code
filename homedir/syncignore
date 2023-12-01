@@ -1,9 +1,11 @@
+imgcat
 mongod
 nvimpager
 pipenv
 pipenv-resolver
 trurl
 virtualenv
+virtualenv-clone
 whisper-cpp
 whisper-cpp-main
 zls
