@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AoC day 22</title>
+    <style>
+      #map {
+        font-size: 4px;
+        padding: 0;
+        margin: 0;
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+      td {
+        padding: 0;
+        opacity: 0.5;
+      }
+      .loc {
+        transform: rotate(180deg);
+      }
+      td.visited {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="map"></table>
+    <textarea cols="100" rows="50" id="puzzle">
+        ...#
+        .#..
+        #...
+        ....
+...#.......#
+........#...
+..#....#....
+..........#.
+        ...#....
+        .....#..
+        .#......
+        ......#.
+
+10R5L5R10L4R5L5</textarea
+    >
+    <script src="createnode.js" type="module"></script>
+    <script src="index.js" type="module"></script>
+  </body>
+</html>
