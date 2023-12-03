@@ -28,7 +28,7 @@ def possible(games, limit=(12, 13, 14)):
     )
 
 
-def powersum(games, limit=(12, 13, 14)):
+def powersum(games):
     return sum(
         max(g[0] for g in games) * max(g[1] for g in games) * max(g[2] for g in games)
         for games in games.values()
