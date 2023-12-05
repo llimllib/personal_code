@@ -3,3 +3,4 @@
 *.swo
 *.pyc
 node_modules
+.venv
