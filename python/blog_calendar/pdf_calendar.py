@@ -119,7 +119,7 @@ def createCalendar(month, year=NOW.year, canvas=None, filename=None, size=SIZE):
 
 if __name__ == "__main__":
     # create a December, 2005 PDF
-    c = createCalendar(8, 2023, filename="blog_calendar.pdf")
-    for i in range(9, 13):
-        createCalendar(i, 2023, canvas=c)
+    c = createCalendar(1, 2024, filename="blog_calendar.pdf")
+    for i in range(2, 13):
+        createCalendar(i, 2024, canvas=c)
     c.save()
