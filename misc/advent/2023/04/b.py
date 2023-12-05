@@ -18,8 +18,7 @@ for i, line in enumerate(sys.stdin):
     winners, mine = parse(line)
     n = len(winners & mine)
     bonus[i] += 1
-    for j in range(bonus[i]):
-        for k in range(i + 1, i + n + 1):
-            bonus[k] += 1
+    for k in range(i + 1, i + n + 1):
+        bonus[k] += bonus[i]
 
 print(sum(bonus.values()))
