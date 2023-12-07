@@ -19,12 +19,11 @@ def score(hand):
         Counter(hand).items(), key=lambda x: (x[1], x[0]), reverse=True
     )
     if top == 1:
-        # if the hand is entirely jacks, rest will be empty
-        n = rest.pop(0)[1] if len(rest) else 0
+        n = rest.pop(0)[1] if rest else 0
 
     if n + js == 5:
         return (7, *hand)
-    (_, nn) = rest.pop(0) if len(rest) else (0, 0)
+    nn = rest.pop(0)[1] if rest else 0
     if n + js == 4:
         return (6, *hand)
     if n + nn + js == 5:
