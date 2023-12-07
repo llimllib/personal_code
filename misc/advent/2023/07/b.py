@@ -1,11 +1,10 @@
 import sys
 from collections import Counter
 
-faces = {"T": 10, "J": 1, "Q": 12, "K": 13, "A": 14}
-
 
 def parse(iter):
     hands = []
+    faces = {"T": 10, "J": 1, "Q": 12, "K": 13, "A": 14}
     for line in iter:
         hand, bid = line.strip().split(" ")
         hand = [int(faces.get(c, c)) for c in hand]
