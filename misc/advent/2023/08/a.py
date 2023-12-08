@@ -25,6 +25,6 @@ directions, network = parse(sys.stdin)
 print(cycle_len(directions, network, "AAA"))
 print(
     math.lcm(
-        *[cycle_len(directions, network, node) for node in network if node[-1] == "A"]
+        *(cycle_len(directions, network, node) for node in network if node[-1] == "A")
     )
 )
