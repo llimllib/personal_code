@@ -7,7 +7,7 @@ def parse(iter):
     faces = {"T": 10, "J": 11, "Q": 12, "K": 13, "A": 14}
     for line in iter:
         hand, bid = line.strip().split(" ")
-        hand = [int(faces.get(c, c)) for c in hand]
+        hand = [faces.get(c) or int(c) for c in hand]
         hands.append((hand, int(bid)))
     return hands
 
