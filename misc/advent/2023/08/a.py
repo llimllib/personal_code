@@ -1,5 +1,5 @@
 import itertools
-import numpy as np
+import math
 import re
 import sys
 
@@ -14,21 +14,17 @@ def parse(iter):
     return (directions, network)
 
 
-def cycle_len(directions, network, loc, part1=True):
+def cycle_len(directions, network, loc):
     for i, dir in enumerate(itertools.cycle(directions)):
         loc = network[loc][dir]
-        if part1 and loc == "ZZZ" or loc[-1] == "Z":
+        if loc[-1] == "Z":
             return i + 1
 
 
 directions, network = parse(sys.stdin)
 print(cycle_len(directions, network, "AAA"))
 print(
-    np.lcm.reduce(
-        [
-            cycle_len(directions, network, node, part1=False)
-            for node in network
-            if node[-1] == "A"
-        ]
+    math.lcm(
+        *[cycle_len(directions, network, node) for node in network if node[-1] == "A"]
     )
 )
