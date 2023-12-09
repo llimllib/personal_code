@@ -5,7 +5,7 @@ import sys
 def part1(ints):
     ls = []
     while any(a != b for a, b in itertools.pairwise(ints)):
-        ls += [ints[-1]]
+        ls.append(ints[-1])
         ints = [b - a for a, b in itertools.pairwise(ints)]
     return sum([ints[0]] + ls)
 
@@ -13,7 +13,7 @@ def part1(ints):
 def part2(ints):
     ls = []
     while any(a != b for a, b in itertools.pairwise(ints)):
-        ls += [ints[0]]
+        ls.append(ints[0])
         ints = [b - a for a, b in itertools.pairwise(ints)]
     cur = ints[0]
     for b in reversed(ls):
