@@ -8,13 +8,15 @@ CLEARSC = "\033[2J"
 GOHOME = "\033[0;0H"
 
 
-def pgrid(grid, loop=None):
+def pgrid(grid, loop=None, inner=None):
     if loop:
         loop = set(loop)
     for row, line in enumerate(grid):
         for col, c in enumerate(line):
             if loop and (col, row) in loop:
                 sys.stdout.write(f"{GREEN_BG}{c}{RESET}")
+            elif inner and (col, row) in inner:
+                sys.stdout.write(f"{YELLOW_BG}{c}{RESET}")
             else:
                 sys.stdout.write(c)
         print()
@@ -104,8 +106,23 @@ def findloop(grid, start):
     raise Exception("no loop found")
 
 
+def find_inner_cells(grid, loop):
+    width = len(grid[0])
+    innercells = []
+    for row in range(len(grid)):
+        bars = 0
+        for col in range(width):
+            if grid[row][col] in ["│", "└", "┘", "╳"] and (col, row) in loop:
+                bars += 1
+            elif bars % 2 == 1 and (col, row) not in loop:
+                innercells.append((col, row))
+    return innercells
+
+
 grid, start = parse(sys.stdin)
 loop = findloop(grid, start)
 print(f"{CLEARSC}{GOHOME}")
+innercells = find_inner_cells(grid, set(loop))
+pgrid(grid, loop, innercells)
 print("max length: ", len(loop) // 2)
-pgrid(grid, loop)
+print("inner cells: ", len(innercells))
