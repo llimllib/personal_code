@@ -3,8 +3,8 @@ import sys
 
 pts = [
     (row, col)
-    for row, line in enumerate(sys.stdin)
-    for col, c in enumerate(line.strip())
+    for col, line in enumerate(sys.stdin)
+    for row, c in enumerate(line.strip())
     if c != "."
 ]
 
