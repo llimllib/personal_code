@@ -1,3 +1,4 @@
+import functools
 import sys
 
 
@@ -5,11 +6,12 @@ def parse(iter):
     lines = []
     for line in iter:
         cond, lens = line.strip().split(" ")
-        lines.append((cond, [int(x) for x in lens.split(",")]))
+        lines.append((cond, tuple(int(x) for x in lens.split(","))))
     return lines
 
 
-def count(s: str, machines: list[int]) -> int:
+@functools.cache
+def count(s: str, machines: tuple[int]) -> int:
     if not machines:
         if "#" not in s:
             return 1
@@ -34,4 +36,12 @@ def count(s: str, machines: list[int]) -> int:
     return n
 
 
-print(sum(count(s, machines) for (s, machines) in parse(sys.stdin)))
+def unfold(s: str, machines: tuple[int]) -> tuple[str, tuple[int]]:
+    return "?".join([s] * 5), tuple(machines * 5)
+
+
+puzzles = parse(sys.stdin)
+# part 1
+print(sum(count(s, machines) for (s, machines) in puzzles))
+# part 2
+print(sum(count(*unfold(*x)) for x in puzzles))
