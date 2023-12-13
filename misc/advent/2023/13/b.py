@@ -6,12 +6,12 @@ def t(g: list[str]) -> list[str]:
     return list("".join(y) for y in zip(*g))
 
 
-def is_symmetric(g: list[str], i: int) -> int:
+def is_symmetric(g: list[str], i: int) -> bool:
     l = len(g)
     for j in range(1, min(i + 1, l - i - 1)):
         if g[i - j] != g[i + j + 1]:
-            return 0
-    return 1
+            return False
+    return True
 
 
 def onediff(a: str, b: str) -> bool:
