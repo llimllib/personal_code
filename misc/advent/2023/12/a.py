@@ -32,7 +32,7 @@ def count(s: str, machines: tuple[int]) -> int:
 
 
 def unfold(s: str, machines: tuple[int]) -> tuple[str, tuple[int]]:
-    return "?".join([s] * 5), tuple(machines * 5)
+    return "?".join([s] * 5), machines * 5
 
 
 puzzles = parse(sys.stdin)
