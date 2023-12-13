@@ -16,8 +16,6 @@ def count(s: str, machines: tuple[int]) -> int:
         if "#" not in s:
             return 1
         return 0
-    if not s:
-        return 0
 
     i = 0
     l = len(s)
