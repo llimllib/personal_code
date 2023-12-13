@@ -4,3 +4,5 @@
 *.pyc
 node_modules
 .venv
+.tool-versions
+.envrc
