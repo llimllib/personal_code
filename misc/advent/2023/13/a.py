@@ -28,7 +28,6 @@ print(
         for grid in [
             [line.strip() for line in chunk.split("\n")]
             for chunk in sys.stdin.read().strip().split("\n\n")
-            # for chunk in open("input.txt").read().strip().split("\n\n")
         ]
     )
 )
