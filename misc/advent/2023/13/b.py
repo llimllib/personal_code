@@ -21,13 +21,8 @@ def onediff(a: str, b: str) -> bool:
 def unsmudge(g: list[str]) -> int:
     l = len(g)
     for i, (a, b) in enumerate(itertools.pairwise(g)):
-        if onediff(a, b):
-            h = g[:]
-            h[i] = b
-            if is_symmetric(h, i):
-                return i + 1
-        if a == b:
-            for j in range(1, min(i + 1, l - i - 1)):
+        if a == b or onediff(a, b):
+            for j in range(min(i + 1, l - i - 1)):
                 if onediff(g[i - j], g[i + j + 1]):
                     h = g[:]
                     h[i - j] = g[i + j + 1]
