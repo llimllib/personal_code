@@ -28,10 +28,7 @@ def count(s: str, machines: tuple[int]) -> int:
         while i < l and s[i] in ["?", "#"] and i - match < m:
             i += 1
         if i - match == m and (i == l or s[i] in [".", "?"]) and "#" not in s[:match]:
-            n += count(
-                s[i + 1 :],
-                machines[1:],
-            )
+            n += count(s[i + 1 :], machines[1:])
         i = match + 1
     return n
 
