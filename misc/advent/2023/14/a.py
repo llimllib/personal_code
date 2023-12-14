@@ -9,14 +9,7 @@ for row, line in enumerate(sys.stdin):
     maxrow = row + 1
 
 for i, (col, row) in enumerate(rocks):
-    rocks[i][1] = (
-        max(
-            [r for c, r in rocks if r < row and c == col]
-            + [r for c, r in pins if r < row and c == col]
-            + [-1]
-        )
-        + 1
-    )
+    rocks[i][1] = max([r for c, r in rocks + pins if r < row and c == col] + [-1]) + 1
 
 for row in range(max(r for _, r in rocks + pins) + 1):
     for col in range(max(c for c, _ in rocks + pins) + 1):

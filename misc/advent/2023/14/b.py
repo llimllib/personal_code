@@ -25,45 +25,25 @@ def cycle(rocks, pins):
     rocks.sort(key=get(1))
     for i, (col, row) in enumerate(sorted(rocks, key=get(1))):
         rocks[i][1] = (
-            max(
-                [r for c, r in rocks if r < row and c == col]
-                + [r for c, r in pins if r < row and c == col]
-                + [-1]
-            )
-            + 1
+            max([r for c, r in rocks + pins if r < row and c == col] + [-1]) + 1
         )
-    rocks.sort(key=get(0))
     # west
+    rocks.sort(key=get(0))
     for i, (col, row) in enumerate(rocks):
         rocks[i][0] = (
-            max(
-                [c for c, r in rocks if c < col and r == row]
-                + [c for c, r in pins if c < col and r == row]
-                + [-1]
-            )
-            + 1
+            max([c for c, r in rocks + pins if c < col and r == row] + [-1]) + 1
         )
-    rocks.sort(key=get(1), reverse=True)
     # south
+    rocks.sort(key=get(1), reverse=True)
     for i, (col, row) in enumerate(rocks):
         rocks[i][1] = (
-            min(
-                [r for c, r in rocks if r > row and c == col]
-                + [r for c, r in pins if r > row and c == col]
-                + [maxrow]
-            )
-            - 1
+            min([r for c, r in rocks + pins if r > row and c == col] + [maxrow]) - 1
         )
     # east
     rocks.sort(key=get(0), reverse=True)
     for i, (col, row) in enumerate(rocks):
         rocks[i][0] = (
-            min(
-                [c for c, r in rocks if c > col and r == row]
-                + [c for c, r in pins if c > col and r == row]
-                + [maxcol + 1]
-            )
-            - 1
+            min([c for c, r in rocks + pins if c > col and r == row] + [maxcol + 1]) - 1
         )
 
 
