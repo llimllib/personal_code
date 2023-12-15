@@ -21,9 +21,7 @@ for i in instructions:
             pass
     else:
         label, val = i.split("=")
-        val = int(val)
-        box = hash(label)
-        boxes[box][label] = val
+        boxes[hash(label)][label] = int(val)
 
 print(
     "part 2:",
