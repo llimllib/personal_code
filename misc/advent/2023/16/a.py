@@ -4,6 +4,7 @@ Grid = list[list[str]]
 Point = tuple[int, int]
 Dir = int
 Beam = tuple[Point, Dir]
+Cache = dict[Beam, set[Beam]]
 
 L, D, R, U = [1, 2, 3, 4]
 mirror_a = {L: U, U: L, D: R, R: D}  # \
@@ -33,12 +34,9 @@ def valid(beam: Beam, maxrow: int, maxcol: int) -> bool:
     return 0 <= beam[0][0] < maxrow and 0 <= beam[0][1] < maxcol
 
 
-cache = {}
-
-
-def update_beam(grid: Grid, beam: Beam) -> set[Beam]:
+def update_beam(grid: Grid, beam: Beam, cache: Cache) -> set[Beam]:
     if beam in cache:
-        return cache[beam]
+        return set()
 
     (row, col), dir = beam
     newdir = dir
@@ -66,9 +64,9 @@ def update_beam(grid: Grid, beam: Beam) -> set[Beam]:
 
 
 def run(
-    grid: Grid, beams: set[Beam], points: set[Point]
+    grid: Grid, beams: set[Beam], points: set[Point], cache: Cache
 ) -> tuple[set[Beam], set[Point]]:
-    newbeams = {b for beam in beams for b in update_beam(grid, beam)}
+    newbeams = {b for beam in beams for b in update_beam(grid, beam, cache)}
 
     for (row, col), _ in newbeams:
         points.add((row, col))
@@ -77,11 +75,12 @@ def run(
 
 
 def run_to_completion(grid, beams={((0, 0), R)}):
+    cache = {}
     points = {pos for pos, _ in beams}
     n = 0
     lastn = [-1, -1, -1, -1, -1]
     while beams and n < 800:
-        beams, points = run(grid, beams, points)
+        beams, points = run(grid, beams, points, cache)
         if all(n == len(points) for n in lastn):
             break
         lastn.append(len(points))
