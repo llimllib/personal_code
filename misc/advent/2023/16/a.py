@@ -4,7 +4,7 @@ Grid = list[list[str]]
 Point = tuple[int, int]
 Dir = int
 Beam = tuple[Point, Dir]
-Cache = dict[Beam, set[Beam]]
+Cache = set[Beam]
 
 L, D, R, U = [1, 2, 3, 4]
 mirror_a = {L: U, U: L, D: R, R: D}  # \
@@ -58,7 +58,7 @@ def update_beam(grid: Grid, beam: Beam, cache: Cache) -> set[Beam]:
     pbeams.add(advance[newdir](beam[0]))
     pbeams = set(b for b in pbeams if valid(b, maxrow, maxcol))
 
-    cache[beam] = pbeams
+    cache.add(beam)
 
     return pbeams
 
@@ -75,7 +75,7 @@ def run(
 
 
 def run_to_completion(grid, beams={((0, 0), R)}):
-    cache = {}
+    cache = set()
     points = {pos for pos, _ in beams}
     n = 0
     lastn = [-1, -1, -1, -1, -1]
