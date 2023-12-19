@@ -17,7 +17,7 @@ for _, _, color in moves:
     points.append(cur + dir * dist)
 
 poly = Polygon((p.real, p.imag) for p in points)
-print("buf:", poly.buffer(0.5, cap_style="square", join_style="mitre").area)
+print("part 2:", poly.buffer(0.5, cap_style="square", join_style="mitre").area)
 with open("final.svg", "w") as fout:
     pad = 2000
     minx = round(min(p.real for p in points))
