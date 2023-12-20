@@ -1,0 +1,171 @@
+digraph G {
+  vn [shape=rectangle]
+  ks [shape=circle]
+  zt [shape=rectangle]
+  xg [shape=rectangle]
+  xd [shape=circle]
+  pm [shape=circle]
+  gb [shape=rectangle]
+  qx [shape=rectangle]
+  rl [shape=rectangle]
+  lq [shape=rectangle]
+  qm [shape=rectangle]
+  zn [shape=rectangle]
+  lz [shape=rectangle]
+  bf [shape=rectangle]
+  gx [shape=rectangle]
+  zr [shape=rectangle]
+  lt [shape=rectangle]
+  hd [shape=rectangle]
+  mg [shape=rectangle]
+  tx [shape=rectangle]
+  gk [shape=rectangle]
+  vr [shape=circle]
+  roadcaster [shape=circle]
+  bc [shape=rectangle]
+  xz [shape=rectangle]
+  jg [shape=rectangle]
+  qn [shape=rectangle]
+  gc [shape=rectangle]
+  vx [shape=rectangle]
+  vf [shape=rectangle]
+  dt [shape=circle]
+  sb [shape=rectangle]
+  kx [shape=rectangle]
+  hk [shape=rectangle]
+  cb [shape=rectangle]
+  dl [shape=circle]
+  vl [shape=rectangle]
+  fl [shape=rectangle]
+  ng [shape=rectangle]
+  jr [shape=rectangle]
+  cd [shape=rectangle]
+  mt [shape=rectangle]
+  rr [shape=rectangle]
+  tr [shape=rectangle]
+  hq [shape=rectangle]
+  xv [shape=rectangle]
+  vj [shape=rectangle]
+  pp [shape=rectangle]
+  vh [shape=rectangle]
+  cn [shape=rectangle]
+  kk [shape=rectangle]
+  pf [shape=circle]
+  ts [shape=circle]
+  tv [shape=rectangle]
+  vk [shape=circle]
+  pb [shape=rectangle]
+  lj [shape=rectangle]
+  qz [shape=rectangle]
+  rx [shape=invtriangle style=filled fillcolor=red]
+
+  vn -> ts
+  vn -> lq
+  ks -> dt
+  zt -> vl
+  xg -> ts
+  xg -> pb
+  xd -> qz
+  xd -> bc
+  xd -> zt
+  xd -> vk
+  xd -> hq
+  xd -> qx
+  xd -> gc
+  pm -> dt
+  gb -> vj
+  gb -> xd
+  qx -> gb
+  rl -> qn
+  lq -> gk
+  qm -> bf
+  zn -> vh
+  zn -> pf
+  lz -> kk
+  lz -> vr
+  bf -> rr
+  gx -> vr
+  zr -> vx
+  zr -> pf
+  lt -> ng
+  lt -> vr
+  hd -> mg
+  hd -> xd
+  mg -> xd
+  tx -> jg
+  tx -> vr
+  gk -> kx
+  gk -> ts
+  vr -> tr
+  vr -> vf
+  vr -> tx
+  vr -> ks
+  vr -> kk
+  vr -> jg
+  roadcaster -> qz
+  roadcaster -> tx
+  roadcaster -> jr
+  roadcaster -> hk
+  bc -> qx
+  xz -> lt
+  xz -> vr
+  jg -> sb
+  qn -> zr
+  qn -> pf
+  gc -> xv
+  vx -> lj
+  vx -> pf
+  vf -> cn
+  dt -> rx
+  sb -> lz
+  sb -> vr
+  kx -> xg
+  hk -> pf
+  hk -> tv
+  cb -> pf
+  dl -> dt
+  vl -> xd
+  vl -> bc
+  fl -> pp
+  fl -> pf
+  ng -> vr
+  ng -> gx
+  jr -> ts
+  jr -> qm
+  cd -> vn
+  cd -> ts
+  mt -> ts
+  rr -> ts
+  rr -> cd
+  tr -> xz
+  hq -> zt
+  xv -> hq
+  xv -> xd
+  vj -> xd
+  vj -> hd
+  pp -> zn
+  vh -> pf
+  vh -> cb
+  cn -> vr
+  cn -> tr
+  kk -> vf
+  pf -> pp
+  pf -> tv
+  pf -> rl
+  pf -> pm
+  pf -> hk
+  ts -> dl
+  ts -> qm
+  ts -> kx
+  ts -> lq
+  ts -> bf
+  ts -> jr
+  tv -> rl
+  vk -> dt
+  pb -> ts
+  pb -> mt
+  lj -> pf
+  lj -> fl
+  qz -> xd
+  qz -> gc
+}
