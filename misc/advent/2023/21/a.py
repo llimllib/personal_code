@@ -11,8 +11,7 @@ for row, line in enumerate(sys.stdin):
 
 N, E, S, W = -1j, 1 + 0j, 1j, -1 + 0j
 adj = {
-    point: [point + delta for delta in [N, E, S, W] if point + delta in garden]
-    for point in garden
+    point: [point + ẟ for ẟ in [N, E, S, W] if point + ẟ in garden] for point in garden
 }
 
 for i in range(64):
