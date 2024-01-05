@@ -39,7 +39,7 @@ function warn {
 # see:
 # https://spin.atomicobject.com/2021/02/23/git-worktrees-untracked-files/
 #
-# On gnu: use --reflog
+# On gnu: use --reflink
 #
 # Use /bin/cp directly to avoid any of the user's aliases - this script is
 # often eval'ed
