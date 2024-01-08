@@ -61,8 +61,7 @@ function cp_cow {
 # Create a worktree from a given branchname, in exactly the way I like it.
 function _worktree {
     if [ -z "$1" ]; then
-        echo "usage: worktree <branch name>"
-        return 1
+        usage
     fi
 
     if [ -n "$VERBOSE" ]; then
@@ -107,14 +106,13 @@ function _worktree {
         fi
     fi
 
+    # Find untracked files that we want to copy to the new worktree
+
     # packages in node_modules packages can have sub-node-modules packages, and
-    # we don't want to copy them. I also don't feel like adding this as a
-    # special case to the find command above, but it certainly could be
+    # we don't want to copy them; only copy the root node_modules directory
     if [ -d "node_modules" ]; then
       cp_cow node_modules ../"$dirname"/node_modules
     fi
-
-    # Find untracked files that we want to copy to the new worktree
 
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
@@ -145,7 +143,7 @@ function _worktree {
     # return the shell to normal splitting mode
     unset IFS
 
-
+    # if there was an envrc file, tell direnv that it's ok to run it
     if [ -f "../$dirname/.envrc" ]; then
         direnv allow "../$dirname"
     fi
