@@ -2,8 +2,9 @@
 # LICENSE: unlicense. This is free and unencumbered software released into the public domain.
 # see unlicense.org for full license
 
-RED=$(tput setaf 1)
-CLEAR=$(tput sgr0)
+RED="\033[0;31m"
+YELLOW="\033[0;33m"
+CLEAR="\033[0m"
 MAIN_BRANCH=${MAIN_BRANCH:-main}
 VERBOSE=
 
@@ -33,8 +34,16 @@ function die {
     if [ -n "$VERBOSE" ]; then
         set +x
     fi
-    printf '%s%s%s\n' "$RED" "$1" "$CLEAR"
+    printf '%b%s%b\n' "$RED" "$1" "$CLEAR"
     exit 1
+}
+
+function err {
+    printf '%b%s%b\n' "$YELLOW" "$1" "$CLEAR"
+}
+
+function warn {
+    printf '%b%s%b\n' "$YELLOW" "$1" "$CLEAR"
 }
 
 # rmtree <dir> will remove a worktree's directory, then prune the worktree list
@@ -46,24 +55,37 @@ function rmtree {
 
     # verify that the first argument is a directory that exists, that we want
     # to remove
-    if [ -z "$1" ] || [ ! -d "$1" ]; then
+    if [ -z "$1" ]; then
         die "You must provide a directory name that is a worktree to remove"
     fi
 
-    # verify that the main branch exists
-    if [ ! -d "$MAIN_BRANCH" ]; then
-        # for legacy reasons, check "master" as a possibility for the main
-        # branch
-        if [ -d "master" ] ; then
-            MAIN_BRANCH=master
-        else
-            die "Could not find main branch directory <$MAIN_BRANCH>"
+    # for each argument, delete the directory and remove the worktree
+    while [ -n "$1" ]; do
+        if [ ! -d "$1" ]; then
+            err "Unable to find directory $1, skipping"
+            shift
+            continue
         fi
-    fi
 
-    branch_name=$(cd "$1" && git rev-parse --abbrev-ref HEAD)
-    rm -rf "$1"
-    (cd $MAIN_BRANCH && git worktree prune && git branch -D "$branch_name")
+        warn "removing $1"
+
+        # verify that the main branch exists
+        if [ ! -d "$MAIN_BRANCH" ]; then
+            # for legacy reasons, check "master" as a possibility for the main
+            # branch
+            if [ -d "master" ] ; then
+                MAIN_BRANCH=master
+            else
+                die "Could not find main branch directory <$MAIN_BRANCH>"
+            fi
+        fi
+
+        branch_name=$(cd "$1" && git rev-parse --abbrev-ref HEAD)
+        rm -rf "$1"
+        (cd "$MAIN_BRANCH" && git worktree prune && git branch -D "$branch_name")
+
+        shift
+    done
 }
 
 while true; do
