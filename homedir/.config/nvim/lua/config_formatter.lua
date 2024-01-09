@@ -44,6 +44,7 @@ require("formatter").setup({
 			require("formatter.filetypes.go").goimports,
 			require("formatter.filetypes.go").gofumpt,
 		},
+		html = { local_prettier },
 		javascript = { local_prettier },
 		json = { local_prettier },
 		lua = { require("formatter.filetypes.lua").stylua },
@@ -65,7 +66,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.c,*.go,*.js,*.json,*.jsx,*.lua,*.mjs,*.py,*.rs,*.ts,*.tsx,*.yaml FormatWrite
+  autocmd BufWritePost *.c,*.go,*.html,*.js,*.json,*.jsx,*.lua,*.mjs,*.py,*.rs,*.ts,*.tsx,*.yaml FormatWrite
 augroup END
 ]],
 	true

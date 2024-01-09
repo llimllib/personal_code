@@ -26,7 +26,7 @@ require("nvim-treesitter.configs").setup({
 		"make",
 		"markdown",
 		"markdown_inline",
-        "prisma",
+		"prisma",
 		"python",
 		"query",
 		"ruby",
@@ -78,5 +78,12 @@ require("nvim-treesitter.configs").setup({
 		-- Using this option may slow down your editor, and you may see some duplicate highlights.
 		-- Instead of true it can also be a list of languages
 		additional_vim_regex_highlighting = false,
+	},
+
+	-- Treesitter indentation is completely busted for python, and I don't know
+	-- how to just disable it there. Disable it everywhere
+	-- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
+	indent = {
+		enable = true,
 	},
 })

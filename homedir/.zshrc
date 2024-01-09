@@ -369,12 +369,15 @@ if command -v fd &> /dev/null ; then
       # doesn't support it unfortunately:
       # https://github.com/junegunn/fzf/issues/1102
       # shellcheck disable=SC2016
+      dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
       case "$command" in
         cd)           fzf --preview 'erd --inverted -H -C {} | head -200'   "$@" ;;
         export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
         ssh)          fzf --preview 'dig {}'                   "$@" ;;
         *)            fzf --preview 'ft=$(file --mime-type -b {}); if [[ $ft == image* ]]; then identify {}; elif [[ $ft = inode* ]]; then erd -H -C {} | head -n100; else bat -n --color=always {}; fi;'
-                                   # bat -n --color=always {} 2>/dev/null || imgcat {} 2>/dev/null || erd -H -C {} | head -200' "$@" ;;
+        # https://github.com/junegunn/fzf/blob/0.44.0/bin/fzf-preview.sh
+        # *)            fzf --preview 'ft=$(file --mime-type -b {}); if [[ $ft == image* ]]; then kitty icat --clear --transfer-mode=memory --stdin=no --place="$dim@0x0" "{}"; elif [[ $ft = inode* ]]; then erd -H -C {} | head -n100; else bat -n --color=always {}; fi;'
+        # bat -n --color=always {} 2>/dev/null || imgcat {} 2>/dev/null || erd -H -C {} | head -200' "$@" ;;
       esac
     }
 fi
