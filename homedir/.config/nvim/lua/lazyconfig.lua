@@ -79,15 +79,15 @@ require("lazy").setup({
 		-- https://github.com/echasnovski/mini.nvim/tree/main#modules
 		"echasnovski/mini.nvim",
 
-		-- null-ls is an attempt to simplify the process of creating,
-		-- sharing, and setting up LSP sources using pure Lua.
-		-- {
-		-- 	"jose-elias-alvarez/null-ls.nvim",
-		-- 	dependencies = { "nvim-lua/plenary.nvim" },
-		-- },
-		-- trying this out to replace the soon-to-be-departed null-ls :sad:
-		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1621
-		"mhartington/formatter.nvim",
+		-- Use Neovim as a language server to inject LSP diagnostics, code
+		-- actions, and more via Lua.
+		--
+		-- allows you to run command line programs like gofmt as if they were
+		-- LSP servers
+		{
+			"nvimtools/none-ls.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
+		},
 
 		-- hex colors
 		{

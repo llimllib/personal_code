@@ -152,15 +152,16 @@ local on_attach = function(client, bufnr)
 	end
 
 	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+	-- use none-ls instead of any LSP to do document formatting. Do I need to
+	-- do any conditional LSPs here?
+	client.server_capabilities.document_formatting = false
 end
 
 -- XXX: how to switch between the two as necesssary?
 -- npm install -g typescript typescript-language-server
 lsp.tsserver.setup({
 	on_attach = function(client, bufnr)
-		-- don't format files, I prefer using prettier
-		client.server_capabilities.document_formatting = false
-
 		on_attach(client, bufnr)
 	end,
 	-- don't format files, I prefer using prettier
@@ -172,8 +173,6 @@ lsp.tsserver.setup({
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 lsp.eslint.setup({
 	on_attach = function(client, bufnr)
-		-- don't format files, I prefer using prettier
-		client.server_capabilities.document_formatting = false
 		on_attach(client, bufnr)
 	end,
 	-- don't format files, I prefer using prettier
@@ -260,9 +259,6 @@ lsp.zls.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.terraformls.setup({
 	on_attach = function(client, bufnr)
-		-- terraformls doesn't seem to do formatting? So use null_ls instead
-		client.server_capabilities.document_formatting = false
-
 		on_attach(client, bufnr)
 	end,
 	cmd = { "terraform-ls", "serve" },
@@ -280,9 +276,6 @@ lsp.sourcekit.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.html.setup({
 	on_attach = function(client, bufnr)
-		-- don't format files, I prefer using prettier
-		client.server_capabilities.document_formatting = false
-
 		on_attach(client, bufnr)
 	end,
 	capabilities = capabilities,
