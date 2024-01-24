@@ -57,8 +57,14 @@ function zshaddhistory() {
 	[[ ${1} != ${~HISTORY_IGNORE} ]]
 }
 
-# start compinit for completions
-autoload -Uz compinit && compinit
+# start compinit for completions. Only load the cache freshly once a day -
+# otherwise you pay ~100ms on every zsh startup
+# https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
+autoload -Uz compinit
+for dump in ~/.zcompdump(N.mh+24); do
+  compinit
+done
+compinit -C
 
 # set git up for prompt
 # https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Git-in-Zsh
@@ -313,7 +319,6 @@ if [[ -d $HOME/.local/share/asdf ]]; then
     #
     # the instructions change if I were to start using oh-my-zsh
     fpath=(${ASDF_DIR}/completions $fpath)
-    autoload -Uz compinit && compinit
 
     # https://asdf-vm.com/manage/configuration.html#asdfrc
     export ASDF_CONFIG_FILE="$HOME/.config/asdf/asdfrc"
