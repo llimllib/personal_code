@@ -76,7 +76,7 @@ function main {
         fi
     done
 
-    dirs_to_sync=(.local/bin)
+    dirs_to_sync=(.local/bin .config/nvim/lua)
     for dir in "${dirs_to_sync[@]}"; do
         for f in $(cd "$HOME" && fd --type file --hidden . "$dir"); do
             basename_="$(basename "$f")"
