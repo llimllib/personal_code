@@ -56,6 +56,16 @@ require("lazy").setup({
 			},
 		},
 
+		-- otter.nvim for autocomplete in nvim code blocks
+		{
+			"jmbuhr/otter.nvim",
+			dependencies = {
+				"hrsh7th/nvim-cmp",
+				"neovim/nvim-lspconfig",
+				"nvim-treesitter/nvim-treesitter",
+			},
+		},
+
 		-- colorschemes
 		"sainnhe/everforest",
 		-- https://github.com/Shatur/neovim-ayu

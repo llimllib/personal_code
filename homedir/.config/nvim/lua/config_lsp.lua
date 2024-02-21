@@ -110,7 +110,7 @@ cmp.setup({
 			end
 		end,
 	},
-	sources = { { name = "nvim_lsp" }, { name = "buffer" }, { name = "path" } },
+	sources = { { name = "nvim_lsp" }, { name = "buffer" }, { name = "path" }, { name = "otter" } },
 	formatting = {
 		format = function(entry, vim_item)
 			-- Kind icons
