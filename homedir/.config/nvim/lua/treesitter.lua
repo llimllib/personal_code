@@ -85,6 +85,6 @@ require("nvim-treesitter.configs").setup({
 	-- how to just disable it there. Disable it everywhere
 	-- https://github.com/nvim-treesitter/nvim-treesitter/issues/1136
 	indent = {
-		enable = true,
+		enable = false,
 	},
 })
