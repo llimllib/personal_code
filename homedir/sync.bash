@@ -76,7 +76,7 @@ function main {
         fi
     done
 
-    dirs_to_sync=(.local/bin .config/nvim/lua)
+    dirs_to_sync=(.local/bin .config/nvim/lua .config/mise)
     for dir in "${dirs_to_sync[@]}"; do
         for f in $(cd "$HOME" && fd --type file --hidden . "$dir"); do
             basename_="$(basename "$f")"
@@ -85,7 +85,7 @@ function main {
                 read -r -p "Do you want to ${red}[a]${fg}dd $f to repo? " action
                 case $action in
                     a)
-                        ensuredir "$dir"
+                        ensuredir "./$f"
                         rsync "$HOME/$f" "./$f"
                         git add "./$f";;
                 esac
