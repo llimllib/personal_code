@@ -1,0 +1,3 @@
+golang.org/x/tools/gopls@latest
+mvdan.cc/gofumpt@latest
+honnef.co/go/tools/cmd/staticcheck@latest

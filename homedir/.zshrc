@@ -306,40 +306,45 @@ export EDITOR
 export SHELL=zsh
 
 #asdf
-if [[ -d $HOME/.local/share/asdf ]]; then
-    # I really wish asdf supported XDG_CONFIG:
-    # https://github.com/asdf-vm/asdf/issues/687
-    #
-    # so let's set a bunch of variables that let us pretend it does
-    export ASDF_DIR="$HOME/.local/share/asdf"
-    export ASDF_DATA_DIR="$HOME/.local/share/asdf"
+# if [[ -d $HOME/.local/share/asdf ]]; then
+#     # I really wish asdf supported XDG_CONFIG:
+#     # https://github.com/asdf-vm/asdf/issues/687
+#     #
+#     # so let's set a bunch of variables that let us pretend it does
+#     export ASDF_DIR="$HOME/.local/share/asdf"
+#     export ASDF_DATA_DIR="$HOME/.local/share/asdf"
+# 
+#     . "$ASDF_DIR/asdf.sh"
+#     # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
+#     #
+#     # the instructions change if I were to start using oh-my-zsh
+#     fpath=(${ASDF_DIR}/completions $fpath)
+# 
+#     # https://asdf-vm.com/manage/configuration.html#asdfrc
+#     export ASDF_CONFIG_FILE="$HOME/.config/asdf/asdfrc"
+# 
+#     # https://github.com/asdf-vm/asdf-nodejs#default-npm-packages
+#     export ASDF_NPM_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-npm-packages"
+# 
+#     # https://github.com/asdf-community/asdf-python#default-python-packages
+#     export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
+# 
+#     # set DOTNET_ROOT variable properly if the dotnet-core asdf plugin is installed
+#     if [[ -f $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh ]]; then
+#         . $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh
+# 
+#         # dotnet has to come before asdf because microsoft sucks
+#         #
+#         # https://github.com/razzmatazz/csharp-language-server/issues/82
+#         # https://github.com/dotnet/roslyn/issues/67383
+#         export PATH=$DOTNETBIN:$PATH
+#     fi
+# fi
 
-    . "$ASDF_DIR/asdf.sh"
-    # https://asdf-vm.com/guide/getting-started.html#_3-install-asdf
-    #
-    # the instructions change if I were to start using oh-my-zsh
-    fpath=(${ASDF_DIR}/completions $fpath)
-
-    # https://asdf-vm.com/manage/configuration.html#asdfrc
-    export ASDF_CONFIG_FILE="$HOME/.config/asdf/asdfrc"
-
-    # https://github.com/asdf-vm/asdf-nodejs#default-npm-packages
-    export ASDF_NPM_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-npm-packages"
-
-    # https://github.com/asdf-community/asdf-python#default-python-packages
-    export ASDF_PYTHON_DEFAULT_PACKAGES_FILE="$HOME/.config/asdf/default-python-packages"
-
-    # set DOTNET_ROOT variable properly if the dotnet-core asdf plugin is installed
-    if [[ -f $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh ]]; then
-        . $HOME/.local/share/asdf/plugins/dotnet-core/set-dotnet-home.zsh
-
-        # dotnet has to come before asdf because microsoft sucks
-        #
-        # https://github.com/razzmatazz/csharp-language-server/issues/82
-        # https://github.com/dotnet/roslyn/issues/67383
-        export PATH=$DOTNETBIN:$PATH
-    fi
-fi
+# EXPERIMENT: try mise instead of asdf
+# https://mise.jdx.dev/getting-started.html
+# https://mise.jdx.dev/dev-tools/comparison-to-asdf.html
+eval "$(/opt/homebrew/bin/mise activate zsh)"
 
 # fzf
 #

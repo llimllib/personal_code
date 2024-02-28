@@ -1,0 +1,7 @@
+@vtsls/language-server
+bash-language-server
+eslint
+prettier
+typescript
+typescript-language-server
+vscode-langservers-extracted
