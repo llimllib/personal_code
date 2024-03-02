@@ -1,21 +1,27 @@
--- configure colorscheme
--- if vim.fn.has("termguicolors") == 1 then
---     vim.opt.termguicolors = true
---
---     ayu = require('ayu')
---     ayu.setup({
---         mirage = true,
---         overrides = {
---             -- a few shades brighter than the default #5c6773
---             Comment = {fg = "#adb3b9", italic = true}
---         }
---     })
---     ayu.colorscheme()
---
---     -- to set a colorscheme that's not lua-based:
---     -- vim.cmd('colorscheme everforest')
--- end
-
--- vim.cmd("colorscheme adhoc")
--- vim.cmd("colorscheme tokyonight-moon")
-vim.cmd("colorscheme lilium")
+vim.g.sonokai_colors_override = {
+	black = { "#181a1c", "232" },
+	bg_dim = { "#24272e", "232" },
+	bg0 = { "#252A39", "235" },
+	bg1 = { "#2a3041", "236" },
+	bg2 = { "#2f3548", "236" },
+	bg3 = { "#343b50", "237" },
+	bg4 = { "#394158", "237" },
+	bg_red = { "#ff6d7e", "203" },
+	diff_red = { "#55393d", "52" },
+	bg_green = { "#a5e179", "107" },
+	diff_green = { "#394634", "22" },
+	bg_blue = { "#7ad5f1", "110" },
+	diff_blue = { "#354157", "17" },
+	diff_yellow = { "#4e432f", "54" },
+	fg = { "#e1e3e4", "250" },
+	red = { "#F47648", "203" },
+	orange = { "#8ED0B2", "215" },
+	yellow = { "#8ED0B2", "179" },
+	green = { "#40BA93", "107" },
+	blue = { "#73D0FF", "110" },
+	purple = { "#fca07f", "176" },
+	grey = { "#828a9a", "246" },
+	grey_dim = { "#5a6477", "240" },
+	none = { "NONE", "NONE" },
+}
+vim.cmd("colorscheme sonokai")
