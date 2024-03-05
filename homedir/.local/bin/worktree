@@ -128,14 +128,12 @@ function _worktree {
     #
     # Skip any of these files if they're found within node_modules.
     #
+    # Putting the `-not -path` argument first is a great deal faster than the
+    # other way around
+    #
     # shellcheck disable=SC2207
-    files_to_copy=( $(find . \( \
-            -name .envrc \
-            -or -name .env \
-            -or -name .env.local \
-            -or -name .tool-versions \
-            \) \
-        -and -not -path '*node_modules*') )
+    files_to_copy=( $(find -E . -not -path '*node_modules*' -and \
+        -iregex '.*\/\.(envrc|env|env.local|tool-versions|mise.toml)' ) )
     for f in "${files_to_copy[@]}"; do
       cp_cow "$f" ../"$dirname"/"$f"
     done
