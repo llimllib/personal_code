@@ -1,0 +1,70 @@
+#!/usr/bin/env python
+import argparse
+import json
+import subprocess
+import sys
+
+VERBOSE = False
+RED = "\033[31m"
+GREEN = "\033[32m"
+BLUE = "\033[34m"
+RESET='\033[0m'
+
+def red(s):
+    return f"{RED}{s}{RESET}"
+
+def green(s):
+    return f"{GREEN}{s}{RESET}"
+
+def blue(s):
+    return f"{BLUE}{s}{RESET}"
+
+# create an OCS8 hyperlink in the terminal
+#
+# https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
+# https://github.com/Alhadis/OSC8-Adoption
+def link(url, link):
+    return f'\033]8;;{url}\033\\{link}\033]8;;\033\\'
+
+def log(s):
+    if VERBOSE:
+        sys.stderr.write(s)
+    return s
+
+def highlight_match(s: str, start: int, end: int):
+    # the start and end values of a highlight are given in bytes so we have to
+    # operate on a byte string
+    bs = s.encode("utf8")
+    return bs[:start].decode('utf8') + red(bs[start:end].decode('utf8')) + bs[end:].decode('utf8')
+
+def main(args):
+    cmd = log(f"gh search code --json path,repository,sha,textMatches,url {" ".join(args.args)}")
+    out = log(subprocess.getoutput(cmd))
+
+    matches = []
+    try:
+        matches= log(json.loads(out))
+    except Exception as e:
+        print(f"Unable to parse {out}: {e}")
+
+    for m in matches:
+        repo = m["repository"]
+        print(f'{blue(repo["nameWithOwner"])} {link(m["url"], green(m["path"]))}')
+        first = True
+        for tm in m["textMatches"]:
+            if not first:
+                print()
+            for highlight in reversed(sorted(tm["matches"], key=lambda tm: tm["indices"])):
+                tm["fragment"] = highlight_match(tm["fragment"], *highlight["indices"])
+            print(tm["fragment"])
+            first = False
+        print()
+
+
+if __name__=="__main__":
+    parser = argparse.ArgumentParser(description='Example script with a --verbose option.')
+    parser.add_argument('--verbose', action='store_true', help='Enable verbose output.')
+    parser.add_argument('args', nargs='*', help='arguments to pass to gh')
+    args = parser.parse_args()
+    VERBOSE = args.verbose
+    main(args)
