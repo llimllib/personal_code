@@ -54,6 +54,16 @@
     # narrow ones. https://github.com/dandavison/delta/issues/359
     # side-by-side = true
 
+    # enable clicking on line numbers to jump right to the file in vim.
+    # Unfortunately because of the way I've configured kitty, right now this
+    # doesn't work when you're in the pager.
+    #
+    # https://dandavison.github.io/delta/grep.html?highlight=hyper#grep
+    # https://notes.billmill.org/computer_usage/terminals/kitty.html#opening-files-with-clicks
+    # https://mastodon.social/@cfbolz/112095079659025365
+    hyperlinks = true
+    hyperlinks-file-link-format = "file:///{path}#{line}"
+
 [interactive]
     diffFilter = delta --color-only
 
