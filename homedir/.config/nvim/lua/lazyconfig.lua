@@ -25,7 +25,8 @@ require("lazy").setup({
 		"tpope/vim-dadbod", -- query databases
 		"lewis6991/gitsigns.nvim", -- git gutter signs
 		"preservim/vim-markdown", -- markdown mode: fenced code blocks etc
-		"nvim-treesitter/nvim-treesitter", -- treesitter modules
+		"tpope/vim-fugitive", -- git integration
+		"tpope/vim-rhubarb", -- github integration
 
 		-- scope highlighting
 		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
@@ -77,11 +78,8 @@ require("lazy").setup({
 		--  https://github.com/AlexvZyl/nordic.nvim
 		"AlexvZyl/nordic.nvim",
 		"folke/tokyonight.nvim",
-		"sainnhe/sonokai",
+		"sainnhe/sonokai", -- the one I currently use, with a custom palette
 		"projekt0n/github-nvim-theme",
-		"llimllib/lilium",
-
-		{ dir = "~/code/adhoc-nvim-colors" },
 		-- /colorschemes
 
 		-- includes a whole bunch of stuff, I'm using it for base16 experiments
@@ -104,6 +102,70 @@ require("lazy").setup({
 			"norcalli/nvim-colorizer.lua",
 			config = function()
 				require("colorizer").setup()
+			end,
+		},
+
+		-- somehow, disabling indentation here makes my indentation go crazy. I
+		-- have no idea why.
+		--
+		-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#lazynvim
+		{
+			"nvim-treesitter/nvim-treesitter",
+			build = ":TSUpdate",
+			event = { "BufReadPre", "BufNewFile" },
+			main = "nvim-treesitter.configs",
+			config = function()
+				require("nvim-treesitter.configs").setup({
+					auto_install = false,
+					ensure_installed = {
+						"bash",
+						"c",
+						"c_sharp",
+						"comment",
+						"cpp",
+						"css",
+						"diff",
+						"elixir",
+						"erlang",
+						"go",
+						"gomod",
+						"gosum",
+						"gowork",
+						"html",
+						"htmldjango",
+						"ini",
+						"java",
+						"javascript",
+						"json",
+						"json5",
+						"julia",
+						"latex",
+						"lua",
+						"make",
+						"markdown",
+						"markdown_inline",
+						"prisma",
+						"python",
+						"query",
+						"ruby",
+						"rust",
+						"scss",
+						"sql",
+						"starlark",
+						"swift",
+						"terraform",
+						"toml",
+						"tsx",
+						"typescript",
+						"vim",
+						"vimdoc",
+						"vimdoc",
+						"yaml",
+						"zig",
+					},
+					highlight = { enable = true },
+					indent = { enable = true },
+				})
 			end,
 		},
 	},

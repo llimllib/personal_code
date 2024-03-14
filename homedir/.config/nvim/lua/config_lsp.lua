@@ -158,7 +158,6 @@ local on_attach = function(client, bufnr)
 	client.server_capabilities.document_formatting = false
 end
 
--- XXX: how to switch between the two as necesssary?
 -- npm install -g typescript typescript-language-server
 lsp.tsserver.setup({
 	on_attach = function(client, bufnr)

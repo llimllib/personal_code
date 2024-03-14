@@ -7,7 +7,6 @@ require("lazyconfig")
 
 require("autocmds")
 require("config_lsp")
-require("treesitter")
 require("config_otter")
 require("none_ls")
 require("colorscheme")
