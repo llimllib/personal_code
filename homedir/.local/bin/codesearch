@@ -7,42 +7,55 @@ VERBOSE = False
 RED = "\033[31m"
 GREEN = "\033[32m"
 BLUE = "\033[34m"
-RESET='\033[0m'
+RESET = "\033[0m"
+
 
 def red(s):
     return f"{RED}{s}{RESET}"
 
+
 def green(s):
     return f"{GREEN}{s}{RESET}"
+
 
 def blue(s):
     return f"{BLUE}{s}{RESET}"
 
+
 # create an OSC8 hyperlink in the terminal
-# 
+#
 # https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3cb5feda
 # https://github.com/Alhadis/OSC8-Adoption
 def link(url, link):
-    return f'\033]8;;{url}\033\\{link}\033]8;;\033\\'
+    return f"\033]8;;{url}\033\\{link}\033]8;;\033\\"
+
 
 def log(s):
     if VERBOSE:
         sys.stderr.write(s)
     return s
 
+
 def highlight_match(s: str, start: int, end: int):
     # the start and end values of a highlight are given in bytes so we have to
     # operate on a byte string
     bs = s.encode("utf8")
-    return bs[:start].decode('utf8') + red(bs[start:end].decode('utf8')) + bs[end:].decode('utf8')
+    return (
+        bs[:start].decode("utf8")
+        + red(bs[start:end].decode("utf8"))
+        + bs[end:].decode("utf8")
+    )
+
 
 def main():
-    cmd = log(f"gh search code --json path,repository,sha,textMatches,url {" ".join(sys.argv[1:])}")
+    cmd = log(
+        f"gh search code --json path,repository,sha,textMatches,url {' '.join(sys.argv[1:])}"
+    )
     out = log(subprocess.getoutput(cmd))
 
     matches = []
     try:
-        matches= json.loads(out)
+        matches = json.loads(out)
     except Exception as e:
         print(f"Unable to parse {out}: {e}")
 
@@ -53,15 +66,17 @@ def main():
         for tm in m["textMatches"]:
             if not first:
                 print()
-            for highlight in reversed(sorted(tm["matches"], key=lambda tm: tm["indices"])):
+            for highlight in reversed(
+                sorted(tm["matches"], key=lambda tm: tm["indices"])
+            ):
                 tm["fragment"] = highlight_match(tm["fragment"], *highlight["indices"])
             print(tm["fragment"])
             first = False
         print()
 
 
-if __name__=="__main__":
-    if '--verbose' in sys.argv:
-        VERBOSE=True
-        sys.argv.remove('--verbose')
+if __name__ == "__main__":
+    if "--verbose" in sys.argv:
+        VERBOSE = True
+        sys.argv.remove("--verbose")
     main()
