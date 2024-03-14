@@ -262,9 +262,9 @@ alias da='direnv allow'
 alias de='direnv edit'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
-alias ls='ls -FG'
+alias ls='gls -FG --hyperlink=auto'
 alias py='ipython'
-alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git'"
+alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
 alias sqlite='sqlite3'
 alias tf='terraform'
 alias tmux='tmux -2' # tmux into 256 color mode
