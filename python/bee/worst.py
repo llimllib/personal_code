@@ -1,3 +1,5 @@
+# worst.py: print the worst possible pangrams for the New York Times spelling bee
+
 from collections import Counter
 from itertools import combinations
 
@@ -30,7 +32,7 @@ for n, pangram in pangrams[:15]:
         [
             w
             for w in [l.strip() for l in open("words.txt")]
-            if set(w).issubset(ps) and len(w) > 3
+            if set(w).issubset(ps) and len(w) > 3 and w != pangram
         ]
     )
     if len(matches) > 60:
