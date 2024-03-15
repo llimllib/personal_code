@@ -15,9 +15,9 @@ for word in allwords:
             score[ws.union(letters)] += 1
 
 pangrams = [
-    (score[frozenset(line.strip())] + 1, line.strip())
-    for line in open("words.txt")
-    if "s" not in line and len(set(line.strip())) == 7
+    (score[frozenset(word)] + 1, word)
+    for word in [line.strip() for line in open("words.txt")]
+    if "s" not in word and len(set(word)) == 7
 ]
 pangrams.sort()
 
