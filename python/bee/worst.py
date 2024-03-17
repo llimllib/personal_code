@@ -2,10 +2,13 @@
 
 from collections import Counter
 from itertools import combinations
+import sys
+
+FILE = sys.argv[-1] if sys.argv[-1].endswith(".txt") else "words.txt"
 
 # the spelling bee never includes the letter "s"
 alphabet = frozenset("abcdefghijklmnopqrtuvwxyz")
-allwords = set(line.strip() for line in open("words.txt") if "s" not in line)
+allwords = set(line.strip() for line in open(FILE) if "s" not in line)
 
 score = Counter()
 for word in allwords:
@@ -16,7 +19,7 @@ for word in allwords:
 
 pangrams = [
     (score[frozenset(word)] + 1, word)
-    for word in [line.strip() for line in open("words.txt")]
+    for word in [line.strip() for line in open(FILE)]
     if "s" not in word and len(set(word)) == 7
 ]
 pangrams.sort()
@@ -31,7 +34,7 @@ for n, pangram in pangrams[:15]:
     matches = ",".join(
         [
             w
-            for w in [l.strip() for l in open("words.txt")]
+            for w in [l.strip() for l in open(FILE)]
             if set(w).issubset(ps) and len(w) > 3 and w != pangram
         ]
     )
