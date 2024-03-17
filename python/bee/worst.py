@@ -61,7 +61,7 @@ def hl(w: str, l: str) -> str:
     return f"{red}{w.replace(l, f'{yellow}{l}{red}')}"
 
 
-print(f"{green}points\tpangram\twords")
+print(f"{green}points\tpangram\t\twords")
 scores_with_req_letters.sort()
 for points, l, pangram in scores_with_req_letters[:50]:
     ps = set(pangram)
@@ -74,5 +74,5 @@ for points, l, pangram in scores_with_req_letters[:50]:
     if len(matchstr) > 60:
         matchstr = matchstr[:59] + "..."
     print(
-        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (15-len(pangram))}{reset}{matchstr}"
+        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (16-len(pangram))}{reset}{matchstr}"
     )
