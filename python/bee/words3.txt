@@ -9786,7 +9786,6 @@ currying
 curt
 curtail
 curtain
-curtalax
 curtate
 curter
 curtly
@@ -19245,7 +19244,6 @@ hindered
 hinderer
 hindering
 hindgut
-hindmilk
 hindwing
 hinge
 hinged
@@ -21873,8 +21871,6 @@ kameez
 kami
 kamik
 kamikaze
-kamotik
-kamotiq
 kampong
 kanamycin
 kangaroo
@@ -31898,7 +31894,6 @@ puerperal
 puerperia
 puerperium
 puff
-puffback
 puffball
 puffbird
 puffed
@@ -40747,7 +40742,6 @@ wamble
 wambled
 wambly
 wame
-wamefou
 wameful
 wampum
 wampumpeag
