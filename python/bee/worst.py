@@ -59,7 +59,7 @@ for points, _, pangram in pangrams:
         lmatches = [m for m in matches if l in m]
         pangram_matches[(pangram, l)] = lmatches
         score = len(pangram) + 7 + sum(wscore(m) for m in lmatches)
-        scores_with_req_letters.append((score, l, pangram))
+        scores_with_req_letters.append((score, l, len(lmatches), pangram))
 
 
 @cache
@@ -77,7 +77,7 @@ print(f"{green}points\tpangram\t\twords")
 # print("| score | pangram | words |")
 # print("|-------|---------|-------|")
 scores_with_req_letters.sort()
-for points, l, pangram in scores_with_req_letters:
+for points, l, _, pangram in scores_with_req_letters:
     matches = pangram_matches[(pangram, l)]
     panscore = wscore(pangram)
     total = panscore + sum(wscore(m) for m in matches)
@@ -90,3 +90,35 @@ for points, l, pangram in scores_with_req_letters:
         )
         # uncomment to print out markdown instead of ANSI
         # print(f'|{points}|{pangram.replace(l, f"**{l}**")}|{",".join(matches)}|')
+
+print(f"{yellow}----------- lowest puzzles with >= 16 words --------------{reset}")
+
+# print the 25 lowest-scoring puzzles which generate at least 20 words
+for points, l, nwords, pangram in [s for s in scores_with_req_letters if s[2] >= 16][
+    :25
+]:
+    matches = pangram_matches[(pangram, l)]
+    panscore = wscore(pangram)
+    total = panscore + sum(wscore(m) for m in matches)
+    matchstr = ",".join(matches)
+    if len(matchstr) > 60:
+        matchstr = matchstr[:59] + "..."
+    print(
+        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (16-len(pangram))}{reset}{matchstr}"
+    )
+
+print(
+    f"{yellow}----------- the lowest ever actual puzzle, score 47 points --------------{reset}"
+)
+for points, l, nwords, pangram in [
+    s for s in scores_with_req_letters if s[1] == "f" and s[3] == "mortify"
+]:
+    matches = pangram_matches[(pangram, l)]
+    panscore = wscore(pangram)
+    total = panscore + sum(wscore(m) for m in matches)
+    matchstr = ",".join(matches)
+    print(
+        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (16-len(pangram))}{reset}{matchstr}"
+    )
+    # uncomment to print out markdown instead of ANSI
+    # print(f'|{points}|{pangram.replace(l, f"**{l}**")}|{",".join(matches)}|')
