@@ -48,16 +48,16 @@ def wscore(w):
     return (1 if len(w) == 4 else len(w)) + (7 if len(allwordsets[w]) == 7 else 0)
 
 
+# find all matches for each pangram, then the score for each possible required
+# letter
 scores_with_req_letters = []
+pangram_matches = {}
 for points, _, pangram in pangrams:
     ps = allwordsets[pangram]
-    matches = [
-        w
-        for w in allwords
-        if allwordsets[w].issubset(ps) and len(w) > 3 and w != pangram
-    ]
+    matches = [w for w in allwords if allwordsets[w].issubset(ps) and w != pangram]
     for l in ps:
         lmatches = [m for m in matches if l in m]
+        pangram_matches[(pangram, l)] = lmatches
         score = len(pangram) + 7 + sum(wscore(m) for m in lmatches)
         scores_with_req_letters.append((score, l, pangram))
 
@@ -73,17 +73,20 @@ yellow = "\033[0;33m"
 blue = "\033[0;34m"
 reset = "\033[0m"
 print(f"{green}points\tpangram\t\twords")
+# uncomment to print out markdown instead of ANSI
+# print("| score | pangram | words |")
+# print("|-------|---------|-------|")
 scores_with_req_letters.sort()
-for points, l, pangram in scores_with_req_letters[:50]:
-    ps = allwordsets[pangram]
-    matches = [
-        w
-        for w in allwords
-        if l in w and allwordsets[w].issubset(ps) and len(w) > 3 and w != pangram
-    ]
-    matchstr = ",".join(matches)
-    if len(matchstr) > 60:
-        matchstr = matchstr[:59] + "..."
-    print(
-        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (16-len(pangram))}{reset}{matchstr}"
-    )
+for points, l, pangram in scores_with_req_letters:
+    matches = pangram_matches[(pangram, l)]
+    panscore = wscore(pangram)
+    total = panscore + sum(wscore(m) for m in matches)
+    if (panscore / total) > 0.7:
+        matchstr = ",".join(matches)
+        if len(matchstr) > 60:
+            matchstr = matchstr[:59] + "..."
+        print(
+            f"{blue}{points: <8}{hl(pangram, l)}{' ' * (16-len(pangram))}{reset}{matchstr}"
+        )
+        # uncomment to print out markdown instead of ANSI
+        # print(f'|{points}|{pangram.replace(l, f"**{l}**")}|{",".join(matches)}|')
