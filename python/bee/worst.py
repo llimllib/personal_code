@@ -33,19 +33,46 @@ pangrams = [
 ]
 pangrams.sort()
 
+
+def wscore(w):
+    return (1 if len(w) == 4 else len(w)) + (7 if len(set(w)) == 7 else 0)
+
+
 red = "\033[0;31m"
 green = "\033[0;32m"
+yellow = "\033[0;33m"
 blue = "\033[0;34m"
 reset = "\033[0m"
-print(f"{green}words\tpoints\tpangram")
-for points, n, pangram in pangrams[:15]:
+scores_with_req_letters = []
+for points, n, pangram in pangrams:
     ps = set(pangram)
     matches = [
         w
         for w in [l.strip() for l in open(FILE)]
         if set(w).issubset(ps) and len(w) > 3 and w != pangram
     ]
+    for l in set(pangram):
+        lmatches = [m for m in matches if l in m]
+        score = len(pangram) + 7 + sum(wscore(m) for m in lmatches)
+        scores_with_req_letters.append((score, l, pangram))
+
+
+def hl(w: str, l: str) -> str:
+    return f"{red}{w.replace(l, f'{yellow}{l}{red}')}"
+
+
+print(f"{green}points\tpangram\twords")
+scores_with_req_letters.sort()
+for points, l, pangram in scores_with_req_letters[:50]:
+    ps = set(pangram)
+    matches = [
+        w
+        for w in [line.strip() for line in open(FILE)]
+        if set(w).issubset(ps) and len(w) > 3 and w != pangram and l in w
+    ]
     matchstr = ",".join(matches)
     if len(matchstr) > 60:
         matchstr = matchstr[:59] + "..."
-    print(f"{blue}{n: <8}{points: <8}{red}{pangram: <15}{reset}{matchstr}")
+    print(
+        f"{blue}{points: <8}{hl(pangram, l)}{' ' * (15-len(pangram))}{reset}{matchstr}"
+    )
