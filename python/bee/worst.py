@@ -1,6 +1,7 @@
 # worst.py: print the worst possible pangrams for the New York Times spelling bee
 
 from collections import Counter
+from functools import cache
 from itertools import combinations
 import sys
 
@@ -34,6 +35,7 @@ pangrams = [
 pangrams.sort()
 
 
+@cache
 def wscore(w):
     return (1 if len(w) == 4 else len(w)) + (7 if len(set(w)) == 7 else 0)
 
@@ -47,9 +49,7 @@ scores_with_req_letters = []
 for points, n, pangram in pangrams:
     ps = set(pangram)
     matches = [
-        w
-        for w in [l.strip() for l in open(FILE)]
-        if set(w).issubset(ps) and len(w) > 3 and w != pangram
+        w for w in allwords if set(w).issubset(ps) and len(w) > 3 and w != pangram
     ]
     for l in set(pangram):
         lmatches = [m for m in matches if l in m]
@@ -57,6 +57,7 @@ for points, n, pangram in pangrams:
         scores_with_req_letters.append((score, l, pangram))
 
 
+@cache
 def hl(w: str, l: str) -> str:
     return f"{red}{w.replace(l, f'{yellow}{l}{red}')}"
 
