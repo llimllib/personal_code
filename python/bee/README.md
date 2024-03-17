@@ -2,7 +2,12 @@
 
 I wrote this simple program to find the worst possible spelling bee pangrams, in the sense that they give the fewest possible answers.
 
-Unfortunately, I didn't have the actual spelling bee glossary, so I used a larger word list, and these words actually have fewer matches than presented here.
+I explained this code in two blog posts:
+
+- [part 1](https://notes.billmill.org/blog/2024/03/What_are_the__worst__spelling_bee_pangrams_.html)
+- [part 2](https://notes.billmill.org/blog/2024/03/mitzVah_-_the__worst__pangrams_part_2.html)
+
+I didn't have the actual spelling bee glossary, so I used a larger word list, and these words actually have fewer matches than presented here.
 
 ```
 $ python worst.py
