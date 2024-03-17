@@ -5,7 +5,7 @@ from functools import cache
 from itertools import combinations
 import sys
 
-FILE = sys.argv[-1] if sys.argv[-1].endswith(".txt") else "words.txt"
+FILE = sys.argv[-1] if sys.argv[-1].endswith(".txt") else "words3.txt"
 
 # the spelling bee never includes the letter "s"
 alphabet = frozenset("abcdefghijklmnopqrtuvwxyz")
