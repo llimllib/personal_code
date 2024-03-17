@@ -94,7 +94,7 @@ for points, l, _, pangram in scores_with_req_letters:
 print(f"{yellow}----------- lowest puzzles with >= 16 words --------------{reset}")
 
 # print the 25 lowest-scoring puzzles which generate at least 20 words
-for points, l, nwords, pangram in [s for s in scores_with_req_letters if s[2] >= 16][
+for points, l, nwords, pangram in [s for s in scores_with_req_letters if s[2] >= 15][
     :25
 ]:
     matches = pangram_matches[(pangram, l)]
