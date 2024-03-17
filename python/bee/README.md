@@ -47,3 +47,33 @@ words	points	pangram
 ```
 
 It's a hilarious result that `fuckwit` comes out as the lowest-scoring possible pangram.
+
+One thing I realized eventually is that I'm not taking into account the required letter constraint; for example if we choose `jacquard` as our pangram and require the letter `q`, that limits us to just the words `aqua`, `qajaq`, and `quad`, which means that `jacquard`'s total score would be 22, 15 of which would be the pangram itself.
+
+Here's a list of the 22 pangrams, including a required letter, that score the lowest in the word list given by `words3.txt`:
+
+| points | pangram      | words          |
+| ------ | ------------ | -------------- |
+| 14     | kamoti**q**  |
+| 14     | mitz**v**ah  |
+| 14     | princo**x**  |
+| 15     | **v**agotomy |
+| 15     | **v**iburnum |
+| 15     | conflu**x**  | flux           |
+| 15     | jukebo**x**  | jeux           |
+| 15     | ca**z**ique  | quiz           |
+| 15     | ga**z**pacho |
+| 16     | bo**v**inity | viny           |
+| 16     | checkbo**x** | exec           |
+| 16     | fo**x**hound | doxx           |
+| 16     | qui**x**ote  | exit,text      |
+| 17     | **h**indmilk | hill,hind      |
+| 17     | b**i**keway  | bike,kiwi,wiki |
+| 17     | **j**udicial | jail,juju      |
+| 17     | **w**amefou  | meow,wame,woof |
+| 17     | e**x**iguity | exit,text      |
+| 17     | tubife**x**  | exit,ibex,text |
+| 17     | activi**z**e | zeta,ziti      |
+| 18     | ja**c**quard | card,crud,curd |
+| 18     | pu**ff**back | buff,cuff,puff |
+| 18     | hi**g**hjack | gaga,high,jagg |
