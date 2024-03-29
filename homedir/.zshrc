@@ -258,11 +258,9 @@ alias cp='command rsync --human-readable --progress --archive --hard-links --acl
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
-alias da='direnv allow'
-alias de='direnv edit'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
-alias ls='gls -FG --hyperlink=auto'
+alias ls='gls -FG --hyperlink=auto --color=auto'
 alias py='ipython'
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
 alias sqlite='sqlite3'

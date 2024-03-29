@@ -110,8 +110,16 @@ function _worktree {
 
     # packages in node_modules packages can have sub-node-modules packages, and
     # we don't want to copy them; only copy the root node_modules directory
+    #
+    # Because this can be so slow, we launch it as a process in the background
     if [ -d "node_modules" ]; then
-      cp_cow node_modules ../"$dirname"/node_modules
+        tmpfile=$(mktemp)
+        cp_node_modules="cp -Rc node_modules ../$dirname/node_modules ||
+            cp -R --reflink node_modules ../$dirname/node_modules"
+
+        warn "copying node_modules and npm installing in the background"
+        warn "logging to $tmpfile"
+        nohup bash -c "$cp_node_modules" &> "$tmpfile" &
     fi
 
     # this will fail for any files with \n in their names. don't do that.
@@ -135,7 +143,7 @@ function _worktree {
     files_to_copy=( $(find -E . -not -path '*node_modules*' -and \
         -iregex '.*\/\.(envrc|env|env.local|tool-versions|mise.toml)' ) )
     for f in "${files_to_copy[@]}"; do
-      cp_cow "$f" ../"$dirname"/"$f"
+        cp_cow "$f" ../"$dirname"/"$f"
     done
 
     # return the shell to normal splitting mode

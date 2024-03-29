@@ -28,7 +28,7 @@ null_ls.setup({
 		end
 	end,
 	-- documentaton on using local executables:
-	-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/a138b14099e9623832027ea12b4631ddd2a49256/doc/BUILTIN_CONFIG.md?plain=1#L358-L392
+	-- https://github.com/nvimtools/none-ls.nvim/blob/72e25ed4/doc/BUILTIN_CONFIG.md?plain=1#L351-L385
 	sources = {
 		null_ls.builtins.formatting.black.with({
 			prefer_local = ".venv/bin",

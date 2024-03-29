@@ -27,6 +27,7 @@ require("lazy").setup({
 		"preservim/vim-markdown", -- markdown mode: fenced code blocks etc
 		"tpope/vim-fugitive", -- git integration
 		"tpope/vim-rhubarb", -- github integration
+		"digitaltoad/vim-pug", -- jade/pug highlighting
 
 		-- scope highlighting
 		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },

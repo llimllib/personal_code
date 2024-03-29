@@ -31,6 +31,7 @@
   "vim-elixir": { "branch": "master", "commit": "6dd03f87d825bf0a9f8611eb54076c7952d4f15c" },
   "vim-fugitive": { "branch": "master", "commit": "41beedabc7e948c787ea5696e04c3544c3674e23" },
   "vim-markdown": { "branch": "master", "commit": "a657e697376909c41475a686eeef7fc7a4972d94" },
+  "vim-pug": { "branch": "master", "commit": "ea39cd942cf3194230cf72bfb838901a5344d3b3" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
   "vim-terraform": { "branch": "master", "commit": "21f756b933cd11ac5990a6046fdc7c4e2a6c0aee" },
   "vim-vsnip": { "branch": "master", "commit": "02a8e79295c9733434aab4e0e2b8c4b7cea9f3a9" },

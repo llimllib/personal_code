@@ -114,7 +114,7 @@ cmp.setup({
 	formatting = {
 		format = function(entry, vim_item)
 			-- Kind icons
-			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+			vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 			-- Source
 			vim_item.menu = ({
 				buffer = "[Buffer]",
@@ -126,6 +126,11 @@ cmp.setup({
 		end,
 	},
 	preselect = { cmp.PreselectMode.None },
+	-- enable if you like a border around the completion window
+	-- window = {
+	-- 	completion = cmp.config.window.bordered(),
+	-- 	documentation = cmp.config.window.bordered(),
+	-- },
 })
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
