@@ -17,7 +17,6 @@ function calculatePosttestProbability() {
 }
 
 function update() {
-  console.log("change");
   document.getElementById("result").textContent =
     calculatePosttestProbability();
 }
