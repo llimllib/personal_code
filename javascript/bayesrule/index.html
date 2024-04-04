@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Post-test Probability Calculator</title>
+  <style>
+    body {
+      margin: auto;
+      width: 750px;
+      font-size: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: auto auto;
+      width: 450px;
+      margin: auto;
+    }
+
+    .item {
+      padding: 20px;
+    }
+
+    .nomo {
+      width: 750px;
+    }
+
+    figcaption {
+      padding-top: 150px;
+      padding-bottom: 25px;
+      font-style: italic;
+      width: 750px;
+    }
+  </style>
+  <script src="index.js"></script>
+</head>
+
+<body>
+  <h1>Dr. Wood's Probability Calculator</h1>
+  <main class="container">
+    <div class="item">
+      <label for="pretestProbability">Pre-test Probability:</label>
+    </div>
+    <div class="item"><input type="text" id="pretestProbability" /></div>
+    <div class="item">
+      <label for="likelihoodRatio">Likelihood Ratio:</label>
+    </div>
+    <div class="item"><input type="text" id="likelihoodRatio" /></div>
+    <div class="item">Post-test probability:</div>
+    <div class="item">
+      <span id="result"></p>
+    </div>
+  </main>
+  <div>
+    <figure>
+      <figcaption>The <a href="https://en.wikipedia.org/wiki/Pre-_and_post-test_probability#By_likelihood_ratio">Fagan
+          nomogram</a> gives a visual way to approximate probabilities; draw a line from the pre-test probability
+        through
+        the likelihood
+        ratio to find the post-test probability</figcaption>
+      <img class="nomo" src="Fagan_nomogram.svg">
+    </figure>
+  </div>
+</body>
+
+</html>
