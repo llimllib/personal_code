@@ -119,7 +119,7 @@ function _worktree {
 
         warn "copying node_modules and npm installing in the background"
         warn "logging to $tmpfile"
-        nohup bash -c "$cp_node_modules" &> "$tmpfile" &
+        nohup bash -c "($cp_node_modules) && npm i" &> "$tmpfile" &
     fi
 
     # this will fail for any files with \n in their names. don't do that.
