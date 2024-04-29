@@ -1,19 +1,19 @@
-local augroup = vim.api.nvim_create_augroup('goyo_cmds', {clear = true})
+local augroup = vim.api.nvim_create_augroup("goyo_cmds", { clear = true })
 local autocmd = vim.api.nvim_create_autocmd
 
 -- configure Goyo
 local function enter()
-    vim.opt.wrap = true
-    vim.opt.linebreak = true
+	vim.opt.wrap = true
+	vim.opt.linebreak = true
 end
 
 local function leave()
-    vim.opt.wrap = false
-    vim.opt.linebreak = false
+	vim.opt.wrap = false
+	vim.opt.linebreak = false
 end
 
-autocmd('User', {pattern = 'GoyoEnter', group = augroup, callback = enter})
-autocmd('User', {pattern = 'GoyoLeave', group = augroup, callback = leave})
+autocmd("User", { pattern = "GoyoEnter", group = augroup, callback = enter })
+autocmd("User", { pattern = "GoyoLeave", group = augroup, callback = leave })
 
 -- TODO: get this stuff into proper lua
 vim.cmd([[
@@ -28,6 +28,7 @@ augroup myfiletypes
   autocmd FileType go set ts=4 sw=4 sts=4 noet nolist
   autocmd FileType smarty set syntax=gotexttmpl
   autocmd FileType proto set ts=2 sts=2 sw=2
+  autocmd BufRead,BufNewFile *.glsl,*.frag setfiletype glsl
 augroup END
 
 " Neovim doesn't seem to save the buffer input mode status, and I don't like

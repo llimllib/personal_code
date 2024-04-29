@@ -128,6 +128,7 @@ require("lazy").setup({
 						"diff",
 						"elixir",
 						"erlang",
+						"glsl",
 						"go",
 						"gomod",
 						"gosum",
