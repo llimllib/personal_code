@@ -19,12 +19,41 @@
 # aliases
 #
 [alias]
-    st = status
+
+    br = branch
     ci = commit
     co = checkout
-    br = branch
+    # to debug an alias:
+    # git debug <aliasname>
+    # https://stackoverflow.com/a/39468026/42559
+    debug = !GIT_TRACE=1 git
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # git alias for listing the files in the current directory, along with
+    # their hash, author, and a hyperlink to the filename
+    #
+    # git aliases operate in the root of the git repo by default, so we need to
+    # cd into the current directory using GIT_PREFIX
+    # https://stackoverflow.com/a/26243454/42559
+    #
+    # Using :(glob)* gets us the files in the current directory only, instead of
+    # listing recursively
+    #
+    # Here's a version that doesn't use hyperlinks for the file names:
+    # ls = ! cd ${GIT_PREFIX:-.} && git ls-files -z ':(glob)*' | xargs -0 -n1 -I{} -- git log -1 --format=\"%<(20,trunc)%aN %<(12)%h%<(24)%ar{}\" {}
+    #
+    # Here's a version that does use hyperlinks:
+    # - use %x1b for literal escape characters
+    # - use %x3b for semicolons; otherwise git can't parse this config file
+    # - escape backslashes
+    # - git's parser turns them into single slashes inside the single quotes
+    # - hyperlink format: \e]8;;<url>\e\<link text>\e]8;;\e\ 
+    #
+    # TODO: link the hash to github maybe?
+    ls = ! cd ${GIT_PREFIX:-.} && git ls-files -z ':(glob)*' | xargs -0 -n1 -I{} -- git log -1 --pretty=format:'%<(20,trunc)%aN %<(12)%h%<(24)%ar%x1b]8%x3b%x3bfile:{}%x1b\\{}%x1b]8%x3b%x3b%x1b\\' {}
+
     re = restore
+    st = status
     sw = switch
     wt = worktree
 
