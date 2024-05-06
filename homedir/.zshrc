@@ -232,7 +232,8 @@ export LESS="-SRXF"
 
 # TODO: git
 # git aliases
-alias gs='ls && echo "---------------------------------------" && git status'
+# alias gs='ls && echo "---------------------------------------" && git status'
+alias gs='git ls'
 # alias gs='ls && echo "---------------------------------------" && git diff --stat=80 --compact-summary'
 alias gd="git diff"
 alias gdc="git diff --cached"
