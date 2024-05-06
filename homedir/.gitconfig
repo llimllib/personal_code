@@ -158,3 +158,13 @@
 #[receive]
 #    fsckObjects = true 
 #
+[rerere]
+	enabled = true
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[maintenance]
+	repo = /Users/llimllib/readme/readme/feat-queue-project-export
+[fetch]
+	writeCommitGraph = true
