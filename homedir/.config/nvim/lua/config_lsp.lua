@@ -245,7 +245,11 @@ lsp.elixirls.setup({
 
 lsp.clangd.setup({
 	on_attach = on_attach,
-	capabilities = capabilities,
+	-- fixes multiple encodings error. taken from:
+	-- https://github.com/LazyVim/LazyVim/blob/530e94a9/lua/lazyvim/plugins/extras/lang/clangd.lua#L67C1-L69C13
+	capabilities = {
+		offsetEncoding = { "utf-16" },
+	},
 	cmd = {
 		"clangd",
 		"-log=verbose",
