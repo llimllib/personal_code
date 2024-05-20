@@ -230,11 +230,8 @@ export XDG_CACHE_HOME=~/.cache
 export PAGER="less"
 export LESS="-SRXF"
 
-# TODO: git
 # git aliases
-# alias gs='ls && echo "---------------------------------------" && git status'
-alias gs='git ls'
-# alias gs='ls && echo "---------------------------------------" && git diff --stat=80 --compact-summary'
+alias gs='ls && echo "---------------------------------------" && git status'
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gm="git co master"
@@ -251,6 +248,7 @@ alias prune='git remote prune origin'
 
 # other aliases
 alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
+alias cat='bat --wrap never'
 alias be='bundle exec'
 # https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md
 alias gg='batgrep'
@@ -270,6 +268,7 @@ alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
+alias run='npm run'
 
 # "get-headers https://billmill.org" to do a GET request and print the headers
 # and total time of the response
@@ -408,3 +407,11 @@ delta_sidebyside
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/llimllib/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

@@ -4,6 +4,11 @@
 [core]
     pager=delta
 
+    # prevent an RCE
+    # https://amalmurali.me/posts/git-rce/
+    # hopefully will be able to reënable once it's fixed
+	symlinks = false
+
 [user]
     name = Bill Mill
     email = bill@billmill.org

@@ -34,7 +34,7 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 vim.keymap.set("n", "<leader>t", ":vsplit<CR>:terminal<CR>a")
 
 -- insert one character
-vim.keymap.set("", "<C-i>", "i<space><esc>r")
+vim.keymap.set("", "<leader>i", "i<space><esc>r")
 
 -- system paste and yank
 vim.keymap.set("n", "<leader>p", ":pu +<CR>")
@@ -81,7 +81,8 @@ local bufopts = { noremap = true, silent = true }
 -- something more convenient
 vim.keymap.set("n", "gh", "<c-t>", bufopts)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-vim.keymap.set("n", "gD", vim.lsp.buf.implementation, bufopts)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 vim.keymap.set("n", "gt", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, bufopts)
 vim.keymap.set("n", "<leader>d", vim.lsp.buf.type_definition, bufopts)

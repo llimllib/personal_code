@@ -1,0 +1,14 @@
+#!/usr/bin/env python
+from math import *
+from pprint import pprint
+import sys
+
+args = sys.argv[1:]
+
+# numpy costs about 50ms to import, so skip it by default
+if args[0] == "-n":
+    import numpy as np
+
+    args = args[1:]
+
+pprint(eval(" ".join(args)))
