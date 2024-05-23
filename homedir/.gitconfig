@@ -7,7 +7,8 @@
     # prevent an RCE
     # https://amalmurali.me/posts/git-rce/
     # hopefully will be able to reënable once it's fixed
-	symlinks = false
+    # nope, this just breaks all kinds of shit
+    # symlinks = false
 
 [user]
     name = Bill Mill

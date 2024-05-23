@@ -28,6 +28,8 @@ require("lazy").setup({
 		"tpope/vim-fugitive", -- git integration
 		"tpope/vim-rhubarb", -- github integration
 		"digitaltoad/vim-pug", -- jade/pug highlighting
+		"lepture/vim-jinja", -- jinja
+		"fatih/vim-go", -- go dev. Mainly useful for template syntax
 
 		-- scope highlighting
 		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },

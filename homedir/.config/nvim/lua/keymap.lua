@@ -152,3 +152,6 @@ vim.keymap.set(
 vim.keymap.set("n", "<leader>se", ":normal v<leader>aq<cr>:DB<cr>", { noremap = true })
 
 -- end vim-dadbod
+
+vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
+vim.keymap.set("n", "<leader>gs", ":Git<cr>")

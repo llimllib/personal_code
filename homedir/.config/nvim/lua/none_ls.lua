@@ -30,6 +30,7 @@ null_ls.setup({
 	-- documentaton on using local executables:
 	-- https://github.com/nvimtools/none-ls.nvim/blob/72e25ed4/doc/BUILTIN_CONFIG.md?plain=1#L351-L385
 	sources = {
+		-- formatters
 		null_ls.builtins.formatting.black.with({
 			prefer_local = ".venv/bin",
 		}),
@@ -41,6 +42,14 @@ null_ls.setup({
 		}),
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
+
+		-- diagnostics
+		null_ls.builtins.diagnostics.actionlint.with({
+			condition = function()
+				local cwd = vim.fn.expand("%:p:.")
+				return cwd:find(".github/workflows")
+			end,
+		}),
 	},
 	root_dir = lsp.util.root_pattern("yarn.lock", ".git"),
 	-- enable this and run :NullLsLog to see a detailed log
