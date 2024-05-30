@@ -177,6 +177,8 @@ export PATH=$PATH:$GOPATH/bin
 # yarn (javascript) binaries
 export PATH="$PATH:$HOME/.yarn/bin"
 
+[[ -d /home/linuxbrew ]] && PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
 #asdf
 if [[ -d $HOME/.local/share/asdf ]]; then
     # I really wish asdf supported XDG_CONFIG:
