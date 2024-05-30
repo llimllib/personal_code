@@ -247,19 +247,22 @@ alias pr="gh pr create"
 alias prune='git remote prune origin'
 
 # other aliases
-alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
-alias cat='bat --wrap never'
+if command -v bat > /dev/null; then
+    alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
+    alias cat='bat --wrap never'
+fi
 alias be='bundle exec'
 # https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md
 alias gg='batgrep'
-# use rsync for copying: experimental (and verbose, but progress!)
-alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
+# use rsync for copying: experimental (and verbose, but progress!). on linux
+# complains about crtimes
+[[ $(uname) == "Darwin" ]] && alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
-alias ls='gls -FG --hyperlink=auto --color=auto'
+command -v gls && alias ls='gls -FG --hyperlink=auto --color=auto'
 alias py='ipython'
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
 alias sqlite='sqlite3'
@@ -305,7 +308,8 @@ export SHELL=zsh
 
 # https://mise.jdx.dev/getting-started.html
 # https://mise.jdx.dev/dev-tools/comparison-to-asdf.html
-eval "$(/opt/homebrew/bin/mise activate zsh)"
+mise=$(command -v mise >/dev/null)
+[[ -n $mise ]] && eval "$($mise activate zsh)"
 
 # fzf
 #
