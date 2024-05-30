@@ -308,7 +308,7 @@ export SHELL=zsh
 
 # https://mise.jdx.dev/getting-started.html
 # https://mise.jdx.dev/dev-tools/comparison-to-asdf.html
-mise=$(command -v mise >/dev/null)
+mise=$(command -v mise)
 [[ -n $mise ]] && eval "$($mise activate zsh)"
 
 # fzf
