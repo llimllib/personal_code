@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+#
+# preview a file or an image in the preview window of fzf.
+#
+# Modified from: https://github.com/junegunn/fzf/tree/c4a9ccd6afc3698a57a6b938ebba6d85238033e2?tab=readme-ov-file#previewing-an-image
+#
+# Dependencies:
+# - https://github.com/sharkdp/bat
+# - https://github.com/solidiquis/erdtree
+#
+# Here's an example call:
+#       fzf --ansi \
+#           --height 40% \
+#           --layout reverse \
+#           --border bold \
+#           --preview 'fzf-preview {}' \
+#           --preview-window 'right,60%,border,+3/3'
+#
+# if an optional second argument is passed to this script, it will be
+# interpreted as a line number to be highlighted by `bat`
+
+# preview an image with either kitty or imgcat
+#
+# https://github.com/junegunn/fzf/issues/3228#issuecomment-1749167376 for useful info
+function preview_image {
+    dim=${FZF_PREVIEW_COLUMNS}x${FZF_PREVIEW_LINES}
+    if [[ $dim = x ]]; then
+      dim=$(stty size < /dev/tty | awk '{print $2 "x" $1}')
+    elif ! [[ $KITTY_WINDOW_ID ]] && (( FZF_PREVIEW_TOP + FZF_PREVIEW_LINES == $(stty size < /dev/tty | awk '{print $1}') )); then
+      # Avoid scrolling issue when the Sixel image touches the bottom of the screen
+      # * https://github.com/junegunn/fzf/issues/2544
+      dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
+    fi
+
+    # 1. Use kitty icat on kitty terminal
+    if [[ $KITTY_WINDOW_ID ]]; then
+      # 1. 'memory' is the fastest option but if you want the image to be scrollable,
+      #    you have to use 'stream'.
+      #
+      # 2. The last line of the output is the ANSI reset code without newline.
+      #    This confuses fzf and makes it render scroll offset indicator.
+      #    So we remove the last line and append the reset code to its previous line.
+      kitty icat --clear --transfer-mode=memory --unicode-placeholder --stdin=no --place="$dim@0x0" "$1" | sed '$d' | sed $'$s/$/\e[m/'
+
+    # 2. If chafa is not found but imgcat is available, use it on iTerm2
+    elif command -v imgcat > /dev/null; then
+      # NOTE: We should use https://iterm2.com/utilities/it2check to check if the
+      # user is running iTerm2. But for the sake of simplicity, we just assume
+      # that's the case here.
+      imgcat -W "${dim%%x*}" -H "${dim##*x}" "$1"
+
+    # 5. Cannot find any suitable method to preview the image
+    else
+      identify "$1"
+    fi
+}
+
+
+if [[ $# -lt 1 ]]; then
+  >&2 echo "usage: $0 FILENAME [LINE NUMBER]"
+  exit 1
+fi
+
+file=${1/#\~\//$HOME/}
+type=$(file --brief --dereference --mime -- "$file")
+
+case "$type" in
+    image/* )
+        preview_image "$file" ;;
+    inode/*)
+        erd --layout inverted --color force "$file" | head -200 ;;
+    *binary*)
+        file "$1" ;;
+    *)
+        bat --style="${BAT_STYLE:-numbers}" --highlight-line "${2:-0}" --color=always --pager=never --theme=base16 -- "$file"
+esac

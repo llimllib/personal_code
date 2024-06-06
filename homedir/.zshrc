@@ -254,14 +254,15 @@ fi
 alias be='bundle exec'
 # https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md
 alias gg='batgrep'
-# use rsync for copying: experimental (and verbose, but progress!). on linux
-# complains about crtimes
+# use rsync for copying: experimental (and verbose, but progress!)
+# skip for now on linux because it complains about crtimes
 [[ $(uname) == "Darwin" ]] && alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
+# if gls (gnu ls installed by homebrew) is present, prefer it to ls
 command -v gls && alias ls='gls -FG --hyperlink=auto --color=auto'
 alias py='ipython'
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
@@ -306,6 +307,8 @@ export EDITOR
 # understand why. Anyway, set the default to zsh.
 export SHELL=zsh
 
+# run mise activate if it's available
+#
 # https://mise.jdx.dev/getting-started.html
 # https://mise.jdx.dev/dev-tools/comparison-to-asdf.html
 mise=$(command -v mise)
@@ -333,27 +336,18 @@ if command -v fd &> /dev/null ; then
       fd --type d --hidden --follow --exclude ".git" . "$1"
     }
 
-    # Advanced customization of fzf options via _fzf_comprun function
-    # - The first argument to the function is the name of the command.
-    # - You should make sure to pass the rest of the arguments to fzf.
+    # This tells fzf what to do when the uesr presses **
     _fzf_comprun() {
       local command=$1
       shift
 
-      # would love to use "imgcat" instead of "identify" for images, but fzf
-      # doesn't support it unfortunately:
-      # https://github.com/junegunn/fzf/issues/1102
-      # shellcheck disable=SC2016
-      dim=${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))
-      case "$command" in
-        cd)           fzf --preview 'erd --inverted -H -C {} | head -200'   "$@" ;;
-        export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
-        ssh)          fzf --preview 'dig {}'                   "$@" ;;
-        *)            fzf --preview 'ft=$(file --mime-type -b {}); if [[ $ft == image* ]]; then identify {}; elif [[ $ft = inode* ]]; then erd -H -C {} | head -n100; else bat -n --color=always {}; fi;'
-        # https://github.com/junegunn/fzf/blob/0.44.0/bin/fzf-preview.sh
-        # *)            fzf --preview 'ft=$(file --mime-type -b {}); if [[ $ft == image* ]]; then kitty icat --clear --transfer-mode=memory --stdin=no --place="$dim@0x0" "{}"; elif [[ $ft = inode* ]]; then erd -H -C {} | head -n100; else bat -n --color=always {}; fi;'
-        # bat -n --color=always {} 2>/dev/null || imgcat {} 2>/dev/null || erd -H -C {} | head -200' "$@" ;;
-      esac
+      fzf --ansi \
+          --height 40% \
+          --layout reverse \
+          --border bold \
+          --preview 'fzf-preview {}' \
+          --preview-window 'right,60%,border,+3/3' \
+          "$@"
     }
 fi
 
