@@ -13,16 +13,32 @@ alt-semicolon = 'focus right'
 
 alt-shift-semicolon = 'move right'
 
-alt-h = 'split horizontal'
-alt-v = 'split vertical'
+alt-h = ['split horizontal', '''exec-and-forget osascript <<EOF
+    display notification "split horizontal" with title "aerospace"
+EOF''']
+alt-v = ['split vertical', '''exec-and-forget osascript <<EOF
+    display notification "split vertical" with title "aerospace"
+EOF''']
 
-alt-f = 'fullscreen'
 
-alt-s = 'layout v_accordion' # 'layout stacking' in i3
-alt-w = 'layout h_accordion' # 'layout tabbed' in i3
-alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+alt-f = ['fullscreen', '''exec-and-forget osascript <<EOF
+    display notification "fullscreen" with title "aerospace"
+EOF''']
 
-alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+alt-s = ['layout v_accordion', '''exec-and-forget osascript <<EOF
+    display notification "vertical accordion" with title "aerospace"
+EOF''']
+alt-w = ['layout h_accordion', '''exec-and-forget osascript <<EOF
+    display notification "horizontal accordion" with title "aerospace"
+EOF''']
+alt-e = ['layout tiles horizontal vertical', '''exec-and-forget osascript <<EOF
+    display notification "toggle layout tiles -> horiz -> vert" with title "aerospace"
+EOF''']
+
+alt-shift-space = ['layout floating tiling', '''exec-and-forget osascript <<EOF
+    display notification "toggle floating -> tiling" with title "aerospace"
+EOF''']
+
 
 # Not supported, because this command is redundant in AeroSpace mental model.
 # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
@@ -32,16 +48,36 @@ alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
 # alt-a = 'focus parent'
 
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
+alt-1 = ['workspace 1', '''exec-and-forget osascript <<EOF
+    display notification "workspace 1" with title "aerospace"
+EOF''']
+alt-2 = ['workspace 2', '''exec-and-forget osascript <<EOF
+    display notification "workspace 2" with title "aerospace"
+EOF''']
+alt-3 = ['workspace 3', '''exec-and-forget osascript <<EOF
+    display notification "workspace 3" with title "aerospace"
+EOF''']
+alt-4 = ['workspace 4', '''exec-and-forget osascript <<EOF
+    display notification "workspace 4" with title "aerospace"
+EOF''']
+alt-5 = ['workspace 5', '''exec-and-forget osascript <<EOF
+    display notification "workspace 5" with title "aerospace"
+EOF''']
+alt-6 = ['workspace 6', '''exec-and-forget osascript <<EOF
+    display notification "workspace 6" with title "aerospace"
+EOF''']
+alt-7 = ['workspace 7', '''exec-and-forget osascript <<EOF
+    display notification "workspace 7" with title "aerospace"
+EOF''']
+alt-8 = ['workspace 8', '''exec-and-forget osascript <<EOF
+    display notification "workspace 8" with title "aerospace"
+EOF''']
+alt-9 = ['workspace 9', '''exec-and-forget osascript <<EOF
+    display notification "workspace 9" with title "aerospace"
+EOF''']
+alt-0 = ['workspace 10', '''exec-and-forget osascript <<EOF
+    display notification "workspace 10" with title "aerospace"
+EOF''']
 
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
