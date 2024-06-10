@@ -226,6 +226,23 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
 export XDG_CACHE_HOME=~/.cache
 
+# PATH CONFIGURATION
+#
+# PATH configs have to go before aliases, some of them depend on the updated
+# paths being available
+export GOPATH=~/go
+export GOBIN="$GOPATH/bin"
+
+export LOCALBIN="$HOME/.local/bin"
+export DOTNETBIN="$HOME/.dotnet/tools"
+export HOMEBREWBIN="/opt/homebrew/bin"
+export HOMEBREWSBIN="/opt/homebrew/sbin"
+export PNPMBIN="$HOEM/Library/pnpm"
+
+# add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
+# git-prompt depends on being able to find brew, so this must come before that.
+export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:/usr/local/sbin:$PATH
+
 # Fix colors in ipython paging
 export PAGER="less"
 export LESS="-SRXF"
@@ -262,8 +279,17 @@ alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
-# if gls (gnu ls installed by homebrew) is present, prefer it to ls
-command -v gls && alias ls='gls -FG --hyperlink=auto --color=auto'
+# if gls (gnu ls installed by homebrew) is present, prefer it to ls. If it's
+# not, use --hyperlink if it's available; otherwise back to bsd ls options
+if command -v gls >/dev/null ; then
+    alias ls='gls -FG --hyperlink=auto --color=auto'
+else
+    if ls --help | grep hyperlink; then
+        alias ls='ls -FG --hyperlink=auto --color=auto'
+    else
+        alias ls='ls -FG'
+    fi
+fi
 alias py='ipython'
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
 alias sqlite='sqlite3'
@@ -282,22 +308,6 @@ alias get-headers="curl -sD - -o /dev/null -w 'time:\t%{time_total}s\ndownload s
 # this BAT_THEME makes it use the colors you've already got defined in your
 # terminal
 export BAT_THEME="ansi"
-
-#set golang root dir
-export GOPATH=~/go
-export GOBIN="$GOPATH/bin"
-
-export LOCALBIN="$HOME/.local/bin"
-export DOTNETBIN="$HOME/.dotnet/tools"
-export HOMEBREWBIN="/opt/homebrew/bin"
-export HOMEBREWSBIN="/opt/homebrew/sbin"
-export PNPMBIN="$HOEM/Library/pnpm"
-
-# PATH CONFIGURATION
-#
-# add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
-# git-prompt depends on being able to find brew, so this must come before that.
-export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:/usr/local/sbin:$PATH
 
 # has to happen after the path gets modified, or else nvim may not be found
 EDITOR=$(which nvim)
