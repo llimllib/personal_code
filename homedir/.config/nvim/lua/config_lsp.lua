@@ -239,7 +239,7 @@ lsp.pyright.setup({
 
 lsp.elixirls.setup({
 	on_attach = on_attach,
-	cmd = { "/opt/elixir-ls/language_server.sh" },
+	cmd = { "~/.local/share/elixir-ls/language_server.sh" },
 	capabilities = capabilities,
 })
 
@@ -281,6 +281,8 @@ lsp.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
 -- swift lsp. executes "sourcekit-lsp"
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 lsp.sourcekit.setup({ on_attach = on_attach, capabilities = capabilities })
+
+lsp.texlab.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.html.setup({
 	on_attach = function(client, bufnr)
