@@ -104,3 +104,11 @@ k = 'resize height -50'
 l = 'resize width +50'
 enter = 'mode main'
 esc = 'mode main'
+
+[gaps]
+inner.horizontal = 25
+inner.vertical =   25
+outer.left =       10
+outer.bottom =     10
+outer.top =        10
+outer.right =      10
