@@ -30,6 +30,7 @@ require("lazy").setup({
 		"digitaltoad/vim-pug", -- jade/pug highlighting
 		"lepture/vim-jinja", -- jinja
 		"fatih/vim-go", -- go dev. Mainly useful for template syntax
+		"vmchale/just-vim", -- highlighting Justfiles
 
 		-- scope highlighting
 		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },

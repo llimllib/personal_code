@@ -50,6 +50,7 @@ null_ls.setup({
 				return cwd:find(".github/workflows")
 			end,
 		}),
+		null_ls.builtins.diagnostics.golangci_lint,
 	},
 	root_dir = lsp.util.root_pattern("yarn.lock", ".git"),
 	-- enable this and run :NullLsLog to see a detailed log

@@ -12,6 +12,7 @@ alt-l = 'focus up'
 alt-semicolon = 'focus right'
 
 alt-shift-semicolon = 'move right'
+alt-shift-right = 'workspace next'
 
 alt-h = ['split horizontal', '''exec-and-forget osascript <<EOF
     display notification "split horizontal" with title "aerospace"

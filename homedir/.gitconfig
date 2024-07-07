@@ -174,3 +174,5 @@
 	repo = /Users/llimllib/readme/readme/feat-queue-project-export
 [fetch]
 	writeCommitGraph = true
+[tag]
+	sort = -authordate
