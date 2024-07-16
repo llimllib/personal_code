@@ -1,9 +1,15 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
-local keymaps = require("lazyvim.plugins.lsp.keymaps")
 
-vim.keymap.set("n", "<leader>m", keymaps.diagnostic_goto(true), { desc = "Next Diagnostic" })
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+vim.keymap.set("n", "<leader>m", diagnostic_goto(true), { desc = "Next Diagnostic" })
 
 -- c-t means "up the tag stack" and is the opposite of gd, so map it to
 -- something more convenient
@@ -71,16 +77,3 @@ vim.keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.stop_client(vim.lsp.get_activ
 -- https://github.com/LazyVim/LazyVim/discussions/1239
 vim.keymap.set("v", "<", "<")
 vim.keymap.set("v", ">", ">")
-
--- remove the lazyvim mapping for gw, which can be used to format while
--- ignoring formatexpr
--- https://github.com/LazyVim/LazyVim/discussions/534
-vim.keymap.del({ "n", "x" }, "gw")
--- Then, reset formatexpr so that gq uses vim's default formatting instead of
--- trying to use the LSP, which I always hate. idea stolen from here, but I
--- don't care at all about keeping gq using formatters
--- https://github.com/willnorris/dotfiles/blob/0e227cef/config/nvim/lua/config/keymaps.lua#L79C1-L89C5
--- See: https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
-require("lazyvim.util").on_attach(function(_, buf)
-  vim.bo[buf].formatexpr = nil
-end)
