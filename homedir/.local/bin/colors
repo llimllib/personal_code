@@ -31,7 +31,7 @@ whitebg='\e[47m'
 blackbg='\e[40m'
 
 ## print the foreground colors table ##
-printf "%bforeground colors%b\n" "\e[31m$italic$underline" "$reset"
+printf "%bforeground colors%b\n\n" "\e[31m$italic$underline" "$reset"
 
 printf '%b \\e[30m black     %b \\e[90m bright black   %b\n' "$whitebg\e[30m" "\e[90m" "$reset"
 printf '%b \\e[31m red       %b \\e[91m bright red     %b\n' "\e[31m" "\e[91m" "$reset"
