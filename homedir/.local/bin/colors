@@ -36,18 +36,23 @@ nostrike='\e[29m'
 whitebg='\e[47m'
 blackbg='\e[40m'
 
-printf "%bforeground colors%b\n\n" "\e[31m$italic$underline" "$reset"
+printf "%bforeground colors%b\n" "\e[31m$italic$underline" "$reset"
 
-printf '%b%b \\e[30m black     %b \\e[90m bright black   %b\n' "$whitebg" "\e[30m" "\e[90m" "$reset"
-printf '%b%b \\e[31m red       %b \\e[91m bright red     %b\n' "" "\e[31m" "\e[91m" "$reset"
-printf '%b%b \\e[32m green     %b \\e[92m bright green   %b\n' "" "\e[32m" "\e[92m" "$reset"
-printf '%b%b \\e[33m yellow    %b \\e[93m bright yellow  %b\n' "" "\e[33m" "\e[93m" "$reset"
-printf '%b%b \\e[34m blue      %b \\e[94m bright blue    %b\n' "" "\e[34m" "\e[94m" "$reset"
-printf '%b%b \\e[35m magenta   %b \\e[95m bright magenta %b\n' "" "\e[35m" "\e[95m" "$reset"
-printf '%b%b \\e[36m cyan      %b \\e[96m bright cyan    %b\n' "" "\e[36m" "\e[96m" "$reset"
-printf '%b%b \\e[37m white     %b \\e[97m bright white   %b\n' "$blackbg" "\e[37m" "\e[97m" "$reset"
+printf '%b \\e[30m black     %b \\e[90m bright black   %b\n' "$whitebg\e[30m" "\e[90m" "$reset"
+printf '%b \\e[31m red       %b \\e[91m bright red     %b\n' "\e[31m" "\e[91m" "$reset"
+printf '%b \\e[32m green     %b \\e[92m bright green   %b\n' "\e[32m" "\e[92m" "$reset"
+printf '%b \\e[33m yellow    %b \\e[93m bright yellow  %b\n' "\e[33m" "\e[93m" "$reset"
+printf '%b \\e[34m blue      %b \\e[94m bright blue    %b\n' "\e[34m" "\e[94m" "$reset"
+printf '%b \\e[35m magenta   %b \\e[95m bright magenta %b\n' "\e[35m" "\e[95m" "$reset"
+printf '%b \\e[36m cyan      %b \\e[96m bright cyan    %b\n' "\e[36m" "\e[96m" "$reset"
+printf '%b \\e[37m white     %b \\e[97m bright white   %b\n' "$blackbg\e[37m" "\e[97m" "$reset"
 
-printf "\n\n%bbackground colors%b\n\n" "\e[31m$italic$underline" "$reset"
+printf '\n%bto print red text, you might do:%b\n' "$underline" "$nounderline"
+printf 'RED="\\e[31m"; RESET="\\e[0m"\n'
+# shellcheck disable=SC2016
+printf 'printf "something %%bimportant%%b here\\n" "$RED" "$RESET"\n'
+
+printf "\n%bbackground colors%b\n\n" "\e[31m$italic$underline" "$reset"
 
 printf '%b%b \\e[40m black     %b \\e[100m bright black   %b\n' "" "\e[40m" "\e[100m" "$reset"
 printf '%b%b \\e[41m red       %b \\e[101m bright red     %b\n' "" "\e[41m" "\e[101m" "$reset"
@@ -58,10 +63,10 @@ printf '%b%b \\e[45m magenta   %b \\e[105m bright magenta %b\n' "" "\e[45m" "\e[
 printf '%b%b \\e[46m cyan      %b \\e[106m bright cyan    %b\n' "" "\e[46m" "\e[106m" "$reset"
 printf '%b%b \\e[47m white     %b \\e[107m bright white   %b\n' "\e[30m" "\e[47m" "\e[107m" "$reset"
 
-printf '\n\nYou can combine them: \\e[31;47m is %bred text on a white background%b\n' "\e[31;47m" "$reset"
+printf '\nYou can combine them: \\e[31;47m is\n%bred text on a white background%b\n' "\e[31;47m" "$reset"
 
 ## text styles ##
-printf "\n\n%btext styles%b\n\n" "\e[31m$italic$underline" "$reset"
+printf "\n%btext styles%b\n\n" "\e[31m$italic$underline" "$reset"
 printf '\\e[0m resets all text styles\n'
 printf '%b\\e[1m is %bbold text%b disabled by \\e[22m\n' "\e[32m" "$bold" "$nobold"
 printf '%b\\e[2m is %bfaint text%b disabled by \\e[22m\n' "\e[32m" "$faint" "$nobold"
