@@ -52,14 +52,14 @@ printf 'printf "something %%bimportant%%b here\\n" "$RED" "$RESET"\n'
 ## print the background colors table ##
 printf "\n%bbackground colors%b\n\n" "\e[31m$italic$underline" "$reset"
 
-printf '%b%b \\e[40m black     %b \\e[100m bright black   %b\n' "" "\e[40m" "\e[100m" "$reset"
-printf '%b%b \\e[41m red       %b \\e[101m bright red     %b\n' "" "\e[41m" "\e[101m" "$reset"
-printf '%b%b \\e[42m green     %b \\e[102m bright green   %b\n' "" "\e[42m" "\e[102m" "$reset"
-printf '%b%b \\e[43m yellow    %b \\e[103m bright yellow  %b\n' "" "\e[43m" "\e[103m" "$reset"
-printf '%b%b \\e[44m blue      %b \\e[104m bright blue    %b\n' "" "\e[44m" "\e[104m" "$reset"
-printf '%b%b \\e[45m magenta   %b \\e[105m bright magenta %b\n' "" "\e[45m" "\e[105m" "$reset"
-printf '%b%b \\e[46m cyan      %b \\e[106m bright cyan    %b\n' "" "\e[46m" "\e[106m" "$reset"
-printf '%b%b \\e[47m white     %b \\e[107m bright white   %b\n' "\e[30m" "\e[47m" "\e[107m" "$reset"
+printf '%b \\e[40m black     %b \\e[100m bright black   %b\n' "\e[40m" "\e[100m" "$reset"
+printf '%b \\e[41m red       %b \\e[101m bright red     %b\n' "\e[41m" "\e[101m" "$reset"
+printf '%b \\e[42m green     %b \\e[102m bright green   %b\n' "\e[42m" "\e[102m" "$reset"
+printf '%b \\e[43m yellow    %b \\e[103m bright yellow  %b\n' "\e[43m" "\e[103m" "$reset"
+printf '%b \\e[44m blue      %b \\e[104m bright blue    %b\n' "\e[44m" "\e[104m" "$reset"
+printf '%b \\e[45m magenta   %b \\e[105m bright magenta %b\n' "\e[45m" "\e[105m" "$reset"
+printf '%b \\e[46m cyan      %b \\e[106m bright cyan    %b\n' "\e[46m" "\e[106m" "$reset"
+printf '%b \\e[47m white     %b \\e[107m bright white   %b\n' "\e[30m\e[47m" "\e[107m" "$reset"
 
 printf '\nYou can combine them: \\e[31;47m is\n%bred text on a white background%b\n' "\e[31;47m" "$reset"
 
