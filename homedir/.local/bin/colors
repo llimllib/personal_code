@@ -1,0 +1,112 @@
+#!/usr/bin/env bash
+# useful reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+
+# TODO: mess with 24-bit codes:
+# ESC[38;2;{r};{g};{b}m	Set foreground color as RGB.
+# ESC[48;2;{r};{g};{b}m	Set background color as RGB.
+#
+# this function may be a good starting point for that:
+# https://gist.github.com/mhulse/b11e568260fb8c3aa2a8
+
+# pass -v to print out the 8-bit color table
+VERBOSE=
+case $1 in
+-v | --verbose)
+    VERBOSE=true
+    ;;
+esac
+
+# reset all styles (incl. bold/etc)
+reset='\e[0m'
+bold='\e[1m'
+nobold='\e[22m'
+faint='\e[2m'
+italic='\e[3m'
+noitalic='\e[23m'
+underline='\e[4m'
+nounderline='\e[24m'
+blink='\e[5m'
+noblink='\e[25m'
+inverse='\e[7m'
+noinverse='\e[27m'
+hidden='\e[8m'
+nohidden='\e[28m'
+strike='\e[9m'
+nostrike='\e[29m'
+whitebg='\e[47m'
+blackbg='\e[40m'
+
+printf "%bforeground colors%b\n\n" "\e[31m$italic$underline" "$reset"
+
+printf '%b%b \\e[30m black     %b \\e[90m bright black   %b\n' "$whitebg" "\e[30m" "\e[90m" "$reset"
+printf '%b%b \\e[31m red       %b \\e[91m bright red     %b\n' "" "\e[31m" "\e[91m" "$reset"
+printf '%b%b \\e[32m green     %b \\e[92m bright green   %b\n' "" "\e[32m" "\e[92m" "$reset"
+printf '%b%b \\e[33m yellow    %b \\e[93m bright yellow  %b\n' "" "\e[33m" "\e[93m" "$reset"
+printf '%b%b \\e[34m blue      %b \\e[94m bright blue    %b\n' "" "\e[34m" "\e[94m" "$reset"
+printf '%b%b \\e[35m magenta   %b \\e[95m bright magenta %b\n' "" "\e[35m" "\e[95m" "$reset"
+printf '%b%b \\e[36m cyan      %b \\e[96m bright cyan    %b\n' "" "\e[36m" "\e[96m" "$reset"
+printf '%b%b \\e[37m white     %b \\e[97m bright white   %b\n' "$blackbg" "\e[37m" "\e[97m" "$reset"
+
+printf "\n\n%bbackground colors%b\n\n" "\e[31m$italic$underline" "$reset"
+
+printf '%b%b \\e[40m black     %b \\e[100m bright black   %b\n' "" "\e[40m" "\e[100m" "$reset"
+printf '%b%b \\e[41m red       %b \\e[101m bright red     %b\n' "" "\e[41m" "\e[101m" "$reset"
+printf '%b%b \\e[42m green     %b \\e[102m bright green   %b\n' "" "\e[42m" "\e[102m" "$reset"
+printf '%b%b \\e[43m yellow    %b \\e[103m bright yellow  %b\n' "" "\e[43m" "\e[103m" "$reset"
+printf '%b%b \\e[44m blue      %b \\e[104m bright blue    %b\n' "" "\e[44m" "\e[104m" "$reset"
+printf '%b%b \\e[45m magenta   %b \\e[105m bright magenta %b\n' "" "\e[45m" "\e[105m" "$reset"
+printf '%b%b \\e[46m cyan      %b \\e[106m bright cyan    %b\n' "" "\e[46m" "\e[106m" "$reset"
+printf '%b%b \\e[47m white     %b \\e[107m bright white   %b\n' "\e[30m" "\e[47m" "\e[107m" "$reset"
+
+printf '\n\nYou can combine them: \\e[31;47m is %bred text on a white background%b\n' "\e[31;47m" "$reset"
+
+## text styles ##
+printf "\n\n%btext styles%b\n\n" "\e[31m$italic$underline" "$reset"
+printf '\\e[0m resets all text styles\n'
+printf '%b\\e[1m is %bbold text%b disabled by \\e[22m\n' "\e[32m" "$bold" "$nobold"
+printf '%b\\e[2m is %bfaint text%b disabled by \\e[22m\n' "\e[32m" "$faint" "$nobold"
+printf '%b\\e[3m is %bitalic text%b disabled by \\e[23m\n' "\e[32m" "$italic" "$noitalic"
+printf '%b\\e[4m is %bunderlined text%b disabled by \\e[24m\n' "\e[32m" "$underline" "$nounderline"
+printf '%b\\e[5m is %bblink text%b disabled by \\e[25m\n' "\e[32m" "$blink" "$noblink"
+printf '%b\\e[6m is %binverse text%b disabled by \\e[26m\n' "\e[32m" "$inverse" "$noinverse"
+printf '%b\\e[7m is %bhidden text%b disabled by \\e[27m\n' "\e[32m" "$hidden" "$nohidden"
+printf '%b\\e[8m is %bstrikethrough text%b disabled by \\e[28m\n' "\e[32m" "$strike" "$nostrike"
+
+if [[ -n $VERBOSE ]]; then
+    ## 8-bit colors ##
+    printf '\n\n%b8-bit foreground colors%b\n\n' "\e[31m$italic$underline" "$reset"
+
+    rows=16
+    for ((i=0;i<rows;i++));
+    do
+        for ((j=0;j<17;j++));
+        do
+            c="$(printf '\e[38;5;%bm' "$((i*rows+j))")"
+            printf "%b%03d " "$c" "$((i*rows+j))"
+        done
+        echo
+    done
+
+    printf '\n\n%b8-bit background colors%b\n\n' "\e[31m$italic$underline" "$reset"
+
+    rows=16
+    for ((i=0;i<rows;i++));
+    do
+        for ((j=0;j<17;j++));
+        do
+            c="$(printf '\e[48;5;%bm' "$((i*rows+j))")"
+            printf "%b%03d " "$c" "$((i*rows+j))"
+        done
+        printf '\e[0m\n'
+    done
+fi
+
+# Here's how asdf's nodejs manager does it:
+# colored() {
+#   local color="$1" text="$2"
+#   printf "\033[%sm%s\033[39;49m\n" "$color" "$text"
+# }
+# 
+# export RED=31 GREEN=32 YELLOW=33 BLUE=34 MAGENTA=35 CYAN=36
+#
+# printf "$(colored $CYAN "Installing the following default packages globally: ")"
