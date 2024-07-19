@@ -8,14 +8,48 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  { "llimllib/lilium" },
+  -- my custom sonokai theme
+  {
+    "sainnhe/sonokai",
+    config = function()
+      vim.g.sonokai_colors_override = {
+        black = { "#181a1c", "232" },
+        bg_dim = { "#24272e", "232" },
+        bg0 = { "#252A39", "235" },
+        bg1 = { "#2a3041", "236" },
+        bg2 = { "#2f3548", "236" },
+        bg3 = { "#343b50", "237" },
+        bg4 = { "#394158", "237" },
+        bg_red = { "#ff6d7e", "203" },
+        diff_red = { "#55393d", "52" },
+        bg_green = { "#a5e179", "107" },
+        diff_green = { "#394634", "22" },
+        bg_blue = { "#7ad5f1", "110" },
+        diff_blue = { "#354157", "17" },
+        diff_yellow = { "#4e432f", "54" },
+        fg = { "#e1e3e4", "250" },
+        red = { "#F47648", "203" },
+        orange = { "#8ED0B2", "215" },
+        yellow = { "#8ED0B2", "179" },
+        green = { "#40BA93", "107" },
+        blue = { "#73D0FF", "110" },
+        purple = { "#fca07f", "176" },
+        grey = { "#828a9a", "246" },
+        grey_dim = { "#5a6477", "240" },
+        none = { "NONE", "NONE" },
+      }
+    end,
+  },
   { "digitaltoad/vim-pug" }, -- pug and jade syntax highlighting
+  { "lepture/vim-jinja" }, -- jinja
+  { "fatih/vim-go" }, -- go dev. Mainly useful for template syntax
+  { "vmchale/just-vim" }, -- highlighting Justfiles
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "lilium",
+      colorscheme = "sonokai",
     },
   },
 
@@ -104,6 +138,20 @@ return {
           vim.keymap.set("n", "<leader>cR", "TypescriptRenameFile", { desc = "Rename File", buffer = buffer })
         end)
       end,
+      opts = {
+        setup = {
+          tsserver = function()
+            require("lazyvim.util").lsp.on_attach(function(client)
+              if client.name == "tsserver" then
+                client.server_capabilities.documentFormattingProvider = false
+              end
+              if client.name == "eslint" then
+                client.server_capabilities.documentFormattingProvider = false
+              end
+            end)
+          end,
+        },
+      },
     },
     opts = {
       servers = {
@@ -136,6 +184,7 @@ return {
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.linting.eslint" },
+  -- { import = "lazyvim.plugins.extra.formatting.prettier" },
 
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
   -- would overwrite `ensure_installed` with the new value.
@@ -322,6 +371,13 @@ return {
       name = { "venv", ".venv" },
     },
     keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+  },
+  -- colorize hex colors
+  {
+    "norcalli/nvim-colorizer.lua",
+    config = function()
+      require("colorizer").setup()
+    end,
   },
   -- {
   --   "folke/flash.nvim",

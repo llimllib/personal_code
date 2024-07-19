@@ -318,3 +318,10 @@ export PIPENV_VENV_IN_PROJECT=1
 export PNPM_HOME="/Users/llimllib/Library/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
+# run mise activate if it's available
+#
+# https://mise.jdx.dev/getting-started.html
+# https://mise.jdx.dev/dev-tools/comparison-to-asdf.html
+mise=$(command -v mise)
+[[ -n $mise ]] && eval "$($mise activate bash)"
