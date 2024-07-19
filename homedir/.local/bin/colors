@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
-# useful reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
-
-# TODO: mess with 24-bit codes:
-# ESC[38;2;{r};{g};{b}m	Set foreground color as RGB.
-# ESC[48;2;{r};{g};{b}m	Set background color as RGB.
+# I refuse to put a license on this code. Use it any way you like.
 #
-# this function may be a good starting point for that:
-# https://gist.github.com/mhulse/b11e568260fb8c3aa2a8
+# Originally by Bill Mill, 2024
 
-# pass -v to print out the 8-bit color table
+# pass -v to enable verbose mode, which prints out the 8-bit color table
 VERBOSE=
 case $1 in
 -v | --verbose)
@@ -16,7 +11,6 @@ case $1 in
     ;;
 esac
 
-# reset all styles (incl. bold/etc)
 reset='\e[0m'
 bold='\e[1m'
 nobold='\e[22m'
@@ -36,6 +30,7 @@ nostrike='\e[29m'
 whitebg='\e[47m'
 blackbg='\e[40m'
 
+## print the foreground colors table ##
 printf "%bforeground colors%b\n" "\e[31m$italic$underline" "$reset"
 
 printf '%b \\e[30m black     %b \\e[90m bright black   %b\n' "$whitebg\e[30m" "\e[90m" "$reset"
@@ -47,11 +42,14 @@ printf '%b \\e[35m magenta   %b \\e[95m bright magenta %b\n' "\e[35m" "\e[95m" "
 printf '%b \\e[36m cyan      %b \\e[96m bright cyan    %b\n' "\e[36m" "\e[96m" "$reset"
 printf '%b \\e[37m white     %b \\e[97m bright white   %b\n' "$blackbg\e[37m" "\e[97m" "$reset"
 
+# print a usage example; it's a bit convoluted because it needs to be
+# double-escaped
 printf '\n%bto print red text, you might do:%b\n' "$underline" "$nounderline"
 printf 'RED="\\e[31m"; RESET="\\e[0m"\n'
 # shellcheck disable=SC2016
 printf 'printf "something %%bimportant%%b here\\n" "$RED" "$RESET"\n'
 
+## print the background colors table ##
 printf "\n%bbackground colors%b\n\n" "\e[31m$italic$underline" "$reset"
 
 printf '%b%b \\e[40m black     %b \\e[100m bright black   %b\n' "" "\e[40m" "\e[100m" "$reset"
@@ -115,3 +113,12 @@ fi
 # export RED=31 GREEN=32 YELLOW=33 BLUE=34 MAGENTA=35 CYAN=36
 #
 # printf "$(colored $CYAN "Installing the following default packages globally: ")"
+#
+# useful reference: https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797
+
+# TODO: mess with 24-bit codes:
+# ESC[38;2;{r};{g};{b}m	Set foreground color as RGB.
+# ESC[48;2;{r};{g};{b}m	Set background color as RGB.
+#
+# this function may be a good starting point for that:
+# https://gist.github.com/mhulse/b11e568260fb8c3aa2a8
