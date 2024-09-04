@@ -10,10 +10,10 @@ import feedparser
 pods = [
     ("circle round", "https://rss.wbur.org/CircleRound/podcast"),
     ("stories podcast", "https://rss.art19.com/stories-podcast"),
-    (
-        "super great kids stories",
-        "https://rss.acast.com/super-great-kids-stories",
-    ),
+    # (
+    #     "super great kids stories",
+    #     "https://rss.acast.com/super-great-kids-stories",
+    # ),
     ("wow in the world", "https://rss.art19.com/wow-in-the-world"),
     ("flip and mozi", "https://rss.art19.com/guide-to-how-to-be-an-earthling-"),
     ("who, when, wow", "https://rss.art19.com/who-when-wow"),
@@ -60,13 +60,13 @@ def main():
         outdir = f"podcasts/{sanitize(title)}"
         os.makedirs(outdir, exist_ok=True)
         f = feedparser.parse(pod_url)
-        for entry in f.entries:
+        for entry in f.entries[:100]:
             for link in entry["links"]:
                 if link["type"] == "audio/mpeg" or link["href"].endswith(".mp3"):
                     extension = getext(link["href"])
                     outfile = f'{outdir}/{sanitize(entry["title"])}{extension}'
                     if not os.path.isfile(outfile):
-                        cmd = f"curl --location -o {outfile} {link['href']}"
+                        cmd = f"curl --no-progress-meter --location -o {outfile} {link['href']}"
                         print(cmd)
                         try:
                             subprocess.run(shlex.split(cmd), check=True)
