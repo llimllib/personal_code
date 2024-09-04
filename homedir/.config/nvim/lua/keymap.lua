@@ -115,6 +115,13 @@ vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = tr
 vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true })
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
 
+-- NoNeckPain
+vim.keymap.set("n", "<leader>nn", "<cmd>NoNeckPain<cr>", { noremap = true })
+
+-- git fugitive
+vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>gB", "<cmd>GBrowse<cr>", { noremap = true })
+
 -- dadbod shortcuts
 -- I can't figure out why this doesn't work?
 -- vim.keymap.set("v", "<leader>db", "<cmd>DB<cr>", {noremap = true})

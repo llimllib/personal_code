@@ -263,6 +263,7 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 alias pr="gh pr create"
 alias prune='git remote prune origin'
 
+
 # other aliases
 if command -v bat > /dev/null; then
     alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
@@ -299,6 +300,9 @@ alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
+
+# ask claude a question and get an answer without ceremony
+alias q='llm --system "respond with a simple answer and do not explain yourself at all. Do not quote the answer" '
 
 # "get-headers https://billmill.org" to do a GET request and print the headers
 # and total time of the response

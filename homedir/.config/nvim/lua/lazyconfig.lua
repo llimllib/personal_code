@@ -32,6 +32,11 @@ require("lazy").setup({
 		"fatih/vim-go", -- go dev. Mainly useful for template syntax
 		"vmchale/just-vim", -- highlighting Justfiles
 
+		-- center a buffer with :NoNeckPain
+		-- examples of things you can do:
+		-- https://github.com/shortcuts/no-neck-pain.nvim/wiki/Showcase
+		{ "shortcuts/no-neck-pain.nvim", version = "*" },
+
 		-- scope highlighting
 		{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 
@@ -80,10 +85,11 @@ require("lazy").setup({
 
 		-- interesting looking one, nordic:
 		--  https://github.com/AlexvZyl/nordic.nvim
-		"AlexvZyl/nordic.nvim",
-		"folke/tokyonight.nvim",
+		-- "AlexvZyl/nordic.nvim",
+		-- "folke/tokyonight.nvim",
 		"sainnhe/sonokai", -- the one I currently use, with a custom palette
-		"projekt0n/github-nvim-theme",
+		-- "projekt0n/github-nvim-theme",
+		-- "0xstepit/flow.nvim",
 		-- /colorschemes
 
 		-- includes a whole bunch of stuff, I'm using it for base16 experiments
