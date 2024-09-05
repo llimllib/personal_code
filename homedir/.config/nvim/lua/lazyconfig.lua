@@ -90,6 +90,7 @@ require("lazy").setup({
 		"sainnhe/sonokai", -- the one I currently use, with a custom palette
 		-- "projekt0n/github-nvim-theme",
 		-- "0xstepit/flow.nvim",
+		-- "habamax/vim-habamax",
 		-- /colorschemes
 
 		-- includes a whole bunch of stuff, I'm using it for base16 experiments

@@ -163,13 +163,35 @@ local on_attach = function(client, bufnr)
 	client.server_capabilities.document_formatting = false
 end
 
--- npm install -g typescript typescript-language-server
-lsp.tsserver.setup({
+-- https://github.com/yioneko/vtsls
+-- npm install -g @vtsls/language-server
+lsp.vtsls.setup({
 	on_attach = function(client, bufnr)
+		-- don't format files, I prefer using prettier
+		client.server_capabilities.document_formatting = false
+
+		-- lsp sets formatexpr here even though I tell it not to use prettier
+		-- for document formatting. Unset it so that `gq` works.
+		--
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/1131
+		vim.api.nvim_buf_set_option(bufnr, "formatexpr", "")
+
 		on_attach(client, bufnr)
 	end,
-	-- don't format files, I prefer using prettier
-	settings = { documentFormatting = false },
+	-- don't format files, I prefer using prettier (I'm not even sure that's a
+	-- thing vtsls does?)
+	settings = {
+		-- These make vtsls try to go to the actual source code instead of just
+		-- showing the .d.ts
+		-- https://github.com/yioneko/vtsls/blob/bbe6d6f3b/packages/service/configuration.schema.json#L1025-L1029
+		javascript = {
+			preferGoToSourceDefinition = true,
+		},
+		typescript = {
+			preferGoToSourceDefinition = true,
+		},
+		documentFormatting = false,
+	},
 	capabilities = capabilities,
 })
 
