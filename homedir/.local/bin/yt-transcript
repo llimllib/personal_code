@@ -1,24 +1,45 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# given a youtube URL, download the video, transcribe it, and create a
-# decent-looking HTML transcript to read
-
 function usage() {
         cat <<"EOF"
-Usage: yt-transcript <youtube-url>
+Usage: yt-transcript [options] <youtube-url>
 
 Output a transcript of the given youtube video.
+
+OPTIONS
+
+  -help:          print this message
+  -thumbs:        enable thumbnail generation
+  -thumbinterval: the interval between thumbnails, in seconds [default 30]
+  -v:             print more verbose output
+
+DEPENDENCIES
 
 Assumes you have installed:
 
 - ffmpeg
 - mlx_whisper
 - yt-dlp
+- python
 
 To install all on a mac:
 
-`brew install ffmpeg yt-dlp && pip install mlx_whisper`
+`brew install ffmpeg python yt-dlp && pip install mlx_whisper`
+
+EXAMPLES
+
+Create a transcript of a youtube video:
+
+    yt-transcript 'https://www.youtube.com/watch?v=vP4iY1TtS3s'
+
+Create a transcript with thumbnails every 30 seconds (the default):
+
+    yt-transcript -thumbs 'https://www.youtube.com/watch?v=Ac7G7xOG2Ag'
+
+Create a transcript with thumbnails every 10 seconds (the default):
+
+    yt-transcript -thumbs -thumbinterval 10 'https://www.youtube.com/watch?v=X48G7Y0VWW4'
 EOF
         exit 1
 }
@@ -49,6 +70,9 @@ while true; do
             thumbinterval=$2
             shift 2
             break
+        ;;
+        -help)
+            usage
         ;;
         *)
             break
@@ -147,7 +171,7 @@ p {
   overflow-wrap: break-word;
   hyphens: auto;
 }
-</style></head><body><p>transcript of <a href="$1">$1</a><p>
+</style></head><body><p><em>transcript of <a href="$1">$1</a></em><p>
 EOF
 
 # if no thumbs are requested, convert it into a text file and make an HTML page
@@ -186,9 +210,12 @@ else
     # Loop through the duration in 30-second intervals and build a string for
     # the clip-timestamps option of mlx_whisper
     intervals="0,$thumbinterval"
-    for ((i=0; i+thumbinterval<="$duration_sec"; i+=thumbinterval)); do
+    max=
+    for ((i=0; i+thumbinterval<"$duration_sec"; i+=thumbinterval)); do
         intervals="$intervals,$i,$((i+thumbinterval))"
+        max=$((i+thumbinterval))
     done
+    intervals="$intervals,$max"
 
     # transcribe the video into json format, clipping at 30-second intervals
     transcript="$yttranscript_cache_folder/audio_$yturl_clean.json"
@@ -209,7 +236,8 @@ else
     for ((i=0; i<="$duration_sec"; i+=thumbinterval)); do
         img="$yttranscript_cache_folder/thumb_${yturl_clean}_$i.jpg"
         # I tried to find a video filter here that would avoid the initial
-        # black frame I'm seeing, but was unsuccessful
+        # black frame I'm seeing, but was unsuccessful. Some attempts:
+        #
         #-vf "select='eq(n,0)+eq(pict_type,PICT_TYPE_I)+gt(scene,0.3)',scale=320:240,unsharp" \
         #-vf "select='gt(scene,0.3)',scale=320:240,unsharp" \
         #-vf "select='eq(pict_type,PICT_TYPE_I)',scale=320:240,unsharp" \
