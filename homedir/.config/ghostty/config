@@ -957,6 +957,13 @@ working-directory =
 # in the terminal. If you wish to send the encoded value to the program,
 # specify the "unconsumed:" prefix before the entire keybind. For example:
 # "unconsumed:ctrl+a=reload_config"
+#
+# my custom keybinds
+keybind = super+t=new_tab
+keybind = super+left=previous_tab
+keybind = super+right=next_tab
+
+# default keybinds
 keybind = super+page_up=scroll_page_up
 keybind = super+physical:four=goto_tab:4
 keybind = super+shift+down=jump_to_prompt:1
@@ -968,7 +975,6 @@ keybind = super+physical:eight=goto_tab:8
 keybind = super+alt+right=goto_split:right
 keybind = shift+up=adjust_selection:up
 keybind = super+enter=toggle_fullscreen
-keybind = super+t=new_tab
 keybind = super+c=copy_to_clipboard
 keybind = super+shift+right_bracket=next_tab
 keybind = super+physical:one=goto_tab:1
@@ -978,6 +984,7 @@ keybind = shift+page_up=adjust_selection:page_up
 keybind = super+physical:three=goto_tab:3
 keybind = super+physical:zero=last_tab
 keybind = super+d=new_split:right
+keybind = super+\=new_split:right
 keybind = super+ctrl+down=resize_split:down,10
 keybind = shift+end=adjust_selection:end
 keybind = super+plus=increase_font_size:1

@@ -1726,6 +1726,15 @@
 				<key>Red Component</key>
 				<real>0.31764705882352939</real>
 			</dict>
+			<key>Semantic History</key>
+			<dict>
+				<key>action</key>
+				<string>raw command</string>
+				<key>editor</key>
+				<string>com.github.atom</string>
+				<key>text</key>
+				<string>$EDITOR +\2 \1</string>
+			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
 			<key>Shortcut</key>
@@ -8197,6 +8206,15 @@
 				<real>0.20784313976764679</real>
 				<key>Red Component</key>
 				<real>0.16470588743686676</real>
+			</dict>
+			<key>Semantic History</key>
+			<dict>
+				<key>action</key>
+				<string>raw command</string>
+				<key>editor</key>
+				<string>com.github.atom</string>
+				<key>text</key>
+				<string>vim +\2 \1</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
