@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# given a youtube URL, download the video, transcribe it, and create a
+# decent-looking HTML transcript to read
+
+# TODO: add key images to the transcript. Or maybe screencap every 30s? How to
+# intersperse them sensibly.
+
+function usage() {
+        cat <<"EOF"
+Usage: ,yt-transcript <youtube-url>
+
+Output a transcript of the given youtube video.
+
+Assumes you have installed:
+
+- ffmpeg
+- mlx_whisper
+- yt-dlp
+
+To install all on a mac:
+
+`brew install ffmpeg yt-dlp && pip install mlx_whisper`
+EOF
+        exit 1
+}
+if [ -z "${1:-}" ]; then
+    usage
+fi
+
+# default to suppressing ffmpeg and ytdlp output
+ffmpegquiet=(-hide_banner -loglevel error)
+ytdlpquiet=(--quiet)
+
+# parse command line arguments
+while true; do
+    case $1 in
+        -v)
+            set -x
+            ffmpegquiet=()
+            ytdlpquiet=()
+            shift
+        ;;
+        *)
+            break
+        ;;
+    esac
+done
+
+# verify requirements are installed
+if ! command -v ffmpeg &> /dev/null
+then
+    printf "\033[31mYou must install ffmpeg\033[0m: https://ffmpeg.org/download.html\n\n"
+fi
+
+if ! command -v yt-dlp &> /dev/null
+then
+    printf "\033[31mYou must install yt-dlp\033[0m: https://github.com/yt-dlp/yt-dlp#installation\n\n"
+    exit 1
+fi
+
+if ! command -v mlx_whisper &> /dev/null
+then
+    printf "\033[31mYou must install mlx_whisper\033[0m: https://pypi.org/project/mlx-whisper/\n\n"
+    exit 1
+fi
+
+# create a sanitized version of the URL name to use as a cache key
+yturl_clean=${1//[^a-zA-Z0-9]/}
+
+# create the cache folder if it doesn't exist
+yttranscript_cache_folder="/tmp/yttranscript_cache"
+if [ ! -d $yttranscript_cache_folder ]; then
+    mkdir $yttranscript_cache_folder
+fi
+
+# 1. download audio of talk if we haven't yet
+ytdl_audio_outfile="$yttranscript_cache_folder/rawaudio_$yturl_clean.%(ext)s"
+rawaudio=$(find "$yttranscript_cache_folder" -name "rawaudio_$yturl_clean*")
+if [ -z "$rawaudio" ]; then
+    printf "\033[32mdownloading talk audio\033[0m\n"
+    if ! yt-dlp -f ba "$1" \
+        "${ytdlpquiet[@]}" \
+        -o "$ytdl_audio_outfile"; then
+        printf "\033[31mfailed running yt-dlp\033[0m\n"
+        exit 1
+    fi
+fi
+
+# re-run the `find` bc the file should exist now if it didn't before
+rawaudio=$(find "$yttranscript_cache_folder" -name "rawaudio_$yturl_clean*")
+
+# 2. convert into 16-bit wav file if we haven't yet
+wav_transcript="$yttranscript_cache_folder/audio_$yturl_clean.wav"
+if [ ! -f "$wav_transcript" ]; then
+    printf "\033[32mconverting to wav\033[0m\n"
+    if ! ffmpeg -y "${ffmpegquiet[@]}" \
+        -i "${rawaudio}" \
+        -ar 16000 -ac 1 -c:a pcm_s16le \
+        "$wav_transcript"; then
+        printf "\033[31mfailed running ffmpeg\033[0m\n"
+        exit 1
+    fi
+fi
+
+# 3. Convert it into a text file
+# mlx_whisper saves the input file into an output dir with the same filename
+# but with .txt instead of .wav. I wish it had an option to specify file output
+# name but it does not
+transcript="$yttranscript_cache_folder/audio_$yturl_clean.txt"
+if [ ! -f "$transcript" ]; then
+    printf "\033[32mtranscribing\033[0m\n"
+    if ! mlx_whisper --model 'mlx-community/distil-whisper-large-v3' \
+             -f txt \
+             -o "$yttranscript_cache_folder" \
+             --verbose False \
+             "$wav_transcript"; then
+        printf "\033[31mfailed running whisper.cpp\033[0m\n"
+        exit 1
+    fi
+    # if ! whisper-cpp -np -otxt \
+    #     -m ~/.local/share/blisper/ggml-distil-large-v3.bin ./input.wav \
+    #     -of "$transcriptArg"; then
+    #     printf "\033[31mfailed running whisper.cpp\033[0m\n"
+    #     exit 1
+    # fi
+fi
+
+# 4. Create an HTML file to display, and open it
+transcript_html="$yttranscript_cache_folder/$yturl_clean.html"
+cat <<"EOF">"$transcript_html"
+<html><head><style>
+body {
+  font-family: Georgia, "Book Antiqua", serif;
+  padding-top: 100px;
+  margin: auto;
+  justify-content: center;
+  color: #333;
+  width: 800px;
+}
+p {
+  font-size: 18px;
+  line-height: 30px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+</style></head><body><p>
+EOF
+sed -E 's/([.?])$/\1<p>/' "$transcript" >> "$transcript_html"
+printf '</body>' >> "$transcript_html"
+
+open "$transcript_html"
