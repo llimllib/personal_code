@@ -207,15 +207,18 @@ else
     # Convert duration to seconds
     duration_sec=$(printf "%.0f" "$duration")
 
-    # Loop through the duration in 30-second intervals and build a string for
-    # the clip-timestamps option of mlx_whisper
-    intervals="0,$thumbinterval"
-    max=
-    for ((i=0; i+thumbinterval<"$duration_sec"; i+=thumbinterval)); do
-        intervals="$intervals,$i,$((i+thumbinterval))"
-        max=$((i+thumbinterval))
-    done
-    intervals="$intervals,$max"
+    intervals=
+    if [ "$duration_sec" -gt "$thumbinterval" ]; then
+        # Loop through the duration in 30-second intervals and build a string for
+        # the clip-timestamps option of mlx_whisper
+        intervals="0,$thumbinterval"
+        max=
+        for ((i=0; i+thumbinterval<"$duration_sec"; i+=thumbinterval)); do
+            intervals="$intervals,$i,$((i+thumbinterval))"
+            max=$((i+thumbinterval))
+        done
+        intervals="$intervals,$max"
+    fi
 
     # transcribe the video into json format, clipping at 30-second intervals
     transcript="$yttranscript_cache_folder/audio_$yturl_clean.json"
@@ -234,7 +237,8 @@ else
 
     # Now loop through the intervals and output the HTML accordingly
     for ((i=0; i<="$duration_sec"; i+=thumbinterval)); do
-        img="$yttranscript_cache_folder/thumb_${yturl_clean}_$i.jpg"
+        imgName="${yturl_clean}_thumb_$i.jpg"
+        img="$yttranscript_cache_folder/$imgName"
         # I tried to find a video filter here that would avoid the initial
         # black frame I'm seeing, but was unsuccessful. Some attempts:
         #
@@ -247,7 +251,7 @@ else
         ffmpeg -ss "$((i+1))" -i "$rawvideo" \
             -vf "select='eq(n,0)+eq(pict_type,PICT_TYPE_I)+gt(scene,0.3)',scale=320:240,unsharp" \
             -vframes 1 -q:v 2 "$img" -y &> /dev/null
-        printf '<img src="%s"><p>' "$img" >> "$transcript_html"
+        printf '<img src="./%s"><p>' "$imgName" >> "$transcript_html"
         segment=$(cat "$transcript" |
             jq -r $"[.segments[] | select(.start >= $i and .start < $((i+thumbinterval))).text] | join(\"<p>\n\")")
         printf "%s<p>\n" "$segment" >> "$transcript_html"
