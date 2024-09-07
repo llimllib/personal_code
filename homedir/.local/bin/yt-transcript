@@ -107,6 +107,9 @@ if [ ! -d $yttranscript_cache_folder ]; then
     mkdir $yttranscript_cache_folder
 fi
 
+# get the video title
+title=$(yt-dlp --skip-download --print title "$1")
+
 # download audio of talk if we haven't yet
 ytdl_audio_outfile="$yttranscript_cache_folder/rawaudio_$yturl_clean.%(ext)s"
 rawaudio=$(find "$yttranscript_cache_folder" -name "rawaudio_$yturl_clean*")
@@ -155,7 +158,9 @@ fi
 # branch
 transcript_html="$yttranscript_cache_folder/$yturl_clean.html"
 cat <<EOF >"$transcript_html"
-<html><head><style>
+<html><head>
+<meta charset="utf-8">
+<style>
 body {
   font-family: Georgia, "Book Antiqua", serif;
   padding-top: 100px;
@@ -171,7 +176,9 @@ p {
   overflow-wrap: break-word;
   hyphens: auto;
 }
-</style></head><body><p><em>transcript of <a href="$1">$1</a></em><p>
+</style>
+<title>transcript of $title</title>
+</head><body><p><em>transcript of <a href="$1">$title</a></em><p>
 EOF
 
 # if no thumbs are requested, convert it into a text file and make an HTML page
@@ -200,7 +207,6 @@ if [ -z "$thumbs" ]; then
     fi
     sed -E 's/([.?])$/\1<p>/' "$transcript" >> "$transcript_html"
 else
-
     # Get the duration of the audio file using ffprobe
     duration=$(ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$wavfile")
 
