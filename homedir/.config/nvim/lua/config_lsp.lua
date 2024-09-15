@@ -184,12 +184,16 @@ lsp.vtsls.setup({
 		-- These make vtsls try to go to the actual source code instead of just
 		-- showing the .d.ts
 		-- https://github.com/yioneko/vtsls/blob/bbe6d6f3b/packages/service/configuration.schema.json#L1025-L1029
-		javascript = {
-			preferGoToSourceDefinition = true,
-		},
-		typescript = {
-			preferGoToSourceDefinition = true,
-		},
+		--
+		-- I like having these turned on, but with them on I don't know how to
+		-- get to the types instead! More research needed so I can get around
+		-- my code like I want.
+		-- javascript = {
+		-- 	preferGoToSourceDefinition = true,
+		-- },
+		-- typescript = {
+		-- 	preferGoToSourceDefinition = true,
+		-- },
 		documentFormatting = false,
 	},
 	capabilities = capabilities,
