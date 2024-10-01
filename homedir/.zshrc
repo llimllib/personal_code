@@ -77,6 +77,13 @@ zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 # right version
 # zstyle ':vcs_info:git:*' formats '%F{yellow}%F{black}%K{yellow}  %b %F{yellow}'
 
+# man zshoptions
+#q
+# MENU_COMPLETE (-Y)
+#  On an ambiguous completion, instead of listing possibilities or beeping,
+#  insert the first match immediately. 
+setopt menu_complete
+
 # ^x^e to edit the current command in $EDITOR... is there a less terrible
 # shortcut? ^E doesn't work, that's end. I'll probably never remember this
 # shortcut but it does work pretty well
@@ -264,11 +271,16 @@ alias pr="gh pr create"
 alias prune='git remote prune origin'
 
 
-# other aliases
+# if bat is present, replace cat with it
 if command -v bat > /dev/null; then
     alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
     alias cat='bat --wrap never'
+
+    # use bat to read man pages
+    # https://github.com/sharkdp/bat#man
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 fi
+
 alias be='bundle exec'
 # https://github.com/eth-p/bat-extras/blob/master/doc/batgrep.md
 alias gg='batgrep'
