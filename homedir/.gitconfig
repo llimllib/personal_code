@@ -3,6 +3,7 @@
 #
 [core]
     pager=delta
+	excludesFile = ~/.config/git/exclude
 
     # prevent an RCE
     # https://amalmurali.me/posts/git-rce/

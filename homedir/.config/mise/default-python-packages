@@ -1,2 +1,3 @@
-pyright
 black
+ipython
+pyright

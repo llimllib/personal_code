@@ -77,17 +77,18 @@ require("lazy").setup({
 		},
 
 		-- colorschemes
-		"sainnhe/everforest",
+		-- "sainnhe/everforest",
 		-- https://github.com/Shatur/neovim-ayu
 		-- is a neovim rewrite of
 		-- https://github.com/ayu-theme/ayu-vim
-		"Shatur/neovim-ayu",
+		-- "Shatur/neovim-ayu",
 
 		-- interesting looking one, nordic:
 		--  https://github.com/AlexvZyl/nordic.nvim
 		-- "AlexvZyl/nordic.nvim",
 		-- "folke/tokyonight.nvim",
 		"sainnhe/sonokai", -- the one I currently use, with a custom palette
+		"Aliqyan-21/darkvoid.nvim",
 		-- "projekt0n/github-nvim-theme",
 		-- "0xstepit/flow.nvim",
 		-- "habamax/vim-habamax",
