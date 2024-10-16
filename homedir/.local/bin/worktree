@@ -121,7 +121,7 @@ function _worktree {
         cp_node_modules="cp -Rc node_modules ../$dirname/node_modules ||
             cp -R --reflink node_modules ../$dirname/node_modules"
 
-        warn "copying node_modules and npm installing in the background"
+        warn "copying node_modules in the background"
         warn "logging to $tmpfile"
         nohup bash -c "($cp_node_modules)" &> "$tmpfile" &
     fi
