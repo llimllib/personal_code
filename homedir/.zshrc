@@ -4,7 +4,10 @@
 # cd to a dir without need to type cd
 setopt autocd
 
-setopt extendedglob
+# This causes ^ to get interpreted as a special character, which is a pain in
+# npm and git, so I've disabled it.
+# https://zsh.sourceforge.io/Doc/Release/Options.html
+# setopt extendedglob
 
 # case insensitive matching
 unsetopt case_match
@@ -116,13 +119,20 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 # `first segment/.../last/three/segments`, otherwise displays four segments
 # https://unix.stackexchange.com/a/273567
 #
+# %(x.true-text.false-text) is the ternary operator in zsh, we use it for
+# handing the return code and number of jobs in the shell
+#
 # https://zsh.sourceforge.io/Doc/Release/Prompt-Expansion.html
+# `man zshmisc`
 #
 function makeprompt() {
     local prompt=''
 
     # status of last command. Green check if success, Red code if failure
-    prompt+="%(?.%K{green}%F{black}√ %F{green}.%K{red}%F{black}%? %F{red})"
+    prompt+="%(?.%K{green}%F{black}√%F{green}.%K{red}%F{black}%?%F{red})"
+
+    # if there are more than one backgorund job, add them to the line
+    prompt+="%(1j.%K{magenta}%F{white}𑫕%j%F{magenta}.)"
 
     # machine name in blue
     prompt+="%K{blue}%F{black}  %m %F{blue}"
