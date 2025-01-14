@@ -177,3 +177,5 @@
 	writeCommitGraph = true
 [tag]
 	sort = -authordate
+[help]
+	autocorrect = prompt

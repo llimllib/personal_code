@@ -85,7 +85,10 @@ zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 # MENU_COMPLETE (-Y)
 #  On an ambiguous completion, instead of listing possibilities or beeping,
 #  insert the first match immediately. 
-setopt menu_complete
+#
+# I tried this but found it too annoying, if I type pack<tab> I don't want the
+# prompt to jump to package-lock.json
+# setopt menu_complete
 
 # ^x^e to edit the current command in $EDITOR... is there a less terrible
 # shortcut? ^E doesn't work, that's end. I'll probably never remember this
@@ -355,7 +358,14 @@ mise=$(command -v mise)
 # use the presence of fd to signal the ability to set complex fzf settings.
 # Full prereqs: fd erd bat
 if command -v fd &> /dev/null ; then
+    # https://github.com/junegunn/fzf?tab=readme-ov-file#environment-variables
     export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_DEFAULT_OPTS="--ansi \
+          --height 100% \
+          --layout reverse \
+          --border bold \
+          --preview 'fzf-preview {}' \
+          --preview-window 'right,60%,border,+3/3'"
 
     # https://github.com/junegunn/fzf#settings
     #
@@ -449,3 +459,8 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# television looks neat, but doesn't support bat's ansi mode currently:
+# https://github.com/alexpasmantier/television/issues/271
+# if the television config file is available, source it
+# [[ -f ~/.config/television/init.zsh ]] && source ~/.config/television/init.zsh
