@@ -120,7 +120,14 @@ vim.keymap.set("n", "<leader>nn", "<cmd>NoNeckPain<cr>", { noremap = true })
 
 -- git fugitive
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { noremap = true })
+vim.keymap.set("v", "<leader>gb", ":Git blame<CR>", { noremap = true })
+-- ,gB or ,gh to browse the file in github
 vim.keymap.set("n", "<leader>gB", "<cmd>GBrowse<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>gh", "<cmd>GBrowse<cr>", { noremap = true })
+-- in visual mode, ,gh or ,gB will bring you to github with the lines you
+-- selected as an anchor so github highlights them
+vim.keymap.set("v", "<leader>gB", ":GBrowse<CR>", { noremap = true })
+vim.keymap.set("v", "<leader>gh", ":GBrowse<CR>", { noremap = true })
 
 -- dadbod shortcuts
 -- I can't figure out why this doesn't work?
