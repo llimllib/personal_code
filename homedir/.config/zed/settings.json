@@ -1,0 +1,35 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+  "assistant": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-haiku-latest"
+    },
+    "version": "2"
+  },
+  "theme": "lilium",
+  "buffer_font_size": 18,
+  "buffer_font_family": "Iosevka Term Slab",
+  // I guess maybe I have to do this to enable gopls? unclear
+  // I still don't get gopls running
+  // https://github.com/zed-industries/zed/issues/4660
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "completeUnimported": true,
+        "experimentalPostfixCompletions": true,
+        "buildFlags": []
+      }
+    }
+  },
+  "show_completions_on_input": false,
+  "use_autoclose": false,
+  "vim_mode": true
+}

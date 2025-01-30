@@ -1,0 +1,26 @@
+[
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "tab": "editor::ShowCompletions"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      ", m": "editor::GoToDiagnostic"
+    }
+  },
+  {
+    // https://github.com/zed-industries/zed/blob/5ecff157/assets/keymaps/vim.json#L568C1-L568C155
+    "context": "ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView",
+    "bindings": {
+      // "cmd-;": "pane::ActivateNextItem"
+      // what I really want this to do is to cycle the pane, but that doesn't appear to be an option
+      "cmd-;": "workspace::ActivateNextPane",
+      // "cmd-;": ["workspace::ActivatePaneInDirection", "Right"],
+      "cmd-left": "pane::ActivatePrevItem",
+      "cmd-right": "pane::ActivateNextItem"
+    }
+  }
+]
