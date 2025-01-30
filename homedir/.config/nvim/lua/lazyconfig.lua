@@ -335,6 +335,15 @@ require("lazy").setup({
 				return opts
 			end,
 		},
+		-- https://codecompanion.olimorris.dev/installation.html
+		{
+			"olimorris/codecompanion.nvim",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"nvim-treesitter/nvim-treesitter",
+			},
+			config = true,
+		},
 	},
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom
