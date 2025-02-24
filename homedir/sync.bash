@@ -40,7 +40,7 @@ function main {
         src="$f"
         dest="$HOME/$f"
 
-        # TOOD: we might want to do something smarter than exact name matching,
+        # TODO: we might want to do something smarter than exact name matching,
         # for now its good enough though
         basename_=$(basename "$f")
         if grep -qE "^$basename_$" syncignore ; then
@@ -70,7 +70,11 @@ function main {
                 case $action in
                     a)
                         ensuredir "$dest"
-                        rsync "$src" "$dest";;
+                        # we need dirname here because otherwise we get a command like:
+                        # rsync .config/git/exclude /Users/llimllib/.config/git/exclude
+                        # which causes rsync to create a folder `exclude` in
+                        # the git directory, then add the file `exclude` to it
+                        rsync "$src" "$(dirname "$dest")";;
                 esac
             fi
         fi
@@ -86,7 +90,8 @@ function main {
                 case $action in
                     a)
                         ensuredir "./$f"
-                        rsync "$HOME/$f" "./$f"
+                        # we need dirname here for the same reason as above
+                        rsync "$HOME/$f" "$(dirname "./$f")"
                         git add "./$f";;
                 esac
             fi
