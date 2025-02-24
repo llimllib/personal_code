@@ -167,5 +167,17 @@ vim.keymap.set("n", "<leader>se", ":normal v<leader>aq<cr>:DB<cr>", { noremap = 
 
 -- end vim-dadbod
 
+-- fugitive
 vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
 vim.keymap.set("n", "<leader>gs", ":Git<cr>")
+-- end fugitive
+
+-- codecompanion
+-- https://codecompanion.olimorris.dev/getting-started.html
+vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
+-- end codecompanion

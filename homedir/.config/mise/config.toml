@@ -10,7 +10,7 @@ MISE_PYTHON_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-python-pa
 [settings]
 # plugins can read the versions files used by other version managers (if enabled by the plugin)
 # for example, .nvmrc in the case of node's nvm
-legacy_version_file = true                     # enabled by default (unlike asdf)
+idiomatic_version_file = true
 
 # configure `mise install` to always keep the downloaded archive
 # always_keep_download = false        # deleted after install by default
