@@ -1,32 +1,85 @@
-#
-# base config
-#
+# core config
 [core]
-    pager=delta
-	excludesFile = ~/.config/git/exclude
-
-    # prevent an RCE
-    # https://amalmurali.me/posts/git-rce/
-    # hopefully will be able to reënable once it's fixed
-    # nope, this just breaks all kinds of shit
-    # symlinks = false
-
+    pager = delta
+    excludesFile = ~/.config/git/exclude
 [user]
     name = Bill Mill
     email = bill@billmill.org
 
+#
+# config options
+#
+# https://blog.gitbutler.com/how-git-core-devs-configure-git/
+[branch]
+    sort = -committerdate # sort branches by most recently committed
+[column]
+    ui = auto # show branch names in columns
+[commit]
+    verbose = true # add the commit diff to the editor message
+[credential]
+    helper = osxkeychain
+[diff]
+    algorithm = histogram
+    colorMoved = default
+    compactionHeuristic = true
+    # replace the a/ and b/ in your diff header output with where the diff is
+    # coming from, so i/ (index), w/ (working directory) or c/ commit.
+    mnemonicPrefix = true
+    renames = true # detect if a file was renamed (slightly more expensive)
+    # don't show the annoying a/ and b/ prefixes in git diffs, though setting
+    # this option breaks patch/apply. Sigh.
+    # https://stackoverflow.com/a/57340649
+    # noprefix = true
+    # show the difference between branches in a submodule in a git diff
+    submodule = log
+[fetch]
+    all = true
+    prune = true
+    pruneTags = true
+    writeCommitGraph = true
+[help]
+    autocorrect = prompt
 [http]
     # I was getting hangs when pushing to github, and this resolved it 🤷
     postBuffer = 524288000
-
 [init]
     defaultBranch = main
+[interactive]
+    diffFilter = delta --color-only
+[merge]
+    conflictstyle = zdiff3
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true # always push local tags, without tag push
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[tag]
+    sort = -authordate # sort tags by most recently authored
+
+# Git doesn't check the validity of commit hashes by default
+# https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+#
+# ... I turned this off a few months later because several of the git repos
+# I depend on for vim plugins have fsck errors. Even python requests does.
+# I wish they didn't.
+#
+#[transfer]
+#    fsckobjects = true
+#[fetch]
+#    fsckobjects = true
+#[receive]
+#    fsckObjects = true
 
 #
 # aliases
 #
 [alias]
-
     br = branch
     ci = commit
     co = checkout
@@ -66,15 +119,8 @@
 
     # Show branches, verbosely, sorted by last touch, with commit messages.
     brv = "!f() { git branch --sort=-creatordate --color=always --format='%(color:reset)%(creatordate:short) %(color:bold white)%(align:2,right)%(upstream:trackshort)%(end)%(color:nobold) %(align:40,left)%(color:yellow)%(refname:short)%(end) %(color:reset)%(contents:subject)'; }; f"
-	gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
-	rm-gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
-
-[push]
-    default = upstream
-	autoSetupRemote = true
-
-[credential]
-	helper = osxkeychain
+    gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\"
+    rm-gone = !git branch --format=\"%(refname:short) %(upstream:track)\" | grep \"\\[gone\\]\" | cut -f1 -d \" \" | xargs -I{} git branch -D {}
 
 #
 # Delta config
@@ -99,23 +145,6 @@
     # https://mastodon.social/@cfbolz/112095079659025365
     hyperlinks = true
     hyperlinks-file-link-format = "file:///{path}#{line}"
-
-[interactive]
-    diffFilter = delta --color-only
-
-[merge]
-    conflictstyle = diff3
-
-[diff]
-    colorMoved = default
-    algorithm = histogram
-    compactionHeuristic = true
-    # don't show the annoying a/ and b/ prefixes in git diffs, though setting
-    # this option breaks patch/apply. Sigh.
-    # https://stackoverflow.com/a/57340649
-    # noprefix = true
-    # show the difference between branches in a submodule in a git diff
-	submodule = log
 
 #
 # color config
@@ -146,36 +175,8 @@
 # not sure where I got this from or if it's a good idea, honestly
 #
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
-	required = true
-	process = git-lfs filter-process --skip
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge --skip -- %f
+    required = true
+    process = git-lfs filter-process --skip
 
-# Git doesn't check the validity of commit hashes by default
-# https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
-#
-# ... I turned this off a few months later because several of the git repos
-# I depend on for vim plugins have fsck errors. Even python requests does.
-# I wish they didn't.
-#
-#[transfer]
-#    fsckobjects = true 
-#[fetch]
-#    fsckobjects = true 
-#[receive]
-#    fsckObjects = true 
-#
-[rerere]
-	enabled = true
-[column]
-	ui = auto
-[branch]
-	sort = -committerdate
-[maintenance]
-	repo = /Users/llimllib/readme/readme/feat-queue-project-export
-[fetch]
-	writeCommitGraph = true
-[tag]
-	sort = -authordate
-[help]
-	autocorrect = prompt
