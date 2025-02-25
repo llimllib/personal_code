@@ -14,6 +14,8 @@ require("codecompanion").setup({
 				env = {
 					-- saved key with:
 					-- $ security add-generic-password -s 'anthropic' -a 'llimllib' -w 'sk-ant-<key-goes-here>'
+					-- retrieve with:
+					-- $ security find-generic-password -s 'anthropic' -a 'llimllib' -w
 					api_key = "cmd:security find-generic-password -w -s 'anthropic' | tr -d '\n'",
 				},
 			})
