@@ -3,7 +3,7 @@ node = "22"
 python = '3.12'
 
 [env]
-MISE_GO_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-golan-packages"
+MISE_GO_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-golang-packages"
 MISE_NODE_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-npm-packages"
 MISE_PYTHON_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-python-packages"
 
