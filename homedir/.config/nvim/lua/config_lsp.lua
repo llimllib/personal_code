@@ -210,6 +210,15 @@ lsp.eslint.setup({
 	capabilities = capabilities,
 })
 
+-- Disable vim-go's LSP-like features but keep syntax highlighting; we'll set
+-- up gopls right after
+vim.g.go_def_mapping_enabled = 0 -- Disable go to definition mapping
+vim.g.go_gopls_enabled = 0 -- Disable gopls integration in vim-go
+vim.g.go_code_completion_enabled = 0 -- Disable code completion
+vim.g.go_doc_keywordprg_enabled = 0 -- Disable K for documentation
+vim.g.go_implements_mode = "" -- Disable :GoImplements
+vim.g.go_referrers_mode = "" -- Disable :GoReferrers
+
 -- go install golang.org/x/tools/gopls@latest
 lsp.gopls.setup({
 	on_attach = function(client, bufnr)
