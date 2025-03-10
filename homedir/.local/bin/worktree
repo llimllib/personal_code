@@ -75,6 +75,17 @@ function _worktree {
     # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
     dirname=${branchname//\//_}
 
+    # Find the git repository root and change to it; if you run this command
+    # from a directory within the repository this will make sure it still does
+    # the right thing
+    git_root=$(git rev-parse --show-toplevel)
+    if [ -z "$git_root" ]; then
+        die "Not in a git repository"
+    fi
+
+    # Change to the git root directory
+    cd "$git_root" || die "Failed to change to git root directory"
+
     # pull the most recent version of the remote
     if ! git pull; then
         warn "Unable to run git pull, there may not be an upstream"
