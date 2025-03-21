@@ -1,61 +1,4 @@
 #!/usr/bin/env python3
-#import datetime
-#import sys
-#import argparse
-#
-## ANSI color codes
-#YELLOW = "\033[33m"
-#RESET = "\033[0m"
-#
-#
-#def format_timestamp(timestamp, verbose=False):
-#    # Convert to float to handle potential decimal points
-#    timestamp = float(timestamp)
-#
-#    # Determine if timestamp is in milliseconds or seconds
-#    # 1000000000000 milliseconds = September 9, 2001
-#    if timestamp >= 1000000000000:
-#        if verbose:
-#            print(f"Detected timestamp in milliseconds: {timestamp}")
-#        timestamp = timestamp / 1000.0
-#    else:
-#        if verbose:
-#            print(f"Detected timestamp in seconds: {timestamp}")
-#
-#    # Convert to datetime objects
-#    utc_timezone = datetime.timezone.utc
-#    utc_time = datetime.datetime.fromtimestamp(timestamp, tz=utc_timezone)
-#    local_time = datetime.datetime.fromtimestamp(timestamp)
-#
-#    # Format times
-#    time_format = "%Y-%m-%d %H:%M:%S"
-#
-#    print(
-#        f"Local: {YELLOW}{local_time.strftime(time_format)} {local_time.astimezone().tzname()}{RESET}"
-#    )
-#    print(f"UTC:   {YELLOW}{utc_time.strftime(time_format)} UTC{RESET}")
-#
-#
-#if __name__ == "__main__":
-#    parser = argparse.ArgumentParser(
-#        description="Convert Unix timestamp to human-readable format"
-#    )
-#    parser.add_argument("timestamp", help="Unix timestamp (in seconds or milliseconds)")
-#    parser.add_argument(
-#        "-v", "--verbose", action="store_true", help="Enable verbose output"
-#    )
-#
-#    args = parser.parse_args()
-#
-#    try:
-#        format_timestamp(args.timestamp, args.verbose)
-#    except ValueError as e:
-#        print(f"Error: {e}")
-#        print(
-#            "Please provide a valid Unix timestamp in either seconds or milliseconds."
-#        )
-#        sys.exit(1)
-#!/usr/bin/env python3
 import datetime
 import sys
 import argparse
@@ -65,9 +8,11 @@ import re
 YELLOW = "\033[33m"
 RESET = "\033[0m"
 
+
 def is_timestamp(input_str):
     # Check if the input is a numeric timestamp (integer or float)
     return input_str.replace(".", "").isdigit()
+
 
 def format_time(timestamp, verbose=False):
     # Convert to float to handle potential decimal points
@@ -95,13 +40,16 @@ def format_time(timestamp, verbose=False):
 
     print(f"ts seconds: {YELLOW}{timestamp_s}{RESET}")
     print(f"ts ms:      {YELLOW}{int(timestamp_ms)}{RESET}")
-    print(f"Local:      {YELLOW}{local_time.strftime(time_format)} {local_time.astimezone().tzname()}{RESET}")
+    print(
+        f"Local:      {YELLOW}{local_time.strftime(time_format)} {local_time.astimezone().tzname()}{RESET}"
+    )
     print(f"UTC:        {YELLOW}{utc_time.strftime(time_format)} UTC{RESET}")
+
 
 def parse_date_string(date_string, verbose=False):
     if verbose:
         print(f"Parsing date string: {date_string}")
-    
+
     # Common format patterns
     format_patterns = [
         # ISO formats
@@ -109,27 +57,29 @@ def parse_date_string(date_string, verbose=False):
         ("%Y-%m-%dT%H:%M", False),
         ("%Y-%m-%dT%H:%M:%S", False),
         ("%Y-%m-%dT%H:%M:%SZ", True),  # UTC
-        
         # Common formats
-        ("%B %d %Y", False),           # March 21 2023
+        ("%B %d %Y", False),  # March 21 2023
         ("%B %d %Y %H:%M:%S", False),  # March 21 2023 10:34:56
-        ("%b %d %Y", False),           # Mar 21 2023
+        ("%b %d %Y", False),  # Mar 21 2023
         ("%b %d %Y %H:%M:%S", False),  # Mar 21 2023 10:34:56
-        
         # RFC formats
         ("%a, %d %b %Y %H:%M:%S GMT", True),  # Fri, 21 Mar 2025 13:57:36 GMT
     ]
 
     # Try ISO format with timezone offset (special handling required)
-    iso_tz_match = re.match(r'(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([+-]\d{2}:?\d{2})', date_string)
+    iso_tz_match = re.match(
+        r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})([+-]\d{2}:?\d{2})", date_string
+    )
     if iso_tz_match:
         base_str, tz_str = iso_tz_match.groups()
         # Fix timezone format for parsing
-        tz_str = tz_str.replace(':', '')
+        tz_str = tz_str.replace(":", "")
         if len(tz_str) == 3:  # +09 → +0900
             tz_str = f"{tz_str}00"
         try:
-            dt = datetime.datetime.strptime(f"{base_str}{tz_str}", "%Y-%m-%dT%H:%M:%S%z")
+            dt = datetime.datetime.strptime(
+                f"{base_str}{tz_str}", "%Y-%m-%dT%H:%M:%S%z"
+            )
             if verbose:
                 print(f"Parsed ISO timezone format: {dt}")
             return dt.timestamp()
@@ -144,24 +94,42 @@ def parse_date_string(date_string, verbose=False):
                 dt = dt.replace(tzinfo=datetime.timezone.utc)
             else:
                 dt = datetime.datetime.strptime(date_string, pattern)
-            
+
             if verbose:
-                print(f"Matched pattern {pattern}: {dt} {"as utc" if is_utc else "as local time"}")
-            
+                print(
+                    f"Matched pattern {pattern}: {dt} {"as utc" if is_utc else "as local time"}"
+                )
+
             return dt.timestamp()
         except ValueError:
             continue
-    
+
     # Try additional custom parsing for "Month Day Year" format
     try:
         # Try to match "March 21, 2023" or "March 21 2023"
-        month_day_match = re.match(r'([A-Za-z]+)\s+(\d{1,2})(?:,|\s)+(\d{4})', date_string)
+        month_day_match = re.match(
+            r"([A-Za-z]+)\s+(\d{1,2})(?:,|\s)+(\d{4})", date_string
+        )
         if month_day_match:
             month, day, year = month_day_match.groups()
-            month_num = {"january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6, 
-                         "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12}
+            month_num = {
+                "january": 1,
+                "february": 2,
+                "march": 3,
+                "april": 4,
+                "may": 5,
+                "june": 6,
+                "july": 7,
+                "august": 8,
+                "september": 9,
+                "october": 10,
+                "november": 11,
+                "december": 12,
+            }
             month_lower = month.lower()
-            if month_lower in month_num or month_lower[:3] in [k[:3] for k in month_num.keys()]:
+            if month_lower in month_num or month_lower[:3] in [
+                k[:3] for k in month_num.keys()
+            ]:
                 if month_lower in month_num:
                     month_val = month_num[month_lower]
                 else:
@@ -175,14 +143,15 @@ def parse_date_string(date_string, verbose=False):
                 return dt.timestamp()
     except Exception:
         pass
-    
+
     raise ValueError(f"Could not parse date string: {date_string}")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Convert timestamps or date strings to various formats"
     )
-    parser.add_argument("input", nargs='+', help="Unix timestamp or date string")
+    parser.add_argument("input", nargs="+", help="Unix timestamp or date string")
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose output"
     )
@@ -190,7 +159,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Join all input arguments into a single string
-    input_string = ' '.join(args.input)
+    input_string = " ".join(args.input)
     verbose = args.verbose
     if verbose:
         print(f"input: {input_string}")
@@ -204,7 +173,5 @@ if __name__ == "__main__":
             format_time(timestamp, verbose)
     except ValueError as e:
         print(f"Error: {e}")
-        print(
-            "Please provide a valid Unix timestamp or a recognizable date string."
-        )
+        print("Please provide a valid Unix timestamp or a recognizable date string.")
         sys.exit(1)
