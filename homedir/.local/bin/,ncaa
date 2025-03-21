@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# the sha256 hash probably represents a cached GraphQL query, so if this script
+# breaks that's probably why. I took a brief look at trying to find the actual
+# graphql query and I wasn't successful
+curl -sG 'https://sdataprod.ncaa.com/' \
+    --data-urlencode 'meta=GetLiveSchedulePlusMmlEventVideo_web' \
+    --data-urlencode 'extensions={"persistedQuery":{"version":1,"sha256Hash":"8fda21f254000da2c11a6c46f805ec55e2ed0c28c4a64d44d0dd3dab89551f2d"}}' \
+    --data-urlencode "variables={\"today\":true,\"monthly\":false,\"contestDate\":\"$(date +"%m/%d/%Y")\",\"seasonYear\":2024,\"current\":true}" \
+    -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:136.0) Gecko/20100101 Firefox/136.0' \
+    -H 'Accept: */*' \
+    -H 'Accept-Language: en-US,en;q=0.5' \
+    -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+    -H 'Content-Type: application/json' \
+    -H 'Origin: https://www.ncaa.com' \
+    --output - |
+    gzcat |
+    jq -r '.data.liveVideos.games[] | select(.sportUrl=="basketball-men" and .gameState=="I") |
+      [
+        (.teams | map(select(.isHome == true)) | .[0].nameFull),
+        (.teams | map(select(.isHome == true)) | .[0].score),
+        (.teams | map(select(.isHome == false)) | .[0].score),
+        (.teams | map(select(.isHome == false)) | .[0].nameFull),
+        .contestClock,
+        (.finalMessage | ascii_downcase | sub(" half"; ""))
+      ] | @tsv' |
+    awk -F'\t' '{printf "\033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m \033[31m%s%s%s\033[0m\n", $1, $2, $3, $4, $5, (length($5) > 0) ? " " : "", $6}'
