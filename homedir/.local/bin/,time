@@ -3,8 +3,8 @@ import datetime
 import sys
 import argparse
 import re
+import time
 
-# ANSI color codes
 YELLOW = "\033[33m"
 RESET = "\033[0m"
 
@@ -151,16 +151,22 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Convert timestamps or date strings to various formats"
     )
-    parser.add_argument("input", nargs="+", help="Unix timestamp or date string")
+    parser.add_argument("input", nargs="*", help="Unix timestamp or date string")
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose output"
     )
 
     args = parser.parse_args()
 
-    # Join all input arguments into a single string
-    input_string = " ".join(args.input)
     verbose = args.verbose
+
+    if not args.input:
+        input_string = str(int(time.time()))
+        if verbose:
+            print(f"No input provided. Using current timestamp: {input_string}")
+    else:
+        input_string = " ".join(args.input)
+
     if verbose:
         print(f"input: {input_string}")
 
