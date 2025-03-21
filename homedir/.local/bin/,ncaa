@@ -16,11 +16,13 @@ curl -sG 'https://sdataprod.ncaa.com/' \
     gzcat |
     jq -r '.data.liveVideos.games[] | select(.sportUrl=="basketball-men" and .gameState=="I") |
       [
+        (.teams | map(select(.isHome == true)) | .[0].seed),
         (.teams | map(select(.isHome == true)) | .[0].nameFull),
         (.teams | map(select(.isHome == true)) | .[0].score),
         (.teams | map(select(.isHome == false)) | .[0].score),
         (.teams | map(select(.isHome == false)) | .[0].nameFull),
+        (.teams | map(select(.isHome == false)) | .[0].seed),
         .contestClock,
         (.finalMessage | ascii_downcase | sub(" half"; ""))
       ] | @tsv' |
-    awk -F'\t' '{printf "\033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m \033[31m%s%s%s\033[0m\n", $1, $2, $3, $4, $5, (length($5) > 0) ? " " : "", $6}'
+    awk -F'\t' '{printf "\033[34m%2s\033[0m \033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m  \033[34m%-2s\033[0m      \033[31m%s%s%s\033[0m\n", $1, $2, $3, $4, $5, $6, $7, (length($7) > 0) ? " " : "", $8}'
