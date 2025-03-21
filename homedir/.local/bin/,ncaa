@@ -25,4 +25,9 @@ curl -sG 'https://sdataprod.ncaa.com/' \
         .contestClock,
         (.finalMessage | ascii_downcase | sub(" half"; ""))
       ] | @tsv' |
-    awk -F'\t' '{printf "\033[34m%2s\033[0m \033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m  \033[34m%-2s\033[0m      \033[31m%s%s%s\033[0m\n", $1, $2, $3, $4, $5, $6, $7, (length($7) > 0) ? " " : "", $8}'
+    awk -F'\t' '{
+      home_team = (length($2) > 29) ? substr($2, 1, 29) "…" : $2;
+      away_team = (length($5) > 29) ? substr($5, 1, 29) "…" : $5;
+      printf "\033[34m%2s\033[0m \033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m  \033[34m%-2s\033[0m      \033[31m%s%s%s\033[0m\n", 
+        $1, home_team, $3, $4, away_team, $6, $7, (length($7) > 0) ? " " : "", $8
+      }'
