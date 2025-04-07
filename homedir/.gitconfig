@@ -180,3 +180,10 @@
     required = true
     process = git-lfs filter-process --skip
 
+[worktree]
+	untrackedfiles = mise.toml
+	untrackedfiles = .mise.toml
+	untrackedfiles = .env
+	untrackedfiles = .env.local
+	untrackedfiles = .envrc
+	untrackedfiles = .tool-versions

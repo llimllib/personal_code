@@ -21,11 +21,11 @@ Will copy over some untracked files to the new worktree. By default, this includ
 .env, .envrc, .env.local, .tool-versions, and mise.toml files.
 
 To customize the list of untracked files to copy for a particular repository:
-    git config --add worktree.untrackedfiles "env"
+    git config --add worktree.untrackedfiles ".env"
     git config --add worktree.untrackedfiles "mise.toml"
 
 To set a global configuration for all repositories:
-    git config --global --add worktree.untrackedfiles "env"
+    git config --global --add worktree.untrackedfiles ".env"
     git config --global --add worktree.untrackedfiles "mise.toml"
 EOF
     kill -INT $$
