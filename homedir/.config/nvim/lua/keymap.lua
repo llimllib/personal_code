@@ -175,7 +175,7 @@ vim.keymap.set("n", "<leader>gs", ":Git<cr>")
 -- codecompanion
 -- https://codecompanion.olimorris.dev/getting-started.html
 vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>c", "<cmd>'<,'> CodeCompanionChat<cr>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
