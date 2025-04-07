@@ -17,7 +17,16 @@ worktree [-v] <branch name>
 create a git worktree with <branch name>. Will create a worktree if one isn't
 found that matches the given name.
 
-Will copy over any .env, .envrc, or .tool-versions files to the new worktree
+Will copy over some untracked files to the new worktree. By default, this includes
+.env, .envrc, .env.local, .tool-versions, and mise.toml files.
+
+To customize the list of untracked files to copy for a particular repository:
+    git config --add worktree.untrackedfiles "env"
+    git config --add worktree.untrackedfiles "mise.toml"
+
+To set a global configuration for all repositories:
+    git config --global --add worktree.untrackedfiles "env"
+    git config --global --add worktree.untrackedfiles "mise.toml"
 EOF
     kill -INT $$
 }
@@ -57,6 +66,21 @@ function cp_cow {
     fi
 }
 
+# Get the list of untracked files to copy from git config. If no config is
+# found, return the default list
+function get_untracked_files_pattern {
+    # Default file patterns
+    local default_patterns="\.env|\.envrc|\.env.local|\.mise.toml|\.tool-versions|mise.toml"
+
+    # Check if we have custom patterns in git config
+    if git config --get-all worktree.untrackedfiles > /dev/null 2>&1; then
+        local custom_patterns=""
+        custom_patterns=$(git config --get-all worktree.untrackedfiles | tr '\n' '|' | sed 's/|$//')
+        echo "^($custom_patterns)$"
+    else
+        echo "^($default_patterns)$"
+    fi
+}
 
 # Create a worktree from a given branchname, in exactly the way I like it.
 function _worktree {
@@ -137,12 +161,13 @@ function _worktree {
         nohup bash -c "($cp_node_modules)" &> "$tmpfile" &
     fi
 
+    # get a list of untracked files to copy, either from "git config" or a
+    # default list
+    untracked_file_re=$(get_untracked_files_pattern)
+
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
 
-    # (XXX: should I add some mechanism for users to spcify this list? perhaps
-    # ~/.config/worktree/untracked or something?)
-    #
     # this is the best of a bunch of bad options for reading the files into an
     # array. We're often executing in bash or zsh, so we're going to let them
     # use their file splitting rules, with an explicit IFS. We can't use find's
@@ -154,14 +179,13 @@ function _worktree {
     # Putting the `-not -path` argument first is a great deal faster than the
     # other way around
     #
-    # shellcheck disable=SC2207
     # files_to_copy=( $(find -E . -not -path '*node_modules*' -and \
     #     -iregex '.*\/\.(envrc|env|env.local|tool-versions|mise.toml)' ) )
     #
     # if `fd` is available, this is _much_ faster than the find command above:
-    files_to_copy=( $(fd -u \
-        '^\.(env|mise.toml|envrc|env|env.local|tool-versions)$' \
-        -E node_modules ) )
+
+    # shellcheck disable=SC2207
+    files_to_copy=( $(fd -u "$untracked_file_re" -E node_modules) )
     for f in "${files_to_copy[@]}"; do
         cp_cow "$f" ../"$dirname"/"$f"
     done
