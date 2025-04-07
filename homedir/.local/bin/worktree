@@ -27,6 +27,9 @@ To customize the list of untracked files to copy for a particular repository:
 To set a global configuration for all repositories:
     git config --global --add worktree.untrackedfiles ".env"
     git config --global --add worktree.untrackedfiles "mise.toml"
+
+If you have any custom configuration set, it will override the defaults
+completely, so add all files you want copied.
 EOF
     kill -INT $$
 }
