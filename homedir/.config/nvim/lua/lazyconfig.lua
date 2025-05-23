@@ -30,7 +30,7 @@ require("lazy").setup({
 		"digitaltoad/vim-pug", -- jade/pug highlighting
 		"lepture/vim-jinja", -- jinja
 		"fatih/vim-go", -- go dev. Mainly useful for template syntax
-		"vmchale/just-vim", -- highlighting Justfiles
+		"NoahTheDuke/vim-just", -- highlighting Justfiles
 
 		-- center a buffer with :NoNeckPain
 		-- examples of things you can do:

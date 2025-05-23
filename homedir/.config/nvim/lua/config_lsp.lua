@@ -1,7 +1,7 @@
 -- config docs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 --
 -- To install all prerequisite language servers and formatters:
--- brew install efm-langserver rust-analyzer shellcheck stylua
+-- brew install efm-langserver rust-analyzer shellcheck stylua taplo
 -- dotnet tool install --global csharp-ls
 -- gem install solargraph
 -- go install golang.org/x/tools/gopls@latest
@@ -329,6 +329,9 @@ lsp.html.setup({
 lsp.csharp_ls.setup({ on_attach = on_attach, capabilities = capabilities })
 
 lsp.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
+
+-- for TOML files
+lsp.taplo.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- configure diagnostics
 vim.diagnostic.config({
