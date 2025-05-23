@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-# the sha256 hash probably represents a cached GraphQL query, so if this script
-# breaks that's probably why. I took a brief look at trying to find the actual
-# graphql query and I wasn't successful
 curl -sG 'https://sdataprod.ncaa.com/' \
     --data-urlencode 'meta=GetLiveSchedulePlusMmlEventVideo_web' \
     --data-urlencode 'extensions={"persistedQuery":{"version":1,"sha256Hash":"8fda21f254000da2c11a6c46f805ec55e2ed0c28c4a64d44d0dd3dab89551f2d"}}' \
@@ -26,8 +23,43 @@ curl -sG 'https://sdataprod.ncaa.com/' \
         (.finalMessage | ascii_downcase | sub(" half"; ""))
       ] | @tsv' |
     awk -F'\t' '{
-      home_team = (length($2) > 29) ? substr($2, 1, 29) "…" : $2;
-      away_team = (length($5) > 29) ? substr($5, 1, 29) "…" : $5;
-      printf "\033[34m%2s\033[0m \033[32m%-30s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-30s\033[0m  \033[34m%-2s\033[0m      \033[31m%s%s%s\033[0m\n", 
-        $1, home_team, $3, $4, away_team, $6, $7, (length($7) > 0) ? " " : "", $8
-      }'
+      # Truncate team names if needed
+      home_team = (length($2) > 20) ? substr($2, 1, 20) "…" : $2;
+      away_team = (length($5) > 20) ? substr($5, 1, 20) "…" : $5;
+      
+      # Box width calculation (fixed width)
+      box_width = 78;
+      
+      # Create border line
+      border = "";
+      for (i = 0; i < box_width; i++) border = border "─";
+      
+      # Top border
+      printf "┌%s┐\n", border;
+      
+      # Format the team_score_line with colors
+      team_score_line = sprintf("\033[34m%2s\033[0m \033[32m%-20s\033[0m \033[33m%2d\033[0m - \033[33m%-2d\033[0m \033[32m%-20s\033[0m \033[34m%-2s\033[0m", 
+        $1, home_team, $3, $4, away_team, $6);
+      
+      # Calculate the visible length without ANSI codes
+      visible_length = 2 + 1 + 20 + 1 + 2 + 3 + 2 + 1 + 20 + 1 + 2 + 2;  # Total visible characters
+      
+      # Center the line properly
+      left_padding = int((box_width - visible_length) / 2);
+      right_padding = box_width - visible_length - left_padding;
+      
+      printf "│%*s%s%*s│\n", left_padding, "", team_score_line, right_padding, "";
+      
+      # Time row (centered)
+      time_text = sprintf("%s%s%s", $7, (length($7) > 0) ? " " : "", $8);
+      time_display = sprintf("\033[31m%s\033[0m", time_text);
+      
+      # Center the time text
+      time_left_padding = int((box_width - length(time_text)) / 2);
+      time_right_padding = box_width - length(time_text) - time_left_padding;
+      
+      printf "│%*s%s%*s│\n", time_left_padding, "", time_display, time_right_padding, "";
+      
+      # Bottom border
+      printf "└%s┘\n\n", border;
+    }'
