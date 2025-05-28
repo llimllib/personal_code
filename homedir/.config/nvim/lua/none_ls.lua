@@ -5,6 +5,17 @@
 -- imported as null-ls, confusingly
 local lsp = require("lspconfig")
 local null_ls = require("null-ls")
+local util = require("lspconfig.util")
+
+local is_dprint_available = function(fname)
+	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
+	if not root then
+		return false
+	end
+
+	local dprint_path = util.path.join(root, "node_modules", ".bin", "dprint")
+	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
+end
 
 null_ls.setup({
 	-- this on_attach function sets null-ls to do document formatting on save
@@ -39,6 +50,15 @@ null_ls.setup({
 		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.formatting.prettier.with({
 			prefer_local = "node_modules/.bin",
+			-- Skip prettier if this is a dprint-supported filetype and dprint is available
+			condition = function(utils)
+				local dprint_filetypes =
+					{ "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "markdown" }
+				if vim.tbl_contains(dprint_filetypes, vim.bo.filetype) and is_dprint_available(utils.bufname) then
+					return false
+				end
+				return true
+			end,
 		}),
 		null_ls.builtins.formatting.stylua,
 		null_ls.builtins.formatting.terraform_fmt,
