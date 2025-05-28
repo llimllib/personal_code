@@ -3,6 +3,19 @@ require("codecompanion").setup({
 	strategies = {
 		chat = {
 			adapter = "anthropic",
+			-- for all options: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua#L42-L392
+			keymaps = {
+				options = {
+					modes = {
+						-- replace the default ? shortcut with g?, so that I
+						-- can never use it and have access to reverse search
+						n = "g?",
+					},
+					callback = "keymaps.options",
+					description = "Options",
+					hide = true,
+				},
+			},
 		},
 		inline = {
 			adapter = "anthropic",
