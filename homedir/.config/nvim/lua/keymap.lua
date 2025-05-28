@@ -174,9 +174,15 @@ vim.keymap.set("n", "<leader>gs", ":Git<cr>")
 
 -- codecompanion
 -- https://codecompanion.olimorris.dev/getting-started.html
-vim.api.nvim_set_keymap("n", "<leader>c", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>c", "<cmd>'<,'> CodeCompanionChat<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>c", ":CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>c", ":'<,'> CodeCompanionChat<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "ga", ":CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>ft",
+	":CodeCompanion #buffer fill in all the TODOs with appropriate code<cr>",
+	{ noremap = true, silent = true }
+)
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])

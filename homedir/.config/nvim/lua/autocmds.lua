@@ -19,7 +19,7 @@ local filetypes = vim.api.nvim_create_augroup("filetypes", { clear = true })
 -- languages that use 2 spaces and expandtab
 autocmd("FileType", {
 	group = filetypes,
-	pattern = { "haml", "html", "javascript", "markdown", "proto", "ruby", "typescript", "yaml" },
+	pattern = { "haml", "html", "javascript", "json", "markdown", "proto", "ruby", "sh", "typescript", "yaml" },
 	callback = function()
 		vim.opt_local.shiftwidth = 2
 		vim.opt_local.tabstop = 2
