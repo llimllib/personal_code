@@ -72,9 +72,25 @@ if ! command -v bat >/dev/null 2>&1; then
   error "Missing required command bat. On mac: brew install bat"
 fi
 
-max_tokens=4000  # Adjust based on your LLM's limits
+max_tokens=50000  # claude's limit is 100k
 chars_per_token=4  # Rough estimation - adjust if needed
-prompt="Please review this PR as if you were a senior engineer. Focus on architecture, potential bugs, edge cases, performance, and best practices. Be specific and constructive in your feedback."
+prompt="Please review this PR as if you were a senior engineer.
+
+## Focus Areas
+- Architecture and design decisions
+- Potential bugs and edge cases
+- Performance considerations
+- Security implications
+- Code maintainability and best practices
+- Test coverage
+
+## Review Format
+- Start with a brief summary of the PR purpose and changes
+- List strengths of the implementation
+- Identify issues and improvement opportunities (ordered by priority)
+- Provide specific code examples for suggested changes where applicable
+
+Please be specific, constructive, and actionable in your feedback. Output the review in markdown format."
 
 if [[ -n "${1:-}" ]]; then
     prompt="$prompt ${*}"
