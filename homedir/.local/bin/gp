@@ -1,0 +1,151 @@
+#!/bin/bash
+set -euo pipefail
+
+function usage {
+  cat <<EOF
+gp
+
+Alias for "git push" that adds protection from accidental force-pushes
+EOF
+  exit "${1:-0}"
+}
+
+while true; do
+  case ${1:-} in
+    -h|--help)
+      usage 0
+    ;;
+    *)
+      break
+    ;;
+  esac
+done
+
+for arg in "$@"; do
+  if [[ $arg == "-v" || $arg == "--verbose" ]]; then
+    set -x
+  fi
+done 
+
+readonly RED='\033[0;31m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[0;33m'
+readonly BLUE='\033[0;34m'
+readonly BOLD='\033[1m'
+readonly RESET='\033[0m' # No Color
+
+info() {
+  printf "${BLUE}• %s${RESET}\n" "$1" >&2
+}
+
+warn() {
+  printf "${BLUE}⚠️ %s${RESET}\n" "$1" >&2
+}
+
+# Use XDG cache directory for storing API responses
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/gp-protection"
+CACHE_EXPIRY=21600  # 6 hours in seconds
+
+# Check branch protection status with caching
+check_branch_protection() {
+  local owner=$1
+  local repo=$2
+  local branch=$3
+  local cache_file="${CACHE_DIR}/${owner}_${repo}_${branch}"
+  local current_time
+  current_time=$(date +%s)
+  
+  # Create cache directory if it doesn't exist
+  mkdir -p "$CACHE_DIR"
+  
+  # Check if cache exists and is still valid
+  if [[ -f "$cache_file" ]]; then
+    read -r timestamp is_protected < "$cache_file"
+    if (( current_time - timestamp < CACHE_EXPIRY )); then
+      # Cache is valid
+      return "$is_protected"
+    fi
+  fi
+  
+  # Cache doesn't exist or is expired, make API call
+  if gh api "repos/$owner/$repo/branches/$branch/protection" &>/dev/null; then
+    # Branch is protected
+    echo "$current_time 0" > "$cache_file"
+    return 0
+  else
+    # Branch is not protected
+    echo "$current_time 1" > "$cache_file"
+    return 1
+  fi
+}
+
+if ! command -v gh >/dev/null 2>&1; then
+  warn "gh is not installed"
+  git push "$@"
+  exit $?
+fi
+
+# Skip the protection check if -f or --force is provided
+if [[ "$*" == *"-f"* || "$*" == *"--force"* ]]; then
+  info "Force push detected, skipping branch protection check."
+  git push "$@"
+  exit $?
+fi
+
+# Get the current branch name
+branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+if [ -z "$branch" ]; then
+  warn "no branch found, proceeding with push."
+  git push "$@"
+  exit $?
+fi
+
+# Get remote (either explicitly specified or default for branch)
+remote=$(git config --get "branch.$branch.remote" || echo "origin")
+# Check for explicit remote in arguments
+for arg in "$@"; do
+  if git remote | grep -q "^$arg\$"; then
+    remote=$arg
+    break
+  fi
+done
+
+# Get GitHub repo info
+remote_url=$(git config --get "remote.$remote.url")
+if [[ ! $remote_url =~ github\.com[:/]([^/]+)/([^/]+)(\.git)?$ ]]; then
+  echo "Not a GitHub repository, proceeding with push."
+  git push "$@"
+  exit $?
+fi
+
+owner=${BASH_REMATCH[1]}
+repo=${BASH_REMATCH[2]%.git}
+
+# Check if authenticated with GitHub
+if ! gh auth status &>/dev/null; then
+  warn "Not authenticated with GitHub CLI. Proceeding with push without branch protection check."
+  git push "$@"
+  exit $?
+fi
+
+# Check if branch has protection
+if check_branch_protection "$owner" "$repo" "$branch" ; then
+  cat <<EOF
+🛡️ ${RED}BRANCH PROTECTION ALERT${RESET}
+───────────────────────────
+${BLUE}Repository${RESET}: $owner/$repo
+${BLUE}Branch${RESET}:     $branch
+
+This branch has protection rules, but you have override permission.
+EOF
+  read -r -p "Type 'override' to proceed with the push: " REPLY
+  if [[ ! $REPLY = "override" ]]; then
+    echo "Push aborted."
+    exit 1
+  fi
+  echo "Proceeding with push to protected branch..."
+fi
+
+# Execute the actual git push command with all original arguments
+git push "$@"
+exit $?
