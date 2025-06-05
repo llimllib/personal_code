@@ -51,7 +51,9 @@ check_branch_protection() {
   local owner=$1
   local repo=$2
   local branch=$3
-  local cache_file="${CACHE_DIR}/${owner}_${repo}_${branch}"
+  local safe_branch
+  safe_branch=$(echo "$branch" | tr -c '[:alnum:]._-' '_')
+  local cache_file="${CACHE_DIR}/${owner}_${repo}_${safe_branch}"
   local current_time
   current_time=$(date +%s)
   
@@ -68,19 +70,32 @@ check_branch_protection() {
   fi
   
   # Cache doesn't exist or is expired, make API call
+
+  # 1. First check the direct branch protection API
   if gh api "repos/$owner/$repo/branches/$branch/protection" &>/dev/null; then
-    # Branch is protected
     echo "$current_time 0" > "$cache_file"
     return 0
-  else
-    # Branch is not protected
-    echo "$current_time 1" > "$cache_file"
-    return 1
   fi
+
+  # 2. Check if the branch has any rules via the branch API
+  if gh api "repos/$owner/$repo/branches/$branch" | jq -e '.protected == true' &>/dev/null; then
+    echo "$current_time 0" > "$cache_file"
+    return 0
+  fi
+
+  # Branch is not protected
+  echo "$current_time 1" > "$cache_file"
+  return 1
 }
 
 if ! command -v gh >/dev/null 2>&1; then
   warn "gh is not installed"
+  git push "$@"
+  exit $?
+fi
+
+if ! command -v jq >/dev/null 2>&1; then
+  warn "jq is not installed"
   git push "$@"
   exit $?
 fi
@@ -130,14 +145,12 @@ fi
 
 # Check if branch has protection
 if check_branch_protection "$owner" "$repo" "$branch" ; then
-  cat <<EOF
-🛡️ ${RED}BRANCH PROTECTION ALERT${RESET}
-───────────────────────────
-${BLUE}Repository${RESET}: $owner/$repo
-${BLUE}Branch${RESET}:     $branch
+  printf "🛡️ %bBRANCH PROTECTION ALERT%b\n" "$RED" "$RESET"
+  printf "───────────────────────────\n"
+  printf "%bRepository%b: %s/%s\n" "$BLUE" "$RESET" "$owner" "$repo"
+  printf "%bBranch%b:     %s\n\n" "$BLUE" "$RESET" "$branch"
+  printf "This branch has protection rules, but you have override permission.\n"
 
-This branch has protection rules, but you have override permission.
-EOF
   read -r -p "Type 'override' to proceed with the push: " REPLY
   if [[ ! $REPLY = "override" ]]; then
     echo "Push aborted."
