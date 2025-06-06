@@ -12,6 +12,10 @@ Uses staged changes if present, otherwise uses unstaged changes.
 -c, --context     change the context window on the diff sent to the llm. defaults to 10
 -m, --merge-base  compare HEAD with the merge base (optionally specify the base branch, defaults to main)
 -b, --branch      review changes in the specified remote branch (compared to main) without pulling it down
+
+Depends on:
+- llm: https://github.com/simonw/llm
+- bat: https://github.com/sharkdp/bat (optional)
 EOF
   exit "${1:-0}"
 }
@@ -76,10 +80,6 @@ error() {
 if ! command -v llm >/dev/null 2>&1; then
   # https://github.com/simonw/llm
   error "Missing required command llm. On mac: brew install llm"
-fi
-
-if ! command -v bat >/dev/null 2>&1; then
-  error "Missing required command bat. On mac: brew install bat"
 fi
 
 max_tokens=50000  # claude's limit is 100k
@@ -154,7 +154,11 @@ if [ $estimated_tokens -gt $max_tokens ]; then
   fi
 fi
 
-echo "$diff_output" | llm -s "$prompt" | bat --paging=never --style=plain --language=markdown
+if command -v bat >/dev/null 2>&1; then
+  echo "$diff_output" | llm -s "$prompt" | bat --paging=never --style=plain --language=markdown
+else
+  echo "$diff_output" | llm -s "$prompt"
+fi
 exit_status=${PIPESTATUS[1]}
 
 if [ "$exit_status" -eq 130 ]; then
