@@ -282,7 +282,6 @@ alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d
 alias pr="gh pr create"
 alias prune='git remote prune origin'
 
-
 # if bat is present, replace cat with it
 if command -v bat > /dev/null; then
     alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
