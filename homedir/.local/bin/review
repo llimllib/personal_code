@@ -3,14 +3,15 @@ set -euo pipefail
 
 function usage {
   cat <<EOF
-llm [--verbose] [-c 10] additional context
+review [--verbose] [-c 10] [-m [base-branch]] [-b branch-name] additional context
 
 Ask the llm to review code changes. Any additional arguments are provided as context.
 Uses staged changes if present, otherwise uses unstaged changes.
 
--v, --verbose   print verbose output
--c, --context   change the context window on the diff sent to the llm. defaults to 10
+-v, --verbose     print verbose output
+-c, --context     change the context window on the diff sent to the llm. defaults to 10
 -m, --merge-base  compare HEAD with the merge base (optionally specify the base branch, defaults to main)
+-b, --branch      review changes in the specified remote branch (compared to main) without pulling it down
 EOF
   exit "${1:-0}"
 }
@@ -18,6 +19,7 @@ EOF
 base_branch="main"
 context=10
 use_merge_base=false
+branch_to_review=""
 while true; do
   case ${1:-} in
     -v|--verbose)
@@ -40,6 +42,14 @@ while true; do
         base_branch="$1"
         shift
       fi
+    ;;
+    -b|--branch)
+      shift
+      if [[ -z "${1:-}" || "$1" =~ ^- ]]; then
+        error "Branch name is required for -b/--branch option"
+      fi
+      branch_to_review="$1"
+      shift
     ;;
     *)
       break
@@ -102,8 +112,13 @@ git diff --cached --quiet 2>/dev/null
 has_staged_changes=$?
 set -e
 
-# use the stage if there are staged changes, otherwise use diff
-if [ "$use_merge_base" = true ]; then
+if [ -n "$branch_to_review" ]; then
+  # Review a remote branch without pulling it down
+  info "Reviewing branch: $branch_to_review against $base_branch"
+  git fetch origin "$branch_to_review" 2>/dev/null || error "Branch $branch_to_review not found"
+  git fetch origin "$base_branch" 2>/dev/null || error "Base branch $base_branch not found"
+  diff_output=$(git diff "origin/$base_branch"..."origin/$branch_to_review" --unified="$context")
+elif [ "$use_merge_base" = true ]; then
   diff_output=$(git diff "$(git merge-base HEAD "$base_branch")"..HEAD --unified="$context")
 elif [ $has_staged_changes -eq 1 ]; then
   diff_output=$(git diff --cached --unified="$context")
@@ -128,7 +143,9 @@ if [ $estimated_tokens -gt $max_tokens ]; then
   
   info "reducing context to $context to fit token limits"
   
-  if [ "$use_merge_base" = true ]; then
+  if [ -n "$branch_to_review" ]; then
+    diff_output=$(git diff "origin/$base_branch"..."origin/$branch_to_review" --unified="$context")
+  elif [ "$use_merge_base" = true ]; then
     diff_output=$(git diff "$(git merge-base HEAD "$base_branch")"..HEAD --unified="$context")
   elif [ "$has_staged_changes" -eq 1 ]; then
     diff_output=$(git diff --cached --unified="$context")
