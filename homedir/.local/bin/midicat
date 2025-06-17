@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+"""
+midicat - A utility to monitor MIDI events from selected devices.
+
+Completely vibe coded, I've not really read this. Does the job
+"""
+
+import sys
+import time
+
+try:
+    import mido
+except ImportError:
+    print(
+        "ERROR: you need mido and python-rtmidi installed. pip install mido python-rtmidi"
+    )
+    sys.exit(1)
+
+
+def usage():
+    """Print usage information."""
+    print_header("MIDI Monitor (midicat) - Usage")
+    print(
+        """
+A utility to monitor MIDI events from selected devices.
+
+Usage: midicat [options]
+
+Options:
+  --help     Show this help message and exit.
+
+When run without options, the program will:
+1. List available MIDI input devices
+2. Prompt you to select a device by number
+3. Display incoming MIDI events until interrupted with Ctrl+C
+"""
+    )
+
+
+def print_colored(text, color_code):
+    """Print colored text to the terminal."""
+    print(f"\033[{color_code}m{text}\033[0m")
+
+
+def print_header(text):
+    """Print a header in green."""
+    print_colored(f"\n{text}", "1;32")
+
+
+def print_info(text):
+    """Print info text in blue."""
+    print_colored(text, "1;34")
+
+
+def print_error(text):
+    """Print error text in red."""
+    print_colored(f"Error: {text}", "1;31")
+
+
+def list_midi_devices():
+    """List all available MIDI input devices."""
+    try:
+        input_ports = mido.get_input_names()
+        if not input_ports:
+            print_error("No MIDI input devices found.")
+            sys.exit(1)
+
+        print_header("Available MIDI Input Devices:")
+        for i, port in enumerate(input_ports, 1):
+            print(f"{i}. {port}")
+        return input_ports
+    except Exception as e:
+        print_error(f"Failed to list MIDI devices: {e}")
+        sys.exit(1)
+
+
+def select_device(input_ports):
+    """Let the user select a MIDI device."""
+    while True:
+        try:
+            choice = input("\nSelect device number (or 'q' to quit): ")
+            if choice.lower() == "q":
+                sys.exit(0)
+
+            choice = int(choice)
+            if 1 <= choice <= len(input_ports):
+                return input_ports[choice - 1]
+            else:
+                print_error(f"Please enter a number between 1 and {len(input_ports)}")
+        except ValueError:
+            print_error("Please enter a valid number")
+        except KeyboardInterrupt:
+            print("\nExiting...")
+            sys.exit(0)
+
+
+def monitor_midi_events(port_name):
+    """Monitor and display MIDI events from the selected device."""
+    try:
+        print_info(f"Connecting to '{port_name}'...")
+        port = mido.open_input(port_name)
+
+        print_header("MIDI Monitor Active")
+        print_info("Displaying incoming MIDI events (press Ctrl+C to stop)...")
+
+        # Define which message types to ignore
+        ignore_types = ["clock", "active_sensing"]
+
+        # Count messages
+        message_count = 0
+        start_time = time.time()
+
+        try:
+            for msg in port:
+                if msg.type not in ignore_types:
+                    message_count += 1
+                    elapsed = time.time() - start_time
+                    rate = message_count / elapsed if elapsed > 0 else 0
+
+                    if msg.type == "note_on":
+                        print(
+                            f"Note ON:  Note={msg.note:3d} Velocity={msg.velocity:3d} Channel={msg.channel:2d}"
+                        )
+                    elif msg.type == "note_off":
+                        print(
+                            f"Note OFF: Note={msg.note:3d} Velocity={msg.velocity:3d} Channel={msg.channel:2d}"
+                        )
+                    elif msg.type == "control_change":
+                        print(f"Control:  CC={msg.control:3d} Value={msg.value:3d}")
+                    elif msg.type == "program_change":
+                        print(f"Program:  Program={msg.program:3d}")
+                    elif msg.type == "pitchwheel":
+                        print(f"Pitch:    Value={msg.pitch:5d}")
+                    else:
+                        print(f"Other:    {msg}")
+        except KeyboardInterrupt:
+            pass
+        finally:
+            port.close()
+            print_info(f"\nSession summary: {message_count} messages received")
+
+    except Exception as e:
+        print_error(f"Failed to connect to MIDI device: {e}")
+        sys.exit(1)
+
+
+def main():
+    """Main function."""
+    try:
+        # Check for help flag
+        if len(sys.argv) > 1 and sys.argv[1] in ["--help", "-h"]:
+            usage()
+            return
+
+        print_header("MIDI Monitor")
+        input_ports = list_midi_devices()
+        selected_port = select_device(input_ports)
+        monitor_midi_events(selected_port)
+    except KeyboardInterrupt:
+        print("\nExiting...")
+    except Exception as e:
+        print_error(f"Unexpected error: {e}")
+
+    print_info("MIDI Monitor closed.")
+
+
+if __name__ == "__main__":
+    main()
