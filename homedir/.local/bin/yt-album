@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+function usage {
+    cat <<EOF
+yt-album [-v] [--artist|-a] <youtube URL>
+
+download an album, and set the artist if supplied
+EOF
+  exit 0
+}
+
+ARTIST=
+while true; do
+    case $1 in
+        help | -h | --help)
+            usage
+            ;;
+        -v | --verbose)
+            set -x
+            shift
+            ;;
+        -a | --artist)
+            ARTIST=$2
+            shift 2
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+if [[ -z "$1" ]]; then
+    echo "Error: YouTube URL is required" >&2
+    usage
+fi
+
+URL_HASH=$(echo "$1" | md5sum | cut -d' ' -f1)
+DOWNLOAD_ARCHIVE="/tmp/yt_album_downloaded_${URL_HASH}.txt"
+
+yt-dlp \
+  --download-archive "$DOWNLOAD_ARCHIVE" \
+  --extract-audio \
+  --audio-format m4a \
+  --embed-metadata \
+  --parse-metadata "playlist_index:%(track_number)s" \
+  --parse-metadata "playlist_title:%(album)s" \
+  --embed-thumbnail \
+  ${ARTIST:+--ppa "ffmpeg:-metadata artist='$ARTIST'"} \
+  -o '%(playlist_index)s. %(title)s.%(ext)s' \
+  "$1"
