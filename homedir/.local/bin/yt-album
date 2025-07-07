@@ -2,9 +2,16 @@
 
 function usage {
     cat <<EOF
-yt-album [-v] [--artist|-a] <youtube URL>
+yt-album [-v] [--artist|-a <Artist>] <youtube playlist URL>
 
-download an album, and set the artist if supplied
+Give the script a playlist URL, and it will download all songs in the playlist
+in m4a format and properly set the metadata for them.
+
+EXAMPLE
+
+To download the Blue Album from Weezer:
+
+  yt-album -a Weezer 'https://www.youtube.com/watch?v=b45rzwIBS_Y&list=PL81_CtYCym2_indonS249kcDhb04JVSy6'
 EOF
   exit 0
 }
