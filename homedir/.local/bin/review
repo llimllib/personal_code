@@ -5,7 +5,7 @@ function usage {
   cat <<EOF
 review [--verbose] [-c 10] [-m [base-branch]] [-b branch-name] additional context
 
-Ask the llm to review code changes. Any additional arguments are provided as context.
+Ask an llm to review code changes. Any additional arguments are provided as context.
 Uses staged changes if present, otherwise uses unstaged changes.
 
 -v, --verbose     print verbose output
@@ -16,6 +16,32 @@ Uses staged changes if present, otherwise uses unstaged changes.
 Depends on:
 - llm: https://github.com/simonw/llm
 - bat: https://github.com/sharkdp/bat (optional)
+
+HOW TO USE
+
+review with no arguments will review the code you have staged
+
+  review
+
+If you've merged code from the main branch, use -m
+
+  review -m
+
+If the main branch isn't called "main", or you want to review the diff between HEAD and some other branch, you can give it as an argument to -m. This command will review the diff betweenHEAD and the first commit it has in common with the development branch
+
+  review -m development
+
+If you want to review a branch that you may not have locally, use -b. I use this for reviewing github PRs; for example if a coworker created a branch called update-guid-format and I wanted to have the LLM review it, I'd use
+
+  review -b update-guid-format
+
+If you want to review a branch against something other than the main branch, combine -b and -m. This command would compare update-guid-format against the development branch instead of the main branch
+
+  review -m development -b update-guid-format
+
+A THOUGHT
+
+LLMs can be useful, but the pairing of a thoughtful human with machine assistance is much more so. The LLM will often be lacking full context or misunderstand some change, so make sure to apply your brain to what it reports!
 EOF
   exit "${1:-0}"
 }
