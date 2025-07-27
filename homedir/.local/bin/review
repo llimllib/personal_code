@@ -3,18 +3,25 @@ set -euo pipefail
 
 function usage {
   cat <<EOF
-review [--verbose] [--help] [git-diff-arguments...]
+review [--verbose] [--context TEXT] [--help] [git-diff-arguments...]
 
 Ask an LLM to review code changes. This tool passes arguments directly to 'git diff',
 allowing you to use any git diff syntax or options.
 
 Options:
-  -v, --verbose      Enable verbose output
-  -h, --help         Show this help message
+  -c, --context TEXT  Add additional context for the review, appended to the system prompt
+  -h, --help          Show this help message
+  -v, --verbose       Enable verbose output
 
 Review Examples:
   # Review unstaged changes
   review
+
+  # Review with additional context
+  review --context "Focus your review on possible authentication bypasses"
+
+  # Review with context from a file
+  review --context "$(cat PR_DESCRIPTION.md)"
 
   # Review staged changes
   review --cached
@@ -53,6 +60,7 @@ EOF
 git_args=()
 has_unified_context=false
 context_value=10
+additional_context=""
 
 # Process only our custom arguments, pass everything else to git
 while [[ $# -gt 0 ]]; do
@@ -60,6 +68,15 @@ while [[ $# -gt 0 ]]; do
     -v|--verbose)
       set -x
       shift
+      ;;
+    -c|--context)
+      shift
+      if [[ $# -gt 0 ]]; then
+        additional_context="$1"
+        shift
+      else
+        error "Missing value for --context option"
+      fi
       ;;
     -U[0-9]*)
       # Form: -U10
@@ -185,6 +202,14 @@ prompt="Please review this PR as if you were a senior engineer.
 - Provide specific code examples for suggested changes where applicable
 
 Please be specific, constructive, and actionable in your feedback. Output the review in markdown format."
+
+# Add the additional context if provided
+if [[ -n "$additional_context" ]]; then
+  prompt="$prompt
+
+## Additional Context
+$additional_context"
+fi
 
 if command -v bat >/dev/null 2>&1; then
   echo "$diff_output" | llm -s "$prompt" | bat --paging=never --style=plain --language=markdown
