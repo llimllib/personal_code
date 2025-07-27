@@ -290,6 +290,11 @@ if command -v bat > /dev/null; then
     # use bat to read man pages
     # https://github.com/sharkdp/bat#man
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+    # create a function that pipes llm output through bat to highlight markdown
+    llm() {
+      command llm "$@" | bat --paging=never --style=plain --language=markdown
+    }
 fi
 
 alias be='bundle exec'
