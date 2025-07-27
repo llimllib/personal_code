@@ -39,7 +39,7 @@ Review Examples:
   # Adjust context lines
   review -U5 main
 
-Dot Notation Explained:
+Dot Notation:
   - Two dots (A..B): Direct comparison between A and B
   - Three dots (A...B): Compare common ancestor of A and B with B
 
@@ -131,6 +131,9 @@ if [[ -z "$diff_output" ]]; then
   error "No changes found to review."
 fi
 
+# I wish there were a simple consistent method to count tokens, but there isn't
+# as far as I can tell, so we're gonna use a poor estimation and keep safely
+# inside the context limit
 max_tokens=50000  # Claude's limit is 100k, this should be a safe amount
 chars_per_token=4 # simple approximation
 
