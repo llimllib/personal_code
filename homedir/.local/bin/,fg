@@ -27,7 +27,7 @@ fzf --ansi --disabled --query "$INITIAL_QUERY" \
     --delimiter : \
     --preview 'fzf-preview {1} {2}' \
     --preview-window 'right,60%,border,+1/1' \
-    --bind 'enter:become(vim {1} +{2})'
+    --bind 'enter:become($EDITOR {1} +{2})'
 
     # replaced with my own custom fzf-preview
     # --preview 'bat --color=always {1} --highlight-line {2}'

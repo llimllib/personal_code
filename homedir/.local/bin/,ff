@@ -14,4 +14,4 @@ fd --hidden --color=always --type file --full-path "${*:-}" |
       --border bold \
       --preview 'fzf-preview {}' \
       --preview-window 'right,60%,border,+3/3' \
-      --bind 'enter:become(nvim {1})'
+      --bind 'enter:become($EDITOR {1})'
