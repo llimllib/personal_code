@@ -1,6 +1,7 @@
 @vtsls/language-server
 bash-language-server
 eslint
+mcp-hub
 prettier
 typescript
 typescript-language-server
