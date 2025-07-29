@@ -160,7 +160,7 @@ fi
 # review. Later on we'll check if this generates too much output and shorten it
 # if so
 if [[ "$has_unified_context" == false ]]; then
-  git_args=("-U$context_value" "${git_args[@]}")
+  git_args=("-U$context_value" "${git_args[@]:-}")
 fi
 
 # Run git diff
