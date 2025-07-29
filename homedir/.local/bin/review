@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# LICENSE: unlicense. This is free and unencumbered software released into the public domain.
+# see unlicense.org for full license
+
 set -euo pipefail
 
 function usage {
