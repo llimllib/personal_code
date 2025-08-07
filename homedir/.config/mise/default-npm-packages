@@ -1,3 +1,4 @@
+@biomejs/biome
 @vtsls/language-server
 bash-language-server
 eslint

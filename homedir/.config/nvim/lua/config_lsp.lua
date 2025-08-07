@@ -200,6 +200,16 @@ lsp.vtsls.setup({
 	capabilities = capabilities,
 })
 
+-- npm install -g @biomejs/biome
+lsp.biome.setup({
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+	end,
+	-- don't format files, I prefer using prettier
+	settings = { documentFormatting = false },
+	capabilities = capabilities,
+})
+
 -- npm install vscode-langservers-extracted
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
 lsp.eslint.setup({
@@ -211,60 +221,46 @@ lsp.eslint.setup({
 	capabilities = capabilities,
 })
 
--- return true if there is dprint in node_modules.
-local is_dprint_available = function(fname)
-	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
-	if not root then
-		return false
-	end
+lsp.dprint.setup({
+	on_attach = function(client, bufnr)
+		-- Call the original on_attach without disabling formatting
+		on_attach(client, bufnr)
 
-	local dprint_path = util.path.join(root, "node_modules", ".bin", "dprint")
-	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
-end
+		-- Enable document formatting for dprint
+		client.server_capabilities.document_formatting = true
 
--- Only set up dprint if it exists in node_modules/.bin
--- We want to use it if there is, but otherwise we will use prettier through
--- none-ls
-local function setup_dprint_lsp()
-	local fname = vim.api.nvim_buf_get_name(0)
-	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
-
-	if root and is_dprint_available(fname) then
-		vim.notify("Setting up dprint LSP for " .. root, vim.log.levels.DEBUG)
-
-		lsp.dprint.setup({
-			on_attach = function(client, bufnr)
-				-- Call the original on_attach but don't disable formatting
-				local original_on_attach = on_attach
-				original_on_attach(client, bufnr)
-
-				-- Re-enable document formatting for dprint
-				client.server_capabilities.document_formatting = true
-
-				-- Add format on save autocmd
-				local augroup = vim.api.nvim_create_augroup("DprintFormatting", { clear = true })
-				vim.api.nvim_create_autocmd("BufWritePre", {
-					group = augroup,
-					buffer = bufnr,
-					callback = function()
-						vim.lsp.buf.format({
-							bufnr = bufnr,
-						})
-					end,
-				})
-			end,
-
-			capabilities = capabilities,
-			root_dir = function()
-				return root -- We already validated that dprint exists
+		-- Add format on save autocmd
+		vim.api.nvim_create_augroup("DprintFormatting", { clear = true })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			group = "DprintFormatting",
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.format({ bufnr = bufnr })
 			end,
 		})
-		-- else
-		-- 	vim.notify("Dprint not found in node_modules/.bin, skipping LSP setup", vim.log.levels.DEBUG)
-	end
-end
+	end,
 
-setup_dprint_lsp()
+	capabilities = capabilities,
+
+	-- Only set up dprint if it exists in node_modules/.bin
+	-- We want to use it if there is, but otherwise we will use prettier through
+	-- none-ls
+	root_dir = function(fname)
+		local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
+		if not root then
+			return nil
+		end
+
+		local dprint_path = util.path.join(root, "node_modules", ".bin", "dprint")
+		local is_available = vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
+
+		if is_available then
+			vim.notify("dprint found at " .. root, vim.log.levels.DEBUG)
+			return root
+		end
+		return nil
+	end,
+})
 
 -- Disable vim-go's LSP-like features but keep syntax highlighting; we'll set
 -- up gopls right after
