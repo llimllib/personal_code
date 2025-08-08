@@ -221,47 +221,6 @@ lsp.eslint.setup({
 	capabilities = capabilities,
 })
 
-lsp.dprint.setup({
-	on_attach = function(client, bufnr)
-		-- Call the original on_attach without disabling formatting
-		on_attach(client, bufnr)
-
-		-- Enable document formatting for dprint
-		client.server_capabilities.document_formatting = true
-
-		-- Add format on save autocmd
-		vim.api.nvim_create_augroup("DprintFormatting", { clear = true })
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = "DprintFormatting",
-			buffer = bufnr,
-			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr })
-			end,
-		})
-	end,
-
-	capabilities = capabilities,
-
-	-- Only set up dprint if it exists in node_modules/.bin
-	-- We want to use it if there is, but otherwise we will use prettier through
-	-- none-ls
-	root_dir = function(fname)
-		local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
-		if not root then
-			return nil
-		end
-
-		local dprint_path = util.path.join(root, "node_modules", ".bin", "dprint")
-		local is_available = vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
-
-		if is_available then
-			vim.notify("dprint found at " .. root, vim.log.levels.DEBUG)
-			return root
-		end
-		return nil
-	end,
-})
-
 -- Disable vim-go's LSP-like features but keep syntax highlighting; we'll set
 -- up gopls right after
 vim.g.go_def_mapping_enabled = 0 -- Disable go to definition mapping
