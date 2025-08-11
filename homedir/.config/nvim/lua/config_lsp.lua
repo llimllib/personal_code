@@ -255,6 +255,8 @@ lsp.solargraph.setup({ on_attach = on_attach, capabilities = capabilities })
 -- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-876700701
 -- https://github.com/ecly/dotfiles/blob/f2ad429f3ee2c75b4726ce803d8a7293b6aa29c5/.vim/lua/core/plugins/lsp/utils.lua#L13
 local function get_python_path(workspace)
+	workspace = workspace or vim.fn.getcwd()
+
 	-- Use activated virtualenv.
 	if vim.env.VIRTUAL_ENV then
 		print(vim.env.VIRTUAL_ENV)
