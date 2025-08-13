@@ -50,6 +50,9 @@ Review Examples:
   # Limit review to specific files
   review main -- src/components/
 
+  # Exclude a file (package-lock.json) from the review:
+  review -- ':!package-lock.json'
+
   # Adjust context lines
   review -U5 main
 
