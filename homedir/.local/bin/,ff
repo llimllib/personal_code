@@ -7,6 +7,7 @@
 # - open the file in vim
 #
 # requires an `fzf-preview` script to be available
+# shellcheck disable=SC2016
 fd --hidden --color=always --type file --full-path "${*:-}" |
   fzf --ansi \
       --height 40% \

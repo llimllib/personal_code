@@ -329,6 +329,9 @@ alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
 
+# cd into a readme project
+alias rd='. ~/.local/bin/,rd'
+
 # ask claude a question and get an answer without ceremony
 alias q='llm --system "respond with a simple answer and do not explain yourself at all. Do not quote the answer" '
 

@@ -19,6 +19,7 @@
 local lsp = require("lspconfig")
 local util = require("lspconfig.util")
 local cmp = require("cmp")
+local none_ls = require("none_ls")
 
 -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings
 local has_words_before = function()
@@ -201,13 +202,15 @@ lsp.vtsls.setup({
 })
 
 -- npm install -g @biomejs/biome
+-- For now, the projects I use that use biome use it as a formatter as well
+-- instead of prettier, so enable formatting from it. See none_ls.lua
 lsp.biome.setup({
+	capabilities = capabilities,
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 	end,
 	-- don't format files, I prefer using prettier
 	settings = { documentFormatting = false },
-	capabilities = capabilities,
 })
 
 -- npm install vscode-langservers-extracted
@@ -219,6 +222,15 @@ lsp.eslint.setup({
 	-- don't format files, I prefer using prettier
 	settings = { documentFormatting = false },
 	capabilities = capabilities,
+	-- Only activate ESLint when Biome is not available
+	root_dir = function(fname)
+		if none_ls.is_biome_available(fname) then
+			return nil
+		else
+			-- Use the default root_dir function for ESLint
+			return util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
+		end
+	end,
 })
 
 -- Disable vim-go's LSP-like features but keep syntax highlighting; we'll set

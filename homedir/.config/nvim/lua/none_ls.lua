@@ -17,6 +17,16 @@ local is_dprint_available = function(fname)
 	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
 end
 
+local is_biome_available = function(fname)
+	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
+	if not root then
+		return false
+	end
+
+	local dprint_path = util.path.join(root, "node_modules", ".bin", "biome")
+	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
+end
+
 null_ls.setup({
 	-- this on_attach function sets null-ls to do document formatting on save
 	--
@@ -76,3 +86,8 @@ null_ls.setup({
 	-- enable this and run :NullLsLog to see a detailed log
 	-- debug = true,
 })
+
+-- used in config_lsp.lua
+return {
+	is_biome_available = is_biome_available,
+}
