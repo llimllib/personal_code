@@ -1,0 +1,5 @@
+**/.claude/settings.local.json
+.DS_Store
+*.swp
+*.swo
+*.pyc
