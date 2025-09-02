@@ -308,9 +308,12 @@ alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
 alias erd="erd -y inverted --human " # give erd a better default sort
 alias icat='kitty +kitten icat'
+if command -v eza > /dev/null; then
+    export EZA_ICON_SPACING=2
+    alias ls='eza --icons=auto --hyperlink'
 # if gls (gnu ls installed by homebrew) is present, prefer it to ls. If it's
 # not, use --hyperlink if it's available; otherwise back to bsd ls options
-if command -v gls >/dev/null ; then
+elif command -v gls >/dev/null ; then
     alias ls='gls -FG --hyperlink=auto --color=auto'
 else
     if ls --help | grep hyperlink; then
