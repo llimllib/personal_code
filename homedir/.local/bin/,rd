@@ -17,8 +17,11 @@ fi
 
 # ls is way faster than I was able to make find run when sorting by mtime, so
 # we'll use it despite the downsides
+#
+# use /bin/ls to avoid any aliases of ls, since this is run sourced
+#
 # shellcheck disable=SC2012
-dir=$(cd $ROOT && ls -td -- */ 2>/dev/null | sed 's#/$##' | 
+dir=$(cd $ROOT && /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' | 
     fzf --ansi \
         --height 40% \
         --layout reverse \
