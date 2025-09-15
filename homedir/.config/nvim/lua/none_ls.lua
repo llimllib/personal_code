@@ -7,24 +7,14 @@ local lsp = require("lspconfig")
 local null_ls = require("null-ls")
 local util = require("lspconfig.util")
 
-local is_dprint_available = function(fname)
+local is_in_node_bin = function(fname, program)
 	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
 	if not root then
 		return false
 	end
 
-	local dprint_path = util.path.join(root, "node_modules", ".bin", "dprint")
-	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
-end
-
-local is_biome_available = function(fname)
-	local root = util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
-	if not root then
-		return false
-	end
-
-	local dprint_path = util.path.join(root, "node_modules", ".bin", "biome")
-	return vim.fn.executable(dprint_path) == 1 or vim.fn.executable(dprint_path .. ".cmd") == 1
+	local binpath = util.path.join(root, "node_modules", ".bin", program)
+	return vim.fn.executable(binpath) == 1
 end
 
 null_ls.setup({
@@ -52,6 +42,19 @@ null_ls.setup({
 	-- https://github.com/nvimtools/none-ls.nvim/blob/72e25ed4/doc/BUILTIN_CONFIG.md?plain=1#L351-L385
 	sources = {
 		-- formatters
+		null_ls.builtins.formatting.biome.with({
+			prefer_local = "node_modules/.bin",
+			-- if prettier is in node bin, configure it as the formatter.
+			-- if dprint or biome is available in the bin, use it as the formatter
+			-- if neither dprint nor biome is available, use the global prettier
+			condition = function(utils)
+				local js_filetypes =
+					{ "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "jsonc", "markdown" }
+				if vim.tbl_contains(js_filetypes, vim.bo.filetype) then
+					return not is_in_node_bin(utils.bufname, "prettier")
+				end
+			end,
+		}),
 		null_ls.builtins.formatting.black.with({
 			prefer_local = ".venv/bin",
 		}),
@@ -60,12 +63,19 @@ null_ls.setup({
 		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.formatting.prettier.with({
 			prefer_local = "node_modules/.bin",
-			-- Skip prettier if this is a dprint-supported filetype and dprint is available
+			-- if prettier is in node bin, configure it as the formatter.
+			-- if dprint or biome is available in the bin, use it as the formatter
+			-- if neither dprint nor biome is available, use the global prettier
 			condition = function(utils)
-				local dprint_filetypes =
-					{ "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "markdown" }
-				if vim.tbl_contains(dprint_filetypes, vim.bo.filetype) and is_dprint_available(utils.bufname) then
-					return false
+				local js_filetypes =
+					{ "javascript", "typescript", "typescriptreact", "javascriptreact", "json", "jsonc", "markdown" }
+				if vim.tbl_contains(js_filetypes, vim.bo.filetype) then
+					if is_in_node_bin(utils.bufname, "prettier") then
+						return true
+					elseif is_in_node_bin(utils.bufname, "dprint") or is_in_node_bin(utils.bufname, "biome") then
+						vim.notify("using dprint or biome", vim.log.levels.INFO)
+						return false
+					end
 				end
 				return true
 			end,
@@ -89,5 +99,5 @@ null_ls.setup({
 
 -- used in config_lsp.lua
 return {
-	is_biome_available = is_biome_available,
+	is_in_node_bin = is_in_node_bin,
 }

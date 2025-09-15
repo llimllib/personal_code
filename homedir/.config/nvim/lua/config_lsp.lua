@@ -1,7 +1,7 @@
 -- config docs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 --
 -- To install all prerequisite language servers and formatters:
--- brew install efm-langserver rust-analyzer shellcheck stylua taplo
+-- brew install efm-langserver gleam rust-analyzer shellcheck stylua taplo
 -- dotnet tool install --global csharp-ls
 -- gem install solargraph
 -- go install golang.org/x/tools/gopls@latest
@@ -112,7 +112,8 @@ cmp.setup({
 			end
 		end,
 	},
-	sources = { { name = "nvim_lsp" }, { name = "buffer" }, { name = "path" }, { name = "otter" } },
+	-- sources = { { name = "nvim_lsp" }, { name = "buffer" }, { name = "path" }, { name = "otter" } },
+	sources = { { name = "nvim_lsp" }, { name = "path" }, { name = "otter" } },
 	formatting = {
 		format = function(entry, vim_item)
 			-- Kind icons
@@ -209,7 +210,9 @@ lsp.biome.setup({
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 	end,
-	-- don't format files, I prefer using prettier
+	root_dir = function(fname)
+		return util.find_git_ancestor(fname) or util.root_pattern("biome.json", "biome.jsonc")(fname)
+	end,
 	settings = { documentFormatting = false },
 })
 
@@ -224,7 +227,7 @@ lsp.eslint.setup({
 	capabilities = capabilities,
 	-- Only activate ESLint when Biome is not available
 	root_dir = function(fname)
-		if none_ls.is_biome_available(fname) then
+		if none_ls.is_in_node_bin(fname, "biome") then
 			return nil
 		else
 			-- Use the default root_dir function for ESLint
@@ -355,6 +358,11 @@ lsp.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- for TOML files
 lsp.taplo.setup({ on_attach = on_attach, capabilities = capabilities })
+
+-- gleam: https://gleam.run/language-server/#neovim
+-- I don't know how to pass on_attach to this?
+vim.lsp.enable("gleam", { on_attach = on_attach })
+-- lsp.gleam.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- configure diagnostics
 vim.diagnostic.config({

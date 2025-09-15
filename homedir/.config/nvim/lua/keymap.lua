@@ -116,7 +116,25 @@ vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { noremap = true
 vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { noremap = true })
 
 -- NoNeckPain
-vim.keymap.set("n", "<leader>nn", "<cmd>NoNeckPain<cr>", { noremap = true })
+-- I still like this extension, but I want to use the n mapping for my scratch
+-- commands and not have to wait for it to execute. Use :NoNeckPain if you want
+-- vim.keymap.set("n", "<leader>nn", "<cmd>NoNeckPain<cr>", { noremap = true })
+
+-- scratch buffers:
+-- ,n: open up a new vertical split scratch buffer
+-- ,N: open up a new horizontal split scratch buffer
+vim.keymap.set(
+	"n",
+	"<leader>n",
+	":Scratch<CR>",
+	{ noremap = true, silent = true, desc = "Open vertical scratch buffer" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>N",
+	":Scratch horizontal<CR>",
+	{ noremap = true, silent = true, desc = "Open horizontal scratch buffer" }
+)
 
 -- git fugitive
 vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<cr>", { noremap = true })

@@ -68,3 +68,28 @@ vim.cmd([[
 " without exiting insert mode, but it is what it is.
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 ]])
+
+-- Add Scratch command for temporary buffer
+vim.api.nvim_create_user_command("Scratch", function(opts)
+	-- Default to vertical split unless horizontal specified
+	local split_cmd = "vnew"
+	if opts.args == "horizontal" then
+		split_cmd = "new"
+	end
+
+	vim.cmd(split_cmd)
+
+	-- Set buffer options for scratch buffer
+	vim.bo.buftype = "nofile"
+	vim.bo.bufhidden = "wipe"
+	vim.bo.buflisted = false
+	vim.bo.swapfile = false
+
+	-- set a name for the buffer
+	vim.api.nvim_buf_set_name(0, "[Scratch]")
+end, {
+	nargs = "?",
+	complete = function()
+		return { "vertical", "horizontal" }
+	end,
+})

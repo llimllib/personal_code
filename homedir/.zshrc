@@ -280,6 +280,7 @@ alias ga="git add"
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit | head"
 alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 alias pr="gh pr create"
+alias gist="gh gist create"
 alias prune='git remote prune origin'
 
 # if bat is present, replace cat with it

@@ -66,8 +66,11 @@ vim.opt.directory = { "~/.vim-tmp", "~/.tmp", "~/tmp", "/var/tmp", "/tmp" }
 -- Wait 100ms before running cursorhold (shows diagnostic messages)
 vim.opt.updatetime = 100
 
--- recommended by nvim-cmp
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
+-- menu, menuone to use a popup menu even if there's only one
+-- noselect to not automatically select the first option
+-- fuzzy,nosort to have fuzzy matching of candidates, but preserve initial
+-- order.
+vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "nosort" }
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true

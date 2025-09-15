@@ -8,8 +8,6 @@ MISE_NODE_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-npm-package
 MISE_PYTHON_DEFAULT_PACKAGES_FILE = "{{env.HOME}}/.config/mise/default-python-packages"
 
 [settings]
-# plugins can read the versions files used by other version managers (if enabled by the plugin)
-# for example, .nvmrc in the case of node's nvm
 idiomatic_version_file = true
 
 # configure `mise install` to always keep the downloaded archive
@@ -31,6 +29,12 @@ asdf_compat = false # set to true to ensure .tool-versions will be compatible wi
 jobs = 4            # number of plugins or runtimes to install in parallel. The default is `4`.
 raw = false         # set to true to directly pipe plugins to stdin/stdout/stderr
 yes = false         # set to true to automatically answer yes to all prompts
+
+# delete this once the stupid warning stops showing up, pain in my butt. I
+# don't care about idiomatic version support but I do care about not getting a
+# giant warning every time I do somethi
+# https://github.com/jdx/mise/discussions/4345
+idiomatic_version_file_enable_tools = ["node"]
 
 # not_found_auto_install = true # see MISE_NOT_FOUND_AUTO_INSTALL
 # task_output = "prefix" # see Tasks Runner for more information
