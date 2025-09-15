@@ -140,7 +140,9 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 -- I might want to use vim.lsp.buf.formatting_seq_sync() ? read about that
 -- here:
 -- https://www.reddit.com/r/neovim/comments/vvtltr/remove_the_message_select_a_language_server/iflxdv8/
-local on_attach = function(client, bufnr)
+local on_attach = function(client, bufnr, opts)
+	opts = opts or {}
+
 	-- https://github.com/nvim-lua/diagnostic-nvim/issues/29#issuecomment-638040064
 	-- If you want to have the diagnostic information come up on hover, uncomment this:
 	-- vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.util.show_line_diagnostics()')
@@ -161,9 +163,11 @@ local on_attach = function(client, bufnr)
 
 	buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-	-- use none-ls instead of any LSP to do document formatting. Do I need to
-	-- do any conditional LSPs here?
-	client.server_capabilities.document_formatting = false
+	-- use none-ls instead of any LSP to do document formatting, unless an LSP
+	-- explicitly opts in with document_formatting=true
+	if opts.document_formatting ~= true then
+		client.server_capabilities.document_formatting = false
+	end
 end
 
 -- https://github.com/yioneko/vtsls
@@ -211,7 +215,8 @@ lsp.biome.setup({
 		on_attach(client, bufnr)
 	end,
 	root_dir = function(fname)
-		return util.find_git_ancestor(fname) or util.root_pattern("biome.json", "biome.jsonc")(fname)
+		-- run biome if we're in a git repo and biome.json[c] is present
+		return util.find_git_ancestor(fname) and util.root_pattern("biome.json", "biome.jsonc")(fname)
 	end,
 	settings = { documentFormatting = false },
 })
@@ -361,7 +366,12 @@ lsp.taplo.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- gleam: https://gleam.run/language-server/#neovim
 -- I don't know how to pass on_attach to this?
-vim.lsp.enable("gleam", { on_attach = on_attach })
+vim.lsp.enable("gleam", {
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr, { document_formatting = true })
+	end,
+	capabilities = capabilities,
+})
 -- lsp.gleam.setup({ on_attach = on_attach, capabilities = capabilities })
 
 -- configure diagnostics

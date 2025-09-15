@@ -69,7 +69,8 @@ vim.cmd([[
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
 ]])
 
--- Add Scratch command for temporary buffer
+-- Add Scratch command for temporary buffer with unique naming
+local scratch_count = 0
 vim.api.nvim_create_user_command("Scratch", function(opts)
 	-- Default to vertical split unless horizontal specified
 	local split_cmd = "vnew"
@@ -85,8 +86,9 @@ vim.api.nvim_create_user_command("Scratch", function(opts)
 	vim.bo.buflisted = false
 	vim.bo.swapfile = false
 
-	-- set a name for the buffer
-	vim.api.nvim_buf_set_name(0, "[Scratch]")
+	-- Increment counter and set a unique name for the buffer
+	scratch_count = scratch_count + 1
+	vim.api.nvim_buf_set_name(0, "[Scratch-" .. scratch_count .. "]")
 end, {
 	nargs = "?",
 	complete = function()
