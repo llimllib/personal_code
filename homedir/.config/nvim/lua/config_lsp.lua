@@ -172,7 +172,7 @@ end
 
 -- https://github.com/yioneko/vtsls
 -- npm install -g @vtsls/language-server
-lsp.vtsls.setup({
+vim.lsp.enable("vtsls", {
 	on_attach = function(client, bufnr)
 		-- don't format files, I prefer using prettier
 		client.server_capabilities.document_formatting = false
@@ -209,36 +209,33 @@ lsp.vtsls.setup({
 -- npm install -g @biomejs/biome
 -- For now, the projects I use that use biome use it as a formatter as well
 -- instead of prettier, so enable formatting from it. See none_ls.lua
-lsp.biome.setup({
+vim.lsp.enable("biome")
+vim.lsp.config("biome", {
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
-		on_attach(client, bufnr)
+		on_attach(client, bufnr, { document_formatting = true })
 	end,
-	root_dir = function(fname)
+	root_dir = function(bufnr, on_dir)
 		-- run biome if we're in a git repo and biome.json[c] is present
-		return util.find_git_ancestor(fname) and util.root_pattern("biome.json", "biome.jsonc")(fname)
+		local fname = vim.fn.bufname(bufnr)
+		if util.root_pattern("biome.json", "biome.jsonc")(fname) then
+			on_dir(vim.fn.getcwd())
+		end
 	end,
 	settings = { documentFormatting = false },
 })
 
 -- npm install vscode-langservers-extracted
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint
-lsp.eslint.setup({
-	on_attach = function(client, bufnr)
-		on_attach(client, bufnr)
-	end,
-	-- don't format files, I prefer using prettier
-	settings = { documentFormatting = false },
+vim.lsp.enable("eslint")
+vim.lsp.config("eslint", {
+	on_attach = on_attach,
+	-- don't format files, this is delegated to none_ls
+	settings = {
+		documentFormatting = false,
+		format = true,
+	},
 	capabilities = capabilities,
-	-- Only activate ESLint when Biome is not available
-	root_dir = function(fname)
-		if none_ls.is_in_node_bin(fname, "biome") then
-			return nil
-		else
-			-- Use the default root_dir function for ESLint
-			return util.find_git_ancestor(fname) or util.root_pattern("package.json", "tsconfig.json")(fname)
-		end
-	end,
 })
 
 -- Disable vim-go's LSP-like features but keep syntax highlighting; we'll set
@@ -251,7 +248,7 @@ vim.g.go_implements_mode = "" -- Disable :GoImplements
 vim.g.go_referrers_mode = "" -- Disable :GoReferrers
 
 -- go install golang.org/x/tools/gopls@latest
-lsp.gopls.setup({
+vim.lsp.config("gopls", {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 	end,
@@ -266,9 +263,11 @@ lsp.gopls.setup({
 	},
 	init_options = { usePlaceholders = false },
 })
+vim.lsp.enable("gopls")
 
 -- gem install solargraph
-lsp.solargraph.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("solargraph", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("solargraph")
 
 -- use the proper pyright version. From:
 -- https://github.com/neovim/nvim-lspconfig/issues/500#issuecomment-851247107
@@ -295,21 +294,23 @@ local function get_python_path(workspace)
 end
 
 -- pip install pyright
-lsp.pyright.setup({
+vim.lsp.config("pyright", {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	before_init = function(_, config)
 		config.settings.python.pythonPath = get_python_path(config.root_dir)
 	end,
 })
+vim.lsp.enable("pyright")
 
-lsp.elixirls.setup({
+vim.lsp.config("elixirls", {
 	on_attach = on_attach,
 	cmd = { "~/.local/share/elixir-ls/language_server.sh" },
 	capabilities = capabilities,
 })
+vim.lsp.enable("elixirls")
 
-lsp.clangd.setup({
+vim.lsp.config("clangd", {
 	on_attach = on_attach,
 	-- fixes multiple encodings error. taken from:
 	-- https://github.com/LazyVim/LazyVim/blob/530e94a9/lua/lazyvim/plugins/extras/lang/clangd.lua#L67C1-L69C13
@@ -328,51 +329,62 @@ lsp.clangd.setup({
 		"--clang-tidy",
 	},
 })
+vim.lsp.enable("clangd")
 
-lsp.zls.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("zls", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("zls")
 
-lsp.terraformls.setup({
+vim.lsp.config("terraformls", {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 	end,
 	cmd = { "terraform-ls", "serve" },
 })
+vim.lsp.enable("terraformls")
 
-lsp.tflint.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("tflint", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("tflint")
 
-lsp.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("bashls", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("bashls")
 
-lsp.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("cssls", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("cssls")
 
 -- swift lsp. executes "sourcekit-lsp"
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-lsp.sourcekit.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("sourcekit", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("sourcekit", { on_attach = on_attach, capabilities = capabilities })
 
-lsp.texlab.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("texlab", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("texlab", { on_attach = on_attach, capabilities = capabilities })
 
-lsp.html.setup({
+vim.lsp.config("html", {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
 	end,
 	capabilities = capabilities,
 })
+vim.lsp.enable("html")
 
-lsp.csharp_ls.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("csharp_ls", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("csharp_ls")
 
-lsp.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("rust_analyzer", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("rust_analyzer")
 
 -- for TOML files
-lsp.taplo.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.config("taplo", { on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("taplo")
 
 -- gleam: https://gleam.run/language-server/#neovim
--- I don't know how to pass on_attach to this?
-vim.lsp.enable("gleam", {
+vim.lsp.config("gleam", {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr, { document_formatting = true })
 	end,
 	capabilities = capabilities,
 })
--- lsp.gleam.setup({ on_attach = on_attach, capabilities = capabilities })
+vim.lsp.enable("gleam")
 
 -- configure diagnostics
 vim.diagnostic.config({
