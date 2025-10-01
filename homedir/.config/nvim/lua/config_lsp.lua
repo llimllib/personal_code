@@ -386,6 +386,14 @@ vim.lsp.config("gleam", {
 })
 vim.lsp.enable("gleam")
 
+vim.lsp.config("rust_analyzer", {
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr, { document_formatting = true })
+	end,
+	capabilities = capabilities,
+})
+vim.lsp.enable("rust_analyzer")
+
 -- configure diagnostics
 vim.diagnostic.config({
 	-- set to false to disable virtual text displays
