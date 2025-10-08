@@ -32,11 +32,13 @@ dir=$(cd $ROOT && /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' |
                    elif [[ -f $ROOT/{}master/README.md ]]; then $display $ROOT/{}master/README.md; 
                    else ls -la $ROOT/{}; 
                    fi" \
-        --preview-window "right,60%,border,+3/3")
+        --preview-window "right,60%,border,+3/3" \
+        --query "$1"
+      )
         # above is a complicated preview that finds the README if available and
         # displays it; for a simpler preview, use:
         # --preview "ls -la ~/{}" \
-echo $dir
+echo "$dir"
 
 if [[ -n "$dir" ]]; then
   cd $ROOT/"$dir" || return
