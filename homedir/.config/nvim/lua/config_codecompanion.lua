@@ -29,8 +29,8 @@ require("codecompanion").setup({
 						-- saved key with:
 						-- $ security add-generic-password -s 'anthropic' -a 'llimllib' -w 'sk-ant-<key-goes-here>'
 						-- retrieve with:
-						-- $ security find-generic-password -s 'anthropic' -a 'llimllib' -w
-						api_key = "cmd:security find-generic-password -w -s 'anthropic' | tr -d '\n'",
+						-- $ security find-generic-password -ws 'anthropic'
+						api_key = "cmd:security find-generic-password -ws 'anthropic' | tr -d '\n'",
 					},
 					schema = {
 						model = {
@@ -74,14 +74,6 @@ require("codecompanion").setup({
 				dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
 				---Enable detailed logging for history extension
 				enable_logging = false,
-			},
-		},
-		mcphub = {
-			callback = "mcphub.extensions.codecompanion",
-			opts = {
-				make_vars = true,
-				make_slash_commands = true,
-				show_result_in_chat = true,
 			},
 		},
 	},
