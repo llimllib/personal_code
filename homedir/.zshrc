@@ -245,7 +245,7 @@ RESET='\e[0m'
 # open a parquet file with duckdb
 function parduck {
     local filename="$1"
-    local tablename="${filename%.parquet}"; echo $filename,$tablename
+    local tablename="${filename%.parquet}"
     printf "creating table %b%s%b\n" $YELLOW "$tablename" $RESET
     duckdb -init <(echo "CREATE TABLE $tablename AS SELECT * FROM '$filename';")
 }
