@@ -94,11 +94,6 @@ require("lazy").setup({
 		-- "habamax/vim-habamax",
 		-- /colorschemes
 
-		-- includes a whole bunch of stuff, I'm using it for base16 experiments
-		-- at the moment. List of included modules:
-		-- https://github.com/echasnovski/mini.nvim/tree/main#modules
-		"echasnovski/mini.nvim",
-
 		-- Use Neovim as a language server to inject LSP diagnostics, code
 		-- actions, and more via Lua.
 		--

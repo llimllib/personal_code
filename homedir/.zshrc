@@ -239,6 +239,17 @@ function title {
   fi
 }
 
+YELLOW='\e[33m'
+RESET='\e[0m'
+
+# open a parquet file with duckdb
+function parduck {
+    local filename="$1"
+    local tablename="${filename%.parquet}"; echo $filename,$tablename
+    printf "creating table %b%s%b\n" $YELLOW "$tablename" $RESET
+    duckdb -init <(echo "CREATE TABLE $tablename AS SELECT * FROM '$filename';")
+}
+
 # set the default XDG directories; this shouldn't be necessary but some apps
 # use the presence of these variables to decide whether to follow XDG or not
 export XDG_DATA_HOME=~/.local/share
@@ -287,6 +298,12 @@ alias prune='git remote prune origin'
 if command -v bat > /dev/null; then
     alias bat='bat --wrap never' # Add the `--wrap never` arg to all `bat` invocations
     alias cat='bat --wrap never'
+
+    # tail a file with syntax highlighting and line numbers. Not a tail alias
+    # because it can't do -f
+    bail() {
+        bat --color=always --paging=never "$1" | tail "${@:2}"
+    }
 
     # use bat to read man pages
     # https://github.com/sharkdp/bat#man

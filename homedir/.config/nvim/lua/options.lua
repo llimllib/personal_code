@@ -18,10 +18,11 @@ vim.opt.backspace = { "indent", "eol", "start" }
 -- show invisible characters
 vim.opt.list = true
 vim.opt.listchars = {
+	nbsp = "␣",
 	tab = "→ ",
 	trail = "⋅",
-	extends = "❯",
-	precedes = "❮",
+	extends = "…",
+	precedes = "…",
 }
 
 -- turn on persistent undo, and store it in the vim dir
@@ -74,6 +75,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect", "fuzzy", "nosort" }
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.splitkeep = "screen" -- Reduce scroll during window split
 
 -- show line
 vim.opt.ruler = true
@@ -88,3 +90,14 @@ end
 vim.opt.previewheight = 30
 
 vim.opt.shell = "zsh"
+
+-- trial options from mini.vim: https://github.com/nvim-mini/MiniMax/blob/f45c658a/configs/nvim-0.11/plugin/10_options.lua
+vim.opt.switchbuf = "usetab" -- open from the quickfix list in an open buffer if available
+vim.opt.breakindent = true
+vim.opt.breakindentopt = "list:-1"
+vim.opt.winborder = "single"
+vim.opt.formatoptions = "crqnl1j" -- default jcroql; see fo-table for options meaning
+vim.opt.smartindent = true -- I feel like I disabled this at some point in the ancient past intentionally, let's try it again
+vim.opt.spelloptions = "camel" -- treat camelCase words as two words
+vim.opt.virtualedit = "block" -- Allow going past end of line in blockwise mode
+vim.opt.iskeyword = "@,48-57,_,192-255,-" -- Treat dash as `word` textobject part

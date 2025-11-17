@@ -16,6 +16,27 @@ require("codecompanion").setup({
 					hide = true,
 				},
 			},
+			tools = {
+				opts = {
+					default_tools = {
+						-- https://codecompanion.olimorris.dev/usage/chat-buffer/tools#files
+						-- cmd_runner, create_file, file_search, get_changed_files, grep_search, insert_edit_into_file, read_file
+						-- "full_stack_dev",
+						"cmd_runner",
+						"file_search",
+						"grep_search",
+						"read_file",
+					},
+				},
+			},
+			variables = {
+				-- https://codecompanion.olimorris.dev/configuration/chat-buffer
+				["buffer"] = {
+					opts = {
+						default_params = "pin", -- or 'watch'
+					},
+				},
+			},
 		},
 		inline = {
 			adapter = "anthropic",
