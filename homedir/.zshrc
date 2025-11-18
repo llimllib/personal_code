@@ -250,6 +250,14 @@ function parduck {
     duckdb -init <(echo "CREATE TABLE $tablename AS SELECT * FROM '$filename';")
 }
 
+# open duckdb web ui with the given file
+function parduckui {
+    local filename="$1"
+    local tablename="${filename%.parquet}"
+    printf "creating table %b%s%b\n" $YELLOW "$tablename" $RESET
+    duckdb -init <(echo "CREATE TABLE $tablename AS SELECT * FROM '$filename'; CALL start_ui();")
+}
+
 # set the default XDG directories; this shouldn't be necessary but some apps
 # use the presence of these variables to decide whether to follow XDG or not
 export XDG_DATA_HOME=~/.local/share
