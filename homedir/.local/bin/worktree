@@ -201,8 +201,17 @@ function _worktree {
         direnv allow "../$dirname"
     fi
 
-    # now change to the new tree and enable the root envrc if present
+    # now change to the new tree
     cd "../$dirname" || return
+
+    # Initialize and update submodules if they exist
+    if [ -f "$git_root/.gitmodules" ]; then
+        warn "initializing submodules"
+        if ! git submodule update --init --recursive; then
+            warn "Failed to initialize submodules"
+        fi
+    fi
+
     printf "%bcreated worktree %s%b\n" "$GREEN" "../$dirname" "$CLEAR"
 }
 
