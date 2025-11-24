@@ -276,7 +276,7 @@ export LOCALBIN="$HOME/.local/bin"
 export DOTNETBIN="$HOME/.dotnet/tools"
 export HOMEBREWBIN="/opt/homebrew/bin"
 export HOMEBREWSBIN="/opt/homebrew/sbin"
-export PNPMBIN="$HOEM/Library/pnpm"
+export PNPMBIN="$HOME/Library/pnpm"
 
 # add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
 # git-prompt depends on being able to find brew, so this must come before that.
