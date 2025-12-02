@@ -17,6 +17,9 @@ worktree [-v] <branch name>
 create a git worktree with <branch name>. Will create a worktree if one isn't
 found that matches the given name.
 
+To create a worktree from a github fork, use the format username:branchname:
+    worktree someuser:feature-branch
+
 Will copy over some untracked files to the new worktree. By default, this includes
 .env, .envrc, .env.local, .tool-versions, and mise.toml files.
 
@@ -96,11 +99,54 @@ function _worktree {
     fi
     branchname="$1"
 
-    # Replace slashes with underscores. If there's no slash, dirname will equal
-    # branchname. So "alu/something-other" becomes "alu_something-other", but
-    # "quick-fix" stays unchanged
-    # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
-    dirname=${branchname//\//_}
+    # if the branch is of the form user:branch, assume that is a fork 'branch'
+    # of the current repository at github.com/user/<repo_name>
+    if [[ "$branchname" == *:* ]]; then
+        username="${branchname%%:*}"
+        branchname="${branchname#*:}"
+        remote="$username"
+
+        # Check if remote exists
+        if ! git remote get-url "$remote" > /dev/null 2>&1; then
+            # Get the origin URL and construct the fork URL
+            origin_url=$(git remote get-url origin)
+
+            # Handle both SSH and HTTPS URLs
+            if [[ "$origin_url" == git@github.com:* ]]; then
+                # SSH format: git@github.com:owner/repo.git
+                repo_name="${origin_url##*/}"
+                fork_url="git@github.com:${username}/${repo_name}"
+            elif [[ "$origin_url" == https://github.com/* ]]; then
+                # HTTPS format: https://github.com/owner/repo.git
+                repo_name="${origin_url##*/}"
+                fork_url="https://github.com/${username}/${repo_name}"
+            else
+                die "Unable to determine fork URL from origin: $origin_url"
+            fi
+
+            warn "Adding remote '$remote' for $fork_url"
+            if ! git remote add "$remote" "$fork_url"; then
+                die "Failed to add remote '$remote'"
+            fi
+        fi
+
+        # Fetch from the remote
+        warn "Fetching from remote '$remote'"
+        if ! git fetch "$remote"; then
+            die "Failed to fetch from remote '$remote'"
+        fi
+
+        # Update the dirname to include the username prefix, and replace
+        # slashes with underscores
+        dirname="${username}_${branchname//\//_}"
+    else
+        remote="origin"
+        # Replace slashes with underscores. If there's no slash, dirname will equal
+        # branchname. So "alu/something-other" becomes "alu_something-other", but
+        # "quick-fix" stays unchanged
+        # https://www.tldp.org/LDP/abs/html/parameter-substitution.html
+        dirname=${branchname//\//_}
+    fi
 
     # Find the git repository root and change to it; if you run this command
     # from a directory within the repository this will make sure it still does
@@ -133,12 +179,16 @@ function _worktree {
             die "failed to create git worktree $branchname"
         fi
     # if the branch exists on a remote:
-    elif git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin | grep -E "^$branchname$" > /dev/null 2>&1; then
-        if ! git worktree add "../$dirname" "$branchname"; then
-            die "failed to create git worktree $branchname"
+    elif git for-each-ref --format='%(refname:lstrip=3)' "refs/remotes/$remote" | grep -E "^$branchname$" > /dev/null 2>&1; then
+        # create a local worktree tracking the remote branch
+        if ! git worktree add -b "$branchname" "../$dirname" "$remote/$branchname"; then
+            die "failed to create git worktree $remote/$branchname"
         fi
     else
         # otherwise, create a new branch
+        if [ "$remote" != "origin" ]; then
+            warn "Branch $remote/$branchname not found, creating new local branch"
+        fi
         if ! git worktree add -b "$branchname" "../$dirname"; then
             die "failed to create git worktree $branchname"
         fi
