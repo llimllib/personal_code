@@ -1,0 +1,376 @@
+student,session 1,session 2
+1,Arts and Crafts - Make a Winter Craft,Make your own puppet
+2,Arts and Crafts - Make a Winter Craft,Make Comic Books
+3,Arts and Crafts - Make a Winter Craft,Make your own puppet
+4,Arts and Crafts - Make a Winter Craft,Make your own puppet
+5,Arts and Crafts - Make a Winter Craft,Sciencenter
+6,Arts and Crafts - Make a Winter Craft,Make your own puppet
+7,Arts and Crafts - Make a Winter Craft,Sciencenter
+8,Sciencenter,Pottery/Clay
+9,Makerspace,Sewing
+10,Cooking,Legos
+11,Cooking,Disc Golf
+12,Cooking,Gymnastics Party
+13,Cooking,Pottery/Clay
+14,Cooking,Magic the Gathering (card game)
+15,Cooking,Science project - making oobleck
+16,Cooking,Science project - making oobleck
+17,Cooking,Sewing
+18,Cooking,Pottery/Clay
+19,Cooking,Make Snowflakes
+20,Cooking,Science - Amazing Reactions
+21,Cooking,Zen Group - relax and color
+22,Cooking,Magic the Gathering (card game)
+23,Cooking,Piano Talent Share
+24,Cooking,Science project - making oobleck
+25,Cooking,Pottery/Clay
+26,Cooking,Gymnastics Party
+27,Cooking,Pottery/Clay
+28,Cooking,Science project - making oobleck
+29,Cooking,Pottery/Clay
+30,Pottery/Clay,Cooking
+31,Arts and Crafts - Make a Winter Craft,Cooking
+32,Science - Amazing Reactions,Cooking
+33,Legos,Cooking
+34,Strawbees robots (grades 2-5),Cooking
+35,Science project - making oobleck,Cooking
+36,Science project - making oobleck,Cooking
+37,Makerspace,Cooking
+38,Makerspace,Cooking
+39,Makerspace,Cooking
+40,Arts and Crafts - Make a Winter Craft,Cooking
+41,Disc Golf,Cooking
+42,Legos,Cooking
+43,Strawbees robots (grades 2-5),Cooking
+44,Make your own puppet,Cooking
+45,Arts and Crafts - Make a Winter Craft,Cooking
+46,Zen Group - relax and color,Cooking
+47,Zen Group - relax and color,Cooking
+48,Science - Amazing Reactions,Zen Group - relax and color
+49,Zen Group - relax and color,Makerspace
+50,Creative writing,Pottery/Clay
+51,Sciencenter,Make Snowflakes
+52,Make Snowflakes,Puzzles
+53,,
+54,Disc Golf,Science - Amazing Reactions
+55,Disc Golf,Science - Amazing Reactions
+56,Disc Golf,Science - Amazing Reactions
+57,Disc Golf,Makerspace
+58,Engineering toys (grades 2-5),Sewing
+59,Engineering toys (grades 2-5),Gymnastics Party
+60,Engineering toys (grades 2-5),Sewing
+61,Engineering toys (grades 2-5),Gymnastics Party
+62,Engineering toys (grades 2-5),Sewing
+63,Engineering toys (grades 2-5),Magic the Gathering (card game)
+64,Engineering toys (grades 2-5),Make Snowflakes
+65,Engineering toys (grades 2-5),Legos
+66,Engineering toys (grades 2-5),Legos
+67,Engineering toys (grades 2-5),Sewing
+68,Engineering toys (grades 2-5),Gymnastics Party
+69,Engineering toys (grades 2-5),Gymnastics Party
+70,Engineering toys (grades 2-5),Science project - making oobleck
+71,Engineering toys (grades 2-5),Gymnastics Party
+72,Engineering toys (grades 2-5),Make your own puppet
+73,Engineering toys (grades 2-5),Strawbees robots (grades 2-5)
+74,Engineering toys (grades 2-5),Legos
+75,Engineering toys (grades 2-5),Disc Golf
+76,Engineering toys (grades 2-5),Piano Talent Share
+77,Engineering toys (grades 2-5),Science - Amazing Reactions
+78,Piano Talent Share,Engineering toys (grades 2-5)
+79,Magic the Gathering (card game),Engineering toys (grades 2-5)
+80,Zen Group - relax and color,Engineering toys (grades 2-5)
+81,Legos,Engineering toys (grades 2-5)
+82,Piano Talent Share,Engineering toys (grades 2-5)
+83,Arts and Crafts - Make a Winter Craft,Engineering toys (grades 2-5)
+84,Piano Talent Share,Engineering toys (grades 2-5)
+85,Piano Talent Share,Engineering toys (grades 2-5)
+86,Piano Talent Share,Engineering toys (grades 2-5)
+87,Make Comic Books,Engineering toys (grades 2-5)
+88,Sewing,Feminist Group
+89,Sewing,Feminist Group
+90,Creative writing,Feminist Group
+91,Sciencenter,Feminist Group
+92,Gymnastics Party,Make your own puppet
+93,Gymnastics Party,Science - Amazing Reactions
+94,Gymnastics Party,Hip-hop dance
+95,Gymnastics Party,Hip-hop dance
+96,Gymnastics Party,Pottery/Clay
+97,Gymnastics Party,Hip-hop dance
+98,Gymnastics Party,Sewing
+99,Gymnastics Party,Feminist Group
+100,Gymnastics Party,Hip-hop dance
+101,Gymnastics Party,Sewing
+102,Gymnastics Party,Pottery/Clay
+103,Gymnastics Party,Hip-hop dance
+104,Gymnastics Party,Puzzles
+105,Gymnastics Party,Engineering toys (grades 2-5)
+106,Gymnastics Party,Sewing
+107,Gymnastics Party,Sciencenter
+108,Gymnastics Party,Sciencenter
+109,Gymnastics Party,Sciencenter
+110,Gymnastics Party,Zen Group - relax and color
+111,Gymnastics Party,Pottery/Clay
+112,Gymnastics Party,Pottery/Clay
+113,Gymnastics Party,Puzzles
+114,Gymnastics Party,Science project - making oobleck
+115,Gymnastics Party,Science project - making oobleck
+116,Gymnastics Party,Hip-hop dance
+117,Gymnastics Party,Feminist Group
+118,Gymnastics Party,Sewing
+119,Gymnastics Party,Planets!
+120,Gymnastics Party,Strawbees robots (grades 2-5)
+121,Gymnastics Party,Hip-hop dance
+122,Gymnastics Party,Science project - making oobleck
+123,Gymnastics Party,Science - Amazing Reactions
+124,Gymnastics Party,Zen Group - relax and color
+125,Gymnastics Party,Science project - making oobleck
+126,Gymnastics Party,Puzzles
+127,Gymnastics Party,Hip-hop dance
+128,Puzzles,Hip-hop dance
+129,Gymnastics Party,Sciencenter
+130,Gymnastics Party,Sciencenter
+131,Make Snowflakes,Make your own puppet
+132,Zen Group - relax and color,Gymnastics Party
+133,Make your own puppet,Gymnastics Party
+134,Science - Amazing Reactions,Gymnastics Party
+135,Science - Amazing Reactions,Gymnastics Party
+136,Science - Amazing Reactions,Gymnastics Party
+137,Legos,Gymnastics Party
+138,Hip-hop dance,Gymnastics Party
+139,Hip-hop dance,Pottery/Clay
+140,Hip-hop dance,Arts and Crafts - Make a Winter Craft
+141,Hip-hop dance,Sewing
+142,Hip-hop dance,Magic the Gathering (card game)
+143,Hip-hop dance,Pottery/Clay
+144,Hip-hop dance,Hip-hop dance
+145,Hip-hop dance,Zen Group - relax and color
+146,Hip-hop dance,Gymnastics Party
+147,Hip-hop dance,Zen Group - relax and color
+148,Hip-hop dance,Pottery/Clay
+149,Hip-hop dance,Arts and Crafts - Make a Winter Craft
+150,Hip-hop dance,Puzzles
+151,Hip-hop dance,Science - Amazing Reactions
+152,Hip-hop dance,Arts and Crafts - Make a Winter Craft
+153,Hip-hop dance,Make your own puppet
+154,Hip-hop dance,Make your own puppet
+155,Hip-hop dance,Science project - making oobleck
+156,Hip-hop dance,Gymnastics Party
+157,Hip-hop dance,Legos
+158,Magic the Gathering (card game),Hip-hop dance
+159,Legos,Hip-hop dance
+160,Sciencenter,Hip-hop dance
+161,Planets!,Hip-hop dance
+162,Planets!,Hip-hop dance
+163,Legos,Makerspace
+164,Legos,Science project - making oobleck
+165,Legos,Makerspace
+166,Legos,Science project - making oobleck
+167,Legos,Science project - making oobleck
+168,Legos,Science project - making oobleck
+169,Legos,Strawbees robots (grades 2-5)
+170,Legos,Science - Amazing Reactions
+171,Legos,Legos
+172,Legos,Make your own puppet
+173,Legos,Make your own puppet
+174,Legos,Make your own puppet
+175,Legos,Make your own puppet
+176,Magic the Gathering (card game),Disc Golf
+177,Magic the Gathering (card game),Make Comic Books
+178,Magic the Gathering (card game),Disc Golf
+179,Magic the Gathering (card game),Pottery/Clay
+180,Magic the Gathering (card game),Make Comic Books
+181,Magic the Gathering (card game),Legos
+182,Magic the Gathering (card game),Gymnastics Party
+183,Magic the Gathering (card game),Disc Golf
+184,Magic the Gathering (card game),Science - Amazing Reactions
+185,Magic the Gathering (card game),Disc Golf
+186,Magic the Gathering (card game),Science project - making oobleck
+187,Magic the Gathering (card game),Legos
+188,Magic the Gathering (card game),Magic the Gathering (card game)
+189,Make Comic Books,Planets!
+190,Make Comic Books,Puzzles
+191,Make Comic Books,Gymnastics Party
+192,Make Comic Books,Magic the Gathering (card game)
+193,Make Comic Books,Magic the Gathering (card game)
+194,Make Comic Books,Piano Talent Share
+195,Make Comic Books,Make your own puppet
+196,Make Comic Books,Makerspace
+197,Make Comic Books,Zen Group - relax and color
+198,Make Snowflakes,Gymnastics Party
+199,Make Snowflakes,Science - Amazing Reactions
+200,Make Snowflakes,Planets!
+201,Make Snowflakes,Planets!
+202,Make Snowflakes,Sewing
+203,Make Snowflakes,Sewing
+204,Make Snowflakes,Arts and Crafts - Make a Winter Craft
+205,Make Snowflakes,Puzzles
+206,Make your own puppet,Hip-hop dance
+207,Make your own puppet,Legos
+208,Make your own puppet,Magic the Gathering (card game)
+209,Make your own puppet,Make Comic Books
+210,Make your own puppet,Make Snowflakes
+211,Make your own puppet,Puzzles
+212,Make your own puppet,Planets!
+213,Make your own puppet,Science - Amazing Reactions
+214,Make your own puppet,Legos
+215,Make your own puppet,Sciencenter
+216,Make your own puppet,Legos
+217,Make your own puppet,Legos
+218,Make your own puppet,Arts and Crafts - Make a Winter Craft
+219,Make your own puppet,Sciencenter
+220,Make your own puppet,Make Snowflakes
+221,Make your own puppet,Legos
+222,Makerspace,Makerspace
+223,Makerspace,Science project - making oobleck
+224,Makerspace,Make Snowflakes
+225,Disc Golf,Engineering toys (grades 2-5)
+226,Makerspace,Make Comic Books
+227,Make Snowflakes,Legos
+228,Makerspace,Gymnastics Party
+229,Makerspace,Hip-hop dance
+230,Makerspace,Science - Amazing Reactions
+231,Makerspace,Hip-hop dance
+232,Makerspace,Pottery/Clay
+233,Makerspace,Make Comic Books
+234,Makerspace,Legos
+235,Makerspace,Piano Talent Share
+236,Makerspace,Make your own puppet
+237,Makerspace,Legos
+238,Piano Talent Share,Gymnastics Party
+239,Piano Talent Share,Makerspace
+240,Piano Talent Share,Planets!
+241,Piano Talent Share,Gymnastics Party
+242,Piano Talent Share,Legos
+243,Piano Talent Share,Feminist Group
+244,Planets!,Makerspace
+245,Planets!,Gymnastics Party
+246,Planets!,Science - Amazing Reactions
+247,Planets!,Science - Amazing Reactions
+248,Planets!,Legos
+249,Planets!,Sciencenter
+250,Planets!,Science - Amazing Reactions
+251,Planets!,Science - Amazing Reactions
+252,Planets!,Science - Amazing Reactions
+253,Planets!,Puzzles
+254,Planets!,Make Comic Books
+255,Planets!,Science - Amazing Reactions
+256,Planets!,Arts and Crafts - Make a Winter Craft
+257,Planets!,Strawbees robots (grades 2-5)
+258,Planets!,Legos
+259,Arts and Crafts - Make a Winter Craft,Zen Group - relax and color
+260,Arts and Crafts - Make a Winter Craft,Zen Group - relax and color
+261,Planets!,Zen Group - relax and color
+262,Pottery/Clay,Makerspace
+263,Pottery/Clay,Make your own puppet
+264,Pottery/Clay,Gymnastics Party
+265,Pottery/Clay,Makerspace
+266,Pottery/Clay,Arts and Crafts - Make a Winter Craft
+267,Pottery/Clay,Planets!
+268,Pottery/Clay,Planets!
+269,Pottery/Clay,Puzzles
+270,Pottery/Clay,Gymnastics Party
+271,Pottery/Clay,Makerspace
+272,Pottery/Clay,Make Snowflakes
+273,Pottery/Clay,Arts and Crafts - Make a Winter Craft
+274,Pottery/Clay,Disc Golf
+275,Pottery/Clay,Disc Golf
+276,Pottery/Clay,Zen Group - relax and color
+277,Pottery/Clay,Makerspace
+278,Pottery/Clay,Sewing
+279,Pottery/Clay,Sewing
+280,Pottery/Clay,Sewing
+281,Magic the Gathering (card game),Cooking
+282,Science project - making oobleck,Pottery/Clay
+283,Gymnastics Party,Pottery/Clay
+284,Science project - making oobleck,Pottery/Clay
+285,Science - Amazing Reactions,Gymnastics Party
+286,Science - Amazing Reactions,
+287,Science - Amazing Reactions,Gymnastics Party
+288,Science - Amazing Reactions,Makerspace
+289,Science - Amazing Reactions,Makerspace
+290,Science - Amazing Reactions,Planets!
+291,Science - Amazing Reactions,Piano Talent Share
+292,Science - Amazing Reactions,Legos
+293,Science - Amazing Reactions,Planets!
+294,Science - Amazing Reactions,Gymnastics Party
+295,Science - Amazing Reactions,Planets!
+296,Science - Amazing Reactions,Science project - making oobleck
+297,Science project - making oobleck,Planets!
+298,Science project - making oobleck,Gymnastics Party
+299,Science project - making oobleck,Puzzles
+300,Science project - making oobleck,Planets!
+301,Science project - making oobleck,Cooking
+302,Science project - making oobleck,Gymnastics Party
+303,Science project - making oobleck,Gymnastics Party
+304,Science project - making oobleck,Arts and Crafts - Make a Winter Craft
+305,Science project - making oobleck,Puzzles
+306,Science project - making oobleck,Zen Group - relax and color
+307,Science project - making oobleck,Gymnastics Party
+308,Science project - making oobleck,Gymnastics Party
+309,Science project - making oobleck,Gymnastics Party
+310,Science project - making oobleck,Planets!
+311,Science project - making oobleck,Arts and Crafts - Make a Winter Craft
+312,Make Comic Books,Make your own puppet
+313,Science project - making oobleck,Sciencenter
+314,Make Comic Books,Science - Amazing Reactions
+315,Puzzles,Sciencenter
+316,Science - Amazing Reactions,Gymnastics Party
+317,Make your own puppet,Science project - making oobleck
+318,Zen Group - relax and color,Science project - making oobleck
+319,Gymnastics Party,Science project - making oobleck
+320,Sciencenter,Puzzles
+321,Sciencenter,Hip-hop dance
+322,Sciencenter,Planets!
+323,Sciencenter,Gymnastics Party
+324,Sciencenter,Makerspace
+325,Sciencenter,Sewing
+326,Sciencenter,Gymnastics Party
+327,Sciencenter,Pottery/Clay
+328,Sciencenter,Make Comic Books
+329,Sciencenter,Engineering toys (grades 2-5)
+330,Sciencenter,Puzzles
+331,Sciencenter,Zen Group - relax and color
+332,Sciencenter,Planets!
+333,Sciencenter,Zen Group - relax and color
+334,Sciencenter,Planets!
+335,Sciencenter,Planets!
+336,Zen Group - relax and color,
+337,Science - Amazing Reactions,Gymnastics Party
+338,Science - Amazing Reactions,Sciencenter
+339,Planets!,Sciencenter
+340,Arts and Crafts - Make a Winter Craft,Sciencenter
+341,Planets!,Sciencenter
+342,Makerspace,Sciencenter
+343,Makerspace,Sciencenter
+344,Legos,Sciencenter
+345,Sewing,Zen Group - relax and color
+346,Sewing,Gymnastics Party
+347,Sewing,Make your own puppet
+348,Sewing,Sewing
+349,Sewing,Zen Group - relax and color
+350,Sewing,Make your own puppet
+351,Sewing,Make your own puppet
+352,Sewing,Engineering toys (grades 2-5)
+353,Strawbees robots (grades 2-5),Engineering toys (grades 2-5)
+354,Strawbees robots (grades 2-5),Disc Golf
+355,Strawbees robots (grades 2-5),
+356,Strawbees robots (grades 2-5),Sciencenter
+357,Strawbees robots (grades 2-5),Makerspace
+358,Strawbees robots (grades 2-5),Planets!
+359,Strawbees robots (grades 2-5),Make Comic Books
+360,Strawbees robots (grades 2-5),Piano Talent Share
+361,Zen Group - relax and color,Planets!
+362,Zen Group - relax and color,Disc Golf
+363,Zen Group - relax and color,Makerspace
+364,Zen Group - relax and color,Makerspace
+365,Zen Group - relax and color,Arts and Crafts - Make a Winter Craft
+366,Zen Group - relax and color,Sewing
+367,Make your own puppet,Makerspace
+368,Magic the Gathering (card game),Strawbees robots (grades 2-5)
+369,Zen Group - relax and color,Disc Golf
+370,Legos,Makerspace
+371,Make Comic Books,Zen Group - relax and color
+372,Zen Group - relax and color,Puzzles
+373,Zen Group - relax and color,Hip-hop dance
+374,Zen Group - relax and color,Make Snowflakes
+375,Zen Group - relax and color,Make Snowflakes
