@@ -38,13 +38,13 @@ pub fn n_passes(n, t, m) -> Int {
     let nt = int.negate(t)
     case t {
         // if we're turning right, ⌊(n+t)/m⌋
-        _ if t > 0 -> int.divide(n + t, m) |> result.unwrap(0)
+        _ if t > 0 -> {n + t} / m
         // if we're turning left <1 zero point, 0
         _ if n > nt -> 0
         // if we're at zero, do not pass go, return ⌊t/m⌋
-        _ if n == 0 -> int.absolute_value(int.divide(t, m) |> result.unwrap(0))
+        _ if n == 0 -> int.absolute_value(t/m)
         // if we're turning left >1 zero point, 1 + ⌊(n+t)/m⌋
-        _ -> 1 + {int.divide(int.absolute_value(n + t), m) |> result.unwrap(0)}
+        _ -> 1 + int.absolute_value(n + t) / m
     }
 }
 
