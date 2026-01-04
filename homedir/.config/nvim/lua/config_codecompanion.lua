@@ -2,7 +2,7 @@
 require("codecompanion").setup({
 	strategies = {
 		chat = {
-			adapter = "anthropic",
+			adapter = "claude_code",
 			-- for all options: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua#L42-L392
 			keymaps = {
 				options = {
@@ -39,10 +39,19 @@ require("codecompanion").setup({
 			},
 		},
 		inline = {
-			adapter = "anthropic",
+			adapter = "claude_code",
 		},
 	},
 	adapters = {
+		acp = {
+			claude_code = function()
+				return require("codecompanion.adapters").extend("claude_code", {
+					env = {
+						CLAUDE_CODE_OAUTH_TOKEN = "cmd:security find-generic-password -ws 'anthropic-claude' | tr -d '\n'",
+					},
+				})
+			end,
+		},
 		http = {
 			anthropic = function()
 				return require("codecompanion.adapters").extend("anthropic", {
@@ -79,13 +88,14 @@ require("codecompanion").setup({
 				expiration_days = 0,
 				-- Picker interface ("telescope" or "snacks" or "fzf-lua" or "default")
 				picker = "telescope",
-				---Automatically generate titles for new chats
+				-- Automatically generate titles for new chats
 				auto_generate_title = true,
 				title_generation_opts = {
-					---Adapter for generating titles (defaults to active chat's adapter)
-					adapter = nil, -- e.g "copilot"
-					---Model for generating titles (defaults to active chat's model)
-					model = nil, -- e.g "gpt-4o"
+					-- Adapter for generating titles (defaults to active chat's adapter)
+					adapter = "anthropic", -- e.g "copilot"
+					-- Model for generating titles (defaults to active chat's model)
+					-- let's use a cheap model because so-so titles are fine
+					model = "claude-haiku-4-5-20251001", -- e.g "gpt-4o"
 				},
 				---On exiting and entering neovim, loads the last chat on opening chat
 				continue_last_chat = false,
