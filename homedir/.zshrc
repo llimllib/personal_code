@@ -334,7 +334,10 @@ alias gg='batgrep'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
-alias erd="erd -y inverted --human " # give erd a better default sort
+alias erd="erd -y inverted --human" # give erd a better default sort
+if command -v fd > /dev/null; then
+    alias fd="fd --hyperlink"
+fi
 alias icat='kitty +kitten icat'
 if command -v eza > /dev/null; then
     export EZA_ICON_SPACING=2
