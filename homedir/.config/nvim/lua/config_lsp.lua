@@ -303,6 +303,22 @@ vim.lsp.config("pyright", {
 })
 vim.lsp.enable("pyright")
 
+-- https://docs.astral.sh/ty/editors/
+-- uv tool install ty@latest
+--
+-- I tried this out, but it failed to give me typings on the pandas file
+-- I tried it on - everything was just "unknown". Try again later maybe
+-- vim.lsp.config("ty", {
+-- 	settings = {
+-- 		ty = {
+-- 			-- ty language server settings go here
+-- 		},
+-- 	},
+-- })
+--
+-- -- Required: Enable the language server
+-- vim.lsp.enable("ty")
+
 vim.lsp.config("elixirls", {
 	on_attach = on_attach,
 	cmd = { "~/.local/share/elixir-ls/language_server.sh" },
