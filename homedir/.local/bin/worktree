@@ -76,7 +76,7 @@ function cp_cow {
 # found, return the default list
 function get_untracked_files_pattern {
     # Default file patterns
-    local default_patterns="\.env|\.envrc|\.env.local|\.mise.toml|\.tool-versions|mise.toml"
+    local default_patterns="\.env|\.envrc|\.env\.local|\.mise\.toml|\.tool-versions|mise\.toml|Cargo\.lock"
 
     # Check if we have custom patterns in git config
     if git config --get-all worktree.untrackedfiles > /dev/null 2>&1; then
@@ -221,24 +221,23 @@ function _worktree {
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
 
-    # this is the best of a bunch of bad options for reading the files into an
-    # array. We're often executing in bash or zsh, so we're going to let them
-    # use their file splitting rules, with an explicit IFS. We can't use find's
-    # exec because we want to use cp_cow to copy files copy-on-write when
-    # possible.
+    # The rule we're using here is to copy untracked files if:
+    # - They match the untracked file regex
+    # - *and* they are in a tracked directory
     #
-    # Skip any of these files if they're found within node_modules.
+    # This means we'll copy Cargo.lock from the root, for example, but not from
+    # inside a .gitignored `target` directory
     #
-    # Putting the `-not -path` argument first is a great deal faster than the
-    # other way around
-    #
-    # files_to_copy=( $(find -E . -not -path '*node_modules*' -and \
-    #     -iregex '.*\/\.(envrc|env|env.local|tool-versions|mise.toml)' ) )
-    #
-    # if `fd` is available, this is _much_ faster than the find command above:
+    # We ignore node_modules explicitly because we already handled it above
+    files_to_copy=()
+    while IFS= read -r file; do
+        parent_dir=$(dirname "$file")
+        # Check if parent directory is tracked (or is root which is always tracked)
+        if [ "$parent_dir" = "." ] || ! git check-ignore -q "$parent_dir" 2>/dev/null; then
+            files_to_copy+=("$file")
+        fi
+    done < <(fd -u "$untracked_file_re" -E node_modules)
 
-    # shellcheck disable=SC2207
-    files_to_copy=( $(fd -u "$untracked_file_re" -E node_modules) )
     for f in "${files_to_copy[@]}"; do
         cp_cow "$f" ../"$dirname"/"$f"
     done
