@@ -284,6 +284,9 @@ export PNPMBIN="$HOME/Library/pnpm"
 # git-prompt depends on being able to find brew, so this must come before that.
 export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:/usr/local/sbin:$PATH
 
+# add cargo bin to PATH
+[[ -f ~/.cargo/env ]] && source ~/.cargo/env
+
 # Fix colors in ipython paging
 export PAGER="less"
 export LESS="-SRXF"
@@ -319,9 +322,13 @@ if command -v bat > /dev/null; then
     # https://github.com/sharkdp/bat#man
     export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-    # create a function that pipes llm output through bat to highlight markdown
+fi
+
+# https://github.com/llimllib/mdriver
+if command -v mdriver > /dev/null; then
+    # create a function that pipes llm output through mdriver to highlight markdown
     llm() {
-      command llm "$@" | bat --paging=never --style=plain --language=markdown
+      command llm "$@" | mdriver
     }
 fi
 
@@ -460,18 +467,10 @@ export ATUIN_NOBIND="true"
 eval "$(atuin init zsh)"
 bindkey '^r' _atuin_search_widget
 
-[[ -f ~/.cargo/env ]] && source ~/.cargo/env
-
 # You might want to set export PIPENV_VENV_IN_PROJECT=1 in your .bashrc/.zshrc
 # (or any shell configuration file) for creating the virtualenv inside your
 # project’s directory, avoiding problems with subsequent path changes.
 export PIPENV_VENV_IN_PROJECT=1
-
-# pnpm
-if [[ -d "$HOME/Library/pnpm" ]]; then
-    export PNPM_HOME="/Users/llimllib/Library/pnpm"
-    export PATH="$PNPM_HOME:$PATH"
-fi
 
 # delta (https://github.com/dandavison/delta/issues/359)
 export DELTA_FEATURES
@@ -484,23 +483,3 @@ function delta_sidebyside {
 }
 trap delta_sidebyside WINCH
 delta_sidebyside
-
-# bun completions
-[ -s "/Users/llimllib/.bun/_bun" ] && source "/Users/llimllib/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# pnpm
-export PNPM_HOME="/Users/llimllib/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# television looks neat, but doesn't support bat's ansi mode currently:
-# https://github.com/alexpasmantier/television/issues/271
-# if the television config file is available, source it
-# [[ -f ~/.config/television/init.zsh ]] && source ~/.config/television/init.zsh
