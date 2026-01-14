@@ -452,8 +452,7 @@ fi
 if command -v direnv 1>/dev/null 2>&1; then eval "$(direnv hook zsh)"; fi
 
 # mac sets an absurdly low file handle limit of 256, and apparently you
-# need to set it to this value? I haven't tested, but whateves this
-# should get the job done.
+# need to set it to this value and no more. Bizarre.
 # https://discussions.apple.com/thread/251000125
 ulimit -n 10240
 
