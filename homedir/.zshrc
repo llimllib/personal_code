@@ -460,12 +460,9 @@ ulimit -n 10240
 # atuin
 # https://github.com/ellie/atuin
 #
-# https://atuin.sh/docs/config/key-binding
-# says that by default, atuin will bind both ctrl-r and the up arrow, but this
-# wasn't happening on zsh, so let's manually set ctrl-r
-export ATUIN_NOBIND="true"
-eval "$(atuin init zsh)"
-bindkey '^r' _atuin_search_widget
+# https://docs.atuin.sh/cli/configuration/key-binding/
+# disable the up button binding, but enable ^r
+eval "$(atuin init zsh --disable-up-arrow)"
 
 # You might want to set export PIPENV_VENV_IN_PROJECT=1 in your .bashrc/.zshrc
 # (or any shell configuration file) for creating the virtualenv inside your
