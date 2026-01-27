@@ -33,6 +33,12 @@ To set a global configuration for all repositories:
 
 If you have any custom configuration set, it will override the defaults
 completely, so add all files you want copied.
+
+To configure large directories to copy in the background (defaults: node_modules):
+    git config --add worktree.backgroundcopy ".venv"
+    git config --add worktree.backgroundcopy "node_modules"
+
+Background copy configuration also supports global settings with --global.
 EOF
     kill -INT $$
 }
@@ -85,6 +91,16 @@ function get_untracked_files_pattern {
         echo "^($custom_patterns)$"
     else
         echo "^($default_patterns)$"
+    fi
+}
+
+# Get the list of directories to copy in the background from git config.
+# If no config is found, return the default list (node_modules)
+function get_background_copy_dirs {
+    if git config --get-all worktree.backgroundcopy > /dev/null 2>&1; then
+        git config --get-all worktree.backgroundcopy
+    else
+        echo "node_modules"
     fi
 }
 
@@ -196,23 +212,26 @@ function _worktree {
 
     # Find untracked files that we want to copy to the new worktree
 
-    # packages in node_modules packages can have sub-node-modules packages, and
-    # we don't want to copy them; only copy the root node_modules directory
+    # Copy configured directories in the background
+    # These can contain large dependency trees (node_modules, .venv, etc.)
+    # We don't want to copy nested instances, only the root directory
     #
     # Because this can be so slow, we launch it as a process in the background,
     # and we can't use the cp_cow function, so use a similar command
     #
     # I tried running `npm i` after copying the packages, but it doesn't seem
     # to work for reasons that are unclear to me.
-    if [ -d "node_modules" ]; then
-        tmpfile=$(mktemp)
-        cp_node_modules="cp -Rc node_modules ../$dirname/node_modules ||
-            cp -R --reflink node_modules ../$dirname/node_modules"
+    while IFS= read -r dir; do
+        if [ -d "$dir" ]; then
+            tmpfile=$(mktemp)
+            cp_cmd="cp -Rc $dir ../$dirname/$dir ||
+                cp -R --reflink $dir ../$dirname/$dir"
 
-        warn "copying node_modules in the background"
-        warn "logging to $tmpfile"
-        nohup bash -c "($cp_node_modules)" &> "$tmpfile" &
-    fi
+            warn "copying $dir in the background"
+            warn "logging to $tmpfile"
+            nohup bash -c "($cp_cmd)" &> "$tmpfile" &
+        fi
+    done < <(get_background_copy_dirs)
 
     # get a list of untracked files to copy, either from "git config" or a
     # default list
@@ -228,7 +247,14 @@ function _worktree {
     # This means we'll copy Cargo.lock from the root, for example, but not from
     # inside a .gitignored `target` directory
     #
-    # We ignore node_modules explicitly because we already handled it above
+    # We ignore the background copy directories because we already handled them above
+
+    # Build exclusion arguments for fd
+    fd_excludes=()
+    while IFS= read -r dir; do
+        fd_excludes+=(-E "$dir")
+    done < <(get_background_copy_dirs)
+
     files_to_copy=()
     while IFS= read -r file; do
         parent_dir=$(dirname "$file")
@@ -236,7 +262,7 @@ function _worktree {
         if [ "$parent_dir" = "." ] || ! git check-ignore -q "$parent_dir" 2>/dev/null; then
             files_to_copy+=("$file")
         fi
-    done < <(fd -u "$untracked_file_re" -E node_modules)
+    done < <(fd -u "$untracked_file_re" "${fd_excludes[@]}")
 
     for f in "${files_to_copy[@]}"; do
         cp_cow "$f" ../"$dirname"/"$f"
