@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# change directory to a ~/readme project. A script can't change your working
+# directory, so you either need to eval this (. ,jf) or add an alias:
+# `alias jf='. ~/.local/bin/,jf'`
+ROOT=~/jellyfish
+
+# select the best available command to display markdown. I tried to use glow
+# and richify.py, but neither wanted to work inside fzf - richify just
+# displayed some uv message and glow didn't show colors and doesn't have an
+# equivalent to bat's --color=always
+if command -v bat &> /dev/null; then
+  display="bat --color=always --style=plain --language=markdown"
+else
+  display="cat"
+fi
+
+# ls is way faster than I was able to make find run when sorting by mtime, so
+# we'll use it despite the downsides
+#
+# use /bin/ls to avoid any aliases of ls, since this is sourced so inherits
+# aliases
+# -t: sort by descending mtime
+# -d: directories are listed not expanded
+# -F: display a / after directory names
+# -G: colorized output
+#
+# shellcheck disable=SC2012
+dir=$(cd ${ROOT} && /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' | 
+    fzf --ansi \
+        --height 40% \
+        --layout reverse \
+        --border bold \
+        --preview "if [[ -f ${ROOT}/{}README.md ]]; then ${display} ${ROOT}/{}README.md; 
+                   elif [[ -f ${ROOT}/{}main/README.md ]]; then ${display} ${ROOT}/{}main/README.md; 
+                   elif [[ -f ${ROOT}/{}next/README.md ]]; then ${display} ${ROOT}/{}next/README.md; 
+                   elif [[ -f ${ROOT}/{}master/README.md ]]; then ${display} ${ROOT}/{}master/README.md; 
+                   elif [[ -f ${ROOT}/{}develop/README.md ]]; then ${display} ${ROOT}/{}develop/README.md; 
+                   else ls -la ${ROOT}/{}; 
+                   fi" \
+        --preview-window "right,60%,border,+3/3" \
+        --query "${1}"
+      )
+        # above is a complicated preview that finds the README if available and
+        # displays it; for a simpler preview, use:
+        # --preview "ls -la ~/{}" \
+echo "${dir}"
+
+if [[ -n "${dir}" ]]; then
+  # touch ROOT to update its timestamp so it will sort first next time
+  touch ${ROOT}
+  cd ${ROOT}/"${dir}" || return
+  if [[ -d "next" ]]; then
+    cd next || return
+  elif [[ -d "main" ]]; then
+    cd main || return
+  elif [[ -d "develop" ]]; then
+    cd develop || return
+  fi
+fi
