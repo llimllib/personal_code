@@ -47,6 +47,16 @@ require("codecompanion").setup({
 			claude_code = function()
 				return require("codecompanion.adapters").extend("claude_code", {
 					env = {
+						-- # install claude-code-acp adapter (assuming claude
+						-- # is already installed)
+						-- # https://github.com/zed-industries/claude-code-acp
+						-- $ npm install -g @zed-industries/claude-code-acp
+						--
+						-- # get an oauth token; it will be printed to stdout
+						-- $ claude setup-token
+						--
+						-- # copy it and save it to your keychain
+						-- $ security add-generic-password -s anthropic-cluade -a "$USER" -w 'sk-ant-oat<key-goes-here>'
 						CLAUDE_CODE_OAUTH_TOKEN = "cmd:security find-generic-password -ws 'anthropic-claude' | tr -d '\n'",
 					},
 				})
@@ -57,7 +67,7 @@ require("codecompanion").setup({
 				return require("codecompanion.adapters").extend("anthropic", {
 					env = {
 						-- saved key with:
-						-- $ security add-generic-password -s 'anthropic' -a 'llimllib' -w 'sk-ant-<key-goes-here>'
+						-- $ security add-generic-password -s anthropic -a "$USER" -w 'sk-ant-<key-goes-here>'
 						-- retrieve with:
 						-- $ security find-generic-password -ws 'anthropic'
 						api_key = "cmd:security find-generic-password -ws 'anthropic' | tr -d '\n'",
