@@ -211,10 +211,10 @@ function _worktree {
     fi
 
     # Find untracked files that we want to copy to the new worktree
-
-    # Copy configured directories in the background
-    # These can contain large dependency trees (node_modules, .venv, etc.)
-    # We don't want to copy nested instances, only the root directory
+    #
+    # Copy configured directories in the background These can contain large
+    # dependency trees (node_modules, .venv, etc.) We don't want to copy nested
+    # instances, only the root directory
     #
     # Because this can be so slow, we launch it as a process in the background,
     # and we can't use the cp_cow function, so use a similar command
@@ -247,7 +247,8 @@ function _worktree {
     # This means we'll copy Cargo.lock from the root, for example, but not from
     # inside a .gitignored `target` directory
     #
-    # We ignore the background copy directories because we already handled them above
+    # We ignore the background copy directories because we already handled them
+    # above
 
     # Build exclusion arguments for fd
     fd_excludes=()
