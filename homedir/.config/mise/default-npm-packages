@@ -1,5 +1,6 @@
 @biomejs/biome
 @vtsls/language-server
+@zed-industries/claude-code-acp
 bash-language-server
 eslint
 mcp-hub
