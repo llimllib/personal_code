@@ -97,7 +97,7 @@ def parse_date_string(date_string, verbose=False):
 
             if verbose:
                 print(
-                    f"Matched pattern {pattern}: {dt} {"as utc" if is_utc else "as local time"}"
+                    f"Matched pattern {pattern}: {dt} {'as utc' if is_utc else 'as local time'}"
                 )
 
             return dt.timestamp()
