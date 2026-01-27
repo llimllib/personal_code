@@ -370,8 +370,8 @@ alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
 
-# cd into a readme project
-alias rd='. ~/.local/bin/,rd'
+# cd into a jellyfish project
+alias jf='. ~/.local/bin/,jf'
 
 # ask claude a question and get an answer without ceremony
 alias q='llm --system "respond with a simple answer and do not explain yourself at all. Do not quote the answer" '
@@ -429,7 +429,7 @@ if command -v fd &> /dev/null ; then
       fd --type d --hidden --follow --exclude ".git" . "$1"
     }
 
-    # This tells fzf what to do when the uesr presses **
+    # This tells fzf what to do when the user presses **
     _fzf_comprun() {
       local command=$1
       shift
@@ -479,3 +479,6 @@ function delta_sidebyside {
 }
 trap delta_sidebyside WINCH
 delta_sidebyside
+
+# Source local configuration if it exists
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
