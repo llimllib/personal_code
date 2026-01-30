@@ -326,6 +326,9 @@ fi
 
 # https://github.com/llimllib/mdriver
 if command -v mdriver > /dev/null; then
+    # display images in the terminal
+    alias mdriver="mdriver --images kitty"
+
     # create a function that pipes llm output through mdriver to highlight markdown
     llm() {
       command llm "$@" | mdriver

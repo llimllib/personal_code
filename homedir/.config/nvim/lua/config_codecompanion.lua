@@ -56,7 +56,7 @@ require("codecompanion").setup({
 						-- $ claude setup-token
 						--
 						-- # copy it and save it to your keychain
-						-- $ security add-generic-password -s anthropic-cluade -a "$USER" -w 'sk-ant-oat<key-goes-here>'
+						-- $  security add-generic-password -s anthropic-cluade -a "$USER" -w 'sk-ant-oat<key-goes-here>'
 						CLAUDE_CODE_OAUTH_TOKEN = "cmd:security find-generic-password -ws 'anthropic-claude' | tr -d '\n'",
 					},
 				})
@@ -67,7 +67,7 @@ require("codecompanion").setup({
 				return require("codecompanion.adapters").extend("anthropic", {
 					env = {
 						-- saved key with:
-						-- $ security add-generic-password -s anthropic -a "$USER" -w 'sk-ant-<key-goes-here>'
+						-- $  security add-generic-password -s anthropic -a "$USER" -w 'sk-ant-<key-goes-here>'
 						-- retrieve with:
 						-- $ security find-generic-password -ws 'anthropic'
 						api_key = "cmd:security find-generic-password -ws 'anthropic' | tr -d '\n'",

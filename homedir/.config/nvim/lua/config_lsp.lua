@@ -1,13 +1,14 @@
 -- config docs: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 --
 -- To install all prerequisite language servers and formatters:
--- brew install efm-langserver gleam rust-analyzer shellcheck stylua taplo
+-- brew install efm-langserver gleam shellcheck stylua taplo
 -- dotnet tool install --global csharp-ls
 -- gem install solargraph
 -- go install golang.org/x/tools/gopls@latest
 -- go install mvdan.cc/gofumpt@latest
 -- npm install -g typescript typescript-language-server prettier bash-language-server vscode-langservers-extracted
 -- pip install pyright black
+-- rustup component add rust-analyzer
 -- build zls manually: https://github.com/zigtools/zls/wiki/Downloading-and-Building-ZLS#cloning-with-git
 --
 -- add each npm package to ~/.config/asdf/default-npm-packages so they get
