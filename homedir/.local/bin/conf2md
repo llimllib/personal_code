@@ -5,7 +5,7 @@ CLEAR="\033[0m"
 
 function usage {
     cat <<EOF
-conf2md [--no-wrap] <confluence_url>
+conf2md [--no-wrap] [-v|--verbose] <confluence_url>
 
 Convert a Confluence page to Markdown format.
 
@@ -19,7 +19,8 @@ Requires:
   - jira-cli credentials stored in macOS keychain
 
 Options:
-  --no-wrap    Disable line wrapping in the output
+  --no-wrap       Disable line wrapping in the output
+  -v, --verbose   Print detailed progress information
 
 Supported URL format:
   https://domain.atlassian.net/wiki/spaces/SPACE/pages/PAGE_ID/...
@@ -27,6 +28,7 @@ Supported URL format:
 Example:
   conf2md https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
   conf2md --no-wrap https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
+  conf2md -v https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
 
 If you don't have Atlassian credentials set in the keychain already, enter your
 email and the program will give you a link for where to get an API key.
@@ -41,21 +43,27 @@ function die {
     exit 1
 }
 
+function log_verbose {
+    if [ "${VERBOSE}" = "1" ]; then
+        echo "[verbose] $*" >&2
+    fi
+}
+
 function check_dependencies() {
   local missing_deps=()
-  
+
   if ! command -v curl &> /dev/null; then
     missing_deps+=("curl")
   fi
-  
+
   if ! command -v jq &> /dev/null; then
     missing_deps+=("jq")
   fi
-  
+
   if ! command -v pandoc &> /dev/null; then
     missing_deps+=("pandoc")
   fi
-  
+
   if [ ${#missing_deps[@]} -gt 0 ]; then
     echo "Error: Missing required dependencies: ${missing_deps[*]}" >&2
     echo "" >&2
@@ -68,68 +76,129 @@ function check_dependencies() {
 function confluence_to_md() {
   local wrap_option="${1}"
   local url="${2}"
-  
+
   if [ -z "${url}" ]; then
     die "Error: No URL provided"
   fi
-  
+
+  log_verbose "Starting confluence_to_md with URL: ${url}"
+  log_verbose "Wrap option: ${wrap_option:-none}"
+
   local creds
+  log_verbose "Looking for jira-cli credentials in keychain..."
   if ! creds=$(security find-generic-password -s jira-cli -g 2>&1); then
     echo "No jira-cli credentials found in keychain."
     echo ""
     read -rp "Enter your Atlassian email address: " email
-    
+
     if [ -z "${email}" ]; then
       die "Error: No email provided"
     fi
-    
+
     echo ""
     echo "You will be prompted to enter your Atlassian API key."
     echo "If you don't have one, create it at:"
     echo "https://id.atlassian.com/manage-profile/security/api-tokens"
     echo ""
-    
+
     if ! security add-generic-password -s jira-cli -a "${email}" -w; then
       die "Error: Failed to add credentials to keychain"
     fi
-    
+
     echo ""
     echo "Credentials saved! Fetching page..."
-    
+
     # Fetch credentials again now that they're saved
     creds=$(security find-generic-password -s jira-cli -g 2>&1)
+  else
+    log_verbose "Found existing credentials in keychain"
   fi
-  
+
   local username
   username=$(echo "${creds}" | grep "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
   local password
   password=$(security find-generic-password -s jira-cli -w 2>/dev/null)
   local auth="${username}:${password}"
-  
+  log_verbose "Using username: ${username}"
+  log_verbose "API token: ${password:0:8}..."
+
   # Extract base URL and page ID from various Confluence URL formats
   local base_url page_id
-  
+
+  log_verbose "Parsing Confluence URL..."
   if [[ "${url}" =~ ^(https://[^/]+/wiki)/spaces/[^/]+/pages/([0-9]+) ]]; then
     base_url="${BASH_REMATCH[1]}"
     page_id="${BASH_REMATCH[2]}"
+    log_verbose "Extracted base URL: ${base_url}"
+    log_verbose "Extracted page ID: ${page_id}"
   else
     die "Error: Could not parse Confluence URL. Expected format: https://domain.atlassian.net/wiki/spaces/SPACE/pages/PAGE_ID/..."
   fi
-  
+
   local api_url="${base_url}/rest/api/content/${page_id}?expand=body.storage"
-  
-  # Build pandoc command with optional wrap flag
+  log_verbose "API URL: ${api_url}"
+
+  # > Note that even if raw_html is disabled, tables will be rendered with HTML
+  # > syntax if they cannot use pipe syntax.
+  # https://pandoc.org/demo/example33/8.14-raw-html.html#raw-html
   local pandoc_cmd="pandoc -f html -t gfm+pipe_tables-raw_html"
   if [ -n "${wrap_option}" ]; then
     pandoc_cmd="${pandoc_cmd} ${wrap_option}"
   fi
-  
-  # > Note that even if raw_html is disabled, tables will be rendered with HTML
-  # > syntax if they cannot use pipe syntax.
-  # https://pandoc.org/demo/example33/8.14-raw-html.html#raw-html
-  curl -s -u "${auth}" "${api_url}" |
-    jq -r '.body.storage.value' |
-    ${pandoc_cmd}
+  log_verbose "Pandoc command: ${pandoc_cmd}"
+
+  # Fetch the page content
+  log_verbose "Fetching page content from Confluence API..."
+  local response
+  if ! response=$(curl -s -u "${auth}" -w "\n%{http_code}" "${api_url}"); then
+    die "Error: Failed to connect to Confluence API"
+  fi
+
+  # Extract HTTP status code from last line
+  local http_code
+  http_code=$(echo "${response}" | tail -n1)
+  local content
+  content=$(echo "${response}" | sed '$d')
+  log_verbose "HTTP status code: ${http_code}"
+
+  # Check HTTP status
+  if [[ "${http_code}" -ge 400 ]]; then
+    case "${http_code}" in
+      401)
+        die "Error: Authentication failed (HTTP ${http_code}). Check your credentials."
+        ;;
+      403)
+        die "Error: Access denied (HTTP ${http_code}). You may not have permission to view this page."
+        ;;
+      404)
+        die "Error: Page not found (HTTP ${http_code}). Check the URL is correct."
+        ;;
+      *)
+        die "Error: API request failed with HTTP ${http_code}"
+        ;;
+    esac
+  fi
+
+  # Parse JSON and extract content
+  log_verbose "Parsing JSON response..."
+  local html_content
+  if ! html_content=$(echo "${content}" | jq -r '.body.storage.value' 2>/dev/null); then
+    die "Error: Failed to parse API response. The response may not be valid JSON."
+  fi
+
+  if [ -z "${html_content}" ] || [ "${html_content}" = "null" ]; then
+    die "Error: No content found in API response. The page may be empty or the API response format changed."
+  fi
+
+  local content_length=${#html_content}
+  log_verbose "Successfully extracted HTML content (${content_length} characters)"
+
+  # Convert to markdown
+  log_verbose "Converting HTML to Markdown with pandoc..."
+  if ! echo "${html_content}" | ${pandoc_cmd}; then
+    die "Error: Failed to convert content to markdown. Pandoc may have encountered invalid HTML."
+  fi
+  log_verbose "Conversion complete!"
 
   # some other pandoc attempts; basically the glossary page is impossible for
   # pandoc to present in a nice format because the table is too complex
@@ -141,6 +210,7 @@ function confluence_to_md() {
 
 check_dependencies
 
+VERBOSE=0
 wrap_option=""
 while true; do
     case ${1} in
@@ -149,6 +219,10 @@ while true; do
             ;;
         --no-wrap)
             wrap_option="--wrap=none"
+            shift
+            ;;
+        -v | --verbose)
+            VERBOSE=1
             shift
             ;;
         *)
