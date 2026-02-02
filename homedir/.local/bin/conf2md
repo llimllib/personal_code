@@ -115,7 +115,7 @@ function confluence_to_md() {
   fi
 
   local username
-  username=$(echo "${creds}" | grep "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
+  username=$(echo "${creds}" | grep -a "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
   local password
   password=$(security find-generic-password -s jira-cli -w 2>/dev/null)
   local auth="${username}:${password}"
@@ -232,3 +232,4 @@ while true; do
 done
 
 confluence_to_md "${wrap_option}" "$@"
+
