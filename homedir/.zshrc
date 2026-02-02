@@ -341,6 +341,7 @@ alias gg='batgrep'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
+alias conf2md='conf2md --no-wrap'
 alias erd="erd -y inverted --human" # give erd a better default sort
 if command -v fd > /dev/null; then
     alias fd="fd --hyperlink"
