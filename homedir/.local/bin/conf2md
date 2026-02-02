@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+
+RED="\033[0;31m"
+CLEAR="\033[0m"
+
+function usage {
+    cat <<EOF
+conf2md <confluence_url>
+
+Convert a Confluence page to Markdown format.
+
+The tool fetches a Confluence page using the Confluence REST API and converts
+the HTML content to Markdown using pandoc.
+
+Requires:
+  - curl
+  - jq
+  - pandoc
+  - jira-cli credentials stored in macOS keychain
+
+Supported URL format:
+  https://domain.atlassian.net/wiki/spaces/SPACE/pages/PAGE_ID/...
+
+Example:
+  conf2md https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
+
+The tool will retrieve your Confluence credentials from the macOS keychain
+using the 'jira-cli' service name. To set it, run:
+
+$ security add-generic-password -s jira-cli -a '<your confluence email>' -w
+
+and enter your API key when it prompts for a password
+EOF
+    exit 1
+}
+
+function die {
+    printf '%b%s%b\n' "${RED}" "${1}" "${CLEAR}" >&2
+    exit 1
+}
+
+function check_dependencies() {
+  local missing_deps=()
+  
+  if ! command -v curl &> /dev/null; then
+    missing_deps+=("curl")
+  fi
+  
+  if ! command -v jq &> /dev/null; then
+    missing_deps+=("jq")
+  fi
+  
+  if ! command -v pandoc &> /dev/null; then
+    missing_deps+=("pandoc")
+  fi
+  
+  if [ ${#missing_deps[@]} -gt 0 ]; then
+    echo "Error: Missing required dependencies: ${missing_deps[*]}" >&2
+    echo "" >&2
+    echo "Install them with:" >&2
+    echo "  brew install ${missing_deps[*]}" >&2
+    exit 1
+  fi
+}
+
+function confluence_to_md() {
+  local url="${1}"
+  
+  if [ -z "${url}" ]; then
+    die "Error: No URL provided"
+  fi
+  
+  local creds
+  if ! creds=$(security find-generic-password -s jira-cli -g 2>&1); then
+    echo "No jira-cli credentials found in keychain."
+    echo ""
+    read -rp "Enter your Atlassian email address: " email
+    
+    if [ -z "${email}" ]; then
+      die "Error: No email provided"
+    fi
+    
+    echo ""
+    echo "You will be prompted to enter your Atlassian API key."
+    echo "If you don't have one, create it at:"
+    echo "https://id.atlassian.com/manage-profile/security/api-tokens"
+    echo ""
+    
+    if ! security add-generic-password -s jira-cli -a "${email}" -w; then
+      die "Error: Failed to add credentials to keychain"
+    fi
+    
+    echo ""
+    echo "Credentials saved! Fetching page..."
+    
+    # Fetch credentials again now that they're saved
+    creds=$(security find-generic-password -s jira-cli -g 2>&1)
+  fi
+  
+  local username
+  username=$(echo "${creds}" | grep "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
+  local password
+  password=$(security find-generic-password -s jira-cli -w 2>/dev/null)
+  local auth="${username}:${password}"
+  
+  # Extract base URL and page ID from various Confluence URL formats
+  local base_url page_id
+  
+  if [[ "${url}" =~ ^(https://[^/]+/wiki)/spaces/[^/]+/pages/([0-9]+) ]]; then
+    base_url="${BASH_REMATCH[1]}"
+    page_id="${BASH_REMATCH[2]}"
+  else
+    die "Error: Could not parse Confluence URL. Expected format: https://domain.atlassian.net/wiki/spaces/SPACE/pages/PAGE_ID/..."
+  fi
+  
+  local api_url="${base_url}/rest/api/content/${page_id}?expand=body.storage"
+  
+  # > Note that even if raw_html is disabled, tables will be rendered with HTML
+  # > syntax if they cannot use pipe syntax.
+  # https://pandoc.org/demo/example33/8.14-raw-html.html#raw-html
+  curl -s -u "${auth}" "${api_url}" |
+    jq -r '.body.storage.value' |
+    pandoc -f html -t gfm+pipe_tables-raw_html
+
+  # some other pandoc attempts; basically the glossary page is impossible for
+  # pandoc to present in a nice format because the table is too complex
+    # | pandoc -f html -t markdown-raw_html-native_divs-native_spans --wrap=none
+    # | pandoc -f html -t markdown --wrap=none
+    # | pandoc -f html -t markdown_strict --wrap=none
+    # | pandoc -f html -t gfm-raw_html
+}
+
+check_dependencies
+
+while true; do
+    case ${1} in
+        help | -h | --help)
+            usage
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+confluence_to_md "$@"
+
