@@ -5,7 +5,7 @@ CLEAR="\033[0m"
 
 function usage {
     cat <<EOF
-conf2md <confluence_url>
+conf2md [--no-wrap] <confluence_url>
 
 Convert a Confluence page to Markdown format.
 
@@ -18,11 +18,15 @@ Requires:
   - pandoc
   - jira-cli credentials stored in macOS keychain
 
+Options:
+  --no-wrap    Disable line wrapping in the output
+
 Supported URL format:
   https://domain.atlassian.net/wiki/spaces/SPACE/pages/PAGE_ID/...
 
 Example:
   conf2md https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
+  conf2md --no-wrap https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
 
 If you don't have Atlassian credentials set in the keychain already, enter your
 email and the program will give you a link for where to get an API key.
@@ -62,7 +66,8 @@ function check_dependencies() {
 }
 
 function confluence_to_md() {
-  local url="${1}"
+  local wrap_option="${1}"
+  local url="${2}"
   
   if [ -z "${url}" ]; then
     die "Error: No URL provided"
@@ -113,12 +118,18 @@ function confluence_to_md() {
   
   local api_url="${base_url}/rest/api/content/${page_id}?expand=body.storage"
   
+  # Build pandoc command with optional wrap flag
+  local pandoc_cmd="pandoc -f html -t gfm+pipe_tables-raw_html"
+  if [ -n "${wrap_option}" ]; then
+    pandoc_cmd="${pandoc_cmd} ${wrap_option}"
+  fi
+  
   # > Note that even if raw_html is disabled, tables will be rendered with HTML
   # > syntax if they cannot use pipe syntax.
   # https://pandoc.org/demo/example33/8.14-raw-html.html#raw-html
   curl -s -u "${auth}" "${api_url}" |
     jq -r '.body.storage.value' |
-    pandoc -f html -t gfm+pipe_tables-raw_html
+    ${pandoc_cmd}
 
   # some other pandoc attempts; basically the glossary page is impossible for
   # pandoc to present in a nice format because the table is too complex
@@ -130,10 +141,15 @@ function confluence_to_md() {
 
 check_dependencies
 
+wrap_option=""
 while true; do
     case ${1} in
         help | -h | --help)
             usage
+            ;;
+        --no-wrap)
+            wrap_option="--wrap=none"
+            shift
             ;;
         *)
             break
@@ -141,5 +157,4 @@ while true; do
     esac
 done
 
-confluence_to_md "$@"
-
+confluence_to_md "${wrap_option}" "$@"
