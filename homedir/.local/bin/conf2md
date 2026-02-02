@@ -100,10 +100,19 @@ function confluence_to_md() {
     echo "If you don't have one, create it at:"
     echo "https://id.atlassian.com/manage-profile/security/api-tokens"
     echo ""
+    echo -n "Paste API token: "
+    read -rs api_token
+    echo ""
 
-    if ! security add-generic-password -s jira-cli -a "${email}" -w; then
+    if [ -z "${api_token}" ]; then
+      die "Error: No API token provided"
+    fi
+
+    if ! security add-generic-password -s jira-cli -a "${email}" -w "${api_token}"; then
       die "Error: Failed to add credentials to keychain"
     fi
+
+    unset api_token
 
     echo ""
     echo "Credentials saved! Fetching page..."
