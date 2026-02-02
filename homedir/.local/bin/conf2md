@@ -24,12 +24,10 @@ Supported URL format:
 Example:
   conf2md https://example.atlassian.net/wiki/spaces/TEAM/pages/123456/My-Page
 
-The tool will retrieve your Confluence credentials from the macOS keychain
-using the 'jira-cli' service name. To set it, run:
-
-$ security add-generic-password -s jira-cli -a '<your confluence email>' -w
-
-and enter your API key when it prompts for a password
+If you don't have Atlassian credentials set in the keychain already, enter your
+email and the program will give you a link for where to get an API key.
+Generate one and paste it in, and the program will store it safely in your
+mac keychain.
 EOF
     exit 1
 }
