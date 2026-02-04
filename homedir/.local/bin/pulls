@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Default limit
+LIMIT=30
+STATE="open"
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -L|--limit)
+            LIMIT="$2"
+            shift 2
+            ;;
+        -s|--state)
+            STATE="$2"
+            shift 2
+            ;;
+        -h|--help)
+            echo "Usage: pulls [options]"
+            echo ""
+            echo "List all your pull requests across all repositories"
+            echo ""
+            echo "Options:"
+            echo "  -L, --limit NUM    Maximum number of PRs to fetch (default: 30)"
+            echo "  -s, --state STATE  Filter by state: open|closed|merged|all (default: open)"
+            echo "  -h, --help         Show this help message"
+            echo ""
+            echo "Color coding:"
+            echo "  Gray   - Draft PR"
+            echo "  Yellow - Waiting for review/approval"
+            echo "  Green  - Approved and ready to merge"
+            echo "  Purple - Merged PR"
+            echo "  Red    - Closed PR (not merged)"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+# Build the GraphQL query based on state
+QUERY="is:pr author:@me"
+case $STATE in
+    open)
+        QUERY="$QUERY is:open"
+        ;;
+    closed)
+        QUERY="$QUERY is:closed"
+        ;;
+    merged)
+        QUERY="$QUERY is:merged"
+        ;;
+    all)
+        # No state filter
+        ;;
+    *)
+        echo "Invalid state: $STATE. Must be one of: open, closed, merged, all"
+        exit 1
+        ;;
+esac
+
+# Create temp file for data
+tmpfile=$(mktemp)
+
+# Fetch PRs with review status using GraphQL and save to temp file
+gh api graphql --paginate -f query="
+query(\$endCursor: String) {
+  search(query: \"$QUERY\", type: ISSUE, first: $LIMIT, after: \$endCursor) {
+    edges {
+      node {
+        ... on PullRequest {
+          number
+          title
+          repository {
+            nameWithOwner
+          }
+          isDraft
+          reviewDecision
+          state
+          updatedAt
+          url
+        }
+      }
+    }
+  }
+}" | jq -r '
+    .data.search.edges[].node |
+    # Determine color based on status
+    if .state == "MERGED" then
+        "PURPLE"
+    elif .state == "CLOSED" then
+        "RED"
+    elif .isDraft then
+        "GRAY"
+    elif .reviewDecision == "APPROVED" then
+        "GREEN"
+    elif .reviewDecision == "REVIEW_REQUIRED" or .reviewDecision == "CHANGES_REQUESTED" or .reviewDecision == null then
+        "YELLOW"
+    else
+        "NONE"
+    end as $color |
+    [
+        $color,
+        .repository.nameWithOwner,
+        "#\(.number)",
+        .state,
+        (.updatedAt | fromdateiso8601 | strftime("%Y-%m-%d")),
+        .title,
+        .url
+    ] | @tsv
+' > "$tmpfile"
+
+# Format table without escape codes first, then apply colors and links
+formatted_table=$(
+    {
+        echo -e "REPO\tNUMBER\tSTATE\tUPDATED\tTITLE"
+        echo -e "----\t------\t-----\t-------\t-----"
+        while IFS=$'\t' read -r color repo number state updated title url; do
+            echo -e "${repo}\t${number}\t${state}\t${updated}\t${title}"
+        done < "$tmpfile"
+    } | column -t -s $'\t'
+)
+
+# Now add colors and hyperlinks to the formatted table
+line_num=0
+while IFS= read -r line; do
+    line_num=$((line_num + 1))
+    # Pass through header lines unchanged
+    if [ $line_num -le 2 ]; then
+        echo "$line"
+        continue
+    fi
+
+    # Read corresponding data line
+    data_line_num=$((line_num - 2))
+    IFS=$'\t' read -r color repo number state updated title url < <(sed -n "${data_line_num}p" "$tmpfile")
+
+    # Build hyperlink using actual escape character
+    # OSC8 format: ESC]8;;URLBELTEXTESC]8;;BEL
+    # Using BEL (\007) as terminator instead of ST (ESC\) for better compatibility
+    esc=$'\033'
+    bel=$'\007'
+
+    # Split the line at the PR number and rebuild with hyperlink
+    # Find position of PR number in the line
+    before="${line%%$number*}"
+    after="${line#*$number}"
+
+    # Build the hyperlinked line with OSC8 sequences
+    line_with_link="${before}${esc}]8;;${url}${bel}${number}${esc}]8;;${bel}${after}"
+
+    # Apply color to entire line using printf to avoid echo -e interpretation issues
+    case $color in
+        GRAY)
+            printf "${esc}[90m${line_with_link}${esc}[0m\n"
+            ;;
+        YELLOW)
+            printf "${esc}[33m${line_with_link}${esc}[0m\n"
+            ;;
+        GREEN)
+            printf "${esc}[32m${line_with_link}${esc}[0m\n"
+            ;;
+        PURPLE)
+            printf "${esc}[35m${line_with_link}${esc}[0m\n"
+            ;;
+        RED)
+            printf "${esc}[31m${line_with_link}${esc}[0m\n"
+            ;;
+        *)
+            printf "${line_with_link}\n"
+            ;;
+    esac
+done <<< "$formatted_table"
+
+# Clean up temp file
+rm -f "$tmpfile"
