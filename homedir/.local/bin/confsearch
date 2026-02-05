@@ -1,0 +1,189 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+RED="\033[0;31m"
+CLEAR="\033[0m"
+
+# Number of results to fetch
+MAX_RESULTS="${CONFSEARCH_MAX_RESULTS:-10}"
+
+function usage {
+    cat <<EOF
+confsearch <search_query>
+
+Search Confluence and convert a selected page to Markdown.
+
+Searches your company's Confluence using the CQL search API, displays results
+with titles and summaries, lets you select one, then converts it to Markdown
+using conf2md.
+
+Requires:
+  - curl, jq (for API calls)
+  - fzf (for selection UI)
+  - conf2md (for conversion)
+  - jira-cli credentials stored in macOS keychain
+
+Environment variables:
+  CONFSEARCH_MAX_RESULTS  Number of results to fetch (default: 10)
+
+Example:
+  confsearch "remotedb"
+  confsearch "deployment guide"
+  CONFSEARCH_MAX_RESULTS=20 confsearch "api docs"
+EOF
+    exit 1
+}
+
+function die {
+    printf '%b%s%b\n' "${RED}" "${1}" "${CLEAR}" >&2
+    exit 1
+}
+
+function get_credentials {
+    local creds
+    if ! creds=$(security find-generic-password -s jira-cli -g 2>&1); then
+        die "No jira-cli credentials found. Run conf2md first to set up credentials."
+    fi
+    
+    local username
+    username=$(echo "${creds}" | grep -a "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
+    local password
+    password=$(security find-generic-password -s jira-cli -w 2>/dev/null)
+    echo "${username}:${password}"
+}
+
+function get_base_url {
+    # Try to get base URL from environment or use a default
+    # You may want to set CONFLUENCE_BASE_URL in your shell config
+    if [ -n "${CONFLUENCE_BASE_URL:-}" ]; then
+        echo "https://${CONFLUENCE_BASE_URL}/wiki"
+    else
+        die "CONFLUENCE_BASE_URL not set. Add to your shell config, e.g.:\nexport CONFLUENCE_BASE_URL=\"yourcompany.atlassian.net\""
+    fi
+}
+
+function search_confluence {
+    local query="$1"
+    local auth="$2"
+    local base_url="$3"
+    
+    # URL encode the query
+    local encoded_query
+    encoded_query=$(printf '%s' "${query}" | jq -sRr @uri)
+    
+    # CQL search - search in title and content
+    local cql="text~\"${query}\" OR title~\"${query}\""
+    local encoded_cql
+    encoded_cql=$(printf '%s' "${cql}" | jq -sRr @uri)
+    
+    local search_url="${base_url}/rest/api/content/search?cql=${encoded_cql}&limit=${MAX_RESULTS}&expand=space"
+    
+    local response
+    if ! response=$(curl -s -u "${auth}" -w "\n%{http_code}" "${search_url}"); then
+        die "Error: Failed to connect to Confluence API"
+    fi
+    
+    local http_code
+    http_code=$(echo "${response}" | tail -n1)
+    local content
+    content=$(echo "${response}" | sed '$d')
+    
+    if [[ "${http_code}" -ge 400 ]]; then
+        case "${http_code}" in
+            401) die "Error: Authentication failed. Check your credentials." ;;
+            403) die "Error: Access denied." ;;
+            *) die "Error: API request failed with HTTP ${http_code}" ;;
+        esac
+    fi
+    
+    echo "${content}"
+}
+
+function format_results {
+    local json="$1"
+    local base_url="$2"
+    
+    # Output format: URL<TAB>Title<TAB>Space
+    echo "${json}" | jq -r --arg base "${base_url}" '
+        .results[] | 
+        ($base + ._links.webui) as $url |
+        .title as $title |
+        (.space.name // "Unknown") as $space |
+        "\($url)\t\($title)\t\($space)"
+    '
+}
+
+function main {
+    if [ $# -lt 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+        usage
+    fi
+    
+    local query="$*"
+    
+    # Check dependencies
+    for cmd in curl jq fzf conf2md; do
+        if ! command -v "${cmd}" &> /dev/null; then
+            die "Missing dependency: ${cmd}"
+        fi
+    done
+
+    if ! command -v "mdriver" &> /dev/null; then
+        die "Missing dependency: ${cmd}. Install with 'brew install llimllib/tap/mdriver'"
+    fi
+    
+    local auth base_url
+    auth=$(get_credentials)
+    base_url=$(get_base_url)
+    
+    echo "Searching Confluence for: ${query}" >&2
+    
+    local results
+    results=$(search_confluence "${query}" "${auth}" "${base_url}")
+    
+    local result_count
+    result_count=$(echo "${results}" | jq '.results | length')
+    
+    if [ "${result_count}" = "0" ]; then
+        die "No results found for: ${query}"
+    fi
+    
+    echo "Found ${result_count} results" >&2
+    
+    # Format results for fzf
+    local formatted
+    formatted=$(format_results "${results}" "${base_url}")
+    
+    if [ -z "${formatted}" ]; then
+        die "Error formatting results"
+    fi
+    
+    # Use fzf to select - display title and space, preview shows markdown content
+    local selected
+    selected=$(echo "${formatted}" | fzf \
+        --delimiter='\t' \
+        --with-nth=2,3 \
+        --preview='conf2md --no-wrap {1} | mdriver --color=always' \
+        --preview-window=right:60%:wrap \
+        --height=90% \
+        --border=rounded \
+        --prompt="Select page: " \
+        --pointer="▶" \
+        --marker="✓" \
+        --color="header:italic:underline,prompt:bold")
+    
+    if [ -z "${selected}" ]; then
+        exit 0
+    fi
+    
+    # Extract URL from selection
+    local url
+    url=$(echo "${selected}" | cut -f1)
+    
+    # Convert to markdown
+    echo "" >&2
+    echo "Converting to Markdown..." >&2
+    conf2md --no-wrap "${url}"
+}
+
+main "$@"
