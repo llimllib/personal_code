@@ -5,6 +5,11 @@ set -euo pipefail
 LIMIT=30
 STATE="open"
 
+# nerd font icons https://www.nerdfonts.com/cheat-sheet
+CI_SUCCESS=$'\uf05d' # 
+CI_PENDING=$'\uf252' # 
+CI_FAIL=$'\uea87'    # 
+
 # Parse arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -32,6 +37,12 @@ while [[ $# -gt 0 ]]; do
             echo "  Green  - Approved and ready to merge"
             echo "  Purple - Merged PR"
             echo "  Red    - Closed PR (not merged)"
+            echo ""
+            echo "CI Status symbols:"
+            echo "  ✓ - All checks passing"
+            echo "  ✗ - Some checks failing"
+            echo "   - Checks pending/in progress"
+            echo "  · - No checks configured"
             exit 0
             ;;
         *)
@@ -83,11 +94,20 @@ query(\$endCursor: String) {
           state
           updatedAt
           url
+          commits(last: 1) {
+            nodes {
+              commit {
+                statusCheckRollup {
+                  state
+                }
+              }
+            }
+          }
         }
       }
     }
   }
-}" | jq -r '
+}" | jq -r --arg ci_success "$CI_SUCCESS" --arg ci_pending "$CI_PENDING" --arg ci_fail "$CI_FAIL" '
     .data.search.edges[].node |
     # Determine color based on status
     if .state == "MERGED" then
@@ -103,10 +123,26 @@ query(\$endCursor: String) {
     else
         "NONE"
     end as $color |
+    # Determine CI status symbol
+    (if .commits.nodes[0].commit.statusCheckRollup then
+        .commits.nodes[0].commit.statusCheckRollup.state
+    else
+        null
+    end) as $ciState |
+    (if $ciState == "SUCCESS" then
+        $ci_success
+    elif $ciState == "FAILURE" or $ciState == "ERROR" then
+        $ci_fail
+    elif $ciState == "PENDING" or $ciState == "EXPECTED" then
+        $ci_pending
+    else
+        "·"
+    end) as $ciSymbol |
     [
         $color,
         .repository.nameWithOwner,
         "#\(.number)",
+        $ciSymbol,
         .state,
         (.updatedAt | fromdateiso8601 | strftime("%Y-%m-%d")),
         .title,
@@ -117,10 +153,10 @@ query(\$endCursor: String) {
 # Format table without escape codes first, then apply colors and links
 formatted_table=$(
     {
-        echo -e "REPO\tNUMBER\tSTATE\tUPDATED\tTITLE"
-        echo -e "----\t------\t-----\t-------\t-----"
-        while IFS=$'\t' read -r color repo number state updated title url; do
-            echo -e "${repo}\t${number}\t${state}\t${updated}\t${title}"
+        echo -e "REPO\tNUMBER\tCI\tSTATE\tUPDATED\tTITLE"
+        echo -e "----\t------\t--\t-----\t-------\t-----"
+        while IFS=$'\t' read -r color repo number ci state updated title url; do
+            echo -e "${repo}\t${number}\t${ci}\t${state}\t${updated}\t${title}"
         done < "$tmpfile"
     } | column -t -s $'\t'
 )
@@ -137,7 +173,7 @@ while IFS= read -r line; do
 
     # Read corresponding data line
     data_line_num=$((line_num - 2))
-    IFS=$'\t' read -r color repo number state updated title url < <(sed -n "${data_line_num}p" "$tmpfile")
+    IFS=$'\t' read -r color repo number ci state updated title url < <(sed -n "${data_line_num}p" "$tmpfile")
 
     # Build hyperlink using actual escape character
     # OSC8 format: ESC]8;;URLBELTEXTESC]8;;BEL
@@ -146,41 +182,64 @@ while IFS= read -r line; do
     bel=$'\007'
 
     # Extract the parts of the line - we need to hyperlink both number and title
-    # Line format: REPO  NUMBER  STATE  UPDATED  TITLE
-    # We'll split on the PR number first, then on the title
+    # Line format: REPO  NUMBER  CI  STATE  UPDATED  TITLE
+    # We'll split on the PR number first, then on the CI symbol, then on the title
     before_number="${line%%$number*}"
     after_number="${line#*$number}"
 
-    # Now split after_number to get the middle part and the title
+    # Extract the CI symbol part
+    before_ci="${after_number%%$ci*}"
+    after_ci="${after_number#*$ci}"
+
+    # Now split after_ci to get the middle part and the title
     # The title is at the end, so we need to find it
-    before_title="${after_number%$title*}"
+    before_title="${after_ci%$title*}"
 
     # Build the hyperlinked line with OSC8 sequences around both number and title
     hyperlink_start="${esc}]8;;${url}${bel}"
     hyperlink_end="${esc}]8;;${bel}"
-    line_with_link="${before_number}${hyperlink_start}${number}${hyperlink_end}${before_title}${hyperlink_start}${title}${hyperlink_end}"
 
-    # Apply color to entire line using printf to avoid echo -e interpretation issues
+    # Determine row color code
     case $color in
         GRAY)
-            printf "${esc}[90m${line_with_link}${esc}[0m\n"
+            row_color="${esc}[90m"
             ;;
         YELLOW)
-            printf "${esc}[33m${line_with_link}${esc}[0m\n"
+            row_color="${esc}[33m"
             ;;
         GREEN)
-            printf "${esc}[32m${line_with_link}${esc}[0m\n"
+            row_color="${esc}[32m"
             ;;
         PURPLE)
-            printf "${esc}[35m${line_with_link}${esc}[0m\n"
+            row_color="${esc}[35m"
             ;;
         RED)
-            printf "${esc}[31m${line_with_link}${esc}[0m\n"
+            row_color="${esc}[31m"
             ;;
         *)
-            printf "${line_with_link}\n"
+            row_color=""
             ;;
     esac
+
+    # Color the CI icon and restore row color after
+    if [ "$ci" = "$CI_FAIL" ]; then
+        colored_ci="${esc}[31m${ci}${esc}[0m${row_color}"
+    elif [ "$ci" = "$CI_SUCCESS" ]; then
+        colored_ci="${esc}[32m${ci}${esc}[0m${row_color}"
+    elif [ "$ci" = "$CI_PENDING" ]; then
+        colored_ci="${esc}[33m${ci}${esc}[0m${row_color}"
+    else
+        colored_ci="${ci}"
+    fi
+
+    line_with_link="${before_number}${hyperlink_start}${number}${hyperlink_end}${before_ci}${colored_ci}${before_title}${hyperlink_start}${title}${hyperlink_end}"
+
+    # Apply color to entire line
+    if [ -n "$row_color" ]; then
+        printf "${row_color}${line_with_link}${esc}[0m\n"
+    else
+        printf "${line_with_link}\n"
+    fi
 done <<< "$formatted_table"
 
 # Clean up temp file
