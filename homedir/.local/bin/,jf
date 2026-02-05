@@ -25,19 +25,46 @@ fi
 # -F: display a / after directory names
 # -G: colorized output
 #
+# Build the list of directories, expanding jellyfish repo to show worktrees
 # shellcheck disable=SC2012
-dir=$(cd ${ROOT} && /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' | 
+dir_list=$(cd ${ROOT} && {
+    # Get all directories except jellyfish
+    /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' | grep -v '^jellyfish$'
+    # Add jellyfish itself (will go to develop branch)
+    echo "jellyfish"
+    # Add jellyfish worktrees as separate options (excluding develop)
+    if [[ -d jellyfish ]]; then
+        cd jellyfish && /bin/ls -tdFG -- */ 2>/dev/null | sed 's#/$##' | grep -v '^develop$' | sed 's#^#jellyfish/#'
+    fi
+})
+
+dir=$(echo "${dir_list}" | 
     fzf --ansi \
         --height 40% \
         --layout reverse \
         --border bold \
-        --preview "if [[ -f ${ROOT}/{}README.md ]]; then ${display} ${ROOT}/{}README.md; 
-                   elif [[ -f ${ROOT}/{}main/README.md ]]; then ${display} ${ROOT}/{}main/README.md; 
-                   elif [[ -f ${ROOT}/{}next/README.md ]]; then ${display} ${ROOT}/{}next/README.md; 
-                   elif [[ -f ${ROOT}/{}master/README.md ]]; then ${display} ${ROOT}/{}master/README.md; 
-                   elif [[ -f ${ROOT}/{}develop/README.md ]]; then ${display} ${ROOT}/{}develop/README.md; 
-                   else ls -la ${ROOT}/{}; 
-                   fi" \
+        --preview "
+            # Extract just the directory name (handle both regular and jellyfish/* paths)
+            preview_dir=\$(basename {})
+            
+            # Check if directory starts with OJ- and show Jira issue
+            if [[ \${preview_dir} == OJ-* ]]; then
+                # Extract just the OJ-XXXXX part (everything before the first dash after the number)
+                jira_issue=\$(echo \"\${preview_dir}\" | grep -oE '^OJ-[0-9]+')
+                jira issue view \"\${jira_issue}\"
+            elif [[ -f ${ROOT}/{}README.md ]]; then 
+                ${display} ${ROOT}/{}README.md
+            elif [[ -f ${ROOT}/{}main/README.md ]]; then 
+                ${display} ${ROOT}/{}main/README.md
+            elif [[ -f ${ROOT}/{}next/README.md ]]; then 
+                ${display} ${ROOT}/{}next/README.md
+            elif [[ -f ${ROOT}/{}master/README.md ]]; then 
+                ${display} ${ROOT}/{}master/README.md
+            elif [[ -f ${ROOT}/{}develop/README.md ]]; then 
+                ${display} ${ROOT}/{}develop/README.md
+            else 
+                ls -la ${ROOT}/{}
+            fi" \
         --preview-window "right,60%,border,+3/3" \
         --query "${1}"
       )
@@ -49,12 +76,25 @@ echo "${dir}"
 if [[ -n "${dir}" ]]; then
   # touch ROOT to update its timestamp so it will sort first next time
   touch ${ROOT}
-  cd ${ROOT}/"${dir}" || return
-  if [[ -d "next" ]]; then
-    cd next || return
-  elif [[ -d "main" ]]; then
-    cd main || return
-  elif [[ -d "develop" ]]; then
-    cd develop || return
+  
+  # Check if this is a jellyfish worktree path
+  if [[ "${dir}" == jellyfish/* ]]; then
+    # Already includes the worktree path, just cd to it
+    cd ${ROOT}/"${dir}" || return
+  else
+    # Regular repository, navigate and check for branch directories
+    cd ${ROOT}/"${dir}" || return
+    if [[ -d "next" ]]; then
+      cd next || return
+    elif [[ -d "main" ]]; then
+      cd main || return
+    elif [[ -d "develop" ]]; then
+      cd develop || return
+    fi
   fi
 fi
+
+
+
+
+
