@@ -145,13 +145,20 @@ while IFS= read -r line; do
     esc=$'\033'
     bel=$'\007'
 
-    # Split the line at the PR number and rebuild with hyperlink
-    # Find position of PR number in the line
-    before="${line%%$number*}"
-    after="${line#*$number}"
+    # Extract the parts of the line - we need to hyperlink both number and title
+    # Line format: REPO  NUMBER  STATE  UPDATED  TITLE
+    # We'll split on the PR number first, then on the title
+    before_number="${line%%$number*}"
+    after_number="${line#*$number}"
 
-    # Build the hyperlinked line with OSC8 sequences
-    line_with_link="${before}${esc}]8;;${url}${bel}${number}${esc}]8;;${bel}${after}"
+    # Now split after_number to get the middle part and the title
+    # The title is at the end, so we need to find it
+    before_title="${after_number%$title*}"
+
+    # Build the hyperlinked line with OSC8 sequences around both number and title
+    hyperlink_start="${esc}]8;;${url}${bel}"
+    hyperlink_end="${esc}]8;;${bel}"
+    line_with_link="${before_number}${hyperlink_start}${number}${hyperlink_end}${before_title}${hyperlink_start}${title}${hyperlink_end}"
 
     # Apply color to entire line using printf to avoid echo -e interpretation issues
     case $color in
