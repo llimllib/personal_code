@@ -8,6 +8,17 @@ CLEAR="\033[0m"
 # Number of results to fetch
 MAX_RESULTS="${CONFSEARCH_MAX_RESULTS:-10}"
 
+# Cache directory for previews
+CACHE_DIR=""
+
+function cleanup {
+    if [ -n "${CACHE_DIR}" ] && [ -d "${CACHE_DIR}" ]; then
+        rm -rf "${CACHE_DIR}"
+    fi
+}
+
+trap cleanup EXIT
+
 function usage {
     cat <<EOF
 confsearch <search_query>
@@ -45,7 +56,7 @@ function get_credentials {
     if ! creds=$(security find-generic-password -s jira-cli -g 2>&1); then
         die "No jira-cli credentials found. Run conf2md first to set up credentials."
     fi
-    
+
     local username
     username=$(echo "${creds}" | grep -a "acct" | sed 's/.*"acct"<blob>="\([^"]*\)".*/\1/')
     local password
@@ -67,28 +78,28 @@ function search_confluence {
     local query="$1"
     local auth="$2"
     local base_url="$3"
-    
+
     # URL encode the query
     local encoded_query
     encoded_query=$(printf '%s' "${query}" | jq -sRr @uri)
-    
+
     # CQL search - search in title and content
     local cql="text~\"${query}\" OR title~\"${query}\""
     local encoded_cql
     encoded_cql=$(printf '%s' "${cql}" | jq -sRr @uri)
-    
+
     local search_url="${base_url}/rest/api/content/search?cql=${encoded_cql}&limit=${MAX_RESULTS}&expand=space"
-    
+
     local response
     if ! response=$(curl -s -u "${auth}" -w "\n%{http_code}" "${search_url}"); then
         die "Error: Failed to connect to Confluence API"
     fi
-    
+
     local http_code
     http_code=$(echo "${response}" | tail -n1)
     local content
     content=$(echo "${response}" | sed '$d')
-    
+
     if [[ "${http_code}" -ge 400 ]]; then
         case "${http_code}" in
             401) die "Error: Authentication failed. Check your credentials." ;;
@@ -96,17 +107,17 @@ function search_confluence {
             *) die "Error: API request failed with HTTP ${http_code}" ;;
         esac
     fi
-    
+
     echo "${content}"
 }
 
 function format_results {
     local json="$1"
     local base_url="$2"
-    
+
     # Output format: URL<TAB>Title<TAB>Space
     echo "${json}" | jq -r --arg base "${base_url}" '
-        .results[] | 
+        .results[] |
         ($base + ._links.webui) as $url |
         .title as $title |
         (.space.name // "Unknown") as $space |
@@ -114,13 +125,30 @@ function format_results {
     '
 }
 
+# Preview script that caches results
+function preview_script {
+    cat <<'PREVIEW_EOF'
+url="$1"
+cache_dir="$2"
+
+# Create a hash of the URL for the cache filename
+cache_file="${cache_dir}/$(echo "$url" | md5sum | cut -d' ' -f1).md"
+
+if [ -f "$cache_file" ]; then
+    cat "$cache_file"
+else
+    conf2md --no-wrap "$url" | tee "$cache_file"
+fi
+PREVIEW_EOF
+}
+
 function main {
     if [ $# -lt 1 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
         usage
     fi
-    
+
     local query="$*"
-    
+
     # Check dependencies
     for cmd in curl jq fzf conf2md; do
         if ! command -v "${cmd}" &> /dev/null; then
@@ -128,42 +156,45 @@ function main {
         fi
     done
 
-    if ! command -v "mdriver" &> /dev/null; then
-        die "Missing dependency: ${cmd}. Install with 'brew install llimllib/tap/mdriver'"
-    fi
-    
     local auth base_url
     auth=$(get_credentials)
     base_url=$(get_base_url)
-    
+
+    # Create cache directory
+    CACHE_DIR=$(mktemp -d)
+
+    # Write preview script to cache dir
+    preview_script > "${CACHE_DIR}/preview.sh"
+    chmod +x "${CACHE_DIR}/preview.sh"
+
     echo "Searching Confluence for: ${query}" >&2
-    
+
     local results
     results=$(search_confluence "${query}" "${auth}" "${base_url}")
-    
+
     local result_count
     result_count=$(echo "${results}" | jq '.results | length')
-    
+
     if [ "${result_count}" = "0" ]; then
         die "No results found for: ${query}"
     fi
-    
+
     echo "Found ${result_count} results" >&2
-    
+
     # Format results for fzf
     local formatted
     formatted=$(format_results "${results}" "${base_url}")
-    
+
     if [ -z "${formatted}" ]; then
         die "Error formatting results"
     fi
-    
-    # Use fzf to select - display title and space, preview shows markdown content
+
+    # Use fzf to select - display title and space, preview shows cached markdown content
     local selected
     selected=$(echo "${formatted}" | fzf \
         --delimiter='\t' \
         --with-nth=2,3 \
-        --preview='conf2md --no-wrap {1} | mdriver --color=always' \
+        --preview="${CACHE_DIR}/preview.sh {1} ${CACHE_DIR}" \
         --preview-window=right:60%:wrap \
         --height=90% \
         --border=rounded \
@@ -171,19 +202,22 @@ function main {
         --pointer="▶" \
         --marker="✓" \
         --color="header:italic:underline,prompt:bold")
-    
+
     if [ -z "${selected}" ]; then
         exit 0
     fi
-    
-    # Extract URL from selection
-    local url
+
+    # Extract URL from selection and output cached markdown
+    local url cache_file
     url=$(echo "${selected}" | cut -f1)
-    
-    # Convert to markdown
-    echo "" >&2
-    echo "Converting to Markdown..." >&2
-    conf2md --no-wrap "${url}"
+    cache_file="${CACHE_DIR}/$(echo "$url" | md5sum | cut -d' ' -f1).md"
+
+    # Output the cached version if available, otherwise generate
+    if [ -f "$cache_file" ]; then
+        cat "$cache_file"
+    else
+        conf2md --no-wrap "${url}"
+    fi
 }
 
 main "$@"
