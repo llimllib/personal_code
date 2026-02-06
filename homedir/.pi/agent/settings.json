@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.52.6",
+  "defaultProvider": "anthropic",
+  "defaultModel": "claude-opus-4-5",
+  "defaultThinkingLevel": "off",
+  "skills": ["~/.local/skills"]
+}
