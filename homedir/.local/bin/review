@@ -176,8 +176,16 @@ if [[ "$has_unified_context" == false ]]; then
   fi
 fi
 
+# create a tempfile for storing git error output
+git_error=$(mktemp)
+trap 'rm -f "$git_error"' EXIT
+
 # Run git diff and append any additional context to it
-diff_output=$(git diff "${git_args[@]}" 2>/dev/null || error "Git diff command \`git diff ${git_args[*]}\` failed. Check your arguments.")
+if ! diff_output=$(git diff "${git_args[@]}" 2>"$git_error"); then
+  printf "${RED}❌ Git diff command failed: git diff %s${RESET}\n" "${git_args[*]}" >&2
+  cat "$git_error" >&2
+  exit 1
+fi
 diff_output="${diff_output}
 
 ${additional_context}"
@@ -220,7 +228,11 @@ if [[ $estimated_tokens -gt $max_tokens ]]; then
   fi
   
   # Re-run git diff with reduced context
-  diff_output=$(git diff "${new_git_args[@]}" 2>/dev/null || error "Git diff command failed with reduced context.")
+  if ! diff_output=$(git diff "${new_git_args[@]}" 2>"$git_error"); then
+    printf "${RED}❌ Git diff command failed with reduced context: git diff %s${RESET}\n" "${new_git_args[*]}" >&2
+    cat "$git_error" >&2
+    exit 1
+  fi
 fi
 
 prompt="Please review this PR as if you were a senior engineer.
@@ -255,3 +267,5 @@ elif [[ "$exit_status" -ne 0 ]]; then
   echo "Error: LLM command failed." >&2
   exit 1
 fi
+
+
