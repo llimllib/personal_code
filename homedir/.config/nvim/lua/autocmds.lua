@@ -29,6 +29,7 @@ autocmd("FileType", {
 })
 
 -- python gets 4 spaces and expandtab
+-- see none_ls.lua for formatting
 autocmd("FileType", {
 	group = filetypes,
 	pattern = { "python" },

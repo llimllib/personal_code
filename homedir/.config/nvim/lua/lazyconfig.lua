@@ -119,10 +119,10 @@ require("lazy").setup({
 		{
 			"nvim-treesitter/nvim-treesitter",
 			build = ":TSUpdate",
+			lazy = "false",
 			event = { "BufReadPre", "BufNewFile" },
-			main = "nvim-treesitter.configs",
 			config = function()
-				require("nvim-treesitter.configs").setup({
+				require("nvim-treesitter.config").setup({
 					auto_install = false,
 					ensure_installed = {
 						"bash",
