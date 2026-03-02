@@ -279,10 +279,13 @@ export DOTNETBIN="$HOME/.dotnet/tools"
 export HOMEBREWBIN="/opt/homebrew/bin"
 export HOMEBREWSBIN="/opt/homebrew/sbin"
 export PNPMBIN="$HOME/Library/pnpm"
+# really wish bun supported XDG exec paths, this is a fairly insane path
+# https://github.com/oven-sh/bun/issues/1678
+export BUNBIN="$HOME/.cache/.bun/bin"
 
 # add homebrew bin, go bin, and prefer local/bin and local/sbin to bin.
 # git-prompt depends on being able to find brew, so this must come before that.
-export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:$BUNBIN:/usr/local/bin:/usr/local/sbin:$PATH
 
 # add cargo bin to PATH
 [[ -f ~/.cargo/env ]] && source ~/.cargo/env
@@ -326,7 +329,7 @@ fi
 
 # https://github.com/llimllib/mdriver
 if command -v mdriver > /dev/null; then
-    # display images in the terminal
+    # display images in the terminal      
     alias mdriver="mdriver --images kitty"
 
     # create a function that pipes llm output through mdriver to highlight markdown
@@ -344,7 +347,6 @@ alias gg='batgrep'
 alias dc='docker compose'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
-alias conf2md='conf2md --no-wrap'
 alias erd="erd -y inverted --human" # give erd a better default sort
 if command -v fd > /dev/null; then
     alias fd="fd --hyperlink"
@@ -373,6 +375,7 @@ alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
+alias pi='bun install -g @mariozechner/pi-coding-agent && ~/.cache/.bun/bin/pi'
 
 # cd into a jellyfish project
 alias jf='. ~/.local/bin/,jf'
