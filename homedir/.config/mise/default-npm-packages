@@ -1,7 +1,7 @@
 @biomejs/biome
 @mariozechner/pi-coding-agent
 @vtsls/language-server
-@zed-industries/claude-code-acp
+@zed-industries/claude-agent-acp
 bash-language-server
 eslint
 mcp-hub
