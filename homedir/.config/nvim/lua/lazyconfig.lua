@@ -114,8 +114,6 @@ require("lazy").setup({
 
 		-- somehow, disabling indentation here makes my indentation go crazy. I
 		-- have no idea why.
-		--
-		-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#lazynvim
 		{
 			"nvim-treesitter/nvim-treesitter",
 			build = ":TSUpdate",
