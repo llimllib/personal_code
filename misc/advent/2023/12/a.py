@@ -11,7 +11,7 @@ def parse(iter):
 
 
 @functools.cache
-def count(s: str, machines: tuple[int]) -> int:
+def count(s: str, machines: tuple[int, ...]) -> int:
     if not machines:
         if "#" not in s:
             return 1
@@ -31,7 +31,7 @@ def count(s: str, machines: tuple[int]) -> int:
     return n
 
 
-def unfold(s: str, machines: tuple[int]) -> tuple[str, tuple[int]]:
+def unfold(s: str, machines: tuple[int]) -> tuple[str, tuple[int, ...]]:
     return "?".join([s] * 5), machines * 5
 
 
