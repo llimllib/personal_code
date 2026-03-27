@@ -40,7 +40,7 @@ unsetopt case_match
 setopt extended_history
 setopt hist_allow_clobber
 setopt hist_fcntl_lock
-setopt hist_find_no_dups 
+setopt hist_find_no_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_dups
 setopt hist_ignore_space
@@ -84,7 +84,7 @@ zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 #q
 # MENU_COMPLETE (-Y)
 #  On an ambiguous completion, instead of listing possibilities or beeping,
-#  insert the first match immediately. 
+#  insert the first match immediately.
 #
 # I tried this but found it too annoying, if I type pack<tab> I don't want the
 # prompt to jump to package-lock.json
@@ -102,7 +102,7 @@ export LSCOLORS=dxfxcxdxbxegedabagacad
 
 # better completion menu
 # https://thevaluable.dev/zsh-completion-guide-examples/
-zstyle ':completion:*' menu select    
+zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LSCOLORS}
 
 # case insensitive completion
@@ -144,14 +144,14 @@ function makeprompt() {
     prompt+="%K{green}%F{black}   %(5~|%-1~/…/%3~|%4~) %F{green}"
 
     prompt+='${vcs_info_msg_0_}'
- 
+
     # reset colors
     LF=$'\n'
     prompt+="%k%f ${LF}$ "
- 
+
     echo "$PROMPT"
 }
- 
+
 # to debug:
 # echo "$(makeprompt)"
 export PS1="$(makeprompt)"
@@ -329,7 +329,7 @@ fi
 
 # https://github.com/llimllib/mdriver
 if command -v mdriver > /dev/null; then
-    # display images in the terminal      
+    # display images in the terminal
     alias mdriver="mdriver --images kitty"
 
     # create a function that pipes llm output through mdriver to highlight markdown
