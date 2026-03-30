@@ -181,10 +181,15 @@
     process = git-lfs filter-process --skip
 
 [worktree]
-	untrackedfiles = .mise.toml
+	untrackedfiles = .claude
 	untrackedfiles = .env
 	untrackedfiles = .env.local
 	untrackedfiles = .envrc
 	untrackedfiles = .tool-versions
+	untrackedfiles = db.sql
+	untrackedfiles = mise.local.toml
 	untrackedfiles = mise.toml
 	untrackedfiles = modd.conf
+	untrackedfiles = staticfiles
+	backgroundcopy = node_modules
+	backgroundcopy = staticfiles
