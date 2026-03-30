@@ -3,6 +3,7 @@
 # see unlicense.org for full license
 
 RED="\033[0;31m"
+GREEN="\033[0;32m"
 YELLOW="\033[0;33m"
 CLEAR="\033[0m"
 MAIN_BRANCH=${MAIN_BRANCH:-main}
@@ -14,6 +15,13 @@ rmtree [-vh] [-m <MAIN_BRANCH>] <worktree directory to delete>
 
 remove a worktree from a git repository. Assumes you're in a directory with
 folders representing both a worktree and the main branch of your project.
+
+Before removing, checks for any configured sync-back files that have changed
+in the worktree and offers to copy them back to the main branch.
+
+Configure sync-back files with:
+    git config --add worktree.syncbackfiles "mise.local.toml"
+    git config --add worktree.syncbackfiles "db.sql"
 
 FLAGS:
 
@@ -44,6 +52,54 @@ function err {
 
 function warn {
     printf '%b%s%b\n' "$YELLOW" "$1" "$CLEAR"
+}
+
+# Check configured sync-back files for changes in the worktree, and offer to
+# copy them back to the main branch before removal.
+#
+# Configure with: git config --add worktree.syncbackfiles "mise.local.toml"
+function sync_back_files {
+    local worktree_dir="$1"
+
+    # Read sync-back files from git config (run from inside the worktree so we
+    # pick up local config too)
+    local syncback_files
+    syncback_files=$(cd "$worktree_dir" && git config --get-all worktree.syncbackfiles 2>/dev/null)
+    if [ -z "$syncback_files" ]; then
+        return
+    fi
+
+    while IFS= read -r file; do
+        local wt_file="$worktree_dir/$file"
+        local main_file="$MAIN_BRANCH/$file"
+
+        if [ ! -f "$wt_file" ]; then
+            continue
+        fi
+
+        if [ ! -f "$main_file" ]; then
+            warn "$file exists in worktree but not in main branch — copying back"
+            mkdir -p "$(dirname "$main_file")"
+            cp "$wt_file" "$main_file"
+            continue
+        fi
+
+        # If the files are identical, skip
+        if diff -q "$main_file" "$wt_file" > /dev/null 2>&1; then
+            continue
+        fi
+
+        # Show the diff with delta and ask whether to copy back
+        printf '%b%s has changed in the worktree:%b\n' "$YELLOW" "$file" "$CLEAR"
+        delta "$main_file" "$wt_file"
+
+        printf '%bCopy %s back to main branch? [y/N] %b' "$YELLOW" "$file" "$CLEAR"
+        read -r answer </dev/tty
+        if [[ "$answer" =~ ^[Yy]$ ]]; then
+            cp "$wt_file" "$main_file"
+            printf '%bCopied %s back to main branch%b\n' "$GREEN" "$file" "$CLEAR"
+        fi
+    done <<< "$syncback_files"
 }
 
 # rmtree <dir> will remove a worktree's directory, then prune the worktree list
@@ -81,7 +137,8 @@ function rmtree {
         fi
 
         branch_name=$(cd "$1" && git rev-parse --abbrev-ref HEAD)
-        rm -rf "$1"
+        sync_back_files "$1"
+        mv "$1" ~/.Trash/"$(basename "$1")-$(date +%s)"
         (cd "$MAIN_BRANCH" && git worktree prune && git branch -D "$branch_name")
 
         shift
