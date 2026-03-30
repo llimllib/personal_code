@@ -106,7 +106,9 @@ require("lazy").setup({
 
 		-- hex colors
 		{
-			"norcalli/nvim-colorizer.lua",
+			-- "norcalli/nvim-colorizer.lua",
+			-- maintained fork (as of march 30 2026)
+			"catgoose/nvim-colorizer.lua",
 			config = function()
 				require("colorizer").setup()
 			end,
@@ -114,6 +116,8 @@ require("lazy").setup({
 
 		-- somehow, disabling indentation here makes my indentation go crazy. I
 		-- have no idea why.
+		--
+		-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#lazynvim
 		{
 			"nvim-treesitter/nvim-treesitter",
 			build = ":TSUpdate",

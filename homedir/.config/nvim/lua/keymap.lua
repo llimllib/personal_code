@@ -36,6 +36,9 @@ vim.keymap.set("n", "<leader>t", ":vsplit<CR>:terminal<CR>a")
 -- insert one character
 vim.keymap.set("", "<leader>i", "i<space><esc>r")
 
+-- remove trailing whitespace
+vim.keymap.set("n", "<leader>w", ":%s/\\s\\+$//e<CR>", { noremap = true, silent = true })
+
 -- system paste and yank
 vim.keymap.set("n", "<leader>p", ":pu +<CR>")
 vim.keymap.set("v", "<leader>y", '"+y')

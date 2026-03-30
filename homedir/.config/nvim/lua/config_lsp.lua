@@ -304,6 +304,24 @@ vim.lsp.config("pyright", {
 })
 vim.lsp.enable("pyright")
 
+-- ruff: linting only (no formatting, no hover, no import sorting)
+-- formatting is handled by black, hover by pyright
+vim.lsp.config("ruff", {
+	on_attach = function(client, bufnr)
+		client.server_capabilities.hoverProvider = false
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
+		on_attach(client, bufnr)
+	end,
+	capabilities = capabilities,
+	settings = {
+		ruff = {
+			organizeImports = false,
+		},
+	},
+})
+vim.lsp.enable("ruff")
+
 -- https://docs.astral.sh/ty/editors/
 -- uv tool install ty@latest
 --
@@ -417,6 +435,11 @@ vim.diagnostic.config({
 	virtual_text = {
 		-- the default is '■' but I find that too distracting
 		prefix = "•",
+	},
+
+	-- show the source (e.g. Pyright, Ruff) in diagnostic floats
+	float = {
+		source = true,
 	},
 
 	-- configured with the `sign` command in init.vim, as suggested in :help
