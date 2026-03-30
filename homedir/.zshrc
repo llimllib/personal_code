@@ -75,6 +75,47 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
+
+# command execution time tracking
+function preexec_cmd_timer() {
+    cmd_start_time=$(date +%s)
+}
+
+function precmd_cmd_duration() {
+    local arrow=$'\ue0b2'
+    if [ -n "$cmd_start_time" ]; then
+        local now=$(date +%s)
+        local elapsed=$((now - cmd_start_time))
+        if [ $elapsed -ge 1 ]; then
+            # Format elapsed time in human-readable format
+            local time_str=""
+            if [ $elapsed -ge 3600 ]; then
+                local hours=$((elapsed / 3600))
+                local remainder=$((elapsed % 3600))
+                local minutes=$((remainder / 60))
+                local seconds=$((remainder % 60))
+                time_str="${hours}h ${minutes}m ${seconds}s"
+            elif [ $elapsed -ge 60 ]; then
+                local minutes=$((elapsed / 60))
+                local seconds=$((elapsed % 60))
+                time_str="${minutes}m ${seconds}s"
+            else
+                time_str="${elapsed}s"
+            fi
+            # Show duration section + time section
+            RPROMPT="${RPROMPT_PREFIX}%F{cyan}${arrow}%F{black}%K{cyan} ${time_str} %K{cyan}%F{magenta}${arrow}%K{magenta}%F{black}%t${RPROMPT_SUFFIX}"
+        else
+            # Just show time section
+            RPROMPT="${RPROMPT_PREFIX}%F{magenta}${arrow}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}"
+        fi
+        unset cmd_start_time
+    else
+        # Just show time section (no command was run)
+        RPROMPT="${RPROMPT_PREFIX}%F{magenta}${arrow}%F{black}%K{magenta}%t${RPROMPT_SUFFIX}"
+    fi
+}
+preexec_functions+=( preexec_cmd_timer )
+precmd_functions+=( precmd_cmd_duration )
 # left version
 zstyle ':vcs_info:git:*' formats '%K{yellow}%F{black}  %b %F{yellow}'
 # right version
@@ -279,7 +320,11 @@ export DOTNETBIN="$HOME/.dotnet/tools"
 export HOMEBREWBIN="/opt/homebrew/bin"
 export HOMEBREWSBIN="/opt/homebrew/sbin"
 export PNPMBIN="$HOME/Library/pnpm"
-# really wish bun supported XDG exec paths, this is a fairly insane path
+# To install bun to .local:
+# $ export BUN_INSTALL=$HOME/.local
+# $ curl -fsSL https://bun.sh/install | bash
+#
+# then the bindir will be as below
 # https://github.com/oven-sh/bun/issues/1678
 export BUNBIN="$HOME/.cache/.bun/bin"
 
@@ -292,9 +337,10 @@ export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:$BUNBIN:/usr/lo
 
 # Fix colors in ipython paging
 export PAGER="less"
-export LESS="-SRXF"
+export LESS="-SRXFi"
 
 # git aliases
+alias diffnav='DELTA_FEATURES="" diffnav'
 alias gs='ls && echo "---------------------------------------" && git status'
 alias gd="git diff"
 alias gdc="git diff --cached"
@@ -345,8 +391,10 @@ alias gg='batgrep'
 # skip for now on linux because it complains about crtimes
 [[ $(uname) == "Darwin" ]] && alias cp='command rsync --human-readable --progress --archive --hard-links --acls --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --'
 alias dc='docker compose'
+alias dps='docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
 alias c='clear'
 alias clean='env -i HOME=$HOME PATH=$PATH USER=$USER'
+alias conf2md='conf2md --no-wrap'
 alias erd="erd -y inverted --human" # give erd a better default sort
 if command -v fd > /dev/null; then
     alias fd="fd --hyperlink"
@@ -382,6 +430,13 @@ alias jf='. ~/.local/bin/,jf'
 
 # ask claude a question and get an answer without ceremony
 alias q='llm --system "respond with a simple answer and do not explain yourself at all. Do not quote the answer" '
+
+# prevent claude from overwriting window titles, because I want to know what
+# directory I'm in. I wish I could set it to be <dir> - <claude title>, but
+# alas not possible
+#
+# https://code.claude.com/docs/en/settings#environment-variables
+export CLAUDE_CODE_DISABLE_TERMINAL_TITLE=1
 
 # "get-headers https://billmill.org" to do a GET request and print the headers
 # and total time of the response
@@ -489,3 +544,6 @@ delta_sidebyside
 
 # Source local configuration if it exists
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# bun completions
+[ -s "/Users/llimllib/.bun/_bun" ] && source "/Users/llimllib/.bun/_bun"
