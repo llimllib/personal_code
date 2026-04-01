@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MLX_WHISPER="/Users/llimllib/.local/share/mise/installs/python/3.14.2/bin/mlx_whisper"
+FFMPEG="/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
+MODEL="mlx-community/whisper-large-v3-turbo"
+
+usage() {
+    echo "Usage: caption.sh [options] <video file>"
+    echo ""
+    echo "Add TikTok-style burned-in captions to a video."
+    echo ""
+    echo "Options:"
+    echo "  -m, --model MODEL    Whisper model (default: $MODEL)"
+    echo "  -o, --output FILE    Output filename (default: <input>_captioned.mp4)"
+    echo "  -w, --words N        Max words per line (default: 5)"
+    echo "  -s, --fontsize N     Font size (default: 24)"
+    echo "  -h, --help           Show this help"
+    exit 0
+}
+
+MAX_WORDS=5
+FONTSIZE=24
+OUTPUT=""
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -m|--model)    MODEL="$2"; shift 2 ;;
+        -o|--output)   OUTPUT="$2"; shift 2 ;;
+        -w|--words)    MAX_WORDS="$2"; shift 2 ;;
+        -s|--fontsize) FONTSIZE="$2"; shift 2 ;;
+        -h|--help)     usage ;;
+        -*)            echo "Unknown option: $1" >&2; exit 1 ;;
+        *)             break ;;
+    esac
+done
+
+if [[ $# -lt 1 ]]; then
+    echo "Error: No input file specified" >&2
+    usage
+fi
+
+INPUT="$1"
+if [[ ! -f "$INPUT" ]]; then
+    echo "Error: File not found: $INPUT" >&2
+    exit 1
+fi
+
+BASENAME="${INPUT%.*}"
+OUTPUT="${OUTPUT:-${BASENAME}_captioned.mp4}"
+
+TMPDIR="$(mktemp -d)"
+trap 'rm -rf "$TMPDIR"' EXIT
+
+echo "==> Transcribing with mlx-whisper..."
+"$MLX_WHISPER" \
+    --model "$MODEL" \
+    --language en \
+    --output-format srt \
+    --word-timestamps True \
+    --max-words-per-line "$MAX_WORDS" \
+    --hallucination-silence-threshold 1 \
+    --output-dir "$TMPDIR" \
+    "$INPUT"
+
+# mlx_whisper names the output after the input file
+GENERATED_SRT="$TMPDIR/$(basename "${BASENAME}").srt"
+if [[ ! -f "$GENERATED_SRT" ]]; then
+    echo "Error: Expected SRT file not found at $GENERATED_SRT" >&2
+    echo "Files in tmpdir:" >&2
+    ls -la "$TMPDIR" >&2
+    exit 1
+fi
+
+# ffmpeg's subtitles filter can't handle spaces/special chars in paths,
+# so symlink to a safe name in the temp directory
+SAFE_SRT="$TMPDIR/captions.srt"
+ln -sf "$GENERATED_SRT" "$SAFE_SRT"
+
+FORCE_STYLE="FontSize=${FONTSIZE},FontName=Arial,Bold=1,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,Outline=2,BorderStyle=4,BackColour=&H80000000,Alignment=2,MarginV=30"
+
+echo "==> Burning captions into video..."
+"$FFMPEG" -y -i "$INPUT" \
+    -vf subtitles="${SAFE_SRT}":force_style="'${FORCE_STYLE}'" \
+    -c:a copy \
+    "$OUTPUT"
+
+echo "==> Done! Output: $OUTPUT"
