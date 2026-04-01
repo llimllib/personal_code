@@ -1,8 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MLX_WHISPER="/Users/llimllib/.local/share/mise/installs/python/3.14.2/bin/mlx_whisper"
-FFMPEG="/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
+if ! command -v mlx_whisper &>/dev/null; then
+    echo "Error: mlx_whisper not found" >&2
+    echo "Please install it with: pip install mlx-whisper" >&2
+    exit 1
+fi
+
+if ! command -v ffmpeg &>/dev/null; then
+    echo "Error: ffmpeg not found" >&2
+    exit 1
+fi
+
 MODEL="mlx-community/whisper-large-v3-turbo"
 
 usage() {
@@ -52,8 +61,8 @@ OUTPUT="${OUTPUT:-${BASENAME}_captioned.mp4}"
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
-echo "==> Transcribing with mlx-whisper..."
-"$MLX_WHISPER" \
+echo "==> Transcribing with mlx_whisper..."
+mlx_whisper \
     --model "$MODEL" \
     --language en \
     --output-format srt \
@@ -80,7 +89,7 @@ ln -sf "$GENERATED_SRT" "$SAFE_SRT"
 FORCE_STYLE="FontSize=${FONTSIZE},FontName=Arial,Bold=1,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,Outline=2,BorderStyle=4,BackColour=&H80000000,Alignment=2,MarginV=30"
 
 echo "==> Burning captions into video..."
-"$FFMPEG" -y -i "$INPUT" \
+ffmpeg -y -i "$INPUT" \
     -vf subtitles="${SAFE_SRT}":force_style="'${FORCE_STYLE}'" \
     -c:a copy \
     "$OUTPUT"
