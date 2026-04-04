@@ -81,6 +81,37 @@ require("lazy").setup({
 				{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			},
 		},
+		{
+			"lewis6991/gitsigns.nvim", -- git gutter signs
+			config = function()
+				require("gitsigns").setup({
+					on_attach = function(bufnr)
+						local gs = package.loaded.gitsigns
+						local function map(mode, l, r, opts)
+							opts = opts or {}
+							opts.buffer = bufnr
+							vim.keymap.set(mode, l, r, opts)
+						end
+
+						map("n", "<leader>v", gs.next_hunk, { desc = "Next hunk" })
+						map("n", "]c", function()
+							if vim.wo.diff then
+								return "]c"
+							end
+							vim.schedule(gs.next_hunk)
+							return "<Ignore>"
+						end, { expr = true, desc = "Next hunk" })
+						map("n", "[c", function()
+							if vim.wo.diff then
+								return "[c"
+							end
+							vim.schedule(gs.prev_hunk)
+							return "<Ignore>"
+						end, { expr = true, desc = "Prev hunk" })
+					end,
+				})
+			end,
+		},
 
 		-- install nvim-cmp, for code completion
 		{
@@ -180,7 +211,6 @@ require("lazy").setup({
 						"json",
 						"json5",
 						"julia",
-						"lua",
 						"make",
 						"markdown",
 						"markdown_inline",
