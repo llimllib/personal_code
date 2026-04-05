@@ -181,6 +181,7 @@
     process = git-lfs filter-process --skip
 
 [worktree]
+	untrackedfiles = .mise.toml
 	untrackedfiles = .claude
 	untrackedfiles = .env
 	untrackedfiles = .env.local
