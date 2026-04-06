@@ -23,7 +23,7 @@ null_ls.setup({
 	-- see:
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
 	on_attach = function(client, bufnr)
-		if client.supports_method("textDocument/formatting") then
+		if client:supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
