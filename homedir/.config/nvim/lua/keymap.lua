@@ -63,8 +63,12 @@ vim.keymap.set("c", "<Esc>d", "<S-right><Delete>")
 vim.keymap.set("c", "<C-g>", "<C-c>")
 
 -- navigate diagnostics
-vim.keymap.set("n", "<leader>m", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-vim.keymap.set("n", "<leader>M", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+vim.keymap.set("n", "<leader>m", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, opts)
+vim.keymap.set("n", "<leader>M", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, opts)
 
 -- From the vim-lsp docs:
 -- - Q: How to force-reload LSP?
