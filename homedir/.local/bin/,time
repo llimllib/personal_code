@@ -56,6 +56,7 @@ def parse_date_string(date_string, verbose=False):
         ("%Y-%m-%d", False),
         ("%Y-%m-%dT%H:%M", False),
         ("%Y-%m-%dT%H:%M:%S", False),
+        ("%Y-%m-%dT%H:%M:%S.%fZ", True),  # UTC with microseconds
         ("%Y-%m-%dT%H:%M:%SZ", True),  # UTC
         # Common formats
         ("%B %d %Y", False),  # March 21 2023
