@@ -138,7 +138,17 @@ function rmtree {
 
         branch_name=$(cd "$1" && git rev-parse --abbrev-ref HEAD)
         sync_back_files "$1"
-        mv "$1" ~/.Trash/"$(basename "$1")-$(date +%s)"
+
+        # Use trash if available, otherwise fall back to rm -rf. I do this
+        # because trash is much faster on macs, where deleting a folder with
+        # a venv or node_modules can take multiple minutes (!)
+        if command -v trash >/dev/null 2>&1; then
+            trash "$1"
+        else
+            warn "trash binary not found, using rm -rf instead"
+            rm -rf "$1"
+        fi
+
         (cd "$MAIN_BRANCH" && git worktree prune && git branch -D "$branch_name")
 
         shift
