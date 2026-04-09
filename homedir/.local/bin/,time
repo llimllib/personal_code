@@ -50,6 +50,26 @@ def parse_date_string(date_string, verbose=False):
     if verbose:
         print(f"Parsing date string: {date_string}")
 
+    # Handle ISO format with nanoseconds (Python's %f only handles microseconds)
+    # Match patterns like: 2026-04-09T15:02:20.62254323Z
+    nano_match = re.match(
+        r"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.(\d+)Z", date_string
+    )
+    if nano_match:
+        base_str, frac_str = nano_match.groups()
+        # Truncate to microseconds (6 digits) for Python's datetime
+        micro_str = frac_str[:6].ljust(6, '0')
+        try:
+            dt = datetime.datetime.strptime(
+                f"{base_str}.{micro_str}Z", "%Y-%m-%dT%H:%M:%S.%fZ"
+            )
+            dt = dt.replace(tzinfo=datetime.timezone.utc)
+            if verbose:
+                print(f"Parsed ISO format with nanoseconds (truncated to microseconds): {dt}")
+            return dt.timestamp()
+        except ValueError:
+            pass
+
     # Common format patterns
     format_patterns = [
         # ISO formats
