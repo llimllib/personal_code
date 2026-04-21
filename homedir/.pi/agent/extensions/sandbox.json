@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "network": {
+    "allowedDomains": [],
+    "deniedDomains": []
+  },
+  "filesystem": {
+    "denyRead": ["~/.ssh", "~/.aws", "~/.gnupg"],
+    "allowWrite": [".", "/tmp", "~/Library/Logs"],
+    "denyWrite": [".env", ".env.*", "*.pem", "*.key"]
+  }
+}
