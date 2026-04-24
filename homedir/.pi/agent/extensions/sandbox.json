@@ -1,12 +1,29 @@
 {
   "enabled": true,
   "network": {
-    "allowedDomains": [],
-    "deniedDomains": []
+    "allowedDomains": [
+      "amazonaws.com",
+      "*.amazonaws.com",
+      "api.github.com",
+      "github.com",
+      "localhost",
+      "nodejs.org",
+      "raw.githubusercontent.com"
+    ],
+    "deniedDomains": [],
+    "allowUnixSockets": ["/tmp/*"],
+    "allowLocalBinding": true
   },
   "filesystem": {
-    "denyRead": ["~/.ssh", "~/.aws", "~/.gnupg"],
-    "allowWrite": [".", "/tmp", "~/Library/Logs"],
-    "denyWrite": [".env", ".env.*", "*.pem", "*.key"]
+    "denyRead": ["~/.gnupg", "~/.ssh"],
+    "allowWrite": [".", "/tmp", "~/Library/Logs", "~/.cache", "../main"],
+    "denyWrite": [
+      ".env",
+      ".env.*",
+      "*.pem",
+      "*.key",
+      "mise.toml",
+      "mise.local.toml"
+    ]
   }
 }
