@@ -324,7 +324,10 @@ export PNPMBIN="$HOME/Library/pnpm"
 # $ export BUN_INSTALL=$HOME/.local
 # $ curl -fsSL https://bun.sh/install | bash
 #
-# then the bindir will be as below
+# Then _unset_ BUN_INSTALL to prevent it from installing binaries directly to
+# ~/.local/bin . It will choose as its install dir ~/.cache/.bin at that point,
+# since XDG_CACHE_HOME is set above
+#
 # https://github.com/oven-sh/bun/issues/1678
 export BUNBIN="$HOME/.cache/.bun/bin"
 
