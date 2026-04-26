@@ -120,6 +120,7 @@ require("lazy").setup({
 		-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#lazynvim
 		{
 			"nvim-treesitter/nvim-treesitter",
+			branch = "main",
 			build = ":TSUpdate",
 			lazy = "false",
 			event = { "BufReadPre", "BufNewFile" },
