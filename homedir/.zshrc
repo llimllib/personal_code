@@ -341,7 +341,8 @@ export LESS="-SRXFi"
 
 # git aliases
 alias diffnav='DELTA_FEATURES="" diffnav'
-alias gs='ls && echo "---------------------------------------" && git status'
+# alias gs='ls && echo "---------------------------------------" && git status'
+alias gs='git ls -c'
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gm="git co master"
@@ -350,11 +351,40 @@ alias gc="git checkout"
 alias gm="git ci -m"
 alias gma="git ci -a -m"
 alias ga="git add"
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit | head"
-alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+
+# fancy git logs
+# alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit | head -n 25"
+# alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
+#
+# Git log pretty format with hyperlinks
+# _GL_FORMAT='%Cred'$'\e]8;;git-show:///%H\e\\''%h'$'\e]8;;\e\\''%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset'
+_GL_FORMAT='%Cred'$'\e]8;;git-show:///%H\e\\''%h'$'\e]8;;\e\\''%Creset -%C(yellow)%d%Creset '$'\e]8;;git-show:///%H\e\\''%s'$'\e]8;;\e\\''%Creset %Cgreen(%cr)%C(bold blue)<'$'\e]8;;git-log-author:///%ae\e\\''%an'$'\e]8;;\e\\''>'
+
+gl() {
+   git log --color --graph --pretty=format:"$_GL_FORMAT" --abbrev-commit "$@" |
+       head -n 25
+}
+
+glg() {
+   git log --color --graph --pretty=format:"$_GL_FORMAT" --abbrev-commit "$@" |
+       bat --plain
+}
+
+# when I merge PRs in github, they go in as `bill@billmill.org` even when I'm
+# in my work repo and my computer is configured to send commits as my jellyfish
+# ID, so we have to hardcode my email rather than use git config email
+glme() {
+    LESS="-RXFi" git log --color --graph \
+        --pretty=format:"$_GL_FORMAT" \
+        --abbrev-commit --author="bill@billmill.org" \
+        "$@"
+}
+
 alias pr="gh pr create"
 alias gist="gh gist create"
 alias prune='git remote prune origin'
+# Get the PR number from gh, and watch the checks run in the terminal
+alias ciwatch='gh pr checks $(gh pr view --json number --jq .number) --watch'
 
 # if bat is present, replace cat with it
 if command -v bat > /dev/null; then
@@ -377,6 +407,8 @@ fi
 if command -v mdriver > /dev/null; then
     # display images in the terminal
     alias mdriver="mdriver --images kitty"
+
+    export MDRIVER_PADDING=2
 
     # create a function that pipes llm output through mdriver to highlight markdown
     llm() {
@@ -547,3 +579,8 @@ delta_sidebyside
 
 # bun completions
 [ -s "/Users/llimllib/.bun/_bun" ] && source "/Users/llimllib/.bun/_bun"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/llimllib/.lmstudio/bin"
+# End of LM Studio CLI section
+
