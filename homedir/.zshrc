@@ -324,10 +324,7 @@ export PNPMBIN="$HOME/Library/pnpm"
 # $ export BUN_INSTALL=$HOME/.local
 # $ curl -fsSL https://bun.sh/install | bash
 #
-# Then _unset_ BUN_INSTALL to prevent it from installing binaries directly to
-# ~/.local/bin . It will choose as its install dir ~/.cache/.bin at that point,
-# since XDG_CACHE_HOME is set above
-#
+# then the bindir will be as below
 # https://github.com/oven-sh/bun/issues/1678
 export BUNBIN="$HOME/.cache/.bun/bin"
 
@@ -360,7 +357,6 @@ alias ga="git add"
 # alias glg="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit"
 #
 # Git log pretty format with hyperlinks
-# _GL_FORMAT='%Cred'$'\e]8;;git-show:///%H\e\\''%h'$'\e]8;;\e\\''%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset'
 _GL_FORMAT='%Cred'$'\e]8;;git-show:///%H\e\\''%h'$'\e]8;;\e\\''%Creset -%C(yellow)%d%Creset '$'\e]8;;git-show:///%H\e\\''%s'$'\e]8;;\e\\''%Creset %Cgreen(%cr)%C(bold blue)<'$'\e]8;;git-log-author:///%ae\e\\''%an'$'\e]8;;\e\\''>'
 
 gl() {
@@ -371,6 +367,9 @@ gl() {
 glg() {
    git log --color --graph --pretty=format:"$_GL_FORMAT" --abbrev-commit "$@" |
        bat --plain
+   # ^^^ less fails to correctly calculate the width of the hyperlinks, but
+   # `bat --plain` doesn't even though it just runs `less`, I don't understand
+   # why
 }
 
 # when I merge PRs in github, they go in as `bill@billmill.org` even when I'm
