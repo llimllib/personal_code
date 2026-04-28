@@ -459,6 +459,9 @@ alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
 alias pi='bun install -g @mariozechner/pi-coding-agent && ~/.cache/.bun/bin/pi'
 
+safe()    { "$HOME/.config/sandbox-exec/run-sandboxed.sh" "$@"; }
+claude()  { safe claude --dangerously-skip-permissions "$@"; }
+
 # cd into a jellyfish project
 alias jf='. ~/.local/bin/,jf'
 
