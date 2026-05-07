@@ -46,7 +46,7 @@ def format_time(timestamp, verbose=False):
     print(f"UTC:        {YELLOW}{utc_time.strftime(time_format)} UTC{RESET}")
 
 
-def parse_date_string(date_string, verbose=False):
+def parse_date_string(date_string, verbose=False, assume_utc=False):
     if verbose:
         print(f"Parsing date string: {date_string}")
 
@@ -71,6 +71,9 @@ def parse_date_string(date_string, verbose=False):
             pass
 
     # Common format patterns
+    # Format: (pattern, is_explicit_utc)
+    # is_explicit_utc=True means the format itself indicates UTC (Z suffix, GMT, etc.)
+    # is_explicit_utc=False means no timezone info, will use assume_utc flag
     format_patterns = [
         # ISO formats
         ("%Y-%m-%d", False),
@@ -78,6 +81,10 @@ def parse_date_string(date_string, verbose=False):
         ("%Y-%m-%dT%H:%M:%S", False),
         ("%Y-%m-%dT%H:%M:%S.%fZ", True),  # UTC with microseconds
         ("%Y-%m-%dT%H:%M:%SZ", True),  # UTC
+        # Common datetime formats (space-separated)
+        ("%Y-%m-%d %H:%M:%S.%f", False),  # 2026-05-07 09:51:50.271
+        ("%Y-%m-%d %H:%M:%S", False),  # 2026-05-07 09:51:50
+        ("%Y-%m-%d %H:%M", False),  # 2026-05-07 09:51
         # Common formats
         ("%B %d %Y", False),  # March 21 2023
         ("%B %d %Y %H:%M:%S", False),  # March 21 2023 10:34:56
@@ -108,18 +115,23 @@ def parse_date_string(date_string, verbose=False):
             pass
 
     # Try each format pattern
-    for pattern, is_utc in format_patterns:
+    for pattern, is_explicit_utc in format_patterns:
         try:
-            if is_utc:
-                dt = datetime.datetime.strptime(date_string, pattern)
+            dt = datetime.datetime.strptime(date_string, pattern)
+            
+            if is_explicit_utc:
+                # Format explicitly indicates UTC
+                dt = dt.replace(tzinfo=datetime.timezone.utc)
+            elif assume_utc:
+                # User requested UTC interpretation
                 dt = dt.replace(tzinfo=datetime.timezone.utc)
             else:
-                dt = datetime.datetime.strptime(date_string, pattern)
+                # No timezone info, treat as local time and warn
+                print(f"{YELLOW}Warning: No timezone specified, assuming local time. Use --utc to interpret as UTC.{RESET}")
 
             if verbose:
-                print(
-                    f"Matched pattern {pattern}: {dt} {'as utc' if is_utc else 'as local time'}"
-                )
+                tz_str = "UTC (explicit)" if is_explicit_utc else ("UTC (--utc flag)" if assume_utc else "local time")
+                print(f"Matched pattern {pattern}: {dt} as {tz_str}")
 
             return dt.timestamp()
         except ValueError:
@@ -159,8 +171,13 @@ def parse_date_string(date_string, verbose=False):
                             month_val = v
                             break
                 dt = datetime.datetime(int(year), month_val, int(day))
+                if assume_utc:
+                    dt = dt.replace(tzinfo=datetime.timezone.utc)
+                else:
+                    print(f"{YELLOW}Warning: No timezone specified, assuming local time. Use --utc to interpret as UTC.{RESET}")
                 if verbose:
-                    print(f"Parsed with custom month-day-year logic: {dt}")
+                    tz_str = "UTC (--utc flag)" if assume_utc else "local time"
+                    print(f"Parsed with custom month-day-year logic: {dt} as {tz_str}")
                 return dt.timestamp()
     except Exception:
         pass
@@ -175,6 +192,9 @@ if __name__ == "__main__":
     parser.add_argument("input", nargs="*", help="Unix timestamp or date string")
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose output"
+    )
+    parser.add_argument(
+        "-u", "--utc", action="store_true", help="Interpret date strings without timezone info as UTC instead of local time"
     )
 
     args = parser.parse_args()
@@ -196,7 +216,7 @@ if __name__ == "__main__":
             format_time(input_string, verbose)
         else:
             # Handle date string
-            timestamp = parse_date_string(input_string, verbose)
+            timestamp = parse_date_string(input_string, verbose, args.utc)
             format_time(timestamp, verbose)
     except ValueError as e:
         print(f"Error: {e}")
