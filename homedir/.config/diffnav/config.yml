@@ -1,0 +1,39 @@
+ui:
+  # Hide the "DIFFNAV" header at the top
+  hideHeader: false
+
+  # Hide the footer with keybindings help
+  hideFooter: false
+
+  # Show file tree on startup (toggle with 'e')
+  showFileTree: true
+
+  # Width of the file tree sidebar
+  fileTreeWidth: 30
+
+  # Width of the search panel (when pressing 't' to search)
+  searchTreeWidth: 50
+
+  # Icon style: "nerd-fonts-status", "nerd-fonts-simple", "nerd-fonts-filetype", 
+  # "nerd-fonts-full", "unicode", or "ascii"
+  # - nerd-fonts-status: Boxed git status icons colored by change type
+  # - nerd-fonts-simple: Generic file icon colored by change type
+  # - nerd-fonts-filetype: File-type specific icons colored by change type
+  # - nerd-fonts-full: Both status icon and file-type icon, all colored
+  # - unicode: Unicode symbols (+/⛌/●)
+  # - ascii: Plain ASCII characters (+/x/*)
+  icons: nerd-fonts-status
+
+  # Color filenames by git status (green for added, red for deleted, etc.)
+  colorFileNames: true
+
+  # Show the amount of lines added / removed next to the file
+  showDiffStats: true
+
+  # Use side-by-side diff view (false for unified diff view)
+  # Can also be toggled with 's' key or overridden with --side-by-side / --unified flags
+  sideBySide: false
+
+  # How many levels of folders to open on start
+  # -1 = all folders open, 0 = all folders closed, 1 = first level open, etc.
+  startFoldersOpenDepth: -1
