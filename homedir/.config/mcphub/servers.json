@@ -1,10 +1,7 @@
 {
   "mcpServers": {
     "cloudflare": {
-      "args": [
-        "mcp-remote",
-        "https://docs.mcp.cloudflare.com/sse"
-      ],
+      "args": ["mcp-remote", "https://docs.mcp.cloudflare.com/sse"],
       "autoApprove": [
         "search_cloudflare_documentation",
         "migrate_pages_to_workers_guide"
@@ -12,11 +9,7 @@
       "command": "npx"
     },
     "git": {
-      "args": [
-        "mcp-server-git",
-        "--repository",
-        "${REPOSITORY_PATH}"
-      ],
+      "args": ["mcp-server-git", "--repository", "${REPOSITORY_PATH}"],
       "command": "uvx",
       "disabled": false
     },
@@ -25,6 +18,9 @@
         "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
       },
       "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "honeycomb": {
+      "url": "https://mcp.honeycomb.io/mcp"
     }
   }
 }
