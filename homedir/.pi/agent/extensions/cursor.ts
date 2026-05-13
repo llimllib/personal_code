@@ -16,12 +16,9 @@ class FocusCursorEditor extends CustomEditor {
 }
 
 export default function (pi: ExtensionAPI) {
-  let savedTui: TUI | undefined;
-
-  pi.on("session_start", (_event, ctx) => {
+  pi.on("session_start", (event, ctx) => {
     ctx.ui.setEditorComponent(
       (tui: TUI, theme: Theme, keybindings: Keybindings) => {
-        savedTui = tui;
         // Switch the TUI from software-only to hardware cursor mode.
         tui.setShowHardwareCursor(true);
         return new FocusCursorEditor(tui, theme, keybindings);
@@ -29,9 +26,11 @@ export default function (pi: ExtensionAPI) {
     );
   });
 
-  pi.on("session_end", () => {
-    // Restore default cursor mode when the session exits.
-    savedTui?.setShowHardwareCursor(false);
-    savedTui = undefined;
+  pi.on("session_shutdown", (event, ctx) => {
+    // On reload, we need to reset the editor component so it gets recreated
+    // with the new extension instance
+    if (event.reason === "reload") {
+      ctx.ui.setEditorComponent(undefined);
+    }
   });
 }

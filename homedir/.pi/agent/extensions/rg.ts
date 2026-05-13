@@ -71,7 +71,18 @@ export default function (pi: ExtensionAPI) {
 					signal,
 				});
 			} catch (err: any) {
-				throw new Error(`ripgrep execution failed: ${err.message}`);
+				// If exec throws, return a proper error response instead of throwing
+				return {
+					content: [{ type: "text", text: `ripgrep execution failed: ${err.message}` }],
+					details: {
+						pattern,
+						path,
+						filePattern,
+						ignoreCase,
+						matchCount: 0,
+					} as GrepDetails,
+					isError: true,
+				};
 			}
 
 			// ripgrep exits with 1 when no matches found
@@ -89,7 +100,17 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (result.code !== 0) {
-				throw new Error(`ripgrep failed with exit code ${result.code}: ${result.stderr}`);
+				return {
+					content: [{ type: "text", text: `ripgrep failed with exit code ${result.code}: ${result.stderr}` }],
+					details: {
+						pattern,
+						path,
+						filePattern,
+						ignoreCase,
+						matchCount: 0,
+					} as GrepDetails,
+					isError: true,
+				};
 			}
 
 			// Apply truncation

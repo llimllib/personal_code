@@ -63,13 +63,14 @@ export default function (pi: ExtensionAPI) {
 				args.push("--hidden");
 			}
 
-			// Add pattern if provided, otherwise search for everything
-			if (pattern) {
-				args.push(pattern);
-			}
+			// Add pattern (or match-all if not provided). fd requires a pattern
+			// before the path argument, otherwise it interprets the path as a pattern.
+			args.push(pattern || ".");
 
 			// Add path
-			args.push(path || ".");
+			if (path) {
+				args.push(path);
+			}
 
 			let result;
 			try {

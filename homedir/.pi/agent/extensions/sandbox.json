@@ -4,10 +4,16 @@
     "allowedDomains": [
       "amazonaws.com",
       "*.amazonaws.com",
+      "*.atlassian.net",
       "api.github.com",
       "github.com",
       "localhost",
       "nodejs.org",
+      "*.nodejs.org",
+      "npmjs.org",
+      "*.npmjs.org",
+      "pypi.org",
+      "files.pythonhosted.org",
       "raw.githubusercontent.com"
     ],
     "deniedDomains": [],
@@ -16,14 +22,30 @@
   },
   "filesystem": {
     "denyRead": ["~/.gnupg", "~/.ssh"],
-    "allowWrite": [".", "/tmp", "~/Library/Logs", "~/.cache", "../main"],
+    "allowWrite": [
+      ".",
+      "../main",
+      "/tmp",
+      "/private/tmp",
+      "~/.cache",
+      "~/.local",
+      "~/.npm",
+      "~/go/",
+      "~/Library/Logs",
+      "~/Library/Caches"
+    ],
     "denyWrite": [
       ".env",
       ".env.*",
       "*.pem",
       "*.key",
       "mise.toml",
-      "mise.local.toml"
+      "mise.local.toml",
+      "*.tfstate",
+      "*.tfstate.backup",
+      "**/.terraform/**",
+      "**/terraform.tfstate",
+      "**/terraform.tfstate.backup"
     ]
   }
 }
