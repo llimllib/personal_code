@@ -339,8 +339,6 @@ export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:$BUNBIN:/usr/lo
 export PAGER="less"
 export LESS="-SRXFi"
 
-# git aliases
-alias diffnav='DELTA_FEATURES="" diffnav'
 # alias gs='ls && echo "---------------------------------------" && git status'
 alias gs='git ls -c'
 alias gd="git diff"
@@ -385,8 +383,10 @@ glme() {
 alias pr="gh pr create"
 alias gist="gh gist create"
 alias prune='git remote prune origin'
-# Get the PR number from gh, and watch the checks run in the terminal
-alias ciwatch='gh pr checks $(gh pr view --json number --jq .number) --watch'
+
+# Get the PR number from gh, and watch the checks run in the terminal. Change
+# the terminal title to success or failure when compelte
+alias ciwatch='gh pr checks $(gh pr view --json number --jq .number) --watch && title "✅ success, commit me" || title "❌ failure"'
 
 # if bat is present, replace cat with it
 if command -v bat > /dev/null; then
@@ -457,13 +457,13 @@ alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
-alias pi='bun install -g @mariozechner/pi-coding-agent && ~/.cache/.bun/bin/pi'
+alias pi='bun install -g @earendil-works/pi-coding-agent && ~/.cache/.bun/bin/pi'
 
 safe()    { "$HOME/.config/sandbox-exec/run-sandboxed.sh" "$@"; }
 claude()  { safe claude --dangerously-skip-permissions "$@"; }
 
 # cd into a jellyfish project
-alias jf='. ~/.local/bin/,jf'
+alias jf='. ~/jellyfish/bin/,jf'
 
 # ask claude a question and get an answer without ceremony
 alias q='llm --system "respond with a simple answer and do not explain yourself at all. Do not quote the answer" '
@@ -566,18 +566,6 @@ eval "$(atuin init zsh --disable-up-arrow)"
 # (or any shell configuration file) for creating the virtualenv inside your
 # project’s directory, avoiding problems with subsequent path changes.
 export PIPENV_VENV_IN_PROJECT=1
-
-# delta (https://github.com/dandavison/delta/issues/359)
-export DELTA_FEATURES
-function delta_sidebyside {
-    if [[ "${COLUMNS}" -ge 120 ]]; then
-        DELTA_FEATURES="side-by-side"
-    else
-        DELTA_FEATURES=""
-    fi
-}
-trap delta_sidebyside WINCH
-delta_sidebyside
 
 # Source local configuration if it exists
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
