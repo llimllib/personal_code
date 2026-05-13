@@ -7,7 +7,19 @@ if ! command -v mlx_whisper &>/dev/null; then
     exit 1
 fi
 
-if ! command -v ffmpeg &>/dev/null; then
+# Look for ffmpeg with subtitle support
+# Try ffmpeg-full first (keg-only formula with libass)
+if [[ -x "/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg" ]]; then
+    FFMPEG="/opt/homebrew/opt/ffmpeg-full/bin/ffmpeg"
+elif command -v ffmpeg &>/dev/null; then
+    FFMPEG="ffmpeg"
+    # Check if subtitles filter is available
+    if ! ffmpeg -filters 2>&1 | grep -q "subtitles"; then
+        echo "Error: ffmpeg doesn't have subtitle support" >&2
+        echo "Please install ffmpeg-full with: brew install ffmpeg-full" >&2
+        exit 1
+    fi
+else
     echo "Error: ffmpeg not found" >&2
     exit 1
 fi
@@ -24,6 +36,8 @@ usage() {
     echo "  -o, --output FILE    Output filename (default: <input>_captioned.mp4)"
     echo "  -w, --words N        Max words per line (default: 5)"
     echo "  -s, --fontsize N     Font size (default: 24)"
+    echo "  -p, --prompt TEXT    Initial prompt to guide transcription (e.g., technical terms)"
+    echo "  -e, --edit           Open subtitle file in \$EDITOR before burning"
     echo "  -h, --help           Show this help"
     exit 0
 }
@@ -31,6 +45,10 @@ usage() {
 MAX_WORDS=5
 FONTSIZE=24
 OUTPUT=""
+INITIAL_PROMPT=""
+EDIT_SUBTITLES=false
+YELLOW="\033[33m"
+RESET="\033[0m"
 
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -38,6 +56,8 @@ while [[ $# -gt 0 ]]; do
         -o|--output)   OUTPUT="$2"; shift 2 ;;
         -w|--words)    MAX_WORDS="$2"; shift 2 ;;
         -s|--fontsize) FONTSIZE="$2"; shift 2 ;;
+        -p|--prompt)   INITIAL_PROMPT="$2"; shift 2 ;;
+        -e|--edit)     EDIT_SUBTITLES=true; shift ;;
         -h|--help)     usage ;;
         -*)            echo "Unknown option: $1" >&2; exit 1 ;;
         *)             break ;;
@@ -49,19 +69,39 @@ if [[ $# -lt 1 ]]; then
     usage
 fi
 
+if [[ $# -gt 1 ]]; then
+    printf '%b%s%b\n' "$YELLOW" "Options must come before the input file" "$RESET" >&2
+    usage
+fi
+
 INPUT="$1"
 if [[ ! -f "$INPUT" ]]; then
     echo "Error: File not found: $INPUT" >&2
     exit 1
 fi
 
+# Expand tilde and get absolute path
+INPUT="$(cd "$(dirname "$INPUT")" && pwd)/$(basename "$INPUT")"
 BASENAME="${INPUT%.*}"
-OUTPUT="${OUTPUT:-${BASENAME}_captioned.mp4}"
+echo "DEBUG: OUTPUT before check: '$OUTPUT'" >&2
+if [[ -z "$OUTPUT" ]]; then
+    OUTPUT="${BASENAME}_captioned.mp4"
+    echo "DEBUG: Set default OUTPUT: '$OUTPUT'" >&2
+else
+    # Expand tilde in output path
+    OUTPUT="$(eval echo "$OUTPUT")"
+    echo "DEBUG: Expanded OUTPUT: '$OUTPUT'" >&2
+fi
 
 TMPDIR="$(mktemp -d)"
 trap 'rm -rf "$TMPDIR"' EXIT
 
 echo "==> Transcribing with mlx_whisper..."
+PROMPT_ARGS=()
+if [[ -n "$INITIAL_PROMPT" ]]; then
+    PROMPT_ARGS=(--initial-prompt "$INITIAL_PROMPT")
+fi
+
 mlx_whisper \
     --model "$MODEL" \
     --language en \
@@ -70,15 +110,23 @@ mlx_whisper \
     --max-words-per-line "$MAX_WORDS" \
     --hallucination-silence-threshold 1 \
     --output-dir "$TMPDIR" \
+    "${PROMPT_ARGS[@]}" \
     "$INPUT"
 
-# mlx_whisper names the output after the input file
-GENERATED_SRT="$TMPDIR/$(basename "${BASENAME}").srt"
-if [[ ! -f "$GENERATED_SRT" ]]; then
-    echo "Error: Expected SRT file not found at $GENERATED_SRT" >&2
+# mlx_whisper names the output after the input file (but may sanitize/truncate it)
+# Find the generated SRT file (should be the only .srt file in tmpdir)
+GENERATED_SRT="$(find "$TMPDIR" -name '*.srt' -type f | head -n 1)"
+if [[ -z "$GENERATED_SRT" || ! -f "$GENERATED_SRT" ]]; then
+    echo "Error: No SRT file found in $TMPDIR" >&2
     echo "Files in tmpdir:" >&2
     ls -la "$TMPDIR" >&2
     exit 1
+fi
+
+# Allow editing the subtitle file
+if [[ "$EDIT_SUBTITLES" == "true" ]]; then
+    echo "==> Opening subtitle file for editing..."
+    "${EDITOR:-vi}" "$GENERATED_SRT"
 fi
 
 # ffmpeg's subtitles filter can't handle spaces/special chars in paths,
@@ -89,9 +137,11 @@ ln -sf "$GENERATED_SRT" "$SAFE_SRT"
 FORCE_STYLE="FontSize=${FONTSIZE},FontName=Arial,Bold=1,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,Outline=2,BorderStyle=4,BackColour=&H80000000,Alignment=2,MarginV=30"
 
 echo "==> Burning captions into video..."
-ffmpeg -y -i "$INPUT" \
-    -vf subtitles="${SAFE_SRT}":force_style="'${FORCE_STYLE}'" \
+set -x
+"$FFMPEG" -y -i "$INPUT" \
+    -vf "subtitles='${SAFE_SRT}':force_style='${FORCE_STYLE}'" \
     -c:a copy \
     "$OUTPUT"
+set +x
 
 echo "==> Done! Output: $OUTPUT"
