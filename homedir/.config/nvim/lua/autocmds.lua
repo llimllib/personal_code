@@ -28,6 +28,45 @@ autocmd("FileType", {
 	end,
 })
 
+-- Obsidian-style list indentation: Tab/Shift-Tab indent/outdent list items
+autocmd("FileType", {
+	group = filetypes,
+	pattern = { "markdown" },
+	callback = function()
+		-- Tab in insert mode: if on a list item line, indent the whole line
+		-- regardless of cursor position; otherwise insert tab
+		vim.keymap.set("i", "<Tab>", function()
+			local line = vim.api.nvim_get_current_line()
+			if line:match("^%s*[-*+] ") or line:match("^%s*%d+[.)]") then
+				local sw = vim.bo.shiftwidth
+				-- Use normal mode >> to indent, then return to insert mode
+				local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+				vim.cmd("normal! >>")
+				vim.api.nvim_win_set_cursor(0, { row, col + sw })
+			else
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+			end
+		end, { buffer = true })
+
+		-- Shift-Tab in insert mode: outdent list items
+		vim.keymap.set("i", "<S-Tab>", function()
+			local line = vim.api.nvim_get_current_line()
+			if line:match("^%s*[-*+] ") or line:match("^%s*%d+[.)]") then
+				local sw = vim.bo.shiftwidth
+				local leading = line:match("^(%s*)")
+				local remove = math.min(sw, #leading)
+				if remove > 0 then
+					local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+					vim.cmd("normal! <<")
+					vim.api.nvim_win_set_cursor(0, { row, math.max(0, col - remove) })
+				end
+			else
+				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<S-Tab>", true, false, true), "n", false)
+			end
+		end, { buffer = true })
+	end,
+})
+
 -- python gets 4 spaces and expandtab
 -- see none_ls.lua for formatting
 autocmd("FileType", {

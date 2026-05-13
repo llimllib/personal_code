@@ -81,6 +81,17 @@ cmp.setup({
 		["<Tab>"] = function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
+			elseif vim.bo.filetype == "markdown" then
+				-- don't swallow tabs in markdown mode, we use them to
+				-- indent/dedent lists
+				local line = vim.api.nvim_get_current_line()
+				if line:match("^%s*[-*+] ") or line:match("^%s*%d+[.)]") then
+					fallback()
+				elseif has_words_before() then
+					cmp.complete()
+				else
+					fallback()
+				end
 			elseif has_words_before() then
 				cmp.complete()
 			else

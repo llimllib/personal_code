@@ -23,7 +23,6 @@ require("lazy").setup({
 		"cappyzawa/starlark.vim", -- starlark highlighting
 		"gpanders/editorconfig.nvim", -- .editorconfig reading
 		"tpope/vim-dadbod", -- query databases
-		"lewis6991/gitsigns.nvim", -- git gutter signs
 		"preservim/vim-markdown", -- markdown mode: fenced code blocks etc
 		"tpope/vim-fugitive", -- git integration
 		"tpope/vim-rhubarb", -- github integration
@@ -31,6 +30,38 @@ require("lazy").setup({
 		"lepture/vim-jinja", -- jinja
 		"fatih/vim-go", -- go dev. Mainly useful for template syntax
 		"NoahTheDuke/vim-just", -- highlighting Justfiles
+
+		{
+			"lewis6991/gitsigns.nvim",
+			opts = {
+				-- https://github.com/lewis6991/gitsigns.nvim/tree/0d797daee#-keymaps
+				on_attach = function(bufnr)
+					local gitsigns = require("gitsigns")
+
+					local function map(mode, l, r, opts)
+						opts = opts or {}
+						opts.buffer = bufnr
+						vim.keymap.set(mode, l, r, opts)
+					end
+
+					map("n", "]c", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "]c", bang = true })
+						else
+							gitsigns.nav_hunk("next", { target = "all" })
+						end
+					end)
+
+					map("n", "[c", function()
+						if vim.wo.diff then
+							vim.cmd.normal({ "[c", bang = true })
+						else
+							gitsigns.nav_hunk("prev", { target = "all" })
+						end
+					end)
+				end,
+			},
+		},
 
 		-- center a buffer with :NoNeckPain
 		-- examples of things you can do:
