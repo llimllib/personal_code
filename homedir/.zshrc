@@ -333,7 +333,8 @@ export BUNBIN="$HOME/.cache/.bun/bin"
 export PATH=$LOCALBIN:$HOMEBREWBIN:$HOMEBREWSBIN:$GOBIN:$PNPMBIN:$BUNBIN:/usr/local/bin:/usr/local/sbin:$PATH
 
 # add cargo bin to PATH
-[[ -f ~/.cargo/env ]] && source ~/.cargo/env
+export CARGO_HOME="$HOME/.local/share/cargo"
+[[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
 
 # Fix colors in ipython paging
 export PAGER="less"
@@ -457,7 +458,7 @@ alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
-alias pi='bun install -g @earendil-works/pi-coding-agent && ~/.cache/.bun/bin/pi'
+alias pi='bun install -g @earendil-works/pi-coding-agent && bun run ~/.cache/.bun/bin/pi'
 
 safe()    { "$HOME/.config/sandbox-exec/run-sandboxed.sh" "$@"; }
 claude()  { safe claude --dangerously-skip-permissions "$@"; }

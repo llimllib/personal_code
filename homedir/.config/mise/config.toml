@@ -35,6 +35,7 @@ yes = false         # set to true to automatically answer yes to all prompts
 # giant warning every time I do somethi
 # https://github.com/jdx/mise/discussions/4345
 idiomatic_version_file_enable_tools = ["node"]
+experimental = true
 
 # not_found_auto_install = true # see MISE_NOT_FOUND_AUTO_INSTALL
 # task_output = "prefix" # see Tasks Runner for more information
