@@ -6,7 +6,8 @@
 	"scripts": {
 		"clean": "echo 'nothing to clean'",
 		"build": "echo 'nothing to build'",
-		"check": "echo 'nothing to check'"
+		"check": "echo 'nothing to check'",
+		"postinstall": "patch-package"
 	},
 	"pi": {
 		"extensions": [
@@ -14,6 +15,7 @@
 		]
 	},
 	"dependencies": {
-		"@anthropic-ai/sandbox-runtime": "^0.0.26"
+		"@anthropic-ai/sandbox-runtime": "^0.0.51",
+		"patch-package": "^8.0.1"
 	}
 }
