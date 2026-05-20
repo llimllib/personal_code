@@ -5,6 +5,7 @@
 [user]
     name = Bill Mill
     email = bill@billmill.org
+    signingkey = ~/.ssh/id_ed25519.pub
 
 #
 # config options
@@ -16,6 +17,7 @@
     ui = auto # show branch names in columns
 [commit]
     verbose = true # add the commit diff to the editor message
+    gpgsign = true
 [credential]
     helper = osxkeychain
 [diff]
@@ -109,8 +111,9 @@
     # - git's parser turns them into single slashes inside the single quotes
     # - hyperlink format: \e]8;;<url>\e\<link text>\e]8;;\e\ 
     #
-    # TODO: link the hash to github maybe?
-    ls = ! cd ${GIT_PREFIX:-.} && git ls-files -z ':(glob)*' | xargs -0 -n1 -I{} -- git log -1 --pretty=format:'%<(20,trunc)%aN %<(12)%h%<(24)%ar%x1b]8%x3b%x3bfile:{}%x1b\\{}%x1b]8%x3b%x3b%x1b\\' {}
+    # this became: https://github.com/llimllib/git-ls
+    #
+    # ls = ! cd ${GIT_PREFIX:-.} && git ls-files -z ':(glob)*' | xargs -0 -n1 -I{} -- git log -1 --pretty=format:'%<(20,trunc)%aN %<(12)%h%<(24)%ar%x1b]8%x3b%x3bfile:{}%x1b\\{}%x1b]8%x3b%x3b%x1b\\' {}
 
     re = restore
     st = status
@@ -181,11 +184,11 @@
     process = git-lfs filter-process --skip
 
 [worktree]
-	untrackedfiles = .mise.toml
 	untrackedfiles = .claude
 	untrackedfiles = .env
 	untrackedfiles = .env.local
 	untrackedfiles = .envrc
+	untrackedfiles = .pi
 	untrackedfiles = .tool-versions
 	untrackedfiles = db.sql
 	untrackedfiles = mise.local.toml
@@ -194,3 +197,6 @@
 	untrackedfiles = staticfiles
 	backgroundcopy = node_modules
 	backgroundcopy = staticfiles
+
+[gpg]
+	format = ssh
