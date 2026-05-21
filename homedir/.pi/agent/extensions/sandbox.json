@@ -25,7 +25,7 @@
       "youtube.com"
     ],
     "deniedDomains": [],
-    "allowUnixSockets": ["/tmp/*"],
+    "allowUnixSockets": ["/tmp", "/private/tmp"],
     "allowLocalBinding": true
   },
   "filesystem": {
