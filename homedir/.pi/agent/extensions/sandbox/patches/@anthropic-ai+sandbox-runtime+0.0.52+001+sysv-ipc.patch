@@ -1,0 +1,25 @@
+diff --git a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+index 2775bb9..a1b2c3d 100644
+--- a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
++++ b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+@@ -314,6 +314,11 @@ function generateSandboxProfile({ readConfig, writeConfig, httpProxyPort, socksP
+         '; POSIX IPC - semaphores for Python multiprocessing',
+         '(allow ipc-posix-sem)',
+         '',
++        '; System V IPC - shared memory (needed by PostgreSQL, etc.)',
++        '(allow ipc-sysv-shm)',
++        '(allow ipc-sysv-sem)',
++        '(allow ipc-sysv-msg)',
++        '',
+         '; IOKit - specific operations only',
+         '(allow iokit-open',
+         '  (iokit-registry-entry-class "IOSurfaceRootUserClient")',
+@@ -387,6 +392,8 @@ function generateSandboxProfile({ readConfig, writeConfig, httpProxyPort, socksP
+         '  (sysctl-name-prefix "kern.proc.pid.")',
+         '  (sysctl-name-prefix "machdep.cpu.")',
+         '  (sysctl-name-prefix "net.routetable.")',
++        '  (sysctl-name-prefix "kern.sysv.")',
++        '  (sysctl-name-prefix "kern.ipc.")',
+         ')',
+         '',
+         '; V8 thread calculations',

@@ -1,0 +1,52 @@
+diff --git a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/sandbox-utils.js b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/sandbox-utils.js
+index 1234567..abcdefg 100644
+--- a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/sandbox-utils.js
++++ b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/sandbox-utils.js
+@@ -309,14 +309,18 @@ export function generateProxyEnvVars(httpProxyPort, socksProxyPort, caCertPath) {
+         envVars.push(`https_proxy=http://localhost:${httpProxyPort}`);
+     }
+     if (socksProxyPort) {
+-        // Use socks5h:// for proper DNS resolution through proxy
+-        envVars.push(`ALL_PROXY=socks5h://localhost:${socksProxyPort}`);
+-        envVars.push(`all_proxy=socks5h://localhost:${socksProxyPort}`);
++        // Use socks5h:// for proper DNS resolution through proxy.
++        // Use 127.0.0.1 instead of localhost because some clients (e.g. reqwest
++        // used by Deno) resolve localhost to ::1 (IPv6) first and don't fall back
++        // to IPv4 when connecting to the SOCKS proxy. The proxy only listens on
++        // 127.0.0.1, so using the IP literal avoids DNS resolution entirely.
++        envVars.push(`ALL_PROXY=socks5h://127.0.0.1:${socksProxyPort}`);
++        envVars.push(`all_proxy=socks5h://127.0.0.1:${socksProxyPort}`);
+         // Configure Git to use SSH through the proxy so DNS resolution happens outside the sandbox
+         const platform = getPlatform();
+         if (platform === 'macos') {
+             // macOS: use BSD nc SOCKS5 proxy support (-X 5 -x)
+-            envVars.push(`GIT_SSH_COMMAND=ssh -o ProxyCommand='nc -X 5 -x localhost:${socksProxyPort} %h %p'`);
++            envVars.push(`GIT_SSH_COMMAND=ssh -o ProxyCommand='nc -X 5 -x 127.0.0.1:${socksProxyPort} %h %p'`);
+         }
+         else if (platform === 'linux' && httpProxyPort) {
+             // Linux: use socat HTTP CONNECT via the HTTP proxy bridge.
+@@ -325,10 +329,10 @@ export function generateProxyEnvVars(httpProxyPort, socksProxyPort, caCertPath) {
+             envVars.push(`GIT_SSH_COMMAND=ssh -o ProxyCommand='socat - PROXY:localhost:%h:%p,proxyport=${httpProxyPort}'`);
+         }
+         // FTP proxy support (use socks5h for DNS resolution through proxy)
+-        envVars.push(`FTP_PROXY=socks5h://localhost:${socksProxyPort}`);
+-        envVars.push(`ftp_proxy=socks5h://localhost:${socksProxyPort}`);
++        envVars.push(`FTP_PROXY=socks5h://127.0.0.1:${socksProxyPort}`);
++        envVars.push(`ftp_proxy=socks5h://127.0.0.1:${socksProxyPort}`);
+         // rsync proxy support
+-        envVars.push(`RSYNC_PROXY=localhost:${socksProxyPort}`);
++        envVars.push(`RSYNC_PROXY=127.0.0.1:${socksProxyPort}`);
+         // Database tools NOTE: Most database clients don't have built-in proxy support
+         // You typically need to use SSH tunneling or a SOCKS wrapper like tsocks/proxychains
+         // Docker CLI uses HTTP for the API
+@@ -354,8 +358,8 @@ export function generateProxyEnvVars(httpProxyPort, socksProxyPort, caCertPath) {
+         // Terraform - uses standard HTTP/HTTPS proxy vars
+         // Terraform respects HTTP_PROXY/HTTPS_PROXY which we already set above
+         // gRPC-based tools - use standard proxy vars
+-        envVars.push(`GRPC_PROXY=socks5h://localhost:${socksProxyPort}`);
+-        envVars.push(`grpc_proxy=socks5h://localhost:${socksProxyPort}`);
++        envVars.push(`GRPC_PROXY=socks5h://127.0.0.1:${socksProxyPort}`);
++        envVars.push(`grpc_proxy=socks5h://127.0.0.1:${socksProxyPort}`);
+     }
+     // WARNING: Do not set HTTP_PROXY/HTTPS_PROXY to SOCKS URLs when only SOCKS proxy is available
+     // Most HTTP clients do not support SOCKS URLs in these variables and will fail, and we want
