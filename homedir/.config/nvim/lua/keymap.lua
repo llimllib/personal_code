@@ -197,7 +197,17 @@ vim.keymap.set("n", "<leader>se", ":normal v<leader>aq<cr>:DB<cr>", { noremap = 
 
 -- fugitive
 vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
-vim.keymap.set("n", "<leader>gs", ":Git<cr>")
+vim.keymap.set("n", "<leader>gs", function()
+	-- Check if a fugitive buffer is already open in a window
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		if vim.bo[buf].filetype == "fugitive" then
+			vim.api.nvim_win_close(win, false)
+			return
+		end
+	end
+	vim.cmd("topleft vertical Git | vertical resize 40")
+end, { noremap = true, silent = true })
 -- end fugitive
 
 -- codecompanion
