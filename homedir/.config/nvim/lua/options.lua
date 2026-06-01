@@ -101,3 +101,6 @@ vim.opt.smartindent = true -- I feel like I disabled this at some point in the a
 vim.opt.spelloptions = "camel" -- treat camelCase words as two words
 vim.opt.virtualedit = "block" -- Allow going past end of line in blockwise mode
 vim.opt.iskeyword = "@,48-57,_,192-255,-" -- Treat dash as `word` textobject part
+
+-- New UI opt-in
+require("vim._core.ui2").enable({})
