@@ -102,15 +102,29 @@ function loadConfig(cwd: string): SandboxConfig {
 	return deepMerge(deepMerge(DEFAULT_CONFIG, globalConfig), projectConfig);
 }
 
+function mergeArrays<T>(base: T[] | undefined, overrides: T[] | undefined): T[] | undefined {
+	if (!base && !overrides) return undefined;
+	if (!base) return overrides;
+	if (!overrides) return base;
+	return [...new Set([...base, ...overrides])];
+}
+
 function deepMerge(base: SandboxConfig, overrides: Partial<SandboxConfig>): SandboxConfig {
 	const result: SandboxConfig = { ...base, ...overrides };
 
-	// Deep merge nested objects rather than replacing them wholesale
+	// Deep merge nested objects, concatenating arrays rather than replacing them
 	if (base.network || overrides.network) {
-		result.network = { ...base.network, ...overrides.network };
+		result.network = {
+			allowedDomains: mergeArrays(base.network?.allowedDomains, overrides.network?.allowedDomains),
+			deniedDomains: mergeArrays(base.network?.deniedDomains, overrides.network?.deniedDomains),
+		};
 	}
 	if (base.filesystem || overrides.filesystem) {
-		result.filesystem = { ...base.filesystem, ...overrides.filesystem };
+		result.filesystem = {
+			denyRead: mergeArrays(base.filesystem?.denyRead, overrides.filesystem?.denyRead),
+			allowWrite: mergeArrays(base.filesystem?.allowWrite, overrides.filesystem?.allowWrite),
+			denyWrite: mergeArrays(base.filesystem?.denyWrite, overrides.filesystem?.denyWrite),
+		};
 	}
 
 	return result;
