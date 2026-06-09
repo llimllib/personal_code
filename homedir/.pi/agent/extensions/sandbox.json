@@ -1,5 +1,7 @@
 {
   "enabled": true,
+  "//": "This allows go to access the trustd daemon that it uses to verify certificates: https://github.com/anthropic-experimental/sandbox-runtime/pull/120",
+  "enableWeakerNetworkIsolation": true,
   "network": {
     "allowedDomains": [
       "amazonaws.com",
@@ -10,9 +12,13 @@
       "*.en.dev",
       "api.github.com",
       "github.com",
+      "raw.githubusercontent.com",
       "golang.org",
       "*.golang.org",
+      "storage.googleapis.com",
       "*.hashicorp.com",
+      "linear.app",
+      "*.linear.app",
       "localhost",
       "nodejs.org",
       "*.nodejs.org",
@@ -20,7 +26,10 @@
       "*.npmjs.org",
       "pypi.org",
       "files.pythonhosted.org",
-      "raw.githubusercontent.com",
+      "*.rust-lang.org",
+      "rust-lang.org",
+      "*.slack.com",
+      "slack.com",
       "*.youtube.com",
       "youtube.com"
     ],
@@ -35,10 +44,12 @@
       "../main",
       "/tmp",
       "/private/tmp",
+      "/var/folders",
       "~/.cache",
       "~/.local",
       "~/.npm",
-      "~/go/",
+      "~/.rustup",
+      "~/go",
       "~/Library/Logs",
       "~/Library/Caches"
     ],
