@@ -306,14 +306,14 @@ local function get_python_path(workspace)
 end
 
 -- pip install pyright
-vim.lsp.config("pyright", {
-	on_attach = on_attach,
-	capabilities = capabilities,
-	before_init = function(_, config)
-		config.settings.python.pythonPath = get_python_path(config.root_dir)
-	end,
-})
-vim.lsp.enable("pyright")
+-- vim.lsp.config("pyright", {
+-- 	on_attach = on_attach,
+-- 	capabilities = capabilities,
+-- 	before_init = function(_, config)
+-- 		config.settings.python.pythonPath = get_python_path(config.root_dir)
+-- 	end,
+-- })
+-- vim.lsp.enable("pyright")
 
 -- ruff: linting only (no formatting, no hover, no import sorting)
 -- formatting is handled by black, hover by pyright
@@ -338,16 +338,17 @@ vim.lsp.enable("ruff")
 --
 -- I tried this out, but it failed to give me typings on the pandas file
 -- I tried it on - everything was just "unknown". Try again later maybe
--- vim.lsp.config("ty", {
--- 	settings = {
--- 		ty = {
--- 			-- ty language server settings go here
--- 		},
--- 	},
--- })
---
--- -- Required: Enable the language server
--- vim.lsp.enable("ty")
+vim.lsp.config("ty", {
+	on_attach = on_attach,
+	settings = {
+		ty = {
+			-- ty language server settings go here
+		},
+	},
+})
+
+-- Required: Enable the language server
+vim.lsp.enable("ty")
 
 vim.lsp.config("elixirls", {
 	on_attach = on_attach,
