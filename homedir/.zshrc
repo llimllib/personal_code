@@ -344,6 +344,8 @@ export LESS="-SRXFi"
 alias gs='git ls -c'
 alias gd="git diff"
 alias gdc="git diff --cached"
+alias vd='git diff | nvim -R -c "set filetype=diff" -'
+alias vdc='git diff --cached | nvim -R -c "set filetype=diff" -'
 alias gm="git co master"
 alias gb="git branch"
 alias gc="git checkout"
@@ -574,7 +576,7 @@ export PIPENV_VENV_IN_PROJECT=1
 # bun completions
 [ -s "/Users/llimllib/.bun/_bun" ] && source "/Users/llimllib/.bun/_bun"
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/llimllib/.lmstudio/bin"
-# End of LM Studio CLI section
-
+# Load SSH key passphrases stored in the macOS keychain into the agent at login.
+# Fresh (post-reboot/upgrade) ssh-agents start empty; this repopulates them so
+# git/ssh don't prompt for a passphrase. Silent no-op if already loaded.
+ssh-add --apple-load-keychain 2>/dev/null
