@@ -15,7 +15,7 @@
 		]
 	},
 	"dependencies": {
-		"@anthropic-ai/sandbox-runtime": "^0.0.52",
+		"@anthropic-ai/sandbox-runtime": "^0.0.63",
 		"patch-package": "^8.0.1"
 	}
 }
