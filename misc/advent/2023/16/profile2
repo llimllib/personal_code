@@ -1,0 +1,39 @@
+part 1: 23
+part 2: 96
+         145432 function calls in 0.028 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    0.028    0.028 {built-in method builtins.exec}
+        1    0.000    0.000    0.028    0.028 a.py:1(<module>)
+        1    0.000    0.000    0.028    0.028 {built-in method builtins.max}
+      441    0.000    0.000    0.028    0.000 a.py:101(<genexpr>)
+      441    0.009    0.000    0.028    0.000 a.py:80(run_to_completion)
+    12067    0.005    0.000    0.015    0.000 a.py:69(run)
+    12067    0.004    0.000    0.008    0.000 a.py:72(<setcomp>)
+    19067    0.003    0.000    0.004    0.000 a.py:40(update_beam)
+    12067    0.001    0.000    0.003    0.000 {built-in method builtins.all}
+    25850    0.002    0.000    0.002    0.000 a.py:86(<genexpr>)
+    20237    0.001    0.000    0.001    0.000 {method 'add' of 'set' objects}
+    27560    0.001    0.000    0.001    0.000 {built-in method builtins.len}
+    11638    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+     1697    0.000    0.000    0.000    0.000 a.py:62(<genexpr>)
+      866    0.000    0.000    0.000    0.000 a.py:33(valid)
+        1    0.000    0.000    0.000    0.000 a.py:94(<listcomp>)
+        1    0.000    0.000    0.000    0.000 a.py:104(<listcomp>)
+      441    0.000    0.000    0.000    0.000 a.py:81(<setcomp>)
+      222    0.000    0.000    0.000    0.000 a.py:12(<lambda>)
+      219    0.000    0.000    0.000    0.000 a.py:11(<lambda>)
+      217    0.000    0.000    0.000    0.000 a.py:10(<lambda>)
+      208    0.000    0.000    0.000    0.000 a.py:9(<lambda>)
+        1    0.000    0.000    0.000    0.000 a.py:106(<listcomp>)
+        1    0.000    0.000    0.000    0.000 a.py:103(<listcomp>)
+        1    0.000    0.000    0.000    0.000 a.py:105(<listcomp>)
+        3    0.000    0.000    0.000    0.000 codecs.py:319(decode)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+      110    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+
