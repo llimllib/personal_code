@@ -1,7 +1,14 @@
 {
-  "lastChangelogVersion": "0.75.3",
-  "defaultProvider": "anthropic",
-  "defaultModel": "claude-opus-4-6",
-  "defaultThinkingLevel": "off",
-  "skills": ["~/.local/skills"]
+  "lastChangelogVersion": "0.83.0",
+  "defaultProvider": "claude-bridge",
+  "defaultModel": "claude-opus-5",
+  "defaultThinkingLevel": "minimal",
+  "skills": [
+    "~/.local/skills"
+  ],
+  "hideThinkingBlock": false,
+  "theme": "dark",
+  "packages": [
+    "npm:pi-claude-bridge"
+  ]
 }
