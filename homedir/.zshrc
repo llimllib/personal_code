@@ -465,6 +465,31 @@ alias pi='bun install -g @earendil-works/pi-coding-agent && bun run ~/.cache/.bu
 safe()    { "$HOME/.config/sandbox-exec/run-sandboxed.sh" "$@"; }
 claude()  { safe claude --dangerously-skip-permissions "$@"; }
 
+# --- Claude Code OAuth: force a single credential store ---------------------
+# Claude Code stores its OAuth tokens in TWO places on macOS: the login
+# keychain (service "Claude Code-credentials") and ~/.claude/.credentials.json.
+# The keychain wins whenever it's reachable.
+#
+# Anything under sandbox-exec (my `claude` -> `safe` wrapper) can't reach the
+# keychain, so it reads and refreshes the FILE. Refresh tokens rotate on use:
+# each refresh invalidates the previous pair. So the two stores drift apart --
+# the file keeps moving forward, and the keychain's copy gets orphaned with a
+# refresh token the server has already killed, meaning it can never self-heal.
+#
+# Non-sandboxed clients (pi + pi-claude-bridge, plain `node`/`bun`) read the
+# dead keychain token and fail with:
+#     401 "OAuth access token has expired. Re-authenticate to continue."
+# ...while ~/.claude/.credentials.json holds a perfectly valid token, and
+# `claude` itself works fine. That asymmetry is the tell.
+#
+# Setting CLAUDE_CONFIG_DIR makes the keychain lookup get skipped entirely, so
+# the file is the single source of truth for every client. NOTE: the value here
+# is just the default location -- it's the *presence* of the variable that
+# disables the keychain path, not the value.
+#
+# Diagnosed 2026-08-02.
+export CLAUDE_CONFIG_DIR="$HOME/.claude"
+
 # cd into a jellyfish project
 alias jf='. ~/jellyfish/bin/,jf'
 
