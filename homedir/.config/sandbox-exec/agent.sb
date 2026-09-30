@@ -448,6 +448,7 @@
     (home-prefix "/.claude.json.")
     (home-literal "/Library/Application Support/Claude/claude_desktop_config.json")
     (subpath "/Library/Application Support/ClaudeCode/.claude")
+    (subpath "/Library/Application Support/ClaudeCode")
     (literal "/Library/Application Support/ClaudeCode/managed-settings.json")
     (literal "/Library/Application Support/ClaudeCode/managed-mcp.json")
     (literal "/Library/Application Support/ClaudeCode/CLAUDE.md")
