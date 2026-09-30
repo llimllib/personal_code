@@ -23,6 +23,9 @@ To create a worktree from a github fork, use the format username:branchname:
 Will copy over some untracked files to the new worktree. By default, this includes
 .env, .envrc, .env.local, .tool-versions, and mise.toml files.
 
+Each value is matched as a glob against file names, so a value is either the name
+of a file (".env") or a pattern that matches one ("*.local.toml").
+
 To customize the list of untracked files to copy for a particular repository:
     git config --add worktree.untrackedfiles ".env"
     git config --add worktree.untrackedfiles "mise.toml"
@@ -78,19 +81,25 @@ function cp_cow {
     fi
 }
 
-# Get the list of untracked files to copy from git config. If no config is
-# found, return the default list
-function get_untracked_files_pattern {
+# Get the list of untracked files to copy from git config, as a single fd glob.
+# If no config is found, return the default list
+#
+# The values are combined into one brace alternation ("{.env,.envrc}") and
+# matched as globs rather than joined into a regex. A value looks like a file
+# name, so it has to mean one: read as a regex, ".pi" also matches "api", and
+# copying a source directory named "api" onto the new worktree's own checkout of
+# it silently reverts every tracked file underneath.
+function get_untracked_files_glob {
     # Default file patterns
-    local default_patterns="\.env|\.envrc|\.env\.local|\.mise\.toml|\.tool-versions|mise\.toml|Cargo\.lock"
+    local default_patterns=".env,.envrc,.env.local,.mise.toml,.tool-versions,mise.toml,Cargo.lock"
 
     # Check if we have custom patterns in git config
     if git config --get-all worktree.untrackedfiles > /dev/null 2>&1; then
         local custom_patterns=""
-        custom_patterns=$(git config --get-all worktree.untrackedfiles | tr '\n' '|' | sed 's/|$//')
-        echo "^($custom_patterns)$"
+        custom_patterns=$(git config --get-all worktree.untrackedfiles | tr '\n' ',' | sed 's/,$//')
+        echo "{$custom_patterns}"
     else
-        echo "^($default_patterns)$"
+        echo "{$default_patterns}"
     fi
 }
 
@@ -235,17 +244,23 @@ function _worktree {
 
     # get a list of untracked files to copy, either from "git config" or a
     # default list
-    untracked_file_re=$(get_untracked_files_pattern)
+    untracked_file_glob=$(get_untracked_files_glob)
 
     # this will fail for any files with \n in their names. don't do that.
     IFS=$'\n'
 
     # The rule we're using here is to copy untracked files if:
-    # - They match the untracked file regex
+    # - They match the untracked file glob
     # - *and* they are in a tracked directory
+    # - *and* git doesn't track them here
+    # - *and* they don't already exist in the new worktree
     #
     # This means we'll copy Cargo.lock from the root, for example, but not from
     # inside a .gitignored `target` directory
+    #
+    # The last two rules keep us from copying a file over the new worktree's own
+    # checkout of it: if a repo tracks mise.toml, copying it would silently
+    # revert whatever the new branch changed in it
     #
     # We ignore the background copy directories because we already handled them
     # above
@@ -260,10 +275,17 @@ function _worktree {
     while IFS= read -r file; do
         parent_dir=$(dirname "$file")
         # Check if parent directory is tracked (or is root which is always tracked)
-        if [ "$parent_dir" = "." ] || ! git check-ignore -q "$parent_dir" 2>/dev/null; then
-            files_to_copy+=("$file")
+        if [ "$parent_dir" != "." ] && git check-ignore -q "$parent_dir" 2>/dev/null; then
+            continue
         fi
-    done < <(fd -u "$untracked_file_re" "${fd_excludes[@]}")
+        if git ls-files --error-unmatch -- "$file" > /dev/null 2>&1; then
+            continue
+        fi
+        if [ -e "../$dirname/$file" ]; then
+            continue
+        fi
+        files_to_copy+=("$file")
+    done < <(fd -u --glob "$untracked_file_glob" "${fd_excludes[@]}")
 
     for f in "${files_to_copy[@]}"; do
         cp_cow "$f" ../"$dirname"/"$f"
