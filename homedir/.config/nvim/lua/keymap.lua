@@ -156,6 +156,8 @@ vim.keymap.set("n", "<leader>gh", "<cmd>GBrowse<cr>", { noremap = true })
 -- selected as an anchor so github highlights them
 vim.keymap.set("v", "<leader>gB", ":GBrowse<CR>", { noremap = true })
 vim.keymap.set("v", "<leader>gh", ":GBrowse<CR>", { noremap = true })
+-- ,gd to open up the git status in a left pane
+vim.keymap.set("n", "<leader>gd", ":leftabove vertical Git<bar>vertical resize 40<CR>", { noremap = true })
 
 -- dadbod shortcuts
 -- I can't figure out why this doesn't work?

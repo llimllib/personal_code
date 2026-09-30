@@ -17,13 +17,61 @@ local is_in_node_bin = function(fname, program)
 	return vim.fn.executable(binpath) == 1
 end
 
+-- Format python on save. Prefer ruff, fall back to black. A project can
+-- override the choice with NVIM_PYTHON_FORMATTER
+--
+-- This is outside the null_ls setup because null_ls requires a version of
+-- black that supports --stdin-filename, but my company uses an older version.
+-- https://github.com/nvimtools/none-ls.nvim/blob/68ed8b9b/lua/null-ls/builtins/formatting/black.lua#L21
+local py_format = vim.api.nvim_create_augroup("py_format", { clear = true })
+
+local py_formatter_priority = { "ruff", "black" }
+
+-- Subcommand needed to make a formatter format; bare name is assumed
+-- otherwise.
+local py_formatter_args = { ruff = "format" }
+
+local function py_format_cmd()
+	local prog = vim.env.NVIM_PYTHON_FORMATTER
+	if not prog or prog == "" then
+		for _, candidate in ipairs(py_formatter_priority) do
+			if vim.fn.executable(candidate) == 1 then
+				prog = candidate
+				break
+			end
+		end
+	end
+	if not prog then
+		return nil
+	end
+
+	local args = py_formatter_args[vim.fs.basename(prog)]
+	return args and (prog .. " " .. args) or prog
+end
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+	group = py_format,
+	pattern = "*.py",
+	callback = function()
+		local cmd = py_format_cmd()
+		if not cmd then
+			return
+		end
+		vim.fn.system(cmd .. " " .. vim.fn.shellescape(vim.fn.expand("%")))
+		vim.cmd("edit")
+	end,
+})
+
 null_ls.setup({
+	-- enable this and run :NullLsLog to see a detailed log
+	-- debug = true,
+	--
 	-- this on_attach function sets null-ls to do document formatting on save
 	--
 	-- see:
 	-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
 	on_attach = function(client, bufnr)
-		if client:supports_method("textDocument/formatting", bufnr) then
+		if client:supports_method("textDocument/formatting") then
 			vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = augroup,
@@ -55,9 +103,8 @@ null_ls.setup({
 				end
 			end,
 		}),
-		null_ls.builtins.formatting.black.with({
-			prefer_local = ".venv/bin",
-		}),
+		-- black 19.10b0 doesn't support --stdin-filename, which none-ls requires
+		-- null_ls.builtins.formatting.black,
 		null_ls.builtins.formatting.clang_format,
 		null_ls.builtins.formatting.gleam_format,
 		null_ls.builtins.formatting.goimports,
@@ -94,8 +141,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.golangci_lint,
 	},
 	root_dir = lsp.util.root_pattern("yarn.lock", ".git"),
-	-- enable this and run :NullLsLog to see a detailed log
-	-- debug = true,
 })
 
 -- used in config_lsp.lua
