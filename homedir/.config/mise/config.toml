@@ -1,5 +1,6 @@
 [tools]
 node = "24"
+"npm:@earendil-works/pi-coding-agent" = "latest"
 python = "latest"
 
 [env]
@@ -44,10 +45,17 @@ experimental = true
 # shorthands_file = '~/.config/mise/shorthands.toml' # path to the shorthands file, see `MISE_SHORTHANDS_FILE`
 # disable_default_shorthands = false # disable the default shorthands, see `MISE_DISABLE_DEFAULT_SHORTHANDS`
 # disable_tools = ['node']           # disable specific tools, generally used to turn off core tools
-# 
+#
 # env_file = '.env' # load env vars from a dotenv file, see `MISE_ENV_FILE`
-# 
+#
 # experimental = true # enable experimental features
-# 
+#
 # # configure messages displayed when entering directories with config files
 # status = {missing_tools = "if_other_versions_installed", show_env = false, show_tools = false}
+
+# mise tries to install packages with aube by default, which can break
+# repositories that don't use aube. Default to npm, and in a repo if you want
+# to use aube, you can set npm.package_manager = "aube"
+#
+# https://github.com/jdx/mise/blob/6f7850666/docs/dev-tools/backends/npm.md?plain=1#L8-L15
+npm.package_manager = "npm"

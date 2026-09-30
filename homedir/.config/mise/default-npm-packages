@@ -1,6 +1,5 @@
 @agentclientprotocol/claude-agent-acp
 @biomejs/biome
-@earendil-works/pi-coding-agent
 @vtsls/language-server
 bash-language-server
 eslint
