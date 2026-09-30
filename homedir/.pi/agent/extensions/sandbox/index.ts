@@ -59,24 +59,37 @@ import {
 
 // Extract array-valued keys from a type. If a new array field is added to
 // NetworkConfig or FilesystemConfig, TypeScript will error here until it's
-// added to the corresponding NETWORK_ARRAY_KEYS / FS_ARRAY_KEYS tuple below.
+// added to the corresponding key union and to deepMerge below.
 type ArrayKeys<T> = {
   [K in keyof T]-?: NonNullable<T[K]> extends Array<unknown> ? K : never;
 }[keyof T];
-type AssertExactKeys<Expected, Actual extends Expected> = Actual;
 
-// List every array field so deepMerge handles them. If the upstream types add
-// a new array field, the type assertion will fail at compile time.
-// Compile-time check: if upstream adds a new array field, this will error
-// until it's added to deepMerge below. (Intentionally "unused" — they exist
-// only for the type-level assertion.)
-type _CheckNetArrays = AssertExactKeys<
-  ArrayKeys<NetworkConfig>,
-  "allowedDomains" | "deniedDomains" | "allowUnixSockets" | "allowMachLookup"
+// Mutual assignability. The tuple wrappers stop TS from distributing over the
+// unions, so this compares them whole rather than member by member.
+type Exact<A, B> = [A] extends [B] ? ([B] extends [A] ? true : false) : false;
+// The `extends true` constraint is what makes a failure a compile ERROR. An
+// assertion that merely resolves to `never` is silently accepted when nothing
+// consumes the alias, which is how deniedResolvedAddresses slipped in.
+type Assert<T extends true> = T;
+
+// List every array field so deepMerge handles them. Checked in BOTH directions:
+// a field added upstream and a field removed upstream each fail the build.
+// (Intentionally "unused" — they exist only for the type-level assertion.)
+type _CheckNetArrays = Assert<
+  Exact<
+    ArrayKeys<NetworkConfig>,
+    | "allowedDomains"
+    | "deniedDomains"
+    | "deniedResolvedAddresses"
+    | "allowUnixSockets"
+    | "allowMachLookup"
+  >
 >;
-type _CheckFsArrays = AssertExactKeys<
-  ArrayKeys<FilesystemConfig>,
-  "denyRead" | "allowRead" | "allowWrite" | "denyWrite"
+type _CheckFsArrays = Assert<
+  Exact<
+    ArrayKeys<FilesystemConfig>,
+    "denyRead" | "allowRead" | "allowWrite" | "denyWrite"
+  >
 >;
 
 interface SandboxConfig extends SandboxRuntimeConfig {
@@ -151,7 +164,7 @@ function deepMerge(
 
   // Deep merge nested objects, concatenating arrays rather than replacing them
   // Spread carries all scalar fields; array fields are explicitly merged (concat + dedupe).
-  // The NETWORK_ARRAY_KEYS / FS_ARRAY_KEYS type assertions above guarantee we don't miss any.
+  // The _CheckNetArrays / _CheckFsArrays assertions above guarantee we don't miss any.
   if (base.network || overrides.network) {
     result.network = {
       ...base.network,
@@ -166,6 +179,10 @@ function deepMerge(
           base.network?.deniedDomains,
           overrides.network?.deniedDomains,
         ) ?? [],
+      deniedResolvedAddresses: mergeArrays(
+        base.network?.deniedResolvedAddresses,
+        overrides.network?.deniedResolvedAddresses,
+      ),
       allowUnixSockets: mergeArrays(
         base.network?.allowUnixSockets,
         overrides.network?.allowUnixSockets,
