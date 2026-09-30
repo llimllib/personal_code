@@ -361,7 +361,7 @@ alias ga="git add"
 _GL_FORMAT='%Cred'$'\e]8;;git-show:///%H\e\\''%h'$'\e]8;;\e\\''%Creset -%C(yellow)%d%Creset '$'\e]8;;git-show:///%H\e\\''%s'$'\e]8;;\e\\''%Creset %Cgreen(%cr)%C(bold blue)<'$'\e]8;;git-log-author:///%ae\e\\''%an'$'\e]8;;\e\\''>'
 
 gl() {
-   git log --color --graph --pretty=format:"$_GL_FORMAT" --abbrev-commit "$@" |
+   git log --color --graph --pretty=format:"$_GL_FORMAT" --abbrev-commit "$@" --decorate-refs-exclude='refs/remotes/*/copilot/*' |
        head -n 25
 }
 
@@ -439,7 +439,7 @@ fi
 alias icat='kitty +kitten icat'
 if command -v eza > /dev/null; then
     export EZA_ICON_SPACING=2
-    alias ls='eza --icons=auto --hyperlink'
+    alias ls='eza --icons=auto --hyperlink auto'
 # if gls (gnu ls installed by homebrew) is present, prefer it to ls. If it's
 # not, use --hyperlink if it's available; otherwise back to bsd ls options
 elif command -v gls >/dev/null ; then
@@ -455,40 +455,22 @@ alias py='ipython'
 alias rg="rg --max-columns=250 --max-columns-preview --smart-case --hidden --glob '!.git' --hyperlink-format=kitty"
 alias sqlite='sqlite3'
 alias tf='terraform'
+alias tg='terragrunt'
 alias tmux='tmux -2' # tmux into 256 color mode
 alias ts='npx ts-node'
 alias vim='nvim'
 alias lvim='NVIM_APPNAME=LazyVim_starter nvim'
 alias run='npm run'
-alias pi='bun install -g @earendil-works/pi-coding-agent && bun run ~/.cache/.bun/bin/pi'
+alias pi='mise exec node@24 npm:@earendil-works/pi-coding-agent -- pi'
 
 safe()    { "$HOME/.config/sandbox-exec/run-sandboxed.sh" "$@"; }
 claude()  { safe claude --dangerously-skip-permissions "$@"; }
 
-# --- Claude Code OAuth: force a single credential store ---------------------
-# Claude Code stores its OAuth tokens in TWO places on macOS: the login
-# keychain (service "Claude Code-credentials") and ~/.claude/.credentials.json.
-# The keychain wins whenever it's reachable.
-#
-# Anything under sandbox-exec (my `claude` -> `safe` wrapper) can't reach the
-# keychain, so it reads and refreshes the FILE. Refresh tokens rotate on use:
-# each refresh invalidates the previous pair. So the two stores drift apart --
-# the file keeps moving forward, and the keychain's copy gets orphaned with a
-# refresh token the server has already killed, meaning it can never self-heal.
-#
-# Non-sandboxed clients (pi + pi-claude-bridge, plain `node`/`bun`) read the
-# dead keychain token and fail with:
-#     401 "OAuth access token has expired. Re-authenticate to continue."
-# ...while ~/.claude/.credentials.json holds a perfectly valid token, and
-# `claude` itself works fine. That asymmetry is the tell.
-#
-# Setting CLAUDE_CONFIG_DIR makes the keychain lookup get skipped entirely, so
-# the file is the single source of truth for every client. NOTE: the value here
-# is just the default location -- it's the *presence* of the variable that
-# disables the keychain path, not the value.
-#
-# Diagnosed 2026-08-02.
-export CLAUDE_CONFIG_DIR="$HOME/.claude"
+# use XDG dir for claude. This also causes claude not to use the keychain,
+# which is important for my ability to use it via the pi-claude-bridge; I don't
+# allow keychain writes from my sandbox because there's no way to limit the
+# permissions it gets
+export CLAUDE_CONFIG_DIR=/Users/llimllib/.config/claude
 
 # cd into a jellyfish project
 alias jf='. ~/jellyfish/bin/,jf'
