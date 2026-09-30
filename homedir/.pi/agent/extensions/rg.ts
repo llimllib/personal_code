@@ -22,8 +22,25 @@ import { join } from "node:path";
 const GrepParams = Type.Object({
 	pattern: Type.String({ description: "Search pattern (regex)" }),
 	path: Type.Optional(Type.String({ description: "Directory or file to search (default: current directory)" })),
-	filePattern: Type.Optional(Type.String({ description: "File glob pattern, e.g. '*.ts'" })),
+	filePattern: Type.Optional(Type.String({ description: "File glob pattern, e.g. '*.ts'. Repeat via comma: '*.ts,*.js'" })),
 	ignoreCase: Type.Optional(Type.Boolean({ description: "Case-insensitive search" })),
+	contextLines: Type.Optional(
+		Type.Number({ description: "Show N lines of context around each match (like grep -C N)" }),
+	),
+	afterLines: Type.Optional(Type.Number({ description: "Show N lines after each match (like grep -A N)" })),
+	beforeLines: Type.Optional(Type.Number({ description: "Show N lines before each match (like grep -B N)" })),
+	noIgnore: Type.Optional(
+		Type.Boolean({
+			description: "Search files ignored by .gitignore (e.g. node_modules, build dirs). Off by default.",
+		}),
+	),
+	hidden: Type.Optional(Type.Boolean({ description: "Search hidden files and directories" })),
+	literal: Type.Optional(Type.Boolean({ description: "Treat pattern as a literal string, not a regex (like grep -F)" })),
+	wholeWord: Type.Optional(Type.Boolean({ description: "Match whole words only (like grep -w)" })),
+	invert: Type.Optional(Type.Boolean({ description: "Show lines that do NOT match (like grep -v)" })),
+	filesWithMatches: Type.Optional(Type.Boolean({ description: "List only file names that contain a match (like grep -l)" })),
+	multiline: Type.Optional(Type.Boolean({ description: "Allow the pattern to match across line boundaries" })),
+	maxCount: Type.Optional(Type.Number({ description: "Stop after N matches per file" })),
 });
 
 interface GrepDetails {
@@ -31,6 +48,8 @@ interface GrepDetails {
 	path?: string;
 	filePattern?: string;
 	ignoreCase?: boolean;
+	contextLines?: number;
+	noIgnore?: boolean;
 	matchCount: number;
 	truncation?: TruncationResult;
 	fullOutputPath?: string;
@@ -44,7 +63,23 @@ export default function (pi: ExtensionAPI) {
 		parameters: GrepParams,
 
 		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
-			const { pattern, path, filePattern, ignoreCase } = params;
+			const {
+				pattern,
+				path,
+				filePattern,
+				ignoreCase,
+				contextLines,
+				afterLines,
+				beforeLines,
+				noIgnore,
+				hidden,
+				literal,
+				wholeWord,
+				invert,
+				filesWithMatches,
+				multiline,
+				maxCount,
+			} = params;
 
 			// Build ripgrep command
 			const args = [
@@ -58,10 +93,62 @@ export default function (pi: ExtensionAPI) {
 			}
 
 			if (filePattern) {
-				args.push("--glob", filePattern);
+				// Accept a comma-separated list so callers can pass several globs
+				for (const glob of filePattern.split(",")) {
+					const trimmed = glob.trim();
+					if (trimmed) {
+						args.push("--glob", trimmed);
+					}
+				}
 			}
 
-			args.push(pattern);
+			if (contextLines !== undefined) {
+				args.push("--context", String(contextLines));
+			}
+
+			if (afterLines !== undefined) {
+				args.push("--after-context", String(afterLines));
+			}
+
+			if (beforeLines !== undefined) {
+				args.push("--before-context", String(beforeLines));
+			}
+
+			// Without this, rg silently skips gitignored paths like node_modules,
+			// which is the main reason a caller would fall back to bash grep.
+			if (noIgnore) {
+				args.push("--no-ignore");
+			}
+
+			if (hidden) {
+				args.push("--hidden");
+			}
+
+			if (literal) {
+				args.push("--fixed-strings");
+			}
+
+			if (wholeWord) {
+				args.push("--word-regexp");
+			}
+
+			if (invert) {
+				args.push("--invert-match");
+			}
+
+			if (filesWithMatches) {
+				args.push("--files-with-matches");
+			}
+
+			if (multiline) {
+				args.push("--multiline", "--multiline-dotall");
+			}
+
+			if (maxCount !== undefined) {
+				args.push("--max-count", String(maxCount));
+			}
+
+			args.push("--regexp", pattern);
 			args.push(path || ".");
 
 			let result;
@@ -127,6 +214,8 @@ export default function (pi: ExtensionAPI) {
 				path,
 				filePattern,
 				ignoreCase,
+				contextLines,
+				noIgnore,
 				matchCount,
 			};
 
@@ -168,6 +257,30 @@ export default function (pi: ExtensionAPI) {
 			}
 			if (args.ignoreCase) {
 				text += theme.fg("dim", " -i");
+			}
+			if (args.contextLines !== undefined) {
+				text += theme.fg("dim", ` -C ${args.contextLines}`);
+			}
+			if (args.afterLines !== undefined) {
+				text += theme.fg("dim", ` -A ${args.afterLines}`);
+			}
+			if (args.beforeLines !== undefined) {
+				text += theme.fg("dim", ` -B ${args.beforeLines}`);
+			}
+			if (args.noIgnore) {
+				text += theme.fg("dim", " --no-ignore");
+			}
+			if (args.hidden) {
+				text += theme.fg("dim", " --hidden");
+			}
+			if (args.literal) {
+				text += theme.fg("dim", " -F");
+			}
+			if (args.filesWithMatches) {
+				text += theme.fg("dim", " -l");
+			}
+			if (args.multiline) {
+				text += theme.fg("dim", " -U");
 			}
 			return new Text(text, 0, 0);
 		},

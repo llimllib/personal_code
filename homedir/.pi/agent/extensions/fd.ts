@@ -25,6 +25,13 @@ const FindParams = Type.Object({
 	type: Type.Optional(Type.String({ description: "Type filter: 'f' (file), 'd' (directory), 'l' (symlink)" })),
 	extension: Type.Optional(Type.String({ description: "File extension (e.g., 'ts', 'py')" })),
 	hidden: Type.Optional(Type.Boolean({ description: "Include hidden files" })),
+	glob: Type.Optional(Type.String({ description: "Treat `pattern` as a glob (e.g. '*.test.ts') instead of a regex" })),
+	noIgnore: Type.Optional(
+		Type.Boolean({ description: "Include files ignored by .gitignore (e.g. node_modules). Off by default." }),
+	),
+	maxDepth: Type.Optional(Type.Number({ description: "Maximum directory depth to descend" })),
+	exclude: Type.Optional(Type.String({ description: "Glob to exclude. Repeat via comma: 'node_modules,dist'" })),
+	fullPath: Type.Optional(Type.Boolean({ description: "Match the pattern against the whole path, not just the file name" })),
 });
 
 interface FindDetails {
@@ -33,6 +40,7 @@ interface FindDetails {
 	type?: string;
 	extension?: string;
 	hidden?: boolean;
+	noIgnore?: boolean;
 	fileCount: number;
 	truncation?: TruncationResult;
 	fullOutputPath?: string;
@@ -46,7 +54,7 @@ export default function (pi: ExtensionAPI) {
 		parameters: FindParams,
 
 		async execute(_toolCallId, params, signal, _onUpdate, ctx) {
-			const { pattern, path, type, extension, hidden } = params;
+			const { pattern, path, type, extension, hidden, glob, noIgnore, maxDepth, exclude, fullPath } = params;
 
 			// Build fd command
 			const args: string[] = [];
@@ -63,9 +71,36 @@ export default function (pi: ExtensionAPI) {
 				args.push("--hidden");
 			}
 
+			// Without this, fd silently skips gitignored paths like node_modules,
+			// which is the main reason a caller would fall back to bash find.
+			if (noIgnore) {
+				args.push("--no-ignore");
+			}
+
+			if (glob) {
+				args.push("--glob");
+			}
+
+			if (maxDepth !== undefined) {
+				args.push("--max-depth", String(maxDepth));
+			}
+
+			if (fullPath) {
+				args.push("--full-path");
+			}
+
+			if (exclude) {
+				for (const ex of exclude.split(",")) {
+					const trimmed = ex.trim();
+					if (trimmed) {
+						args.push("--exclude", trimmed);
+					}
+				}
+			}
+
 			// Add pattern (or match-all if not provided). fd requires a pattern
 			// before the path argument, otherwise it interprets the path as a pattern.
-			args.push(pattern || ".");
+			args.push(glob || pattern || ".");
 
 			// Add path
 			if (path) {
@@ -95,6 +130,7 @@ export default function (pi: ExtensionAPI) {
 						type,
 						extension,
 						hidden,
+						noIgnore,
 						fileCount: 0,
 					} as FindDetails,
 				};
@@ -115,6 +151,7 @@ export default function (pi: ExtensionAPI) {
 				type,
 				extension,
 				hidden,
+				noIgnore,
 				fileCount,
 			};
 
