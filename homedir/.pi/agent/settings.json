@@ -1,14 +1,15 @@
 {
-  "lastChangelogVersion": "0.83.0",
-  "defaultProvider": "claude-bridge",
-  "defaultModel": "claude-opus-5",
-  "defaultThinkingLevel": "minimal",
+  "lastChangelogVersion": "0.99.1",
+  "defaultThinkingLevel": "medium",
   "skills": [
+    "../.claude/skills",
+    "~/.config/claude/skills",
     "~/.local/skills"
   ],
-  "hideThinkingBlock": false,
   "theme": "dark",
   "packages": [
     "npm:pi-claude-bridge"
-  ]
+  ],
+  "defaultProvider": "claude-bridge",
+  "defaultModel": "claude-opus-5-5"
 }
