@@ -1,15 +1,9 @@
 {
-  "lastChangelogVersion": "0.99.1",
-  "defaultThinkingLevel": "medium",
-  "skills": [
-    "../.claude/skills",
-    "~/.config/claude/skills",
-    "~/.local/skills"
-  ],
-  "theme": "dark",
-  "packages": [
-    "npm:pi-claude-bridge"
-  ],
+  "lastChangelogVersion": "1.1.0",
   "defaultProvider": "claude-bridge",
-  "defaultModel": "claude-opus-5-5"
+  "defaultModel": "claude-opus-5-5",
+  "defaultThinkingLevel": "medium",
+  "skills": ["../.claude/skills", "~/.config/claude/skills", "~/.local/skills"],
+  "theme": "dark",
+  "packages": ["npm:pi-claude-bridge", "npm:@bigboss2063/pi-clip"]
 }

@@ -43,6 +43,7 @@
 
 import { spawn } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+import { homedir } from "node:os";
 import { join } from "node:path";
 import {
   SandboxManager,
@@ -222,6 +223,34 @@ function deepMerge(
   return result;
 }
 
+// The sandbox can't read ~/.ssh, so sign agent commits with a dedicated key
+// registered as a GitHub signing key. agent@billmill.org is a verified email
+// on the account, so the commits show as Verified. If the key is missing,
+// disable signing rather than failing every commit.
+const AGENT_SIGNING_KEY = join(
+  process.env.XDG_DATA_HOME || join(homedir(), ".local", "share"),
+  "agent-ssh",
+  "id_ed25519.pub",
+);
+
+function agentGitEnv(): Record<string, string> {
+  const identity = {
+    GIT_AUTHOR_NAME: "Bill Mill (agent)",
+    GIT_AUTHOR_EMAIL: "agent@billmill.org",
+    GIT_COMMITTER_NAME: "Bill Mill (agent)",
+    GIT_COMMITTER_EMAIL: "agent@billmill.org",
+  };
+  const signing = existsSync(AGENT_SIGNING_KEY)
+    ? { key: "user.signingkey", value: AGENT_SIGNING_KEY }
+    : { key: "commit.gpgsign", value: "false" };
+  return {
+    ...identity,
+    GIT_CONFIG_COUNT: "1",
+    GIT_CONFIG_KEY_0: signing.key,
+    GIT_CONFIG_VALUE_0: signing.value,
+  };
+}
+
 function createSandboxedBashOps(): BashOperations {
   return {
     async exec(command, cwd, { onData, signal, timeout }) {
@@ -234,6 +263,7 @@ function createSandboxedBashOps(): BashOperations {
       return new Promise((resolve, reject) => {
         const child = spawn("bash", ["-c", wrappedCommand], {
           cwd,
+          env: { ...process.env, ...agentGitEnv() },
           detached: true,
           stdio: ["ignore", "pipe", "pipe"],
         });
