@@ -38,7 +38,7 @@ function warn {
 }
 
 function info {
-    printf '%s%s %s\n' "$blue" "$fg" "$1" >&2
+    printf '%s%s%s\n' "$blue" "$fg" "$1" >&2
 }
 
 # bitwarden items to write to disk, as "item name|destination path". SSH key
