@@ -22,6 +22,7 @@ color() {
 
 red="$(color 1)" 
 green="$(color 2)" 
+yellow="$(color 3)"
 blue="$(color 4)" 
 fg="$(color fg)"
 
@@ -30,6 +31,76 @@ function ensuredir {
     if [ ! -d "$(dirname "$1")" ]; then
         mkdir -p "$1"
     fi
+}
+
+function warn {
+    printf '%swarning:%s %s\n' "$yellow" "$fg" "$1" >&2
+}
+
+function info {
+    printf '%s%s %s\n' "$blue" "$fg" "$1" >&2
+}
+
+# bitwarden items to write to disk, as "item name|destination path". SSH key
+# items write the private key to the destination and the public key to
+# $dest.pub; other items write their notes field.
+private_items=(
+    "agent commit signing key|${XDG_DATA_HOME:-$HOME/.local/share}/agent-ssh/id_ed25519"
+)
+
+# write $2 to the file $1, readable only by me, if it has changed
+function write_private {
+    if [ -f "$1" ] && [ "$(cat "$1")" == "$2" ]; then
+        return
+    fi
+    # shellcheck disable=SC2174 # only the innermost dir should be private
+    mkdir -p -m 700 "$(dirname "$1")"
+    (umask 077 && printf '%s\n' "$2" > "$1")
+    chmod 600 "$1"
+    echo "wrote $1"
+}
+
+# pull private files out of bitwarden. Warns and skips rather than failing if
+# bw isn't available or unlocked
+function sync_private {
+    info "syncing private items"
+
+    if ! command -v bw &> /dev/null; then
+        warn "bw not found, skipping private files"
+        return
+    fi
+    if ! command -v jq &> /dev/null; then
+        warn "jq not found, skipping private files"
+        return
+    fi
+
+    case "$(bw status 2> /dev/null | jq -r .status)" in
+        unlocked) ;;
+        locked)
+            warn "bitwarden is locked, skipping private files. Run: export BW_SESSION=\"\$(bw unlock --raw)\""
+            return;;
+        *)
+            warn "not logged in to bitwarden (bw login), skipping private files"
+            return;;
+    esac
+
+    bw sync &> /dev/null || warn "bw sync failed, using cached vault"
+
+    for entry in "${private_items[@]}"; do
+        local name="${entry%%|*}" dest="${entry#*|}" item
+        if ! item=$(bw get item "$name" 2> /dev/null); then
+            warn "couldn't get bitwarden item \"$name\", skipping"
+            continue
+        fi
+
+        # type 5 is an SSH key item
+        if [ "$(jq -r .type <<< "$item")" == 5 ]; then
+            write_private "$dest" "$(jq -r .sshKey.privateKey <<< "$item")"
+            write_private "$dest.pub" "$(jq -r .sshKey.publicKey <<< "$item")"
+        else
+            write_private "$dest" "$(jq -r .notes <<< "$item")"
+        fi
+    done
 }
 
 function main {
@@ -97,6 +168,8 @@ function main {
             fi
         done
     done
+
+    sync_private
 }
 
 while true; do
