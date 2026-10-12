@@ -1,0 +1,18 @@
+# INTENTIONALLY EMPTY - this patch has been disabled.
+#
+# The Virtualization.framework (colima/lima VM) patch that used to live here has
+# been moved to:
+#
+#   @anthropic-ai+sandbox-runtime+0.0.77+002+virtualization.patch.disabled
+#
+# It was disabled because granting a sandboxed agent access to a VM is a
+# sandbox-escape vector: the guest does not honor our denyRead/denyWrite, so a
+# mounted $HOME (which colima mounts by default) is readable and writable from
+# inside the VM, and `docker run -v /:/host` reaches anything the VM can see.
+# See vz-problems.md for the full analysis.
+#
+# This file is left in place, empty, rather than deleted, so that the numbering
+# is not silently reused and so anyone looking for patch 002 finds this note.
+# patch-package tolerates a patch with no hunks.
+#
+# To re-enable, see the instructions in the .disabled file.

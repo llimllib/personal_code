@@ -1,0 +1,152 @@
+# DORMANT - the .disabled suffix stops patch-package (which runs on postinstall
+# and applies every *.patch in this directory) from re-applying it.
+#
+# This patch enables Virtualization.framework (colima/lima VMs) inside the
+# sandbox. It is correct and verified, but deliberately disabled: granting a
+# sandboxed agent access to a VM is a sandbox-escape vector, because the guest
+# does not honor our denyRead/denyWrite, and a mounted $HOME is readable and
+# writable from inside it. See vz-problems.md for the full analysis.
+#
+# Note that re-enabling this patch alone does NOT restore the escape: the VM
+# also has to be reachable, which needs the colima socket back in
+# allowUnixSockets plus write access to ~/.config/colima. Both were removed.
+# Conversely, removing this patch alone does not close the escape either, if a
+# VM started outside the sandbox is already running - `limactl shell` reaches it
+# over SSH on 127.0.0.1, which the localhost-egress rule permits.
+#
+# To re-enable:
+#   0. REBASE FIRST: these hunks do not apply to 0.0.77. Hand-apply the changes
+#      to node_modules/@anthropic-ai/sandbox-runtime and regenerate with
+#      `npx patch-package @anthropic-ai/sandbox-runtime`. Note that
+#      patch-package's generator shells out to git and will fail while
+#      commit.gpgsign points at a missing SSH key -- prefix with
+#      GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_SYSTEM=/dev/null if so.
+#   1. rename this file to drop the .disabled suffix
+#   2. cd ~/.pi/agent/extensions/sandbox && npx patch-package
+#   3. restart pi (the sandbox profile is generated at session start)
+#   4. re-add the colima socket to allowUnixSockets in sandbox.json, and
+#      ~/.config/colima to allowWrite, or the VM cannot be reached
+#
+# STALE AS OF THE 0.0.63 -> 0.0.77 UPGRADE (2026-09-23). The hunks below were
+# generated against 0.0.63 and were verified to apply cleanly against the
+# 001-only baseline as of 2026-08-05. 0.0.77 rewrote macos-sandbox-utils.js
+# (the write/deny rule generation was restructured and every offset moved), and
+# this patch has been confirmed NOT to apply to 0.0.77. The filename was bumped
+# to 0.0.77 only to keep it beside its sibling patches -- it has NOT been
+# rebased. Re-enabling therefore requires regenerating it, not just a rename;
+# see step 1 below.
+#
+diff --git a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+index 0000001..0000002 100644
+--- a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
++++ b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+@@ -230,6 +230,39 @@
+ /**
+  * Generate filesystem write rules for sandbox profile
+  */
++// Issue sandbox extensions for virtiofs mounts, scoped to the paths that are
++// already writable. Mirrors Apple's (require-all (extension-class ...) <path>)
++// pattern; an unscoped rule would let the VM be used to reach paths the profile
++// otherwise denies. See vz-problems.md.
++function generateIssueExtensionRules(config, logTag) {
++    const EXT_CLASSES = [
++        '    "com.apple.app-sandbox.read"',
++        '    "com.apple.app-sandbox.read-write"',
++        '    "com.apple.virtualization.extension.read"',
++        '    "com.apple.virtualization.extension.read-write"',
++    ];
++    const paths = config?.allowOnly;
++    if (!paths || paths.length === 0) {
++        // No write allowlist means writes are unrestricted anyway, so scoping the
++        // issuance would add nothing.
++        return [
++            '(allow file-issue-extension',
++            '  (extension-class',
++            ...EXT_CLASSES,
++            '  )',
++            ')',
++        ];
++    }
++    const rules = [];
++    for (const pathPattern of paths) {
++        const normalizedPath = normalizePathForSandbox(pathPattern);
++        const filter = containsGlobChars(normalizedPath)
++            ? `  (regex ${escapePath(globToRegex(normalizedPath))})`
++            : `  (subpath ${escapePath(normalizedPath)})`;
++        rules.push('(allow file-issue-extension', '  (require-all', '    (extension-class', ...EXT_CLASSES.map((c) => `  ${c}`), '    )', `  ${filter}`, '  )', `  (with message "${logTag}"))`);
++    }
++    return rules;
++}
+ function generateWriteRules(config, logTag, allowGitConfig = false) {
+     if (!config) {
+         return [`(allow file-write*)`];
+@@ -352,7 +385,55 @@
+         '  (iokit-registry-entry-class "IOSurfaceRootUserClient")',
+         '  (iokit-registry-entry-class "RootDomainUserClient")',
+         '  (iokit-user-client-class "IOSurfaceSendRight")',
++        ')',
++        '',
++        '; Virtualization.framework (colima/lima/Docker Desktop VMs). See vz-problems.md.',
++        '; Apple gates these on the com.apple.security.virtualization entitlement in',
++        '; /System/Library/Sandbox/Profiles/{application,frameworks}.sb; the binary\'s',
++        '; entitlement is necessary but not sufficient once we impose our own profile,',
++        '; so the same operations have to be re-allowed here.',
++        '(allow iokit-open-user-client',
++        '  (iokit-user-client-class "AppleHVClient")',
++        '  (iokit-user-client-class "AppleSMCClient")',
++        ')',
++        '(allow iokit-open',
++        '  (iokit-user-client-class "AppleHVClient")',
++        '  (iokit-user-client-class "AppleSMCClient")',
+         ')',
++        '(allow generic-issue-extension',
++        '  (extension-class-prefix "com.apple.virtualization.extension.")',
++        ')',
++        '; VZVirtualMachine.start() spawns the VM as a child XPC service. This is an',
++        '; xpc-service-name lookup, NOT a global-name one, and the name is',
++        '; case-sensitive (capital V) - getting either wrong yields the generic',
++        '; VZErrorDomain Code=1 "Internal Virtualization error" with no further detail.',
++        '(allow mach-lookup',
++        '  (xpc-service-name "com.apple.Virtualization.VirtualMachine")',
++        '  (xpc-service-name "com.apple.Virtualization.PluginLoader")',
++        '  (xpc-service-name "com.apple.Virtualization.LinuxRosetta")',
++        ')',
++        '(allow mach-lookup',
++        '  (global-name "com.apple.Virtualization.VirtualMachine")',
++        '  (global-name "com.apple.diskimagescontroller")',
++        '  (global-name "com.apple.FSEvents")',
++        ')',
++        '; virtiofs: limactl hands the VM helper access to the host directories it',
++        '; mounts by *issuing a sandbox extension* for them. Without this the VM boots',
++        '; but every read/write through a virtiofs mount fails with EPERM inside the',
++        '; guest, logged on the host as',
++        ';   com.apple.Virtualization.Virtual(pid) deny(1) file-read-data <path>',
++        '; even for paths that are plainly readable by the parent and listed in',
++        '; allowWrite. Not a path-allowlist problem - the extension issuance itself',
++        '; is the denied operation.',
++        ';',
++        '; SCOPED to the same paths that are already writable, following Apple\'s own',
++        '; pattern (require-all + a path filter) at frameworks.sb:538 and :869. An',
++        '; unscoped (allow file-issue-extension (extension-class ...)) would let a',
++        '; sandboxed process mint a read-write token for ANY path and hand it to the VM,',
++        '; which does not honor our denyRead - i.e. mount ~/.ssh into a guest and read it',
++        '; there. Scoping keeps the extension mechanism from reaching past the profile.',
++        ...generateIssueExtensionRules(writeConfig, logTag),
++        '(allow file-map-executable)',
+         '',
+         '; IOKit properties',
+         '(allow iokit-get-properties)',
+@@ -422,6 +503,13 @@
+         '  (sysctl-name-prefix "net.routetable.")',
+         '  (sysctl-name-prefix "kern.sysv.")',
+         '  (sysctl-name-prefix "kern.ipc.")',
++        '  (sysctl-name "kern.hv_support")',
++        '  (sysctl-name "kern.hv_vmm_present")',
++        '  (sysctl-name "sysctl.proc_translated")',
++        '  (sysctl-name "hw.optional.arm64")',
++        '  (sysctl-name-prefix "hw.optional.")',
++        '  (sysctl-name-prefix "hw.features.")',
++        '  (sysctl-name "kern.iossupportversion")',
+         ')',
+         '',
+         '; V8 thread calculations',
