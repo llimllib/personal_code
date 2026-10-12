@@ -240,15 +240,30 @@ function agentGitEnv(): Record<string, string> {
     GIT_COMMITTER_NAME: "Bill Mill (agent)",
     GIT_COMMITTER_EMAIL: "agent@billmill.org",
   };
-  const signing = existsSync(AGENT_SIGNING_KEY)
-    ? { key: "user.signingkey", value: AGENT_SIGNING_KEY }
-    : { key: "commit.gpgsign", value: "false" };
-  return {
+  const config: Array<[string, string]> = [
+    existsSync(AGENT_SIGNING_KEY)
+      ? ["user.signingkey", AGENT_SIGNING_KEY]
+      : ["commit.gpgsign", "false"],
+  ];
+  // The sandbox proxy's credentials ride in HTTPS_PROXY, and after every
+  // successful request git asks credential.helper (osxkeychain) to store
+  // them. The sandbox can't write the keychain, so each helper prints
+  // "fatal: failed to store: 100001" (EPERM). An empty helper scoped to the
+  // proxy URL clears the helper list for it only; github.com is unaffected.
+  // The URL must include the port: git's urlmatch won't match without it.
+  const proxyPort = SandboxManager.getProxyPort();
+  if (proxyPort !== undefined) {
+    config.push([`credential.http://localhost:${proxyPort}.helper`, ""]);
+  }
+  const env: Record<string, string> = {
     ...identity,
-    GIT_CONFIG_COUNT: "1",
-    GIT_CONFIG_KEY_0: signing.key,
-    GIT_CONFIG_VALUE_0: signing.value,
+    GIT_CONFIG_COUNT: String(config.length),
   };
+  config.forEach(([key, value], i) => {
+    env[`GIT_CONFIG_KEY_${i}`] = key;
+    env[`GIT_CONFIG_VALUE_${i}`] = value;
+  });
+  return env;
 }
 
 // Patch 003 lets Chromium register its MachPortRendezvousServer, and the
