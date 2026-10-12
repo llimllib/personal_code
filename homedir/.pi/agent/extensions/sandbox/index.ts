@@ -251,6 +251,18 @@ function agentGitEnv(): Record<string, string> {
   };
 }
 
+// Patch 003 lets Chromium register its MachPortRendezvousServer, and the
+// matching allowMachLookup entries let its helpers find it. Only advertise
+// Playwright support when that config is present, so the advice stays true.
+const CHROMIUM_RENDEZVOUS = "org.chromium.Chromium.MachPortRendezvousServer.*";
+
+const PLAYWRIGHT_GUIDANCE = `Bash commands run inside an OS sandbox. Playwright (Chromium) works in it, with two requirements:
+- Keep Chromium's own sandbox off (Playwright's default; pass --no-sandbox if launching chrome-headless-shell directly). macOS cannot nest sandboxes.
+- Pass the sandbox proxy to launch() with credentials split out; Chromium drops credentials embedded in the URL and ignores proxy env vars on macOS. Without this, every non-localhost page times out:
+    const u = new URL(process.env.HTTPS_PROXY);
+    chromium.launch({ proxy: { server: \`\${u.protocol}//\${u.host}\`, username: decodeURIComponent(u.username), password: decodeURIComponent(u.password) } });
+Pages on domains outside the sandbox allowlist fail with ERR_TUNNEL_CONNECTION_FAILED; that is the sandbox, not a bug. If Playwright reports a missing browser executable, the sandbox cannot download one; ask the user to run \`npx playwright install\` or pass executablePath to an installed build under ~/Library/Caches/ms-playwright.`;
+
 function createSandboxedBashOps(): BashOperations {
   return {
     async exec(command, cwd, { onData, signal, timeout }) {
@@ -333,6 +345,7 @@ export default function (pi: ExtensionAPI) {
 
   let sandboxEnabled = false;
   let sandboxInitialized = false;
+  let playwrightSupported = false;
 
   pi.registerTool({
     ...localBash,
@@ -347,6 +360,15 @@ export default function (pi: ExtensionAPI) {
       });
       return sandboxedBash.execute(id, params, signal, onUpdate);
     },
+  });
+
+  pi.on("before_agent_start", (event) => {
+    if (sandboxEnabled && sandboxInitialized && playwrightSupported) {
+      event.systemPromptOptions.sections.sandbox_playwright =
+        PLAYWRIGHT_GUIDANCE;
+    } else {
+      delete event.systemPromptOptions.sections.sandbox_playwright;
+    }
   });
 
   pi.on("user_bash", () => {
@@ -384,6 +406,9 @@ export default function (pi: ExtensionAPI) {
 
       sandboxEnabled = true;
       sandboxInitialized = true;
+      playwrightSupported =
+        platform === "darwin" &&
+        (config.network?.allowMachLookup ?? []).includes(CHROMIUM_RENDEZVOUS);
 
       const networkCount = config.network?.allowedDomains?.length ?? 0;
       const writeCount = config.filesystem?.allowWrite?.length ?? 0;

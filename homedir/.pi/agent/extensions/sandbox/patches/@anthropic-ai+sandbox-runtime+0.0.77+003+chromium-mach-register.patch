@@ -1,0 +1,19 @@
+diff --git a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+--- a/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
++++ b/node_modules/@anthropic-ai/sandbox-runtime/dist/sandbox/macos-sandbox-utils.js
+@@ -735,6 +735,15 @@
+             ]
+             : []),
+         '',
++        '; Chromium (Playwright) registers <bundle-id>.MachPortRendezvousServer.<pid>',
++        '; at startup so its helper processes can find it. Scoped to the two bundle',
++        '; ids Playwright ships; everyday Chrome (com.google.Chrome) is not covered.',
++        '; Child lookups are granted via allowMachLookup in sandbox.json.',
++        '(allow mach-register',
++        '  (global-name-prefix "org.chromium.Chromium.MachPortRendezvousServer.")',
++        '  (global-name-prefix "com.google.chrome.for.testing.MachPortRendezvousServer.")',
++        ')',
++        '',
+         '; POSIX IPC - shared memory',
+         '(allow ipc-posix-shm)',
+         '',

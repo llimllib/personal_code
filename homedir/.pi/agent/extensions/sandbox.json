@@ -54,6 +54,10 @@
     ],
     "deniedDomains": [],
     "allowUnixSockets": ["/tmp", "/private/tmp"],
+    "allowMachLookup": [
+      "org.chromium.Chromium.MachPortRendezvousServer.*",
+      "com.google.chrome.for.testing.MachPortRendezvousServer.*"
+    ],
     "allowLocalBinding": true
   },
   "filesystem": {
