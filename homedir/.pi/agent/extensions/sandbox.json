@@ -29,6 +29,8 @@
       "golang.org",
       "*.golang.org",
       "storage.googleapis.com",
+      "*.go.dev",
+      "go.dev",
       "grafana.com",
       "*.grafana.net",
       "*.hashicorp.com",
