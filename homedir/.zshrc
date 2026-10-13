@@ -308,6 +308,9 @@ export XDG_CONFIG_HOME=~/.config
 export XDG_STATE_HOME=~/.local/state
 export XDG_CACHE_HOME=~/.cache
 
+# tell kubectl to look in XDG
+export KUBECONFIG="$HOME/.config/kube/config"
+
 # PATH CONFIGURATION
 #
 # PATH configs have to go before aliases, some of them depend on the updated
