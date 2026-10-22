@@ -20,6 +20,11 @@ found that matches the given name.
 To create a worktree from a github fork, use the format username:branchname:
     worktree someuser:feature-branch
 
+You can also pass a github pull request or branch URL for the current
+repository, and it will be resolved to a branch name (PR URLs require gh):
+    worktree https://github.com/owner/repo/pull/1234
+    worktree https://github.com/owner/repo/tree/feature-branch
+
 Will copy over some untracked files to the new worktree. By default, this includes
 .env, .envrc, .env.local, .tool-versions, and mise.toml files.
 
@@ -50,6 +55,11 @@ function die {
     printf '%b%s%b\n' "$RED" "$1" "$CLEAR"
     # exit the script, but if it was sourced, don't kill the shell
     kill -INT $$
+}
+
+# like die, but prints to stderr and doesn't exit, for use in subshells
+function err {
+    printf '%b%s%b\n' "$RED" "$1" "$CLEAR" >&2
 }
 
 function warn {
@@ -113,6 +123,65 @@ function get_background_copy_dirs {
     fi
 }
 
+# Given a github PR or branch URL, print the branch name it refers to, in the
+# form "branch" or "user:branch" for PRs from forks. Fails if the URL is for a
+# repository other than origin, since we'd otherwise silently create a new
+# branch with that name in this one. Errors go to stderr, since it's called
+# in a subshell
+function resolve_github_url {
+    local url="$1"
+    if ! [[ "$url" =~ ^https://github\.com/([^/]+)/([^/]+)/(pull|tree)/(.+)$ ]]; then
+        err "Unrecognized github URL: $url"
+        return 1
+    fi
+    local url_repo="${BASH_REMATCH[1]}/${BASH_REMATCH[2]}"
+    local kind="${BASH_REMATCH[3]}"
+    local rest="${BASH_REMATCH[4]}"
+
+    # origin may be git@github.com:owner/repo.git or
+    # https://github.com/owner/repo(.git)
+    local origin_repo
+    if ! origin_repo=$(git remote get-url origin); then
+        err "Unable to find origin remote"
+        return 1
+    fi
+    origin_repo="${origin_repo#git@github.com:}"
+    origin_repo="${origin_repo#https://github.com/}"
+    origin_repo="${origin_repo%.git}"
+    # github repo names are case-insensitive
+    if [ "$(echo "$url_repo" | tr '[:upper:]' '[:lower:]')" != "$(echo "$origin_repo" | tr '[:upper:]' '[:lower:]')" ]; then
+        err "URL is for $url_repo, but origin is $origin_repo"
+        return 1
+    fi
+
+    # everything after /tree/ is the branch name, which may contain slashes
+    if [ "$kind" = "tree" ]; then
+        echo "$rest"
+        return
+    fi
+
+    # ignore anything after the PR number, like /files or /changes
+    local pr_number="${rest%%/*}"
+    if ! [[ "$pr_number" =~ ^[0-9]+$ ]]; then
+        err "Unrecognized PR number in $url"
+        return 1
+    fi
+    local pr_info
+    if ! pr_info=$(gh pr view "$pr_number" --repo "$url_repo" \
+        --json headRefName,headRepositoryOwner,isCrossRepository \
+        --jq '[.headRefName, .headRepositoryOwner.login, .isCrossRepository] | @tsv'); then
+        err "Unable to look up PR $url_repo#$pr_number"
+        return 1
+    fi
+    local pr_branch pr_owner pr_cross
+    IFS=$'\t' read -r pr_branch pr_owner pr_cross <<< "$pr_info"
+    if [ "$pr_cross" = "true" ]; then
+        echo "$pr_owner:$pr_branch"
+    else
+        echo "$pr_branch"
+    fi
+}
+
 # Create a worktree from a given branchname, in exactly the way I like it.
 function _worktree {
     if [ -z "$1" ]; then
@@ -123,6 +192,17 @@ function _worktree {
         set -x
     fi
     branchname="$1"
+
+    # if given a github URL, resolve it to a branch name. This has to come
+    # before the user:branch check, since URLs contain a colon
+    if [[ "$branchname" == https://github.com/* ]]; then
+        # resolve_github_url runs in a subshell, so it prints errors to
+        # stderr and returns nonzero instead of calling die
+        if ! branchname=$(resolve_github_url "$branchname"); then
+            die "Unable to resolve github URL $1"
+        fi
+        warn "Using branch $branchname"
+    fi
 
     # if the branch is of the form user:branch, assume that is a fork 'branch'
     # of the current repository at github.com/user/<repo_name>
@@ -251,12 +331,13 @@ function _worktree {
 
     # The rule we're using here is to copy untracked files if:
     # - They match the untracked file glob
-    # - *and* they are in a tracked directory
+    # - *and* their directory exists in the new worktree
     # - *and* git doesn't track them here
     # - *and* they don't already exist in the new worktree
     #
     # This means we'll copy Cargo.lock from the root, for example, but not from
-    # inside a .gitignored `target` directory
+    # inside a .gitignored `target` directory, or from a directory that holds
+    # only untracked files, since git didn't create either in the new worktree
     #
     # The last two rules keep us from copying a file over the new worktree's own
     # checkout of it: if a repo tracks mise.toml, copying it would silently
@@ -274,8 +355,7 @@ function _worktree {
     files_to_copy=()
     while IFS= read -r file; do
         parent_dir=$(dirname "$file")
-        # Check if parent directory is tracked (or is root which is always tracked)
-        if [ "$parent_dir" != "." ] && git check-ignore -q "$parent_dir" 2>/dev/null; then
+        if [ ! -d "../$dirname/$parent_dir" ]; then
             continue
         fi
         if git ls-files --error-unmatch -- "$file" > /dev/null 2>&1; then
