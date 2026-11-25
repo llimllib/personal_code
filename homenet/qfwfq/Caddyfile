@@ -10,6 +10,11 @@
 		reverse_proxy localhost:8096
 	}
 
+	@grafana host grafana.home.billmill.org
+	handle @grafana {
+		reverse_proxy localhost:3000
+	}
+
 	# unknown subdomains
 	handle {
 		abort

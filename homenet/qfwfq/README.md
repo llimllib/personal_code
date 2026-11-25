@@ -7,6 +7,7 @@ work on the home LAN without Tailscale, and from anywhere on the tailnet.
 | service  | url                                  | upstream         |
 |----------|--------------------------------------|------------------|
 | jellyfin | https://jellyfin.home.billmill.org   | `localhost:8096` |
+| grafana  | https://grafana.home.billmill.org    | `localhost:3000` |
 
 ## How it fits together
 
