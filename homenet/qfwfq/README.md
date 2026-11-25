@@ -11,6 +11,36 @@ work on the home LAN without Tailscale, and from anywhere on the tailnet.
 
 ## How it fits together
 
+```mermaid
+flowchart LR
+    subgraph internet[Internet]
+        dns["DigitalOcean DNS<br/>*.home.billmill.org A 192.168.68.56"]
+        le[Let's Encrypt]
+    end
+
+    away["Tailnet device<br/>away from home"]
+
+    subgraph lan["Home LAN (Deco)"]
+        client[LAN device]
+        subgraph qfwfq["qfwfq 192.168.68.56"]
+            ts["Tailscale<br/>subnet route 192.168.68.56/32"]
+            caddy["Caddy :443<br/>wildcard cert"]
+            jellyfin["jellyfin<br/>localhost:8096"]
+            grafana["grafana<br/>localhost:3000"]
+        end
+    end
+
+    client -. "lookup name" .-> dns
+    away -. "lookup name" .-> dns
+    client -- HTTPS --> caddy
+    away -- "HTTPS over tailnet" --> ts --> caddy
+    caddy -- jellyfin.home --> jellyfin
+    caddy -- grafana.home --> grafana
+    caddy -. "DNS-01 TXT record via API" .-> dns
+    le -. "checks TXT record" .-> dns
+    caddy -. "ACME" .-> le
+```
+
 - **DNS**: a public wildcard A record `*.home.billmill.org -> 192.168.68.56`
   (qfwfq's LAN IP) in DigitalOcean. The Deco has a DHCP reservation that keeps
   qfwfq at that address.
