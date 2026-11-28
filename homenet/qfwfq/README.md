@@ -8,6 +8,7 @@ work on the home LAN without Tailscale, and from anywhere on the tailnet.
 |----------|--------------------------------------|------------------|
 | jellyfin | https://jellyfin.home.billmill.org   | `localhost:8096` |
 | grafana  | https://grafana.home.billmill.org    | `localhost:3000` |
+| shifgrethor (Synology DSM) | https://shifgrethor.home.billmill.org | `https://100.81.92.46:5001` (Tailscale) |
 
 ## How it fits together
 
@@ -61,10 +62,38 @@ flowchart LR
   `~/Library/Logs/caddy.log`
 - `env.example` -> `~/.config/caddy/env`, mode 600, with a DigitalOcean token
   that has the domain create, read, and delete scopes. Not committed
-- `install.sh` copies the config over ssh, validates it, and restarts caddy.
-  `--upgrade` also downloads a new caddy build to `~/bin/caddy`
+- `mount-video.sh` -> `~/bin/`, and `org.billmill.mount-video.plist` ->
+  `~/Library/LaunchAgents/`. Keeps the video share mounted; see below
+- `install.sh` copies everything over ssh, validates the Caddyfile, and
+  restarts both agents. `--upgrade` also downloads a new caddy build to
+  `~/bin/caddy`
+
+## Video share
+
+Jellyfin's libraries live on `smb://shifgrethor.local/video` (a Synology),
+mounted at `/Volumes/video`. If the mount is missing, playback fails with
+"fatal player error" and ffmpeg logs `No such file or directory`.
+
+A launchd agent runs `mount-video.sh` at login, every minute, and on network
+changes. If the share isn't mounted, it mounts it with `osascript mount
+volume`, which can create the mount point under `/Volumes` without root.
+Failures back off exponentially up to an hour, so a bad password doesn't trip
+the Synology's Auto Block. It logs to `~/Library/Logs/mount-video.log`.
+
+The password is a keychain item only `/usr/bin/security` can read. Create it
+on qfwfq (it prompts for the password):
+
+```sh
+security add-generic-password -s org.billmill.mount-video -a llimllib -T /usr/bin/security -w
+```
+
+If the Synology password changes, rerun that with `-U` added.
 
 ## Adding a service
+
+macOS's Local Network privacy blocks the launchd-run caddy from connecting to
+LAN addresses (`dial tcp ...: connect: no route to host`). Proxy other
+machines through their Tailscale IPs instead.
 
 Add a matcher and handler to the Caddyfile, then run `./install.sh`. DNS and
 the certificate already cover it:

@@ -15,6 +15,19 @@
 		reverse_proxy localhost:3000
 	}
 
+	# Synology DSM, via its Tailscale IP: macOS Local Network privacy blocks
+	# the launchd-run caddy from LAN addresses ("no route to host"). DSM's
+	# HTTPS port has a self-signed cert, so skip verification rather than send
+	# DSM logins over plain HTTP on port 5000
+	@shifgrethor host shifgrethor.home.billmill.org
+	handle @shifgrethor {
+		reverse_proxy https://100.81.92.46:5001 {
+			transport http {
+				tls_insecure_skip_verify
+			}
+		}
+	}
+
 	# unknown subdomains
 	handle {
 		abort

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Label</key><string>org.billmill.mount-video</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/bin/bash</string>
+		<string>/Users/llimllib/bin/mount-video.sh</string>
+	</array>
+	<key>RunAtLoad</key><true/>
+	<key>StartInterval</key><integer>60</integer>
+	<!-- also run when the network configuration changes -->
+	<key>WatchPaths</key>
+	<array>
+		<string>/Library/Preferences/SystemConfiguration</string>
+	</array>
+	<key>StandardOutPath</key><string>/Users/llimllib/Library/Logs/mount-video.log</string>
+	<key>StandardErrorPath</key><string>/Users/llimllib/Library/Logs/mount-video.log</string>
+</dict>
+</plist>

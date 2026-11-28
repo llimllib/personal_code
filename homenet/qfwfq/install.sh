@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# Install or update Caddy on qfwfq, from any machine that can ssh to it.
+# Install or update Caddy and the video-share mounter on qfwfq, from any
+# machine that can ssh to it.
 #
-#   ./install.sh            push the Caddyfile and plist, restart caddy
+#   ./install.sh            push config, scripts, and plists; restart agents
 #   ./install.sh --upgrade  also download the latest caddy build
 #
 # The token file (~/.config/caddy/env on qfwfq) is never touched; create it
@@ -11,6 +12,7 @@ set -euo pipefail
 HOST=${HOST:-qfwfq}
 DIR=$(cd "$(dirname "$0")" && pwd)
 LABEL=org.billmill.caddy
+MOUNT_LABEL=org.billmill.mount-video
 
 upgrade=false
 case "${1:-}" in
@@ -25,12 +27,14 @@ esac
 ssh "$HOST" 'mkdir -p ~/bin ~/.config/caddy ~/Library/LaunchAgents ~/Library/Logs'
 scp -q "$DIR/Caddyfile" "$HOST:.config/caddy/Caddyfile"
 scp -q "$DIR/$LABEL.plist" "$HOST:Library/LaunchAgents/$LABEL.plist"
+scp -q "$DIR/mount-video.sh" "$HOST:bin/mount-video.sh"
+scp -q "$DIR/$MOUNT_LABEL.plist" "$HOST:Library/LaunchAgents/$MOUNT_LABEL.plist"
 
 # ssh joins its arguments into one string for the remote shell, so only pass
 # shell-safe words; everything else lives in the heredoc
-ssh "$HOST" bash -s -- "$upgrade" "$LABEL" <<'EOF'
+ssh "$HOST" bash -s -- "$upgrade" "$LABEL" "$MOUNT_LABEL" <<'EOF'
 set -euo pipefail
-upgrade=$1 label=$2
+upgrade=$1 label=$2 mount_label=$3
 domain=gui/$(id -u)
 # Homebrew's caddy has no DNS plugins; caddyserver.com builds one with the
 # DigitalOcean provider, which the wildcard certificate needs
@@ -59,13 +63,25 @@ if ! out=$(~/bin/caddy validate --config ~/.config/caddy/Caddyfile --envfile ~/.
     exit 1
 fi
 
+chmod +x ~/bin/mount-video.sh
+if ! security find-generic-password -s "$mount_label" -a "$(id -un)" >/dev/null 2>&1; then
+    echo "warning: no keychain item for the video share; on $(hostname) run:" >&2
+    echo "  security add-generic-password -s $mount_label -a $(id -un) -T /usr/bin/security -w" >&2
+fi
+
 # bootout + bootstrap rather than kickstart, so plist changes take effect
-launchctl bootout "$domain/$label" 2>/dev/null || true
-for _ in 1 2 3 4 5 6 7 8 9 10; do
-    launchctl print "$domain/$label" >/dev/null 2>&1 || break
-    sleep 1
-done
-launchctl bootstrap "$domain" ~/Library/LaunchAgents/"$label".plist
+restart() {
+    local label=$1
+    launchctl bootout "$domain/$label" 2>/dev/null || true
+    for _ in 1 2 3 4 5 6 7 8 9 10; do
+        launchctl print "$domain/$label" >/dev/null 2>&1 || break
+        sleep 1
+    done
+    launchctl bootstrap "$domain" ~/Library/LaunchAgents/"$label".plist
+}
+restart "$label"
+restart "$mount_label"
 sleep 2
 launchctl print "$domain/$label" | grep -E '^\s+state ='
+tail -3 ~/Library/Logs/mount-video.log 2>/dev/null || true
 EOF
